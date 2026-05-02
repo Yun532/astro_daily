@@ -1,0 +1,146 @@
+from __future__ import annotations
+
+import os
+from pathlib import Path
+from typing import Any
+
+import yaml
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field, model_validator
+
+
+class ArxivCategoryConfig(BaseModel):
+    category: str
+    max_results: int = Field(default=30, ge=1, le=300)
+
+
+class ArxivConfig(BaseModel):
+    days_back: int = Field(default=3, ge=1, le=30)
+    primary: list[ArxivCategoryConfig]
+    secondary: list[ArxivCategoryConfig] = Field(default_factory=list)
+
+
+class RssFeedConfig(BaseModel):
+    name: str
+    url: str
+
+
+class RssConfig(BaseModel):
+    max_entries_per_feed: int = Field(default=30, ge=1, le=200)
+    feeds: list[RssFeedConfig] = Field(default_factory=list)
+
+
+class SourcesConfig(BaseModel):
+    arxiv: ArxivConfig
+    rss: RssConfig
+
+
+class ScoringWeights(BaseModel):
+    novelty: float = 0.30
+    importance: float = 0.35
+    relevance: float = 0.35
+
+    @model_validator(mode="after")
+    def validate_sum(self) -> "ScoringWeights":
+        total = self.novelty + self.importance + self.relevance
+        if abs(total - 1.0) > 0.001:
+            raise ValueError("scoring weights must sum to 1.0")
+        return self
+
+
+class Thresholds(BaseModel):
+    high_energy: float = Field(default=6.2, alias="astro-ph.HE")
+    non_he: float = 7.8
+
+
+class ScoringConfig(BaseModel):
+    max_candidates: int = Field(default=60, ge=1, le=200)
+    max_papers_per_report: int = Field(default=12, ge=1, le=50)
+    weights: ScoringWeights = Field(default_factory=ScoringWeights)
+    category_boost: dict[str, float] = Field(default_factory=lambda: {"astro-ph.HE": 0.10})
+    thresholds: Thresholds = Field(default_factory=Thresholds)
+    non_he_min_relevance: int = Field(default=7, ge=1, le=10)
+
+
+class LlmConfig(BaseModel):
+    model: str = "claude-opus-4-7"
+    max_tokens: int = Field(default=16000, ge=256)
+    effort: str = "high"
+    prompt_cache: bool = True
+    base_url: str | None = None
+    api_mode: str = "auto"
+
+    @property
+    def use_claude_native_features(self) -> bool:
+        if self.api_mode == "native":
+            return True
+        if self.api_mode == "compatible":
+            return False
+        return self.model.startswith("claude-") and not self.base_url
+
+
+class ReportConfig(BaseModel):
+    output_dir: str = "daily_reports"
+    seen_file: str = "seen_papers.json"
+    title_prefix: str = "Astro Daily"
+
+
+class WechatConfig(BaseModel):
+    enabled: bool = True
+    endpoint_template: str = "https://sctapi.ftqq.com/{sendkey}.send"
+
+
+class PublishConfig(BaseModel):
+    enabled: bool = False
+    provider: str = "github_pages"
+    mode: str = "git_push"
+    repo_url: str | None = None
+    branch: str = "main"
+    docs_dir: str = "docs"
+    commit_message_template: str = "Publish Astro Daily report {date}"
+    require_success_before_push: bool = True
+
+
+class Settings(BaseModel):
+    sources: SourcesConfig
+    scoring: ScoringConfig
+    llm: LlmConfig
+    report: ReportConfig
+    wechat: WechatConfig
+    publish: PublishConfig = Field(default_factory=PublishConfig)
+    site_base_url: str = "本地HTML报告"
+    anthropic_api_key: str | None = None
+    root_dir: Path = Field(default_factory=lambda: Path.cwd())
+
+    def require_llm_key(self) -> None:
+        if not self.anthropic_api_key:
+            raise RuntimeError("ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN is required for LLM scoring and summarization")
+
+    @property
+    def seen_path(self) -> Path:
+        return self.root_dir / self.report.seen_file
+
+    @property
+    def report_dir(self) -> Path:
+        return self.root_dir / self.report.output_dir
+
+
+def load_settings(config_path: str | Path = "config.yaml") -> Settings:
+    load_dotenv()
+    path = Path(config_path)
+    if not path.is_absolute():
+        path = Path.cwd() / path
+    with path.open("r", encoding="utf-8") as handle:
+        raw: dict[str, Any] = yaml.safe_load(handle) or {}
+    raw.setdefault("llm", {})
+    if os.getenv("ANTHROPIC_MODEL"):
+        raw["llm"]["model"] = os.getenv("ANTHROPIC_MODEL")
+    if os.getenv("ANTHROPIC_BASE_URL"):
+        raw["llm"]["base_url"] = os.getenv("ANTHROPIC_BASE_URL")
+    if os.getenv("ANTHROPIC_API_MODE"):
+        raw["llm"]["api_mode"] = os.getenv("ANTHROPIC_API_MODE")
+    return Settings(
+        **raw,
+        anthropic_api_key=os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_AUTH_TOKEN") or None,
+        root_dir=path.parent,
+    )

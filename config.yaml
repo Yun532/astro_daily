@@ -1,0 +1,65 @@
+sources:
+  arxiv:
+    days_back: 3
+    primary:
+      - category: astro-ph.HE
+        max_results: 80
+    secondary:
+      - category: astro-ph.IM
+        max_results: 25
+      - category: astro-ph.GA
+        max_results: 25
+      - category: astro-ph.CO
+        max_results: 25
+      - category: astro-ph.SR
+        max_results: 25
+      - category: astro-ph.EP
+        max_results: 25
+  rss:
+    max_entries_per_feed: 30
+    feeds:
+      - name: Nature Astronomy
+        url: https://www.nature.com/natastron.rss
+      - name: Nature astronomy and astrophysics
+        url: https://www.nature.com/subjects/astronomy-and-astrophysics/nature.rss
+
+scoring:
+  max_candidates: 60
+  max_papers_per_report: 12
+  weights:
+    novelty: 0.30
+    importance: 0.35
+    relevance: 0.35
+  category_boost:
+    astro-ph.HE: 0.10
+  thresholds:
+    astro-ph.HE: 6.2
+    non_he: 7.8
+  non_he_min_relevance: 7
+
+llm:
+  model: claude-opus-4-7
+  max_tokens: 16000
+  effort: high
+  prompt_cache: true
+
+report:
+  output_dir: daily_reports
+  seen_file: seen_papers.json
+  title_prefix: Astro Daily
+
+site_base_url: 本地HTML报告
+
+publish:
+  enabled: false
+  provider: github_pages
+  mode: git_push
+  repo_url:
+  branch: main
+  docs_dir: docs
+  commit_message_template: Publish Astro Daily report {date}
+  require_success_before_push: true
+
+wechat:
+  enabled: true
+  endpoint_template: https://sctapi.ftqq.com/{sendkey}.send
