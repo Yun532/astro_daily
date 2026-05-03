@@ -1,0 +1,175 @@
+# 微信连通 Claude 启动说明
+
+用途：这个文件说明在当前 Claude Code 会话关闭以后，如何重新开启一个可以通过微信收消息并回复的 Claude。
+
+重要原则：同一时间只能有一个微信 / ClawBot channel 在运行。不要同时开启多个微信监听进程，否则可能会互相抢消息、导致无法回复或登录状态异常。
+
+
+## 一、日常微信聊天启动方式
+
+1. 打开 PowerShell。
+
+2. 进入项目目录：
+
+```powershell
+cd E:\astro-daliy
+```
+
+3. 确认没有其他微信 channel 正在运行。
+
+不要同时运行这些进程：
+
+```text
+npx claude-code-wechat-channel start
+```
+
+和：
+
+```text
+python -m astro_daily clawbot-chat
+```
+
+如果之前开过旧窗口，先关闭旧窗口；如果不确定，可以在任务管理器里检查并结束相关的 `node.exe` 或 `python.exe`。
+
+4. 启动微信聊天监听：
+
+```powershell
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+```
+
+保持这个 PowerShell 窗口不要关闭。
+
+启动后，流程是：
+
+```text
+微信消息 → ClawBot → astro_daily clawbot-chat → Claude / LLM → 回复微信
+```
+
+也就是说，你在微信里发消息，它会自动交给 Claude 回答，并把回答发回微信。
+
+
+## 二、只处理一条消息的模式
+
+如果只想临时测试或只处理当前积压的一轮消息，可以运行：
+
+```powershell
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat --once
+```
+
+这个命令只轮询一次，处理完就退出。
+
+日常聊天不要用 `--once`，应该使用常驻模式：
+
+```powershell
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+```
+
+
+## 三、如果微信登录失效
+
+ClawBot 登录凭据通常保存在：
+
+```text
+C:\Users\Administrator\.claude\channels\wechat\account.json
+```
+
+如果登录过期，需要重新扫码登录。
+
+可以临时运行原来的插件：
+
+```powershell
+npx claude-code-wechat-channel start
+```
+
+扫码成功并确认登录文件更新后，立刻关闭这个插件进程。
+
+然后回到项目目录，重新启动项目自己的聊天监听：
+
+```powershell
+cd E:\astro-daliy
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+```
+
+注意：原插件只用于扫码登录，不要和 `astro_daily clawbot-chat` 同时长期运行。
+
+
+## 四、如果 LLM / Claude 兼容 API 服务也关闭了
+
+当前项目通常通过本地兼容 API 调 Claude / LLM，例如 `.env` 中可能有：
+
+```env
+ANTHROPIC_BASE_URL=http://127.0.0.1:8317
+ANTHROPIC_MODEL=gpt-5.5
+ANTHROPIC_API_MODE=compatible
+```
+
+这意味着 `clawbot-chat` 依赖本机的：
+
+```text
+http://127.0.0.1:8317
+```
+
+如果这个服务没开，微信消息可能能收到，但 Claude 回复会失败。
+
+完整启动顺序应该是：
+
+```text
+1. 启动本地 LLM / Claude 兼容 API 服务，确保 http://127.0.0.1:8317 可用。
+2. 打开 PowerShell。
+3. 进入项目目录：E:\astro-daliy
+4. 运行：.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+5. 保持这个窗口开着。
+```
+
+
+## 五、每日自动日报和微信聊天的区别
+
+每日自动日报不需要开启微信聊天 channel。
+
+日报自动化建议用 Windows 任务计划程序运行：
+
+```powershell
+E:\astro-daliy\.venv\Scripts\python.exe -m astro_daily run
+```
+
+这个命令负责：
+
+```text
+抓论文 → LLM 筛选 / 生成课程 → 生成 Markdown / HTML → 发布网页 → 推送企业微信 / ClawBot
+```
+
+而微信聊天监听是：
+
+```powershell
+cd E:\astro-daliy
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+```
+
+它负责：
+
+```text
+你在微信发消息 → Claude 回复微信
+```
+
+这两个用途不同。通常建议：
+
+- 每日自动日报：交给 Windows 任务计划程序。
+- 微信里和 Claude 聊天：需要时手动启动 `clawbot-chat`。
+
+
+## 六、一句话总结
+
+下次 Claude Code 关闭后，如果想重新开启一个能和微信连通的 Claude：
+
+```powershell
+cd E:\astro-daliy
+.\.venv\Scripts\python.exe -m astro_daily clawbot-chat
+```
+
+前提是：
+
+```text
+1. 没有第二个微信 channel 正在运行。
+2. ClawBot 微信登录凭据仍然有效。
+3. 本地 LLM / Claude 兼容 API 服务已经启动。
+```

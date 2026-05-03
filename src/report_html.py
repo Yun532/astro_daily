@@ -7,12 +7,17 @@ import re
 import markdown
 
 
+MARKDOWN_EXTENSIONS = ["extra", "sane_lists", "toc", "tables", "attr_list", "md_in_html", "nl2br"]
+
+
 def generate_html_report(md_path: str) -> str:
     source = Path(md_path)
     markdown_text = source.read_text(encoding="utf-8")
-    html_body = markdown.markdown(markdown_text, extensions=["extra", "sane_lists"])
     report_date = _date_from_path(source)
     title = f"天文论文日报 {report_date}"
+    markdown_body, display_math_blocks = _prepare_math(_remove_top_heading(markdown_text))
+    html_body = markdown.markdown(markdown_body, extensions=MARKDOWN_EXTENSIONS)
+    html_body = _restore_display_math(html_body, display_math_blocks)
     html = f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -20,60 +25,168 @@ def generate_html_report(md_path: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{escape(title)}</title>
   <style>
+    :root {{
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }}
+    * {{ box-sizing: border-box; }}
+    html {{ scroll-behavior: smooth; }}
     body {{
       margin: 0;
-      padding: 24px;
-      background: #f6f7f9;
-      color: #202124;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-      line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
     }}
+    a {{ color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }}
+    a:hover {{ color: var(--blue-dark); }}
+    .page {{ max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }}
+    .hero {{
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }}
+    .hero::after {{
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }}
+    .eyebrow {{ margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }}
+    h1 {{ position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }}
+    .subtitle {{ position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }}
     main {{
-      max-width: 920px;
-      margin: 0 auto;
-      background: #fff;
+      margin-top: 22px;
       padding: 28px;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }}
-    h1 {{ font-size: 2rem; margin-top: 0; }}
+    main > p:first-child,
+    main > p:nth-child(2) {{ color: var(--muted); }}
     h2 {{
-      margin-top: 2rem;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 1.45rem;
-    }}
-    h3 {{
-      margin-top: 1.6rem;
-      padding: 1rem;
-      background: #f8fafc;
-      border-left: 4px solid #3b82f6;
-      border-radius: 8px;
-      font-size: 1.15rem;
-    }}
-    a {{ color: #2563eb; word-break: break-word; }}
-    details {{
-      margin: 1rem 0 1.5rem;
-      padding: 1rem;
-      background: #fbfdff;
-      border: 1px solid #dbeafe;
-      border-radius: 10px;
-    }}
-    summary {{ cursor: pointer; font-weight: 700; }}
-    blockquote {{
-      margin-left: 0;
+      margin: 2.4rem 0 1rem;
       padding: 0.8rem 1rem;
-      background: #fff7ed;
-      border-left: 4px solid #fb923c;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
     }}
-    code {{ background: #f1f5f9; padding: 0.1rem 0.25rem; border-radius: 4px; }}
+    h2:first-child {{ margin-top: 0; }}
+    h3 {{
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }}
+    h4 {{ margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }}
+    ul, ol {{ padding-left: 1.35rem; }}
+    li {{ margin: 0.3rem 0; }}
+    main > ul {{
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }}
+    strong {{ color: #0f2f5f; }}
+    blockquote {{
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }}
+    code {{ background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }}
+    table {{ width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }}
+    th, td {{ padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }}
+    th {{ background: #eff6ff; }}
+    mjx-container {{ overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }}
+    .math-display {{ margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }}
+    main img {{ max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }}
+    details.paper-detail {{
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }}
+    details.paper-detail[open] {{ border-color: #60a5fa; }}
+    details.paper-detail summary {{
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }}
+    details.paper-detail summary::-webkit-details-marker {{ display: none; }}
+    details.paper-detail summary::before {{ content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }}
+    details.paper-detail[open] summary::before {{ content: "收起"; background: #0891b2; }}
+    details.paper-detail > *:not(summary) {{ margin-left: 1.15rem; margin-right: 1.15rem; }}
+    details.paper-detail > :last-child {{ margin-bottom: 1.2rem; }}
+    details.paper-detail h4 {{
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }}
+    @media (max-width: 720px) {{
+      .page {{ padding: 18px 10px 36px; }}
+      .hero {{ padding: 24px 20px; border-radius: 22px; }}
+      main {{ padding: 18px 14px; border-radius: 20px; }}
+      h2 {{ font-size: 1.25rem; }}
+      h3 {{ font-size: 1.05rem; }}
+    }}
   </style>
+  <script>
+    window.MathJax = {{
+      tex: {{ inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']] }},
+      svg: {{ fontCache: 'global' }}
+    }};
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
-  <main>
-    <h1>{escape(title)}</h1>
-    {html_body}
-  </main>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>{escape(title)}</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <main>
+      {html_body}
+    </main>
+  </div>
 </body>
 </html>
 """
@@ -82,6 +195,31 @@ def generate_html_report(md_path: str) -> str:
     target = target_dir / f"{source.stem}.html"
     target.write_text(html, encoding="utf-8")
     return str(target)
+
+
+def _prepare_math(markdown_text: str) -> tuple[str, list[str]]:
+    display_blocks: list[str] = []
+
+    def replace_display(match: re.Match[str]) -> str:
+        content = (match.group(1) or match.group(2) or "").strip()
+        placeholder = f"@@ASTRO_DISPLAY_MATH_{len(display_blocks)}@@"
+        display_blocks.append(f'<div class="math-display">\\[{content}\\]</div>')
+        return f"\n\n{placeholder}\n\n"
+
+    text = re.sub(r"\\\[([\s\S]*?)\\\]|\$\$([\s\S]*?)\$\$", replace_display, markdown_text)
+    text = text.replace("\\(", "$").replace("\\)", "$")
+    return text, display_blocks
+
+
+def _restore_display_math(html: str, display_blocks: list[str]) -> str:
+    for index, block in enumerate(display_blocks):
+        placeholder = f"@@ASTRO_DISPLAY_MATH_{index}@@"
+        html = html.replace(f"<p>{placeholder}</p>", block).replace(placeholder, block)
+    return html
+
+
+def _remove_top_heading(markdown_text: str) -> str:
+    return re.sub(r"\A# .+?(?:\r?\n)+", "", markdown_text, count=1)
 
 
 def _date_from_path(path: Path) -> str:

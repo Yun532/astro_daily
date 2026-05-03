@@ -1,6 +1,3 @@
-import pytest
-from pydantic import ValidationError
-
 from astro_daily.models import Paper, PaperScore
 
 
@@ -34,13 +31,14 @@ def test_unrelated_non_he_paper_is_not_priority_topic():
     assert not paper.is_priority_topic
 
 
-def test_score_bounds_are_validated():
-    with pytest.raises(ValidationError):
-        PaperScore(
-            novelty_score=11,
-            importance_score=5,
-            relevance_to_me=5,
-            final_score=5,
-            keep=True,
-            reason="too high",
-        )
+def test_score_bounds_are_normalized():
+    score = PaperScore(
+        novelty_score=11,
+        importance_score=5,
+        relevance_to_me=0,
+        final_score=5,
+        keep=True,
+        reason="normalized",
+    )
+    assert score.novelty_score == 10
+    assert score.relevance_to_me == 1

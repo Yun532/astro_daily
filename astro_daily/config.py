@@ -54,12 +54,14 @@ class Thresholds(BaseModel):
 
 
 class ScoringConfig(BaseModel):
-    max_candidates: int = Field(default=60, ge=1, le=200)
-    max_papers_per_report: int = Field(default=12, ge=1, le=50)
+    max_candidates: int = Field(default=120, ge=1, le=300)
+    max_papers_per_report: int = Field(default=15, ge=1, le=50)
     weights: ScoringWeights = Field(default_factory=ScoringWeights)
     category_boost: dict[str, float] = Field(default_factory=lambda: {"astro-ph.HE": 0.10})
+    same_day_target: int = Field(default=5, ge=1, le=20)
+    max_backfill_papers: int = Field(default=5, ge=0, le=20)
     thresholds: Thresholds = Field(default_factory=Thresholds)
-    non_he_min_relevance: int = Field(default=7, ge=1, le=10)
+    non_he_min_relevance: int = Field(default=6, ge=1, le=10)
 
 
 class LlmConfig(BaseModel):
@@ -90,6 +92,16 @@ class WechatConfig(BaseModel):
     endpoint_template: str = "https://sctapi.ftqq.com/{sendkey}.send"
 
 
+class ClawBotConfig(BaseModel):
+    enabled: bool = False
+    base_url: str = "https://ilinkai.weixin.qq.com"
+    credentials_file: str | None = None
+    sync_file: str | None = None
+    default_recipient: str | None = None
+    send_report: bool = False
+    poll_enabled: bool = False
+
+
 class PublishConfig(BaseModel):
     enabled: bool = False
     provider: str = "github_pages"
@@ -107,6 +119,7 @@ class Settings(BaseModel):
     llm: LlmConfig
     report: ReportConfig
     wechat: WechatConfig
+    clawbot: ClawBotConfig = Field(default_factory=ClawBotConfig)
     publish: PublishConfig = Field(default_factory=PublishConfig)
     site_base_url: str = "本地HTML报告"
     anthropic_api_key: str | None = None

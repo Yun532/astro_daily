@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, List
 
-from astro_daily.models import Paper
+from astro_daily.models import Paper, WeekendLesson
 
 MAX_WECOM_BYTES = 3800
 
@@ -15,6 +15,29 @@ def compress_for_wechat(papers: List[Paper], date: str, report_url: str) -> str:
             return text
     count = min(3, len(items))
     text = _render(items[:count], date, report_url, short=True)
+    if _byte_len(text) <= MAX_WECOM_BYTES:
+        return text
+    suffix = f"\n\n[完整报告]({report_url})"
+    return _fit_bytes(text, MAX_WECOM_BYTES - _byte_len(suffix)).rstrip() + suffix
+
+
+def compress_weekend_lessons(lessons: list[WeekendLesson], date: str, report_url: str) -> str:
+    lines = [
+        f"# 天文日报｜{date}",
+        "",
+        f"周末经典专题课：{len(lessons)} 讲",
+        "今天 arXiv 通常不更新，改为精讲高能天体物理经典工作。",
+        "",
+    ]
+    for index, lesson in enumerate(lessons[:3], start=1):
+        lines.extend([
+            f"{index}. **{lesson.title_cn}**",
+            f"主题：{lesson.topic}",
+            f"经典性：{_trim(lesson.why_classic_cn, 120)}",
+            "",
+        ])
+    lines.append(f"[完整报告]({report_url})")
+    text = "\n".join(lines).strip()
     if _byte_len(text) <= MAX_WECOM_BYTES:
         return text
     suffix = f"\n\n[完整报告]({report_url})"

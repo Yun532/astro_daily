@@ -7,6 +7,10 @@ from datetime import date
 
 from astro_daily.config import load_settings
 from astro_daily.pipeline import fetch_all_sources, run_pipeline
+from src.clawbot_chat import run_clawbot_chat_loop, run_clawbot_chat_once
+from src.clawbot_client import poll_clawbot_once
+from src.push_clawbot import send_clawbot_report_message
+from src.report_urls import latest_report_date
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -18,12 +22,12 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "run":
             run_date = date.fromisoformat(args.date) if args.date else None
-            result = run_pipeline(config_path=args.config, run_date=run_date, dry_run=args.dry_run)
+            result = run_pipeline(config_path=args.config, run_date=run_date, dry_run=args.dry_run, ignore_seen=args.ignore_seen)
             print(f"Report: {result.report_path}")
             print(f"HTML report: {result.html_report_path}")
             if result.published_url:
                 print(f"Published URL: {result.published_url}")
-            print(f"Fetched unique: {result.fetched_count}; new: {result.new_count}; kept: {result.kept_count}")
+            print(f"Fetched unique: {result.fetched_count}; new: {result.new_count}; kept: {result.kept_count}; classic lessons: {result.classic_lesson_count}")
             print(f"WeChat selected: {result.wechat_selected_count}; HE: {result.wechat_he_count}; length: {len(result.wechat_message)}")
             print("WeChat preview:")
             print(result.wechat_message)
@@ -44,6 +48,29 @@ def main(argv: list[str] | None = None) -> int:
                 for error in errors:
                     print(f"- {error}")
             return 0 if papers else 1
+        if args.command == "test-clawbot-send":
+            settings = load_settings(args.config)
+            run_date = date.fromisoformat(args.date) if args.date else latest_report_date(settings) or date.today()
+            content = args.text or _clawbot_report_link_message(settings.site_base_url, run_date)
+            send_clawbot_report_message(settings, content, dry_run=args.dry_run)
+            print("ClawBot dry-run complete" if args.dry_run else "ClawBot message sent")
+            return 0
+        if args.command == "test-clawbot-poll":
+            settings = load_settings(args.config)
+            messages = poll_clawbot_once(settings)
+            print(f"Received {len(messages)} ClawBot messages")
+            for message in messages:
+                token_state = "context_token=yes" if message.context_token else "context_token=no"
+                print(f"- {message.sender_id} ({token_state}): {message.text}")
+            return 0
+        if args.command == "clawbot-chat":
+            settings = load_settings(args.config)
+            if args.once:
+                replied = run_clawbot_chat_once(settings, dry_run=args.dry_run)
+                print(f"ClawBot replies sent: {replied}")
+                return 0
+            run_clawbot_chat_loop(settings, poll_interval=args.poll_interval, dry_run=args.dry_run)
+            return 0
         parser.print_help()
         return 1
     except Exception as exc:
@@ -60,8 +87,28 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--config", default="config.yaml")
     run.add_argument("--date", help="Override report date, YYYY-MM-DD")
     run.add_argument("--dry-run", action="store_true", help="Do not update seen_papers.json or send WeChat push")
+    run.add_argument("--ignore-seen", action="store_true", help="Ignore seen_papers.json when re-testing a historical date")
 
     test_fetch = subparsers.add_parser("test-fetch", help="Fetch and parse configured sources without LLM calls")
     test_fetch.add_argument("--config", default="config.yaml")
 
+    clawbot_send = subparsers.add_parser("test-clawbot-send", help="Send an existing report link or text through ClawBot")
+    clawbot_send.add_argument("--config", default="config.yaml")
+    clawbot_send.add_argument("--date", help="Report date for default link, YYYY-MM-DD")
+    clawbot_send.add_argument("--text", help="Text to send instead of the default report link")
+    clawbot_send.add_argument("--dry-run", action="store_true")
+
+    clawbot_poll = subparsers.add_parser("test-clawbot-poll", help="Poll ClawBot once and print received messages")
+    clawbot_poll.add_argument("--config", default="config.yaml")
+
+    clawbot_chat = subparsers.add_parser("clawbot-chat", help="Poll ClawBot messages, answer with LLM, and reply through WeChat")
+    clawbot_chat.add_argument("--config", default="config.yaml")
+    clawbot_chat.add_argument("--poll-interval", type=float, default=2.0, help="Seconds between polling cycles")
+    clawbot_chat.add_argument("--once", action="store_true", help="Run one poll-and-reply cycle, then exit")
+    clawbot_chat.add_argument("--dry-run", action="store_true", help="Generate replies but do not send them")
+
     return parser
+
+
+def _clawbot_report_link_message(site_base_url: str, run_date: date) -> str:
+    return f"Astro Daily {run_date.isoformat()} 完整报告：\n{site_base_url.rstrip('/')}/reports/{run_date.isoformat()}.html"

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Sequence
 
 from astro_daily.config import Settings
+from src.report_urls import report_url
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +21,7 @@ class PublishResult:
 
 
 def publish_report_if_enabled(settings: Settings, html_report_path: str, run_date: date, *, dry_run: bool = False) -> PublishResult:
-    url = _report_url(settings.site_base_url, run_date)
+    url = report_url(settings.site_base_url, run_date)
     if not settings.publish.enabled:
         return PublishResult(enabled=False, published=False, url=url)
     if settings.publish.provider != "github_pages" or settings.publish.mode != "git_push":
@@ -48,10 +49,6 @@ def publish_report_if_enabled(settings: Settings, html_report_path: str, run_dat
     _run_git(root, ["commit", "-m", _commit_message(settings, run_date)])
     _run_git(root, ["push", "origin", settings.publish.branch])
     return PublishResult(enabled=True, published=True, url=url)
-
-
-def _report_url(site_base_url: str, run_date: date) -> str:
-    return f"{site_base_url.rstrip('/')}/reports/{run_date.isoformat()}.html"
 
 
 def _commit_message(settings: Settings, run_date: date) -> str:

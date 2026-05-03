@@ -9,12 +9,14 @@
 - 数据源
   - arXiv 主方向：`astro-ph.HE`
   - arXiv 辅方向：`astro-ph.IM` / `astro-ph.GA` / `astro-ph.CO` / `astro-ph.SR` / `astro-ph.EP`
-  - Nature Astronomy RSS
+  - Nature / Nature Astronomy / Nature Physics / Nature Communications RSS
   - Nature astronomy and astrophysics 主题 RSS
+  - Science / Science Advances RSS
 - 筛选策略
   - `astro-ph.HE` 权重最高，推荐阈值较低
   - IACT / 大气切伦科夫望远镜相关论文与 HE 同等优先，包括 CTA、MAGIC、H.E.S.S.、VERITAS、LST 等
   - 其他非 HE 方向必须明显新颖、重要，或对高能天文 / 宇宙线 / 伽马射线 / 仪器方法有影响才保留
+  - Nature / Science 及其重点子刊来源会进入候选池并使用较宽的期刊来源阈值，避免漏掉未上 arXiv 的重要文章
 - Claude LLM 评分
   - `novelty_score`
   - `importance_score`
@@ -24,7 +26,7 @@
 - 输出
   - `daily_reports/YYYY-MM-DD.md`
   - `docs/reports/YYYY-MM-DD.html`：由 Markdown 自动转换出的 HTML 报告，用于企业微信摘要跳转或静态托管
-  - 每篇论文包含可折叠详细解读：背景知识、基础理论/方法、建议重点查看的图表、强相关工作链接
+  - 每篇论文包含可折叠详细解读：文章详细讲解、背景知识、基础理论/方法、重点章节阅读指引、建议重点查看的图表、强相关工作链接
   - 企业微信 Markdown 摘要：自动压缩 Top 3–5 篇，控制在安全长度内
   - `seen_papers.json`
   - 可选企业微信群机器人推送
@@ -94,17 +96,27 @@ ANTHROPIC_API_MODE=compatible
 ```yaml
 sources:
   arxiv:
-    days_back: 3
+    days_back: 7
     primary:
       - category: astro-ph.HE
-        max_results: 80
+        max_results: 120
     secondary:
       - category: astro-ph.IM
         max_results: 25
   rss:
     feeds:
+      - name: Nature
+        url: https://www.nature.com/nature.rss
       - name: Nature Astronomy
         url: https://www.nature.com/natastron.rss
+      - name: Nature Physics
+        url: https://www.nature.com/nphys.rss
+      - name: Nature Communications
+        url: https://www.nature.com/ncomms.rss
+      - name: Science
+        url: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science
+      - name: Science Advances
+        url: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv
 
 site_base_url: 你的静态站点根地址
 
@@ -201,7 +213,43 @@ publish:
 
 启用后，正式运行会只提交并推送当天的 `docs/reports/YYYY-MM-DD.html`。如果发布失败，程序不会继续推送企业微信，也不会更新 `seen_papers.json`。
 
-`claude-wechat-channel` 暂未接入；等该工具安装并确认接口形式后，应作为独立发送适配器加入。当前稳定路径是：GitHub Pages 承载完整网页，企业微信群机器人发送摘要和完整报告链接。
+个人微信 ClawBot 可作为企业微信群机器人的补充通道。`claude-code-wechat-channel` 仍可用于扫码登录并生成 `C:\Users\Administrator\.claude\channels\wechat\account.json`，但日报项目内的可靠发送路径使用直接 ClawBot HTTP 适配器，不依赖 Claude Code 实验 channel 路由。配置示例：
+
+```yaml
+clawbot:
+  enabled: false
+  base_url: https://ilinkai.weixin.qq.com
+  default_recipient: o9cq803A3uKxRbdu5k_QS43jZYt8@im.wechat
+  send_report: false
+  poll_enabled: false
+```
+
+测试现有报告链接发送，不生成新报告：
+
+```bash
+python -m astro_daily test-clawbot-send --dry-run
+python -m astro_daily test-clawbot-send --date 2026-05-02
+```
+
+诊断微信入站消息：
+
+```bash
+python -m astro_daily test-clawbot-poll
+```
+
+把微信输入作为一次模型输入并自动回复：
+
+```bash
+python -m astro_daily clawbot-chat
+```
+
+只处理一轮消息可用于测试：
+
+```bash
+python -m astro_daily clawbot-chat --once
+```
+
+不要同时运行多个 ClawBot 监听器，包括单独的 `npx claude-code-wechat-channel start`、`test-clawbot-poll` 循环和 `clawbot-chat`；否则消息游标和上下文 token 可能被不同进程消费。当前稳定自动化路径仍然是：GitHub Pages 承载完整网页，企业微信群机器人发送摘要和完整报告链接。
 
 ## 输出文件
 

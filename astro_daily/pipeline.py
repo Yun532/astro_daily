@@ -6,16 +6,18 @@ from datetime import date
 
 from astro_daily.config import Settings, load_settings
 from astro_daily.llm import ClaudePaperAnalyst
-from astro_daily.models import Paper, ScoredPaper
+from astro_daily.models import Paper, ScoredPaper, WeekendLesson
 from astro_daily.report import render_report, write_daily_report
 from astro_daily.scoring import apply_policy, prepare_candidates
 from astro_daily.seen import SeenStore, deduplicate_papers
 from astro_daily.sources import fetch_arxiv_papers, fetch_rss_papers
 from astro_daily.summarizer import add_summaries
 from src.publisher import publish_report_if_enabled
+from src.push_clawbot import send_clawbot_report_message
 from src.push_wecom_bot import send_wecom_markdown
 from src.report_html import generate_html_report
-from src.wechat_summary import compress_for_wechat, select_wechat_papers, wechat_category_counts
+from src.report_urls import report_url
+from src.wechat_summary import compress_for_wechat, compress_weekend_lessons, select_wechat_papers, wechat_category_counts
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +35,7 @@ class PipelineResult:
     source_errors: list[str]
     published_url: str | None
     published: bool
+    classic_lesson_count: int = 0
 
 
 def run_pipeline(
@@ -40,23 +43,30 @@ def run_pipeline(
     config_path: str = "config.yaml",
     run_date: date | None = None,
     dry_run: bool = False,
+    ignore_seen: bool = False,
 ) -> PipelineResult:
     settings = load_settings(config_path)
     run_date = run_date or date.today()
     papers, source_errors = fetch_all_sources(settings)
     unique = deduplicate_papers(papers)
     seen = SeenStore.load(settings.seen_path)
-    new_papers = seen.filter_new(unique)
+    new_papers = unique if ignore_seen else seen.filter_new(unique)
     logger.info("Fetched %s papers, %s unique, %s new", len(papers), len(unique), len(new_papers))
 
     scored: list[ScoredPaper] = []
-    candidates = prepare_candidates(new_papers, settings.scoring)
+    weekend_lessons: list[WeekendLesson] = []
+    analyst: ClaudePaperAnalyst | None = None
+    candidates = prepare_candidates(new_papers, settings.scoring, run_date=run_date)
     if candidates:
         settings.require_llm_key()
         analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
         score_results = analyst.score_papers(candidates, run_date=run_date, scoring_config=settings.scoring)
         scored = apply_policy(candidates, score_results, settings.scoring)
         scored = add_summaries(scored, analyst, run_date=run_date)
+    if not scored and _is_weekend(run_date):
+        settings.require_llm_key()
+        analyst = analyst or ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
+        weekend_lessons = analyst.generate_weekend_lessons(run_date=run_date, topics=_weekend_classic_topics())
 
     report_path = write_daily_report(
         output_dir=settings.report_dir,
@@ -65,19 +75,26 @@ def run_pipeline(
         scored_papers=scored,
         source_errors=source_errors,
         dry_run=dry_run,
+        weekend_lessons=weekend_lessons,
     )
     html_report_path = generate_html_report(str(report_path))
     publish_result = publish_report_if_enabled(settings, html_report_path, run_date, dry_run=dry_run)
-    report_url = publish_result.url or _report_url(settings.site_base_url, run_date)
-    wechat_message = compress_for_wechat(scored, run_date.isoformat(), report_url)
-    selected_for_wechat = select_wechat_papers(scored)
-    wechat_he_count, _, _ = wechat_category_counts(selected_for_wechat)
+    report_url_value = publish_result.url or report_url(settings.site_base_url, run_date)
+    if weekend_lessons:
+        wechat_message = compress_weekend_lessons(weekend_lessons, run_date.isoformat(), report_url_value)
+        selected_for_wechat = weekend_lessons
+        wechat_he_count = 0
+    else:
+        wechat_message = compress_for_wechat(scored, run_date.isoformat(), report_url_value)
+        selected_for_wechat = select_wechat_papers(scored)
+        wechat_he_count, _, _ = wechat_category_counts(selected_for_wechat)
     he_ratio = wechat_he_count / len(selected_for_wechat) if selected_for_wechat else 0.0
     logger.info("WeChat selected papers: %s", len(selected_for_wechat))
     logger.info("WeChat HE ratio: %.2f", he_ratio)
     logger.info("WeChat message length: %s", len(wechat_message))
 
     push_succeeded = dry_run or not settings.wechat.enabled
+    clawbot_succeeded = dry_run or not settings.clawbot.enabled or not settings.clawbot.send_report
     publish_succeeded = dry_run or not settings.publish.enabled or publish_result.published or not settings.publish.require_success_before_push
     if settings.wechat.enabled:
         if dry_run:
@@ -86,8 +103,15 @@ def run_pipeline(
         else:
             send_wecom_markdown(wechat_message)
             push_succeeded = True
+    if settings.clawbot.enabled and settings.clawbot.send_report:
+        if dry_run:
+            logger.info("Dry-run: ClawBot push skipped")
+            send_clawbot_report_message(settings, wechat_message, dry_run=True)
+        else:
+            send_clawbot_report_message(settings, wechat_message)
+            clawbot_succeeded = True
 
-    if scored and not dry_run and push_succeeded and publish_succeeded:
+    if scored and not dry_run and push_succeeded and clawbot_succeeded and publish_succeeded:
         seen.mark_many([item.paper for item in scored], seen_date=run_date)
         seen.save()
 
@@ -103,11 +127,20 @@ def run_pipeline(
         source_errors=source_errors,
         published_url=publish_result.url,
         published=publish_result.published,
+        classic_lesson_count=len(weekend_lessons),
     )
 
 
-def _report_url(site_base_url: str, run_date: date) -> str:
-    return f"{site_base_url.rstrip('/')}/reports/{run_date.isoformat()}.html"
+def _is_weekend(run_date: date) -> bool:
+    return run_date.weekday() >= 5
+
+
+def _weekend_classic_topics() -> list[str]:
+    return [
+        "GRB prompt emission and afterglow classic work",
+        "cosmic-ray origin with SNR, PWN, pulsars, and pulsar halos",
+        "IACT and TeV gamma-ray astronomy classic methods and results",
+    ]
 
 
 def fetch_all_sources(settings: Settings) -> tuple[list[Paper], list[str]]:

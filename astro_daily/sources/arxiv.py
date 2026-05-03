@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import time
 from email.utils import parsedate_to_datetime
 from time import struct_time
 from typing import Iterable
 
 import feedparser
 import requests
+from requests import HTTPError
 
 from astro_daily.config import ArxivCategoryConfig
 from astro_daily.models import Paper
@@ -30,8 +32,7 @@ def fetch_arxiv_papers(
             "sortBy": "submittedDate",
             "sortOrder": "descending",
         }
-        response = requests.get(ARXIV_API_URL, params=params, timeout=timeout)
-        response.raise_for_status()
+        response = _get_with_retry(params, timeout=timeout)
         feed = feedparser.parse(response.content)
         for entry in feed.entries:
             paper = _entry_to_paper(entry, item.category)
@@ -39,6 +40,23 @@ def fetch_arxiv_papers(
                 continue
             papers.append(paper)
     return papers
+
+
+def _get_with_retry(params: dict[str, object], *, timeout: int) -> requests.Response:
+    last_error: HTTPError | None = None
+    for attempt in range(3):
+        if attempt:
+            time.sleep(3 * attempt)
+        response = requests.get(ARXIV_API_URL, params=params, timeout=timeout)
+        try:
+            response.raise_for_status()
+            return response
+        except HTTPError as exc:
+            last_error = exc
+            if response.status_code not in {429, 503}:
+                raise
+    raise last_error or RuntimeError("arXiv request failed")
+
 
 
 def _entry_to_paper(entry: object, category: str) -> Paper:

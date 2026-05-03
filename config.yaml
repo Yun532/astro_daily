@@ -1,9 +1,9 @@
 sources:
   arxiv:
-    days_back: 3
+    days_back: 7
     primary:
       - category: astro-ph.HE
-        max_results: 80
+        max_results: 120
     secondary:
       - category: astro-ph.IM
         max_results: 25
@@ -16,30 +16,42 @@ sources:
       - category: astro-ph.EP
         max_results: 25
   rss:
-    max_entries_per_feed: 30
+    max_entries_per_feed: 50
     feeds:
+      - name: Nature
+        url: https://www.nature.com/nature.rss
       - name: Nature Astronomy
         url: https://www.nature.com/natastron.rss
+      - name: Nature Physics
+        url: https://www.nature.com/nphys.rss
+      - name: Nature Communications
+        url: https://www.nature.com/ncomms.rss
       - name: Nature astronomy and astrophysics
         url: https://www.nature.com/subjects/astronomy-and-astrophysics/nature.rss
+      - name: Science
+        url: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science
+      - name: Science Advances
+        url: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv
 
 scoring:
-  max_candidates: 60
-  max_papers_per_report: 12
+  max_candidates: 120
+  max_papers_per_report: 15
   weights:
     novelty: 0.30
     importance: 0.35
     relevance: 0.35
   category_boost:
     astro-ph.HE: 0.10
+  same_day_target: 5
+  max_backfill_papers: 5
   thresholds:
-    astro-ph.HE: 6.2
-    non_he: 7.8
-  non_he_min_relevance: 7
+    astro-ph.HE: 5.8
+    non_he: 7.2
+  non_he_min_relevance: 6
 
 llm:
   model: claude-opus-4-7
-  max_tokens: 16000
+  max_tokens: 32000
   effort: high
   prompt_cache: true
 
@@ -63,3 +75,10 @@ publish:
 wechat:
   enabled: true
   endpoint_template: https://sctapi.ftqq.com/{sendkey}.send
+
+clawbot:
+  enabled: true
+  base_url: https://ilinkai.weixin.qq.com
+  default_recipient: o9cq803A3uKxRbdu5k_QS43jZYt8@im.wechat
+  send_report: true
+  poll_enabled: false

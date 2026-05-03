@@ -66,6 +66,11 @@ class Paper(BaseModel):
         tokens = set(re.findall(r"[a-z0-9]+", text))
         return bool(tokens & IACT_ACRONYMS)
 
+    @property
+    def is_prestige_journal_source(self) -> bool:
+        text = " ".join([self.source, self.journal or ""]).casefold()
+        return "nature" in text or "science" in text
+
 
 class PaperScore(BaseModel):
     novelty_score: int = Field(ge=1, le=10)
@@ -75,6 +80,15 @@ class PaperScore(BaseModel):
     keep: bool
     reason: str
 
+    @field_validator("novelty_score", "importance_score", "relevance_to_me", mode="before")
+    @classmethod
+    def clamp_score(cls, value: Any) -> int:
+        try:
+            score = int(round(float(value)))
+        except (TypeError, ValueError):
+            return value
+        return min(10, max(1, score))
+
 
 class PaperSummary(BaseModel):
     paper_id: str
@@ -83,9 +97,15 @@ class PaperSummary(BaseModel):
     why_important_cn: str
     value_cn: str
     why_care_cn: str
+    detailed_explanation_cn: str = ""
     background_cn: str = ""
     basic_theory_cn: str = ""
+    formula_derivation_cn: str = ""
+    model_fitting_cn: str = ""
+    key_sections_cn: str = ""
     figures_to_check_cn: str = ""
+    key_figure_analysis_cn: str = ""
+    figure_image_urls: list[str] = Field(default_factory=list)
     related_work_cn: str = ""
     similar_work_links: list[str] = Field(default_factory=list)
     foundational_work_links: list[str] = Field(default_factory=list)
@@ -108,3 +128,26 @@ class ScoreBatch(BaseModel):
 
 class SummaryBatch(BaseModel):
     summaries: list[PaperSummary]
+
+
+class WeekendLesson(BaseModel):
+    topic: str
+    title_cn: str
+    anchor_work_cn: str
+    why_classic_cn: str
+    detailed_explanation_cn: str
+    background_cn: str
+    basic_theory_cn: str
+    formula_derivation_cn: str
+    model_fitting_cn: str
+    key_sections_cn: str
+    figures_to_check_cn: str
+    key_figure_analysis_cn: str
+    figure_image_urls: list[str] = Field(default_factory=list)
+    followup_reading_cn: str
+    search_keywords: list[str] = Field(default_factory=list)
+    links: list[str] = Field(default_factory=list)
+
+
+class WeekendLessonBatch(BaseModel):
+    lessons: list[WeekendLesson]

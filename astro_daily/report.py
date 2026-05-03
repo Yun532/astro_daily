@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from pathlib import Path
 
-from astro_daily.models import ScoredPaper
+from astro_daily.models import ScoredPaper, WeekendLesson
 
 
 def write_daily_report(
@@ -14,6 +14,7 @@ def write_daily_report(
     scored_papers: list[ScoredPaper],
     source_errors: list[str],
     dry_run: bool,
+    weekend_lessons: list[WeekendLesson] | None = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{run_date.isoformat()}.md"
@@ -24,6 +25,7 @@ def write_daily_report(
             scored_papers=scored_papers,
             source_errors=source_errors,
             dry_run=dry_run,
+            weekend_lessons=weekend_lessons,
         ),
         encoding="utf-8",
     )
@@ -37,6 +39,7 @@ def render_report(
     scored_papers: list[ScoredPaper],
     source_errors: list[str],
     dry_run: bool,
+    weekend_lessons: list[WeekendLesson] | None = None,
 ) -> str:
     title = f"# {title_prefix} {run_date.isoformat()}"
     lines = [title, ""]
@@ -52,12 +55,15 @@ def render_report(
         lines.extend(f"- {error}" for error in source_errors)
         lines.append("")
     if not scored_papers:
-        lines.extend([
-            "## 今日结论",
-            "",
-            "今天没有论文通过推荐阈值。不是没有新论文，而是没有看到足够值得优先阅读的结果。",
-            "",
-        ])
+        if weekend_lessons:
+            _append_weekend_lessons(lines, weekend_lessons)
+        else:
+            lines.extend([
+                "## 今日结论",
+                "",
+                "今天没有论文通过推荐阈值。不是没有新论文，而是没有看到足够值得优先阅读的结果。",
+                "",
+            ])
         return "\n".join(lines).strip() + "\n"
 
     he = [item for item in scored_papers if item.paper.is_priority_topic]
@@ -103,8 +109,12 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> 
                 "",
                 f"**为什么应该关注**：{summary.why_care_cn}",
                 "",
-                "<details>",
-                "<summary>展开详细解读：背景、理论、图表与相关工作</summary>",
+                "<details class=\"paper-detail\" markdown=\"1\">",
+                "<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>",
+                "",
+                "#### 文章详细讲解",
+                "",
+                summary.detailed_explanation_cn or "（未提供）",
                 "",
                 "#### 背景知识",
                 "",
@@ -114,9 +124,29 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> 
                 "",
                 summary.basic_theory_cn or "（未提供）",
                 "",
+                "#### 公式与推导",
+                "",
+                summary.formula_derivation_cn or "（未提供）",
+                "",
+                "#### 模型拟合 / 应用方法",
+                "",
+                summary.model_fitting_cn or "（未提供）",
+                "",
+                "#### 重点章节 / 结果段落怎么读",
+                "",
+                summary.key_sections_cn or "（未提供）",
+                "",
                 "#### 建议重点查看的图表",
                 "",
                 summary.figures_to_check_cn or "（未提供）",
+                "",
+                "#### 关键图表逐图导读",
+                "",
+                summary.key_figure_analysis_cn or "（未提供）",
+                "",
+                "#### 可嵌入的官方图片",
+                "",
+                *_image_lines(summary.figure_image_urls),
                 "",
                 "#### 强相关工作",
                 "",
@@ -136,6 +166,84 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> 
             ])
         else:
             lines.extend(["中文总结生成失败，请直接查看原文。", ""])
+
+
+def _append_weekend_lessons(lines: list[str], lessons: list[WeekendLesson]) -> None:
+    lines.extend([
+        "## 周末经典专题课",
+        "",
+        "周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。",
+        "",
+    ])
+    for index, lesson in enumerate(lessons, start=1):
+        lines.extend([
+            f"### {index}. {lesson.title_cn}",
+            "",
+            f"- 主题：{lesson.topic}",
+            f"- 经典工作：{lesson.anchor_work_cn}",
+            f"- 为什么经典：{lesson.why_classic_cn}",
+            "",
+            "<details class=\"paper-detail\" markdown=\"1\">",
+            "<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>",
+            "",
+            "#### 经典工作详细讲解",
+            "",
+            lesson.detailed_explanation_cn,
+            "",
+            "#### 背景知识",
+            "",
+            lesson.background_cn,
+            "",
+            "#### 基础理论 / 方法脉络",
+            "",
+            lesson.basic_theory_cn,
+            "",
+            "#### 公式与推导",
+            "",
+            lesson.formula_derivation_cn,
+            "",
+            "#### 经典拟合 / 应用方法",
+            "",
+            lesson.model_fitting_cn,
+            "",
+            "#### 重点章节 / 结果段落怎么读",
+            "",
+            lesson.key_sections_cn,
+            "",
+            "#### 建议重点查看的图表",
+            "",
+            lesson.figures_to_check_cn,
+            "",
+            "#### 关键图表逐图导读",
+            "",
+            lesson.key_figure_analysis_cn,
+            "",
+            "#### 可嵌入的官方图片",
+            "",
+            *_image_lines(lesson.figure_image_urls),
+            "",
+            "#### 后续阅读路径",
+            "",
+            lesson.followup_reading_cn,
+            "",
+            "**检索关键词**：",
+            *_link_lines(lesson.search_keywords),
+            "",
+            "**确信的公开链接**：",
+            *_link_lines(lesson.links),
+            "",
+            "</details>",
+            "",
+        ])
+
+
+def _image_lines(urls: list[str]) -> list[str]:
+    if not urls:
+        return ["（未提供；为避免编造图片链接，本节只在能确认官方图片 URL 时嵌入图片。）"]
+    lines: list[str] = []
+    for index, url in enumerate(urls, start=1):
+        lines.extend([f"![关键图表 {index}]({url})", f"图源：{url}", ""])
+    return lines[:-1]
 
 
 def _link_lines(links: list[str]) -> list[str]:
