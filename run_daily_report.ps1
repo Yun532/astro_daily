@@ -6,5 +6,6 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $logFile = Join-Path $logDir "daily-report-$stamp.log"
 Set-Location $projectRoot
-& $python -m astro_daily run *> $logFile
+$command = "`"$python`" -m astro_daily run >> `"$logFile`" 2>&1"
+cmd.exe /c $command
 exit $LASTEXITCODE
