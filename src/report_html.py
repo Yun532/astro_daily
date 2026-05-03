@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date
 from html import escape
 from pathlib import Path
 import re
@@ -18,6 +19,7 @@ def generate_html_report(md_path: str) -> str:
     markdown_body, display_math_blocks = _prepare_math(_remove_top_heading(markdown_text))
     html_body = markdown.markdown(markdown_body, extensions=MARKDOWN_EXTENSIONS)
     html_body = _restore_display_math(html_body, display_math_blocks)
+    target_dir = source.parent.parent / "docs" / "reports"
     html = f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -72,6 +74,11 @@ def generate_html_report(md_path: str) -> str:
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.14);
     }}
+    .report-nav {{ display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }}
+    .report-nav a,
+    .report-nav span {{ flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }}
+    .report-nav .next {{ text-align: right; }}
+    .report-nav span {{ color: var(--muted); background: rgba(248, 251, 255, 0.78); }}
     .eyebrow {{ margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }}
     h1 {{ position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }}
     .subtitle {{ position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }}
@@ -163,6 +170,8 @@ def generate_html_report(md_path: str) -> str:
     @media (max-width: 720px) {{
       .page {{ padding: 18px 10px 36px; }}
       .hero {{ padding: 24px 20px; border-radius: 22px; }}
+      .report-nav {{ flex-direction: column; }}
+      .report-nav .next {{ text-align: left; }}
       main {{ padding: 18px 14px; border-radius: 20px; }}
       h2 {{ font-size: 1.25rem; }}
       h3 {{ font-size: 1.05rem; }}
@@ -183,6 +192,7 @@ def generate_html_report(md_path: str) -> str:
       <h1>{escape(title)}</h1>
       <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
     </header>
+    {_report_nav_html(report_date, *_adjacent_report_dates(target_dir, report_date))}
     <main>
       {html_body}
     </main>
@@ -190,11 +200,68 @@ def generate_html_report(md_path: str) -> str:
 </body>
 </html>
 """
-    target_dir = source.parent.parent / "docs" / "reports"
     target_dir.mkdir(parents=True, exist_ok=True)
     target = target_dir / f"{source.stem}.html"
     target.write_text(html, encoding="utf-8")
+    _refresh_report_nav_links(target_dir)
     return str(target)
+
+
+def _refresh_report_nav_links(target_dir: Path) -> None:
+    report_dates = _available_report_dates(target_dir)
+    for index, report_date in enumerate(report_dates):
+        path = target_dir / f"{report_date}.html"
+        html = path.read_text(encoding="utf-8")
+        previous_date = report_dates[index - 1] if index > 0 else None
+        next_date = report_dates[index + 1] if index + 1 < len(report_dates) else None
+        nav_html = _report_nav_html(report_date, previous_date, next_date)
+        html = _replace_report_nav(html, nav_html)
+        path.write_text(html, encoding="utf-8")
+
+
+def _replace_report_nav(html: str, nav_html: str) -> str:
+    pattern = r"\n\s*<!-- REPORT_NAV_START -->[\s\S]*?<!-- REPORT_NAV_END -->"
+    if re.search(pattern, html):
+        return re.sub(pattern, "\n    " + nav_html, html, count=1)
+    return html.replace("\n    <main>", "\n    " + nav_html + "\n    <main>", 1)
+
+
+def _report_nav_html(report_date: str, previous_date: str | None, next_date: str | None) -> str:
+    previous = (
+        f'<a class="previous" href="{previous_date}.html">← 上一期：{previous_date}</a>'
+        if previous_date
+        else '<span class="previous">← 没有更早的报告</span>'
+    )
+    next_link = (
+        f'<a class="next" href="{next_date}.html">下一期：{next_date} →</a>'
+        if next_date
+        else '<span class="next">没有更新的报告 →</span>'
+    )
+    return f'<!-- REPORT_NAV_START -->\n    <nav class="report-nav" aria-label="日报前后导航" data-report-date="{escape(report_date)}">\n      {previous}\n      {next_link}\n    </nav>\n    <!-- REPORT_NAV_END -->'
+
+
+def _adjacent_report_dates(target_dir: Path, report_date: str) -> tuple[str | None, str | None]:
+    report_dates = _available_report_dates(target_dir)
+    if report_date not in report_dates:
+        report_dates.append(report_date)
+        report_dates.sort()
+    index = report_dates.index(report_date)
+    previous_date = report_dates[index - 1] if index > 0 else None
+    next_date = report_dates[index + 1] if index + 1 < len(report_dates) else None
+    return previous_date, next_date
+
+
+def _available_report_dates(target_dir: Path) -> list[str]:
+    if not target_dir.exists():
+        return []
+    dates: list[str] = []
+    for path in target_dir.glob("*.html"):
+        try:
+            date.fromisoformat(path.stem)
+        except ValueError:
+            continue
+        dates.append(path.stem)
+    return sorted(dates)
 
 
 def _prepare_math(markdown_text: str) -> tuple[str, list[str]]:

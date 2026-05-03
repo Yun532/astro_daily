@@ -18,6 +18,9 @@ def test_generate_html_report(tmp_path: Path):
     assert "天文论文日报 2026-05-02" in html
     assert '<a href="https://example.com">link</a>' in html
     assert "Astro Daily 2026-05-02" not in html.split("<main>", 1)[1]
+    assert 'class="report-nav"' in html
+    assert "没有更早的报告" in html
+    assert "没有更新的报告" in html
     assert '<details class="paper-detail">' in html
     assert "tex-svg.js" in html
     assert "MathJax" in html

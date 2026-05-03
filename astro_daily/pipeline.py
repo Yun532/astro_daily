@@ -56,17 +56,22 @@ def run_pipeline(
     scored: list[ScoredPaper] = []
     weekend_lessons: list[WeekendLesson] = []
     analyst: ClaudePaperAnalyst | None = None
-    candidates = prepare_candidates(new_papers, settings.scoring, run_date=run_date)
-    if candidates:
+    if _is_weekend(run_date):
         settings.require_llm_key()
         analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
-        score_results = analyst.score_papers(candidates, run_date=run_date, scoring_config=settings.scoring)
-        scored = apply_policy(candidates, score_results, settings.scoring)
-        scored = add_summaries(scored, analyst, run_date=run_date)
-    if not scored and _is_weekend(run_date):
-        settings.require_llm_key()
-        analyst = analyst or ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
-        weekend_lessons = analyst.generate_weekend_lessons(run_date=run_date, topics=_weekend_classic_topics())
+        weekend_lessons = analyst.generate_weekend_lessons(
+            run_date=run_date,
+            topics=_weekend_classic_topics(),
+            avoid_previous_lessons=seen.weekend_lesson_history(),
+        )
+    else:
+        candidates = prepare_candidates(new_papers, settings.scoring, run_date=run_date)
+        if candidates:
+            settings.require_llm_key()
+            analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
+            score_results = analyst.score_papers(candidates, run_date=run_date, scoring_config=settings.scoring)
+            scored = apply_policy(candidates, score_results, settings.scoring)
+            scored = add_summaries(scored, analyst, run_date=run_date)
 
     report_path = write_daily_report(
         output_dir=settings.report_dir,
@@ -111,8 +116,11 @@ def run_pipeline(
             send_clawbot_report_message(settings, wechat_message)
             clawbot_succeeded = True
 
-    if scored and not dry_run and push_succeeded and clawbot_succeeded and publish_succeeded:
-        seen.mark_many([item.paper for item in scored], seen_date=run_date)
+    if (scored or weekend_lessons) and not dry_run and push_succeeded and clawbot_succeeded and publish_succeeded:
+        if scored:
+            seen.mark_many([item.paper for item in scored], seen_date=run_date)
+        if weekend_lessons:
+            seen.mark_lessons(weekend_lessons, seen_date=run_date)
         seen.save()
 
     return PipelineResult(
