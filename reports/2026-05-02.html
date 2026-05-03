@@ -110,6 +110,9 @@
     table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
     th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
     th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
     details.paper-detail {
       margin: 1.25rem 0 1.9rem;
       border: 1px solid #b9d7ff;
@@ -145,6 +148,13 @@
       h3 { font-size: 1.05rem; }
     }
   </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <div class="page">
@@ -154,117 +164,155 @@
       <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
     </header>
     <main>
-      <p>生成时间：2026-05-02T20:27:45+08:00<br />
-今日保留论文数：3</p>
-<h2 id="_1">高能天体物理重点</h2>
-<h3 id="1-a-rare-eddington-limited-heavily-obscured-low-mass-active-galactic-nucleus-likely-triggered-by-a-galaxy-merger">1. A Rare Eddington-Limited, Heavily Obscured Low-Mass Active Galactic Nucleus Likely Triggered by a Galaxy Merger</h3>
+      <blockquote>
+<p>Dry-run：本次不会推送微信，也不会更新 seen_papers.json。</p>
+</blockquote>
+<p>生成时间：2026-05-03T10:51:50+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-blandfordmckee">1. 经典专题课：伽马暴余辉的相对论火球同步辐射模型——从 Blandford–McKee 激波到多波段光变曲线</h3>
 <ul>
-<li>来源：arXiv / astro-ph.HE</li>
-<li>链接：https://arxiv.org/abs/2604.26743v1</li>
-<li>作者：Shouyi Wang, Fan Zou, Chang-Hao Chen, W. N. Brandt, Elena Gallo, Bin Luo, Xue-Bing Wu, Yuming Fu</li>
-<li>评分：novelty 6/10，importance 7/10，relevance 7/10，final 7.70/10</li>
-<li>推荐理由：NuSTAR确认低质量星系中罕见重遮蔽、近Eddington吸积AGN，并给出并合触发证据；X射线AGN样本和黑洞增长问题值得关注。</li>
+<li>主题：GRB prompt emission and afterglow classic work</li>
+<li>经典工作：1997–1999 年建立的 GRB 余辉标准模型：相对论外激波、Blandford–McKee 自相似解、电子幂律加速、同步辐射谱断裂，以及 Sari、Piran、Narayan 等关于余辉谱和光变曲线的经典工作；观测里程碑包括 GRB 970228 的首个 X 射线/光学余辉、GRB 970508 的红移测量和射电闪烁。</li>
+<li>为什么经典：这套模型之所以经典，是因为它把一个原本只在伽马射线瞬时爆发中出现的暂现现象，转化为可计算、可检验、可拟合的宽波段相对论激波问题。它给出了三个关键频率 $\nu_a,\nu_m,\nu_c$ 和峰值流量 $F_{\nu,\max}$ 的时间演化，并用少数物理参数——能量、外介质密度、电子和磁场能量分配、电子谱指数、喷流张角——解释了 X 射线、光学、射电余辉的谱形与光变。它也是后来所有 GRB 物理讨论的共同语言：喷流破裂、能量注入、密度结构、反向激波、微物理参数演化、短暴余辉、孤儿余辉以及多信使事件 GW170817 的余辉建模，都从这套标准框架出发。</li>
 </ul>
-<p><strong>中文题目</strong>：一个罕见的、接近爱丁顿吸积且重度遮蔽的低质量星系活动星系核，可能由星系并合触发</p>
-<p><strong>做了什么</strong>：这篇论文研究了低质量宿主星系 GAMA 376183 中的一个强而重度遮蔽 AGN。目标最初因异常强的 [Ne V] λ3426 发射线被挑出，其静止系等效宽度约 48 Å，说明存在很硬的电离辐射场。作者用约 100 ks 的 NuSTAR 观测确认该源在 X 射线中被显著吸收，柱密度 log NH≈23.3，内禀 2–10 keV 光度 log LX,int≈42.92。结合恒星质量约 10^10 M⊙、黑洞质量估计和多波段 SED，作者认为其爱丁顿比约 0.8，处于快速黑洞增长阶段。高分辨率光学图像显示宿主形态扰动，SED 也指向近期星暴，因此作者提出：一次并合可能同时触发了遮蔽的高吸积 AGN 和星暴。</p>
-<p><strong>为什么重要</strong>：重度遮蔽 AGN 在低质量星系中很难找：光学窄线诊断容易被星形成稀释，软 X 射线又会被吸收压低。若这类系统漏检严重，我们对低质量星系中黑洞占有率、黑洞增长通道以及低质量端的黑洞—星系协同演化都会有系统偏差。GAMA 376183 提供了一个少见案例：低质量宿主、强遮蔽、接近爱丁顿吸积、并合迹象和星暴证据同时出现。</p>
-<p><strong>理论 / 观测 / 仪器方法价值</strong>：观测价值在于证明 [Ne V] 可作为筛选低质量、重度遮蔽 AGN 的有效入口，尤其适用于传统 BPT 或软 X 射线方法不完整的样本。理论价值在于它把常用于解释大质量星系中并合—星暴—遮蔽 AGN—黑洞快速增长的图景，推向了较低质量宿主。方法价值在于它展示了一个多波段闭环：高电离光学线选源、NuSTAR 硬 X 射线约束遮蔽和内禀光度、光学形态判断并合、SED 分解追踪近期星暴。</p>
-<p><strong>为什么应该关注</strong>：如果你关心低质量星系里的黑洞种子和增长，这个源说明“低质量宿主中的快速、遮蔽黑洞增长”可能不是理论想象，而是可观测的阶段。如果你做 AGN 巡天选源，它提醒你不要只依赖 BPT 或浅层 X 射线，[Ne V] 这类高电离线可能打开一个被遗漏的参数空间。如果你研究星系并合反馈，它提供了一个检验并合驱动协同演化是否跨越宿主质量尺度的具体靶标。</p>
 <details class="paper-detail">
-<summary>展开详细解读：背景、理论、图表与相关工作</summary>
-<h4 id="_2">背景知识</h4>
-<p>低质量星系中的 AGN 识别长期受三类问题限制：第一，黑洞质量较小，典型光度低；第二，宿主星形成强时，窄线诊断会被 H II 区贡献稀释；第三，若核区被气体尘埃遮蔽，软 X 射线和紫外光学连续谱都会被压低。[Ne V] 的电离势约 97 eV，普通恒星族很难产生如此多的光子，因此常被视为较干净的 AGN 指示器。NuSTAR 的硬 X 射线覆盖对 NH≈10^23 cm^-2 量级的吸收尤其关键，可比软 X 射线更可靠地恢复内禀 2–10 keV 光度。</p>
-<h4 id="_3">基础理论 / 方法脉络</h4>
-<p>核心物理链条是：并合导致气体角动量损失，气体流入中心，触发星暴并喂养黑洞；同一批气体和尘埃也会在快速增长阶段造成遮蔽。爱丁顿比 λEdd=Lbol/LEdd 衡量吸积接近辐射压平衡的程度，λEdd≈0.8 表明黑洞可能处于高效增长阶段。X 射线谱拟合通过吸收柱密度 NH、光子指数和反射/散射成分估计内禀光度；SED 拟合则把恒星、尘埃、AGN 和星形成历史贡献分开。需要注意的是，黑洞质量估计、bolometric correction 和遮蔽几何都会影响 λEdd 的系统误差。</p>
-<h4 id="_4">建议重点查看的图表</h4>
-<p>优先看四类图或表：1）光学谱线区域，尤其 [Ne V] λ3426 的强度、等效宽度和与其他窄线的关系；2）NuSTAR/X 射线谱拟合图和 NH–LX 置信区间，判断重度遮蔽和内禀光度是否稳健；3）高分辨率光学成像或残差图，检查并合/扰动形态是否直观；4）多波段 SED 分解和星形成历史结果，确认近期星暴与 AGN 成分是否被合理区分。若论文有参数汇总表，应重点检查黑洞质量、bolometric correction、λEdd 和 NH 的误差范围。</p>
-<h4 id="_5">强相关工作</h4>
-<p>强相关工作线索包括：低质量星系 AGN 的光学和 X 射线搜寻、[Ne V] 选源的完整性和污染问题、NuSTAR 对遮蔽 AGN 的测量、并合触发 AGN/星暴的协同演化模型，以及低质量宿主中黑洞占有率和高爱丁顿比吸积。建议检索关键词：low-mass galaxy AGN, dwarf/low-mass obscured AGN, [Ne V] AGN selection, NuSTAR obscured AGN, merger triggered AGN, black hole occupation fraction。</p>
-<p><strong>相似工作</strong>：<br />
-- https://arxiv.org/abs/2604.26743<br />
-- https://arxiv.org/abs/1105.4391<br />
-- https://arxiv.org/abs/1209.3013</p>
-<p><strong>基础理论 / 方法工作</strong>：<br />
-- https://arxiv.org/abs/astro-ph/9806315<br />
-- https://arxiv.org/abs/0711.5028<br />
-- https://arxiv.org/abs/1102.5351</p>
-<p><strong>相反观点 / 张力线索</strong>：<br />
-- https://arxiv.org/abs/1009.3260<br />
-- https://arxiv.org/abs/1409.3223</p>
-</details>
-<h3 id="2-x-ray-spectral-variability-of-the-tev-hbl-blazar-pg-1553113-with-xmm-newton">2. X-Ray Spectral Variability of the TeV HBL Blazar PG 1553+113 with XMM-Newton</h3>
-<ul>
-<li>来源：arXiv / astro-ph.HE</li>
-<li>链接：https://arxiv.org/abs/2604.27502v1</li>
-<li>作者：P. U. Devanand, Alok C. Gupta, Paul J. Wiita, V. Jithesh, Archana Gupta</li>
-<li>评分：novelty 5/10，importance 6/10，relevance 8/10，final 7.40/10</li>
-<li>推荐理由：TeV HBL PG 1553+113的长期XMM谱变研究，含对额外IC成分和同步峰变化的约束；对TeV blazar读者有实用价值。</li>
-</ul>
-<p><strong>中文题目</strong>：用 XMM-Newton 研究 TeV HBL 耀变体 PG 1553+113 的 X 射线谱变</p>
-<p><strong>做了什么</strong>：这篇论文系统分析了 TeV 高能峰 BL Lac 天体 PG 1553+113 在 2001 年 9 月到 2024 年 11 月期间的 XMM-Newton EPIC-PN X 射线观测，能段为 0.6–7.0 keV。作者分别用吸收幂律和吸收 log-parabola 模型拟合 30 次观测的谱形。结果显示，14 个谱在 99% 置信度下更偏好 log-parabola，曲率参数 β 约 0.04–0.18；1 个谱偏好 β&lt;0 的 log-parabola；其余 15 个谱用简单幂律即可描述，光子指数 Γ≈2.53–2.69。另有两次观测显示明显的额外逆康普顿成分，一次观测显示较弱迹象。结合 Optical Monitor 与 EPIC-PN 的联合拟合，作者估计同步辐射峰位于约 4.59–48.61 eV，认为谱演化主要反映喷流中粒子加速或冷却条件的变化。</p>
-<p><strong>为什么重要</strong>：PG 1553+113 是研究 HBL 喷流辐射和 TeV 发射机制的经典目标之一。X 射线能段通常位于 HBL 同步辐射分量的高能尾部或峰附近，因此谱斜率和曲率对电子能谱、加速效率、冷却以及可能出现的逆康普顿低能端非常敏感。长达二十余年的同一卫星数据集可减少仪器交叉定标差异，使长期谱变研究更干净。</p>
-<p><strong>理论 / 观测 / 仪器方法价值</strong>：对理论而言，谱曲率和同步峰漂移可约束喷流中电子能量分布是否由随机加速、能量依赖逃逸或辐射冷却塑造。对观测而言，它给出了 PG 1553+113 在 XMM 时代的谱态统计：哪些时期近似幂律，哪些时期有明显曲率，哪些时期可能出现额外 IC 分量。对方法而言，论文展示了对多历元 X 射线谱进行统一模型比较，并用 OM+X 射线联合拟合追踪同步峰的做法。</p>
-<p><strong>为什么应该关注</strong>：如果你做耀变体 SED 建模，这篇文章提供了 PG 1553+113 的长期 X 射线谱参数基准，可直接用于约束单区或多区 SSC 模型。如果你关心 TeV HBL 的粒子加速，log-parabola 曲率和峰位变化比单个流量点更有诊断力。如果你研究多信使或 EBL 吸收背景下的 TeV 源，理解其内禀同步辐射态是解释高能伽马射线变化的前提。</p>
-<details class="paper-detail">
-<summary>展开详细解读：背景、理论、图表与相关工作</summary>
-<h4 id="_6">背景知识</h4>
-<p>HBL 的同步辐射峰位于紫外到 X 射线，逆康普顿峰可延伸到 GeV–TeV。PG 1553+113 因红移长期存在不确定性、TeV 可探测性和可能的长期周期性而受到关注。XMM-Newton 的 EPIC-PN 提供高信噪比软 X 射线谱，Optical Monitor 同时给出光学/紫外约束。幂律谱通常对应在观测能段内电子能谱近似单一斜率；log-parabola 则描述连续弯曲的谱形，常用于表征加速概率随能量变化或冷却造成的曲率。</p>
-<h4 id="_7">基础理论 / 方法脉络</h4>
-<p>同步辐射谱由相对论电子在磁场中的辐射给出，观测到的峰频取决于电子洛伦兹因子、磁场强度和多普勒因子。HBL 的 X 射线谱若变硬并伴随同步峰向高能移动，通常表示高能电子注入或加速增强；若变软或曲率增大，可能表示冷却占优。log-parabola 模型常写作 F(E)∝E^{-[α+β log(E/E0)]}，α 表示参考能量处斜率，β 表示曲率。若 X 射线高能端出现上翘或双成分结构，可能是同步辐射尾部之外叠加了 SSC 逆康普顿分量。</p>
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>科学问题的核心是：伽马暴本身持续时间很短， prompt emission 的辐射机制和中心引擎都复杂而不确定；但爆发之后，超相对论抛射物不可避免地扫过外部介质，形成外激波。外激波的动力学主要由能量守恒和相对论流体力学控制，辐射主要由激波加速电子在湍动磁场中的同步辐射产生。因此，余辉是理解 GRB 总能量、环境、几何和粒子加速的最干净窗口。</p>
+<p>历史上，1997 年 BeppoSAX 对 GRB 970228 的精确定位打开了余辉时代。此前 GRB 的宇宙学起源虽然已有统计证据，但缺少红移和宿主星系关联。GRB 970508 的光学谱线给出红移后，伽马暴被确认是宇宙学距离上的巨大能量释放事件。随后的射电观测发现强烈星际闪烁，推断源区角尺度随时间增长，直接支持相对论膨胀图像。</p>
+<p>方法上，标准余辉模型分成两层：第一层是动力学，即 blast wave 的洛伦兹因子 $\Gamma(t)$、半径 $R(t)$ 如何随观测时间演化；第二层是辐射，即激波后电子分布、磁场强度和冷却过程如何决定同步辐射谱。最经典的情形是假设各向同性等效能量 $E_{\rm iso}$ 注入均匀星际介质，外激波绝热演化，微物理参数 $\epsilon_e,\epsilon_B,p$ 为常数。</p>
+<p>关键结果是余辉谱不是任意弯曲的连续谱，而是由若干幂律段拼接而成的 broken power law。典型频率包括自吸收频率 $\nu_a$、最小注入电子对应的 $\nu_m$、冷却频率 $\nu_c$，以及归一化 $F_{\nu,\max}$。这些量的时间演化决定了不同波段的光变斜率。例如均匀介质、慢冷却、$\nu_m&lt;\nu&lt;\nu_c$ 时，$F_\nu\propto t^{-3(p-1)/4}\nu^{-(p-1)/2}$。这类闭合关系使得观测者可以通过光变斜率 $\alpha$ 和谱指数 $\beta$ 检验外介质类型和冷却区间。</p>
+<p>局限也很重要。真实 GRB 余辉常出现早期平台、耀发、浅衰减、色演化、再增亮、反向激波成分和喷流结构效应，说明简单的球对称绝热外激波并不总是充分。微物理参数是否常数仍无定论；电子加速是否总为单一幂律也值得怀疑；高能 GeV 余辉可能涉及 synchrotron self-Compton 或极限同步辐射问题。尽管如此，标准模型提供了判断“哪里异常”的基准。</p>
+<p>后续影响方面，这套框架直接推动了喷流破裂的研究：当 $\Gamma\sim\theta_j^{-1}$ 时，观测者感受到喷流边缘和侧向膨胀，光变曲线应变陡，从而可估计真实能量。它还影响了短 GRB 与致密并合的解释、GRB 作为恒星形成率探针的使用、以及 GW170817/GRB 170817A 的结构喷流余辉建模。现代数值相对论和辐射转移计算更复杂，但它们的参数解释仍离不开这套经典语言。</p>
+<h4 id="_3">背景知识</h4>
+<p>伽马暴发现于冷战时期的 Vela 卫星。早期最主要的问题是距离尺度：如果在银河系内，能量相对温和；如果在宇宙学距离，能量则可达 $10^{51}$ 到 $10^{54}$ erg。BATSE 发现 GRB 在天空中近似各向同性分布，且 $\log N-\log S$ 偏离欧氏空间预期，支持宇宙学起源，但在没有余辉定位和红移之前，这一结论并不完全闭合。</p>
+<p>余辉发现改变了局面。BeppoSAX 能够在数小时内给出 X 射线定位，使光学望远镜找到衰减源。GRB 970228 的余辉使人们第一次看到爆发后能量如何在较长时间尺度释放；GRB 970508 的红移确认了宇宙学距离；射电余辉则提供了角尺度演化和自吸收信息。这些观测共同证明，GRB 不是单点瞬时发光，而是相对论抛射物与周围介质相互作用的过程。</p>
+<p>领域中的核心问题包括：prompt emission 的内部耗散如何发生；余辉是否由外激波主导；外部介质是均匀 ISM 还是大质量星风 $\rho\propto r^{-2}$；GRB 是否是准球形还是窄喷流；总能量分布是否有标准烛光特征；粒子加速和磁场放大是否与超新星遗迹激波类似。余辉模型没有解决所有问题，但它将这些问题转化为可观测参数。</p>
+<p>一个常见误区是把余辉谱看作黑体冷却或简单指数衰减。实际上，余辉来自非热电子同步辐射，其谱和光变通常是幂律。另一个误区是认为观测到的 $E_{\rm iso}$ 就是真实爆发能量；若存在喷流准直，真实能量约为 $E_j\simeq E_{\rm iso}(1-\cos\theta_j)$，可小很多。第三个误区是把所有早期 X 射线行为都归入标准外激波；Swift 时代表明，早期余辉常混入中心引擎活动和能量注入。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>核心物理图像是：中心引擎释放一个具有大洛伦兹因子 $\Gamma_0\sim 10^2-10^3$ 的相对论壳层。壳层向外传播并扫掠外部介质。当扫掠质量足以显著减速壳层时，形成前向激波进入外介质，同时可能有反向激波穿过抛射物。经典长时标余辉主要由前向激波产生。</p>
+<p>动力学上，绝热相对论 blast wave 的能量近似为激波后内能，量级 $E\sim \Gamma^2 M_{\rm sw}c^2$。对均匀介质 $M_{\rm sw}\propto R^3$，因此 $\Gamma\propto R^{-3/2}$。由于光子到达时间压缩，观测时间不是 $R/c$，而是 $t\sim R/(2c\Gamma^2)$，这导致 $\Gamma\propto t^{-3/8}$。这一非直观关系是余辉光变幂律的根源。</p>
+<p>辐射上，激波后内能密度的一部分 $\epsilon_e$ 给电子，一部分 $\epsilon_B$ 放大为磁场。电子分布通常设为 $N(\gamma_e)\propto \gamma_e^{-p}$，从最小洛伦兹因子 $\gamma_m$ 开始。每个电子在共动磁场 $B'$ 中发射同步辐射，观测频率经过多普勒提升约为 $\Gamma$ 倍。冷却过程定义了 $\gamma_c$ 和 $\nu_c$：高于该频率的电子在动力学时间内显著损失能量。</p>
+<p>观测分析逻辑是先测光变指数 $F_\nu\propto t^{-\alpha}$ 和谱指数 $F_\nu\propto \nu^{-\beta}$，再使用 closure relations 判断频段、冷却状态和外介质。若多波段数据足够好，可以同时拟合 $E_{\rm iso}, n, \epsilon_e, \epsilon_B, p, A_*$ 或喷流参数。射电提供 $\nu_a$ 和角尺度信息，光学常约束 $\nu_m$ 穿越，高能 X 射线常约束 $\nu_c$ 与能量注入。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步是减速条件。设各向同性等效能量为 $E$，初始洛伦兹因子为 $\Gamma_0$，均匀外介质数密度为 $n$。扫掠质量 $M_{\rm sw}=4\pi R^3 n m_p/3$。当 $\Gamma_0^2 M_{\rm sw}c^2\sim E$ 时开始显著减速，因此</p>
+<div class="math-display">\[R_{\rm dec}\simeq \left(\frac{3E}{4\pi n m_p c^2\Gamma_0^2}\right)^{1/3}.\]</div>
+<p>观测到的减速时间由相对论到达时间给出</p>
+<div class="math-display">\[t_{\rm dec}\simeq \frac{(1+z)R_{\rm dec}}{2c\Gamma_0^2}
+= (1+z)\left(\frac{3E}{32\pi n m_p c^5\Gamma_0^8}\right)^{1/3}.\]</div>
+<p>这个公式说明早期峰值时间对 $\Gamma_0$ 极其敏感，$t_{\rm dec}\propto \Gamma_0^{-8/3}$。</p>
+<p>第二步是 Blandford–McKee 绝热标度。相对论激波能量量级为</p>
+<div class="math-display">\[E\simeq \frac{16\pi}{17}R^3 n m_p c^2\Gamma^2,\]</div>
+<p>而观测时间近似</p>
+<div class="math-display">\[t\simeq \frac{1+z}{4c}\frac{R}{\Gamma^2}.\]</div>
+<p>消去 $R$ 得</p>
+<div class="math-display">\[\Gamma(t)\simeq \left[\frac{17E(1+z)^3}{1024\pi n m_p c^5 t^3}\right]^{1/8}\propto t^{-3/8},
+\quad
+R(t)\propto t^{1/4}.\]</div>
+<p>这组标度是所有余辉时间指数的动力学基础。</p>
+<p>第三步是激波后磁场。共动内能密度近似为 $e'\simeq 4\Gamma^2 n m_p c^2$，若磁场能量占比为 $\epsilon_B$，则</p>
+<div class="math-display">\[\frac{B'^2}{8\pi}=\epsilon_B e'
+\quad \Rightarrow \quad
+B'=(32\pi\epsilon_B n m_p c^2)^{1/2}\Gamma.\]</div>
+<p>因此在均匀介质中 $B'\propto \Gamma\propto t^{-3/8}$。</p>
+<p>第四步是电子最小能量。若电子获得激波后能量的比例为 $\epsilon_e$，且 $p&gt;2$，则幂律电子的平均洛伦兹因子约为 $\langle\gamma_e\rangle=[(p-1)/(p-2)]\gamma_m$。由能量分配得</p>
+<div class="math-display">\[\gamma_m \simeq \epsilon_e\frac{p-2}{p-1}\frac{m_p}{m_e}\Gamma.\]</div>
+<p>所以 $\gamma_m\propto t^{-3/8}$。</p>
+<p>第五步是特征同步频率。共动系中电子 $\gamma_e$ 的同步频率为 $\nu'_{\rm syn}\simeq 3q_eB'\gamma_e^2/(4\pi m_e c)$，观测频率多普勒提升并红移：</p>
+<div class="math-display">\[\nu(\gamma_e)=\frac{\Gamma}{1+z}\frac{3q_eB'}{4\pi m_e c}\gamma_e^2.\]</div>
+<p>代入 $\gamma_m$ 得</p>
+<div class="math-display">\[\nu_m\propto \Gamma B'\gamma_m^2 \propto \Gamma^4 \propto t^{-3/2}.\]</div>
+<p>这解释了为什么 $\nu_m$ 会很快从 X 射线/光学扫到红外和射电。</p>
+<p>第六步是冷却频率。电子同步冷却时间在共动系为</p>
+<div class="math-display">\[t'_{\rm cool}=\frac{6\pi m_e c}{\sigma_T B'^2\gamma_e}.\]</div>
+<p>令 $t'_{\rm cool}\sim t'\sim \Gamma t/(1+z)$，得到冷却洛伦兹因子</p>
+<div class="math-display">\[\gamma_c=\frac{6\pi m_e c(1+z)}{\sigma_T B'^2\Gamma t}.\]</div>
+<p>对应频率为</p>
+<div class="math-display">\[\nu_c=\frac{\Gamma}{1+z}\frac{3q_eB'}{4\pi m_e c}\gamma_c^2\propto \Gamma^{-4}t^{-2}\propto t^{-1/2}\]</div>
+<p>在均匀介质中随时间下降较慢。若考虑逆康普顿冷却，通常需把 $\gamma_c$ 除以 $(1+Y)$，从而 $\nu_c\propto (1+Y)^{-2}$。</p>
+<p>第七步是峰值流量。单电子峰值谱功率量级 $P'_{\nu,\max}\propto q_e^3B'/(m_ec^2)$，可辐射电子数 $N_e\simeq 4\pi R^3n/3$。观测流量为</p>
+<div class="math-display">\[F_{\nu,\max}\simeq \frac{1+z}{4\pi D_L^2}N_e\Gamma P'_{\nu,\max}
+\propto \frac{R^3 n\Gamma B'}{D_L^2}.\]</div>
+<p>对均匀绝热情形，$R^3\propto t^{3/4}$，$\Gamma B'\propto \Gamma^2\propto t^{-3/4}$，所以</p>
+<div class="math-display">\[F_{\nu,\max}\propto t^0.\]</div>
+<p>这就是经典模型中峰值归一化近似不变的原因。</p>
+<p>第八步得到光变闭合关系。慢冷却且 $\nu_m&lt;\nu&lt;\nu_c$ 时，谱为</p>
+<div class="math-display">\[F_\nu=F_{\nu,\max}\left(\frac{\nu}{\nu_m}\right)^{-(p-1)/2}.\]</div>
+<p>在固定观测频率下，$F_\nu\propto \nu_m^{(p-1)/2}\propto t^{-3(p-1)/4}$，因此</p>
+<div class="math-display">\[\alpha=\frac{3(p-1)}{4},\qquad \beta=\frac{p-1}{2},\qquad \alpha=\frac{3\beta}{2}.\]</div>
+<p>若 $\nu&gt;\nu_c$，则</p>
+<div class="math-display">\[F_\nu\propto t^{-(3p-2)/4}\nu^{-p/2},
+\quad \Rightarrow \quad
+\alpha=\frac{3\beta-1}{2}.\]</div>
+<p>这些 closure relations 是检验标准余辉模型的核心公式。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>经典拟合通常从 broken power-law 谱和幂律光变开始。最简模型参数包括 $E_{\rm iso}$、外介质密度 $n$ 或风介质参数 $A_*$、红移 $z$、电子谱指数 $p$、微物理参数 $\epsilon_e$ 与 $\epsilon_B$、宿主星系消光 $A_V$、银河系消光和吸收、以及 luminosity distance $D_L$。若加入喷流，则增加喷流半开角 $\theta_j$、视线角 $\theta_{\rm obs}$、侧向扩展处方和结构喷流参数。</p>
+<p>最常见的经验拟合是对单波段光变使用平滑断裂幂律：$F(t)=F_0[(t/t_b)^{s\alpha_1}+(t/t_b)^{s\alpha_2}]^{-1/s}$，其中 $t_b$ 是断裂时间，$\alpha_1,\alpha_2$ 是断裂前后衰减指数，$s$ 控制断裂平滑度。这个模型不直接给出物理参数，但非常适合判断是否存在喷流破裂、能量注入结束或谱断裂穿越。残差若呈系统性颜色相关，往往说明不是几何断裂，而是谱断裂或消光建模问题。</p>
+<p>物理拟合则直接计算 $\nu_a,\nu_m,\nu_c,F_{\nu,\max}$ 的时间演化，并生成多波段 $F_\nu(t)$。对观测点 $F_i$ 和误差 $\sigma_i$，常用高斯似然</p>
+<div class="math-display">\[\ln\mathcal{L}=-\frac12\sum_i\left[\frac{F_i-F_{\rm model}(t_i,\nu_i;\Theta)}{\sigma_i}\right]^2-\frac12\sum_i\ln(2\pi\sigma_i^2),\]</div>
+<p>其中 $\Theta$ 是物理参数集合。若使用计数率或低计数 X 射线数据，应采用 Poisson 或 Cash statistic，而不是简单高斯误差。</p>
+<p>贝叶斯拟合中后验为 $P(\Theta|D)\propto \mathcal{L}(D|\Theta)P(\Theta)$。常用对数均匀先验给 $E,n,\epsilon_B$，因为它们跨越多个数量级；对 $p$ 可给较窄先验如 $2&lt;p&lt;3$。需要警惕参数简并：$E,n,\epsilon_B$ 对 $F_{\nu,\max}$ 和 $\nu_c$ 的影响相互耦合；若没有射电或毫米数据，$n$ 与 $\epsilon_B$ 常难以分开；若没有宽波段谱，$A_V$ 与内禀谱指数也会混淆。</p>
+<p>残差诊断是课程中必须强调的部分。若 X 射线与光学有相同时间斜率但不同谱指数，可能 $\nu_c$ 位于两者之间；若二者时间斜率也不满足 closure relation，可能有能量注入或额外成分。若射电早期低于模型，可能是自吸收或星际闪烁；若早期光学高于前向激波外推，可能有反向激波。喷流破裂应近似 achromatic，即多波段同一时间变陡；若只在一个波段出现，不能轻易解释为喷流。</p>
+<p>系统误差包括：交叉定标误差、宿主星系贡献、银河系与宿主吸收、光学滤波器转换、X 射线谱演化、射电闪烁、非同步辐射成分、微物理参数演化以及模型近似本身。现代拟合常用 MCMC 或 nested sampling，同时比较 ISM、wind、jet、energy injection、structured jet 等模型的 evidence，而不仅是最小 $\chi^2$。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读经典余辉论文时，第一部分要抓住问题定义：作者不是试图解释 prompt emission 的所有细节，而是问一个更可控的问题——相对论爆炸波在外介质中如何产生长时标非热辐射。读引言时应标出三个关键词：cosmological distance、relativistic blast wave、synchrotron afterglow。</p>
+<p>理论模型部分要逐行检查假设。尤其要看介质密度是均匀还是风型，爆炸波是绝热还是辐射损失显著，电子分布是否为单一幂律，$\epsilon_e$ 与 $\epsilon_B$ 是否常数。很多读者直接背结论的时间指数，但不看假设；这会导致把 ISM 的 closure relation 错用到 wind 环境，或把慢冷却公式错用到快冷却阶段。</p>
+<p>谱形推导部分是全文的核心。应把 $\nu_a,\nu_m,\nu_c,F_{\nu,\max}$ 单独列出来，分别写出它们随 $E,n,\epsilon_e,\epsilon_B,t,z$ 的依赖关系。然后根据频率排序判断快冷却与慢冷却。读图时不要只看拟合线漂亮不漂亮，而要问：某个观测波段处于哪个谱段？该谱段的 $\alpha$ 和 $\beta$ 是否满足闭合关系？</p>
+<p>观测比较部分要关注“过约束”。真正有说服力的余辉拟合不是单独拟合一条光学曲线，而是同一组参数同时解释射电、光学和 X 射线。射电数据尤其重要，因为它涉及自吸收、峰值穿越和源区角尺度；X 射线则对冷却频率和能量注入敏感。读经典结果时，应把每个波段约束了哪个参数写在旁边。</p>
+<p>结论部分要同时读正面和负面信息。正面信息是标准模型可解释许多幂律衰减和宽波段谱；负面信息是早期数据稀疏、参数简并强、微物理参数不一定唯一。后来的 Swift 和 Fermi 观测并没有推翻标准余辉模型，而是揭示了哪些时间段、哪些能段需要在标准模型外增加中心引擎活动、反向激波、SSC 或喷流结构。</p>
 <h4 id="_8">建议重点查看的图表</h4>
-<p>优先检查：1）各历元 EPIC-PN 谱与残差图，特别是幂律拟合失败而 log-parabola 改善显著的观测；2）α–β、通量–光子指数、通量–曲率关系图，看是否存在 harder-when-brighter 或曲率随亮度变化；3）OM+EPIC-PN 联合 SED 图，确认同步峰位置如何由数据约束而不是外推决定；4）声称有额外逆康普顿分量的那几次观测的残差图，检查是否可能来自背景、pile-up、交叉定标或吸收处理。</p>
-<h4 id="_9">强相关工作</h4>
-<p>强相关工作线索包括：PG 1553+113 的多波段 SED 与 TeV 观测、HBL 的 X 射线 log-parabola 谱形、随机加速模型、X 射线谱变与同步峰漂移、以及该源长期准周期性讨论。建议检索关键词：PG 1553+113 XMM-Newton spectral variability, HBL log-parabola, synchrotron peak shift, TeV BL Lac SSC modeling, PG 1553+113 periodicity。</p>
-<p><strong>相似工作</strong>：<br />
-- https://arxiv.org/abs/2604.27502<br />
-- https://arxiv.org/abs/1509.02063<br />
-- https://arxiv.org/abs/1801.01511</p>
-<p><strong>基础理论 / 方法工作</strong>：<br />
-- https://arxiv.org/abs/astro-ph/0311612<br />
-- https://arxiv.org/abs/astro-ph/0404031<br />
-- https://arxiv.org/abs/astro-ph/0610374</p>
-<p><strong>相反观点 / 张力线索</strong>：<br />
-- https://arxiv.org/abs/1609.02088<br />
-- https://arxiv.org/abs/1709.06174</p>
+<ol>
+<li>
+<p>多波段光变曲线：横轴通常是爆发后时间，纵轴是流量或星等。要看不同波段是否共享同一衰减指数，是否有 achromatic break，以及早期是否有额外峰或平台。</p>
+</li>
+<li>
+<p>宽波段谱能量分布 SED：横轴频率，纵轴 $F_\nu$ 或 $\nu F_\nu$。要看 $\nu_m$、$\nu_c$、$\nu_a$ 的位置，光学到 X 射线是否需一个冷却断裂，宿主消光是否合理。</p>
+</li>
+<li>
+<p>closure relation 图：横轴谱指数 $\beta$，纵轴时间衰减指数 $\alpha$。要看观测点落在 ISM 慢冷却、ISM 高于冷却频率、wind 慢冷却等哪条理论线附近。</p>
+</li>
+<li>
+<p>参数后验角图：看 $E,n,\epsilon_e,\epsilon_B,p$ 的边缘分布和二维相关。重点识别 $n-\epsilon_B$、$E-\epsilon_B$、$A_V-p$ 等简并。</p>
+</li>
+<li>
+<p>残差图：按时间和波段画 $(F_{\rm obs}-F_{\rm model})/\sigma$。如果残差在某个时间段所有波段同号，可能是动力学模型问题；如果只在某一波段系统偏离，可能是谱断裂、消光或额外成分。</p>
+</li>
+<li>
+<p>喷流破裂诊断图：看断裂前后斜率变化 $\Delta\alpha$，断裂时间是否多波段一致，断裂后斜率是否接近 $p$。若断裂不同时出现，需谨慎解释。</p>
+</li>
+<li>
+<p>射电闪烁和角尺度图：早期射电大幅起伏随时间减弱，可反推源区角尺度增长。要看闪烁调制指数是否随时间下降，以及是否与相对论膨胀半径一致。</p>
+</li>
+</ol>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 1：典型余辉同步辐射谱。横轴为频率 $\nu$，纵轴为 $F_\nu$，模型线由若干幂律段组成。低频端若受到自吸收，谱可能为 $F_\nu\propto \nu^2$ 或 $\nu^{5/2}$；在 $\nu_a$ 与 $\nu_m$ 之间，常见斜率为 $1/3$；在慢冷却 $\nu_m&lt;\nu&lt;\nu_c$ 区间，斜率为 $-(p-1)/2$；高于 $\nu_c$ 后变为 $-p/2$。读这张图时不要把断裂看作任意拟合节点，而要把每个断裂对应到一个电子能量或辐射过程。若数据点在光学和 X 射线之间需要约 $\Delta\beta=0.5$ 的谱变陡，这是冷却断裂的标志性特征。</p>
+<p>图 2：多波段光变曲线。横轴是爆发后时间，常用对数坐标；纵轴是不同波段流量，绘图时常为清楚起见人为平移。模型线应在射电、光学、X 射线同时通过数据。关键是看峰值时间随频率降低而后移：因为 $\nu_m\propto t^{-3/2}$，高频先进入衰减，低频晚些达到峰值。如果光学在早期有快速衰减而射电之后出现峰，可能提示反向激波；如果 X 射线早期平台而光学无平台，可能说明中心引擎或辐射成分分离。</p>
+<p>图 3：$\alpha-\beta$ closure relation 诊断。横轴为谱指数 $\beta$，纵轴为时间指数 $\alpha$，不同理论情形画成直线：例如 ISM 慢冷却 $\alpha=3\beta/2$，高于冷却频率 $\alpha=(3\beta-1)/2$，wind 慢冷却则为 $\alpha=(3\beta+1)/2$。观测点若带误差棒落在某条线上，只说明该情形一致，不代表唯一。若点明显偏离所有标准线，首先检查是否存在能量注入、喷流破裂、宿主消光误差或多成分混合。</p>
+<p>图 4：喷流破裂光变。横轴时间，纵轴流量，数据由较浅衰减转为较陡衰减。模型线可能给出断裂时间 $t_j$。物理解释是 $\Gamma(t_j)\sim\theta_j^{-1}$，之后可见喷流边缘，且侧向扩展可能加强衰减。读图时要检查断裂是否无色，即光学、X 射线、射电是否在同一时间附近改变斜率；如果只有光学断裂，可能只是 $\nu_c$ 或 $\nu_m$ 穿越，不应立刻当作几何喷流。</p>
+<p>图 5：物理参数后验角图。对角线是单参数边缘分布，非对角线是二维置信区域。若 $\epsilon_B$ 与 $n$ 呈强反相关，说明冷却频率和峰值流量未能独立锁定二者。若 $p$ 与 $A_V$ 相关，说明光学谱的内禀斜率和宿主尘埃红化互相混淆。优秀论文会展示这些简并，而不是只给一个 best-fit 表格。</p>
+<p>图 6：残差随时间的分布。横轴为时间，纵轴为标准化残差。若残差随机围绕零分布，模型在统计意义上可接受；若早期 X 射线连续为正，说明模型低估了高能成分，可能有 flare 或 plateau；若晚期所有波段残差由正转负，可能断裂时间或喷流模型不对；若射电残差大而随机，需考虑星际闪烁而非立即否定模型。</p>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供；为避免编造图片链接，本节只在能确认官方图片 URL 时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径是从标准模型到观测验证。建议先读 GRB 970228、GRB 970508 余辉发现和红移测量相关论文，再读 Sari、Piran、Narayan 关于同步辐射余辉谱的经典文章。阅读目标不是记住每个数值系数，而是掌握 $\nu_m,\nu_c,F_{\nu,\max}$ 的物理来源和 closure relations 的使用方法。</p>
+<p>第二条路径是从球对称外激波到喷流。读完标准模型后，应继续读喷流破裂和准直校正能量的经典工作。重点关注 $t_j$ 如何转化为 $\theta_j$，以及为什么“无色断裂”是几何解释的关键。随后可以进入结构喷流和 off-axis 观测，这将自然连接到 GW170817/GRB 170817A 的射电到 X 射线余辉。</p>
+<p>第三条路径是从解析模型到现代数值拟合。解析 broken power law 是理解物理的基础，但现代数据需要考虑等到达时间面、喷流角结构、反向激波、SSC、能量注入和微物理参数演化。可以从 afterglowpy、BOXFIT 等公开工具或相关文献入手，比较它们与手算 closure relation 的差异。</p>
+<p>第四条路径是回到 prompt-afterglow 连接。外激波模型能给出动能 $E_K$，prompt 观测给出 $E_\gamma$，二者结合可估计辐射效率 $\eta=E_\gamma/(E_\gamma+E_K)$。若效率过高，就会挑战简单内激波模型；若早期余辉显示能量注入，则 prompt 阶段结束后中心引擎仍可能活动。这条路径把余辉物理与 GRB 中心引擎问题重新连接起来。</p>
+<p><strong>检索关键词</strong>：<br />
+- Sari Piran Narayan 1998 GRB afterglow synchrotron spectrum<br />
+- gamma-ray burst afterglow closure relations ISM wind<br />
+- GRB 970228 first optical afterglow BeppoSAX<br />
+- GRB 970508 redshift radio scintillation afterglow<br />
+- Blandford McKee self similar relativistic blast wave gamma ray burst<br />
+- GRB jet break Frail standard energy reservoir<br />
+- afterglowpy structured jet GRB afterglow modeling<br />
+- BOXFIT gamma ray burst afterglow modeling</p>
+<p><strong>确信的公开链接</strong>：<br />
+（未提供）</p>
 </details>
-<h3 id="3-indication-of-gamma-ray-quasi-periodicity-in-gb6-j10375711-from-multi-technique-timing-analysis">3. Indication of gamma-Ray Quasi-periodicity in GB6 J1037+5711 from Multi-technique Timing Analysis</h3>
-<ul>
-<li>来源：arXiv / astro-ph.HE</li>
-<li>链接：https://arxiv.org/abs/2604.27461v1</li>
-<li>作者：Zahoor Malik, Sikandar Akbar, Zahir Shah, Seemin Rubab</li>
-<li>评分：novelty 5/10，importance 5/10，relevance 9/10，final 7.40/10</li>
-<li>推荐理由：基于17年Fermi-LAT数据报告BL Lac约478天伽马射线QPO，多种时序方法交叉验证；尽管QPO声明需谨慎，伽马射线时域相关性高。</li>
-</ul>
-<p><strong>中文题目</strong>：多种时序分析方法给出 GB6 J1037+5711 伽马射线准周期性的迹象</p>
-<p><strong>做了什么</strong>：这篇论文用超过 17 年、按月分箱的 Fermi-LAT 数据研究 BL Lac 天体 GB6 J1037+5711，即 4FGL J1037.7+5711 的长期伽马射线变化。作者考虑到耀变体光变常被红噪声和随机喷流活动主导，因此使用多种方法寻找稳健的周期信号：Lomb–Scargle 周期图、加权小波 Z 变换、REDFIT 一阶自回归红噪声建模和 epoch-folding。结果显示，LSP 得到 478.74±17.55 天的信号，并在蒙特卡洛模拟下超过 99.99% 置信度；WWZ 得到 474.72±27.24 天，约 99.7% 显著性；REDFIT 给出 481.67±35.41 天，超过 99%；epoch-folding 也支持相近时间尺度。作者还发现长期流量分布比高斯更接近对数正态，暗示变化可能来自乘性过程。</p>
-<p><strong>为什么重要</strong>：耀变体准周期振荡如果真实存在，可能指向喷流几何调制、双超大质量黑洞、盘面 Lense–Thirring 进动或盘—喷流耦合不稳定等物理机制。但该领域也非常容易受到红噪声、有限基线、试探因子、分箱选择和 flare 偶然排列的影响。因此，这类论文的重要性不只在于报告一个周期，而在于它是否充分处理了随机过程背景。该文的价值在于用多种互补时序工具对同一约 478 天信号进行交叉检查。</p>
-<p><strong>理论 / 观测 / 仪器方法价值</strong>：对观测而言，它为 GB6 J1037+5711 加入了一个候选长期 QPO 样本，并给出可被未来 Fermi-LAT 延长基线检验的具体周期。对理论而言，约 1.31 年的观测周期可用于约束喷流进动、轨道调制或吸积盘进动模型中的尺度和时间参数。对方法而言，论文强调必须在红噪声背景下评估显著性，并用时频方法检查信号是否贯穿全时段，而不是只由少数 flare 造成。</p>
-<p><strong>为什么应该关注</strong>：如果你研究耀变体喷流动力学，这个候选周期可能是喷流方向、多普勒因子或中心引擎周期性调制的线索。如果你关心双超大质量黑洞候选体，它提供了一个可纳入样本统计但仍需谨慎验证的对象。如果你做时域天文方法，这篇文章是一个典型案例：同一数据上多方法一致并不自动等于物理周期，关键仍是红噪声建模、全局显著性和未来可预测性。</p>
-<details class="paper-detail">
-<summary>展开详细解读：背景、理论、图表与相关工作</summary>
-<h4 id="_10">背景知识</h4>
-<p>Fermi-LAT 自 2008 年以来提供全天 GeV 监测，使耀变体长期光变研究成为可能。BL Lac 的伽马射线辐射主要来自相对论喷流，流量受粒子注入、磁场、辐射冷却、湍流和多普勒因子变化共同影响。这些过程通常产生红噪声，即低频功率更强的随机变化；因此在周期图中出现峰并不必然代表周期。准周期振荡要求不仅有显著周期图峰，还应在时频图中持续或反复出现，并且经得起合理的噪声模型和试探因子修正。</p>
-<h4 id="_11">基础理论 / 方法脉络</h4>
-<p>Lomb–Scargle 周期图适合不均匀采样数据的正弦周期搜索，但对红噪声敏感。WWZ 提供时间—频率局部化，可判断周期是否在整个观测期稳定存在。REDFIT 通过 AR(1) 等红噪声模型估计背景功率谱，从而评估周期峰显著性。Epoch-folding 则把数据按候选周期折叠，检查相位调制是否一致。对数正态流量分布常表示变化是乘性的，例如吸积率扰动级联或多普勒放大对内禀变化的非线性调制。物理解释方面，双黑洞轨道、牛顿进动、Lense–Thirring 进动和盘—喷流不稳定都能产生准周期，但它们对应的质量、半径、进动角和寿命约束不同。</p>
-<h4 id="_12">建议重点查看的图表</h4>
-<p>优先检查：1）17 年月分箱 LAT 光变曲线，确认周期信号是否由少数强 flare 主导；2）LSP 周期图及蒙特卡洛置信水平，特别是红噪声假设和全局显著性处理；3）WWZ 时间—频率图，看约 478 天信号是否跨越多数观测时段，还是只在局部增强；4）REDFIT 背景谱和置信线，检查 AR(1) 模型是否合理；5）折叠光变曲线和相位覆盖；6）流量分布的高斯/对数正态比较图。</p>
-<h4 id="_13">强相关工作</h4>
-<p>强相关工作线索包括：Fermi-LAT 耀变体长期 QPO 搜索、PG 1553+113 和其他 BL Lac 的伽马射线准周期争议、红噪声下周期显著性估计、AGN 光变中的对数正态分布，以及双超大质量黑洞和喷流进动模型。建议检索关键词：Fermi LAT blazar QPO red noise, gamma-ray quasi-periodicity BL Lac, Lomb Scargle red noise significance, WWZ blazar, supermassive binary black hole jet precession。</p>
-<p><strong>相似工作</strong>：<br />
-- https://arxiv.org/abs/2604.27461<br />
-- https://arxiv.org/abs/1509.02063<br />
-- https://arxiv.org/abs/2009.08912</p>
-<p><strong>基础理论 / 方法工作</strong>：<br />
-- https://arxiv.org/abs/astro-ph/0412695<br />
-- https://arxiv.org/abs/1010.2481<br />
-- https://arxiv.org/abs/1701.01298</p>
-<p><strong>相反观点 / 张力线索</strong>：<br />
-- https://arxiv.org/abs/1609.02088<br />
-- https://arxiv.org/abs/1801.06162<br />
-- https://arxiv.org/abs/2002.00952</p>
 </details>
-<h2 id="_14">说明</h2>
-<p>评分由 LLM 给出初评，再由本地阈值策略过滤；IACT / 大气切伦科夫望远镜相关论文按 HE 同等优先级处理，其他非 HE 论文需要明显关联高能天文、宇宙线、伽马射线或仪器/方法价值才会保留。</p>
     </main>
   </div>
 </body>
