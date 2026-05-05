@@ -90,6 +90,28 @@ class PaperScore(BaseModel):
         return min(10, max(1, score))
 
 
+class ExtractedFigure(BaseModel):
+    fig_id: str
+    image_url: str
+    caption: str = ""
+    confidence: str = ""
+    source_type: str = ""
+    provenance: str = ""
+    related_section_cn: str = ""
+    selection_reason_cn: str = ""
+
+
+class FigureSelection(BaseModel):
+    fig_id: str
+    relevance_score: int = Field(ge=1, le=10)
+    related_section_cn: str = ""
+    reason_cn: str = ""
+
+
+class FigureSelectionBatch(BaseModel):
+    selections: list[FigureSelection] = Field(default_factory=list)
+
+
 class PaperSummary(BaseModel):
     paper_id: str
     title_cn: str
@@ -106,6 +128,7 @@ class PaperSummary(BaseModel):
     figures_to_check_cn: str = ""
     key_figure_analysis_cn: str = ""
     figure_image_urls: list[str] = Field(default_factory=list)
+    extracted_figures: list[ExtractedFigure] = Field(default_factory=list)
     related_work_cn: str = ""
     similar_work_links: list[str] = Field(default_factory=list)
     foundational_work_links: list[str] = Field(default_factory=list)

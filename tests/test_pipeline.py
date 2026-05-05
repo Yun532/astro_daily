@@ -13,7 +13,7 @@ from astro_daily.config import (
     SourcesConfig,
     WechatConfig,
 )
-from astro_daily.models import Paper, WeekendLesson
+from astro_daily.models import Paper, PaperSummary, ScoreResult, WeekendLesson
 from astro_daily.pipeline import run_pipeline
 
 
@@ -65,7 +65,56 @@ def make_lesson(title="经典 GRB 余辉课程", anchor="Blandford-McKee self-si
     )
 
 
-def test_weekend_run_skips_old_paper_backfill(monkeypatch, tmp_path):
+def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.scoring.max_candidates = 45
+    papers = [make_paper(f"2605.{index:05d}").model_copy(update={"title": f"High-energy paper {index}"}) for index in range(45)]
+    batch_sizes = []
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            batch_sizes.append(len(papers))
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="important",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn="标题",
+                    summary_cn="总结",
+                    why_important_cn="重要",
+                    value_cn="价值",
+                    why_care_cn="关注",
+                )
+                for paper in papers
+            ]
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: (papers, []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.attach_extracted_figures", lambda *_args, **_kwargs: type("Result", (), {"attempted": 0, "extracted": 0, "failed": 0})())
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 1), dry_run=False, ignore_seen=True)
+
+    assert batch_sizes == [20, 20, 5]
+    assert result.kept_count == settings.scoring.max_papers_per_report
+
+
+
     settings = make_settings(tmp_path)
     score_called = False
 
@@ -90,6 +139,33 @@ def test_weekend_run_skips_old_paper_backfill(monkeypatch, tmp_path):
     assert result.kept_count == 0
     assert result.classic_lesson_count == 1
     assert not score_called
+
+
+def test_clawbot_failure_does_not_prevent_seen_update(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.clawbot.enabled = True
+    settings.clawbot.send_report = True
+    settings.clawbot.default_recipient = "user@im.wechat"
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def generate_weekend_lessons(self, **_kwargs):
+            return [make_lesson()]
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.send_clawbot_report_message", lambda *_args, **_kwargs: (_ for _ in ()).throw(RuntimeError("ret -2")))
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 3), dry_run=False)
+
+    assert result.classic_lesson_count == 1
+    from astro_daily.seen import SeenStore
+
+    records = SeenStore.load(settings.seen_path).records
+    assert "lesson:title:经典 grb 余辉课程" in records
 
 
 def test_successful_weekend_run_records_lesson_and_passes_history(monkeypatch, tmp_path):

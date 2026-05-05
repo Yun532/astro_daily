@@ -68,9 +68,12 @@ def test_refuses_to_publish_outside_docs_reports(tmp_path, monkeypatch):
         publish_report_if_enabled(settings, str(unexpected), date(2026, 5, 2), dry_run=True)
 
 
-def test_enabled_publisher_runs_git_for_single_report(tmp_path, monkeypatch):
+def test_enabled_publisher_runs_git_for_single_report_and_assets(tmp_path, monkeypatch):
     monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
     settings = load_settings(write_config(tmp_path, "publish:\n  enabled: true"))
+    asset_dir = tmp_path / "docs" / "assets" / "figures" / "2026-05-02" / "2605.00001"
+    asset_dir.mkdir(parents=True)
+    (asset_dir / "Fig01.png").write_bytes(b"png")
     calls = []
 
     def fake_run_git(root, args, *, capture_output=True, check=True):
@@ -87,7 +90,7 @@ def test_enabled_publisher_runs_git_for_single_report(tmp_path, monkeypatch):
     result = publish_report_if_enabled(settings, str(write_html(tmp_path)), date(2026, 5, 2))
 
     assert result.published
-    assert ["add", "--", "docs/reports/2026-05-02.html"] in calls
+    assert ["add", "--", "docs/reports/2026-05-02.html", "docs/assets/figures/2026-05-02"] in calls
     assert ["commit", "-m", "Publish Astro Daily report 2026-05-02"] in calls
     assert ["push", "origin", "main"] in calls
 

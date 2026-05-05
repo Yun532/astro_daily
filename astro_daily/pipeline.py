@@ -12,6 +12,7 @@ from astro_daily.scoring import apply_policy, prepare_candidates
 from astro_daily.seen import SeenStore, deduplicate_papers
 from astro_daily.sources import fetch_arxiv_papers, fetch_rss_papers
 from astro_daily.summarizer import add_summaries
+from src.figure_extractor import attach_extracted_figures
 from src.publisher import publish_report_if_enabled
 from src.push_clawbot import send_clawbot_report_message
 from src.push_wecom_bot import send_wecom_markdown
@@ -20,6 +21,8 @@ from src.report_urls import report_url
 from src.wechat_summary import compress_for_wechat, compress_weekend_lessons, select_wechat_papers, wechat_category_counts
 
 logger = logging.getLogger(__name__)
+
+SCORE_BATCH_SIZE = 20
 
 
 @dataclass
@@ -69,9 +72,17 @@ def run_pipeline(
         if candidates:
             settings.require_llm_key()
             analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
-            score_results = analyst.score_papers(candidates, run_date=run_date, scoring_config=settings.scoring)
+            score_results = _score_candidates(candidates, analyst, run_date=run_date, scoring_config=settings.scoring)
             scored = apply_policy(candidates, score_results, settings.scoring)
             scored = add_summaries(scored, analyst, run_date=run_date)
+            extraction = attach_extracted_figures(scored, settings, run_date=run_date, analyst=analyst)
+            if extraction.attempted:
+                logger.info(
+                    "Figure extraction: attempted=%s extracted=%s failed=%s",
+                    extraction.attempted,
+                    extraction.extracted,
+                    extraction.failed,
+                )
 
     report_path = write_daily_report(
         output_dir=settings.report_dir,
@@ -99,7 +110,6 @@ def run_pipeline(
     logger.info("WeChat message length: %s", len(wechat_message))
 
     push_succeeded = dry_run or not settings.wechat.enabled
-    clawbot_succeeded = dry_run or not settings.clawbot.enabled or not settings.clawbot.send_report
     publish_succeeded = dry_run or not settings.publish.enabled or publish_result.published or not settings.publish.require_success_before_push
     if settings.wechat.enabled:
         if dry_run:
@@ -113,10 +123,12 @@ def run_pipeline(
             logger.info("Dry-run: ClawBot push skipped")
             send_clawbot_report_message(settings, wechat_message, dry_run=True)
         else:
-            send_clawbot_report_message(settings, wechat_message)
-            clawbot_succeeded = True
+            try:
+                send_clawbot_report_message(settings, wechat_message)
+            except Exception as exc:
+                logger.warning("ClawBot push failed; continuing after report generation and primary publishing: %s", exc)
 
-    if (scored or weekend_lessons) and not dry_run and push_succeeded and clawbot_succeeded and publish_succeeded:
+    if (scored or weekend_lessons) and not dry_run and push_succeeded and publish_succeeded:
         if scored:
             seen.mark_many([item.paper for item in scored], seen_date=run_date)
         if weekend_lessons:
@@ -137,6 +149,28 @@ def run_pipeline(
         published=publish_result.published,
         classic_lesson_count=len(weekend_lessons),
     )
+
+
+def _score_candidates(candidates: list[Paper], analyst: ClaudePaperAnalyst, *, run_date: date, scoring_config) -> list:
+    score_results = []
+    for start in range(0, len(candidates), SCORE_BATCH_SIZE):
+        batch = candidates[start : start + SCORE_BATCH_SIZE]
+        score_results.extend(_score_batch(batch, analyst, run_date=run_date, scoring_config=scoring_config))
+    return score_results
+
+
+def _score_batch(batch: list[Paper], analyst: ClaudePaperAnalyst, *, run_date: date, scoring_config) -> list:
+    try:
+        return analyst.score_papers(batch, run_date=run_date, scoring_config=scoring_config)
+    except RuntimeError:
+        if len(batch) == 1:
+            raise
+        midpoint = len(batch) // 2
+        logger.warning("LLM scoring failed for batch of %s papers; retrying as %s and %s", len(batch), midpoint, len(batch) - midpoint)
+        return [
+            *_score_batch(batch[:midpoint], analyst, run_date=run_date, scoring_config=scoring_config),
+            *_score_batch(batch[midpoint:], analyst, run_date=run_date, scoring_config=scoring_config),
+        ]
 
 
 def _is_weekend(run_date: date) -> bool:

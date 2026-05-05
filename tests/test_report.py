@@ -1,6 +1,6 @@
 from datetime import date
 
-from astro_daily.models import Paper, PaperScore, PaperSummary, ScoredPaper
+from astro_daily.models import ExtractedFigure, Paper, PaperScore, PaperSummary, ScoredPaper
 from astro_daily.report import render_report
 
 
@@ -25,6 +25,18 @@ def test_report_contains_summary_fields():
             figures_to_check_cn="建议查看光变曲线、偏振角演化和模型残差图。",
             key_figure_analysis_cn="图 1 看光变曲线斜率，图 2 看模型残差。",
             figure_image_urls=["https://example.com/figure.png"],
+            extracted_figures=[
+                ExtractedFigure(
+                    fig_id="Fig01",
+                    image_url="../assets/figures/2026-05-02/1/Fig01.png",
+                    caption="真实图注。",
+                    confidence="high",
+                    source_type="arxiv_source",
+                    provenance="main.tex",
+                    related_section_cn="关键图表逐图导读",
+                    selection_reason_cn="这张图对应模型残差。",
+                )
+            ],
             related_work_cn="相关工作包括早期余辉偏振和磁场结构研究。",
             similar_work_links=["https://arxiv.org/abs/0000000"],
             foundational_work_links=["https://arxiv.org/abs/1111111"],
@@ -45,7 +57,11 @@ def test_report_contains_summary_fields():
     assert "#### 重点章节 / 结果段落怎么读" in report
     assert "#### 建议重点查看的图表" in report
     assert "#### 关键图表逐图导读" in report
-    assert "![关键图表 1](https://example.com/figure.png)" in report
+    assert "![Fig01](../assets/figures/2026-05-02/1/Fig01.png)" in report
+    assert "图注：真实图注。" in report
+    assert "对应解读：关键图表逐图导读" in report
+    assert "入选理由：这张图对应模型残差。" in report
+    assert "来源与置信度：arxiv_source；high；main.tex" in report
     assert "#### 强相关工作" in report
     assert "https://arxiv.org/abs/0000000" in report
     assert "Dry-run" in report

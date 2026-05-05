@@ -88,6 +88,37 @@ def test_send_clawbot_report_message_dry_run_prints_payload(capsys):
     assert payload == {"to_user_id": "user@im.wechat", "text": "完整报告：https://example.com/report.html"}
 
 
+def test_send_clawbot_report_message_retries_without_stale_context(monkeypatch):
+    settings = Settings.model_validate(
+        {
+            "sources": {"arxiv": {"primary": [{"category": "astro-ph.HE", "max_results": 1}]}, "rss": {"feeds": []}},
+            "scoring": {},
+            "llm": {},
+            "report": {},
+            "wechat": {"enabled": False},
+            "clawbot": {"default_recipient": "user@im.wechat"},
+        }
+    )
+    account = ClawBotAccount(token="token", base_url="https://example.com")
+    calls = []
+
+    def send(_account, to_user_id, text, context_token=None):
+        calls.append((_account, to_user_id, text, context_token))
+        if context_token == "stale-context":
+            raise RuntimeError("ClawBot API error")
+
+    monkeypatch.setattr("src.push_clawbot.load_clawbot_account", lambda _settings: account)
+    monkeypatch.setattr("src.push_clawbot.load_cached_context_token", lambda _recipient: "stale-context")
+    monkeypatch.setattr("src.push_clawbot.send_clawbot_text", send)
+
+    send_clawbot_report_message(settings, "日报内容", dry_run=False)
+
+    assert calls == [
+        (account, "user@im.wechat", "日报内容", "stale-context"),
+        (account, "user@im.wechat", "日报内容", None),
+    ]
+
+
 def test_clawbot_chat_responder_uses_compatible_request(monkeypatch):
     calls = []
 

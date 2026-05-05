@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from pathlib import Path
 
-from astro_daily.models import ScoredPaper, WeekendLesson
+from astro_daily.models import ExtractedFigure, ScoredPaper, WeekendLesson
 
 
 def write_daily_report(
@@ -144,9 +144,9 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> 
                 "",
                 summary.key_figure_analysis_cn or "（未提供）",
                 "",
-                "#### 可嵌入的官方图片",
+                "#### 论文原图 / 可嵌入图片",
                 "",
-                *_image_lines(summary.figure_image_urls),
+                *_extracted_figure_lines(summary.extracted_figures, summary.figure_image_urls),
                 "",
                 "#### 强相关工作",
                 "",
@@ -237,9 +237,29 @@ def _append_weekend_lessons(lines: list[str], lessons: list[WeekendLesson]) -> N
         ])
 
 
+def _extracted_figure_lines(figures: list[ExtractedFigure], fallback_urls: list[str]) -> list[str]:
+    if not figures:
+        return _image_lines(fallback_urls)
+    lines: list[str] = []
+    for figure in figures:
+        title = figure.fig_id or "Figure"
+        lines.extend([f"**{title}**", f"![{title}]({figure.image_url})"])
+        if figure.caption:
+            lines.append(f"图注：{figure.caption}")
+        if figure.related_section_cn:
+            lines.append(f"对应解读：{figure.related_section_cn}")
+        if figure.selection_reason_cn:
+            lines.append(f"入选理由：{figure.selection_reason_cn}")
+        provenance = "；".join(part for part in [figure.source_type, figure.confidence, figure.provenance] if part)
+        if provenance:
+            lines.append(f"来源与置信度：{provenance}")
+        lines.append("")
+    return lines[:-1]
+
+
 def _image_lines(urls: list[str]) -> list[str]:
     if not urls:
-        return ["（未提供；为避免编造图片链接，本节只在能确认官方图片 URL 时嵌入图片。）"]
+        return ["（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）"]
     lines: list[str] = []
     for index, url in enumerate(urls, start=1):
         lines.extend([f"![关键图表 {index}]({url})", f"图源：{url}", ""])

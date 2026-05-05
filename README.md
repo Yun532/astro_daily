@@ -27,6 +27,7 @@
   - `daily_reports/YYYY-MM-DD.md`
   - `docs/reports/YYYY-MM-DD.html`：由 Markdown 自动转换出的 HTML 报告，用于企业微信摘要跳转或静态托管
   - 每篇论文包含可折叠详细解读：文章详细讲解、背景知识、基础理论/方法、重点章节阅读指引、建议重点查看的图表、强相关工作链接
+  - 可选嵌入论文 verified figures：通过 [Yun532/paper_figure_extractor](https://github.com/Yun532/paper_figure_extractor) 提取图号、图片、caption 和 provenance，再由 LLM 按图表解读价值选择展示
   - 企业微信 Markdown 摘要：自动压缩 Top 3–5 篇，控制在安全长度内
   - `seen_papers.json`
   - 可选企业微信群机器人推送
@@ -213,6 +214,26 @@ publish:
 
 启用后，正式运行会只提交并推送当天的 `docs/reports/YYYY-MM-DD.html`。如果发布失败，程序不会继续推送企业微信，也不会更新 `seen_papers.json`。
 
+## 论文图片提取
+
+可选图片功能依赖独立项目 [Yun532/paper_figure_extractor](https://github.com/Yun532/paper_figure_extractor)。Astro Daily 只使用该工具输出的 verified figures，不嵌入 candidates 中的不确定截图；报告会保留图号、caption、来源置信度和 provenance，并让 LLM 根据“建议重点查看的图表 / 关键图表逐图导读 / 模型拟合”选择最值得展示的图。
+
+配置示例：
+
+```yaml
+figure_extraction:
+  enabled: true
+  tool_path: E:\paper_figure_extractor\tools\paperfig
+  cache_dir: figure_cache
+  asset_dir: docs/assets/figures
+  max_figures_per_paper: 6
+  max_figure_candidates_per_paper: 12
+  dpi: 400
+  strict: true
+```
+
+生成后的图片会复制到 `docs/assets/figures/YYYY-MM-DD/<paper_id>/` 并随 GitHub Pages 报告一起发布；`figure_cache/` 只作为本地缓存，不提交到仓库。
+
 个人微信 ClawBot 可作为企业微信群机器人的补充通道。`claude-code-wechat-channel` 仍可用于扫码登录并生成 `C:\Users\Administrator\.claude\channels\wechat\account.json`，但日报项目内的可靠发送路径使用直接 ClawBot HTTP 适配器，不依赖 Claude Code 实验 channel 路由。配置示例：
 
 ```yaml
@@ -379,6 +400,7 @@ astro_daily/
     arxiv.py
     rss.py
 src/
+  figure_extractor.py
   push_wecom_bot.py
   report_html.py
   wechat_summary.py

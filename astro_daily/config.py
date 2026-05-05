@@ -113,6 +113,17 @@ class PublishConfig(BaseModel):
     require_success_before_push: bool = True
 
 
+class FigureExtractionConfig(BaseModel):
+    enabled: bool = False
+    tool_path: str = r"E:\paper_figure_extractor\tools\paperfig"
+    cache_dir: str = "figure_cache"
+    asset_dir: str = "docs/assets/figures"
+    max_figures_per_paper: int = Field(default=6, ge=0, le=10)
+    max_figure_candidates_per_paper: int = Field(default=12, ge=1, le=50)
+    dpi: int = Field(default=400, ge=72, le=800)
+    strict: bool = True
+
+
 class Settings(BaseModel):
     sources: SourcesConfig
     scoring: ScoringConfig
@@ -121,6 +132,7 @@ class Settings(BaseModel):
     wechat: WechatConfig
     clawbot: ClawBotConfig = Field(default_factory=ClawBotConfig)
     publish: PublishConfig = Field(default_factory=PublishConfig)
+    figure_extraction: FigureExtractionConfig = Field(default_factory=FigureExtractionConfig)
     site_base_url: str = "本地HTML报告"
     anthropic_api_key: str | None = None
     root_dir: Path = Field(default_factory=lambda: Path.cwd())

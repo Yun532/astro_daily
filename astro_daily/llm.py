@@ -8,7 +8,7 @@ from typing import Any
 import anthropic
 
 from astro_daily.config import LlmConfig, ScoringConfig
-from astro_daily.models import Paper, ScoreBatch, ScoreResult, SummaryBatch, PaperSummary, WeekendLesson, WeekendLessonBatch
+from astro_daily.models import ExtractedFigure, FigureSelection, FigureSelectionBatch, Paper, PaperSummary, ScoreBatch, ScoreResult, SummaryBatch, WeekendLesson, WeekendLessonBatch
 
 logger = logging.getLogger(__name__)
 
@@ -48,6 +48,14 @@ WEEKEND_LESSON_SYSTEM_PROMPT = """你是高能天体物理周末专题课讲师�
 formula_derivation_cn 必须包含多步 LaTeX 推导和至少 6 个公式；model_fitting_cn 必须讲常见拟合模型、参数、似然/后验或残差诊断；key_figure_analysis_cn 必须像讲课一样逐图导读重要图表。
 可以提到经典论文、实验或观测结果；只有在你确信 URL 存在时才把 URL 放入 links，不确定时 links 留空，并用 search_keywords 给出检索关键词。figure_image_urls 只有在确信是官方真实图片 URL 时才填写，不确定就留空。不要编造 DOI、arXiv 号、网页链接或图片链接。
 如果 user_payload 里有 avoid_previous_lessons，必须避开这些已经讲过的标题、经典工作和近似内容，选择不同切入点。
+只输出符合 schema 的 JSON。"""
+
+
+FIGURE_SELECTION_SYSTEM_PROMPT = """你是天体物理论文图表编辑。
+你的任务不是挑好看的图，而是从已验证提取出的论文原图中，选择最能支撑日报详细解读的图。
+必须优先匹配日报里“建议重点查看的图表”和“关键图表逐图导读”提到的图号、诊断量、坐标轴、模型线、残差、置信区间或系统误差。
+只能选择输入 candidates 里真实存在的 fig_id；不要编造图号、图片链接或论文没有的图。
+如果候选图与文字解读关系弱，可以少选；如果多张图都重要，按科学价值从高到低排序。
 只输出符合 schema 的 JSON。"""
 
 
@@ -124,6 +132,36 @@ class ClaudePaperAnalyst:
             user_payload=payload,
         )
         return WeekendLessonBatch.model_validate(data).lessons[:1]
+
+    def select_figures_for_paper(
+        self,
+        *,
+        paper: Paper,
+        summary: PaperSummary,
+        figures: list[ExtractedFigure],
+        max_figures: int,
+        run_date: date,
+    ) -> list[FigureSelection]:
+        if not figures or max_figures <= 0:
+            return []
+        payload = {
+            "date": run_date.isoformat(),
+            "max_figures": max_figures,
+            "paper": _paper_for_prompt(paper),
+            "report_sections": {
+                "figures_to_check_cn": summary.figures_to_check_cn,
+                "key_figure_analysis_cn": summary.key_figure_analysis_cn,
+                "model_fitting_cn": summary.model_fitting_cn,
+                "detailed_explanation_cn": summary.detailed_explanation_cn,
+            },
+            "candidates": [_figure_for_prompt(figure) for figure in figures],
+        }
+        data = self._json_request(
+            system_prompt=FIGURE_SELECTION_SYSTEM_PROMPT,
+            schema=_figure_selection_schema(),
+            user_payload=payload,
+        )
+        return FigureSelectionBatch.model_validate(data).selections[:max_figures]
 
     def _json_request(self, *, system_prompt: str, schema: dict[str, Any], user_payload: dict[str, Any]) -> dict[str, Any]:
         request: dict[str, Any] = {
@@ -216,13 +254,67 @@ def _compatible_system_prompt(system_prompt: str, schema: dict[str, Any]) -> str
 
 def _parse_json_text(text: str) -> dict[str, Any]:
     try:
-        return json.loads(text)
+        return _loads_json(text)
     except json.JSONDecodeError:
         start = text.find("{")
         end = text.rfind("}")
         if start == -1 or end == -1 or end <= start:
             raise
-        return json.loads(text[start : end + 1])
+        return _loads_json(text[start : end + 1])
+
+
+def _loads_json(text: str) -> dict[str, Any]:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        repaired = _escape_unescaped_latex_backslashes(text)
+        if repaired == text:
+            raise exc
+        return json.loads(repaired)
+
+
+def _escape_unescaped_latex_backslashes(text: str) -> str:
+    output: list[str] = []
+    in_string = False
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if char == '"' and _is_unescaped_quote(text, index):
+            in_string = not in_string
+            output.append(char)
+            index += 1
+            continue
+        if in_string and char == "\\":
+            next_char = text[index + 1] if index + 1 < len(text) else ""
+            after_next = text[index + 2] if index + 2 < len(text) else ""
+            if _is_json_escape(next_char, after_next, text[index + 2 : index + 6]):
+                output.append(char)
+            else:
+                output.append("\\\\")
+            index += 1
+            continue
+        output.append(char)
+        index += 1
+    return "".join(output)
+
+
+def _is_unescaped_quote(text: str, index: int) -> bool:
+    backslashes = 0
+    cursor = index - 1
+    while cursor >= 0 and text[cursor] == "\\":
+        backslashes += 1
+        cursor -= 1
+    return backslashes % 2 == 0
+
+
+def _is_json_escape(next_char: str, after_next: str, unicode_digits: str) -> bool:
+    if next_char in {'"', "\\", "/"}:
+        return True
+    if next_char == "u":
+        return len(unicode_digits) == 4 and all(char in "0123456789abcdefABCDEF" for char in unicode_digits)
+    if next_char in {"b", "f", "n", "r", "t"}:
+        return not after_next.isalpha()
+    return False
 
 
 def _paper_for_prompt(paper: Paper) -> dict[str, Any]:
@@ -237,6 +329,16 @@ def _paper_for_prompt(paper: Paper) -> dict[str, Any]:
         "category": paper.category,
         "published": paper.published.isoformat() if paper.published else None,
         "tags": paper.tags,
+    }
+
+
+def _figure_for_prompt(figure: ExtractedFigure) -> dict[str, str]:
+    return {
+        "fig_id": figure.fig_id,
+        "caption": figure.caption,
+        "confidence": figure.confidence,
+        "source_type": figure.source_type,
+        "provenance": figure.provenance,
     }
 
 
@@ -311,6 +413,30 @@ def _weekend_lesson_schema() -> dict[str, Any]:
             }
         },
         "required": ["lessons"],
+    }
+
+
+def _figure_selection_schema() -> dict[str, Any]:
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "selections": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "fig_id": {"type": "string"},
+                        "relevance_score": {"type": "integer", "minimum": 1, "maximum": 10},
+                        "related_section_cn": {"type": "string", "description": "这张图对应日报中的哪个图表建议、逐图导读或模型拟合段落。"},
+                        "reason_cn": {"type": "string", "description": "为什么这张图比其他候选图更值得嵌入。"},
+                    },
+                    "required": ["fig_id", "relevance_score", "related_section_cn", "reason_cn"],
+                },
+            }
+        },
+        "required": ["selections"],
     }
 
 
