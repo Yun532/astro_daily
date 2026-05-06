@@ -391,22 +391,33 @@ def _available_report_dates(target_dir: Path) -> list[str]:
 
 
 def _prepare_math(markdown_text: str) -> tuple[str, list[str]]:
-    display_blocks: list[str] = []
+    math_blocks: list[str] = []
+
+    def placeholder_for(block: str) -> str:
+        placeholder = f"@@ASTRO_MATH_{len(math_blocks)}@@"
+        math_blocks.append(block)
+        return placeholder
 
     def replace_display(match: re.Match[str]) -> str:
         content = (match.group(1) or match.group(2) or "").strip()
-        placeholder = f"@@ASTRO_DISPLAY_MATH_{len(display_blocks)}@@"
-        display_blocks.append(f'<div class="math-display">\\[{content}\\]</div>')
-        return f"\n\n{placeholder}\n\n"
+        block = f'<div class="math-display">\\[{content}\\]</div>'
+        return f"\n\n{placeholder_for(block)}\n\n"
+
+    def replace_inline_paren(match: re.Match[str]) -> str:
+        return placeholder_for(f"\\({match.group(1)}\\)")
+
+    def replace_inline_dollar(match: re.Match[str]) -> str:
+        return placeholder_for(f"${match.group(1)}$")
 
     text = re.sub(r"\\\[([\s\S]*?)\\\]|\$\$([\s\S]*?)\$\$", replace_display, markdown_text)
-    text = text.replace("\\(", "$").replace("\\)", "$")
-    return text, display_blocks
+    text = re.sub(r"\\\((.*?)\\\)", replace_inline_paren, text)
+    text = re.sub(r"(?<!\\)(?<!\$)\$(?!\$)(.*?)(?<!\\)(?<!\$)\$(?!\$)", replace_inline_dollar, text)
+    return text, math_blocks
 
 
 def _restore_display_math(html: str, display_blocks: list[str]) -> str:
     for index, block in enumerate(display_blocks):
-        placeholder = f"@@ASTRO_DISPLAY_MATH_{index}@@"
+        placeholder = f"@@ASTRO_MATH_{index}@@"
         html = html.replace(f"<p>{placeholder}</p>", block).replace(placeholder, block)
     return html
 

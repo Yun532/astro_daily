@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from datetime import date
 
 from astro_daily.config import Settings, load_settings
+from astro_daily.formula_integrity import repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
 from astro_daily.report import render_report, write_daily_report
@@ -93,6 +94,17 @@ def run_pipeline(
         dry_run=dry_run,
         weekend_lessons=weekend_lessons,
     )
+    try:
+        formula_result = repair_report_latex_formulas(report_path)
+        logger.info(
+            "Formula integrity check: checked=%s issues=%s repaired=%s unresolved=%s",
+            formula_result.checked_sections,
+            formula_result.issue_count,
+            formula_result.repaired_count,
+            formula_result.unresolved_count,
+        )
+    except Exception as exc:
+        logger.warning("Formula integrity check failed; continuing with original report: %s", exc)
     html_report_path = generate_html_report(str(report_path))
     publish_result = publish_report_if_enabled(settings, html_report_path, run_date, dry_run=dry_run)
     report_url_value = publish_result.url or report_url(settings.site_base_url, run_date)

@@ -13,6 +13,7 @@ from astro_daily.config import (
     SourcesConfig,
     WechatConfig,
 )
+from astro_daily.formula_integrity import FormulaIntegrityResult
 from astro_daily.models import Paper, PaperSummary, ScoreResult, WeekendLesson
 from astro_daily.pipeline import run_pipeline
 
@@ -204,3 +205,77 @@ def test_successful_weekend_run_records_lesson_and_passes_history(monkeypatch, t
     records = SeenStore.load(settings.seen_path).records
     assert "lesson:title:新的 iact 课程" in records
     assert "lesson:anchor:h.e.s.s. galactic center observations" in records
+
+
+def test_formula_check_runs_before_html_generation(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    calls = []
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def generate_weekend_lessons(self, **_kwargs):
+            return [make_lesson()]
+
+    def fake_write_daily_report(**_kwargs):
+        calls.append("write")
+        path = tmp_path / "reports" / "2026-05-03.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("# report\n", encoding="utf-8")
+        return path
+
+    def fake_repair_report_latex_formulas(_path):
+        calls.append("repair")
+        return FormulaIntegrityResult(checked_sections=1)
+
+    def fake_generate_html_report(_path):
+        calls.append("html")
+        return str(tmp_path / "docs" / "reports" / "2026-05-03.html")
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.write_daily_report", fake_write_daily_report)
+    monkeypatch.setattr("astro_daily.pipeline.repair_report_latex_formulas", fake_repair_report_latex_formulas)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", fake_generate_html_report)
+
+    run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 3), dry_run=False)
+
+    assert calls[:3] == ["write", "repair", "html"]
+
+
+def test_formula_check_failure_does_not_block_html_generation(monkeypatch, tmp_path, caplog):
+    settings = make_settings(tmp_path)
+    html_called = False
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def generate_weekend_lessons(self, **_kwargs):
+            return [make_lesson()]
+
+    def fake_write_daily_report(**_kwargs):
+        path = tmp_path / "reports" / "2026-05-03.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("# report\n", encoding="utf-8")
+        return path
+
+    def fake_generate_html_report(_path):
+        nonlocal html_called
+        html_called = True
+        return str(tmp_path / "docs" / "reports" / "2026-05-03.html")
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.write_daily_report", fake_write_daily_report)
+    monkeypatch.setattr("astro_daily.pipeline.repair_report_latex_formulas", lambda _path: (_ for _ in ()).throw(RuntimeError("boom")))
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", fake_generate_html_report)
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 3), dry_run=False)
+
+    assert html_called
+    assert result.classic_lesson_count == 1
+    assert "Formula integrity check failed" in caplog.text
