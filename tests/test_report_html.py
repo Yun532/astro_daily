@@ -28,3 +28,9 @@ def test_generate_html_report(tmp_path: Path):
     assert '<img alt="figure" src="https://example.com/figure.png"' in html
     assert "<h4" in html
     assert "背景知识</h4>" in html
+
+    index_path = tmp_path / "docs" / "index.html"
+    index = index_path.read_text(encoding="utf-8")
+    assert "Astro Daily 天文论文日报" in index
+    assert "阅读最新日报：2026-05-02" in index
+    assert 'href="reports/2026-05-02.html"' in index

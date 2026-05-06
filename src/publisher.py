@@ -34,7 +34,7 @@ def publish_report_if_enabled(settings: Settings, html_report_path: str, run_dat
     if not _is_relative_to(relative_path, expected_prefix):
         raise RuntimeError(f"Refusing to publish unexpected path: {relative_path}")
 
-    publish_paths = [*_report_html_paths(settings, relative_path), *_figure_asset_paths(settings, run_date)]
+    publish_paths = [*_report_html_paths(settings, relative_path), *_index_page_paths(settings), *_figure_asset_paths(settings, run_date)]
     if dry_run:
         print("Dry-run publish: git add " + " ".join(path.as_posix() for path in publish_paths))
         print(f"Dry-run publish: git commit -m \"{_commit_message(settings, run_date)}\"")
@@ -71,6 +71,13 @@ def _report_html_paths(settings: Settings, current_report: Path) -> list[Path]:
         return [current_report]
     paths = sorted(path.resolve().relative_to(settings.root_dir.resolve()) for path in report_dir.glob("*.html"))
     return paths or [current_report]
+
+
+def _index_page_paths(settings: Settings) -> list[Path]:
+    index_path = settings.root_dir / settings.publish.docs_dir / "index.html"
+    if not index_path.exists():
+        return []
+    return [index_path.resolve().relative_to(settings.root_dir.resolve())]
 
 
 def _figure_asset_paths(settings: Settings, run_date: date) -> list[Path]:

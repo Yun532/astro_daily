@@ -204,7 +204,133 @@ def generate_html_report(md_path: str) -> str:
     target = target_dir / f"{source.stem}.html"
     target.write_text(html, encoding="utf-8")
     _refresh_report_nav_links(target_dir)
+    _refresh_index_page(target_dir.parent, target_dir)
     return str(target)
+
+
+def _refresh_index_page(docs_dir: Path, reports_dir: Path) -> None:
+    report_dates = _available_report_dates(reports_dir)
+    latest_date = report_dates[-1] if report_dates else None
+    latest_html = (
+        f'<a class="latest-link" href="reports/{escape(latest_date)}.html">阅读最新日报：{escape(latest_date)}</a>'
+        if latest_date
+        else '<span class="latest-link disabled">暂无日报</span>'
+    )
+    archive_html = (
+        "\n".join(
+            f'          <li><a href="reports/{escape(report_date)}.html">天文论文日报 {escape(report_date)}</a></li>'
+            for report_date in reversed(report_dates)
+        )
+        if report_dates
+        else "          <li>暂无已发布日报。</li>"
+    )
+    html = f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astro Daily 天文论文日报</title>
+  <style>
+    :root {{
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }}
+    a {{ color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }}
+    a:hover {{ color: var(--blue-dark); }}
+    .page {{ max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }}
+    .hero {{
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }}
+    .hero::after {{
+      content: "";
+      position: absolute;
+      inset: auto -90px -150px auto;
+      width: 330px;
+      height: 330px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }}
+    .eyebrow {{ position: relative; margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }}
+    h1 {{ position: relative; margin: 0; max-width: 760px; font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.12; }}
+    .subtitle {{ position: relative; max-width: 760px; margin: 18px 0 0; color: rgba(255, 255, 255, 0.88); font-size: 1.08rem; }}
+    .latest-link {{ position: relative; display: inline-block; margin-top: 26px; padding: 0.85rem 1.15rem; border-radius: 999px; background: #fff; color: #1e40af; text-decoration: none; font-weight: 800; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.18); }}
+    .latest-link.disabled {{ color: var(--muted); }}
+    .grid {{ display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); gap: 22px; margin-top: 22px; }}
+    .card {{ padding: 26px; border: 1px solid rgba(220, 230, 242, 0.9); border-radius: 24px; background: rgba(255, 255, 255, 0.92); box-shadow: var(--shadow); }}
+    .card h2 {{ margin: 0 0 1rem; font-size: 1.35rem; color: #0f2f5f; }}
+    .card p {{ color: var(--muted); }}
+    .features {{ padding-left: 1.2rem; }}
+    .features li {{ margin: 0.45rem 0; }}
+    .archive {{ margin: 0; padding: 0; list-style: none; }}
+    .archive li {{ border-top: 1px solid var(--line); }}
+    .archive li:first-child {{ border-top: 0; }}
+    .archive a {{ display: block; padding: 0.85rem 0; text-decoration: none; font-weight: 700; }}
+    footer {{ margin-top: 24px; color: var(--muted); text-align: center; font-size: 0.92rem; }}
+    @media (max-width: 780px) {{
+      .page {{ padding: 18px 10px 36px; }}
+      .hero {{ padding: 28px 22px; border-radius: 22px; }}
+      .grid {{ grid-template-columns: 1fr; }}
+      .card {{ padding: 20px 16px; border-radius: 20px; }}
+    }}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文深度解读、公式推导、图表导读与延伸阅读。</p>
+      {latest_html}
+    </header>
+    <main class="grid">
+      <section class="card">
+        <h2>项目说明</h2>
+        <p>Astro Daily 自动抓取 arXiv 与重要期刊 RSS，优先筛选高能天体物理、宇宙线、伽马射线、IACT、脉冲星、SNR、PWN 与 pulsar halo 等方向的论文，并生成适合专业读者阅读的中文报告。</p>
+        <ul class="features">
+          <li>工作日：聚焦当天或近期值得关注的新论文。</li>
+          <li>周末或 arXiv 安静日：生成经典论文课程式深度讲解。</li>
+          <li>报告包含科学背景、核心结果、模型拟合、公式与关键图表导读。</li>
+        </ul>
+      </section>
+      <section class="card">
+        <h2>报告归档</h2>
+        <ul class="archive">
+{archive_html}
+        </ul>
+      </section>
+    </main>
+    <footer>GitHub Pages 静态主页 · 自动随日报生成刷新</footer>
+  </div>
+</body>
+</html>
+"""
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    (docs_dir / "index.html").write_text(html, encoding="utf-8")
 
 
 def _refresh_report_nav_links(target_dir: Path) -> None:
