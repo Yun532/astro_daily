@@ -1,33 +1,48 @@
-# 工作流名称：可以自定义
-name: Deploy to Tencent COS 
+name: Deploy docs to Tencent COS
 
-# 触发条件：当代码 push 到 main 分支时自动运行
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - ".github/workflows/deploy-to-cos.yml"
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     steps:
-      # 1. 检出代码
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 安装腾讯云COS命令行工具
-      - name: Install coscmd
-        run: sudo pip install coscmd
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      # 3. 配置访问凭证
-      - name: Configure coscmd
+      - name: Install COSCMD
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U coscmd
+
+      - name: Configure COSCMD
         env:
-          # 使用在第二步配置的 Secrets
-          SECRET_ID: ${{ secrets.COS_SECRET_ID }}
-          SECRET_KEY: ${{ secrets.COS_SECRET_KEY }}
-          BUCKET: ${{ secrets.COS_BUCKET }}
-          REGION: ${{ secrets.COS_REGION }}
-        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
+          TENCENT_SECRET_ID: ${{ secrets.COS_SECRET_ID }}
+          TENCENT_SECRET_KEY: ${{ secrets.COS_SECRET_KEY }}
+          COS_BUCKET: ${{ secrets.COS_BUCKET }}
+          COS_REGION: ${{ secrets.COS_REGION }}
+        run: |
+          coscmd config \
+            -a "$TENCENT_SECRET_ID" \
+            -s "$TENCENT_SECRET_KEY" \
+            -b "$COS_BUCKET" \
+            -r "$COS_REGION"
 
-      # 4. 上传文件到 COS
-      - name: Upload to COS
-        run: coscmd upload -rfs --delete ./ / 
+      - name: Sync docs to COS root
+        run: |
+          coscmd upload -rs --delete ./docs/ /
