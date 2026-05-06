@@ -33,7 +33,7 @@ site_base_url: https://example.github.io/astro-daily
 
 def write_html(tmp_path: Path) -> Path:
     html_path = tmp_path / "docs" / "reports" / "2026-05-02.html"
-    html_path.parent.mkdir(parents=True)
+    html_path.parent.mkdir(parents=True, exist_ok=True)
     html_path.write_text("<html></html>", encoding="utf-8")
     return html_path
 
@@ -68,9 +68,12 @@ def test_refuses_to_publish_outside_docs_reports(tmp_path, monkeypatch):
         publish_report_if_enabled(settings, str(unexpected), date(2026, 5, 2), dry_run=True)
 
 
-def test_enabled_publisher_runs_git_for_single_report_and_assets(tmp_path, monkeypatch):
+def test_enabled_publisher_runs_git_for_report_nav_and_assets(tmp_path, monkeypatch):
     monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
     settings = load_settings(write_config(tmp_path, "publish:\n  enabled: true"))
+    previous_html = tmp_path / "docs" / "reports" / "2026-05-01.html"
+    previous_html.parent.mkdir(parents=True, exist_ok=True)
+    previous_html.write_text("<html>previous nav changed</html>", encoding="utf-8")
     asset_dir = tmp_path / "docs" / "assets" / "figures" / "2026-05-02" / "2605.00001"
     asset_dir.mkdir(parents=True)
     (asset_dir / "Fig01.png").write_bytes(b"png")
@@ -90,7 +93,7 @@ def test_enabled_publisher_runs_git_for_single_report_and_assets(tmp_path, monke
     result = publish_report_if_enabled(settings, str(write_html(tmp_path)), date(2026, 5, 2))
 
     assert result.published
-    assert ["add", "--", "docs/reports/2026-05-02.html", "docs/assets/figures/2026-05-02"] in calls
+    assert ["add", "--", "docs/reports/2026-05-01.html", "docs/reports/2026-05-02.html", "docs/assets/figures/2026-05-02"] in calls
     assert ["commit", "-m", "Publish Astro Daily report 2026-05-02"] in calls
     assert ["push", "origin", "main"] in calls
 
