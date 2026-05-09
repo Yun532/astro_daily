@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-05-09</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-05-09</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-05-09">
+      <a class="previous" href="2026-05-08.html">← 上一期：2026-05-08</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-05-09T12:48:27+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-hillas-crab-nebula-tev">1. 从 Hillas 参数到 Crab Nebula：成像大气切伦科夫望远镜如何把 TeV 伽马天文学变成精密测量</h3>
+<ul>
+<li>主题：IACT and TeV gamma-ray astronomy classic methods and results</li>
+<li>经典工作：A. M. Hillas 在 1985 年国际宇宙线大会提出的成像大气切伦科夫图像参数化方法，以及 Whipple 10 m 望远镜在 1989 年前后对 Crab Nebula 的 TeV 伽马射线显著探测。</li>
+<li>为什么经典：这组经典工作之所以经典，不只是因为它们给出了第一个被广泛接受的 TeV 伽马射线天体探测，更因为它们把原本被强烈宇宙线背景淹没的地基 Cherenkov 闪光观测转化为一个可统计建模、可优化、可复现的图像分类问题。Hillas 参数把空气簇射在焦平面上的二维光斑压缩为 length、width、distance、alpha、size 等少数物理可解释量，直接连接簇射几何、入射方向、横向发展和背景排除。Crab Nebula 则成为 TeV 天文学的标准烛光、仪器标定源和方法验证场。后来的 H.E.S.S.、MAGIC、VERITAS、CTA 的方向重建、能量重建、gamma/hadron separation、有效面积、响应矩阵、似然分析都可以看作是这一路线的系统化和高维化。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>科学问题的核心是：地面望远镜并不直接探测 TeV 光子，而是探测光子在大气中诱发电磁簇射后产生的纳秒级切伦科夫光。问题的困难在于，触发率主要来自带电宇宙线质子和原子核，它们的通量远高于伽马射线源；而且单个空气簇射的光斑受大气透明度、望远镜光学、相机像素化、夜天光和触发阈值影响。因此，TeV 伽马天文学的第一性问题不是“有没有光子”，而是“如何在巨大强子背景中识别出来自某个天区方向的电磁簇射统计过剩”。</p>
+<p>Hillas 方法的关键思想是把相机中每个像素的光电子数看作二维亮度分布的离散采样，然后计算其一阶矩和二阶矩。对于点源伽马射线，电磁簇射图像通常呈细长椭圆，长轴大致指向相机中的源位置；而强子簇射含有较大横向动量、μ 子子簇射和不规则子结构，图像更宽、更破碎、方向关联更弱。这样，gamma/hadron separation 不再依赖肉眼判断，而成为 width、length、alpha 等变量上的切割或似然分类。</p>
+<p>Crab Nebula 的作用是把方法从工程技巧提升为天体物理测量。Crab 是明亮、稳定、可重复观测的银河系 TeV 源，且其非热辐射由脉冲星风星云中的相对论电子产生。Whipple 对 Crab 的探测说明：只要使用成像信息选择形态像伽马的事件，并检验这些事件的图像长轴是否回指源方向，就可以得到统计显著的 TeV 信号。这使 TeV 天文学摆脱早期非成像探测中大量互相矛盾的源声明。</p>
+<p>关键结果不只是一个显著性数字，而是一整套分析范式：定义 ON 区和 OFF 区，估计背景归一化因子，使用 Li &amp; Ma 显著性而不是简单的 excess/sqrt(background)，用 Monte Carlo 或标准源标定有效面积，最后反推出微分能谱。这个范式后来扩展到 wobble 观测、反射背景区、环形背景、模板背景、二维/三维 Poisson 似然以及联合多望远镜分析。</p>
+<p>局限也很重要。早期单望远镜 IACT 的角分辨率、能量分辨率、背景排除能力和系统误差控制都有限；图像方向只有投影信息，单台望远镜重建 shower axis 存在退化；低能端受触发阈值和夜天光影响，高能端受统计量限制；大气并非被动透明介质，而是探测器的一部分。Hillas 参数也不是充分统计量：它丢弃了像素级时间结构、边缘截断信息和复杂形态。</p>
+<p>后续影响非常深远。现代 stereoscopic IACT 通过多台望远镜同时观测同一簇射，利用多个图像主轴交会确定方向，用 image size 和 impact parameter 重建能量，用 mean scaled width/length 或机器学习分类器排除强子背景。CTA 时代的模板似然、半解析电磁簇射模型、随机森林、深度学习和全事件似然，本质上仍继承 Hillas 的核心物理图像：伽马射线簇射更紧致、更轴对称、更指向源。</p>
+<h4 id="_3">背景知识</h4>
+<p>在 20 世纪 60–80 年代，地基 TeV 伽马射线探测长期处在尴尬状态：大气切伦科夫闪光确实提供了巨大有效面积，但非成像探测器只有几个光电倍增管或简单计数器阵列，无法有效区分伽马诱发的电磁簇射和宇宙线强子簇射。因此早期 TeV 源声明很多，但可重复性差，显著性估计和 trials factor 控制也不充分。</p>
+<p>成像大气切伦科夫望远镜的突破在于把空气簇射投影成相机图像。对于电磁级联，e^+e^- 对和光子反复通过 pair production 与 bremsstrahlung 发展，簇射主轴附近的电子产生切伦科夫光，投影到焦平面后形成一个方向性很强的椭圆斑。强子簇射则含有 hadronic subshowers、π^0 电磁分量、穿透性 μ 子和更大的事件间涨落，图像统计性质不同。</p>
+<p>Crab Nebula 在这个历史中非常关键。它在射电、光学、X 射线和 GeV/TeV 波段均为强非热源，并且中心 Crab pulsar 的自转能通过脉冲星风注入星云。对于 IACT 方法学，Crab 的价值不是“最有趣的源”，而是“最稳定、最可校验的源”：它让不同仪器可以比较灵敏度、能标和分析链。</p>
+<p>常见误区之一是把 IACT 想象成“拍到伽马射线照片”。事实上相机看到的是纳秒级大气 Cherenkov 光，不是源的直接成像；每个事件是一条空气簇射的投影，天图要靠许多事件方向重建后统计叠加。另一个误区是认为 gamma/hadron separation 只是经验切割。实际上，Hillas 参数背后对应电磁级联横向尺度、Molière 半径、入射方向投影和相机像差等具体物理。</p>
+<p>还有一个误区是把显著性简单写成 N_signal/sqrt(N_background)。在真实 IACT 分析中，背景来自 OFF 区或多个反射区，ON/OFF 曝光或接受度不同，需要使用 Poisson 似然比形式。Li &amp; Ma 公式成为高能伽马射线天文学的标准，是因为它在低计数、不同曝光归一化和泊松统计下更可靠。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>核心物理图像从电磁簇射开始。一个能量 E_0 的 TeV 光子进入大气后，在核场中产生 e^+e^- 对；高能电子和正电子通过 bremsstrahlung 产生更多光子。级联在粒子平均能量降到临界能量 E_c 附近达到最大，簇射最大深度 X_max 随 \ln E_0 增加。相对论带电粒子速度超过空气中的光速 c/n 时产生 Cherenkov 光，典型波长在近紫外到蓝光，持续时间为几纳秒。</p>
+<p>望远镜的反射镜把 Cherenkov 光聚焦到相机上。相机每个像素记录的光电子数近似正比于簇射光子密度、镜面面积、光学效率和量子效率。图像总亮度 size 与原初能量相关，但也依赖 impact parameter、天顶角和大气透明度。图像 centroid 与相机中心距离 distance 反映 shower axis 与望远镜指向之间的几何关系。</p>
+<p>Hillas 参数化把二维光强分布的二阶矩对角化，得到椭圆主轴方向、长轴 RMS 即 length、短轴 RMS 即 width。点源伽马事件的图像长轴应当指向相机中源位置，因此 alpha，即长轴方向与 centroid-source 连线的夹角，应在小角度处堆积；各向同性强子背景的 alpha 近似平坦。这一条是早期单望远镜探测 Crab 的决定性诊断。</p>
+<p>现代 stereoscopic 分析在此基础上加入多望远镜几何。每台望远镜图像主轴给出一个 shower axis 所在平面，多台望远镜的主轴交会给出入射方向。能量则通过查表或回归模型从 size、impact distance、zenith angle、image amplitude 等变量估计。有效面积 A_eff(E, z, cuts) 和能量迁移矩阵 R(E_reco|E_true) 将事件计数与真实源谱联系起来。</p>
+<p>观测分析逻辑通常分为 calibration、image cleaning、parameterization、direction/energy reconstruction、background estimation、spectral or morphological fitting。每一步都有系统误差：增益标定、夜天光、坏像素、镜面反射率、大气气溶胶、触发模拟、cut efficiency 和源外延假设。经典 Hillas 方法的优点是物理透明，缺点是不能充分利用像素级似然信息。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步，从 Cherenkov 辐射阈值出发。带电粒子速度 v=\beta c 在折射率 n 的介质中产生 Cherenkov 光的条件为</p>
+<div class="math-display">\[\beta n>1 .\]</div>
+<p>对应 Lorentz 因子的阈值近似为</p>
+<div class="math-display">\[\gamma_{\rm th}=\frac{1}{\sqrt{1-\beta_{\rm th}^2}}=\frac{1}{\sqrt{1-n^{-2}}}\simeq \frac{1}{\sqrt{2(n-1)}} .\]</div>
+<p>在空气中 n-1\sim 10^{-4}--10^{-3}，所以几十 MeV 以上电子即可辐射 Cherenkov 光。这解释了为什么 TeV 电磁簇射中大量 e^\pm 都能贡献光。</p>
+<p>第二步，Cherenkov 角给出图像角尺度的物理来源：</p>
+<div class="math-display">\[\cos\theta_C=\frac{1}{\beta n},\qquad \theta_C\simeq \sqrt{2(n-1)-\gamma^{-2}} .\]</div>
+<p>高能电子 \gamma\gg \gamma_{\rm th} 时，\theta_C 通常约为一度量级。簇射不同高度、不同横向位置的 Cherenkov 光叠加后，在焦平面形成有限长度和宽度的图像。</p>
+<p>第三步，用 Heitler 电磁级联模型估计簇射最大深度。若每经过一个辐射长度 X_0，粒子数翻倍、单粒子能量减半，则第 k 代后</p>
+<div class="math-display">\[N_k=2^k,\qquad E_k=\frac{E_0}{2^k} .\]</div>
+<p>当 E_k\simeq E_c 时达到最大，故</p>
+<div class="math-display">\[k_{\max}=\frac{\ln(E_0/E_c)}{\ln 2},\qquad X_{\max}\simeq X_0\frac{\ln(E_0/E_c)}{\ln 2} .\]</div>
+<p>这说明能量越高，簇射越深、图像越亮且形态随天顶角变化。</p>
+<p>第四步，定义 Hillas 矩。设清洗后像素坐标为 (x_i,y_i)，光电子数或电荷为 q_i，总亮度为</p>
+<div class="math-display">\[S=\sum_i q_i .\]</div>
+<p>图像重心为</p>
+<div class="math-display">\[\bar{x}=\frac{1}{S}\sum_i q_i x_i,\qquad \bar{y}=\frac{1}{S}\sum_i q_i y_i .\]</div>
+<p>二阶中心矩为</p>
+<div class="math-display">\[S_{xx}=\frac{1}{S}\sum_i q_i(x_i-\bar{x})^2,
+S_{yy}=\frac{1}{S}\sum_i q_i(y_i-\bar{y})^2,
+S_{xy}=\frac{1}{S}\sum_i q_i(x_i-\bar{x})(y_i-\bar{y}) .\]</div>
+<p>这些量是把图像压缩为椭圆的数学基础。</p>
+<p>第五步，对二阶矩矩阵对角化。主轴方位角 \psi 满足</p>
+<div class="math-display">\[\tan 2\psi=\frac{2S_{xy}}{S_{xx}-S_{yy}} .\]</div>
+<p>两个本征值为</p>
+<div class="math-display">\[\lambda_{\pm}=\frac{S_{xx}+S_{yy}}{2}\pm \sqrt{\left(\frac{S_{xx}-S_{yy}}{2}\right)^2+S_{xy}^2} .\]</div>
+<p>于是定义</p>
+<div class="math-display">\[{\rm length}=\sqrt{\lambda_+},\qquad {\rm width}=\sqrt{\lambda_-} .\]</div>
+<p>伽马事件通常 width 较小、length/width 有规律；强子事件的 width 更大且波动更强。</p>
+<p>第六步，点源方向判别由 alpha 给出。若源在相机坐标 (x_s,y_s)，从重心指向源的方向角为</p>
+<div class="math-display">\[\phi_s=\arctan\frac{y_s-\bar{y}}{x_s-\bar{x}} .\]</div>
+<p>则</p>
+<div class="math-display">\[\alpha=|\psi-\phi_s|\quad \text{folded into }[0,90^\circ] .\]</div>
+<p>点源伽马射线应在 \alpha\simeq 0 处形成峰，而各向同性背景在 alpha 上近似平坦；这就是单望远镜 Crab 分析的核心统计信号。</p>
+<p>第七步，ON/OFF 计数的显著性应由泊松似然比推导。设 ON 区计数 N_{\rm on}，OFF 区计数 N_{\rm off}，背景曝光比 \alpha_{\rm b}，背景期望为 b，则无源假设下 ON 期望为 \alpha_{\rm b} b，OFF 期望为 b。Li &amp; Ma 形式的显著性为</p>
+<div class="math-display">\[S_{\rm LM}=\left\{2\left[N_{\rm on}\ln\left(\frac{1+\alpha_{\rm b}}{\alpha_{\rm b}}\frac{N_{\rm on}}{N_{\rm on}+N_{\rm off}}\right)+N_{\rm off}\ln\left((1+\alpha_{\rm b})\frac{N_{\rm off}}{N_{\rm on}+N_{\rm off}}\right)\right]\right\}^{1/2} .\]</div>
+<p>这里 \alpha_{\rm b} 不是 Hillas alpha，而是背景归一化因子；二者符号相同但含义完全不同。</p>
+<p>第八步，从事件数到能谱需要折叠仪器响应。若真实微分通量为 \Phi(E)=dN/(dE\,dA\,dt)，观测时间 T，有效面积为 A_{\rm eff}(E)，能量迁移矩阵为 R(E_{\rm reco}|E)，则重建能量 bin j 中的期望计数为</p>
+<div class="math-display">\[\mu_j=T\int dE\,\Phi(E)A_{\rm eff}(E)\int_{E_{j,1}}^{E_{j,2}}dE_{\rm reco}\,R(E_{\rm reco}|E)+\mu_{j,\rm bkg} .\]</div>
+<p>这说明 IACT 谱拟合必须 forward-folding，而不能简单把 excess 除以面积和时间。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>经典 Hillas 分析中的第一个“模型”是切割模型。对图像 size、distance、width、length、concentration、alpha 等变量设定选择区间，例如要求图像不在相机边缘、size 超过阈值、width/length 落在伽马 Monte Carlo 或 Crab 标定给出的范围内，最后用小 alpha 区间作为信号区。参数包括各切割阈值、ON 区角半径或 alpha cut、清洗阈值和最小像素数。优化目标通常是最大化预期显著性 S/\sqrt{B} 或 Li &amp; Ma 显著性，但必须在独立样本上验证，避免 trials bias。</p>
+<p>第二类是 scaled-parameter 模型。由于 width 和 length 随能量、impact parameter、天顶角变化，现代分析常把观测到的 width 与 Monte Carlo 期望均值和方差比较，定义 scaled width 或 mean reduced scaled width：\({\rm MSW}=\langle w/w_{\gamma,\rm exp}\rangle\) 或 \((w-w_{\gamma,\rm exp})/\sigma_{w,\gamma}\)。拟合或分类时使用 MSW、MSL、方向误差、shower maximum 等变量。其思想是把简单 Hillas 参数转换为近似能量无关、几何无关的判别量。</p>
+<p>第三类是谱模型。Crab 或其他源常用幂律、带指数截断幂律、log-parabola 拟合：\(\Phi(E)=\Phi_0(E/E_0)^{-\Gamma}\)，\(\Phi(E)=\Phi_0(E/E_0)^{-\Gamma}\exp(-E/E_{\rm cut})\)，或 \(\Phi(E)=\Phi_0(E/E_0)^{-\alpha-\beta\ln(E/E_0)}\)。自由参数包括归一化 \(\Phi_0\)、谱指数 \(\Gamma\)、截断能量 \(E_{\rm cut}\)、曲率 \(\beta\)。IACT 谱拟合一般采用 forward-folding Poisson 似然，而不是先反卷积再最小二乘。</p>
+<p>似然写法可用每个重建能量 bin 的 Poisson 项：\(\mathcal{L}=\prod_j {\mu_j^{N_j}e^{-\mu_j}}/{N_j!}\)，其中 \(\mu_j\) 由源模型折叠 A_eff 和能量迁移矩阵得到，再加背景项。若使用 ON/OFF 数据，可采用联合似然，把 OFF 区背景约束作为 nuisance parameter，并对背景归一化、能标、有效面积不确定性加入先验或 profile likelihood。Bayesian 写法则给 \(\Phi_0,\Gamma,E_{\rm cut}\) 和系统参数赋予后验，报告 credible interval。</p>
+<p>残差诊断至少包括四类：第一，alpha 分布或 \(\theta^2\) 分布中信号区外是否平坦，检验背景模型；第二，重建能量各 bin 的 pulls，即 \((N_j-\mu_j)/\sigma_j\) 是否随机分布；第三，不同天顶角、不同观测夜、不同相机位置的通量是否一致，检验大气和接受度系统误差；第四，Crab 标准源分析是否复现参考谱，检验能标和有效面积。</p>
+<p>系统误差在 IACT 中不是附属问题。能量尺度 10–20% 的误差会显著改变通量归一化和谱指数；大气气溶胶会降低 Cherenkov 光产额，使能量被低估；相机边缘截断会偏置 length 和 size；夜天光变化会影响图像清洗和低能阈值。经典模型拟合的应用价值在于，它让 Crab 从“探测源”变成“校准源”，让每个新仪器都可以用相同统计语言报告灵敏度、谱和系统误差。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 Hillas 经典方法时，第一段应抓住作者要解决的问题：不是提出一个天体模型，而是提出一种在宇宙线背景下识别伽马射线空气簇射的图像统计方法。因此要优先读图像参数定义和参数物理意义，而不是只看最终显著性。</p>
+<p>第二部分要逐字理解 moment analysis。课程上建议学生手算一个 5–10 个像素的玩具图像，计算 size、centroid、二阶矩、主轴方向、length 和 width。这样会明白 Hillas 参数不是黑箱特征，而是带权协方差矩阵的本征值问题。</p>
+<p>第三部分要重点读 alpha 参数和点源检验。早期单望远镜没有 stereoscopic 交会方向，alpha 分布就是源方向信息的主要载体。阅读时要问：背景为什么应近似平坦？什么因素会造成非平坦？源偏离相机中心或接受度不均匀会怎样？</p>
+<p>第四部分读 Whipple Crab 结果时，不要只看“多少 sigma”。要检查 ON/OFF 的定义、cut 是否事先固定、背景归一化如何得到、alpha 峰是否只出现在小 alpha 区间、控制样本是否没有峰。经典性来自可重复性和统计方法，而非单个漂亮数字。</p>
+<p>第五部分要把早期方法和现代 IACT 分析连接起来。Hillas 参数是低维 summary statistics；现代模板拟合、随机森林、深度学习虽然更复杂，但仍要回答同样问题：事件像不像电磁簇射？方向是否来自源？能量和有效面积如何估计？背景如何从数据中约束？</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<ol>
+<li>
+<p>相机原始图像与清洗后图像：看哪些像素被保留，图像是否呈椭圆，是否存在边缘截断或孤立噪声像素。</p>
+</li>
+<li>
+<p>Hillas 椭圆示意图：看 centroid、major axis、minor axis、length、width、distance、miss、alpha 的几何定义，尤其注意 alpha 是相对于假定源位置的方向角。</p>
+</li>
+<li>
+<p>width–length 或 scaled width–scaled length 分布：看伽马 Monte Carlo、Crab excess 和 OFF 背景是否在形态空间中分离，以及切割边界是否合理。</p>
+</li>
+<li>
+<p>alpha 分布：这是早期单望远镜点源探测的核心图。看小 alpha 区间是否出现 ON-OFF 过剩，大 alpha 区间是否一致，背景是否平坦。</p>
+</li>
+<li>
+<p>\(\theta^2\) 分布：现代 stereoscopic 分析常用。点源信号应在小 \(\theta^2\) 处形成峰，背景在小范围内近似平坦；cut 半径反映角分辨率与信号保留率的折中。</p>
+</li>
+<li>
+<p>有效面积与能量阈值曲线：看 A_eff 如何随能量上升并趋于平台，低能端触发效率如何决定阈值，不同天顶角如何改变响应。</p>
+</li>
+<li>
+<p>能谱和 residual/pull 图：看幂律或曲率模型是否足够，残差是否随能量系统偏离，最高能点是否受低统计影响。</p>
+</li>
+<li>
+<p>Crab 光变或逐夜通量图：看标准源是否稳定，仪器系统误差是否导致不同观测条件下的通量漂移。</p>
+</li>
+</ol>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 1：相机图像与 Hillas 椭圆。横轴和纵轴通常是相机角坐标，单位为 degree；颜色或数字表示每个像素的 photoelectron 数。课堂上先让学生找出最亮区域，然后标出重心。再看二阶矩椭圆：长轴方向代表簇射主轴在焦平面的投影，length 是沿长轴的 RMS 展宽，width 是横向展宽。若假定源在相机中心，伽马事件的长轴应大致穿过中心；若椭圆很宽、很碎或方向不指向源，更可能是强子背景或被截断事件。</p>
+<p>图 2：alpha 分布。横轴是 alpha，通常从 0 到 90 度；纵轴是事件数，常画 ON 数据、归一化 OFF 数据或 ON-OFF excess。读图时首先看大 alpha 区间：ON 和 OFF 是否一致？如果不一致，背景归一化或接受度可能有问题。然后看小 alpha 区间：点源伽马信号应表现为靠近 0 度的尖峰。模型线或阴影通常表示背景估计；显著性来自小 alpha 区间的过剩，而不是全区间的形状差异。残差若在大 alpha 处有结构，说明 cut 或相机非均匀性可能引入系统误差。</p>
+<p>图 3：\(\theta^2\) 或重建方向分布。横轴是重建方向与源位置夹角的平方，纵轴是事件数或 excess。对于真正的点源，信号峰在 \(\theta^2=0\) 附近，宽度由点扩散函数 PSF 决定；背景在二维均匀条件下对 \(\theta^2\) 近似常数。读图时要比较 ON 点、背景估计和信号区 cut 位置：cut 太小会损失信号，太大会引入背景。若源有外延，峰会比 PSF 更宽，这需要形态模型而不是点源 cut。</p>
+<p>图 4：有效面积随能量变化。横轴是真实能量，纵轴为 \(A_{\rm eff}\)。低能端 A_eff 急剧下降，因为 Cherenkov 光少、触发和图像清洗效率低；中高能端接近几万到几十万平方米量级，体现 IACT 的巨大收集面积。不同天顶角曲线会平移：大天顶角路径更长、阈值更高，但高能有效面积可能更大。读谱时必须记住，观测到的计数峰值不等于源能谱峰值，而是源谱与有效面积共同作用的结果。</p>
+<p>图 5：Crab 能谱。横轴通常为能量 TeV，纵轴为 \(E^2 dN/dE\) 或 \(dN/dE\)。幂律在 log-log 图上是直线，曲率或截断表现为高能端下弯。数据点的水平误差或 bin 宽反映能量分箱，竖直误差为统计误差，阴影或括号可表示系统误差。残差图要检查是否低能端和高能端同时偏离：低能偏离可能来自阈值和能量偏差，高能偏离可能是真实曲率也可能是统计量不足。</p>
+<p>图 6：逐夜 Crab flux 或 run-wise excess rate。横轴为时间或观测 run，纵轴为通量、excess rate 或相对 Crab 单位。理想情况下 Crab 星云非脉冲 TeV 通量稳定；若不同夜晚系统性偏高或偏低，应检查大气透明度、镜面反射率、触发阈值和相机增益。这个图常被低估，但它是判断 IACT 分析链是否可靠的关键质量控制图。</p>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径是从 Hillas 参数到 stereoscopic reconstruction。先读成像参数定义和 Whipple Crab 探测，再读 HEGRA、H.E.S.S. 等多望远镜系统如何用多个图像主轴交会重建方向，以及 mean scaled width/length 如何提高背景排除。这样可以看到同一个物理思想如何从单望远镜经验切割演化为阵列几何重建。</p>
+<p>第二条路径是从事件选择到似然统计。建议把 Li &amp; Ma 显著性、ON/OFF likelihood、reflected-region background 和 ring background 连起来读。现代 IACT 数据分析越来越少依赖单一 cut-and-count，而是使用二维或三维 Poisson likelihood 同时拟合空间、能量和背景。理解早期 alpha 图有助于理解现代 \(\theta^2\)、skymap significance 和 residual map。</p>
+<p>第三条路径是从 Crab 标定到源物理。Crab Nebula 的 TeV 谱可由脉冲星风星云中的电子逆康普顿散射解释，和同步辐射波段共同约束磁场、电子谱和种子光子场。读完 IACT 方法后，可以进一步学习一区 PWN leptonic model、多波段 SED 拟合，以及为什么 Crab 既是标准烛光又不是绝对简单源。</p>
+<p>第四条路径是通向 CTA 和机器学习。CTA 的相机像素更多、望远镜类型更多、能量范围更宽，传统 Hillas 特征仍常作为 baseline，但模板 likelihood、随机森林、boosted decision trees 和 convolutional neural networks 可以利用更多信息。学习时应保持一个原则：复杂分类器若不能在 Crab、空场和模拟闭合检验中给出可解释残差，就不能替代物理理解。</p>
+<p><strong>检索关键词</strong>：<br />
+- Hillas 1985 image parameters atmospheric Cherenkov technique<br />
+- Whipple 10m Crab Nebula TeV gamma ray detection 1989<br />
+- imaging atmospheric Cherenkov telescope Hillas parameters alpha width length<br />
+- Li Ma significance gamma ray astronomy ON OFF<br />
+- IACT effective area forward folding spectrum Crab Nebula<br />
+- mean scaled width length stereoscopic Cherenkov analysis<br />
+- Crab Nebula standard candle TeV astronomy Whipple</p>
+<p><strong>确信的公开链接</strong>：<br />
+（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
