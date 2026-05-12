@@ -10,6 +10,37 @@ logger = logging.getLogger(__name__)
 FORMULA_HEADING = "#### 公式与推导"
 FORMULA_BOUNDARY_RE = re.compile(r"^####\s+")
 LATEX_COMMAND_RE = re.compile(r"\\[A-Za-z]+")
+PROTECTED_MARKDOWN_RE = re.compile(
+    r"`[^`]*`"
+    r"|!\[[^\]]*\]\([^)]*\)"
+    r"|\[[^\]]+\]\([^)]*\)"
+    r"|https?://\S+"
+    r"|\\\[[\s\S]*?\\\]"
+    r"|\$\$[\s\S]*?\$\$"
+    r"|\\\(.*?\\\)"
+    r"|(?<!\\)(?<!\$)\$(?!\$).*?(?<!\\)(?<!\$)\$(?!\$)"
+    r"|<[^>]+>"
+)
+MATH_TOKEN_RE = re.compile(
+    r"(?<![\\\w])"
+    r"("
+    r"(?:[A-Za-z]+[A-Za-z0-9]*(?:_\{[^}]+\}|_[A-Za-z0-9\\]+|\^\{[^}]+\}|\^[A-Za-z0-9\\]+)[A-Za-z0-9\\{}_^+\-*/=().,<>|]*)"
+    r"|(?:\\[A-Za-z]+(?:\{[^}]+\})?[A-Za-z0-9\\{}_^+\-*/=().,<>|]*)"
+    r"|(?:[A-Za-z][A-Za-z0-9()\\{}_^+\-*/.,<>|]*=[A-Za-z0-9\\{}_^+\-*/=().,<>|]+)"
+    r")"
+    r"(?![\\\w])"
+)
+HTML_PARAGRAPH_RE = re.compile(r"<p\b[^>]*>[\s\S]*?</p>", re.IGNORECASE)
+HTML_PROTECTED_RE = re.compile(
+    r"<a\b[\s\S]*?</a>"
+    r"|<code\b[\s\S]*?</code>"
+    r"|<img\b[^>]*>"
+    r"|\\\(.*?\\\)"
+    r"|(?<!\\)(?<!\$)\$(?!\$).*?(?<!\\)(?<!\$)\$(?!\$)"
+    r"|https?://\S+"
+    r"|<[^>]+>",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -40,9 +71,20 @@ class FormulaIntegrityResult:
         return sum(1 for issue in self.issues if not issue.repaired)
 
 
+class HtmlFormulaValidationError(RuntimeError):
+    def __init__(self, html_path: Path, result: FormulaIntegrityResult):
+        super().__init__(f"HTML formula validation failed for {html_path}: {result.unresolved_count} unresolved issues")
+        self.html_path = html_path
+        self.result = result
+
+
 def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> FormulaIntegrityResult:
     original = md_path.read_text(encoding="utf-8")
     repaired_text, result = repair_formula_sections(original, repair=repair)
+    repaired_text, prose_result = repair_bare_latex_in_prose(repaired_text, repair=repair)
+    repaired_lines = {issue.line_number for issue in prose_result.issues if issue.repaired}
+    result.issues = [issue for issue in result.issues if not (issue.kind == "bare_latex" and issue.line_number in repaired_lines)]
+    result.issues.extend(prose_result.issues)
     if repair and repaired_text != original:
         md_path.write_text(repaired_text, encoding="utf-8")
     for issue in result.issues:
@@ -53,6 +95,40 @@ def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> Formu
         )
         log = logger.info if issue.repaired else logger.warning
         log(message, issue.kind, issue.line_number, issue.section_title, issue.snippet)
+    return result
+
+
+def validate_html_latex_formulas(html_path: str | Path) -> FormulaIntegrityResult:
+    path = Path(html_path)
+    html = path.read_text(encoding="utf-8")
+    result = FormulaIntegrityResult(checked_sections=1)
+    for match in HTML_PARAGRAPH_RE.finditer(html):
+        paragraph = match.group(0)
+        if "<img" in paragraph:
+            continue
+        stripped = HTML_PROTECTED_RE.sub("", paragraph)
+        tokens = _find_naked_latex_tokens(stripped)
+        if not tokens:
+            continue
+        line_number = html.count("\n", 0, match.start()) + 1
+        result.issues.append(
+            _issue(
+                line_number,
+                "naked_latex_html",
+                "naked LaTeX remains in HTML paragraph",
+                False,
+                paragraph,
+                section_title="HTML formula validation",
+            )
+        )
+    return result
+
+
+def ensure_html_latex_formulas_valid(html_path: str | Path) -> FormulaIntegrityResult:
+    path = Path(html_path)
+    result = validate_html_latex_formulas(path)
+    if result.unresolved_count:
+        raise HtmlFormulaValidationError(path, result)
     return result
 
 
@@ -83,6 +159,30 @@ def repair_formula_sections(markdown_text: str, *, repair: bool = True) -> tuple
     return "\n".join(output), result
 
 
+def repair_bare_latex_in_prose(markdown_text: str, *, repair: bool = True) -> tuple[str, FormulaIntegrityResult]:
+    lines = markdown_text.split("\n")
+    output: list[str] = []
+    result = FormulaIntegrityResult(checked_sections=1)
+    in_fence = False
+    in_display_math = False
+    for index, line in enumerate(lines, start=1):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            output.append(line)
+            continue
+        skip_line = in_fence or in_display_math or _should_skip_prose_line(line)
+        if skip_line:
+            output.append(line)
+            in_display_math = _update_display_math_state(line, in_display_math)
+            continue
+        repaired_line, issues = _repair_bare_latex_line(line, index, repair=repair)
+        output.append(repaired_line)
+        result.issues.extend(issues)
+        in_display_math = _update_display_math_state(line, in_display_math)
+    return "\n".join(output), result
+
+
 def _is_section_boundary(line: str) -> bool:
     stripped = line.strip()
     return stripped == "</details>" or bool(FORMULA_BOUNDARY_RE.match(stripped))
@@ -109,16 +209,19 @@ def _repair_section(lines: list[str], start_line_number: int, *, repair: bool) -
     elif bracket_open > bracket_close:
         issues.append(_issue(start_line_number, "ambiguous_display_bracket", "unmatched \\[ left unchanged", False, repaired[-1] if repaired else "\\["))
 
+    in_display_math = False
     for offset, line in enumerate(list(repaired)):
         line_number = start_line_number + offset
-        new_line, line_issues = _repair_line(line, line_number, repair=repair)
+        skip_bare_latex = in_display_math
+        new_line, line_issues = _repair_line(line, line_number, repair=repair, skip_bare_latex=skip_bare_latex)
         repaired[offset] = new_line
         issues.extend(line_issues)
+        in_display_math = _update_display_math_state(line, in_display_math)
 
     return repaired, issues
 
 
-def _repair_line(line: str, line_number: int, *, repair: bool) -> tuple[str, list[FormulaIntegrityIssue]]:
+def _repair_line(line: str, line_number: int, *, repair: bool, skip_bare_latex: bool = False) -> tuple[str, list[FormulaIntegrityIssue]]:
     if _is_markdown_link_or_image(line):
         return line, []
 
@@ -145,10 +248,80 @@ def _repair_line(line: str, line_number: int, *, repair: bool) -> tuple[str, lis
     current, span_issues = _repair_math_spans(current, line_number, repair=repair)
     issues.extend(span_issues)
 
-    if not _has_math_delimiter(current) and _looks_bare_latex(current):
+    if not skip_bare_latex and not _has_math_delimiter(current) and _looks_bare_latex(current):
         issues.append(_issue(line_number, "bare_latex", "possible bare LaTeX left unchanged", False, current))
 
     return current, issues
+
+
+def _repair_bare_latex_line(line: str, line_number: int, *, repair: bool) -> tuple[str, list[FormulaIntegrityIssue]]:
+    issues: list[FormulaIntegrityIssue] = []
+    parts: list[str] = []
+    cursor = 0
+    for match in PROTECTED_MARKDOWN_RE.finditer(line):
+        segment = line[cursor : match.start()]
+        repaired_segment, segment_issues = _repair_bare_latex_segment(segment, line_number, repair=repair)
+        parts.append(repaired_segment)
+        parts.append(match.group(0))
+        issues.extend(segment_issues)
+        cursor = match.end()
+    segment = line[cursor:]
+    repaired_segment, segment_issues = _repair_bare_latex_segment(segment, line_number, repair=repair)
+    parts.append(repaired_segment)
+    issues.extend(segment_issues)
+    return "".join(parts), issues
+
+
+def _repair_bare_latex_segment(segment: str, line_number: int, *, repair: bool) -> tuple[str, list[FormulaIntegrityIssue]]:
+    issues: list[FormulaIntegrityIssue] = []
+
+    def replace(match: re.Match[str]) -> str:
+        token = match.group(1)
+        if not _is_repairable_naked_math_token(token):
+            return token
+        issues.append(
+            _issue(
+                line_number,
+                "bare_inline_latex_repaired",
+                "wrapped naked inline LaTeX in \\( ... \\)",
+                repair,
+                token,
+                section_title="full report prose",
+            )
+        )
+        return f"\\({token}\\)" if repair else token
+
+    return MATH_TOKEN_RE.sub(replace, segment), issues
+
+
+def _is_repairable_naked_math_token(token: str) -> bool:
+    stripped = token.strip(".,;:，。；：、）)]}】》")
+    if not stripped or stripped.startswith("\\begin") or stripped.startswith("\\end"):
+        return False
+    if LATEX_COMMAND_RE.search(stripped):
+        return True
+    if re.search(r"[A-Za-z]+(?:_\{[^}]+\}|_[A-Za-z0-9]+|\^\{[^}]+\}|\^[A-Za-z0-9]+)", stripped):
+        return True
+    return bool("=" in stripped and re.search(r"[A-Za-z]", stripped) and any(marker in stripped for marker in ["_", "^", "\\", "("]))
+
+
+def _find_naked_latex_tokens(text: str) -> list[str]:
+    return [match.group(1) for match in MATH_TOKEN_RE.finditer(text) if _is_repairable_naked_math_token(match.group(1))]
+
+
+def _should_skip_prose_line(line: str) -> bool:
+    stripped = line.strip()
+    if not stripped:
+        return True
+    if stripped.startswith("#") or stripped.startswith("|"):
+        return True
+    if stripped.startswith(("<details", "</details", "<summary", "</summary", "</div", "<div")):
+        return True
+    if stripped.startswith(("[", "![")):
+        return True
+    if stripped.startswith(("- 链接", "- URL", "- url")):
+        return True
+    return False
 
 
 def _repair_math_spans(line: str, line_number: int, *, repair: bool) -> tuple[str, list[FormulaIntegrityIssue]]:
@@ -192,6 +365,13 @@ def _append_missing_closers(content: str) -> str:
     if not stack or len(stack) > 2:
         return content
     return content + "".join(pairs[char] for char in reversed(stack))
+
+
+def _update_display_math_state(line: str, in_display_math: bool) -> bool:
+    display_tokens = line.count("$$") + line.count("\\[") + line.count("\\]")
+    if display_tokens % 2 == 0:
+        return in_display_math
+    return not in_display_math
 
 
 def _single_dollar_positions(text: str) -> list[int]:
@@ -242,9 +422,9 @@ def _inside_markdown_url(text: str, position: int) -> bool:
     return open_paren != -1 and close_paren != -1
 
 
-def _issue(line_number: int, kind: str, message: str, repaired: bool, snippet: str) -> FormulaIntegrityIssue:
+def _issue(line_number: int, kind: str, message: str, repaired: bool, snippet: str, *, section_title: str | None = None) -> FormulaIntegrityIssue:
     return FormulaIntegrityIssue(
-        section_title=FORMULA_HEADING.removeprefix("#### "),
+        section_title=section_title or FORMULA_HEADING.removeprefix("#### "),
         line_number=line_number,
         kind=kind,
         message=message,

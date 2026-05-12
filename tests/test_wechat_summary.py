@@ -55,3 +55,27 @@ def test_non_he_needs_high_score_for_wechat_selection():
     assert "he" in ids
     assert "im-high" in ids
     assert wechat_category_counts(selected) == (1, 1, 0)
+
+
+def test_supplemental_wechat_message_uses_non_daily_wording():
+    papers = [scored(str(index), "astro-ph.HE", 7.0) for index in range(3)]
+
+    text = compress_for_wechat(papers, "2026-05-08", "report.html", supplemental=True)
+
+    assert "补充推荐：3 篇" in text
+    assert "不是今日每日论文" in text
+    assert "今日精选" not in text
+    assert "类型：补充推荐（非今日每日论文）" in text
+
+
+def test_supplemental_wechat_selection_preserves_pipeline_choices():
+    papers = [
+        scored("co-low", "astro-ph.CO", 7.1),
+        scored("ga-low", "astro-ph.GA", 7.0),
+        scored("he", "astro-ph.HE", 6.5),
+        scored("extra", "astro-ph.HE", 9.0),
+    ]
+
+    selected = select_wechat_papers(papers, supplemental=True)
+
+    assert [item.paper.paper_id for item in selected] == ["co-low", "ga-low", "he"]

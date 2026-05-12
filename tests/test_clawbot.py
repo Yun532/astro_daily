@@ -1,7 +1,10 @@
 import json
 
+import pytest
+import requests
+
 from astro_daily.config import Settings
-from src.clawbot_chat import ClawBotChatResponder, reply_to_clawbot_message
+from src.clawbot_chat import ClawBotChatResponder, reply_to_clawbot_message, run_clawbot_chat_loop
 from src.clawbot_client import ClawBotAccount, ClawBotMessage, get_clawbot_updates, send_clawbot_text
 from src.push_clawbot import send_clawbot_report_message
 
@@ -159,6 +162,38 @@ def test_clawbot_chat_responder_uses_compatible_request(monkeypatch):
     assert calls[1]["messages"] == [{"role": "user", "content": "你能收到吗"}]
     assert "thinking" not in calls[1]
     assert "output_config" not in calls[1]
+
+
+def test_clawbot_chat_loop_retries_transient_poll_errors(monkeypatch, caplog):
+    sleeps = []
+
+    class Responder:
+        def __init__(self, _settings):
+            pass
+
+    def sleep(seconds):
+        sleeps.append(seconds)
+        raise KeyboardInterrupt
+
+    settings = Settings.model_validate(
+        {
+            "sources": {"arxiv": {"primary": [{"category": "astro-ph.HE", "max_results": 1}]}, "rss": {"feeds": []}},
+            "scoring": {},
+            "llm": {},
+            "report": {},
+            "wechat": {"enabled": False},
+        }
+    )
+    monkeypatch.setattr("src.clawbot_chat.ClawBotChatResponder", Responder)
+    monkeypatch.setattr("src.clawbot_chat.load_clawbot_account", lambda _settings: ClawBotAccount(token="token", base_url="https://example.com"))
+    monkeypatch.setattr("src.clawbot_chat.poll_clawbot_once", lambda _settings: (_ for _ in ()).throw(requests.exceptions.SSLError("temporary eof")))
+    monkeypatch.setattr("src.clawbot_chat.time.sleep", sleep)
+
+    with pytest.raises(KeyboardInterrupt):
+        run_clawbot_chat_loop(settings, poll_interval=0.1)
+
+    assert sleeps == [0.1]
+    assert "ClawBot polling failed; will retry" in caplog.text
 
 
 def test_reply_to_clawbot_message_sends_answer_with_context(monkeypatch):

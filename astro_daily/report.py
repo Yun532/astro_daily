@@ -15,6 +15,7 @@ def write_daily_report(
     source_errors: list[str],
     dry_run: bool,
     weekend_lessons: list[WeekendLesson] | None = None,
+    supplemental_papers: list[ScoredPaper] | None = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{run_date.isoformat()}.md"
@@ -26,6 +27,7 @@ def write_daily_report(
             source_errors=source_errors,
             dry_run=dry_run,
             weekend_lessons=weekend_lessons,
+            supplemental_papers=supplemental_papers,
         ),
         encoding="utf-8",
     )
@@ -40,16 +42,20 @@ def render_report(
     source_errors: list[str],
     dry_run: bool,
     weekend_lessons: list[WeekendLesson] | None = None,
+    supplemental_papers: list[ScoredPaper] | None = None,
 ) -> str:
     title = f"# {title_prefix} {run_date.isoformat()}"
     lines = [title, ""]
     if dry_run:
         lines.extend(["> Dry-run：本次不会推送微信，也不会更新 seen_papers.json。", ""])
+    supplemental_papers = supplemental_papers or []
     lines.extend([
         f"生成时间：{datetime.now().astimezone().isoformat(timespec='seconds')}",
         f"今日保留论文数：{len(scored_papers)}",
-        "",
     ])
+    if supplemental_papers:
+        lines.append(f"补充推荐论文数：{len(supplemental_papers)}")
+    lines.append("")
     if source_errors:
         lines.extend(["## 数据源警告", ""])
         lines.extend(f"- {error}" for error in source_errors)
@@ -57,6 +63,8 @@ def render_report(
     if not scored_papers:
         if weekend_lessons:
             _append_weekend_lessons(lines, weekend_lessons)
+        elif supplemental_papers:
+            _append_supplemental_papers(lines, supplemental_papers)
         else:
             lines.extend([
                 "## 今日结论",
@@ -79,7 +87,17 @@ def render_report(
     return "\n".join(lines).strip() + "\n"
 
 
-def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> None:
+def _append_supplemental_papers(lines: list[str], papers: list[ScoredPaper]) -> None:
+    lines.extend([
+        "## 今日结论",
+        "",
+        f"今天有论文更新，但没有论文通过常规推荐阈值。以下 {len(papers)} 篇是近期/较早未读论文中的补充推荐，不是今日每日论文。",
+        "",
+    ])
+    _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", papers, supplemental=True)
+
+
+def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, supplemental: bool = False) -> None:
     if not papers:
         return
     lines.extend([f"## {title}", ""])
@@ -93,6 +111,10 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper]) -> 
             f"- 来源：{paper.source}" + (f" / {paper.category}" if paper.category else ""),
             f"- 链接：{paper.url}",
             f"- 作者：{', '.join(paper.authors[:8]) if paper.authors else '未知'}",
+        ])
+        if supplemental:
+            lines.append("- 类型：补充推荐（近期/较早未读，非今日每日论文）")
+        lines.extend([
             f"- 评分：novelty {score.novelty_score}/10，importance {score.importance_score}/10，relevance {score.relevance_to_me}/10，final {score.final_score:.2f}/10",
             f"- 推荐理由：{score.reason}",
             "",

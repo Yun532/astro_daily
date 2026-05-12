@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date, datetime
 import re
 from typing import Any
 
@@ -17,6 +17,49 @@ IACT_PHRASES = (
 
 IACT_ACRONYMS = {"iact", "cta", "magic", "hess", "veritas", "lst", "sst", "mst"}
 
+NEUTRINO_TERMS = {
+    "neutrino",
+    "neutrinos",
+    "icecube",
+    "km3net",
+    "baikal",
+    "gvd",
+    "grand",
+    "p-one",
+}
+
+NEUTRINO_CONTEXT_PHRASES = (
+    "astrophysical neutrino",
+    "cosmic neutrino",
+    "cosmogenic neutrino",
+    "high-energy neutrino",
+    "ultra-high-energy neutrino",
+    "neutrino astronomy",
+    "neutrino source",
+    "multimessenger",
+    "multi-messenger",
+    "hadronic emission",
+    "hadronuclear",
+    "photohadronic",
+    "p gamma",
+    "p-gamma",
+    "pp interaction",
+    "p p interaction",
+    "cosmic ray",
+    "cosmic-ray",
+    "pevatrons",
+    "pevatron",
+    "blazar",
+    "agn",
+    "gamma-ray burst",
+    "grb",
+    "tidal disruption event",
+    "tde",
+    "supernova remnant",
+    "pulsar wind nebula",
+    "pwn",
+)
+
 
 class Paper(BaseModel):
     paper_id: str
@@ -29,6 +72,7 @@ class Paper(BaseModel):
     category: str | None = None
     published: datetime | None = None
     updated: datetime | None = None
+    source_batch_date: date | None = None
     journal: str | None = None
     tags: list[str] = Field(default_factory=list)
 
@@ -64,7 +108,9 @@ class Paper(BaseModel):
         if any(phrase in text for phrase in IACT_PHRASES):
             return True
         tokens = set(re.findall(r"[a-z0-9]+", text))
-        return bool(tokens & IACT_ACRONYMS)
+        if tokens & IACT_ACRONYMS:
+            return True
+        return bool((tokens & NEUTRINO_TERMS) and any(phrase in text for phrase in NEUTRINO_CONTEXT_PHRASES))
 
     @property
     def is_prestige_journal_source(self) -> bool:

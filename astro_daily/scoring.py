@@ -9,8 +9,8 @@ from astro_daily.models import Paper, PaperScore, ScoredPaper, ScoreResult
 def prepare_candidates(papers: list[Paper], config: ScoringConfig, *, run_date: date | None = None) -> list[Paper]:
     if run_date is None:
         return _sort_candidates(papers)[: config.max_candidates]
-    same_day = [paper for paper in papers if _paper_date(paper) == run_date]
-    other_days = [paper for paper in papers if _paper_date(paper) is None or _paper_date(paper) < run_date]
+    same_day = [paper for paper in papers if is_same_day_candidate(paper, run_date)]
+    other_days = [paper for paper in papers if _is_backfill_candidate(paper, run_date)]
     candidates = _sort_candidates(same_day)
     if len(same_day) < config.same_day_target:
         candidates.extend(_sort_candidates(other_days)[: config.max_backfill_papers])
@@ -18,6 +18,48 @@ def prepare_candidates(papers: list[Paper], config: ScoringConfig, *, run_date: 
 
 
 def apply_policy(
+    papers: list[Paper],
+    score_results: list[ScoreResult],
+    config: ScoringConfig,
+) -> list[ScoredPaper]:
+    scored = _build_scored_papers(papers, score_results, config)
+    kept = [item for item in scored if _passes_threshold(item.paper, item.score, config)]
+    kept.sort(key=_scored_sort_key, reverse=True)
+    return kept[: config.max_papers_per_report]
+
+
+def prepare_supplemental_candidates(papers: list[Paper], config: ScoringConfig, *, run_date: date) -> list[Paper]:
+    candidates = [paper for paper in papers if _is_supplemental_candidate(paper, run_date)]
+    return _sort_candidates(candidates)[: config.supplemental_max_candidates]
+
+
+def apply_supplemental_policy(
+    papers: list[Paper],
+    score_results: list[ScoreResult],
+    config: ScoringConfig,
+) -> list[ScoredPaper]:
+    scored = [
+        item
+        for item in _build_scored_papers(papers, score_results, config)
+        if item.score.keep
+        and item.score.final_score >= config.supplemental_min_final_score
+        and item.score.relevance_to_me >= config.supplemental_min_relevance
+    ]
+    scored.sort(key=_scored_sort_key, reverse=True)
+    return scored[: config.supplemental_papers]
+
+
+def paper_updated_on(paper: Paper, run_date: date) -> bool:
+    return paper.updated is not None and paper.updated.date() == run_date
+
+
+def is_same_day_candidate(paper: Paper, run_date: date) -> bool:
+    if paper.source == "arXiv":
+        return paper.source_batch_date == run_date
+    return _source_available_date(paper) == run_date
+
+
+def _build_scored_papers(
     papers: list[Paper],
     score_results: list[ScoreResult],
     config: ScoringConfig,
@@ -36,11 +78,8 @@ def apply_policy(
             keep=result.keep,
             reason=result.reason,
         )
-        score.keep = _passes_threshold(paper, score, config)
-        if score.keep:
-            scored.append(ScoredPaper(paper=paper, score=score))
-    scored.sort(key=_scored_sort_key, reverse=True)
-    return scored[: config.max_papers_per_report]
+        scored.append(ScoredPaper(paper=paper, score=score))
+    return scored
 
 
 def _compute_final_score(score: ScoreResult, paper: Paper, config: ScoringConfig) -> float:
@@ -76,6 +115,13 @@ def _sort_candidates(papers: list[Paper]) -> list[Paper]:
     )
 
 
+def _is_supplemental_candidate(paper: Paper, run_date: date) -> bool:
+    if is_same_day_candidate(paper, run_date):
+        return False
+    paper_date = _source_available_date(paper)
+    return paper_date is None or paper_date < run_date
+
+
 def _scored_sort_key(item: ScoredPaper) -> tuple[float, int, str]:
     return (
         item.score.final_score,
@@ -89,6 +135,15 @@ def _paper_timestamp(paper: Paper) -> str:
     return timestamp.isoformat() if timestamp else ""
 
 
-def _paper_date(paper: Paper) -> date | None:
-    timestamp = paper.published or paper.updated
+def _source_available_date(paper: Paper) -> date | None:
+    if paper.source == "arXiv" and paper.source_batch_date is not None:
+        return paper.source_batch_date
+    timestamp = paper.updated or paper.published
     return timestamp.date() if timestamp else None
+
+
+def _is_backfill_candidate(paper: Paper, run_date: date) -> bool:
+    if is_same_day_candidate(paper, run_date):
+        return False
+    paper_date = _source_available_date(paper)
+    return paper_date is None or paper_date < run_date

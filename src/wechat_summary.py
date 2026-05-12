@@ -7,14 +7,14 @@ from astro_daily.models import Paper, WeekendLesson
 MAX_WECOM_BYTES = 3800
 
 
-def compress_for_wechat(papers: List[Paper], date: str, report_url: str) -> str:
-    items = _select_candidates(papers)
+def compress_for_wechat(papers: List[Paper], date: str, report_url: str, *, supplemental: bool = False) -> str:
+    items = list(papers)[:3] if supplemental else _select_candidates(papers)
     for count in range(min(5, len(items)), 2, -1):
-        text = _render(items[:count], date, report_url, short=False)
+        text = _render(items[:count], date, report_url, short=False, supplemental=supplemental)
         if _byte_len(text) <= MAX_WECOM_BYTES:
             return text
     count = min(3, len(items))
-    text = _render(items[:count], date, report_url, short=True)
+    text = _render(items[:count], date, report_url, short=True, supplemental=supplemental)
     if _byte_len(text) <= MAX_WECOM_BYTES:
         return text
     suffix = f"\n\n[完整报告]({report_url})"
@@ -44,7 +44,9 @@ def compress_weekend_lessons(lessons: list[WeekendLesson], date: str, report_url
     return _fit_bytes(text, MAX_WECOM_BYTES - _byte_len(suffix)).rstrip() + suffix
 
 
-def select_wechat_papers(papers: list[Any]) -> list[Any]:
+def select_wechat_papers(papers: list[Any], *, supplemental: bool = False) -> list[Any]:
+    if supplemental:
+        return list(papers)[:3]
     return _select_candidates(papers)[:5]
 
 
@@ -69,20 +71,34 @@ def _minimum_score(item: Any) -> float:
     return 8.0
 
 
-def _render(items: list[Any], date: str, report_url: str, *, short: bool) -> str:
+def _render(items: list[Any], date: str, report_url: str, *, short: bool, supplemental: bool = False) -> str:
     he, instrument, other = wechat_category_counts(items)
-    lines = [
-        f"# 天文日报｜{date}",
-        "",
-        f"今日精选：{len(items)} 篇  ",
-        f"HE：{he} 篇｜仪器：{instrument} 篇｜其他：{other} 篇",
-        "",
-    ]
+    if supplemental:
+        lines = [
+            f"# 天文日报｜{date}",
+            "",
+            f"补充推荐：{len(items)} 篇  ",
+            "说明：今天有论文更新，但没有论文通过常规推荐阈值；以下是近期/较早未读论文中的补充推荐，不是今日每日论文。",
+            f"HE：{he} 篇｜仪器：{instrument} 篇｜其他：{other} 篇",
+            "",
+        ]
+    else:
+        lines = [
+            f"# 天文日报｜{date}",
+            "",
+            f"今日精选：{len(items)} 篇  ",
+            f"HE：{he} 篇｜仪器：{instrument} 篇｜其他：{other} 篇",
+            "",
+        ]
     for index, item in enumerate(items, start=1):
         paper = _paper(item)
         summary = getattr(item, "summary", None)
         lines.extend([
             f"{index}. **{paper.title}**",
+        ])
+        if supplemental:
+            lines.append("类型：补充推荐（非今日每日论文）")
+        lines.extend([
             f"一段话：{_summary_text(item, short=short)}",
             f"重要性：{_importance_text(item, short=short)}",
             f"[阅读全文]({paper.url})",

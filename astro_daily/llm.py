@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from datetime import date
 from typing import Any
 
@@ -16,7 +17,8 @@ logger = logging.getLogger(__name__)
 SCORING_SYSTEM_PROMPT = """你是高能天体物理、宇宙线、伽马射线天文和天文仪器方法方向的论文编辑。
 你的任务是判断每天的新论文是否值得专业读者花时间阅读。
 astro-ph.HE 是主方向，可以用较低阈值保留；IACT / 大气切伦科夫望远镜相关论文与 astro-ph.HE 同等优先，包括 CTA、MAGIC、H.E.S.S.、HESS、VERITAS、LST、MST、SST 等主题。
-其他方向只有在明显新颖、重要，或会影响高能天文/宇宙线/伽马射线/仪器方法时才保留。
+高能中微子天文学也属于重点兴趣，但只在论文与天体源、高能宇宙线、强子伽马/中微子辐射或多信使高能天体物理明显相关时按重点处理；普通中微子振荡、质量、反应堆/加速器中微子或无天体物理关联的探测器论文不要因此加权。
+其他方向只有在明显新颖、重要，或会影响高能天文/宇宙线/伽马射线/中微子天文学/仪器方法时才保留。
 Nature、Science 及其子刊来源不享受硬性配额或固定加权；但这类期刊文章往往经过更强筛选，评分时可以把期刊来源作为重要性线索之一，最终仍要根据文章内容本身判断。
 不要因为论文看起来宏大就自动高分。优先考虑清楚的新结果、强观测证据、重要理论约束、方法突破或可复用仪器技术。
 只输出符合 schema 的 JSON。"""
@@ -80,8 +82,21 @@ class ClaudePaperAnalyst:
             "date": run_date.isoformat(),
             "policy": {
                 "primary_category": "astro-ph.HE",
-                "same_priority_topics": ["IACT", "大气切伦科夫望远镜", "CTA", "MAGIC", "H.E.S.S.", "HESS", "VERITAS", "LST", "MST", "SST"],
-                "secondary_rule": "IACT / 大气切伦科夫望远镜相关论文按 HE 同等优先级处理；其他非 HE 方向只有在明显影响高能天文、宇宙线、伽马射线或仪器方法时才保留。",
+                "same_priority_topics": [
+                    "IACT",
+                    "大气切伦科夫望远镜",
+                    "CTA",
+                    "MAGIC",
+                    "H.E.S.S.",
+                    "HESS",
+                    "VERITAS",
+                    "LST",
+                    "MST",
+                    "SST",
+                    "high-energy neutrino astronomy with clear astrophysical-source or cosmic-ray context",
+                    "IceCube/KM3NeT/Baikal-GVD source or multimessenger neutrino results",
+                ],
+                "secondary_rule": "IACT / 大气切伦科夫望远镜相关论文按 HE 同等优先级处理；高能中微子方向只有在明显关联天体源、高能宇宙线、强子伽马/中微子辐射或多信使高能天体物理时按重点处理；普通中微子振荡、质量、反应堆/加速器中微子或无天体物理关联的探测器论文不要因为中微子关键词而加权。其他非 HE 方向只有在明显影响高能天文、宇宙线、伽马射线、中微子天文学或仪器方法时才保留。",
                 "weights": scoring_config.weights.model_dump(),
                 "thresholds": {
                     "astro-ph.HE": scoring_config.thresholds.high_energy,
@@ -212,7 +227,14 @@ class ClaudePaperAnalyst:
                 return _parse_json_text(text)
             except json.JSONDecodeError as exc:
                 last_parse_error = exc
-        raise RuntimeError("LLM returned malformed JSON after retry") from last_parse_error
+                logger.warning(
+                    "LLM JSON parse failed at pos=%s: %s; context=%s",
+                    exc.pos,
+                    exc.msg,
+                    _json_error_context(text, exc.pos),
+                )
+        detail = f": {last_parse_error.msg} at pos {last_parse_error.pos}" if last_parse_error else ""
+        raise RuntimeError(f"LLM returned malformed JSON after retry{detail}") from last_parse_error
 
     def _message_request(self, request: dict[str, Any]) -> Any:
         try:
@@ -252,6 +274,12 @@ def _compatible_system_prompt(system_prompt: str, schema: dict[str, Any]) -> str
     )
 
 
+def _json_error_context(text: str, position: int, *, radius: int = 180) -> str:
+    start = max(0, position - radius)
+    end = min(len(text), position + radius)
+    return text[start:end].replace("\r", "\\r").replace("\n", "\\n")
+
+
 def _parse_json_text(text: str) -> dict[str, Any]:
     try:
         return _loads_json(text)
@@ -264,13 +292,47 @@ def _parse_json_text(text: str) -> dict[str, Any]:
 
 
 def _loads_json(text: str) -> dict[str, Any]:
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError as exc:
-        repaired = _escape_unescaped_latex_backslashes(text)
-        if repaired == text:
-            raise exc
-        return json.loads(repaired)
+    candidates = [text]
+    repaired = _repair_common_json_issues(text)
+    if repaired != text:
+        candidates.append(repaired)
+    last_error: json.JSONDecodeError | None = None
+    for candidate in candidates:
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError as exc:
+            last_error = exc
+    if last_error is not None:
+        raise last_error
+    return json.loads(text)
+
+
+def _repair_common_json_issues(text: str) -> str:
+    repaired = _escape_unescaped_string_control_characters(text)
+    repaired = _escape_unescaped_latex_backslashes(repaired)
+    repaired = re.sub(r",\s*([}\]])", r"\1", repaired)
+    return repaired
+
+
+def _escape_unescaped_string_control_characters(text: str) -> str:
+    output: list[str] = []
+    in_string = False
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if char == '"' and _is_unescaped_quote(text, index):
+            in_string = not in_string
+            output.append(char)
+        elif in_string and char == "\n":
+            output.append("\\n")
+        elif in_string and char == "\r":
+            output.append("\\r")
+        elif in_string and char == "\t":
+            output.append("\\t")
+        else:
+            output.append(char)
+        index += 1
+    return "".join(output)
 
 
 def _escape_unescaped_latex_backslashes(text: str) -> str:
@@ -313,7 +375,7 @@ def _is_json_escape(next_char: str, after_next: str, unicode_digits: str) -> boo
     if next_char == "u":
         return len(unicode_digits) == 4 and all(char in "0123456789abcdefABCDEF" for char in unicode_digits)
     if next_char in {"b", "f", "n", "r", "t"}:
-        return not after_next.isalpha()
+        return not (after_next.isascii() and after_next.isalpha())
     return False
 
 
@@ -328,6 +390,8 @@ def _paper_for_prompt(paper: Paper) -> dict[str, Any]:
         "source": paper.source,
         "category": paper.category,
         "published": paper.published.isoformat() if paper.published else None,
+        "updated": paper.updated.isoformat() if paper.updated else None,
+        "source_batch_date": paper.source_batch_date.isoformat() if paper.source_batch_date else None,
         "tags": paper.tags,
     }
 

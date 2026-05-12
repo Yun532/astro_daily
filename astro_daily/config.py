@@ -62,6 +62,10 @@ class ScoringConfig(BaseModel):
     max_backfill_papers: int = Field(default=5, ge=0, le=20)
     thresholds: Thresholds = Field(default_factory=Thresholds)
     non_he_min_relevance: int = Field(default=6, ge=1, le=10)
+    supplemental_papers: int = Field(default=3, ge=1, le=10)
+    supplemental_max_candidates: int = Field(default=30, ge=1, le=100)
+    supplemental_min_final_score: float = Field(default=7.0, ge=0, le=10)
+    supplemental_min_relevance: int = Field(default=6, ge=1, le=10)
 
 
 class LlmConfig(BaseModel):

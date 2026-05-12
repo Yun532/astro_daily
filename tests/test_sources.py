@@ -1,5 +1,7 @@
+from datetime import date, datetime, timezone
+
 from astro_daily.config import ArxivCategoryConfig, RssFeedConfig
-from astro_daily.sources.arxiv import fetch_arxiv_papers
+from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_papers, parse_arxiv_daily_listing
 from astro_daily.sources.rss import fetch_rss_papers
 
 
@@ -31,10 +33,38 @@ def test_arxiv_parser(monkeypatch):
       </entry>
     </feed>"""
     monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", lambda *args, **kwargs: FakeResponse(atom))
-    papers = fetch_arxiv_papers([ArxivCategoryConfig(category="astro-ph.HE", max_results=1)], days_back=10)
+    papers = fetch_arxiv_papers([ArxivCategoryConfig(category="astro-ph.HE", max_results=1)], days_back=30)
     assert papers[0].paper_id == "2605.00001"
     assert papers[0].category == "astro-ph.HE"
     assert papers[0].authors == ["Alice"]
+    assert papers[0].published == datetime(2026, 5, 2, tzinfo=timezone.utc)
+    assert papers[0].updated == datetime(2026, 5, 2, tzinfo=timezone.utc)
+
+
+
+def test_arxiv_parser_applies_daily_listing_batch_date(monkeypatch):
+    atom = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom'>
+      <entry>
+        <id>https://arxiv.org/abs/2605.00001v1</id>
+        <updated>2026-05-11T00:00:00Z</updated>
+        <published>2026-05-11T00:00:00Z</published>
+        <title> A daily batch paper </title>
+        <summary> Result summary. </summary>
+        <author><name>Alice</name></author>
+      </entry>
+    </feed>"""
+    listing = ArxivDailyListing("astro-ph.HE", date(2026, 5, 12), {"2605.00001"}, True)
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", lambda *args, **kwargs: FakeResponse(atom))
+
+    papers = fetch_arxiv_papers(
+        [ArxivCategoryConfig(category="astro-ph.HE", max_results=1)],
+        days_back=30,
+        daily_listings={"astro-ph.HE": listing},
+    )
+
+    assert papers[0].source_batch_date == date(2026, 5, 12)
+
 
 
 def test_arxiv_retries_429(monkeypatch):
@@ -59,10 +89,27 @@ def test_arxiv_retries_429(monkeypatch):
     monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", get)
     monkeypatch.setattr("astro_daily.sources.arxiv.time.sleep", lambda seconds: None)
 
-    papers = fetch_arxiv_papers([ArxivCategoryConfig(category="astro-ph.HE", max_results=1)], days_back=10)
+    papers = fetch_arxiv_papers([ArxivCategoryConfig(category="astro-ph.HE", max_results=1)], days_back=30)
 
     assert len(calls) == 2
     assert papers[0].paper_id == "2605.00002"
+
+
+
+def test_arxiv_daily_listing_parser_extracts_date_and_ids():
+    html = """
+    <html><body>
+      <h3>New submissions for Tue, 12 May 2026</h3>
+      <a href="/abs/2605.10411v1">arXiv:2605.10411</a>
+      <a href="/abs/2605.10559">arXiv:2605.10559</a>
+    </body></html>
+    """
+
+    listing = parse_arxiv_daily_listing("astro-ph.HE", html)
+
+    assert listing.available
+    assert listing.listing_date.isoformat() == "2026-05-12"
+    assert listing.paper_ids == {"2605.10411", "2605.10559"}
 
 
 
@@ -81,3 +128,4 @@ def test_rss_parser(monkeypatch):
     papers = fetch_rss_papers([RssFeedConfig(name="Nature", url="https://example.com/rss")], max_entries_per_feed=10)
     assert papers[0].source == "Nature"
     assert papers[0].title == "Cosmic-ray detection"
+    assert papers[0].published == datetime(2026, 5, 2, tzinfo=timezone.utc)

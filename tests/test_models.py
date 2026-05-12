@@ -19,6 +19,32 @@ def test_iact_keywords_are_priority_topics():
     assert paper.is_priority_topic
 
 
+def test_astrophysical_neutrino_paper_is_priority_topic():
+    paper = Paper(
+        paper_id="nu",
+        title="IceCube neutrino emission from a cosmic-ray source candidate",
+        abstract="We model hadronic emission from an AGN as a multimessenger high-energy neutrino source.",
+        url="https://example.com/nu",
+        source="arXiv",
+        category="astro-ph.GA",
+    )
+    assert paper.is_priority_topic
+
+
+
+def test_unrelated_neutrino_paper_is_not_priority_topic():
+    paper = Paper(
+        paper_id="nu-osc",
+        title="Neutrino oscillation parameter constraints",
+        abstract="A reactor neutrino analysis of mixing angles and mass ordering.",
+        url="https://example.com/nu-osc",
+        source="arXiv",
+        category="hep-ex",
+    )
+    assert not paper.is_priority_topic
+
+
+
 def test_unrelated_non_he_paper_is_not_priority_topic():
     paper = Paper(
         paper_id="co",

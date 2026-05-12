@@ -1,4 +1,7 @@
-from astro_daily.llm import _parse_json_text
+from datetime import date, datetime, timezone
+
+from astro_daily.llm import _paper_for_prompt, _parse_json_text
+from astro_daily.models import Paper
 
 
 def test_parse_json_repairs_unescaped_latex_backslashes():
@@ -13,3 +16,35 @@ def test_parse_json_keeps_structural_quote_escapes():
     data = _parse_json_text('{"value": "他说：\\"ok\\""}')
 
     assert data["value"] == '他说："ok"'
+
+
+def test_parse_json_repairs_raw_newlines_inside_strings():
+    data = _parse_json_text('{"value": "第一段\n第二段"}')
+
+    assert data["value"] == "第一段\n第二段"
+
+
+def test_parse_json_repairs_trailing_commas():
+    data = _parse_json_text('{"items": ["a", "b",],}')
+
+    assert data == {"items": ["a", "b"]}
+
+
+
+def test_paper_prompt_includes_update_and_source_batch_dates():
+    paper = Paper(
+        paper_id="2605.10559",
+        title="Neutrino source",
+        url="https://arxiv.org/abs/2605.10559v1",
+        source="arXiv",
+        category="astro-ph.HE",
+        published=datetime(2026, 5, 11, tzinfo=timezone.utc),
+        updated=datetime(2026, 5, 11, tzinfo=timezone.utc),
+        source_batch_date=date(2026, 5, 12),
+    )
+
+    payload = _paper_for_prompt(paper)
+
+    assert payload["published"] == "2026-05-11T00:00:00+00:00"
+    assert payload["updated"] == "2026-05-11T00:00:00+00:00"
+    assert payload["source_batch_date"] == "2026-05-12"

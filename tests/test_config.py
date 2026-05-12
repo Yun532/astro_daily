@@ -21,6 +21,7 @@ wechat:
 """.strip(),
         encoding="utf-8",
     )
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.setenv("ANTHROPIC_BASE_URL", "http://127.0.0.1:8317")
     monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "token")
     monkeypatch.setenv("ANTHROPIC_MODEL", "gpt-5.5")

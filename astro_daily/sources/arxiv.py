@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from dataclasses import dataclass
+from datetime import date, datetime, timedelta, timezone
+import re
 import time
 from email.utils import parsedate_to_datetime
 from time import struct_time
@@ -14,6 +16,59 @@ from astro_daily.config import ArxivCategoryConfig
 from astro_daily.models import Paper
 
 ARXIV_API_URL = "https://export.arxiv.org/api/query"
+ARXIV_LIST_URL = "https://arxiv.org/list/{category}/new"
+ARXIV_LISTING_DATE_RE = re.compile(r"(?:New submissions for|Showing new listings for)\s+([^<]+)", re.IGNORECASE)
+ARXIV_LISTING_DAY_RE = re.compile(r"(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})")
+ARXIV_ABS_ID_RE = re.compile(r"/abs/([\w.\-/]+)")
+MONTHS = {
+    "january": 1,
+    "february": 2,
+    "march": 3,
+    "april": 4,
+    "may": 5,
+    "june": 6,
+    "july": 7,
+    "august": 8,
+    "september": 9,
+    "october": 10,
+    "november": 11,
+    "december": 12,
+}
+
+
+@dataclass(frozen=True)
+class ArxivDailyListing:
+    category: str
+    listing_date: date | None
+    paper_ids: set[str]
+    available: bool
+
+
+def fetch_arxiv_daily_listing(category: str, *, timeout: int = 30) -> ArxivDailyListing:
+    response = requests.get(ARXIV_LIST_URL.format(category=category), timeout=timeout)
+    response.raise_for_status()
+    return parse_arxiv_daily_listing(category, response.text)
+
+
+def parse_arxiv_daily_listing(category: str, html: str) -> ArxivDailyListing:
+    date_match = ARXIV_LISTING_DATE_RE.search(html)
+    listing_date = _parse_listing_date(date_match.group(1)) if date_match else None
+    paper_ids = {_normalize_arxiv_id(match.group(1)) for match in ARXIV_ABS_ID_RE.finditer(html)}
+    return ArxivDailyListing(
+        category=category,
+        listing_date=listing_date,
+        paper_ids=paper_ids,
+        available=listing_date is not None and bool(paper_ids),
+    )
+
+
+def annotate_arxiv_batch(papers: list[Paper], listing: ArxivDailyListing) -> list[Paper]:
+    if not listing.available or listing.listing_date is None:
+        return papers
+    for paper in papers:
+        if paper.source == "arXiv" and paper.category == listing.category and paper.paper_id in listing.paper_ids:
+            paper.source_batch_date = listing.listing_date
+    return papers
 
 
 def fetch_arxiv_papers(
@@ -21,6 +76,7 @@ def fetch_arxiv_papers(
     *,
     days_back: int,
     timeout: int = 30,
+    daily_listings: dict[str, ArxivDailyListing] | None = None,
 ) -> list[Paper]:
     papers: list[Paper] = []
     cutoff = datetime.now(timezone.utc) - timedelta(days=days_back)
@@ -36,6 +92,9 @@ def fetch_arxiv_papers(
         feed = feedparser.parse(response.content)
         for entry in feed.entries:
             paper = _entry_to_paper(entry, item.category)
+            listing = (daily_listings or {}).get(item.category)
+            if listing and listing.available and listing.listing_date is not None and paper.paper_id in listing.paper_ids:
+                paper.source_batch_date = listing.listing_date
             if paper.published and paper.published < cutoff:
                 continue
             papers.append(paper)
@@ -102,6 +161,20 @@ def _parse_entry_datetime(parsed: struct_time | None, raw: str | None) -> dateti
         except (TypeError, ValueError):
             return None
     return None
+
+
+def _parse_listing_date(raw: str) -> date | None:
+    text = raw.strip()
+    day_match = ARXIV_LISTING_DAY_RE.search(text)
+    if day_match:
+        day, month_name, year = day_match.groups()
+        month = MONTHS.get(month_name.casefold())
+        if month is not None:
+            return date(int(year), month, int(day))
+    try:
+        return parsedate_to_datetime(text).date()
+    except (TypeError, ValueError):
+        return None
 
 
 def _get(entry: object, key: str) -> str:

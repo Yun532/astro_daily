@@ -5,6 +5,7 @@ import time
 from typing import Any
 
 import anthropic
+import requests
 
 from astro_daily.config import Settings
 from src.clawbot_client import ClawBotMessage, load_clawbot_account, poll_clawbot_once, send_clawbot_text
@@ -75,7 +76,12 @@ def run_clawbot_chat_loop(settings: Settings, *, poll_interval: float = 2.0, dry
     account = load_clawbot_account(settings)
     print("ClawBot chat listener started")
     while True:
-        messages = poll_clawbot_once(settings)
+        try:
+            messages = poll_clawbot_once(settings)
+        except requests.RequestException as exc:
+            logger.warning("ClawBot polling failed; will retry: %s", exc)
+            time.sleep(poll_interval)
+            continue
         for message in messages:
             reply_to_clawbot_message(settings, account, responder, message, dry_run=dry_run)
         time.sleep(poll_interval)

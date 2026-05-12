@@ -119,3 +119,36 @@ def test_report_renders_weekend_classic_lessons_when_no_papers():
     assert "避免编造图片链接" in report
     assert "GRB afterglow fireball model" in report
     assert "今天没有论文通过推荐阈值" not in report
+    assert "补充推荐" not in report
+
+
+def test_report_renders_supplemental_papers_as_non_daily_recommendations():
+    paper = Paper(paper_id="old", title="Important older pulsar paper", url="https://example.com/old", source="arXiv", category="astro-ph.HE")
+    supplemental = ScoredPaper(
+        paper=paper,
+        score=PaperScore(novelty_score=7, importance_score=8, relevance_to_me=8, final_score=8.0, keep=True, reason="重要基础工作"),
+        summary=PaperSummary(
+            paper_id="old",
+            title_cn="重要的旧脉冲星论文",
+            summary_cn="这篇论文值得补读。",
+            why_important_cn="它是相关方向的重要基础。",
+            value_cn="对理论和观测都有价值。",
+            why_care_cn="值得作为背景阅读。",
+        ),
+    )
+
+    report = render_report(
+        run_date=date(2026, 5, 8),
+        title_prefix="Astro Daily",
+        scored_papers=[],
+        supplemental_papers=[supplemental],
+        source_errors=[],
+        dry_run=False,
+    )
+
+    assert "今日保留论文数：0" in report
+    assert "补充推荐论文数：1" in report
+    assert "今天有论文更新，但没有论文通过常规推荐阈值" in report
+    assert "补充推荐：近期/较早未读论文（非今日论文）" in report
+    assert "类型：补充推荐（近期/较早未读，非今日每日论文）" in report
+    assert "高能天体物理重点" not in report

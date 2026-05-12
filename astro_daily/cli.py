@@ -6,7 +6,7 @@ import sys
 from datetime import date
 
 from astro_daily.config import load_settings
-from astro_daily.pipeline import fetch_all_sources, run_pipeline
+from astro_daily.pipeline import DEFERRED_RETRY_EXIT_CODE, DeferredRetryNeeded, fetch_all_sources, run_pipeline
 from src.clawbot_chat import run_clawbot_chat_loop, run_clawbot_chat_once
 from src.clawbot_client import poll_clawbot_once
 from src.push_clawbot import send_clawbot_report_message
@@ -22,12 +22,19 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "run":
             run_date = date.fromisoformat(args.date) if args.date else None
-            result = run_pipeline(config_path=args.config, run_date=run_date, dry_run=args.dry_run, ignore_seen=args.ignore_seen)
+            result = run_pipeline(
+                config_path=args.config,
+                run_date=run_date,
+                dry_run=args.dry_run,
+                ignore_seen=args.ignore_seen,
+                defer_if_unfresh=args.defer_if_unfresh,
+                final_attempt=args.final_attempt,
+            )
             print(f"Report: {result.report_path}")
             print(f"HTML report: {result.html_report_path}")
             if result.published_url:
                 print(f"Published URL: {result.published_url}")
-            print(f"Fetched unique: {result.fetched_count}; new: {result.new_count}; kept: {result.kept_count}; classic lessons: {result.classic_lesson_count}")
+            print(f"Fetched unique: {result.fetched_count}; new: {result.new_count}; kept: {result.kept_count}; supplemental: {result.supplemental_count}; classic lessons: {result.classic_lesson_count}")
             print(f"WeChat selected: {result.wechat_selected_count}; HE: {result.wechat_he_count}; length: {len(result.wechat_message)}")
             print("WeChat preview:")
             print(result.wechat_message)
@@ -73,6 +80,10 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         parser.print_help()
         return 1
+    except DeferredRetryNeeded as exc:
+        logging.getLogger(__name__).warning("Deferred retry requested: %s", exc)
+        print(f"Deferred retry requested: {exc}")
+        return DEFERRED_RETRY_EXIT_CODE
     except Exception as exc:
         logging.getLogger(__name__).error("%s", exc)
         return 1
@@ -88,6 +99,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--date", help="Override report date, YYYY-MM-DD")
     run.add_argument("--dry-run", action="store_true", help="Do not update seen_papers.json or send WeChat push")
     run.add_argument("--ignore-seen", action="store_true", help="Ignore seen_papers.json when re-testing a historical date")
+    run.add_argument("--defer-if-unfresh", action="store_true", help="Exit with retry code before publishing if weekday arXiv freshness is unreliable")
+    run.add_argument("--final-attempt", action="store_true", help="Bypass freshness deferral and publish the best available result")
 
     test_fetch = subparsers.add_parser("test-fetch", help="Fetch and parse configured sources without LLM calls")
     test_fetch.add_argument("--config", default="config.yaml")
