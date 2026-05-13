@@ -30,12 +30,23 @@ def compress_weekend_lessons(lessons: list[WeekendLesson], date: str, report_url
         "",
     ]
     for index, lesson in enumerate(lessons[:3], start=1):
-        lines.extend([
-            f"{index}. **{lesson.title_cn}**",
-            f"主题：{lesson.topic}",
-            f"经典性：{_trim(lesson.why_classic_cn, 120)}",
-            "",
-        ])
+        metadata_lines = [
+            line
+            for line in [
+                f"系列：{_lesson_series_label(lesson)}" if _lesson_series_label(lesson) else "",
+                f"本讲边界：{_trim(lesson.lesson_scope_cn, 90)}" if lesson.lesson_scope_cn else "",
+            ]
+            if line
+        ]
+        lines.extend(
+            [
+                f"{index}. **{lesson.title_cn}**",
+                *metadata_lines,
+                f"主题：{lesson.topic}",
+                f"经典性：{_trim(lesson.why_classic_cn, 120)}",
+                "",
+            ]
+        )
     lines.append(f"[完整报告]({report_url})")
     text = "\n".join(lines).strip()
     if _byte_len(text) <= MAX_WECOM_BYTES:
@@ -77,33 +88,32 @@ def _render(items: list[Any], date: str, report_url: str, *, short: bool, supple
         lines = [
             f"# 天文日报｜{date}",
             "",
-            f"补充推荐：{len(items)} 篇  ",
+            f"补充推荐：{len(items)} 篇",
             "说明：今天有论文更新，但没有论文通过常规推荐阈值；以下是近期/较早未读论文中的补充推荐，不是今日每日论文。",
-            f"HE：{he} 篇｜仪器：{instrument} 篇｜其他：{other} 篇",
+            f"HE：{he} 篇；仪器：{instrument} 篇；其他：{other} 篇",
             "",
         ]
     else:
         lines = [
             f"# 天文日报｜{date}",
             "",
-            f"今日精选：{len(items)} 篇  ",
-            f"HE：{he} 篇｜仪器：{instrument} 篇｜其他：{other} 篇",
+            f"今日精选：{len(items)} 篇",
+            f"HE：{he} 篇；仪器：{instrument} 篇；其他：{other} 篇",
             "",
         ]
     for index, item in enumerate(items, start=1):
         paper = _paper(item)
-        summary = getattr(item, "summary", None)
-        lines.extend([
-            f"{index}. **{paper.title}**",
-        ])
+        lines.append(f"{index}. **{paper.title}**")
         if supplemental:
             lines.append("类型：补充推荐（非今日每日论文）")
-        lines.extend([
-            f"一段话：{_summary_text(item, short=short)}",
-            f"重要性：{_importance_text(item, short=short)}",
-            f"[阅读全文]({paper.url})",
-            "",
-        ])
+        lines.extend(
+            [
+                f"一段话：{_summary_text(item, short=short)}",
+                f"重要性：{_importance_text(item, short=short)}",
+                f"[阅读全文]({paper.url})",
+                "",
+            ]
+        )
     lines.append(f"[完整报告]({report_url})")
     return "\n".join(lines).strip()
 
@@ -111,7 +121,6 @@ def _render(items: list[Any], date: str, report_url: str, *, short: bool, supple
 def _summary_text(item: Any, *, short: bool) -> str:
     summary = getattr(item, "summary", None)
     paper = _paper(item)
-    text = ""
     if summary and getattr(summary, "summary_cn", ""):
         text = summary.summary_cn
     else:
@@ -122,7 +131,6 @@ def _summary_text(item: Any, *, short: bool) -> str:
 def _importance_text(item: Any, *, short: bool) -> str:
     summary = getattr(item, "summary", None)
     reason = getattr(getattr(item, "score", None), "reason", "")
-    text = ""
     if summary and getattr(summary, "why_important_cn", ""):
         text = summary.why_important_cn
     else:
@@ -139,17 +147,28 @@ def _fit_bytes(text: str, byte_limit: int) -> str:
         return text
     result = ""
     for character in text:
-        if _byte_len(result + character + "…") > byte_limit:
+        if _byte_len(result + character + "...") > byte_limit:
             break
         result += character
-    return result.rstrip("，。；、 \n") + "…"
+    return result.rstrip("，。；、 ,.;\n") + "..."
 
 
 def _trim(text: str, limit: int) -> str:
     normalized = " ".join(str(text).split())
     if len(normalized) <= limit:
         return normalized
-    return normalized[: limit - 1].rstrip("，。；、 ") + "…"
+    return normalized[: limit - 3].rstrip("，。；、 ,.;") + "..."
+
+
+def _lesson_series_label(lesson: WeekendLesson) -> str:
+    title = lesson.series_title_cn or lesson.series_id
+    if not title:
+        return ""
+    if lesson.part_index and lesson.planned_parts:
+        return f"{title}（第 {lesson.part_index}/{lesson.planned_parts} 讲）"
+    if lesson.part_index:
+        return f"{title}（第 {lesson.part_index} 讲）"
+    return title
 
 
 def _paper(item: Any) -> Paper:

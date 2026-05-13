@@ -44,15 +44,16 @@ def render_report(
     weekend_lessons: list[WeekendLesson] | None = None,
     supplemental_papers: list[ScoredPaper] | None = None,
 ) -> str:
-    title = f"# {title_prefix} {run_date.isoformat()}"
-    lines = [title, ""]
+    lines = [f"# {title_prefix} {run_date.isoformat()}", ""]
     if dry_run:
         lines.extend(["> Dry-run：本次不会推送微信，也不会更新 seen_papers.json。", ""])
     supplemental_papers = supplemental_papers or []
-    lines.extend([
-        f"生成时间：{datetime.now().astimezone().isoformat(timespec='seconds')}",
-        f"今日保留论文数：{len(scored_papers)}",
-    ])
+    lines.extend(
+        [
+            f"生成时间：{datetime.now().astimezone().isoformat(timespec='seconds')}",
+            f"今日保留论文数：{len(scored_papers)}",
+        ]
+    )
     if supplemental_papers:
         lines.append(f"补充推荐论文数：{len(supplemental_papers)}")
     lines.append("")
@@ -66,34 +67,40 @@ def render_report(
         elif supplemental_papers:
             _append_supplemental_papers(lines, supplemental_papers)
         else:
-            lines.extend([
-                "## 今日结论",
-                "",
-                "今天没有论文通过推荐阈值。不是没有新论文，而是没有看到足够值得优先阅读的结果。",
-                "",
-            ])
+            lines.extend(
+                [
+                    "## 今日结论",
+                    "",
+                    "今天没有论文通过推荐阈值。",
+                    "",
+                ]
+            )
         return "\n".join(lines).strip() + "\n"
 
     he = [item for item in scored_papers if item.paper.is_priority_topic]
     non_he = [item for item in scored_papers if not item.paper.is_priority_topic]
     _append_section(lines, "高能天体物理重点", he)
     _append_section(lines, "相关但非 HE 的重要论文", non_he)
-    lines.extend([
-        "## 说明",
-        "",
-        "评分由 LLM 给出初评，再由本地阈值策略过滤；IACT / 大气切伦科夫望远镜相关论文按 HE 同等优先级处理，其他非 HE 论文需要明显关联高能天文、宇宙线、伽马射线或仪器/方法价值才会保留。",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 说明",
+            "",
+            "评分由 LLM 给出初评，再由本地阈值策略过滤；IACT、TeV 伽马射线和高能中微子天文学按重点方向处理。",
+            "",
+        ]
+    )
     return "\n".join(lines).strip() + "\n"
 
 
 def _append_supplemental_papers(lines: list[str], papers: list[ScoredPaper]) -> None:
-    lines.extend([
-        "## 今日结论",
-        "",
-        f"今天有论文更新，但没有论文通过常规推荐阈值。以下 {len(papers)} 篇是近期/较早未读论文中的补充推荐，不是今日每日论文。",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 今日结论",
+            "",
+            f"今天有论文更新，但没有论文通过常规推荐阈值。以下 {len(papers)} 篇是近期/较早未读论文中的补充推荐，不是今日每日论文。",
+            "",
+        ]
+    )
     _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", papers, supplemental=True)
 
 
@@ -105,158 +112,193 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, 
         paper = item.paper
         score = item.score
         summary = item.summary
-        lines.extend([
-            f"### {index}. {paper.title}",
-            "",
-            f"- 来源：{paper.source}" + (f" / {paper.category}" if paper.category else ""),
-            f"- 链接：{paper.url}",
-            f"- 作者：{', '.join(paper.authors[:8]) if paper.authors else '未知'}",
-        ])
+        lines.extend(
+            [
+                f"### {index}. {paper.title}",
+                "",
+                f"- 来源：{paper.source}" + (f" / {paper.category}" if paper.category else ""),
+                f"- 链接：{paper.url}",
+                f"- 作者：{', '.join(paper.authors[:8]) if paper.authors else '未知'}",
+            ]
+        )
         if supplemental:
             lines.append("- 类型：补充推荐（近期/较早未读，非今日每日论文）")
-        lines.extend([
-            f"- 评分：novelty {score.novelty_score}/10，importance {score.importance_score}/10，relevance {score.relevance_to_me}/10，final {score.final_score:.2f}/10",
-            f"- 推荐理由：{score.reason}",
-            "",
-        ])
+        lines.extend(
+            [
+                f"- 评分：novelty {score.novelty_score}/10，importance {score.importance_score}/10，relevance {score.relevance_to_me}/10，final {score.final_score:.2f}/10",
+                f"- 推荐理由：{score.reason}",
+                "",
+            ]
+        )
         if summary:
-            lines.extend([
-                f"**中文题目**：{summary.title_cn}",
-                "",
-                f"**做了什么**：{summary.summary_cn}",
-                "",
-                f"**为什么重要**：{summary.why_important_cn}",
-                "",
-                f"**理论 / 观测 / 仪器方法价值**：{summary.value_cn}",
-                "",
-                f"**为什么应该关注**：{summary.why_care_cn}",
-                "",
-                "<details class=\"paper-detail\" markdown=\"1\">",
-                "<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>",
-                "",
-                "#### 文章详细讲解",
-                "",
-                summary.detailed_explanation_cn or "（未提供）",
-                "",
-                "#### 背景知识",
-                "",
-                summary.background_cn or "（未提供）",
-                "",
-                "#### 基础理论 / 方法脉络",
-                "",
-                summary.basic_theory_cn or "（未提供）",
-                "",
-                "#### 公式与推导",
-                "",
-                summary.formula_derivation_cn or "（未提供）",
-                "",
-                "#### 模型拟合 / 应用方法",
-                "",
-                summary.model_fitting_cn or "（未提供）",
-                "",
-                "#### 重点章节 / 结果段落怎么读",
-                "",
-                summary.key_sections_cn or "（未提供）",
-                "",
-                "#### 建议重点查看的图表",
-                "",
-                summary.figures_to_check_cn or "（未提供）",
-                "",
-                "#### 关键图表逐图导读",
-                "",
-                summary.key_figure_analysis_cn or "（未提供）",
-                "",
-                "#### 论文原图 / 可嵌入图片",
-                "",
-                *_extracted_figure_lines(summary.extracted_figures, summary.figure_image_urls),
-                "",
-                "#### 强相关工作",
-                "",
-                summary.related_work_cn or "（未提供）",
-                "",
-                "**相似工作**：",
-                *_link_lines(summary.similar_work_links),
-                "",
-                "**基础理论 / 方法工作**：",
-                *_link_lines(summary.foundational_work_links),
-                "",
-                "**相反观点 / 张力线索**：",
-                *_link_lines(summary.tension_or_opposing_links),
-                "",
-                "</details>",
-                "",
-            ])
+            lines.extend(
+                [
+                    f"**中文题目**：{summary.title_cn}",
+                    "",
+                    f"**做了什么**：{summary.summary_cn}",
+                    "",
+                    f"**为什么重要**：{summary.why_important_cn}",
+                    "",
+                    f"**理论 / 观测 / 仪器方法价值**：{summary.value_cn}",
+                    "",
+                    f"**为什么应该关注**：{summary.why_care_cn}",
+                    "",
+                    '<details class="paper-detail" markdown="1">',
+                    "<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>",
+                    "",
+                    "#### 文章详细讲解",
+                    "",
+                    summary.detailed_explanation_cn or "(Not provided)",
+                    "",
+                    "#### 背景知识",
+                    "",
+                    summary.background_cn or "(Not provided)",
+                    "",
+                    "#### 基础理论 / 方法脉络",
+                    "",
+                    summary.basic_theory_cn or "(Not provided)",
+                    "",
+                    "#### 公式与推导",
+                    "",
+                    summary.formula_derivation_cn or "(Not provided)",
+                    "",
+                    "#### 模型拟合 / 应用方法",
+                    "",
+                    summary.model_fitting_cn or "(Not provided)",
+                    "",
+                    "#### 重点章节 / 结果段落怎么读",
+                    "",
+                    summary.key_sections_cn or "(Not provided)",
+                    "",
+                    "#### 建议重点查看的图表",
+                    "",
+                    summary.figures_to_check_cn or "(Not provided)",
+                    "",
+                    "#### 关键图表逐图导读",
+                    "",
+                    summary.key_figure_analysis_cn or "(Not provided)",
+                    "",
+                    "#### 论文原图 / 可嵌入图片",
+                    "",
+                    *_extracted_figure_lines(summary.extracted_figures, summary.figure_image_urls),
+                    "",
+                    "#### 强相关工作",
+                    "",
+                    summary.related_work_cn or "(Not provided)",
+                    "",
+                    "**相似工作**：",
+                    *_link_lines(summary.similar_work_links),
+                    "",
+                    "**基础理论 / 方法工作**：",
+                    *_link_lines(summary.foundational_work_links),
+                    "",
+                    "**相反观点 / 张力线索**：",
+                    *_link_lines(summary.tension_or_opposing_links),
+                    "",
+                    "</details>",
+                    "",
+                ]
+            )
         else:
             lines.extend(["中文总结生成失败，请直接查看原文。", ""])
 
 
 def _append_weekend_lessons(lines: list[str], lessons: list[WeekendLesson]) -> None:
-    lines.extend([
-        "## 周末经典专题课",
-        "",
-        "周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。",
-        "",
-    ])
+    lines.extend(
+        [
+            "## 周末经典专题课",
+            "",
+            "周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。",
+            "",
+        ]
+    )
     for index, lesson in enumerate(lessons, start=1):
-        lines.extend([
-            f"### {index}. {lesson.title_cn}",
-            "",
-            f"- 主题：{lesson.topic}",
-            f"- 经典工作：{lesson.anchor_work_cn}",
-            f"- 为什么经典：{lesson.why_classic_cn}",
-            "",
-            "<details class=\"paper-detail\" markdown=\"1\">",
-            "<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>",
-            "",
-            "#### 经典工作详细讲解",
-            "",
-            lesson.detailed_explanation_cn,
-            "",
-            "#### 背景知识",
-            "",
-            lesson.background_cn,
-            "",
-            "#### 基础理论 / 方法脉络",
-            "",
-            lesson.basic_theory_cn,
-            "",
-            "#### 公式与推导",
-            "",
-            lesson.formula_derivation_cn,
-            "",
-            "#### 经典拟合 / 应用方法",
-            "",
-            lesson.model_fitting_cn,
-            "",
-            "#### 重点章节 / 结果段落怎么读",
-            "",
-            lesson.key_sections_cn,
-            "",
-            "#### 建议重点查看的图表",
-            "",
-            lesson.figures_to_check_cn,
-            "",
-            "#### 关键图表逐图导读",
-            "",
-            lesson.key_figure_analysis_cn,
-            "",
-            "#### 可嵌入的官方图片",
-            "",
-            *_image_lines(lesson.figure_image_urls),
-            "",
-            "#### 后续阅读路径",
-            "",
-            lesson.followup_reading_cn,
-            "",
-            "**检索关键词**：",
-            *_link_lines(lesson.search_keywords),
-            "",
-            "**确信的公开链接**：",
-            *_link_lines(lesson.links),
-            "",
-            "</details>",
-            "",
-        ])
+        metadata_lines = [
+            line
+            for line in [
+                f"- 课程系列：{_lesson_series_label(lesson)}" if _lesson_series_label(lesson) else "",
+                f"- 本讲边界：{lesson.lesson_scope_cn}" if lesson.lesson_scope_cn else "",
+                f"- 上下文承接：{lesson.previous_context_cn}" if lesson.previous_context_cn else "",
+            ]
+            if line
+        ]
+        lines.extend(
+            [
+                f"### {index}. {lesson.title_cn}",
+                "",
+                *metadata_lines,
+                f"- 主题：{lesson.topic}",
+                f"- 经典工作：{lesson.anchor_work_cn}",
+                f"- 为什么经典：{lesson.why_classic_cn}",
+                "",
+                '<details class="paper-detail" markdown="1">',
+                "<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>",
+                "",
+                "#### 经典工作详细讲解",
+                "",
+                lesson.detailed_explanation_cn,
+                "",
+                "#### 背景知识",
+                "",
+                lesson.background_cn,
+                "",
+                "#### 基础理论 / 方法脉络",
+                "",
+                lesson.basic_theory_cn,
+                "",
+                "#### 公式与推导",
+                "",
+                lesson.formula_derivation_cn,
+                "",
+                "#### 经典拟合 / 应用方法",
+                "",
+                lesson.model_fitting_cn,
+                "",
+                "#### 重点章节 / 结果段落怎么读",
+                "",
+                lesson.key_sections_cn,
+                "",
+                "#### 建议重点查看的图表",
+                "",
+                lesson.figures_to_check_cn,
+                "",
+                "#### 关键图表逐图导读",
+                "",
+                lesson.key_figure_analysis_cn,
+                "",
+                "#### 可嵌入的官方图片",
+                "",
+                *_image_lines(lesson.figure_image_urls),
+                "",
+                "#### 后续阅读路径",
+                "",
+                lesson.followup_reading_cn,
+                "",
+                "#### 下一讲建议",
+                "",
+                lesson.next_lesson_suggestions_cn or "(Not provided)",
+                "",
+                "**检索关键词**：",
+                *_link_lines(lesson.search_keywords),
+                "",
+                "**确信的公开链接**：",
+                *_link_lines(lesson.links),
+                "",
+                "</details>",
+                "",
+            ]
+        )
+
+
+def _lesson_series_label(lesson: WeekendLesson) -> str:
+    title = lesson.series_title_cn or lesson.series_id
+    if not title:
+        return ""
+    if lesson.part_index and lesson.planned_parts:
+        return f"{title}（第 {lesson.part_index}/{lesson.planned_parts} 讲）"
+    if lesson.part_index:
+        return f"{title}（第 {lesson.part_index} 讲）"
+    return title
 
 
 def _extracted_figure_lines(figures: list[ExtractedFigure], fallback_urls: list[str]) -> list[str]:

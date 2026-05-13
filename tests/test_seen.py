@@ -13,6 +13,12 @@ def lesson(title: str = "经典课程", anchor: str = "classic anchor") -> Weeke
         topic="GRB afterglow",
         title_cn=title,
         anchor_work_cn=anchor,
+        series_id="grb-afterglow",
+        series_title_cn="GRB afterglow course",
+        part_index=1,
+        planned_parts=3,
+        lesson_scope_cn="Blast-wave dynamics",
+        previous_context_cn="First part of the series",
         why_classic_cn="经典原因。",
         detailed_explanation_cn="详细解释。",
         background_cn="背景。",
@@ -63,5 +69,28 @@ def test_mark_lessons_and_history(tmp_path):
             "title": "经典课程",
             "topic": "GRB afterglow",
             "anchor_work": "classic anchor",
+            "series_id": "grb-afterglow",
+            "series_title": "GRB afterglow course",
+            "part_index": "1",
+            "planned_parts": "3",
+            "lesson_scope": "Blast-wave dynamics",
+        }
+    ]
+
+
+def test_weekend_history_keeps_legacy_records_compact(tmp_path):
+    path = tmp_path / "seen.json"
+    path.write_text(
+        '{"lesson:title:old": {"type": "weekend_lesson", "title": "old", "topic": "GRB", "anchor_work": "anchor", "first_seen": "2026-05-01"}}',
+        encoding="utf-8",
+    )
+
+    loaded = SeenStore.load(path)
+
+    assert loaded.weekend_lesson_history() == [
+        {
+            "title": "old",
+            "topic": "GRB",
+            "anchor_work": "anchor",
         }
     ]

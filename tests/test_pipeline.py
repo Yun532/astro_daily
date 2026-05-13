@@ -1,4 +1,5 @@
 from datetime import date, datetime, timezone
+import json
 
 import pytest
 
@@ -69,6 +70,12 @@ def make_lesson(title="经典 GRB 余辉课程", anchor="Blandford-McKee self-si
     )
 
 
+def read_run_log(tmp_path):
+    logs = sorted((tmp_path / "logs").glob("pipeline-*.jsonl"))
+    assert logs
+    return [json.loads(line) for line in logs[-1].read_text(encoding="utf-8").splitlines()]
+
+
 def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
     settings.scoring.max_candidates = 45
@@ -119,6 +126,160 @@ def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
 
 
 
+def test_successful_run_writes_stage_log_with_threshold_count(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    paper = make_paper("2605.10001").model_copy(update={"source_batch_date": date(2026, 5, 12), "title": "Logged threshold paper"})
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="important",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn="标题",
+                    summary_cn="总结",
+                    why_important_cn="重要",
+                    value_cn="价值",
+                    why_care_cn="关注",
+                )
+                for paper in papers
+            ]
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([paper], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
+    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
+
+    run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=True, ignore_seen=True)
+
+    records = read_run_log(tmp_path)
+    apply_end = next(record for record in records if record["stage"] == "apply_policy" and record["event"] == "end")
+    assert apply_end["data"]["regular_threshold_passing_count"] == 1
+    assert apply_end["data"]["selected_papers"][0]["title"] == "Logged threshold paper"
+    assert apply_end["data"]["selected_papers"][0]["source_batch_date"] == "2026-05-12"
+    assert any(record["stage"] == "fetch_sources" and record["event"] == "end" for record in records)
+    assert any(record["stage"] == "seen_update" and record["event"] == "end" and record["data"]["updated"] is False for record in records)
+
+
+
+def test_failed_run_writes_error_stage_log(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    paper = make_paper("2605.10002").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="important",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, *_args, **_kwargs):
+            raise RuntimeError("summary json broke")
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([paper], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+
+    with pytest.raises(RuntimeError, match="summary json broke"):
+        run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=True, ignore_seen=True)
+
+    records = read_run_log(tmp_path)
+    error = next(record for record in records if record["stage"] == "summaries_and_figures" and record["event"] == "error")
+    assert error["data"]["error_type"] == "RuntimeError"
+    assert error["data"]["error_message"] == "summary json broke"
+
+
+
+def test_parallel_figure_extraction_starts_before_summary(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.figure_extraction.enabled = True
+    paper = make_paper("2605.10003").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+    extraction_started = False
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="important",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            assert extraction_started
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn="标题",
+                    summary_cn="总结",
+                    why_important_cn="重要",
+                    value_cn="价值",
+                    why_care_cn="关注",
+                )
+                for paper in papers
+            ]
+
+        def select_figures_for_paper(self, **_kwargs):
+            return []
+
+    def fake_extract(*_args, **_kwargs):
+        nonlocal extraction_started
+        extraction_started = True
+        return []
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([paper], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.extract_figures_for_item", fake_extract)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
+    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
+
+    run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=True, ignore_seen=True)
+
+    records = read_run_log(tmp_path)
+    summary_end = next(record for record in records if record["stage"] == "summaries_and_figures" and record["event"] == "end")
+    assert summary_end["data"]["figure_attempted"] == 1
+
+
+
+def test_weekend_run_scores_no_candidates(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
     score_called = False
 

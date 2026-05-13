@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+import hashlib
+from pathlib import Path
 import re
 import time
 from email.utils import parsedate_to_datetime
@@ -20,6 +22,8 @@ ARXIV_LIST_URL = "https://arxiv.org/list/{category}/new"
 ARXIV_LISTING_DATE_RE = re.compile(r"(?:New submissions for|Showing new listings for)\s+([^<]+)", re.IGNORECASE)
 ARXIV_LISTING_DAY_RE = re.compile(r"(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})")
 ARXIV_ABS_ID_RE = re.compile(r"/abs/([\w.\-/]+)")
+ARXIV_SECTION_RE = re.compile(r"<h3[^>]*>(.*?)</h3>", re.IGNORECASE | re.DOTALL)
+HTML_TAG_RE = re.compile(r"<[^>]+>")
 MONTHS = {
     "january": 1,
     "february": 2,
@@ -53,13 +57,35 @@ def fetch_arxiv_daily_listing(category: str, *, timeout: int = 30) -> ArxivDaily
 def parse_arxiv_daily_listing(category: str, html: str) -> ArxivDailyListing:
     date_match = ARXIV_LISTING_DATE_RE.search(html)
     listing_date = _parse_listing_date(date_match.group(1)) if date_match else None
-    paper_ids = {_normalize_arxiv_id(match.group(1)) for match in ARXIV_ABS_ID_RE.finditer(html)}
+    paper_ids = _extract_daily_listing_ids(html)
     return ArxivDailyListing(
         category=category,
         listing_date=listing_date,
         paper_ids=paper_ids,
         available=listing_date is not None and bool(paper_ids),
     )
+
+
+def _extract_daily_listing_ids(html: str) -> set[str]:
+    sections = list(ARXIV_SECTION_RE.finditer(html))
+    if not sections:
+        return {_normalize_arxiv_id(match.group(1)) for match in ARXIV_ABS_ID_RE.finditer(html)}
+    paper_ids: set[str] = set()
+    matched_daily_section = False
+    for index, section in enumerate(sections):
+        title = HTML_TAG_RE.sub("", section.group(1)).strip().casefold()
+        if "replacement submissions" in title:
+            continue
+        if "new submissions" not in title and "cross submissions" not in title:
+            continue
+        matched_daily_section = True
+        end = sections[index + 1].start() if index + 1 < len(sections) else len(html)
+        segment = html[section.end() : end]
+        paper_ids.update(_normalize_arxiv_id(match.group(1)) for match in ARXIV_ABS_ID_RE.finditer(segment))
+    if matched_daily_section:
+        return paper_ids
+    return {_normalize_arxiv_id(match.group(1)) for match in ARXIV_ABS_ID_RE.finditer(html)}
+
 
 
 def annotate_arxiv_batch(papers: list[Paper], listing: ArxivDailyListing) -> list[Paper]:
@@ -77,10 +103,18 @@ def fetch_arxiv_papers(
     days_back: int,
     timeout: int = 30,
     daily_listings: dict[str, ArxivDailyListing] | None = None,
+    request_delay_seconds: float = 0,
+    retry_attempts: int = 3,
+    retry_initial_delay_seconds: float = 3,
+    retry_max_delay_seconds: float = 60,
+    cache_dir: str | Path | None = None,
+    cache_ttl_seconds: float | None = None,
 ) -> list[Paper]:
     papers: list[Paper] = []
     cutoff = datetime.now(timezone.utc) - timedelta(days=days_back)
-    for item in categories:
+    for index, item in enumerate(categories):
+        if index and request_delay_seconds > 0:
+            time.sleep(request_delay_seconds)
         params = {
             "search_query": f"cat:{item.category}",
             "start": 0,
@@ -88,11 +122,20 @@ def fetch_arxiv_papers(
             "sortBy": "submittedDate",
             "sortOrder": "descending",
         }
-        response = _get_with_retry(params, timeout=timeout)
-        feed = feedparser.parse(response.content)
+        listing = (daily_listings or {}).get(item.category)
+        content = _get_cached_or_fetch(
+            params,
+            timeout=timeout,
+            retry_attempts=retry_attempts,
+            retry_initial_delay_seconds=retry_initial_delay_seconds,
+            retry_max_delay_seconds=retry_max_delay_seconds,
+            cache_dir=cache_dir,
+            cache_ttl_seconds=cache_ttl_seconds,
+            cache_context=_listing_cache_context(listing),
+        )
+        feed = feedparser.parse(content)
         for entry in feed.entries:
             paper = _entry_to_paper(entry, item.category)
-            listing = (daily_listings or {}).get(item.category)
             if listing and listing.available and listing.listing_date is not None and paper.paper_id in listing.paper_ids:
                 paper.source_batch_date = listing.listing_date
             if paper.published and paper.published < cutoff:
@@ -101,21 +144,102 @@ def fetch_arxiv_papers(
     return papers
 
 
-def _get_with_retry(params: dict[str, object], *, timeout: int) -> requests.Response:
-    last_error: HTTPError | None = None
-    for attempt in range(3):
-        if attempt:
-            time.sleep(3 * attempt)
-        response = requests.get(ARXIV_API_URL, params=params, timeout=timeout)
+def _get_cached_or_fetch(
+    params: dict[str, object],
+    *,
+    timeout: int,
+    retry_attempts: int,
+    retry_initial_delay_seconds: float,
+    retry_max_delay_seconds: float,
+    cache_dir: str | Path | None,
+    cache_ttl_seconds: float | None,
+    cache_context: str,
+) -> bytes:
+    cache_path = _cache_path(cache_dir, params, cache_context)
+    if cache_path is not None and _cache_is_fresh(cache_path, cache_ttl_seconds):
+        return cache_path.read_bytes()
+    response = _get_with_retry(
+        params,
+        timeout=timeout,
+        retry_attempts=retry_attempts,
+        retry_initial_delay_seconds=retry_initial_delay_seconds,
+        retry_max_delay_seconds=retry_max_delay_seconds,
+    )
+    content = response.content
+    if cache_path is not None:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_bytes(content)
+    return content
+
+
+def _get_with_retry(
+    params: dict[str, object],
+    *,
+    timeout: int,
+    retry_attempts: int,
+    retry_initial_delay_seconds: float,
+    retry_max_delay_seconds: float,
+) -> requests.Response:
+    last_error: Exception | None = None
+    delay = retry_initial_delay_seconds
+    for attempt in range(retry_attempts):
+        if attempt and delay > 0:
+            time.sleep(delay)
+            delay = _next_retry_delay(delay, retry_max_delay_seconds)
         try:
+            response = requests.get(ARXIV_API_URL, params=params, timeout=timeout)
             response.raise_for_status()
             return response
         except HTTPError as exc:
             last_error = exc
-            if response.status_code not in {429, 503}:
+            status_code = getattr(exc.response, "status_code", None) or getattr(locals().get("response", None), "status_code", None)
+            if status_code not in {429, 503}:
                 raise
+            retry_after_delay = _retry_after_delay(getattr(exc.response, "headers", None), retry_max_delay_seconds)
+            if retry_after_delay is not None:
+                delay = retry_after_delay
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            last_error = exc
     raise last_error or RuntimeError("arXiv request failed")
 
+
+
+def _next_retry_delay(current_delay: float, max_delay: float) -> float:
+    if current_delay <= 0:
+        return 0
+    return min(current_delay * 2, max_delay)
+
+
+def _retry_after_delay(headers: object | None, max_delay: float) -> float | None:
+    retry_after = getattr(headers, "get", lambda _key: None)("Retry-After") if headers is not None else None
+    if retry_after is None:
+        return None
+    try:
+        return min(float(retry_after), max_delay)
+    except ValueError:
+        return None
+
+
+def _cache_path(cache_dir: str | Path | None, params: dict[str, object], cache_context: str) -> Path | None:
+    if cache_dir is None:
+        return None
+    cache_key = repr((sorted(params.items()), cache_context)).encode("utf-8")
+    return Path(cache_dir) / f"{hashlib.sha256(cache_key).hexdigest()}.xml"
+
+
+def _cache_is_fresh(cache_path: Path, cache_ttl_seconds: float | None) -> bool:
+    if not cache_path.exists():
+        return False
+    if cache_ttl_seconds is None or cache_ttl_seconds <= 0:
+        return True
+    return time.time() - cache_path.stat().st_mtime <= cache_ttl_seconds
+
+
+def _listing_cache_context(listing: ArxivDailyListing | None) -> str:
+    if listing is None:
+        return "no-listing"
+    ids_digest = hashlib.sha256("\n".join(sorted(listing.paper_ids)).encode("utf-8")).hexdigest()
+    return f"{listing.category}:{listing.listing_date}:{listing.available}:{ids_digest}"
 
 
 def _entry_to_paper(entry: object, category: str) -> Paper:

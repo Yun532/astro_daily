@@ -1,6 +1,13 @@
 sources:
   arxiv:
     days_back: 7
+    api_request_delay_seconds: 6
+    api_retry_attempts: 5
+    api_retry_initial_delay_seconds: 10
+    api_retry_max_delay_seconds: 300
+    api_cache_enabled: true
+    api_cache_dir: .cache/arxiv_api
+    api_cache_ttl_hours: 24
     primary:
       - category: astro-ph.HE
         max_results: 120
@@ -35,7 +42,7 @@ sources:
 
 scoring:
   max_candidates: 120
-  max_papers_per_report: 15
+  max_papers_per_report: 5
   weights:
     novelty: 0.30
     importance: 0.35
@@ -45,9 +52,9 @@ scoring:
   same_day_target: 5
   max_backfill_papers: 5
   thresholds:
-    astro-ph.HE: 5.8
-    non_he: 7.2
-  non_he_min_relevance: 6
+    astro-ph.HE: 7.5
+    non_he: 9.0
+  non_he_min_relevance: 8
   supplemental_papers: 3
   supplemental_max_candidates: 30
   supplemental_min_final_score: 7.0
@@ -83,8 +90,13 @@ figure_extraction:
   asset_dir: docs/assets/figures
   max_figures_per_paper: 6
   max_figure_candidates_per_paper: 12
+  parallel_workers: 3
   dpi: 400
   strict: true
+
+run_log:
+  enabled: true
+  dir: logs
 
 wechat:
   enabled: true

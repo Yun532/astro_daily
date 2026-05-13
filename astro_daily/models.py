@@ -203,6 +203,12 @@ class WeekendLesson(BaseModel):
     topic: str
     title_cn: str
     anchor_work_cn: str
+    series_id: str = ""
+    series_title_cn: str = ""
+    part_index: int | None = Field(default=None, ge=1)
+    planned_parts: int | None = Field(default=None, ge=1)
+    lesson_scope_cn: str = ""
+    previous_context_cn: str = ""
     why_classic_cn: str
     detailed_explanation_cn: str
     background_cn: str
@@ -214,6 +220,7 @@ class WeekendLesson(BaseModel):
     key_figure_analysis_cn: str
     figure_image_urls: list[str] = Field(default_factory=list)
     followup_reading_cn: str
+    next_lesson_suggestions_cn: str = ""
     search_keywords: list[str] = Field(default_factory=list)
     links: list[str] = Field(default_factory=list)
 

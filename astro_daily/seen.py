@@ -59,6 +59,12 @@ class SeenStore:
                 "topic": lesson.topic,
                 "title": lesson.title_cn,
                 "anchor_work": lesson.anchor_work_cn,
+                "series_id": lesson.series_id,
+                "series_title": lesson.series_title_cn,
+                "part_index": lesson.part_index,
+                "planned_parts": lesson.planned_parts,
+                "lesson_scope": lesson.lesson_scope_cn,
+                "next_lesson_suggestions": lesson.next_lesson_suggestions_cn,
                 "first_seen": seen_date.isoformat(),
                 "search_keywords": lesson.search_keywords,
                 "links": lesson.links,
@@ -79,13 +85,19 @@ class SeenStore:
             if not title or title in seen_titles:
                 continue
             seen_titles.add(title)
-            lessons.append(
-                {
-                    "title": title,
-                    "topic": str(record.get("topic", "")).strip(),
-                    "anchor_work": str(record.get("anchor_work", "")).strip(),
-                }
-            )
+            item = {
+                "title": title,
+                "topic": str(record.get("topic", "")).strip(),
+                "anchor_work": str(record.get("anchor_work", "")).strip(),
+            }
+            for key in ("series_id", "series_title", "part_index", "planned_parts", "lesson_scope", "next_lesson_suggestions"):
+                raw_value = record.get(key, "")
+                if raw_value is None:
+                    continue
+                value = str(raw_value).strip()
+                if value:
+                    item[key] = value
+            lessons.append(item)
             if len(lessons) >= limit:
                 break
         return lessons

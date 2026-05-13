@@ -31,19 +31,38 @@ def attach_extracted_figures(scored: list[ScoredPaper], settings: Settings, *, r
     for item in scored:
         if not item.summary:
             continue
-        figure_input = _paper_input(item.paper)
-        if not figure_input:
+        if not _paper_input(item.paper):
             continue
         attempted += 1
         try:
-            figures = extract_paper_figures(item.paper, settings, run_date=run_date, figure_input=figure_input)
+            figures = extract_figures_for_item(item, settings, run_date=run_date)
         except Exception as exc:
             failed += 1
             logger.warning("Figure extraction failed for %s: %s", item.paper.paper_id, exc)
             continue
-        item.summary.extracted_figures = _select_report_figures(item, figures, settings, run_date=run_date, analyst=analyst)
-        extracted += len(item.summary.extracted_figures)
+        extracted += select_and_attach_figures(item, figures, settings, run_date=run_date, analyst=analyst)
     return FigureExtractionSummary(attempted=attempted, extracted=extracted, failed=failed)
+
+
+def extract_figures_for_item(item: ScoredPaper, settings: Settings, *, run_date: date) -> list[ExtractedFigure]:
+    figure_input = _paper_input(item.paper)
+    if not figure_input:
+        return []
+    return extract_paper_figures(item.paper, settings, run_date=run_date, figure_input=figure_input)
+
+
+def select_and_attach_figures(
+    item: ScoredPaper,
+    figures: list[ExtractedFigure],
+    settings: Settings,
+    *,
+    run_date: date,
+    analyst: Any | None,
+) -> int:
+    if not item.summary:
+        return 0
+    item.summary.extracted_figures = _select_report_figures(item, figures, settings, run_date=run_date, analyst=analyst)
+    return len(item.summary.extracted_figures)
 
 
 def extract_paper_figures(paper: Paper, settings: Settings, *, run_date: date, figure_input: str | None = None) -> list[ExtractedFigure]:

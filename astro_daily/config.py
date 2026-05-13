@@ -18,6 +18,13 @@ class ArxivConfig(BaseModel):
     days_back: int = Field(default=3, ge=1, le=30)
     primary: list[ArxivCategoryConfig]
     secondary: list[ArxivCategoryConfig] = Field(default_factory=list)
+    api_request_delay_seconds: float = Field(default=6.0, ge=0, le=120)
+    api_retry_attempts: int = Field(default=5, ge=1, le=10)
+    api_retry_initial_delay_seconds: float = Field(default=10.0, ge=0, le=300)
+    api_retry_max_delay_seconds: float = Field(default=300.0, ge=0, le=1800)
+    api_cache_enabled: bool = True
+    api_cache_dir: str = ".cache/arxiv_api"
+    api_cache_ttl_hours: float = Field(default=24.0, ge=0, le=168)
 
 
 class RssFeedConfig(BaseModel):
@@ -124,8 +131,14 @@ class FigureExtractionConfig(BaseModel):
     asset_dir: str = "docs/assets/figures"
     max_figures_per_paper: int = Field(default=6, ge=0, le=10)
     max_figure_candidates_per_paper: int = Field(default=12, ge=1, le=50)
+    parallel_workers: int = Field(default=3, ge=1, le=8)
     dpi: int = Field(default=400, ge=72, le=800)
     strict: bool = True
+
+
+class RunLogConfig(BaseModel):
+    enabled: bool = True
+    dir: str = "logs"
 
 
 class Settings(BaseModel):
@@ -137,6 +150,7 @@ class Settings(BaseModel):
     clawbot: ClawBotConfig = Field(default_factory=ClawBotConfig)
     publish: PublishConfig = Field(default_factory=PublishConfig)
     figure_extraction: FigureExtractionConfig = Field(default_factory=FigureExtractionConfig)
+    run_log: RunLogConfig = Field(default_factory=RunLogConfig)
     site_base_url: str = "本地HTML报告"
     anthropic_api_key: str | None = None
     root_dir: Path = Field(default_factory=lambda: Path.cwd())

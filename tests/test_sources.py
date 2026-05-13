@@ -1,5 +1,7 @@
 from datetime import date, datetime, timezone
 
+import requests
+
 from astro_daily.config import ArxivCategoryConfig, RssFeedConfig
 from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_papers, parse_arxiv_daily_listing
 from astro_daily.sources.rss import fetch_rss_papers
@@ -9,6 +11,7 @@ class FakeResponse:
     def __init__(self, content: str, status_code: int = 200):
         self.content = content.encode("utf-8")
         self.status_code = status_code
+        self.headers = {}
 
     def raise_for_status(self):
         if self.status_code >= 400:
@@ -96,6 +99,69 @@ def test_arxiv_retries_429(monkeypatch):
 
 
 
+def test_arxiv_retries_timeout_with_configured_backoff(monkeypatch):
+    calls = []
+    sleeps = []
+    atom = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom'>
+      <entry>
+        <id>https://arxiv.org/abs/2605.00003v1</id>
+        <published>2026-05-02T00:00:00Z</published>
+        <title>Timeout retry paper</title>
+        <summary>Result summary.</summary>
+        <author><name>Alice</name></author>
+      </entry>
+    </feed>"""
+
+    def get(*args, **kwargs):
+        calls.append(1)
+        if len(calls) == 1:
+            raise requests.Timeout("slow arXiv")
+        return FakeResponse(atom)
+
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", get)
+    monkeypatch.setattr("astro_daily.sources.arxiv.time.sleep", sleeps.append)
+
+    papers = fetch_arxiv_papers(
+        [ArxivCategoryConfig(category="astro-ph.HE", max_results=1)],
+        days_back=30,
+        retry_initial_delay_seconds=7,
+    )
+
+    assert sleeps == [7]
+    assert papers[0].paper_id == "2605.00003"
+
+
+
+def test_arxiv_uses_cached_api_response(monkeypatch, tmp_path):
+    calls = []
+    atom = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom'>
+      <entry>
+        <id>https://arxiv.org/abs/2605.00004v1</id>
+        <published>2026-05-02T00:00:00Z</published>
+        <title>Cached paper</title>
+        <summary>Result summary.</summary>
+        <author><name>Alice</name></author>
+      </entry>
+    </feed>"""
+
+    def get(*args, **kwargs):
+        calls.append(1)
+        return FakeResponse(atom)
+
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", get)
+    config = [ArxivCategoryConfig(category="astro-ph.HE", max_results=1)]
+
+    first = fetch_arxiv_papers(config, days_back=30, cache_dir=tmp_path, cache_ttl_seconds=3600)
+    second = fetch_arxiv_papers(config, days_back=30, cache_dir=tmp_path, cache_ttl_seconds=3600)
+
+    assert len(calls) == 1
+    assert first[0].paper_id == "2605.00004"
+    assert second[0].paper_id == "2605.00004"
+
+
+
 def test_arxiv_daily_listing_parser_extracts_date_and_ids():
     html = """
     <html><body>
@@ -110,6 +176,25 @@ def test_arxiv_daily_listing_parser_extracts_date_and_ids():
     assert listing.available
     assert listing.listing_date.isoformat() == "2026-05-12"
     assert listing.paper_ids == {"2605.10411", "2605.10559"}
+
+
+
+def test_arxiv_daily_listing_parser_excludes_replacements():
+    html = """
+    <html><body>
+      <h3>Showing new listings for Tuesday, 12 May 2026</h3>
+      <h3>New submissions (showing 1 of 1 entries)</h3>
+      <a href="/abs/2605.10001">arXiv:2605.10001</a>
+      <h3>Cross submissions (showing 1 of 1 entries)</h3>
+      <a href="/abs/2605.08010">arXiv:2605.08010</a>
+      <h3>Replacement submissions (showing 1 of 1 entries)</h3>
+      <a href="/abs/2605.07001">arXiv:2605.07001</a>
+    </body></html>
+    """
+
+    listing = parse_arxiv_daily_listing("astro-ph.HE", html)
+
+    assert listing.paper_ids == {"2605.10001", "2605.08010"}
 
 
 
