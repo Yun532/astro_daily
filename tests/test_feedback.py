@@ -103,3 +103,38 @@ clawbot:
     assert [item[0] for item in sent] == ["wecom", "clawbot"]
     assert sent[0][1] == "**Backup**\n\nSaved changes"
     assert sent[0][2] is True
+
+
+def test_notify_update_cli_continues_when_one_channel_fails(tmp_path, monkeypatch):
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        """
+sources:
+  arxiv:
+    primary:
+      - category: astro-ph.HE
+        max_results: 1
+  rss:
+    feeds: []
+scoring: {}
+llm: {}
+report: {}
+wechat:
+  enabled: true
+clawbot:
+  enabled: true
+  default_recipient:
+""".strip(),
+        encoding="utf-8",
+    )
+    sent = []
+    monkeypatch.setattr("astro_daily.cli.send_wecom_markdown", lambda content, dry_run=False: sent.append(("wecom", content, dry_run)))
+    monkeypatch.setattr(
+        "astro_daily.cli.send_clawbot_report_message",
+        lambda settings, content, dry_run=False: (_ for _ in ()).throw(RuntimeError("missing recipient")),
+    )
+
+    exit_code = main(["notify-update", "--config", str(config_path), "--text", "Saved changes", "--dry-run"])
+
+    assert exit_code == 0
+    assert [item[0] for item in sent] == ["wecom"]

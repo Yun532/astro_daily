@@ -81,17 +81,28 @@ def main(argv: list[str] | None = None) -> int:
             settings = load_settings(args.config)
             content = _update_note_message(args.title, args.text)
             sent = []
+            failed = []
             if settings.wechat.enabled:
-                send_wecom_markdown(content, dry_run=args.dry_run)
-                sent.append("wecom")
+                try:
+                    send_wecom_markdown(content, dry_run=args.dry_run)
+                    sent.append("wecom")
+                except Exception as exc:
+                    failed.append(f"wecom: {exc}")
             if settings.clawbot.enabled:
-                send_clawbot_report_message(settings, content, dry_run=args.dry_run)
-                sent.append("clawbot")
+                try:
+                    send_clawbot_report_message(settings, content, dry_run=args.dry_run)
+                    sent.append("clawbot")
+                except Exception as exc:
+                    failed.append(f"clawbot: {exc}")
             if sent:
                 prefix = "Dry-run update notification: " if args.dry_run else "Update notification sent: "
                 print(prefix + ", ".join(sent))
             else:
                 print("No update notification channel enabled")
+            if failed:
+                print("Update notification warnings:")
+                for item in failed:
+                    print(f"- {item}")
             return 0
         if args.command == "test-clawbot-poll":
             settings = load_settings(args.config)
