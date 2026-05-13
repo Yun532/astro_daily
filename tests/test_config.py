@@ -118,3 +118,38 @@ clawbot:
     assert settings.clawbot.enabled
     assert settings.clawbot.default_recipient == "user@im.wechat"
     assert settings.clawbot.send_report
+
+
+def test_private_runtime_values_can_come_from_env(tmp_path, monkeypatch):
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        """
+sources:
+  arxiv:
+    primary:
+      - category: astro-ph.HE
+        max_results: 1
+  rss:
+    feeds: []
+scoring: {}
+llm: {}
+report: {}
+wechat:
+  enabled: false
+figure_extraction:
+  tool_path: tools/paperfig
+clawbot:
+  default_recipient:
+""".strip(),
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
+    monkeypatch.delenv("ANTHROPIC_BASE_URL", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_MODE", raising=False)
+    monkeypatch.setenv("FIGURE_TOOL_PATH", r"C:\private\paperfig")
+    monkeypatch.setenv("CLAWBOT_DEFAULT_RECIPIENT", "private-user@im.wechat")
+
+    settings = load_settings(config_path)
+
+    assert settings.figure_extraction.tool_path == r"C:\private\paperfig"
+    assert settings.clawbot.default_recipient == "private-user@im.wechat"

@@ -77,6 +77,8 @@ Copy-Item .env.example .env
 ```text
 ANTHROPIC_API_KEY=你的 Anthropic API key
 WECOM_WEBHOOK_URL=你的企业微信群机器人 Webhook
+FIGURE_TOOL_PATH=C:\path\to\paper_figure_extractor\tools\paperfig
+CLAWBOT_DEFAULT_RECIPIENT=your-recipient@im.wechat
 ```
 
 如果使用本地 Anthropic-compatible 代理（例如 cc switch），可以改用：
@@ -223,7 +225,7 @@ publish:
 ```yaml
 figure_extraction:
   enabled: true
-  tool_path: E:\paper_figure_extractor\tools\paperfig
+  tool_path: C:\path\to\paper_figure_extractor\tools\paperfig
   cache_dir: figure_cache
   asset_dir: docs/assets/figures
   max_figures_per_paper: 6
@@ -234,13 +236,13 @@ figure_extraction:
 
 生成后的图片会复制到 `docs/assets/figures/YYYY-MM-DD/<paper_id>/` 并随 GitHub Pages 报告一起发布；`figure_cache/` 只作为本地缓存，不提交到仓库。
 
-个人微信 ClawBot 可作为企业微信群机器人的补充通道。`claude-code-wechat-channel` 仍可用于扫码登录并生成 `C:\Users\Administrator\.claude\channels\wechat\account.json`，但日报项目内的可靠发送路径使用直接 ClawBot HTTP 适配器，不依赖 Claude Code 实验 channel 路由。配置示例：
+个人微信 ClawBot 可作为企业微信群机器人的补充通道。`claude-code-wechat-channel` 仍可用于扫码登录并生成本机 ClawBot 登录凭据，但日报项目内的可靠发送路径使用直接 ClawBot HTTP 适配器，不依赖 Claude Code 实验 channel 路由。配置示例：
 
 ```yaml
 clawbot:
   enabled: false
   base_url: https://ilinkai.weixin.qq.com
-  default_recipient: o9cq803A3uKxRbdu5k_QS43jZYt8@im.wechat
+  default_recipient:
   send_report: false
   poll_enabled: false
 ```
@@ -303,13 +305,13 @@ powershell.exe
 - Add arguments（先用 11:30 dry-run 验证，不真实推送）：
 
 ```text
--NoProfile -ExecutionPolicy Bypass -Command "Set-Location 'E:\astro-daliy'; & '.\.venv\Scripts\python.exe' -m astro_daily run --dry-run --config 'E:\astro-daliy\config.yaml' >> 'E:\astro-daliy\astro_daily.log' 2>&1"
+-NoProfile -ExecutionPolicy Bypass -Command "Set-Location 'C:\path\to\astro-daily'; & '.\.venv\Scripts\python.exe' -m astro_daily run --dry-run --config '.\config.yaml' >> '.\astro_daily.log' 2>&1"
 ```
 
 - Start in:
 
 ```text
-E:\astro-daliy
+C:\path\to\astro-daily
 ```
 
 确认报告质量和微信配置后，再把命令里的 `run --dry-run` 改成 `run` 用于真实推送和更新 `seen_papers.json`。

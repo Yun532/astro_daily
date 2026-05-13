@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$projectRoot = 'E:\astro-daliy'
+$projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $python = Join-Path $projectRoot '.venv\Scripts\python.exe'
 $logDir = Join-Path $projectRoot 'logs'
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null

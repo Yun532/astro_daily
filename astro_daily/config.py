@@ -128,7 +128,7 @@ class PublishConfig(BaseModel):
 
 class FigureExtractionConfig(BaseModel):
     enabled: bool = False
-    tool_path: str = r"E:\paper_figure_extractor\tools\paperfig"
+    tool_path: str = "tools/paperfig"
     cache_dir: str = "figure_cache"
     asset_dir: str = "docs/assets/figures"
     max_figures_per_paper: int = Field(default=6, ge=0, le=10)
@@ -188,6 +188,14 @@ def load_settings(config_path: str | Path = "config.yaml") -> Settings:
         raw["llm"]["base_url"] = os.getenv("ANTHROPIC_BASE_URL")
     if os.getenv("ANTHROPIC_API_MODE"):
         raw["llm"]["api_mode"] = os.getenv("ANTHROPIC_API_MODE")
+    raw.setdefault("figure_extraction", {})
+    if os.getenv("FIGURE_TOOL_PATH"):
+        raw["figure_extraction"]["tool_path"] = os.getenv("FIGURE_TOOL_PATH")
+    raw.setdefault("clawbot", {})
+    if os.getenv("CLAWBOT_DEFAULT_RECIPIENT"):
+        raw["clawbot"]["default_recipient"] = os.getenv("CLAWBOT_DEFAULT_RECIPIENT")
+    if os.getenv("CLAWBOT_CREDENTIALS_FILE"):
+        raw["clawbot"]["credentials_file"] = os.getenv("CLAWBOT_CREDENTIALS_FILE")
     return Settings(
         **raw,
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_AUTH_TOKEN") or None,
