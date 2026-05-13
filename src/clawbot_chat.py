@@ -8,6 +8,7 @@ import anthropic
 import requests
 
 from astro_daily.config import Settings
+from src.clawbot_console import handle_console_command
 from src.clawbot_client import ClawBotMessage, load_clawbot_account, poll_clawbot_once, send_clawbot_text
 from src.report_urls import latest_report_url
 
@@ -74,7 +75,8 @@ def run_clawbot_chat_once(settings: Settings, *, dry_run: bool = False) -> int:
 def run_clawbot_chat_loop(settings: Settings, *, poll_interval: float = 2.0, dry_run: bool = False) -> None:
     responder = ClawBotChatResponder(settings)
     account = load_clawbot_account(settings)
-    print("ClawBot chat listener started")
+    print("ClawBot chat listener started", flush=True)
+    last_heartbeat = 0.0
     while True:
         try:
             messages = poll_clawbot_once(settings)
@@ -82,6 +84,10 @@ def run_clawbot_chat_loop(settings: Settings, *, poll_interval: float = 2.0, dry
             logger.warning("ClawBot polling failed; will retry: %s", exc)
             time.sleep(poll_interval)
             continue
+        now = time.monotonic()
+        if messages or now - last_heartbeat >= 60:
+            logger.info("ClawBot polling healthy; messages=%s", len(messages))
+            last_heartbeat = now
         for message in messages:
             reply_to_clawbot_message(settings, account, responder, message, dry_run=dry_run)
         time.sleep(poll_interval)
@@ -99,13 +105,13 @@ def reply_to_clawbot_message(
     if not prompt:
         return False
     token_state = "context_token=yes" if message.context_token else "context_token=no"
-    print(f"- {message.sender_id} ({token_state}): {prompt}")
-    reply = responder.answer(prompt)
+    print(f"- {message.sender_id} ({token_state}): {prompt}", flush=True)
+    reply = handle_console_command(settings, prompt) or responder.answer(prompt)
     if dry_run:
-        print(f"Dry-run reply to {message.sender_id}: {reply}")
+        print(f"Dry-run reply to {message.sender_id}: {reply}", flush=True)
     else:
         send_clawbot_text(account, message.sender_id, reply, context_token=message.context_token)
-        print(f"Replied to {message.sender_id}")
+        print(f"Replied to {message.sender_id}", flush=True)
     logger.info("Replied to ClawBot message from %s", message.sender_id)
     return True
 

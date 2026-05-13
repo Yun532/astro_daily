@@ -68,6 +68,8 @@ publish:
     monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
     monkeypatch.delenv("ANTHROPIC_BASE_URL", raising=False)
     monkeypatch.delenv("ANTHROPIC_API_MODE", raising=False)
+    monkeypatch.setenv("CLAWBOT_DEFAULT_RECIPIENT", "")
+    monkeypatch.setenv("CLAWBOT_CREDENTIALS_FILE", "")
 
     settings = load_settings(config_path)
 
@@ -112,6 +114,8 @@ clawbot:
     monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
     monkeypatch.delenv("ANTHROPIC_BASE_URL", raising=False)
     monkeypatch.delenv("ANTHROPIC_API_MODE", raising=False)
+    monkeypatch.setenv("CLAWBOT_DEFAULT_RECIPIENT", "")
+    monkeypatch.setenv("CLAWBOT_CREDENTIALS_FILE", "")
 
     settings = load_settings(config_path)
 

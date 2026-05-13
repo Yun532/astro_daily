@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
 import secrets
 from dataclasses import dataclass
 from pathlib import Path
@@ -11,6 +12,8 @@ from urllib.parse import urljoin
 import requests
 
 from astro_daily.config import Settings
+
+logger = logging.getLogger(__name__)
 
 CHANNEL_VERSION = "0.1.0"
 MSG_TYPE_USER = 1
@@ -96,11 +99,18 @@ def get_clawbot_updates(account: ClawBotAccount, sync_buf: str = "", *, timeout:
     }
     data = _post(account, "ilink/bot/getupdates", payload, timeout=timeout)
     messages: list[ClawBotMessage] = []
-    for raw in data.get("msgs") or []:
-        if raw.get("message_type") != MSG_TYPE_USER:
+    raw_messages = data.get("msgs") or []
+    if raw_messages:
+        logger.info("ClawBot returned raw messages; count=%s", len(raw_messages))
+    for index, raw in enumerate(raw_messages):
+        message_type = raw.get("message_type")
+        item_types = [item.get("type") for item in raw.get("item_list") or []]
+        if message_type != MSG_TYPE_USER:
+            logger.info("ClawBot raw message ignored; index=%s message_type=%s item_types=%s", index, message_type, item_types)
             continue
         text = _extract_text(raw)
         if not text:
+            logger.info("ClawBot user message ignored because no text was extracted; index=%s item_types=%s", index, item_types)
             continue
         messages.append(
             ClawBotMessage(
@@ -109,6 +119,8 @@ def get_clawbot_updates(account: ClawBotAccount, sync_buf: str = "", *, timeout:
                 context_token=raw.get("context_token"),
             )
         )
+    if raw_messages:
+        logger.info("ClawBot extracted user text messages; count=%s", len(messages))
     return messages, str(data.get("get_updates_buf") or sync_buf)
 
 
