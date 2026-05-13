@@ -7,9 +7,11 @@ from dataclasses import dataclass
 from datetime import date
 
 from astro_daily.config import Settings, load_settings
+from astro_daily.feedback import feedback_context_for_scoring, load_feedback
 from astro_daily.formula_integrity import ensure_html_latex_formulas_valid, repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
+from astro_daily.quality import check_summary_quality, quality_log_summary
 from astro_daily.report import render_report, write_daily_report
 from astro_daily.run_logging import RunLogger
 from astro_daily.scoring import (
@@ -122,6 +124,19 @@ def run_pipeline(
         seen = SeenStore.load(settings.seen_path)
         new_papers = unique if ignore_seen else seen.filter_new(unique)
         stage.update(unique_count=len(unique), new_count=len(new_papers))
+    with run_logger.stage("feedback_load") as stage:
+        try:
+            feedback_records = load_feedback(settings.feedback_path, limit=200)
+        except ValueError as exc:
+            logger.warning("Feedback file could not be loaded; continuing without feedback: %s", exc)
+            feedback_records = []
+            stage["error"] = str(exc)
+        feedback_context = feedback_context_for_scoring(feedback_records)
+        stage.update(
+            feedback_count=len(feedback_records),
+            positive_terms=feedback_context.get("positive_terms", []),
+            negative_terms=feedback_context.get("negative_terms", []),
+        )
     logger.info("Fetched %s papers, %s unique, %s new", len(papers), len(unique), len(new_papers))
 
     scored: list[ScoredPaper] = []
@@ -151,7 +166,7 @@ def run_pipeline(
             settings.require_llm_key()
             analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
             with run_logger.stage("score_candidates", candidate_count=len(candidates), score_batch_size=SCORE_BATCH_SIZE) as stage:
-                score_results = _score_candidates(candidates, analyst, run_date=run_date, scoring_config=settings.scoring)
+                score_results = _score_candidates(candidates, analyst, run_date=run_date, scoring_config=settings.scoring, feedback_context=feedback_context)
                 stage.update(score_result_count=len(score_results), score_batch_count=(len(candidates) + SCORE_BATCH_SIZE - 1) // SCORE_BATCH_SIZE)
             with run_logger.stage("apply_policy") as stage:
                 scored = apply_policy(candidates, score_results, settings.scoring)
@@ -164,16 +179,24 @@ def run_pipeline(
                         analyst,
                         run_date=run_date,
                         scoring_config=settings.scoring,
+                        feedback_context=feedback_context,
                     )
                     stage.update(supplemental_selected_count=len(supplemental_scored), selected_papers=_scored_log_items(supplemental_scored))
             displayed_scored = scored or supplemental_scored
-            with run_logger.stage("summaries_and_figures", paper_count=len(displayed_scored)) as stage:
+            with run_logger.stage(
+                "summaries_and_figures",
+                paper_count=len(displayed_scored),
+                summary_parallel_workers=settings.llm.summary_parallel_workers,
+                figure_parallel_workers=settings.figure_extraction.parallel_workers,
+            ) as stage:
                 displayed_scored, extraction = _enrich_selected_papers(displayed_scored, settings, analyst, run_date=run_date)
+                quality_results = check_summary_quality(displayed_scored)
                 stage.update(
                     summary_count=sum(1 for item in displayed_scored if item.summary),
                     figure_attempted=extraction.attempted,
                     figure_extracted=extraction.extracted,
                     figure_failed=extraction.failed,
+                    content_quality=quality_log_summary(quality_results),
                 )
             if scored:
                 scored = displayed_scored
@@ -332,10 +355,10 @@ def _enrich_selected_papers(
             executor = ThreadPoolExecutor(max_workers=workers)
             futures = {executor.submit(extract_figures_for_item, item, settings, run_date=run_date): item for item in extractable}
     try:
-        scored = add_summaries(scored, analyst, run_date=run_date)
+        scored = add_summaries(scored, analyst, run_date=run_date, parallel_workers=settings.llm.summary_parallel_workers)
         if not futures:
             return scored, FigureExtractionSummary()
-        extracted = 0
+        ready_for_selection: list[tuple[ScoredPaper, list]] = []
         failed = 0
         for future in as_completed(futures):
             item = futures[future]
@@ -345,11 +368,39 @@ def _enrich_selected_papers(
                 failed += 1
                 logger.warning("Figure extraction failed for %s: %s", item.paper.paper_id, exc)
                 continue
-            extracted += select_and_attach_figures(item, figures, settings, run_date=run_date, analyst=analyst)
+            ready_for_selection.append((item, figures))
+        extracted = _select_figures_for_items_parallel(ready_for_selection, settings, analyst, run_date=run_date)
         return scored, FigureExtractionSummary(attempted=attempted, extracted=extracted, failed=failed)
     finally:
         if executor:
             executor.shutdown(wait=True)
+
+
+def _select_figures_for_items_parallel(
+    items: list[tuple[ScoredPaper, list]],
+    settings: Settings,
+    analyst: ClaudePaperAnalyst,
+    *,
+    run_date: date,
+) -> int:
+    if not items:
+        return 0
+    workers = min(settings.figure_extraction.parallel_workers, len(items))
+    if workers <= 1:
+        return sum(select_and_attach_figures(item, figures, settings, run_date=run_date, analyst=analyst) for item, figures in items)
+    extracted = 0
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(select_and_attach_figures, item, figures, settings, run_date=run_date, analyst=analyst): item
+            for item, figures in items
+        }
+        for future in as_completed(futures):
+            item = futures[future]
+            try:
+                extracted += future.result()
+            except Exception as exc:
+                logger.warning("Figure selection failed for %s: %s", item.paper.paper_id, exc)
+    return extracted
 
 
 def _freshness_log_data(freshness: SourceFreshnessDecision) -> dict[str, object]:
@@ -442,11 +493,18 @@ def evaluate_source_freshness(*, settings: Settings, papers: list[Paper], source
 
 
 
-def _score_candidates(candidates: list[Paper], analyst: ClaudePaperAnalyst, *, run_date: date, scoring_config) -> list:
+def _score_candidates(
+    candidates: list[Paper],
+    analyst: ClaudePaperAnalyst,
+    *,
+    run_date: date,
+    scoring_config,
+    feedback_context: dict | None = None,
+) -> list:
     score_results = []
     for start in range(0, len(candidates), SCORE_BATCH_SIZE):
         batch = candidates[start : start + SCORE_BATCH_SIZE]
-        score_results.extend(_score_batch(batch, analyst, run_date=run_date, scoring_config=scoring_config))
+        score_results.extend(_score_batch(batch, analyst, run_date=run_date, scoring_config=scoring_config, feedback_context=feedback_context))
     return score_results
 
 
@@ -470,6 +528,7 @@ def _select_supplemental_papers(
     *,
     run_date: date,
     scoring_config,
+    feedback_context: dict | None = None,
 ) -> list[ScoredPaper]:
     candidates = prepare_supplemental_candidates(new_papers, scoring_config, run_date=run_date)
     if not candidates:
@@ -478,23 +537,50 @@ def _select_supplemental_papers(
     missing_candidates = [paper for paper in candidates if paper.paper_id not in existing_by_id]
     score_results = [existing_by_id[paper.paper_id] for paper in candidates if paper.paper_id in existing_by_id]
     if missing_candidates:
-        score_results.extend(_score_candidates(missing_candidates, analyst, run_date=run_date, scoring_config=scoring_config))
+        score_results.extend(
+            _score_candidates(
+                missing_candidates,
+                analyst,
+                run_date=run_date,
+                scoring_config=scoring_config,
+                feedback_context=feedback_context,
+            )
+        )
     supplemental = apply_supplemental_policy(candidates, score_results, scoring_config)
     logger.info("Supplemental fallback selected %s papers", len(supplemental))
     return supplemental
 
 
-def _score_batch(batch: list[Paper], analyst: ClaudePaperAnalyst, *, run_date: date, scoring_config) -> list:
+def _score_batch(
+    batch: list[Paper],
+    analyst: ClaudePaperAnalyst,
+    *,
+    run_date: date,
+    scoring_config,
+    feedback_context: dict | None = None,
+) -> list:
     try:
-        return analyst.score_papers(batch, run_date=run_date, scoring_config=scoring_config)
+        return analyst.score_papers(batch, run_date=run_date, scoring_config=scoring_config, feedback_context=feedback_context)
     except RuntimeError:
         if len(batch) == 1:
             raise
         midpoint = len(batch) // 2
         logger.warning("LLM scoring failed for batch of %s papers; retrying as %s and %s", len(batch), midpoint, len(batch) - midpoint)
         return [
-            *_score_batch(batch[:midpoint], analyst, run_date=run_date, scoring_config=scoring_config),
-            *_score_batch(batch[midpoint:], analyst, run_date=run_date, scoring_config=scoring_config),
+            *_score_batch(
+                batch[:midpoint],
+                analyst,
+                run_date=run_date,
+                scoring_config=scoring_config,
+                feedback_context=feedback_context,
+            ),
+            *_score_batch(
+                batch[midpoint:],
+                analyst,
+                run_date=run_date,
+                scoring_config=scoring_config,
+                feedback_context=feedback_context,
+            ),
         ]
 
 

@@ -6,10 +6,12 @@ import sys
 from datetime import date
 
 from astro_daily.config import load_settings
+from astro_daily.feedback import VALID_RATINGS, append_feedback
 from astro_daily.pipeline import DEFERRED_RETRY_EXIT_CODE, DeferredRetryNeeded, fetch_all_sources, run_pipeline
 from src.clawbot_chat import run_clawbot_chat_loop, run_clawbot_chat_once
 from src.clawbot_client import poll_clawbot_once
 from src.push_clawbot import send_clawbot_report_message
+from src.push_wecom_bot import send_wecom_markdown
 from src.report_urls import latest_report_date
 
 
@@ -55,12 +57,41 @@ def main(argv: list[str] | None = None) -> int:
                 for error in errors:
                     print(f"- {error}")
             return 0 if papers else 1
+        if args.command == "feedback":
+            settings = load_settings(args.config)
+            feedback_date = date.fromisoformat(args.date) if args.date else None
+            record = append_feedback(
+                settings.feedback_path,
+                paper_id=args.paper_id,
+                rating=args.rating,
+                reason=args.reason or "",
+                feedback_date=feedback_date,
+            )
+            print(f"Feedback saved: {record.rating} {record.paper_id} ({record.date.isoformat()})")
+            print(f"Path: {settings.feedback_path}")
+            return 0
         if args.command == "test-clawbot-send":
             settings = load_settings(args.config)
             run_date = date.fromisoformat(args.date) if args.date else latest_report_date(settings) or date.today()
             content = args.text or _clawbot_report_link_message(settings.site_base_url, run_date)
             send_clawbot_report_message(settings, content, dry_run=args.dry_run)
             print("ClawBot dry-run complete" if args.dry_run else "ClawBot message sent")
+            return 0
+        if args.command == "notify-update":
+            settings = load_settings(args.config)
+            content = _update_note_message(args.title, args.text)
+            sent = []
+            if settings.wechat.enabled:
+                send_wecom_markdown(content, dry_run=args.dry_run)
+                sent.append("wecom")
+            if settings.clawbot.enabled:
+                send_clawbot_report_message(settings, content, dry_run=args.dry_run)
+                sent.append("clawbot")
+            if sent:
+                prefix = "Dry-run update notification: " if args.dry_run else "Update notification sent: "
+                print(prefix + ", ".join(sent))
+            else:
+                print("No update notification channel enabled")
             return 0
         if args.command == "test-clawbot-poll":
             settings = load_settings(args.config)
@@ -105,11 +136,24 @@ def build_parser() -> argparse.ArgumentParser:
     test_fetch = subparsers.add_parser("test-fetch", help="Fetch and parse configured sources without LLM calls")
     test_fetch.add_argument("--config", default="config.yaml")
 
+    feedback = subparsers.add_parser("feedback", help="Record paper feedback for future recommendations")
+    feedback.add_argument("--config", default="config.yaml")
+    feedback.add_argument("rating", choices=sorted(VALID_RATINGS))
+    feedback.add_argument("paper_id")
+    feedback.add_argument("--reason", default="")
+    feedback.add_argument("--date", help="Feedback/report date, YYYY-MM-DD")
+
     clawbot_send = subparsers.add_parser("test-clawbot-send", help="Send an existing report link or text through ClawBot")
     clawbot_send.add_argument("--config", default="config.yaml")
     clawbot_send.add_argument("--date", help="Report date for default link, YYYY-MM-DD")
     clawbot_send.add_argument("--text", help="Text to send instead of the default report link")
     clawbot_send.add_argument("--dry-run", action="store_true")
+
+    notify_update = subparsers.add_parser("notify-update", help="Send a short GitHub/code backup update note to WeChat channels")
+    notify_update.add_argument("--config", default="config.yaml")
+    notify_update.add_argument("--title", default="Astro Daily 代码备份更新")
+    notify_update.add_argument("--text", required=True, help="Short update note text")
+    notify_update.add_argument("--dry-run", action="store_true")
 
     clawbot_poll = subparsers.add_parser("test-clawbot-poll", help="Poll ClawBot once and print received messages")
     clawbot_poll.add_argument("--config", default="config.yaml")
@@ -121,6 +165,10 @@ def build_parser() -> argparse.ArgumentParser:
     clawbot_chat.add_argument("--dry-run", action="store_true", help="Generate replies but do not send them")
 
     return parser
+
+
+def _update_note_message(title: str, text: str) -> str:
+    return "\n".join([f"**{title.strip()}**", "", text.strip()]).strip()
 
 
 def _clawbot_report_link_message(site_base_url: str, run_date: date) -> str:

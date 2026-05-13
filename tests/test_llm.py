@@ -30,6 +30,12 @@ def test_parse_json_repairs_trailing_commas():
     assert data == {"items": ["a", "b"]}
 
 
+def test_parse_json_repairs_invalid_escape_at_error_position():
+    data = _parse_json_text(r'{"value": "latex \(E_{\max}\) and \mathrm{eV}"}')
+
+    assert data["value"] == r"latex \(E_{\max}\) and \mathrm{eV}"
+
+
 
 def test_paper_prompt_includes_update_and_source_batch_dates():
     paper = Paper(

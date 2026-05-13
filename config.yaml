@@ -42,7 +42,7 @@ sources:
 
 scoring:
   max_candidates: 120
-  max_papers_per_report: 5
+  max_papers_per_report: 10
   weights:
     novelty: 0.30
     importance: 0.35
@@ -65,10 +65,12 @@ llm:
   max_tokens: 32000
   effort: high
   prompt_cache: true
+  summary_parallel_workers: 3
 
 report:
   output_dir: daily_reports
   seen_file: seen_papers.json
+  feedback_file: feedback.jsonl
   title_prefix: Astro Daily
 
 site_base_url: https://yun532.github.io/astro_daily

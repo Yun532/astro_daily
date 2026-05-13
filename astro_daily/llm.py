@@ -78,6 +78,7 @@ class ClaudePaperAnalyst:
         *,
         run_date: date,
         scoring_config: ScoringConfig,
+        feedback_context: dict[str, Any] | None = None,
     ) -> list[ScoreResult]:
         if not papers:
             return []
@@ -109,6 +110,8 @@ class ClaudePaperAnalyst:
             },
             "papers": [_paper_for_prompt(paper) for paper in papers],
         }
+        if feedback_context:
+            payload["reader_feedback"] = feedback_context
         data = self._json_request(
             system_prompt=SCORING_SYSTEM_PROMPT,
             schema=_score_schema(),
@@ -324,19 +327,47 @@ def _parse_json_text(text: str) -> dict[str, Any]:
 
 
 def _loads_json(text: str) -> dict[str, Any]:
-    candidates = [text]
     repaired = _repair_common_json_issues(text)
+    candidates = [repaired]
     if repaired != text:
-        candidates.append(repaired)
+        candidates.append(text)
     last_error: json.JSONDecodeError | None = None
     for candidate in candidates:
         try:
-            return json.loads(candidate)
+            return _loads_json_with_targeted_repairs(candidate)
         except json.JSONDecodeError as exc:
             last_error = exc
     if last_error is not None:
         raise last_error
     return json.loads(text)
+
+
+def _loads_json_with_targeted_repairs(text: str, *, max_repairs: int = 20) -> dict[str, Any]:
+    candidate = text
+    seen: set[str] = set()
+    last_error: json.JSONDecodeError | None = None
+    for _attempt in range(max_repairs + 1):
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError as exc:
+            last_error = exc
+            repaired = _repair_json_error_at_position(candidate, exc)
+            if repaired is None or repaired == candidate or repaired in seen:
+                break
+            seen.add(candidate)
+            candidate = repaired
+    if last_error is not None:
+        raise last_error
+    return json.loads(text)
+
+
+def _repair_json_error_at_position(text: str, exc: json.JSONDecodeError) -> str | None:
+    if exc.msg != "Invalid \\escape":
+        return None
+    slash_index = exc.pos if exc.pos < len(text) and text[exc.pos] == "\\" else text.rfind("\\", 0, exc.pos + 1)
+    if slash_index == -1:
+        return None
+    return text[:slash_index] + "\\" + text[slash_index:]
 
 
 def _repair_common_json_issues(text: str) -> str:

@@ -80,6 +80,7 @@ class LlmConfig(BaseModel):
     max_tokens: int = Field(default=16000, ge=256)
     effort: str = "high"
     prompt_cache: bool = True
+    summary_parallel_workers: int = Field(default=3, ge=1, le=8)
     base_url: str | None = None
     api_mode: str = "auto"
 
@@ -95,6 +96,7 @@ class LlmConfig(BaseModel):
 class ReportConfig(BaseModel):
     output_dir: str = "daily_reports"
     seen_file: str = "seen_papers.json"
+    feedback_file: str = "feedback.jsonl"
     title_prefix: str = "Astro Daily"
 
 
@@ -162,6 +164,10 @@ class Settings(BaseModel):
     @property
     def seen_path(self) -> Path:
         return self.root_dir / self.report.seen_file
+
+    @property
+    def feedback_path(self) -> Path:
+        return self.root_dir / self.report.feedback_file
 
     @property
     def report_dir(self) -> Path:
