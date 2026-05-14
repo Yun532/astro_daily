@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import logging
+import math
 import shutil
 import sys
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 from typing import Any
+
+from PIL import Image
 
 from astro_daily.config import Settings
 from astro_daily.models import ExtractedFigure, FigureSelection, Paper, ScoredPaper
@@ -81,11 +84,11 @@ def extract_paper_figures(paper: Paper, settings: Settings, *, run_date: date, f
         output_file = getattr(record, "output_file", None)
         if not output_file:
             continue
-        source = output_dir / str(output_file)
+        source = _output_path(output_dir, output_file)
         if not source.exists():
             continue
         target = asset_root / source.name
-        shutil.copy2(source, target)
+        _copy_report_figure_image(record, output_dir, source, target, settings)
         figures.append(
             ExtractedFigure(
                 fig_id=str(getattr(record, "fig_id", "") or target.stem),
@@ -97,6 +100,114 @@ def extract_paper_figures(paper: Paper, settings: Settings, *, run_date: date, f
             )
         )
     return figures
+
+
+def _copy_report_figure_image(record: Any, output_dir: Path, source: Path, target: Path, settings: Settings) -> None:
+    panel_sources = _panel_sources_for_grid(record, output_dir)
+    if (
+        settings.figure_extraction.compose_panel_figures
+        and len(panel_sources) >= 2
+        and _looks_like_vertical_panel_composite(record, source)
+        and _compose_panel_grid(
+            panel_sources,
+            target,
+            max_columns=settings.figure_extraction.panel_grid_max_columns,
+            max_width=settings.figure_extraction.panel_grid_max_width_px,
+        )
+    ):
+        return
+    shutil.copy2(source, target)
+
+
+def _panel_sources_for_grid(record: Any, output_dir: Path) -> list[Path]:
+    sources: list[Path] = []
+    for panel in getattr(record, "panels", []) or []:
+        if not getattr(panel, "verified", False):
+            continue
+        output_file = getattr(panel, "output_file", None)
+        source_image = getattr(panel, "source_image", None)
+        path = _output_path(output_dir, output_file) if output_file else Path(str(source_image or ""))
+        if path.exists() and path.is_file():
+            sources.append(path)
+    return sources
+
+
+def _looks_like_vertical_panel_composite(record: Any, source: Path) -> bool:
+    if _composite_strategy(record) == "source_order_vertical_stack":
+        return True
+    try:
+        with Image.open(source) as image:
+            return image.height / max(image.width, 1) >= 2.4
+    except Exception:
+        return False
+
+
+def _composite_strategy(record: Any) -> str:
+    for provenance in getattr(record, "provenance", []) or []:
+        details = getattr(provenance, "details", None) or {}
+        strategy = details.get("composite_strategy")
+        if strategy:
+            return str(strategy)
+    return ""
+
+
+def _compose_panel_grid(panel_sources: list[Path], target: Path, *, max_columns: int, max_width: int) -> bool:
+    images: list[Image.Image] = []
+    try:
+        for source in panel_sources:
+            with Image.open(source) as image:
+                images.append(image.convert("RGBA"))
+        if len(images) < 2:
+            return False
+
+        columns = _panel_grid_columns(len(images), max_columns=max_columns)
+        gap = 24
+        cell_width = max(1, min(max(image.width for image in images), (max_width - gap * (columns - 1)) // columns))
+        resized = [_resize_to_width(image, cell_width) for image in images]
+        rows = [resized[index : index + columns] for index in range(0, len(resized), columns)]
+        row_heights = [max(image.height for image in row) for row in rows]
+        width = columns * cell_width + gap * (columns - 1)
+        height = sum(row_heights) + gap * (len(rows) - 1)
+        composite = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        y = 0
+        for row, row_height in zip(rows, row_heights):
+            for column, image in enumerate(row):
+                x = column * (cell_width + gap)
+                offset_y = y + (row_height - image.height) // 2
+                composite.alpha_composite(image, (x, offset_y))
+            y += row_height + gap
+
+        target.parent.mkdir(parents=True, exist_ok=True)
+        composite.convert("RGB").save(target, optimize=True)
+        return True
+    except Exception as exc:
+        logger.warning("Panel grid composition failed for %s: %s", target, exc)
+        return False
+    finally:
+        for image in images:
+            image.close()
+
+
+def _panel_grid_columns(count: int, *, max_columns: int) -> int:
+    if count <= 1:
+        return 1
+    if count <= 4:
+        return min(2, max_columns, count)
+    return min(3, max_columns, count)
+
+
+def _resize_to_width(image: Image.Image, width: int) -> Image.Image:
+    if image.width == width:
+        return image.copy()
+    height = max(1, math.ceil(image.height * width / image.width))
+    return image.resize((width, height), Image.Resampling.LANCZOS)
+
+
+def _output_path(output_dir: Path, output_file: Any) -> Path:
+    path = Path(str(output_file).replace("\\", "/"))
+    if path.is_absolute():
+        return path
+    return output_dir / path
 
 
 def _run_paperfig(figure_input: str, settings: Settings) -> Any:

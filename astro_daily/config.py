@@ -136,6 +136,9 @@ class FigureExtractionConfig(BaseModel):
     parallel_workers: int = Field(default=3, ge=1, le=8)
     dpi: int = Field(default=400, ge=72, le=800)
     strict: bool = True
+    compose_panel_figures: bool = True
+    panel_grid_max_columns: int = Field(default=3, ge=1, le=4)
+    panel_grid_max_width_px: int = Field(default=4800, ge=1200, le=12000)
 
 
 class RunLogConfig(BaseModel):

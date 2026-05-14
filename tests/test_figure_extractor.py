@@ -1,19 +1,43 @@
 from datetime import date
 from pathlib import Path
 
+from PIL import Image
+
 from astro_daily.config import Settings
 from astro_daily.models import FigureSelection, Paper, PaperScore, PaperSummary, ScoredPaper
 from src.figure_extractor import attach_extracted_figures
 
 
+class FakeProvenance:
+    def __init__(self, composite_strategy: str | None = None):
+        self.source_type = "arxiv_source"
+        self.locator = "fixture"
+        self.details = {"composite_strategy": composite_strategy} if composite_strategy else {}
+
+
+class FakePanel:
+    def __init__(self, label: str, output_file: str):
+        self.label = label
+        self.output_file = output_file
+        self.source_image = None
+        self.verified = True
+
+
 class FakeRecord:
-    def __init__(self, fig_id: str = "Fig01", caption: str = "A verified figure caption."):
+    def __init__(
+        self,
+        fig_id: str = "Fig01",
+        caption: str = "A verified figure caption.",
+        panels: list[FakePanel] | None = None,
+        composite_strategy: str | None = None,
+    ):
         self.fig_id = fig_id
         self.output_file = f"figures/{fig_id}.png"
         self.caption = caption
         self.confidence = "high"
         self.source_type = "arxiv_source"
-        self.provenance = []
+        self.provenance = [FakeProvenance(composite_strategy)] if composite_strategy else []
+        self.panels = panels or []
 
 
 class FakeResult:
@@ -127,3 +151,34 @@ def test_attach_extracted_figures_is_nonfatal(monkeypatch, tmp_path):
 
     assert result.failed == 1
     assert scored.summary.extracted_figures == []
+
+
+def test_attach_extracted_figures_reflows_vertical_panel_composites(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.figure_extraction.max_figures_per_paper = 1
+    settings.figure_extraction.panel_grid_max_width_px = 1200
+    paper = Paper(paper_id="2605.00001", title="Paper", url="https://arxiv.org/abs/2605.00001", source="arXiv")
+    scored = ScoredPaper(
+        paper=paper,
+        score=PaperScore(novelty_score=8, importance_score=8, relevance_to_me=8, final_score=8, keep=True, reason="ok"),
+        summary=PaperSummary(paper_id="2605.00001", title_cn="title", summary_cn="summary", why_important_cn="important", value_cn="value", why_care_cn="care"),
+    )
+    outdir = tmp_path / "paperfig-out"
+    figures_dir = outdir / "figures"
+    figures_dir.mkdir(parents=True)
+    Image.new("RGB", (200, 900), "white").save(figures_dir / "Fig01.png")
+    for index, color in enumerate(["red", "green", "blue", "yellow"], start=1):
+        label = chr(ord("a") + index - 1)
+        Image.new("RGB", (400, 300), color).save(figures_dir / f"Fig01_panel_{label}.png")
+
+    panels = [FakePanel(label, f"figures/Fig01_panel_{label}.png") for label in ["a", "b", "c", "d"]]
+    monkeypatch.setattr("src.figure_extractor._run_paperfig", lambda _input, _settings: FakeResult(outdir, [FakeRecord("Fig01", panels=panels, composite_strategy="source_order_vertical_stack")]))
+
+    result = attach_extracted_figures([scored], settings, run_date=date(2026, 5, 5))
+
+    assert result.extracted == 1
+    target = tmp_path / "docs" / "assets" / "figures" / "2026-05-05" / "2605.00001" / "Fig01.png"
+    with Image.open(target) as image:
+        assert image.width == 824
+        assert image.height == 624
+        assert image.height < 900
