@@ -78,6 +78,25 @@ def test_report_groups_iact_papers_with_he_priority():
     assert "相关但非 HE 的重要论文" not in report
 
 
+def test_report_summarizes_source_warnings_without_raw_errors():
+    errors = [
+        "arXiv listing astro-ph.HE: HTTPSConnectionPool(host='arxiv.org', port=443): Max retries exceeded with url: /list/astro-ph.HE/new (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol')))",
+        "arXiv astro-ph.GA: 429 Client Error: Too Many Requests for url: https://export.arxiv.org/api/query?search_query=cat%3Aastro-ph.GA",
+        "RSS Nature: HTTPSConnectionPool(host='www.nature.com', port=443): Read timed out.",
+    ]
+
+    report = render_report(run_date=date(2026, 5, 2), title_prefix="Astro Daily", scored_papers=[], source_errors=errors, dry_run=False)
+
+    assert "## 数据源警告" in report
+    assert "本次有 3 个数据源访问异常" in report
+    assert "arXiv 每日列表：1 个分类访问异常" in report
+    assert "arXiv API：1 个分类访问异常" in report
+    assert "期刊 RSS：1 个 feed 访问异常" in report
+    assert "完整错误已保留在运行日志中" in report
+    assert "https://export.arxiv.org/api/query" not in report
+    assert "UNEXPECTED_EOF_WHILE_READING" not in report
+
+
 def test_report_renders_weekend_classic_lessons_when_no_papers():
     from astro_daily.models import WeekendLesson
 

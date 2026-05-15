@@ -1,4 +1,6 @@
-from astro_daily.config import LlmConfig, load_settings
+import pytest
+
+from astro_daily.config import ArxivConfig, ArxivCategoryConfig, LlmConfig, load_settings
 
 
 def test_env_overrides_for_local_proxy(tmp_path, monkeypatch):
@@ -157,3 +159,8 @@ clawbot:
 
     assert settings.figure_extraction.tool_path == r"C:\private\paperfig"
     assert settings.clawbot.default_recipient == "private-user@im.wechat"
+
+
+def test_arxiv_fetch_mode_is_validated():
+    with pytest.raises(ValueError, match="fetch_mode"):
+        ArxivConfig(primary=[ArxivCategoryConfig(category="astro-ph.HE")], fetch_mode="wide-open")

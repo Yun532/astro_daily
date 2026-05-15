@@ -1,6 +1,10 @@
 sources:
   arxiv:
     days_back: 7
+    fetch_mode: daily_listing
+    backfill_with_category_search: false
+    on_demand_backfill_with_category_search: true
+    id_list_chunk_size: 100
     api_request_delay_seconds: 6
     api_retry_attempts: 5
     api_retry_initial_delay_seconds: 10
@@ -24,6 +28,13 @@ sources:
         max_results: 25
   rss:
     max_entries_per_feed: 50
+    request_delay_seconds: 3
+    retry_attempts: 4
+    retry_initial_delay_seconds: 10
+    retry_max_delay_seconds: 300
+    cache_enabled: true
+    cache_dir: .cache/rss
+    cache_ttl_hours: 6
     feeds:
       - name: Nature
         url: https://www.nature.com/nature.rss

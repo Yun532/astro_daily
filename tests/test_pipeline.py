@@ -19,11 +19,12 @@ from astro_daily.config import (
 )
 from astro_daily.formula_integrity import FormulaIntegrityResult
 from astro_daily.models import ExtractedFigure, FigureSelection, Paper, PaperScore, PaperSummary, ScoredPaper, ScoreResult, WeekendLesson
-from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, evaluate_source_freshness, run_pipeline
+from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, evaluate_source_freshness, fetch_all_sources, run_pipeline
+from astro_daily.sources.arxiv import ArxivDailyListing
 
 
 def make_settings(tmp_path):
-    return Settings(
+    settings = Settings(
         sources=SourcesConfig(
             arxiv=ArxivConfig(primary=[ArxivCategoryConfig(category="astro-ph.HE")]),
             rss=RssConfig(),
@@ -37,6 +38,8 @@ def make_settings(tmp_path):
         anthropic_api_key="test-token",
         root_dir=tmp_path,
     )
+    settings.sources.arxiv.on_demand_backfill_with_category_search = False
+    return settings
 
 
 def make_paper(paper_id="old"):
@@ -75,6 +78,95 @@ def read_run_log(tmp_path):
     logs = sorted((tmp_path / "logs").glob("pipeline-*.jsonl"))
     assert logs
     return [json.loads(line) for line in logs[-1].read_text(encoding="utf-8").splitlines()]
+
+
+def test_fetch_all_sources_uses_daily_listing_id_mode(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    listing = ArxivDailyListing("astro-ph.HE", date(2026, 5, 12), {"2605.00006"}, True)
+    fetched_by_ids = []
+
+    def fake_fetch_by_ids(category, paper_ids, **kwargs):
+        fetched_by_ids.append((category, sorted(paper_ids), kwargs.get("source_batch_date")))
+        return [make_paper("2605.00006").model_copy(update={"source_batch_date": kwargs.get("source_batch_date")})]
+
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_daily_listing", lambda *_args, **_kwargs: listing)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers_by_ids", fake_fetch_by_ids)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers", lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("category search should not run")))
+
+    papers, errors = fetch_all_sources(settings)
+
+    assert not errors
+    assert fetched_by_ids == [("daily-listing", ["2605.00006"], None)]
+    assert papers[0].paper_id == "2605.00006"
+
+
+def test_weekday_fetches_on_demand_backfill_when_selection_is_sparse(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.sources.arxiv.on_demand_backfill_with_category_search = True
+    settings.scoring.same_day_target = 2
+    today = make_paper("today").model_copy(
+        update={
+            "title": "Today sparse paper",
+            "source_batch_date": date(2026, 5, 12),
+        }
+    )
+    old = make_paper("old-backfill").model_copy(
+        update={
+            "title": "Valuable older paper",
+            "source_batch_date": None,
+            "published": datetime(2026, 5, 10, tzinfo=timezone.utc),
+        }
+    )
+    backfill_called = False
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="good candidate",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn=f"中文 {paper.paper_id}",
+                    summary_cn="摘要",
+                    why_important_cn="重要",
+                    value_cn="价值",
+                    why_care_cn="值得关注",
+                )
+                for paper in papers
+            ]
+
+    def fake_backfill(_settings):
+        nonlocal backfill_called
+        backfill_called = True
+        return [old], []
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([today], []))
+    monkeypatch.setattr("astro_daily.pipeline._fetch_arxiv_category_search_sources", fake_backfill)
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.attach_extracted_figures", lambda *_args, **_kwargs: type("Result", (), {"attempted": 0, "extracted": 0, "failed": 0})())
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
+    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=False)
+
+    assert backfill_called
+    assert result.kept_count == 2
 
 
 def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
@@ -661,6 +753,21 @@ def test_final_attempt_bypasses_primary_zero_defer(monkeypatch, tmp_path):
     assert result.kept_count == 0
 
 
+def test_final_attempt_still_defers_on_temporary_primary_error(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], ["arXiv astro-ph.HE: 429 Client Error"]))
+
+    with pytest.raises(DeferredRetryNeeded, match="temporary primary arXiv"):
+        run_pipeline(
+            config_path="unused.yaml",
+            run_date=date(2026, 5, 12),
+            defer_if_unfresh=True,
+            final_attempt=True,
+        )
+
+
 
 def test_weekend_does_not_defer_on_primary_zero(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
@@ -719,6 +826,7 @@ def test_source_freshness_ignores_rss_today_for_primary_arxiv(tmp_path):
 
 def test_weekday_fallback_recommends_supplemental_papers_when_no_regular_papers_pass(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
+    settings.sources.arxiv.on_demand_backfill_with_category_search = False
     settings.scoring.supplemental_max_candidates = 10
     today = Paper(
         paper_id="today",
@@ -799,6 +907,7 @@ def test_weekday_fallback_recommends_supplemental_papers_when_no_regular_papers_
 
 def test_weekday_fallback_does_not_trigger_without_today_updates(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
+    settings.sources.arxiv.on_demand_backfill_with_category_search = False
     old_paper = make_paper("old-only").model_copy(update={"category": "astro-ph.CO"})
 
     class FakeAnalyst:

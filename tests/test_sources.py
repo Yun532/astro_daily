@@ -1,9 +1,10 @@
+import os
 from datetime import date, datetime, timezone
 
 import requests
 
 from astro_daily.config import ArxivCategoryConfig, RssFeedConfig
-from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_papers, parse_arxiv_daily_listing
+from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_papers, fetch_arxiv_papers_by_ids, parse_arxiv_daily_listing
 from astro_daily.sources.rss import fetch_rss_papers
 
 
@@ -161,6 +162,65 @@ def test_arxiv_uses_cached_api_response(monkeypatch, tmp_path):
     assert second[0].paper_id == "2605.00004"
 
 
+def test_arxiv_uses_stale_cache_when_network_fails(monkeypatch, tmp_path):
+    atom = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom'>
+      <entry>
+        <id>https://arxiv.org/abs/2605.00005v1</id>
+        <published>2026-05-02T00:00:00Z</published>
+        <title>Stale cached paper</title>
+        <summary>Result summary.</summary>
+        <author><name>Alice</name></author>
+      </entry>
+    </feed>"""
+
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", lambda *args, **kwargs: FakeResponse(atom))
+    config = [ArxivCategoryConfig(category="astro-ph.HE", max_results=1)]
+    first = fetch_arxiv_papers(config, days_back=30, cache_dir=tmp_path, cache_ttl_seconds=3600)
+    assert first[0].paper_id == "2605.00005"
+    for cache_file in tmp_path.glob("*.xml"):
+        os.utime(cache_file, (0, 0))
+
+    def fail(*args, **kwargs):
+        raise requests.ConnectionError("network is unstable")
+
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", fail)
+    second = fetch_arxiv_papers(config, days_back=30, cache_dir=tmp_path, cache_ttl_seconds=1)
+
+    assert second[0].paper_id == "2605.00005"
+
+
+def test_arxiv_fetches_metadata_by_listing_ids(monkeypatch):
+    calls = []
+    atom = """<?xml version='1.0' encoding='UTF-8'?>
+    <feed xmlns='http://www.w3.org/2005/Atom'>
+      <entry>
+        <id>https://arxiv.org/abs/2605.00006v1</id>
+        <published>2026-05-02T00:00:00Z</published>
+        <title>ID list paper</title>
+        <summary>Result summary.</summary>
+        <author><name>Alice</name></author>
+      </entry>
+    </feed>"""
+
+    def get(*args, **kwargs):
+        calls.append(kwargs["params"])
+        return FakeResponse(atom)
+
+    monkeypatch.setattr("astro_daily.sources.arxiv.requests.get", get)
+
+    papers = fetch_arxiv_papers_by_ids(
+        "astro-ph.HE",
+        ["2605.00006"],
+        source_batch_date=date(2026, 5, 12),
+    )
+
+    assert calls == [{"id_list": "2605.00006", "start": 0, "max_results": 1}]
+    assert papers[0].paper_id == "2605.00006"
+    assert papers[0].category == "astro-ph.HE"
+    assert papers[0].source_batch_date == date(2026, 5, 12)
+
+
 
 def test_arxiv_daily_listing_parser_extracts_date_and_ids():
     html = """
@@ -214,3 +274,53 @@ def test_rss_parser(monkeypatch):
     assert papers[0].source == "Nature"
     assert papers[0].title == "Cosmic-ray detection"
     assert papers[0].published == datetime(2026, 5, 2, tzinfo=timezone.utc)
+
+
+def test_rss_retries_429(monkeypatch):
+    calls = []
+    rss = """<?xml version='1.0' encoding='UTF-8'?>
+    <rss version='2.0'><channel><title>Nature Astronomy</title>
+      <item>
+        <title>Retry RSS paper</title>
+        <link>https://example.com/retry-paper</link>
+      </item>
+    </channel></rss>"""
+
+    def get(*args, **kwargs):
+        calls.append(1)
+        if len(calls) == 1:
+            return FakeResponse("", status_code=429)
+        return FakeResponse(rss)
+
+    monkeypatch.setattr("astro_daily.sources.rss.requests.get", get)
+    monkeypatch.setattr("astro_daily.sources.rss.time.sleep", lambda seconds: None)
+
+    papers = fetch_rss_papers([RssFeedConfig(name="Nature", url="https://example.com/rss")], max_entries_per_feed=10)
+
+    assert len(calls) == 2
+    assert papers[0].title == "Retry RSS paper"
+
+
+def test_rss_uses_stale_cache_when_network_fails(monkeypatch, tmp_path):
+    rss = """<?xml version='1.0' encoding='UTF-8'?>
+    <rss version='2.0'><channel><title>Nature Astronomy</title>
+      <item>
+        <title>Cached RSS paper</title>
+        <link>https://example.com/cached-paper</link>
+      </item>
+    </channel></rss>"""
+
+    monkeypatch.setattr("astro_daily.sources.rss.requests.get", lambda *args, **kwargs: FakeResponse(rss))
+    feeds = [RssFeedConfig(name="Nature", url="https://example.com/rss")]
+    first = fetch_rss_papers(feeds, max_entries_per_feed=10, cache_dir=tmp_path, cache_ttl_seconds=3600)
+    assert first[0].title == "Cached RSS paper"
+    for cache_file in tmp_path.glob("*.xml"):
+        os.utime(cache_file, (0, 0))
+
+    def fail(*args, **kwargs):
+        raise requests.ConnectionError("network is unstable")
+
+    monkeypatch.setattr("astro_daily.sources.rss.requests.get", fail)
+    second = fetch_rss_papers(feeds, max_entries_per_feed=10, cache_dir=tmp_path, cache_ttl_seconds=1)
+
+    assert second[0].title == "Cached RSS paper"

@@ -24,6 +24,7 @@ from astro_daily.scoring import (
 from astro_daily.seen import SeenStore, deduplicate_papers
 from astro_daily.sources import fetch_arxiv_papers, fetch_rss_papers
 from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_daily_listing
+from astro_daily.sources.arxiv import fetch_arxiv_papers_by_ids
 from astro_daily.summarizer import add_summaries
 from src.figure_extractor import FigureExtractionSummary, attach_extracted_figures, extract_figures_for_item, select_and_attach_figures
 from src.publisher import publish_report_if_enabled
@@ -117,7 +118,7 @@ def run_pipeline(
         len(freshness.transient_primary_errors),
         freshness.should_defer,
     )
-    if defer_if_unfresh and not final_attempt and freshness.should_defer:
+    if defer_if_unfresh and freshness.should_defer and (not final_attempt or freshness.transient_primary_errors):
         run_logger.event("source_freshness", "defer", reason=freshness.reason)
         raise DeferredRetryNeeded(freshness.reason)
     with run_logger.stage("seen_filter", ignore_seen=ignore_seen) as stage:
@@ -171,6 +172,34 @@ def run_pipeline(
             with run_logger.stage("apply_policy") as stage:
                 scored = apply_policy(candidates, score_results, settings.scoring)
                 stage.update(regular_threshold_passing_count=len(scored), selected_papers=_scored_log_items(scored))
+            if _should_fetch_on_demand_backfill(settings, scored, today_update_exists):
+                with run_logger.stage("on_demand_arxiv_backfill") as stage:
+                    backfill_papers, backfill_errors = _fetch_arxiv_category_search_sources(settings)
+                    source_errors.extend(backfill_errors)
+                    new_backfill_papers = seen.filter_new(deduplicate_papers(backfill_papers))
+                    new_papers = deduplicate_papers([*new_papers, *new_backfill_papers])
+                    candidates = prepare_candidates(new_papers, settings.scoring, run_date=run_date)
+                    existing_score_ids = {result.paper_id for result in score_results}
+                    missing_candidates = [paper for paper in candidates if paper.paper_id not in existing_score_ids]
+                    if missing_candidates:
+                        score_results.extend(
+                            _score_candidates(
+                                missing_candidates,
+                                analyst,
+                                run_date=run_date,
+                                scoring_config=settings.scoring,
+                                feedback_context=feedback_context,
+                            )
+                        )
+                    scored = apply_policy(candidates, score_results, settings.scoring)
+                    stage.update(
+                        fetched_count=len(backfill_papers),
+                        source_error_count=len(backfill_errors),
+                        new_backfill_count=len(new_backfill_papers),
+                        candidate_count=len(candidates),
+                        scored_count=len(scored),
+                        selected_papers=_scored_log_items(scored),
+                    )
             if not scored and (today_update_exists or final_attempt):
                 with run_logger.stage("supplemental_selection") as stage:
                     supplemental_scored = _select_supplemental_papers(
@@ -513,7 +542,7 @@ def _paper_available_on(paper: Paper, run_date: date) -> bool:
 
 
 def _is_primary_arxiv_error(error: str, primary_categories: set[str]) -> bool:
-    return error.startswith("arXiv ") and any(category in error for category in primary_categories)
+    return (error.startswith("arXiv ") or error.startswith("arXiv backfill ")) and any(category in error for category in primary_categories)
 
 
 def _is_temporary_source_error(error: str) -> bool:
@@ -549,6 +578,92 @@ def _select_supplemental_papers(
     supplemental = apply_supplemental_policy(candidates, score_results, scoring_config)
     logger.info("Supplemental fallback selected %s papers", len(supplemental))
     return supplemental
+
+
+def _should_fetch_on_demand_backfill(settings: Settings, scored: list[ScoredPaper], today_update_exists: bool) -> bool:
+    return (
+        today_update_exists
+        and settings.sources.arxiv.fetch_mode == "daily_listing"
+        and not settings.sources.arxiv.backfill_with_category_search
+        and settings.sources.arxiv.on_demand_backfill_with_category_search
+        and len(scored) < settings.scoring.same_day_target
+    )
+
+
+def _fetch_arxiv_daily_listing_metadata(
+    settings: Settings,
+    categories,
+    daily_listings: dict[str, ArxivDailyListing],
+) -> tuple[list[Paper], list[str]]:
+    id_category: dict[str, str] = {}
+    id_batch_date: dict[str, date | None] = {}
+    for category in categories:
+        listing = daily_listings.get(category.category)
+        if not listing or not listing.available:
+            continue
+        for paper_id in sorted(listing.paper_ids):
+            id_category.setdefault(paper_id, category.category)
+            id_batch_date.setdefault(paper_id, listing.listing_date)
+    if not id_category:
+        return [], []
+
+    cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
+    cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
+    try:
+        fetched = fetch_arxiv_papers_by_ids(
+            "daily-listing",
+            id_category.keys(),
+            retry_attempts=settings.sources.arxiv.api_retry_attempts,
+            retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
+            retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
+            request_delay_seconds=settings.sources.arxiv.api_request_delay_seconds,
+            cache_dir=cache_dir,
+            cache_ttl_seconds=cache_ttl_seconds,
+            chunk_size=settings.sources.arxiv.id_list_chunk_size,
+        )
+    except Exception as exc:
+        categories_text = ",".join(category.category for category in categories if daily_listings.get(category.category, None) and daily_listings[category.category].available)
+        message = f"arXiv daily metadata {categories_text}: {exc}"
+        logger.warning(message)
+        return [], [message]
+
+    papers: list[Paper] = []
+    for paper in fetched:
+        if paper.paper_id not in id_category:
+            continue
+        paper.category = id_category[paper.paper_id]
+        paper.source_batch_date = id_batch_date[paper.paper_id]
+        papers.append(paper)
+    return _dedupe_papers(papers), []
+
+
+def _fetch_arxiv_category_search_sources(settings: Settings, *, daily_listings: dict[str, ArxivDailyListing] | None = None) -> tuple[list[Paper], list[str]]:
+    papers: list[Paper] = []
+    errors: list[str] = []
+    categories = settings.sources.arxiv.primary + settings.sources.arxiv.secondary
+    cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
+    cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
+    for index, category in enumerate(categories):
+        if index and settings.sources.arxiv.api_request_delay_seconds > 0:
+            time.sleep(settings.sources.arxiv.api_request_delay_seconds)
+        try:
+            papers.extend(
+                fetch_arxiv_papers(
+                    [category],
+                    days_back=settings.sources.arxiv.days_back,
+                    daily_listings=daily_listings,
+                    retry_attempts=settings.sources.arxiv.api_retry_attempts,
+                    retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
+                    retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
+                    cache_dir=cache_dir,
+                    cache_ttl_seconds=cache_ttl_seconds,
+                )
+            )
+        except Exception as exc:
+            message = f"arXiv backfill {category.category}: {exc}"
+            logger.warning(message)
+            errors.append(message)
+    return papers, errors
 
 
 def _score_batch(
@@ -601,9 +716,21 @@ def fetch_all_sources(settings: Settings) -> tuple[list[Paper], list[str]]:
     errors: list[str] = []
     arxiv_categories = settings.sources.arxiv.primary + settings.sources.arxiv.secondary
     daily_listings: dict[str, ArxivDailyListing] = {}
-    for category in arxiv_categories:
+    arxiv_cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
+    arxiv_cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
+    arxiv_listing_cache_ttl_seconds = min(arxiv_cache_ttl_seconds, 2 * 3600)
+    for index, category in enumerate(arxiv_categories):
+        if index and settings.sources.arxiv.api_request_delay_seconds > 0:
+            time.sleep(settings.sources.arxiv.api_request_delay_seconds)
         try:
-            daily_listings[category.category] = fetch_arxiv_daily_listing(category.category)
+            daily_listings[category.category] = fetch_arxiv_daily_listing(
+                category.category,
+                retry_attempts=settings.sources.arxiv.api_retry_attempts,
+                retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
+                retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
+                cache_dir=arxiv_cache_dir,
+                cache_ttl_seconds=arxiv_listing_cache_ttl_seconds,
+            )
             logger.info(
                 "arXiv daily listing: category=%s date=%s papers=%s available=%s",
                 category.category,
@@ -615,36 +742,48 @@ def fetch_all_sources(settings: Settings) -> tuple[list[Paper], list[str]]:
             message = f"arXiv listing {category.category}: {exc}"
             logger.warning(message)
             errors.append(message)
-    arxiv_cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
-    arxiv_cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
-    for index, category in enumerate(arxiv_categories):
-        if index and settings.sources.arxiv.api_request_delay_seconds > 0:
-            time.sleep(settings.sources.arxiv.api_request_delay_seconds)
+    if settings.sources.arxiv.fetch_mode == "daily_listing":
+        daily_papers, daily_errors = _fetch_arxiv_daily_listing_metadata(settings, arxiv_categories, daily_listings)
+        papers.extend(daily_papers)
+        errors.extend(daily_errors)
+    if settings.sources.arxiv.fetch_mode == "category_search" or settings.sources.arxiv.backfill_with_category_search:
+        category_papers, category_errors = _fetch_arxiv_category_search_sources(settings, daily_listings=daily_listings)
+        papers.extend(category_papers)
+        errors.extend(category_errors)
+    rss_cache_dir = settings.root_dir / settings.sources.rss.cache_dir if settings.sources.rss.cache_enabled else None
+    rss_cache_ttl_seconds = settings.sources.rss.cache_ttl_hours * 3600
+    for index, feed in enumerate(settings.sources.rss.feeds):
+        if index and settings.sources.rss.request_delay_seconds > 0:
+            time.sleep(settings.sources.rss.request_delay_seconds)
         try:
             papers.extend(
-                fetch_arxiv_papers(
-                    [category],
-                    days_back=settings.sources.arxiv.days_back,
-                    daily_listings=daily_listings,
-                    retry_attempts=settings.sources.arxiv.api_retry_attempts,
-                    retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
-                    retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
-                    cache_dir=arxiv_cache_dir,
-                    cache_ttl_seconds=arxiv_cache_ttl_seconds,
+                fetch_rss_papers(
+                    [feed],
+                    max_entries_per_feed=settings.sources.rss.max_entries_per_feed,
+                    retry_attempts=settings.sources.rss.retry_attempts,
+                    retry_initial_delay_seconds=settings.sources.rss.retry_initial_delay_seconds,
+                    retry_max_delay_seconds=settings.sources.rss.retry_max_delay_seconds,
+                    cache_dir=rss_cache_dir,
+                    cache_ttl_seconds=rss_cache_ttl_seconds,
                 )
             )
-        except Exception as exc:
-            message = f"arXiv {category.category}: {exc}"
-            logger.warning(message)
-            errors.append(message)
-    for feed in settings.sources.rss.feeds:
-        try:
-            papers.extend(fetch_rss_papers([feed], max_entries_per_feed=settings.sources.rss.max_entries_per_feed))
         except Exception as exc:
             message = f"RSS {feed.name}: {exc}"
             logger.warning(message)
             errors.append(message)
     return papers, errors
+
+
+def _dedupe_papers(papers: list[Paper]) -> list[Paper]:
+    deduped: list[Paper] = []
+    seen: set[tuple[str, str]] = set()
+    for paper in papers:
+        key = (paper.source, paper.paper_id)
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(paper)
+    return deduped
 
 
 def render_dry_wechat_message(settings: Settings) -> str:

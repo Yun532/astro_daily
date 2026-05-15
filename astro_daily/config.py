@@ -18,6 +18,10 @@ class ArxivConfig(BaseModel):
     days_back: int = Field(default=3, ge=1, le=30)
     primary: list[ArxivCategoryConfig]
     secondary: list[ArxivCategoryConfig] = Field(default_factory=list)
+    fetch_mode: str = "daily_listing"
+    backfill_with_category_search: bool = False
+    on_demand_backfill_with_category_search: bool = True
+    id_list_chunk_size: int = Field(default=100, ge=1, le=300)
     api_request_delay_seconds: float = Field(default=6.0, ge=0, le=120)
     api_retry_attempts: int = Field(default=5, ge=1, le=10)
     api_retry_initial_delay_seconds: float = Field(default=10.0, ge=0, le=300)
@@ -25,6 +29,12 @@ class ArxivConfig(BaseModel):
     api_cache_enabled: bool = True
     api_cache_dir: str = ".cache/arxiv_api"
     api_cache_ttl_hours: float = Field(default=24.0, ge=0, le=168)
+
+    @model_validator(mode="after")
+    def validate_fetch_mode(self) -> "ArxivConfig":
+        if self.fetch_mode not in {"daily_listing", "category_search"}:
+            raise ValueError("arxiv fetch_mode must be one of: daily_listing, category_search")
+        return self
 
 
 class RssFeedConfig(BaseModel):
@@ -34,6 +44,13 @@ class RssFeedConfig(BaseModel):
 
 class RssConfig(BaseModel):
     max_entries_per_feed: int = Field(default=30, ge=1, le=200)
+    request_delay_seconds: float = Field(default=3.0, ge=0, le=120)
+    retry_attempts: int = Field(default=4, ge=1, le=10)
+    retry_initial_delay_seconds: float = Field(default=10.0, ge=0, le=300)
+    retry_max_delay_seconds: float = Field(default=300.0, ge=0, le=1800)
+    cache_enabled: bool = True
+    cache_dir: str = ".cache/rss"
+    cache_ttl_hours: float = Field(default=6.0, ge=0, le=168)
     feeds: list[RssFeedConfig] = Field(default_factory=list)
 
 

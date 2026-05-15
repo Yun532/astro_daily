@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter, defaultdict
 from datetime import date, datetime
 from pathlib import Path
 
@@ -58,8 +59,7 @@ def render_report(
         lines.append(f"补充推荐论文数：{len(supplemental_papers)}")
     lines.append("")
     if source_errors:
-        lines.extend(["## 数据源警告", ""])
-        lines.extend(f"- {error}" for error in source_errors)
+        lines.extend(["## 数据源警告", "", *_source_warning_lines(source_errors)])
         lines.append("")
     if not scored_papers:
         if weekend_lessons:
@@ -102,6 +102,55 @@ def _append_supplemental_papers(lines: list[str], papers: list[ScoredPaper]) -> 
         ]
     )
     _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", papers, supplemental=True)
+
+
+def _source_warning_lines(source_errors: list[str]) -> list[str]:
+    groups: dict[str, list[str]] = defaultdict(list)
+    reasons: Counter[str] = Counter()
+    for error in source_errors:
+        group = _source_error_group(error)
+        groups[group].append(error)
+        reasons[_source_error_reason(error)] += 1
+
+    lines = [
+        f"- 本次有 {len(source_errors)} 个数据源访问异常；完整错误已保留在运行日志中，日报只显示摘要。",
+    ]
+    if groups.get("arxiv_listing"):
+        lines.append(f"- arXiv 每日列表：{len(groups['arxiv_listing'])} 个分类访问异常，可能无法严格确认“今日新上架”批次。")
+    if groups.get("arxiv_api"):
+        lines.append(f"- arXiv API：{len(groups['arxiv_api'])} 个分类访问异常，候选池可能不完整；程序会基于已成功获取的数据继续兜底。")
+    if groups.get("rss"):
+        lines.append(f"- 期刊 RSS：{len(groups['rss'])} 个 feed 访问异常，主要影响 Nature/Science 等补充来源，不影响 arXiv 主流程继续生成。")
+    if groups.get("other"):
+        lines.append(f"- 其他来源：{len(groups['other'])} 个异常。")
+
+    if reasons:
+        reason_text = "；".join(f"{reason} {count} 次" for reason, count in reasons.most_common(3))
+        lines.append(f"- 主要错误类型：{reason_text}。")
+    return lines
+
+
+def _source_error_group(error: str) -> str:
+    if error.startswith("arXiv listing "):
+        return "arxiv_listing"
+    if error.startswith("arXiv "):
+        return "arxiv_api"
+    if error.startswith("RSS "):
+        return "rss"
+    return "other"
+
+
+def _source_error_reason(error: str) -> str:
+    lowered = error.lower()
+    if "429" in lowered or "too many requests" in lowered:
+        return "限流"
+    if "timed out" in lowered or "timeout" in lowered:
+        return "超时"
+    if "ssl" in lowered or "unexpected_eof" in lowered:
+        return "SSL 连接中断"
+    if "connection reset" in lowered or "connection aborted" in lowered:
+        return "连接中断"
+    return "其他"
 
 
 def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, supplemental: bool = False) -> None:

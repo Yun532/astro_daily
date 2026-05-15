@@ -8,6 +8,7 @@ from datetime import date
 from astro_daily.config import load_settings
 from astro_daily.feedback import VALID_RATINGS, append_feedback
 from astro_daily.pipeline import DEFERRED_RETRY_EXIT_CODE, DeferredRetryNeeded, fetch_all_sources, run_pipeline
+from astro_daily.process_lock import single_process_lock
 from src.clawbot_chat import run_clawbot_chat_loop, run_clawbot_chat_once
 from src.clawbot_client import poll_clawbot_once
 from src.push_clawbot import send_clawbot_report_message
@@ -23,15 +24,17 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=getattr(logging, args.log_level), format="%(levelname)s %(name)s: %(message)s")
     try:
         if args.command == "run":
+            settings = load_settings(args.config)
             run_date = date.fromisoformat(args.date) if args.date else None
-            result = run_pipeline(
-                config_path=args.config,
-                run_date=run_date,
-                dry_run=args.dry_run,
-                ignore_seen=args.ignore_seen,
-                defer_if_unfresh=args.defer_if_unfresh,
-                final_attempt=args.final_attempt,
-            )
+            with single_process_lock(settings.root_dir, "source-fetch"):
+                result = run_pipeline(
+                    config_path=args.config,
+                    run_date=run_date,
+                    dry_run=args.dry_run,
+                    ignore_seen=args.ignore_seen,
+                    defer_if_unfresh=args.defer_if_unfresh,
+                    final_attempt=args.final_attempt,
+                )
             print(f"Report: {result.report_path}")
             print(f"HTML report: {result.html_report_path}")
             if result.published_url:
@@ -47,7 +50,8 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if args.command == "test-fetch":
             settings = load_settings(args.config)
-            papers, errors = fetch_all_sources(settings)
+            with single_process_lock(settings.root_dir, "source-fetch"):
+                papers, errors = fetch_all_sources(settings)
             print(f"Fetched {len(papers)} papers")
             for paper in papers[:10]:
                 category = f" [{paper.category}]" if paper.category else ""
