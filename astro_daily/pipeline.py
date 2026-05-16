@@ -11,7 +11,7 @@ from astro_daily.feedback import feedback_context_for_scoring, load_feedback
 from astro_daily.formula_integrity import ensure_html_latex_formulas_valid, repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
-from astro_daily.quality import check_summary_quality, quality_log_summary
+from astro_daily.quality import check_summary_quality, check_weekend_lesson_quality, quality_log_summary
 from astro_daily.report import render_report, write_daily_report
 from astro_daily.run_logging import RunLogger
 from astro_daily.scoring import (
@@ -153,7 +153,12 @@ def run_pipeline(
                 topics=_weekend_classic_topics(),
                 avoid_previous_lessons=seen.weekend_lesson_history(),
             )
-            stage.update(classic_lesson_count=len(weekend_lessons), titles=[lesson.title_cn for lesson in weekend_lessons])
+            lesson_quality = check_weekend_lesson_quality(weekend_lessons)
+            stage.update(
+                classic_lesson_count=len(weekend_lessons),
+                titles=[lesson.title_cn for lesson in weekend_lessons],
+                content_quality=quality_log_summary(lesson_quality),
+            )
     else:
         with run_logger.stage("prepare_candidates") as stage:
             candidates = prepare_candidates(new_papers, settings.scoring, run_date=run_date)

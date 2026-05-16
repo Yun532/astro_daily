@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import re
 
-from astro_daily.models import PaperSummary, ScoredPaper
+from astro_daily.models import PaperSummary, ScoredPaper, WeekendLesson
 
 
 PLACEHOLDER_MARKERS = (
@@ -13,7 +13,9 @@ PLACEHOLDER_MARKERS = (
     "fallback summary",
     "auto-generated section was not reliable",
 )
-FORMULA_RE = re.compile(r"\$\$.*?\$\$|\\\(.*?\\\)", re.DOTALL)
+FORMULA_RE = re.compile(r"\$\$.*?\$\$|\\\[.*?\\\]|\\\(.*?\\\)", re.DOTALL)
+SUMMARY_MIN_FORMULAS = 5
+WEEKEND_LESSON_MIN_FORMULAS = 8
 
 
 @dataclass(frozen=True)
@@ -44,6 +46,10 @@ def check_summary_quality(items: list[ScoredPaper]) -> list[SummaryQualityResult
     return [_check_one(item) for item in items if item.summary]
 
 
+def check_weekend_lesson_quality(lessons: list[WeekendLesson]) -> list[SummaryQualityResult]:
+    return [_check_lesson(lesson, index) for index, lesson in enumerate(lessons, start=1)]
+
+
 def quality_log_summary(results: list[SummaryQualityResult]) -> dict[str, object]:
     repair_needed = [result for result in results if result.repair_needed]
     return {
@@ -58,8 +64,46 @@ def quality_log_summary(results: list[SummaryQualityResult]) -> dict[str, object
 def _check_one(item: ScoredPaper) -> SummaryQualityResult:
     summary = item.summary
     assert summary is not None
+    return _quality_from_fields(
+        paper_id=item.paper.paper_id,
+        fields=_required_fields(summary),
+        formula_text=summary.formula_derivation_cn or "",
+        related_work_text=summary.related_work_cn,
+        key_sections_text=summary.key_sections_cn,
+        figures_to_check_text=summary.figures_to_check_cn,
+        key_figure_analysis_text=summary.key_figure_analysis_cn,
+        min_formulas=SUMMARY_MIN_FORMULAS,
+        formula_issue=f"formula_derivation_cn has fewer than {SUMMARY_MIN_FORMULAS} formulas",
+    )
+
+
+def _check_lesson(lesson: WeekendLesson, index: int) -> SummaryQualityResult:
+    return _quality_from_fields(
+        paper_id=f"weekend_lesson:{index}",
+        fields=_lesson_required_fields(lesson),
+        formula_text=lesson.formula_derivation_cn or "",
+        related_work_text=lesson.followup_reading_cn,
+        key_sections_text=lesson.key_sections_cn,
+        figures_to_check_text=lesson.figures_to_check_cn,
+        key_figure_analysis_text=lesson.key_figure_analysis_cn,
+        min_formulas=WEEKEND_LESSON_MIN_FORMULAS,
+        formula_issue=f"formula_derivation_cn has fewer than {WEEKEND_LESSON_MIN_FORMULAS} formulas",
+    )
+
+
+def _quality_from_fields(
+    *,
+    paper_id: str,
+    fields: dict[str, str],
+    formula_text: str,
+    related_work_text: str,
+    key_sections_text: str,
+    figures_to_check_text: str,
+    key_figure_analysis_text: str,
+    min_formulas: int,
+    formula_issue: str,
+) -> SummaryQualityResult:
     issues: list[str] = []
-    fields = _required_fields(summary)
     empty_fields = [name for name, value in fields.items() if not value.strip()]
     if empty_fields:
         issues.append("missing fields: " + ", ".join(empty_fields))
@@ -69,18 +113,20 @@ def _check_one(item: ScoredPaper) -> SummaryQualityResult:
     joined = "\n".join(fields.values())
     if _has_placeholder(joined):
         issues.append("contains placeholder or fallback text")
-    formula_count = len(FORMULA_RE.findall(summary.formula_derivation_cn or ""))
-    if formula_count < 2:
-        issues.append("formula_derivation_cn has fewer than 2 formulas")
-    if len((summary.figures_to_check_cn or "").strip()) < 80 and len((summary.key_figure_analysis_cn or "").strip()) < 120:
+    formula_count = len(FORMULA_RE.findall(formula_text))
+    if formula_count < min_formulas:
+        issues.append(formula_issue)
+    if len(formula_text.strip()) < _minimum_length("formula_derivation_cn"):
+        issues.append("formula_derivation_cn is too short for a foundation-to-paper derivation")
+    if len((figures_to_check_text or "").strip()) < 120 and len((key_figure_analysis_text or "").strip()) < 220:
         issues.append("figure guidance is thin")
     depth_score = _score_from_lengths(fields)
     clarity_score = 6 if _has_placeholder(joined) else 8
-    grounding_score = 7 if summary.related_work_cn or summary.key_sections_cn else 5
-    formula_quality = min(10, 4 + formula_count * 2)
-    figure_quality = 8 if summary.figures_to_check_cn and summary.key_figure_analysis_cn else 5
+    grounding_score = 7 if related_work_text or key_sections_text else 5
+    formula_quality = min(10, 2 + formula_count)
+    figure_quality = 8 if figures_to_check_text and key_figure_analysis_text else 5
     return SummaryQualityResult(
-        paper_id=item.paper.paper_id,
+        paper_id=paper_id,
         grounding_score=grounding_score,
         depth_score=depth_score,
         clarity_score=clarity_score,
@@ -109,12 +155,35 @@ def _required_fields(summary: PaperSummary) -> dict[str, str]:
     }
 
 
+def _lesson_required_fields(lesson: WeekendLesson) -> dict[str, str]:
+    return {
+        "title_cn": lesson.title_cn,
+        "why_classic_cn": lesson.why_classic_cn,
+        "detailed_explanation_cn": lesson.detailed_explanation_cn,
+        "background_cn": lesson.background_cn,
+        "basic_theory_cn": lesson.basic_theory_cn,
+        "formula_derivation_cn": lesson.formula_derivation_cn,
+        "model_fitting_cn": lesson.model_fitting_cn,
+        "key_sections_cn": lesson.key_sections_cn,
+        "figures_to_check_cn": lesson.figures_to_check_cn,
+        "key_figure_analysis_cn": lesson.key_figure_analysis_cn,
+        "followup_reading_cn": lesson.followup_reading_cn,
+        "next_lesson_suggestions_cn": lesson.next_lesson_suggestions_cn,
+    }
+
+
 def _minimum_length(name: str) -> int:
+    if name == "title_cn":
+        return 4
     if name in {"summary_cn", "why_important_cn", "value_cn", "why_care_cn"}:
         return 40
     if name in {"figures_to_check_cn", "key_figure_analysis_cn", "key_sections_cn"}:
-        return 80
-    return 120
+        return 160
+    if name == "formula_derivation_cn":
+        return 500
+    if name in {"basic_theory_cn", "model_fitting_cn", "detailed_explanation_cn", "background_cn", "followup_reading_cn"}:
+        return 260
+    return 160
 
 
 def _score_from_lengths(fields: dict[str, str]) -> int:

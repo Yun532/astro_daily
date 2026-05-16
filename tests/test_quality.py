@@ -1,5 +1,5 @@
-from astro_daily.models import Paper, PaperScore, PaperSummary, ScoredPaper
-from astro_daily.quality import check_summary_quality, quality_log_summary
+from astro_daily.models import Paper, PaperScore, PaperSummary, ScoredPaper, WeekendLesson
+from astro_daily.quality import check_summary_quality, check_weekend_lesson_quality, quality_log_summary
 
 
 def make_item(summary):
@@ -29,6 +29,40 @@ def test_quality_flags_thin_summary():
 
 def test_quality_accepts_detailed_summary():
     long = "This section explains the concrete science context, method, result, limitation, and reading guidance. " * 5
+    formulas = " ".join(
+        [
+            "$$E=mc^2$$",
+            "\\(F_\\nu\\propto t^{-1}\\)",
+            "\\[L=4\\pi D^2F\\]",
+            "\\(\\chi^2=\\sum r_i^2\\)",
+            "$$\\tau=n\\sigma R$$",
+        ]
+    )
+    summary = PaperSummary(
+        paper_id="2605.11894",
+        title_cn="Title",
+        summary_cn=long,
+        why_important_cn=long,
+        value_cn=long,
+        why_care_cn=long,
+        detailed_explanation_cn=long,
+        background_cn=long,
+        basic_theory_cn=long,
+        formula_derivation_cn=long + formulas,
+        model_fitting_cn=long,
+        key_sections_cn=long,
+        figures_to_check_cn=long,
+        key_figure_analysis_cn=long,
+        related_work_cn=long,
+    )
+
+    result = check_summary_quality([make_item(summary)])[0]
+
+    assert not result.repair_needed
+
+
+def test_quality_flags_summary_with_thin_formula_derivation():
+    long = "This section explains the concrete science context, method, result, limitation, and reading guidance. " * 5
     summary = PaperSummary(
         paper_id="2605.11894",
         title_cn="Title",
@@ -48,5 +82,42 @@ def test_quality_accepts_detailed_summary():
     )
 
     result = check_summary_quality([make_item(summary)])[0]
+
+    assert result.repair_needed
+    assert any("fewer than 5 formulas" in issue for issue in result.issues)
+
+
+def test_quality_checks_weekend_lesson_formula_depth():
+    long = "This lesson builds prerequisites, derives the result, explains diagnostics, and states limitations. " * 6
+    formulas = " ".join(
+        [
+            "$$E=mc^2$$",
+            "\\(R=ct\\)",
+            "\\[F=L/(4\\pi D^2)\\]",
+            "\\(N(E)=AE^{-p}\\)",
+            "$$\\tau=n\\sigma R$$",
+            "\\(\\Gamma\\propto t^{-3/8}\\)",
+            "\\[\\nu_m\\propto t^{-3/2}\\]",
+            "\\(\\alpha=3\\beta/2\\)",
+        ]
+    )
+    lesson = WeekendLesson(
+        topic="GRB",
+        title_cn="经典课程",
+        anchor_work_cn="classic anchor",
+        why_classic_cn=long,
+        detailed_explanation_cn=long,
+        background_cn=long,
+        basic_theory_cn=long,
+        formula_derivation_cn=long + formulas,
+        model_fitting_cn=long,
+        key_sections_cn=long,
+        figures_to_check_cn=long,
+        key_figure_analysis_cn=long,
+        followup_reading_cn=long,
+        next_lesson_suggestions_cn=long,
+    )
+
+    result = check_weekend_lesson_quality([lesson])[0]
 
     assert not result.repair_needed

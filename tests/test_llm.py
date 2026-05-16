@@ -1,6 +1,6 @@
 from datetime import date, datetime, timezone
 
-from astro_daily.llm import _paper_for_prompt, _parse_json_text
+from astro_daily.llm import SUMMARY_DEPTH_CONTRACT, WEEKEND_LESSON_DEPTH_CONTRACT, _paper_for_prompt, _parse_json_text
 from astro_daily.models import Paper
 
 
@@ -54,3 +54,9 @@ def test_paper_prompt_includes_update_and_source_batch_dates():
     assert payload["published"] == "2026-05-11T00:00:00+00:00"
     assert payload["updated"] == "2026-05-11T00:00:00+00:00"
     assert payload["source_batch_date"] == "2026-05-12"
+
+
+def test_depth_contracts_require_systematic_formula_derivations():
+    assert "6-12" in SUMMARY_DEPTH_CONTRACT["formula_derivation_cn"]
+    assert "8-14" in WEEKEND_LESSON_DEPTH_CONTRACT["formula_derivation_cn"]
+    assert "foundation-to-frontier" in WEEKEND_LESSON_DEPTH_CONTRACT["course_shape"]
