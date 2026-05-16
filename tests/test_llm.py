@@ -1,6 +1,12 @@
 from datetime import date, datetime, timezone
 
-from astro_daily.llm import SUMMARY_DEPTH_CONTRACT, WEEKEND_LESSON_DEPTH_CONTRACT, _paper_for_prompt, _parse_json_text
+from astro_daily.llm import (
+    SUMMARY_DEPTH_CONTRACT,
+    WEEKEND_LESSON_DEPTH_CONTRACT,
+    _paper_for_prompt,
+    _parse_json_text,
+    _weekend_lesson_outline_schema,
+)
 from astro_daily.models import Paper
 
 
@@ -60,3 +66,11 @@ def test_depth_contracts_require_systematic_formula_derivations():
     assert "6-12" in SUMMARY_DEPTH_CONTRACT["formula_derivation_cn"]
     assert "8-14" in WEEKEND_LESSON_DEPTH_CONTRACT["formula_derivation_cn"]
     assert "foundation-to-frontier" in WEEKEND_LESSON_DEPTH_CONTRACT["course_shape"]
+
+
+def test_weekend_lesson_outline_schema_requires_course_skeleton():
+    schema = _weekend_lesson_outline_schema()
+
+    assert "chapter_outline" in schema["required"]
+    assert schema["properties"]["chapter_outline"]["minItems"] >= 6
+    assert schema["properties"]["derivation_ladder"]["minItems"] >= 8

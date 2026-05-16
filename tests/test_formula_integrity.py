@@ -144,6 +144,22 @@ def test_bare_latex_repair_preserves_protected_markdown(tmp_path: Path):
     assert result.issue_count == 0
 
 
+def test_bare_latex_repair_skips_partial_complex_expressions(tmp_path: Path):
+    path = tmp_path / "2026-05-16.md"
+    original = (
+        "# Astro Daily\n\n"
+        "#### 背景知识\n\n"
+        "Band 谱定义在 N(E)=dN/(dE dA dt) 上，低能段 N(E)=A(E/100 keV)^alpha exp(-E/E_0)。\n"
+    )
+    path.write_text(original, encoding="utf-8")
+
+    result = repair_report_latex_formulas(path)
+    repaired = path.read_text(encoding="utf-8")
+
+    assert repaired == original
+    assert result.issue_count == 0
+
+
 def test_html_formula_validation_reports_naked_latex(tmp_path: Path):
     path = tmp_path / "bad.html"
     path.write_text("<main><p>自转能损失率 \\dot{E} 和 I_\\gamma(\\theta)。</p></main>", encoding="utf-8")

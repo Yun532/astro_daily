@@ -295,14 +295,38 @@ def _repair_bare_latex_segment(segment: str, line_number: int, *, repair: bool) 
 
 
 def _is_repairable_naked_math_token(token: str) -> bool:
-    stripped = token.strip(".,;:，。；：、）)]}】》")
+    stripped = token.strip(".,;:，。；：、）】》")
     if not stripped or stripped.startswith("\\begin") or stripped.startswith("\\end"):
+        return False
+    if stripped.endswith(("\\", "/", "=", "+", "-", "*", "^", "_")):
+        return False
+    if not _has_balanced_group_chars(stripped):
         return False
     if LATEX_COMMAND_RE.search(stripped):
         return True
     if re.search(r"[A-Za-z]+(?:_\{[^}]+\}|_[A-Za-z0-9]+|\^\{[^}]+\}|\^[A-Za-z0-9]+)", stripped):
         return True
     return bool("=" in stripped and re.search(r"[A-Za-z]", stripped) and any(marker in stripped for marker in ["_", "^", "\\", "("]))
+
+
+def _has_balanced_group_chars(text: str) -> bool:
+    pairs = {"(": ")", "[": "]", "{": "}"}
+    closers = {value: key for key, value in pairs.items()}
+    stack: list[str] = []
+    index = 0
+    while index < len(text):
+        char = text[index]
+        if char == "\\":
+            index += 2
+            continue
+        if char in pairs:
+            stack.append(char)
+        elif char in closers:
+            if not stack or stack[-1] != closers[char]:
+                return False
+            stack.pop()
+        index += 1
+    return not stack
 
 
 def _find_naked_latex_tokens(text: str) -> list[str]:
