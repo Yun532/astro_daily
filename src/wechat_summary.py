@@ -21,6 +21,46 @@ def compress_for_wechat(papers: List[Paper], date: str, report_url: str, *, supp
     return _fit_bytes(text, MAX_WECOM_BYTES - _byte_len(suffix)).rstrip() + suffix
 
 
+def compress_report_mix_for_wechat(
+    regular_papers: list[Any],
+    supplemental_papers: list[Any],
+    classic_papers: list[Any],
+    date: str,
+    report_url: str,
+    *,
+    daily_content_floor: int,
+) -> str:
+    regular_items = select_wechat_papers(regular_papers)
+    supplemental_items = select_wechat_papers(supplemental_papers, supplemental=True)
+    classic_items = list(classic_papers)
+    items = [*regular_items, *supplemental_items, *classic_items]
+    he, instrument, other = wechat_category_counts(items)
+    lines = [
+        f"# 天文日报｜{date}",
+        "",
+        f"今日新文：{len(regular_items)} 篇；补充推荐：{len(supplemental_items)} 篇；经典旧文精读：{len(classic_items)} 篇",
+        f"说明：今日通过常规阈值的新论文少于 {daily_content_floor} 篇，已补充近期重要旧文/经典旧文精读。",
+        f"HE：{he} 篇；仪器：{instrument} 篇；其他：{other} 篇",
+        "",
+    ]
+    index = 1
+    for item in regular_items:
+        _append_wechat_item(lines, index, item, label="今日新文", short=False)
+        index += 1
+    for item in supplemental_items:
+        _append_wechat_item(lines, index, item, label="补充推荐（非今日每日论文）", short=False)
+        index += 1
+    for item in classic_items:
+        _append_wechat_item(lines, index, item, label="经典旧文精读（非今日每日论文）", short=False)
+        index += 1
+    lines.append(f"[完整报告]({report_url})")
+    text = "\n".join(lines).strip()
+    if _byte_len(text) <= MAX_WECOM_BYTES:
+        return text
+    suffix = f"\n\n[完整报告]({report_url})"
+    return _fit_bytes(text, MAX_WECOM_BYTES - _byte_len(suffix)).rstrip() + suffix
+
+
 def compress_weekend_lessons(lessons: list[WeekendLesson], date: str, report_url: str) -> str:
     lines = [
         f"# 天文日报｜{date}",
@@ -116,6 +156,20 @@ def _render(items: list[Any], date: str, report_url: str, *, short: bool, supple
         )
     lines.append(f"[完整报告]({report_url})")
     return "\n".join(lines).strip()
+
+
+def _append_wechat_item(lines: list[str], index: int, item: Any, *, label: str, short: bool) -> None:
+    paper = _paper(item)
+    lines.extend(
+        [
+            f"{index}. **{paper.title}**",
+            f"类型：{label}",
+            f"一段话：{_summary_text(item, short=short)}",
+            f"重要性：{_importance_text(item, short=short)}",
+            f"[阅读全文]({paper.url})",
+            "",
+        ]
+    )
 
 
 def _summary_text(item: Any, *, short: bool) -> str:

@@ -17,6 +17,7 @@ def write_daily_report(
     dry_run: bool,
     weekend_lessons: list[WeekendLesson] | None = None,
     supplemental_papers: list[ScoredPaper] | None = None,
+    classic_papers: list[ScoredPaper] | None = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{run_date.isoformat()}.md"
@@ -29,6 +30,7 @@ def write_daily_report(
             dry_run=dry_run,
             weekend_lessons=weekend_lessons,
             supplemental_papers=supplemental_papers,
+            classic_papers=classic_papers,
         ),
         encoding="utf-8",
     )
@@ -44,19 +46,25 @@ def render_report(
     dry_run: bool,
     weekend_lessons: list[WeekendLesson] | None = None,
     supplemental_papers: list[ScoredPaper] | None = None,
+    classic_papers: list[ScoredPaper] | None = None,
 ) -> str:
     lines = [f"# {title_prefix} {run_date.isoformat()}", ""]
     if dry_run:
         lines.extend(["> Dry-run：本次不会推送微信，也不会更新 seen_papers.json。", ""])
     supplemental_papers = supplemental_papers or []
+    classic_papers = classic_papers or []
     lines.extend(
         [
             f"生成时间：{datetime.now().astimezone().isoformat(timespec='seconds')}",
             f"今日保留论文数：{len(scored_papers)}",
         ]
     )
+    if scored_papers or supplemental_papers or classic_papers:
+        lines.append(f"内容构成：今日新文 {len(scored_papers)} 篇；补充推荐 {len(supplemental_papers)} 篇；经典旧文精读 {len(classic_papers)} 篇")
     if supplemental_papers:
         lines.append(f"补充推荐论文数：{len(supplemental_papers)}")
+    if classic_papers:
+        lines.append(f"经典旧文精读数：{len(classic_papers)}")
     lines.append("")
     if source_errors:
         lines.extend(["## 数据源警告", "", *_source_warning_lines(source_errors)])
@@ -64,8 +72,8 @@ def render_report(
     if not scored_papers:
         if weekend_lessons:
             _append_weekend_lessons(lines, weekend_lessons)
-        elif supplemental_papers:
-            _append_supplemental_papers(lines, supplemental_papers)
+        elif supplemental_papers or classic_papers:
+            _append_fallback_papers(lines, supplemental_papers, classic_papers)
         else:
             lines.extend(
                 [
@@ -81,6 +89,10 @@ def render_report(
     non_he = [item for item in scored_papers if not item.paper.is_priority_topic]
     _append_section(lines, "高能天体物理重点", he)
     _append_section(lines, "相关但非 HE 的重要论文", non_he)
+    if supplemental_papers:
+        _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", supplemental_papers, supplemental=True)
+    if classic_papers:
+        _append_section(lines, "经典旧文精读：具体经典论文 / 重要旧文", classic_papers, classic=True)
     lines.extend(
         [
             "## 说明",
@@ -92,16 +104,22 @@ def render_report(
     return "\n".join(lines).strip() + "\n"
 
 
-def _append_supplemental_papers(lines: list[str], papers: list[ScoredPaper]) -> None:
+def _append_fallback_papers(lines: list[str], supplemental_papers: list[ScoredPaper], classic_papers: list[ScoredPaper]) -> None:
+    total = len(supplemental_papers) + len(classic_papers)
     lines.extend(
         [
             "## 今日结论",
             "",
-            f"今天有论文更新，但没有论文通过常规推荐阈值。以下 {len(papers)} 篇是近期/较早未读论文中的补充推荐，不是今日每日论文。",
+            f"今天通过常规推荐阈值的新论文不足内容下限。以下 {total} 篇用于补足阅读质量：近期/较早未读论文或具体经典旧文精读，均不是今日每日论文。",
             "",
         ]
     )
-    _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", papers, supplemental=True)
+    if supplemental_papers:
+        lines.extend([f"今天有论文更新，但没有论文通过常规推荐阈值，或通过数量不足内容下限。以下 {len(supplemental_papers)} 篇是近期/较早未读论文中的补充推荐，不是今日每日论文。", ""])
+    if supplemental_papers:
+        _append_section(lines, "补充推荐：近期/较早未读论文（非今日论文）", supplemental_papers, supplemental=True)
+    if classic_papers:
+        _append_section(lines, "经典旧文精读：具体经典论文 / 重要旧文", classic_papers, classic=True)
 
 
 def _source_warning_lines(source_errors: list[str]) -> list[str]:
@@ -153,7 +171,7 @@ def _source_error_reason(error: str) -> str:
     return "其他"
 
 
-def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, supplemental: bool = False) -> None:
+def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, supplemental: bool = False, classic: bool = False) -> None:
     if not papers:
         return
     lines.extend([f"## {title}", ""])
@@ -172,6 +190,8 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, 
         )
         if supplemental:
             lines.append("- 类型：补充推荐（近期/较早未读，非今日每日论文）")
+        if classic:
+            lines.append("- 类型：经典旧文精读（来自 classic_papers.yaml，非今日每日论文）")
         lines.extend(
             [
                 f"- 评分：novelty {score.novelty_score}/10，importance {score.importance_score}/10，relevance {score.relevance_to_me}/10，final {score.final_score:.2f}/10",

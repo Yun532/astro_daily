@@ -6,6 +6,7 @@ import time
 from dataclasses import dataclass
 from datetime import date
 
+from astro_daily.classics import select_classic_paper
 from astro_daily.config import Settings, load_settings
 from astro_daily.feedback import feedback_context_for_scoring, load_feedback
 from astro_daily.formula_integrity import ensure_html_latex_formulas_valid, repair_report_latex_formulas
@@ -32,7 +33,7 @@ from src.push_clawbot import send_clawbot_report_message
 from src.push_wecom_bot import send_wecom_markdown
 from src.report_html import generate_html_report
 from src.report_urls import report_url
-from src.wechat_summary import compress_for_wechat, compress_weekend_lessons, select_wechat_papers, wechat_category_counts
+from src.wechat_summary import compress_for_wechat, compress_report_mix_for_wechat, compress_weekend_lessons, select_wechat_papers, wechat_category_counts
 
 logger = logging.getLogger(__name__)
 
@@ -79,6 +80,7 @@ class PipelineResult:
     published: bool
     classic_lesson_count: int = 0
     supplemental_count: int = 0
+    classic_paper_count: int = 0
 
 
 def run_pipeline(
@@ -142,6 +144,7 @@ def run_pipeline(
 
     scored: list[ScoredPaper] = []
     supplemental_scored: list[ScoredPaper] = []
+    classic_scored: list[ScoredPaper] = []
     weekend_lessons: list[WeekendLesson] = []
     analyst: ClaudePaperAnalyst | None = None
     if _is_weekend(run_date):
@@ -205,8 +208,9 @@ def run_pipeline(
                         scored_count=len(scored),
                         selected_papers=_scored_log_items(scored),
                     )
-            if not scored and (today_update_exists or final_attempt):
+            if len(scored) < settings.scoring.daily_content_floor and (today_update_exists or final_attempt):
                 with run_logger.stage("supplemental_selection") as stage:
+                    supplemental_needed = max(0, settings.scoring.daily_content_floor - len(scored))
                     supplemental_scored = _select_supplemental_papers(
                         new_papers,
                         score_results,
@@ -214,35 +218,26 @@ def run_pipeline(
                         run_date=run_date,
                         scoring_config=settings.scoring,
                         feedback_context=feedback_context,
+                    )[:supplemental_needed]
+                    stage.update(
+                        supplemental_needed=supplemental_needed,
+                        supplemental_selected_count=len(supplemental_scored),
+                        selected_papers=_scored_log_items(supplemental_scored),
                     )
-                    stage.update(supplemental_selected_count=len(supplemental_scored), selected_papers=_scored_log_items(supplemental_scored))
-            displayed_scored = scored or supplemental_scored
-            with run_logger.stage(
-                "summaries_and_figures",
-                paper_count=len(displayed_scored),
-                summary_parallel_workers=settings.llm.summary_parallel_workers,
-                figure_parallel_workers=settings.figure_extraction.parallel_workers,
-            ) as stage:
-                displayed_scored, extraction = _enrich_selected_papers(displayed_scored, settings, analyst, run_date=run_date)
-                quality_results = check_summary_quality(displayed_scored)
-                stage.update(
-                    summary_count=sum(1 for item in displayed_scored if item.summary),
-                    figure_attempted=extraction.attempted,
-                    figure_extracted=extraction.extracted,
-                    figure_failed=extraction.failed,
-                    content_quality=quality_log_summary(quality_results),
-                )
-            if scored:
-                scored = displayed_scored
-            else:
-                supplemental_scored = displayed_scored
-            if extraction.attempted:
-                logger.info(
-                    "Figure extraction: attempted=%s extracted=%s failed=%s",
-                    extraction.attempted,
-                    extraction.extracted,
-                    extraction.failed,
-                )
+            if len(scored) + len(supplemental_scored) < settings.scoring.daily_content_floor and (today_update_exists or final_attempt):
+                with run_logger.stage("classic_paper_selection") as stage:
+                    classic = select_classic_paper(settings.classic_papers_path, seen)
+                    if classic:
+                        classic_scored = [classic]
+                    stage.update(classic_paper_count=len(classic_scored), selected_papers=_scored_log_items(classic_scored))
+            if scored or supplemental_scored or classic_scored:
+                enriched = [*scored, *supplemental_scored, *classic_scored]
+                enriched = _enrich_and_repair_selected_papers(enriched, settings, analyst, run_logger, run_date=run_date)
+                scored_count = len(scored)
+                supplemental_count = len(supplemental_scored)
+                scored = enriched[:scored_count]
+                supplemental_scored = enriched[scored_count : scored_count + supplemental_count]
+                classic_scored = enriched[scored_count + supplemental_count :]
 
     with run_logger.stage("write_markdown_report") as stage:
         report_path = write_daily_report(
@@ -254,6 +249,7 @@ def run_pipeline(
             dry_run=dry_run,
             weekend_lessons=weekend_lessons,
             supplemental_papers=supplemental_scored,
+            classic_papers=classic_scored,
         )
         stage["report_path"] = str(report_path)
     try:
@@ -285,9 +281,16 @@ def run_pipeline(
             wechat_message = compress_weekend_lessons(weekend_lessons, run_date.isoformat(), report_url_value)
             selected_for_wechat = weekend_lessons
             wechat_he_count = 0
-        elif supplemental_scored:
-            wechat_message = compress_for_wechat(supplemental_scored, run_date.isoformat(), report_url_value, supplemental=True)
-            selected_for_wechat = select_wechat_papers(supplemental_scored, supplemental=True)
+        elif supplemental_scored or classic_scored:
+            wechat_message = compress_report_mix_for_wechat(
+                scored,
+                supplemental_scored,
+                classic_scored,
+                run_date.isoformat(),
+                report_url_value,
+                daily_content_floor=settings.scoring.daily_content_floor,
+            )
+            selected_for_wechat = [*select_wechat_papers(scored), *select_wechat_papers(supplemental_scored, supplemental=True), *classic_scored]
             wechat_he_count, _, _ = wechat_category_counts(selected_for_wechat)
         else:
             wechat_message = compress_for_wechat(scored, run_date.isoformat(), report_url_value)
@@ -329,7 +332,7 @@ def run_pipeline(
             stage["clawbot"] = "disabled"
         stage.update(push_succeeded=push_succeeded, publish_succeeded=publish_succeeded)
 
-    displayed_papers = scored or supplemental_scored
+    displayed_papers = [*scored, *supplemental_scored, *classic_scored]
     with run_logger.stage("seen_update", dry_run=dry_run) as stage:
         should_update_seen = bool((displayed_papers or weekend_lessons) and not dry_run and push_succeeded and publish_succeeded)
         stage["updated"] = should_update_seen
@@ -356,12 +359,14 @@ def run_pipeline(
         published=publish_result.published,
         classic_lesson_count=len(weekend_lessons),
         supplemental_count=len(supplemental_scored),
+        classic_paper_count=len(classic_scored),
     )
     run_logger.event(
         "pipeline",
         "end",
         kept_count=result.kept_count,
         supplemental_count=result.supplemental_count,
+        classic_paper_count=result.classic_paper_count,
         classic_lesson_count=result.classic_lesson_count,
         report_path=result.report_path,
         html_report_path=result.html_report_path,
@@ -382,7 +387,11 @@ def _enrich_selected_papers(
     futures: dict[Future[list], ScoredPaper] = {}
     attempted = 0
     if settings.figure_extraction.enabled and settings.figure_extraction.max_figures_per_paper > 0:
-        extractable = [item for item in scored if item.paper.source == "arXiv" or item.paper.url or item.paper.pdf_url]
+        extractable = [
+            item
+            for item in scored
+            if item.paper.source != "Classic Paper" and (item.paper.source == "arXiv" or item.paper.url or item.paper.pdf_url)
+        ]
         if extractable:
             attempted = len(extractable)
             workers = min(settings.figure_extraction.parallel_workers, len(extractable))
@@ -408,6 +417,110 @@ def _enrich_selected_papers(
     finally:
         if executor:
             executor.shutdown(wait=True)
+
+
+def _enrich_and_repair_selected_papers(
+    scored: list[ScoredPaper],
+    settings: Settings,
+    analyst: ClaudePaperAnalyst,
+    run_logger: RunLogger,
+    *,
+    run_date: date,
+) -> list[ScoredPaper]:
+    with run_logger.stage(
+        "summaries_and_figures",
+        paper_count=len(scored),
+        summary_parallel_workers=settings.llm.summary_parallel_workers,
+        figure_parallel_workers=settings.figure_extraction.parallel_workers,
+    ) as stage:
+        scored, extraction = _enrich_selected_papers(scored, settings, analyst, run_date=run_date)
+        quality_before = check_summary_quality(scored)
+        repaired = _repair_summary_quality(scored, analyst, quality_before, run_date=run_date)
+        quality_after = check_summary_quality(scored)
+        stage.update(
+            summary_count=sum(1 for item in scored if item.summary),
+            figure_attempted=extraction.attempted,
+            figure_extracted=extraction.extracted,
+            figure_failed=extraction.failed,
+            repaired_summary_count=repaired,
+            content_quality_before=quality_log_summary(quality_before),
+            content_quality=quality_log_summary(quality_after),
+        )
+    if extraction.attempted:
+        logger.info(
+            "Figure extraction: attempted=%s extracted=%s failed=%s",
+            extraction.attempted,
+            extraction.extracted,
+            extraction.failed,
+        )
+    return scored
+
+
+def _repair_summary_quality(
+    scored: list[ScoredPaper],
+    analyst: ClaudePaperAnalyst,
+    quality_results,
+    *,
+    run_date: date,
+) -> int:
+    if not hasattr(analyst, "repair_paper_summary"):
+        return 0
+    by_id = {result.paper_id: result for result in quality_results if result.repair_needed}
+    repaired = 0
+    for item in scored:
+        if not item.summary:
+            continue
+        result = by_id.get(item.paper.paper_id)
+        if not result:
+            continue
+        fields = _summary_repair_fields(result.issues)
+        if not fields:
+            continue
+        try:
+            updates = analyst.repair_paper_summary(
+                paper=item.paper,
+                summary=item.summary,
+                issues=result.issues,
+                requested_fields=fields,
+                run_date=run_date,
+            )
+        except Exception as exc:
+            logger.warning("Summary quality repair failed for %s: %s", item.paper.paper_id, exc)
+            continue
+        updates = {field: value for field, value in updates.items() if value}
+        if not updates:
+            continue
+        item.summary = item.summary.model_copy(update=updates)
+        repaired += 1
+    return repaired
+
+
+def _summary_repair_fields(issues: list[str]) -> list[str]:
+    fields = {
+        "detailed_explanation_cn",
+        "background_cn",
+        "basic_theory_cn",
+        "formula_derivation_cn",
+        "model_fitting_cn",
+        "key_sections_cn",
+        "figures_to_check_cn",
+        "key_figure_analysis_cn",
+        "related_work_cn",
+    }
+    joined = "\n".join(issues)
+    if "formula_derivation_cn" in joined or "formula" in joined:
+        fields.add("formula_derivation_cn")
+    if "figure guidance" in joined:
+        fields.update({"figures_to_check_cn", "key_figure_analysis_cn"})
+    if "summary_cn" in joined:
+        fields.add("summary_cn")
+    if "why_important_cn" in joined:
+        fields.add("why_important_cn")
+    if "value_cn" in joined:
+        fields.add("value_cn")
+    if "why_care_cn" in joined:
+        fields.add("why_care_cn")
+    return sorted(fields)
 
 
 def _select_figures_for_items_parallel(
@@ -507,7 +620,7 @@ def evaluate_source_freshness(*, settings: Settings, papers: list[Paper], source
         for error in source_errors
         if _is_primary_arxiv_error(error, primary_categories) and _is_temporary_source_error(error)
     ]
-    if transient_primary_errors:
+    if transient_primary_errors and not primary_batch_confirmed:
         return SourceFreshnessDecision(
             True,
             "temporary primary arXiv source error: " + "; ".join(transient_primary_errors),
@@ -600,46 +713,82 @@ def _fetch_arxiv_daily_listing_metadata(
     categories,
     daily_listings: dict[str, ArxivDailyListing],
 ) -> tuple[list[Paper], list[str]]:
-    id_category: dict[str, str] = {}
-    id_batch_date: dict[str, date | None] = {}
-    for category in categories:
+    papers: list[Paper] = []
+    errors: list[str] = []
+    cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
+    cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
+    for category_index, category in enumerate(categories):
         listing = daily_listings.get(category.category)
         if not listing or not listing.available:
             continue
-        for paper_id in sorted(listing.paper_ids):
-            id_category.setdefault(paper_id, category.category)
-            id_batch_date.setdefault(paper_id, listing.listing_date)
-    if not id_category:
-        return [], []
+        if category_index and settings.sources.arxiv.api_request_delay_seconds > 0:
+            time.sleep(settings.sources.arxiv.api_request_delay_seconds)
+        expected_ids = set(listing.paper_ids)
+        fetched_ids: set[str] = set()
+        for chunk_index, chunk in enumerate(_chunks(sorted(expected_ids), settings.sources.arxiv.id_list_chunk_size)):
+            if chunk_index and settings.sources.arxiv.api_request_delay_seconds > 0:
+                time.sleep(settings.sources.arxiv.api_request_delay_seconds)
+            try:
+                chunk_papers = fetch_arxiv_papers_by_ids(
+                    category.category,
+                    chunk,
+                    source_batch_date=listing.listing_date,
+                    retry_attempts=settings.sources.arxiv.api_retry_attempts,
+                    retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
+                    retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
+                    request_delay_seconds=0,
+                    cache_dir=cache_dir,
+                    cache_ttl_seconds=cache_ttl_seconds,
+                    chunk_size=len(chunk),
+                )
+            except Exception as exc:
+                message = f"arXiv daily metadata {category.category} chunk {chunk_index + 1}: {exc}"
+                logger.warning(message)
+                errors.append(message)
+                continue
+            for paper in chunk_papers:
+                if paper.paper_id not in expected_ids:
+                    continue
+                paper.category = category.category
+                paper.source_batch_date = listing.listing_date
+                fetched_ids.add(paper.paper_id)
+                papers.append(paper)
+        missing_ids = expected_ids - fetched_ids
+        if missing_ids:
+            fallback_papers, fallback_errors = _fetch_listing_metadata_via_category_search(settings, category, listing, missing_ids)
+            papers.extend(fallback_papers)
+            errors.extend(fallback_errors)
+    return _dedupe_papers(papers), errors
 
+
+def _fetch_listing_metadata_via_category_search(settings: Settings, category, listing: ArxivDailyListing, missing_ids: set[str]) -> tuple[list[Paper], list[str]]:
     cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
     cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
     try:
-        fetched = fetch_arxiv_papers_by_ids(
-            "daily-listing",
-            id_category.keys(),
+        fetched = fetch_arxiv_papers(
+            [category],
+            days_back=settings.sources.arxiv.days_back,
+            daily_listings={category.category: listing},
             retry_attempts=settings.sources.arxiv.api_retry_attempts,
             retry_initial_delay_seconds=settings.sources.arxiv.api_retry_initial_delay_seconds,
             retry_max_delay_seconds=settings.sources.arxiv.api_retry_max_delay_seconds,
-            request_delay_seconds=settings.sources.arxiv.api_request_delay_seconds,
             cache_dir=cache_dir,
             cache_ttl_seconds=cache_ttl_seconds,
-            chunk_size=settings.sources.arxiv.id_list_chunk_size,
         )
     except Exception as exc:
-        categories_text = ",".join(category.category for category in categories if daily_listings.get(category.category, None) and daily_listings[category.category].available)
-        message = f"arXiv daily metadata {categories_text}: {exc}"
+        message = f"arXiv daily metadata fallback {category.category}: {exc}"
         logger.warning(message)
         return [], [message]
-
     papers: list[Paper] = []
     for paper in fetched:
-        if paper.paper_id not in id_category:
+        if paper.paper_id not in missing_ids:
             continue
-        paper.category = id_category[paper.paper_id]
-        paper.source_batch_date = id_batch_date[paper.paper_id]
+        paper.category = category.category
+        paper.source_batch_date = listing.listing_date
         papers.append(paper)
-    return _dedupe_papers(papers), []
+    if not papers and missing_ids:
+        return [], [f"arXiv daily metadata fallback {category.category}: missing {len(missing_ids)} listing papers"]
+    return papers, []
 
 
 def _fetch_arxiv_category_search_sources(settings: Settings, *, daily_listings: dict[str, ArxivDailyListing] | None = None) -> tuple[list[Paper], list[str]]:
@@ -789,6 +938,12 @@ def _dedupe_papers(papers: list[Paper]) -> list[Paper]:
         seen.add(key)
         deduped.append(paper)
     return deduped
+
+
+def _chunks(items: list[str], chunk_size: int):
+    chunk_size = max(1, chunk_size)
+    for index in range(0, len(items), chunk_size):
+        yield items[index : index + chunk_size]
 
 
 def render_dry_wechat_message(settings: Settings) -> str:

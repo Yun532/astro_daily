@@ -80,6 +80,7 @@ class Thresholds(BaseModel):
 class ScoringConfig(BaseModel):
     max_candidates: int = Field(default=120, ge=1, le=300)
     max_papers_per_report: int = Field(default=15, ge=1, le=50)
+    daily_content_floor: int = Field(default=3, ge=0, le=10)
     weights: ScoringWeights = Field(default_factory=ScoringWeights)
     category_boost: dict[str, float] = Field(default_factory=lambda: {"astro-ph.HE": 0.10})
     same_day_target: int = Field(default=5, ge=1, le=20)
@@ -114,6 +115,7 @@ class ReportConfig(BaseModel):
     output_dir: str = "daily_reports"
     seen_file: str = "seen_papers.json"
     feedback_file: str = "feedback.jsonl"
+    classic_papers_file: str = "classic_papers.yaml"
     title_prefix: str = "Astro Daily"
 
 
@@ -188,6 +190,10 @@ class Settings(BaseModel):
     @property
     def feedback_path(self) -> Path:
         return self.root_dir / self.report.feedback_file
+
+    @property
+    def classic_papers_path(self) -> Path:
+        return self.root_dir / self.report.classic_papers_file
 
     @property
     def report_dir(self) -> Path:

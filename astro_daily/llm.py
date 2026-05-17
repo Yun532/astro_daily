@@ -116,6 +116,14 @@ FIGURE_SELECTION_SYSTEM_PROMPT = """你是天体物理论文图表编辑。
 只输出符合 schema 的 JSON。"""
 
 
+SUMMARY_REPAIR_SYSTEM_PROMPT = """你是 Astro Daily 的中文论文精读修复编辑。
+输入会给出一篇论文、已有摘要、质量检查指出的问题，以及需要修复的字段。
+只重写 requested_fields 中指定字段；不要改变论文 ID、标题或未请求字段。
+修复目标是让薄弱章节达到研究生阅读笔记深度：具体、连续、有公式、有图表读法、有模型拟合诊断。
+不要编造 URL、DOI、图像链接或论文没有的具体结论；如果不确定，就写成应重点核查的论文内容和诊断方法。
+只输出符合 schema 的 JSON。"""
+
+
 class ClaudePaperAnalyst:
     def __init__(self, config: LlmConfig, *, api_key: str):
         self.config = config
@@ -189,6 +197,38 @@ class ClaudePaperAnalyst:
             paper_ids=[paper.paper_id for paper in papers],
         )
         return SummaryBatch.model_validate(data).summaries
+
+    def repair_paper_summary(
+        self,
+        *,
+        paper: Paper,
+        summary: PaperSummary,
+        issues: list[str],
+        requested_fields: list[str],
+        run_date: date,
+    ) -> dict[str, str]:
+        if not requested_fields:
+            return {}
+        payload = {
+            "date": run_date.isoformat(),
+            "paper": _paper_for_prompt(paper),
+            "existing_summary": summary.model_dump(),
+            "quality_issues": issues,
+            "requested_fields": requested_fields,
+            "content_depth_contract": SUMMARY_DEPTH_CONTRACT,
+            "instruction": (
+                "Rewrite only requested_fields. Keep useful existing details, but make the sections deeper, "
+                "more grounded, and more useful for a professional astronomy/physics reader."
+            ),
+        }
+        data = self._json_request(
+            system_prompt=SUMMARY_REPAIR_SYSTEM_PROMPT,
+            schema=_summary_repair_schema(requested_fields),
+            user_payload=payload,
+            request_type="summary_repair",
+            paper_ids=[paper.paper_id],
+        )
+        return {field: str(data.get(field, "")).strip() for field in requested_fields}
 
     def generate_weekend_lessons(
         self,
@@ -848,4 +888,29 @@ def _summary_schema() -> dict[str, Any]:
             }
         },
         "required": ["summaries"],
+    }
+
+
+def _summary_repair_schema(fields: list[str]) -> dict[str, Any]:
+    descriptions = {
+        "detailed_explanation_cn": "至少 4 段，按科学问题、方法、关键结果、局限和下一步修复为具体讲解。",
+        "background_cn": "至少 4 段，补足历史背景、研究对象、动机和常见误区。",
+        "basic_theory_cn": "至少 4 段，从基础物理图像连接到本文模型、观测量或分析方法。",
+        "formula_derivation_cn": "包含 6-12 个 LaTeX 公式，形成连续推导链，并解释符号和适用条件。",
+        "model_fitting_cn": "至少 4 段，说明拟合量、似然/后验、残差诊断、退化和系统误差。",
+        "key_sections_cn": "说明 3-6 个重点章节或结果段落应如何阅读。",
+        "figures_to_check_cn": "列出 4-8 类图表/诊断量，并说明每类该看什么。",
+        "key_figure_analysis_cn": "按图 1/图 2/图 3 形式逐图导读坐标轴、模型线、残差和陷阱。",
+        "related_work_cn": "至少 2 段，说明相似工作、基础工作和张力线索的检索路径。",
+        "summary_cn": "具体说明核心问题、方法和结论。",
+        "why_important_cn": "具体说明重要性。",
+        "value_cn": "具体说明理论、观测、仪器或方法价值。",
+        "why_care_cn": "具体说明为什么值得读者关注。",
+    }
+    unique_fields = [field for field in dict.fromkeys(fields) if field in descriptions]
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {field: {"type": "string", "description": descriptions[field]} for field in unique_fields},
+        "required": unique_fields,
     }

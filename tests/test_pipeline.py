@@ -20,6 +20,7 @@ from astro_daily.config import (
 from astro_daily.formula_integrity import FormulaIntegrityResult
 from astro_daily.models import ExtractedFigure, FigureSelection, Paper, PaperScore, PaperSummary, ScoredPaper, ScoreResult, WeekendLesson
 from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, evaluate_source_freshness, fetch_all_sources, run_pipeline
+from astro_daily.seen import SeenStore
 from astro_daily.sources.arxiv import ArxivDailyListing
 
 
@@ -96,8 +97,49 @@ def test_fetch_all_sources_uses_daily_listing_id_mode(monkeypatch, tmp_path):
     papers, errors = fetch_all_sources(settings)
 
     assert not errors
-    assert fetched_by_ids == [("daily-listing", ["2605.00006"], None)]
+    assert fetched_by_ids == [("astro-ph.HE", ["2605.00006"], date(2026, 5, 12))]
     assert papers[0].paper_id == "2605.00006"
+
+
+def test_daily_listing_metadata_partial_failure_keeps_other_categories(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.sources.arxiv.secondary = [ArxivCategoryConfig(category="astro-ph.IM")]
+    listings = {
+        "astro-ph.HE": ArxivDailyListing("astro-ph.HE", date(2026, 5, 12), {"2605.00006"}, True),
+        "astro-ph.IM": ArxivDailyListing("astro-ph.IM", date(2026, 5, 12), {"2605.00007"}, True),
+    }
+
+    def fake_fetch_by_ids(category, paper_ids, **kwargs):
+        if category == "astro-ph.HE":
+            raise TimeoutError("metadata timeout")
+        paper_id = sorted(paper_ids)[0]
+        return [make_paper(paper_id).model_copy(update={"category": category, "source_batch_date": kwargs.get("source_batch_date")})]
+
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_daily_listing", lambda category, **_kwargs: listings[category])
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers_by_ids", fake_fetch_by_ids)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers", lambda *_args, **_kwargs: [])
+
+    papers, errors = fetch_all_sources(settings)
+
+    assert [paper.paper_id for paper in papers] == ["2605.00007"]
+    assert any("astro-ph.HE chunk 1" in error for error in errors)
+
+
+def test_daily_listing_metadata_fallback_filters_to_listing_ids(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    listing = ArxivDailyListing("astro-ph.HE", date(2026, 5, 12), {"2605.00006"}, True)
+    listing_paper = make_paper("2605.00006").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+    old_search_paper = make_paper("2605.99999").model_copy(update={"source_batch_date": None})
+
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_daily_listing", lambda *_args, **_kwargs: listing)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers_by_ids", lambda *_args, **_kwargs: (_ for _ in ()).throw(TimeoutError("id_list timeout")))
+    monkeypatch.setattr("astro_daily.pipeline.fetch_arxiv_papers", lambda *_args, **_kwargs: [listing_paper, old_search_paper])
+
+    papers, errors = fetch_all_sources(settings)
+
+    assert [paper.paper_id for paper in papers] == ["2605.00006"]
+    assert papers[0].source_batch_date == date(2026, 5, 12)
+    assert any("id_list timeout" in error for error in errors)
 
 
 def test_weekday_fetches_on_demand_backfill_when_selection_is_sparse(monkeypatch, tmp_path):
@@ -493,6 +535,7 @@ def test_weekend_run_scores_no_candidates(monkeypatch, tmp_path):
 
     assert result.kept_count == 0
     assert result.classic_lesson_count == 1
+    assert result.classic_paper_count == 0
     assert not score_called
 
 
@@ -823,6 +866,21 @@ def test_source_freshness_ignores_rss_today_for_primary_arxiv(tmp_path):
     assert decision.should_defer
 
 
+def test_source_freshness_does_not_defer_when_primary_batch_confirmed_with_warning(tmp_path):
+    settings = make_settings(tmp_path)
+    today_primary = make_paper("today-primary").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+
+    decision = evaluate_source_freshness(
+        settings=settings,
+        papers=[today_primary],
+        source_errors=["arXiv daily metadata astro-ph.HE chunk 2: Read timed out."],
+        run_date=date(2026, 5, 12),
+    )
+
+    assert decision.primary_batch_confirmed
+    assert not decision.should_defer
+
+
 
 def test_weekday_fallback_recommends_supplemental_papers_when_no_regular_papers_pass(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
@@ -903,6 +961,142 @@ def test_weekday_fallback_recommends_supplemental_papers_when_no_regular_papers_
     assert "old-1" in records
     assert "old-2" in records
     assert "today" not in records
+
+
+def test_weekday_fallback_adds_classic_paper_when_content_floor_is_not_met(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.scoring.daily_content_floor = 3
+    settings.sources.arxiv.on_demand_backfill_with_category_search = False
+    (tmp_path / "classic_papers.yaml").write_text(
+        """
+- id: li-ma
+  title: Analysis methods for results in gamma-ray astronomy
+  authors: [T.-P. Li, Y.-Q. Ma]
+  year: 1983
+  url: https://ui.adsabs.harvard.edu/abs/1983ApJ...272..317L/abstract
+  topic: Gamma-ray astronomy statistics
+  tags: [IACT, significance]
+  why_classic_cn: Li-Ma 显著性公式是伽马射线天文 on/off 计数分析的标准工具。
+""",
+        encoding="utf-8",
+    )
+    today = make_paper("today-classic-trigger").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="good new paper",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn=f"中文 {paper.paper_id}",
+                    summary_cn="这是一段足够清楚的摘要，说明科学问题、方法和结论。" * 3,
+                    why_important_cn="这篇文章或经典旧文重要，因为它支撑后续高能天体物理分析。" * 3,
+                    value_cn="它提供了理论、观测或统计方法价值。" * 4,
+                    why_care_cn="它值得关注，因为后续很多论文会复用这个框架。" * 4,
+                    detailed_explanation_cn="详细讲解科学问题、方法、关键结果和局限。" * 8,
+                    background_cn="背景知识。" * 40,
+                    basic_theory_cn="基础理论。" * 40,
+                    formula_derivation_cn=" ".join(["$$E=mc^2$$", "\\(R=ct\\)", "\\[F=L/(4\\pi D^2)\\]", "\\(N=A E^{-p}\\)", "$$\\tau=n\\sigma R$$"]) + " 推导。",
+                    model_fitting_cn="模型拟合和残差诊断。" * 20,
+                    key_sections_cn="重点章节阅读路径。" * 20,
+                    figures_to_check_cn="重点图表。" * 40,
+                    key_figure_analysis_cn="图 1 看坐标轴和模型线。" * 20,
+                    related_work_cn="相关工作。" * 40,
+                )
+                for paper in papers
+            ]
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([today], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
+    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=False)
+
+    assert result.kept_count == 1
+    assert result.classic_paper_count == 1
+    assert "经典旧文精读：1 篇" in result.wechat_message
+    report = (tmp_path / "reports" / "2026-05-12.md").read_text(encoding="utf-8")
+    assert "经典旧文精读：具体经典论文 / 重要旧文" in report
+    records = SeenStore.load(settings.seen_path).records
+    assert "classic:li-ma" in records
+
+
+def test_summary_quality_repair_updates_thin_sections(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    paper = make_paper("repair-me").model_copy(update={"source_batch_date": date(2026, 5, 12)})
+    repaired_fields = []
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def score_papers(self, papers, **_kwargs):
+            return [
+                ScoreResult(
+                    paper_id=paper.paper_id,
+                    novelty_score=8,
+                    importance_score=8,
+                    relevance_to_me=8,
+                    final_score=8,
+                    keep=True,
+                    reason="important",
+                )
+                for paper in papers
+            ]
+
+        def summarize_papers(self, papers, **_kwargs):
+            return [
+                PaperSummary(
+                    paper_id=paper.paper_id,
+                    title_cn="薄摘要",
+                    summary_cn="short",
+                    why_important_cn="short",
+                    value_cn="short",
+                    why_care_cn="short",
+                )
+                for paper in papers
+            ]
+
+        def repair_paper_summary(self, **kwargs):
+            repaired_fields.extend(kwargs["requested_fields"])
+            long = "修复后章节包含具体科学问题、方法、结果、限制和阅读指引。" * 20
+            formulas = " ".join(["$$E=mc^2$$", "\\(R=ct\\)", "\\[F=L/(4\\pi D^2)\\]", "\\(N=A E^{-p}\\)", "$$\\tau=n\\sigma R$$"])
+            return {
+                field: (long + formulas if field == "formula_derivation_cn" else long)
+                for field in kwargs["requested_fields"]
+            }
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([paper], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
+    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
+
+    run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 12), dry_run=True, ignore_seen=True)
+
+    assert "formula_derivation_cn" in repaired_fields
+    report = (tmp_path / "reports" / "2026-05-12.md").read_text(encoding="utf-8")
+    assert "修复后章节" in report
+    summary_end = next(record for record in read_run_log(tmp_path) if record["stage"] == "summaries_and_figures" and record["event"] == "end")
+    assert summary_end["data"]["repaired_summary_count"] == 1
 
 
 def test_weekday_fallback_does_not_trigger_without_today_updates(monkeypatch, tmp_path):
