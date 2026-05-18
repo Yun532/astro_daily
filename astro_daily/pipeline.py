@@ -26,6 +26,7 @@ from astro_daily.seen import SeenStore, deduplicate_papers
 from astro_daily.sources import fetch_arxiv_papers, fetch_rss_papers
 from astro_daily.sources.arxiv import ArxivDailyListing, fetch_arxiv_daily_listing
 from astro_daily.sources.arxiv import fetch_arxiv_papers_by_ids
+from astro_daily.syllabus import select_next_weekend_lesson
 from astro_daily.summarizer import add_summaries
 from src.figure_extractor import FigureExtractionSummary, attach_extracted_figures, extract_figures_for_item, select_and_attach_figures
 from src.publisher import publish_report_if_enabled
@@ -151,15 +152,20 @@ def run_pipeline(
         with run_logger.stage("weekend_lessons") as stage:
             settings.require_llm_key()
             analyst = ClaudePaperAnalyst(settings.llm, api_key=settings.anthropic_api_key or "")
+            planned_lesson = select_next_weekend_lesson(settings.weekend_syllabus_path, seen)
+            topics = [planned_lesson.to_prompt_topic()] if planned_lesson else _weekend_classic_topics()
             weekend_lessons = analyst.generate_weekend_lessons(
                 run_date=run_date,
-                topics=_weekend_classic_topics(),
+                topics=topics,
                 avoid_previous_lessons=seen.weekend_lesson_history(),
+                planned_weekend_lesson=planned_lesson.seed_for_llm() if planned_lesson else None,
             )
             lesson_quality = check_weekend_lesson_quality(weekend_lessons)
             stage.update(
                 classic_lesson_count=len(weekend_lessons),
                 titles=[lesson.title_cn for lesson in weekend_lessons],
+                planned_lesson_id=planned_lesson.id if planned_lesson else None,
+                planned_lesson_title=planned_lesson.title_cn if planned_lesson else None,
                 content_quality=quality_log_summary(lesson_quality),
             )
     else:

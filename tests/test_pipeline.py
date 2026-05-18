@@ -604,6 +604,64 @@ def test_successful_weekend_run_records_lesson_and_passes_history(monkeypatch, t
     assert "lesson:anchor:h.e.s.s. galactic center observations" in records
 
 
+def test_weekend_run_uses_planned_syllabus_lesson(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    (tmp_path / "weekend_syllabus.yaml").write_text(
+        """
+lessons:
+  - id: tde-01
+    series_id: tde-beginner
+    series_title_cn: TDE 从零到前沿课程
+    part_index: 1
+    planned_parts: 2
+    title_cn: TDE 第一讲
+    topic: tidal disruption basics
+    anchor_work_cn: Rees 1988
+    prerequisites_cn: [零基础]
+    lesson_scope_cn: 潮汐半径和 fallback
+    why_classic_cn: 建立 TDE 基本框架
+    classic_paper_ids: [rees-1988-tde]
+    modern_directions_cn: [partial disruption]
+    search_keywords: [tidal disruption event fallback]
+    links: [https://ui.adsabs.harvard.edu/abs/1988Natur.333..523R/abstract]
+""",
+        encoding="utf-8",
+    )
+    captured = {}
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def generate_weekend_lessons(self, **kwargs):
+            captured.update(kwargs)
+            planned = kwargs["planned_weekend_lesson"]
+            return [
+                make_lesson(
+                    title=planned["title_cn"],
+                    anchor=planned["anchor_work_cn"],
+                ).model_copy(
+                    update={
+                        "series_id": planned["series_id"],
+                        "series_title_cn": planned["series_title_cn"],
+                        "part_index": planned["part_index"],
+                        "planned_parts": planned["planned_parts"],
+                    }
+                )
+            ]
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+
+    result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 3), dry_run=True)
+
+    assert result.classic_lesson_count == 1
+    assert captured["planned_weekend_lesson"]["id"] == "tde-01"
+    assert "STRICT_WEEKEND_SYLLABUS_LESSON" in captured["topics"][0]
+    assert "TDE 第一讲" in captured["topics"][0]
+
+
 def test_formula_check_runs_before_html_generation(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
     calls = []

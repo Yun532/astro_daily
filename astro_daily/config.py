@@ -116,6 +116,7 @@ class ReportConfig(BaseModel):
     seen_file: str = "seen_papers.json"
     feedback_file: str = "feedback.jsonl"
     classic_papers_file: str = "classic_papers.yaml"
+    weekend_syllabus_file: str = "weekend_syllabus.yaml"
     title_prefix: str = "Astro Daily"
 
 
@@ -194,6 +195,10 @@ class Settings(BaseModel):
     @property
     def classic_papers_path(self) -> Path:
         return self.root_dir / self.report.classic_papers_file
+
+    @property
+    def weekend_syllabus_path(self) -> Path:
+        return self.root_dir / self.report.weekend_syllabus_file
 
     @property
     def report_dir(self) -> Path:

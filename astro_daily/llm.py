@@ -236,17 +236,24 @@ class ClaudePaperAnalyst:
         run_date: date,
         topics: list[str],
         avoid_previous_lessons: list[dict[str, str]] | None = None,
+        planned_weekend_lesson: dict[str, Any] | None = None,
     ) -> list[WeekendLesson]:
         payload = {
             "date": run_date.isoformat(),
             "reason": "周末或 arXiv 安静日没有合适的新论文，生成一讲讲透的经典专题课。",
             "topics": topics,
+            "planned_weekend_lesson": planned_weekend_lesson or {},
             "course_policy": {
                 "allow_consecutive_parts": True,
                 "preferred_series_length": "2-4 lessons",
                 "continuation_rule": "You may continue the same series when the next lesson has a distinct scope and naturally follows the recent history.",
                 "new_series_rule": "Start a new series if recent lessons do not expose a useful next_lesson_suggestions path, or if continuing would repeat the same physics.",
                 "required_boundary": "Use lesson_scope_cn to state exactly what this lesson covers and what it intentionally leaves for other parts.",
+                "syllabus_rule": (
+                    "If planned_weekend_lesson is non-empty, follow it as the controlling syllabus item. "
+                    "Preserve its title, series id, part index, scope, anchor work, prerequisites, and modern directions. "
+                    "Use the LLM only to teach that lesson deeply, not to choose another topic."
+                ),
             },
             "content_depth_contract": WEEKEND_LESSON_DEPTH_CONTRACT,
             "lesson_count": 1,
@@ -260,6 +267,8 @@ class ClaudePaperAnalyst:
             paper_ids=[],
         )
         lessons = WeekendLessonBatch.model_validate(data).lessons[:1]
+        if planned_weekend_lesson:
+            lessons = [_apply_planned_weekend_lesson(lesson, planned_weekend_lesson) for lesson in lessons]
         return [self._expand_weekend_lesson_sections(lesson, run_date=run_date) for lesson in lessons]
 
     def _expand_weekend_lesson_sections(self, lesson: WeekendLesson, *, run_date: date) -> WeekendLesson:
@@ -615,6 +624,48 @@ def _is_json_escape(next_char: str, after_next: str, unicode_digits: str) -> boo
     if next_char in {"b", "f", "n", "r", "t"}:
         return not (after_next.isascii() and after_next.isalpha())
     return False
+
+
+def _apply_planned_weekend_lesson(lesson: WeekendLesson, planned: dict[str, Any]) -> WeekendLesson:
+    structural_fields = {
+        "topic",
+        "title_cn",
+        "anchor_work_cn",
+        "series_id",
+        "series_title_cn",
+        "part_index",
+        "planned_parts",
+        "lesson_scope_cn",
+        "previous_context_cn",
+        "why_classic_cn",
+    }
+    updates = {
+        field: planned[field]
+        for field in structural_fields
+        if planned.get(field) not in (None, "", [])
+    }
+    search_keywords = _merge_string_lists(planned.get("search_keywords", []), lesson.search_keywords)
+    links = _merge_string_lists(planned.get("links", []), lesson.links)
+    if search_keywords:
+        updates["search_keywords"] = search_keywords
+    if links:
+        updates["links"] = links
+    return lesson.model_copy(update=updates)
+
+
+def _merge_string_lists(*items: Any) -> list[str]:
+    merged: list[str] = []
+    seen: set[str] = set()
+    for item in items:
+        if not isinstance(item, list):
+            continue
+        for value in item:
+            text = str(value).strip()
+            key = text.casefold()
+            if text and key not in seen:
+                merged.append(text)
+                seen.add(key)
+    return merged
 
 
 def _paper_for_prompt(paper: Paper) -> dict[str, Any]:
