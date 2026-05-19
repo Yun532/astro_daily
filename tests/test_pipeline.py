@@ -811,47 +811,30 @@ def test_defers_when_weekday_primary_arxiv_has_no_today_papers(monkeypatch, tmp_
 
 
 
-def test_final_attempt_bypasses_primary_zero_defer(monkeypatch, tmp_path):
+def test_final_attempt_still_defers_when_weekday_primary_batch_unconfirmed(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)
     old_primary = make_paper("old-primary")
     wrote_report = False
 
-    class FakeAnalyst:
-        def __init__(self, *_args, **_kwargs):
-            pass
-
-        def score_papers(self, papers, **_kwargs):
-            return []
-
-        def summarize_papers(self, papers, **_kwargs):
-            return []
-
     def fake_write_daily_report(**_kwargs):
         nonlocal wrote_report
         wrote_report = True
-        path = tmp_path / "reports" / "2026-05-12.md"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("# report\n", encoding="utf-8")
-        return path
+        raise AssertionError("report should not be written when primary batch is unconfirmed")
 
     monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
     monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([old_primary], []))
-    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
     monkeypatch.setattr("astro_daily.pipeline.write_daily_report", fake_write_daily_report)
-    monkeypatch.setattr("astro_daily.pipeline.attach_extracted_figures", lambda *_args, **_kwargs: type("Result", (), {"attempted": 0, "extracted": 0, "failed": 0})())
-    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", lambda _path: str(tmp_path / "docs" / "reports" / "2026-05-12.html"))
-    monkeypatch.setattr("astro_daily.pipeline.ensure_html_latex_formulas_valid", lambda _path: FormulaIntegrityResult(checked_sections=1))
 
-    result = run_pipeline(
-        config_path="unused.yaml",
-        run_date=date(2026, 5, 12),
-        defer_if_unfresh=True,
-        final_attempt=True,
-        ignore_seen=True,
-    )
+    with pytest.raises(DeferredRetryNeeded, match="daily listing"):
+        run_pipeline(
+            config_path="unused.yaml",
+            run_date=date(2026, 5, 12),
+            defer_if_unfresh=True,
+            final_attempt=True,
+            ignore_seen=True,
+        )
 
-    assert wrote_report
-    assert result.kept_count == 0
+    assert not wrote_report
 
 
 def test_final_attempt_still_defers_on_temporary_primary_error(monkeypatch, tmp_path):

@@ -121,7 +121,7 @@ def run_pipeline(
         len(freshness.transient_primary_errors),
         freshness.should_defer,
     )
-    if defer_if_unfresh and freshness.should_defer and (not final_attempt or freshness.transient_primary_errors):
+    if defer_if_unfresh and freshness.should_defer:
         run_logger.event("source_freshness", "defer", reason=freshness.reason)
         raise DeferredRetryNeeded(freshness.reason)
     with run_logger.stage("seen_filter", ignore_seen=ignore_seen) as stage:
@@ -878,7 +878,7 @@ def fetch_all_sources(settings: Settings) -> tuple[list[Paper], list[str]]:
     daily_listings: dict[str, ArxivDailyListing] = {}
     arxiv_cache_dir = settings.root_dir / settings.sources.arxiv.api_cache_dir if settings.sources.arxiv.api_cache_enabled else None
     arxiv_cache_ttl_seconds = settings.sources.arxiv.api_cache_ttl_hours * 3600
-    arxiv_listing_cache_ttl_seconds = min(arxiv_cache_ttl_seconds, 2 * 3600)
+    arxiv_listing_cache_ttl_seconds = min(arxiv_cache_ttl_seconds, settings.sources.arxiv.daily_listing_cache_ttl_minutes * 60)
     for index, category in enumerate(arxiv_categories):
         if index and settings.sources.arxiv.api_request_delay_seconds > 0:
             time.sleep(settings.sources.arxiv.api_request_delay_seconds)

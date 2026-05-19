@@ -29,6 +29,7 @@ class ArxivConfig(BaseModel):
     api_cache_enabled: bool = True
     api_cache_dir: str = ".cache/arxiv_api"
     api_cache_ttl_hours: float = Field(default=24.0, ge=0, le=168)
+    daily_listing_cache_ttl_minutes: float = Field(default=15.0, ge=0, le=120)
 
     @model_validator(mode="after")
     def validate_fetch_mode(self) -> "ArxivConfig":

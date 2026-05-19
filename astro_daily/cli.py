@@ -146,7 +146,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--dry-run", action="store_true", help="Do not update seen_papers.json or send WeChat push")
     run.add_argument("--ignore-seen", action="store_true", help="Ignore seen_papers.json when re-testing a historical date")
     run.add_argument("--defer-if-unfresh", action="store_true", help="Exit with retry code before publishing if weekday arXiv freshness is unreliable")
-    run.add_argument("--final-attempt", action="store_true", help="Bypass freshness deferral and publish the best available result")
+    run.add_argument("--final-attempt", action="store_true", help="Allow best-effort fallback after freshness is confirmed; primary arXiv freshness deferral is still honored")
 
     test_fetch = subparsers.add_parser("test-fetch", help="Fetch and parse configured sources without LLM calls")
     test_fetch.add_argument("--config", default="config.yaml")
