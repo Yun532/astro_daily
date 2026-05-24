@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-05-24</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-05-24</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-05-24">
+      <a class="previous" href="2026-05-23.html">← 上一期：2026-05-23</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-05-24T11:15:48+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-0-pair-cascade">1. 高能天体物理零基础课（四）：强子辐射、π0 衰变、中微子、γγ 吸收和 pair cascade</h3>
+<ul>
+<li>课程系列：高能天体物理零基础桥梁课（第 4/5 讲）</li>
+<li>本讲边界：本讲专门补强高能论文中常见但入门课容易漏掉的强子和级联过程：\(pp\) 与 \(p\gamma\) 相互作用、\(\pi^0\) 伽马射线、\(\pi^\pm\) 中微子、\(\gamma\gamma\) 吸收、pair cascade、EBL attenuation、内部光深和多信使能量预算。不讲具体源类人口统计。</li>
+<li>上下文承接：上一讲建立了粒子如何被加速、冷却和逃逸；本讲把相互作用对象从电子扩展到质子、介子、中微子和二次电子正电子对。</li>
+<li>主题：hadronic emission, pion decay, neutrinos, gamma-gamma absorption and electromagnetic cascades</li>
+<li>经典工作：从 \(pp\)、\(p\gamma\)、\(\pi^0\) 衰变、\(\pi^\pm\) 产生中微子、\(\gamma\gamma\to e^+e^-\)、EBL 吸收和电磁级联出发，补齐 leptonic 模型之外的高能辐射机制。</li>
+<li>为什么经典：GRB、TDE、PWN/halo、SNR、AGN 和 PeVatron 论文经常在 leptonic 与 hadronic 解释之间比较。如果不懂 \(\pi^0\) bump、中微子伴随、\(\gamma\gamma\) opacity 和 cascade，再新的多信使论文也很难判断。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>本讲的科学问题不是“强子模型能不能画出一条穿过数据点的曲线”，而是：当我们看到 \(\rm GeV\) 到 \(\rm PeV\) 的伽马射线、一个可能相关的高能中微子事件、或一个在 \(\rm TeV\) 端突然变软的谱时，如何判断能量最初是从电子、质子，还是从传播过程中的二次级联而来？前两讲已经建立了通量、光度、宽带 \(\rm SED\)、同步辐射、逆康普顿和吸收的语言；上一讲进一步说明非热粒子谱如何由加速、冷却和逃逸共同塑造。本讲在这个基础上把“辐射粒子”从电子扩展到质子、\(\pi^0\)、\(\pi^\pm\)、中微子以及 \(\gamma\gamma\) 吸收后产生的二次 \(e^+e^-\) 对。换言之，上一讲回答“粒子谱从哪里来”，本讲回答“这些高能质子和高能光子撞到靶以后，能量流向哪里，并怎样变成可观测信号”。</p>
+<p>历史动机来自两个方向。第一是宇宙线起源问题：如果某类天体要把带电粒子加速到极高能，至少要满足回旋半径小于加速器尺度的几何条件，即 \(r_L=E/(ZeB)\) 且 \(r_L<R\)。这就是 Hillas 图背后的基本思想。第二是伽马射线和中微子天文学的发展：若高能质子与气体或光子相互作用，产生的 \(\pi^0\) 会衰变为伽马射线，\(\pi^\pm\) 会经由 muon 衰变产生中微子。因此，强子模型不是宽带 \(\rm SED\) 拟合中的一个装饰性选项，而是与宇宙线起源、PeVatron 识别和多信使天文学直接相连的物理框架。</p>
+<p>本讲的统一方法是把复杂现象压缩成三类碰撞。第一类是 \(pp\)：高能质子撞冷气体，效率由气体密度、非弹性截面、非弹性系数和粒子停留时间控制。第二类是 \(p\gamma\)：高能质子撞靶光子，是否能发生反应首先由阈值决定，效率再由光子密度和源区尺度决定。第三类是 \(\gamma\gamma\to e^+e^-\)：高能伽马射线撞软光子，不产生中微子，却会吸收高能伽马射线并启动电磁级联。这样讲的好处是清楚：\(pp\) 和 \(p\gamma\) 是把质子能量转进 meson 通道，\(\gamma\gamma\) 是把已经产生的高能光子重新分配到更低能段。</p>
+<p>具体推导从非热质子谱开始。我们把上一讲的加速结果作为输入，常写为 </p>
+<div class="math-display">\[N_p(E_p)=N_{p,0}\left(\frac{E_p}{E_0}\right)^{-s}\exp\left(-\frac{E_p}{E_{p,\max}}\right),\]</div>
+<p>并用 </p>
+<div class="math-display">\[W_p=\int E_pN_p(E_p)dE_p\]</div>
+<p>表示总质子能量。随后对 \(pp\) 写出非弹性能量损失时间 </p>
+<div class="math-display">\[t_{pp}=\frac{1}{n_{\rm H}\kappa_{pp}\sigma_{pp}c}\]</div>
+<p>和效率 </p>
+<div class="math-display">\[f_{pp}=1-\exp\left(-\frac{t_{\rm esc}}{t_{pp}}\right)\simeq\min\left(1,\frac{t_{\rm esc}}{t_{pp}}\right).\]</div>
+<p>这些式子告诉我们：气体越密、停留越久，质子越接近 calorimetric；反之，即便源内有很多高能质子，也可能只有很小比例转化为伽马射线和中微子。</p>
+<p>从能量映射看，\(\pi^0\) 衰变给出伽马射线，\(\pi^\pm\) 衰变给出中微子和二次电子正电子。在 \(\pi^0\) 静止系中，每个伽马光子的能量为 </p>
+<div class="math-display">\[E_{\gamma,\pi^0\,rest}=\frac{m_{\pi^0}c^2}{2}.\]</div>
+<p>在天体源的数量级估算中，常用 </p>
+<div class="math-display">\[E_\gamma\sim0.05E_p\]</div>
+<p>和 </p>
+<div class="math-display">\[E_\nu\sim0.05E_p\]</div>
+<p>作为父质子能量与二次伽马射线、中微子能量之间的桥梁。因此，一个 \(100\,\rm TeV\) 量级中微子通常提示源内需要 \(\rm PeV\) 量级父质子；一个延伸到 \(100\,\rm TeV\) 的 pion-decay 伽马谱也会把模型推向 PeVatron 讨论。但这只是必要线索，还必须结合能量预算、吸收和替代电子模型。</p>
+<p>对 \(p\gamma\) 过程，关键首先是阈值而不是“光子场很亮”这句话本身。在共动系中可写成 </p>
+<div class="math-display">\[E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}.\]</div>
+<p>这个关系说明，靶光子越软，需要的父质子能量越高；同一个质子谱在不同辐射场中会产生完全不同的中微子能段。达到阈值以后，入门估算可写为 </p>
+<div class="math-display">\[f_{p\gamma}\simeq R n_\gamma\kappa_{p\gamma}\sigma_{p\gamma}\simeq\frac{t_{\rm dyn}}{t_{p\gamma}}.\]</div>
+<p>这一步也引出一个重要张力：更小的 \(R\) 和更高的光子密度会提高 \(p\gamma\) 效率，却往往也提高源内 \(\gamma\gamma\) 光深，使伴随伽马射线更难直接逃逸。</p>
+<p>\(\gamma\gamma\) 吸收是理解高能伽马观测的第二条主线。其阈值可写为 </p>
+<div class="math-display">\[E_\gamma\epsilon(1-\cos\theta)\ge2m_e^2c^4,\]</div>
+<p>头碰撞近似下有 \(E_\gamma\epsilon\gtrsim m_e^2c^4\)。因此，\(\rm TeV\) 光子容易与红外到光学光子相互作用，\(\rm PeV\) 光子容易受远红外或微波背景影响。真正决定逃逸概率的是光深，形式为 </p>
+<div class="math-display">\[\tau_{\gamma\gamma}(E_\gamma)=\int dl\int d\epsilon\int d\Omega\,n(\epsilon,\Omega,l)\sigma_{\gamma\gamma}(E_\gamma,\epsilon,\theta)(1-\cos\theta).\]</div>
+<p>当 \(\tau_{\gamma\gamma}=1\) 时，对应能量常被用作透明与不透明的边界；当 \(\tau_{\gamma\gamma}\gg1\) 时，直接高能伽马射线会被显著压低。</p>
+<p>但是，被吸收的能量不会消失。观测谱更完整的表达应写成 </p>
+<div class="math-display">\[F_{\rm obs}(E,z)=F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]+F_{\rm cas}(E,z).\]</div>
+<p>第一项是被吸收后的直接光子，第二项是电磁级联贡献。级联能量落到哪里，取决于二次 \(e^+e^-\) 的同步冷却和逆康普顿冷却竞争：</p>
+<div class="math-display">\[P_{\rm syn}=\frac{4}{3}\sigma_TcU_B\gamma_e^2,\qquad P_{\rm IC}=\frac{4}{3}\sigma_TcU_{\rm rad}\gamma_e^2f_{\rm KN}.\]</div>
+<p>若 \(U_B\gg U_{\rm rad}f_{\rm KN}\)，级联更容易在 \(\rm X\)-ray 或 \(\rm MeV\) 段表现为同步辐射；若辐射场占优且 Klein-Nishina 抑制不强，IC cascade 可能填充 \(\rm GeV\)-\(\rm TeV\) 能段。</p>
+<p>观测诊断必须从单一谱线升级为多维闭合。\(\pi^0\) bump 是重要强子证据，但要确认 \(\rm 100\,MeV\) 附近低能转折确实由数据约束，并能与 bremsstrahlung 和 IC 区分。中微子关联支持强子相互作用，但并不要求同能段伽马射线必然可见，因为源内 \(\gamma\gamma\) 吸收、EBL 衰减和 cascade 都会改写伽马端信号。快速变时标通过 </p>
+<div class="math-display">\[R\lesssim\frac{c\Delta t\delta}{1+z}\]</div>
+<p>限制源区大小，同时可能提高源内光子密度和 \(\gamma\gamma\) opacity。扩展伽马形态若与气体模板相关，较支持 \(pp\)；若与 PWN、pulsar halo 或 \(\rm X\)-ray 电子结构相关，leptonic IC 可能更自然。</p>
+<p>模型拟合时，最危险的习惯是只看总模型线是否穿过 unfolded \(\rm SED\) 点。对 \(pp\) pion-decay 模型，常见参数包括 \(s\)、\(E_{p,\max}\)、\(W_p\)、\(n_{\rm H}\)、\(d\) 和 \(t_{\rm esc}\)，核心退化是 </p>
+<div class="math-display">\[F_\gamma\propto\frac{W_p n_{\rm H}}{d^2}.\]</div>
+<p>对 \(p\gamma\) 模型，质子谱、靶光子谱、\(R\)、\(\Gamma\)、\(B\)、baryon loading 和逃逸假设之间相关性很强。实际读论文时应优先检查 counts 空间的 Poisson likelihood，例如 </p>
+<div class="math-display">\[\ln\mathcal{L}=\sum_i\left[k_i\ln\mu_i-\mu_i-\ln(k_i!)\right],\qquad \mu_i=\mu_{{\rm src},i}(\theta)+\mu_{{\rm bkg},i}.\]</div>
+<p>还要看残差、置信区间、upper limit、系统误差和先验敏感性，而不是只接受 best-fit。</p>
+<p>本讲的局限同样需要明确。强子模型参数多，\(W_p\)、\(n_{\rm H}\)、\(R\)、\(B\)、靶光子谱、逃逸时间和源年龄之间常有强退化。硬 \(\rm TeV\) 谱不自动等于 PeVatron；可能来自 leptonic IC、多个源混合、内禀截断设置不当、EBL 修正不足或仪器能量标定问题。看到一个中微子候选也不等于确认某个伽马源；必须检查方向误差、时间窗、trial correction、能量代理和伽马上限。能量预算底线可以写为 </p>
+<div class="math-display">\[L_\nu+L_\gamma+L_{e^\pm}\lesssim f_{\rm mes}L_p.\]</div>
+<p>如果模型声称隐藏了伽马射线，就必须说明能量去了 cascade、同步辐射、热化还是逃逸通道。</p>
+<p>本讲的后续影响是在第 \(5\) 讲中把这些物理工具变成真实论文图表的阅读流程。第 \(5\) 讲不会重新推导同步辐射、IC、Fermi 加速、\(pp\)、\(p\gamma\) 或 \(\gamma\gamma\) 基础公式，而会系统训练如何读 light curve、spectrum、\(\rm SED\)、TS map、residual map、upper limit、corner plot 和多信使关联图。也就是说，本讲结束在机制判断和模型可行性；下一讲开始面对真实数据、统计显著性和图上陷阱。</p>
+<h4 id="_3">背景知识</h4>
+<p>要理解为什么本讲必须放在“零基础桥梁课”的第 \(4\) 讲，而不是第 \(2\) 讲或第 \(5\) 讲，先要回到系列结构。第 \(1\) 讲建立的是观测语言：flux、luminosity、fluence、距离平方反比、光变时标和 \(\rm SED\)。第 \(2\) 讲讲电子辐射和吸收：同步辐射、逆康普顿、热辐射、吸收以及宽带分量识别。第 \(3\) 讲讲粒子谱来源：Fermi 加速、最大能量、冷却时间、逃逸时间和稳态谱。本讲承接第 \(3\) 讲，把已经形成的非热粒子谱，特别是非热质子谱，放进气体场、光子场和传播背景中，研究它们如何产生 pion、中微子、\(\gamma\gamma\) 吸收和电磁级联。</p>
+<p>历史上，宇宙线起源问题比现代 \(\gamma\)-ray 天文学更早成为高能天体物理的核心问题。带电粒子若要被加速到极高能，首先不能在一个回旋半径内逃出系统。这个必要条件写成 \(r_L=E/(ZeB)\) 和 \(r_L<R\)，其中 \(R\) 是源区尺度，\(B\) 是磁场，\(Z\) 是电荷数。Hillas 图把不同源类放在 \(B\)-\(R\) 平面上，用固定最大能量的斜线给出几何筛选。它的意义不是证明某个源一定能加速到 \(10^{20}\,\rm eV\)，而是告诉我们哪些源连最基本的几何条件都不满足。</p>
+<p>随着伽马射线天文学成熟，\(\pi^0\) 衰变成为寻找强子加速的重要观测入口。高能质子与气体发生 \(pp\) 相互作用，会产生 \(\pi^0\)、\(\pi^+\) 和 \(\pi^-\)。中性 pion 几乎立即衰变成两个伽马光子，在 pion 静止系中每个光子的能量为 \(E_{\gamma,\pi^0\,rest}=m_{\pi^0}c^2/2\)。卷积上天体源中的质子谱以后，低能端会在 \(\rm 100\,MeV\) 附近出现特征性转折，也就是常说的 \(\pi^0\) bump。这个特征比单纯的 \(\rm GeV\) 幂律更有诊断力，因为电子 bremsstrahlung 和 IC 往往可以模仿高能幂律，却不一定能自然复制这个低能形状。</p>
+<p>中微子天文学又把问题推进一步。带电 pion 的衰变链可以概括为 \(\pi^\pm\to\mu^\pm+\nu_\mu\) 以及随后 \(\mu^\pm\) 衰变产生电子、正电子和更多中微子。数量级上，最终中微子能量常写为 \(E_\nu\sim0.05E_p\)，而 pion-decay 伽马射线也常有 \(E_\gamma\sim0.05E_p\)。因此，高能中微子是强子相互作用的直接信使之一，尤其适合寻找那些对高能伽马射线不透明的致密源。若源内 \(\gamma\gamma\) 光深很大，伽马射线可能被吸收并级联到低能，而中微子仍可近似直线逃逸。</p>
+<p>这里出现第一个常见误区：以为“强子过程产生中微子，所以必然能看到同能段伽马射线”。产生端的确有能量联系，但传播端完全不同。伽马射线会被源内光子场吸收，也会被宇宙背景光，尤其是 EBL，削弱；被吸收的能量还可能通过 pair cascade 转移到 \(\rm MeV\)、\(\rm GeV\)、\(\rm X\)-ray 或更低能段。因而，没有同能段伽马射线并不自动排除强子过程；反过来，有明亮伽马射线也不自动证明有强子，因为电子 IC、bremsstrahlung 和复杂背景都可能产生类似谱形。</p>
+<p>第二个常见误区是把 \(pp\) 和 \(p\gamma\) 简单理解为“低能强子过程”和“高能强子过程”。真正的区别是靶不同。\(pp\) 的靶是冷气体，效率主要由 \(n_{\rm H}\)、\(\sigma_{pp}\)、\(\kappa_{pp}\) 和停留时间决定；它常在 SNR 与分子云、星爆环境、致密风或喷流物质中出现。\(p\gamma\) 的靶是光子，首先要满足阈值 \(E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}\)；它常在 GRB、AGN 内区、TDE 或高光度瞬变源中被讨论。同样的质子能量，在不同靶光子温度和不同 bulk motion 下，可能对应完全不同的中微子能段。</p>
+<p>第三个误区是把 TeV 谱软化或截止直接归因于 EBL 或 \(\gamma\gamma\) 吸收。实际上，高能下降可能来自内禀粒子最大能量 \(E_{p,\max}\) 或 \(E_{e,\max}\)，也可能来自源内吸收、EBL 衰减、仪器能量标定、背景建模或多个源混合。读论文时必须分清 observed spectrum、intrinsic model、de-absorbed spectrum 和 cascade component。去吸收后的点不是望远镜直接测到的点，而是依赖红移、EBL 模型和统计处理得到的推断量。</p>
+<p>第四个误区是把 Hillas 条件当成 PeVatron 证明。\(r_L<R\) 只是必要条件，还要检查加速时间是否短于损失时间、逃逸时间和源年龄；还要检查产生的高能粒子是否真的与气体或光子有足够相互作用效率；最后还要看能量预算是否合理。对于 \(pp\) 模型，常见退化是 \(F_\gamma\propto W_p n_{\rm H}/d^2\)，因此不确定的气体密度和距离会直接改变所需 \(W_p\)。如果所需质子能量超过超新星、喷流或吸积可提供的能量，模型即使拟合了谱，也不能算物理上令人满意。</p>
+<p>本讲的重要性在于，它把高能论文中常见的关键词放入同一张机制地图：hadronic emission、pion-decay、neutrino production、\(\gamma\gamma\) opacity、EBL attenuation、pair cascade、hidden source 和 multimessenger closure。这些词在 GRB、TDE、AGN、SNR、PWN、pulsar halo 和 PeVatron 论文中反复出现。若不理解 \(\pi^0\) bump、中微子伴随、\(\tau_{\gamma\gamma}=1\) 透明边界和 cascade 能量再分配，就很难判断一篇论文是在给出强子证据，还是只是在展示一种可调参数很多的 \(\rm SED\) 解释。</p>
+<p>因此，本讲的边界也要提前说明清楚。我们不做具体源类人口统计，不比较所有 GRB、TDE、AGN 或 SNR 样本，也不复现某一个源的完整 MCMC。我们要建立的是机制层面的读图和判别框架：从质子谱出发，计算 \(pp\) 与 \(p\gamma\) 效率，理解 \(\pi^0\) 伽马射线和 \(\pi^\pm\) 中微子，判断 \(\gamma\gamma\) 与 EBL 是否改写观测谱，再用能量预算 \(L_\nu+L_\gamma+L_{e^\pm}\lesssim f_{\rm mes}L_p\) 约束模型可行性。第 \(5\) 讲会接着训练真实论文图表、统计显著性、upper limit、TS map、corner plot 和多信使关联图的阅读方法。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一步先建立输入量。本讲不重新推导 Fermi 加速，也不重新讨论同步冷却如何改变电子谱；这些属于前两讲和上一讲的内容。这里把源内非热质子谱作为输入，常写为 </p>
+<div class="math-display">\[N_p(E_p)=N_{p,0}\left(\frac{E_p}{E_0}\right)^{-s}\exp\left(-\frac{E_p}{E_{p,\max}}\right).\]</div>
+<p>其中 \(s\) 控制二次伽马射线和中微子的谱斜率，\(E_{p,\max}\) 控制最高可产生的 \(E_\gamma\) 和 \(E_\nu\)，\(N_{p,0}\) 或 \(W_p=\int E_pN_p(E_p)dE_p\) 控制总能量。读强子模型时，首先要问的不是曲线是否好看，而是这些父质子是否有足够能量、是否能被源束缚、是否能在逃逸前发生相互作用。</p>
+<p>第二步是最基本的加速几何约束。带电粒子在磁场中的 Larmor 半径为 \(r_L=E/(ZeB)\)，若要留在加速区内，至少需要 \(r_L<R\)。这个 Hillas 条件只告诉我们候选源是否具备几何可能性，不保证 \(E_{p,\max}\) 一定达到目标能量。完整判断还要比较加速时间、冷却时间、逃逸时间和源年龄。对本讲而言，Hillas 条件的作用是把上一讲的“最大能量”与本讲的“父质子能量需求”连接起来：若观测要求 \(E_p\) 达到 \(\rm PeV\) 或更高，源的 \(B\)、\(R\) 和动力学条件必须首先过关。</p>
+<p>第三步进入 \(pp\) 物理。\(pp\) 过程的靶是冷气体，主要环境量是 \(n_{\rm H}\)。高能质子在气体中发生非弹性碰撞，把一部分能量转给 pion。入门估算的能量损失时间为 </p>
+<div class="math-display">\[t_{pp}=\frac{1}{n_{\rm H}\kappa_{pp}\sigma_{pp}c}.\]</div>
+<p>这个式子解出的物理量是质子把能量转入 meson 通道的时间尺度；下一步必须把它与逃逸时间 \(t_{\rm esc}\) 比较，得到效率 </p>
+<div class="math-display">\[f_{pp}=1-\exp\left(-\frac{t_{\rm esc}}{t_{pp}}\right).\]</div>
+<p>若 \(t_{\rm esc}\ll t_{pp}\)，则 \(f_{pp}\ll1\)，需要更大的 \(W_p\) 才能产生同样的伽马通量；若 \(t_{\rm esc}\gg t_{pp}\)，源接近 calorimetric，强子辐射效率高。</p>
+<p>第四步看 \(pp\) 产生的可观测产物。中性 pion 衰变为伽马射线，带电 pion 衰变为中微子和二次 \(e^\pm\)。数量级上，常用 \(E_\gamma\sim0.05E_p\) 和 \(E_\nu\sim0.05E_p\) 连接父质子与观测能量。这两个关系不是精确谱计算，而是读论文时的第一判断工具：若模型声称解释 \(100\,\rm TeV\) 伽马射线或 \(100\,\rm TeV\) 中微子，就需要检查是否存在 \(\rm PeV\) 量级父质子，以及相应 \(E_{p,\max}\)、\(W_p\)、逃逸和能量损失是否合理。\(\pi^0\) bump 的意义也在这里：它把伽马射线谱形与强子 pion 产生直接连接，而不只是提供一条高能幂律。</p>
+<p>第五步转向 \(p\gamma\)。\(p\gamma\) 的靶不是气体，而是辐射场，因此第一件事是检查阈值。共动系中常写为 </p>
+<div class="math-display">\[E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}.\]</div>
+<p>这说明质子能量 \(E_p'\)、靶光子能量 \(\epsilon'\) 和碰撞角 \(\theta'\) 共同决定能否产生 pion。达到阈值以后，简单效率估算为 </p>
+<div class="math-display">\[f_{p\gamma}\simeq R n_\gamma\kappa_{p\gamma}\sigma_{p\gamma}\simeq\frac{t_{\rm dyn}}{t_{p\gamma}}.\]</div>
+<p>因此，高光度、小半径、光子密度高的源更容易产生中微子；但同样的条件也会提高高能伽马射线被 \(\gamma\gamma\) 吸收的概率。</p>
+<p>第六步引入 \(\gamma\gamma\to e^+e^-\)，这是传播和源内吸收的核心。一个高能光子 \(E_\gamma\) 与软光子 \(\epsilon\) 相遇，阈值为 </p>
+<div class="math-display">\[E_\gamma\epsilon(1-\cos\theta)\ge2m_e^2c^4.\]</div>
+<p>在头碰撞近似下可写成 \(E_\gamma\epsilon\gtrsim m_e^2c^4\)。这个关系给出一个非常重要的直觉：不同能量的伽马射线会被不同能量的背景光最有效吸收。源内强 UV、光学或红外场可以吸收 TeV 光子；宇宙尺度上的 EBL 会衰减远距离 TeV 源；更高能的 PeV 光子还会受远红外和微波背景影响。因此，观测到的高能谱从来不只是内禀辐射谱，也是传播滤波后的结果。</p>
+<p>第七步从阈值走向光深。阈值只说明反应能不能发生，光深 \(\tau_{\gamma\gamma}\) 才说明有多少光子被吸收。一般形式为 </p>
+<div class="math-display">\[\tau_{\gamma\gamma}(E_\gamma)=\int dl\int d\epsilon\int d\Omega\,n(\epsilon,\Omega,l)\sigma_{\gamma\gamma}(E_\gamma,\epsilon,\theta)(1-\cos\theta).\]</div>
+<p>读 opacity 图时，横轴通常是 \(E_\gamma\)，纵轴是 \(\tau_{\gamma\gamma}\)，最重要的边界是 \(\tau_{\gamma\gamma}=1\)。若某个能段满足 \(\tau_{\gamma\gamma}<1\)，直接光子可以较顺利逃逸；若 \(\tau_{\gamma\gamma}>1\)，谱会被压低，并把能量注入二次 \(e^+e^-\)。这一步把源内强子产生与最终可见伽马射线连接起来。</p>
+<p>第八步理解电磁级联。吸收不是能量消失，而是能量再分配。观测谱可写为 </p>
+<div class="math-display">\[F_{\rm obs}(E,z)=F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]+F_{\rm cas}(E,z).\]</div>
+<p>其中 \(F_{\rm int}(E)\) 是内禀谱，\(\exp[-\tau_{\gamma\gamma}(E,z)]\) 是直接光子的衰减，\(F_{\rm cas}(E,z)\) 是级联再处理分量。二次电子正电子的辐射由同步和逆康普顿竞争决定，近似功率为 </p>
+<div class="math-display">\[P_{\rm syn}=\frac{4}{3}\sigma_TcU_B\gamma_e^2,\qquad P_{\rm IC}=\frac{4}{3}\sigma_TcU_{\rm rad}\gamma_e^2f_{\rm KN}.\]</div>
+<p>若磁场强，cascade 能量可能转为 \(\rm X\)-ray 或 \(\rm MeV\) 同步辐射；若辐射场占优，IC cascade 可能在 \(\rm GeV\)-\(\rm TeV\) 形成额外分量。</p>
+<p>第九步把这些理论量翻译成观测检查。\(\pi^0\) bump 需要看 \(\rm 100\,MeV\) 附近低能转折是否被数据真正约束，而不能只看 \(\rm GeV\) 以上一条强子幂律。中微子模型要检查 single flavor 还是 all flavor、是否包含振荡、时间窗是否与源活动期一致，以及模型是否超过 IceCube upper limit。TeV 谱软化要同时比较内禀截断、EBL、源内 \(\gamma\gamma\)、能量标定和背景系统误差。空间上，\(pp\) 模型应关注伽马形态是否与气体柱密度相关；leptonic IC 则可能更自然地跟 PWN、pulsar halo 或 \(\rm X\)-ray 电子结构相关。</p>
+<p>第十步是拟合逻辑。实际分析应尽量在 counts 空间使用 Poisson likelihood，而不是只拟合 unfolded \(\rm SED\) 点。常见形式为 </p>
+<div class="math-display">\[\ln\mathcal{L}=\sum_i\left[k_i\ln\mu_i-\mu_i-\ln(k_i!)\right],\qquad \mu_i=\mu_{{\rm src},i}(\theta)+\mu_{{\rm bkg},i}.\]</div>
+<p>对 \(pp\) 模型，要重点检查 \(F_\gamma\propto W_p n_{\rm H}/d^2\) 的退化；对 \(p\gamma\) 模型，要检查 \(R\)、\(n_\gamma\)、\(B\)、baryon loading 和 \(\tau_{\gamma\gamma}\) 的相关；对 cascade 模型，要同时检查 \(\rm GeV\) 过量、\(\rm TeV\) 硬度和 \(\rm X\)-ray 上限。后验图中 best-fit 不如 credible interval、参数相关和物理可行域重要。</p>
+<p>最后，本讲的基础理论边界是机制层面，而不是源类百科。我们不会在这里展开 GRB、TDE、AGN、SNR、PWN 或 pulsar halo 的完整人口统计，也不会复现具体源的 MCMC。我们要掌握的是一条连续链：从 \(N_p(E_p)\) 到 \(f_{pp}\) 和 \(f_{p\gamma}\)，从 \(\pi^0\) 与 \(\pi^\pm\) 到 \(E_\gamma\sim0.05E_p\) 和 \(E_\nu\sim0.05E_p\)，从 \(\gamma\gamma\) 阈值到 \(\tau_{\gamma\gamma}\)，再到 \(F_{\rm obs}=F_{\rm int}e^{-\tau}+F_{\rm cas}\) 和能量预算 \(L_\nu+L_\gamma+L_{e^\pm}\lesssim f_{\rm mes}L_p\)。下一讲会把这条链用于真实论文图表的阅读，不再重复这些基础推导。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：把上一讲的非热粒子谱作为本讲输入，而不是重新推导加速机制。假设源内已经形成稳态或准稳态父质子分布，求解对象是后续强子相互作用的注入函数：</p>
+<div class="math-display">\[N_p(E_p)=N_{p,0}\left(\frac{E_p}{E_0}\right)^{-s}\exp\left(-\frac{E_p}{E_{p,\max}}\right),\qquad W_p=\int E_pN_p(E_p)\,dE_p.\]</div>
+<p>这里 \(s\) 控制二次伽马射线和中微子谱的斜率，\(E_{p,\max}\) 控制最高可见能量，\(W_p\) 是能量预算的核心量。下一步先让这些质子撞冷气体，即进入 \(pp\) 通道。</p>
+<p>第二步：在均匀冷气体近似下，靶粒子数密度为 \(n_{\rm H}\)，非弹性截面为 \(\sigma_{pp}\)，单次碰撞平均损失能量比例为 \(\kappa_{pp}\)。要求解的是质子把能量转入 pion 通道的时间尺度：</p>
+<div class="math-display">\[t_{pp}=\frac{1}{n_{\rm H}\kappa_{pp}\sigma_{pp}c}.\]</div>
+<p>这个式子说明 \(n_{\rm H}\) 越大，\(pp\) 能量损失越快；但时间尺度本身还不是辐射效率，必须与质子在源内停留的时间比较。</p>
+<p>第三步：假设质子在源区的有效停留或逃逸时间为 \(t_{\rm esc}\)，则进入 \(pp\) meson 通道的效率为</p>
+<div class="math-display">\[f_{pp}=1-\exp\left(-\frac{t_{\rm esc}}{t_{pp}}\right)\simeq \min\left(1,\frac{t_{\rm esc}}{t_{pp}}\right).\]</div>
+<p>当 \(t_{\rm esc}\ll t_{pp}\) 时，\(f_{pp}\simeq t_{\rm esc}/t_{pp}\)，源是薄靶；当 \(t_{\rm esc}\gg t_{pp}\) 时，\(f_{pp}\to1\)，源接近 calorimetric。下一步用这个效率把父质子能量映射到 \(\pi^0\) 伽马射线。</p>
+<p>第四步：在入门平均能量分配近似下，\(pp\) 碰撞产生的 \(\pi^0\) 很快衰变为两个伽马光子，单个伽马光子能量约为父质子能量的小部分：</p>
+<div class="math-display">\[E_\gamma\sim\frac{\kappa_{pp}}{6}E_p\sim0.05E_p.\]</div>
+<p>这个关系的物理意义是，观测到能量为 \(E_\gamma\) 的 pion-decay 伽马射线，通常需要 \(E_p\sim20E_\gamma\) 的父质子。它把 \(\rm TeV\) 到 \(\rm PeV\) 伽马观测直接连接到 \(E_{p,\max}\) 和 PeVatron 诊断。</p>
+<p>第五步：同一批 \(pp\) 碰撞也产生 \(\pi^\pm\)，其衰变链为 \(\pi^\pm\to\mu^\pm+\nu_\mu\)，随后 \(\mu^\pm\) 继续衰变产生更多中微子和二次 \(e^\pm\)。数量级上，每个最终中微子能量满足</p>
+<div class="math-display">\[E_\nu\sim0.05E_p.\]</div>
+<p>因此，若看到 \(E_\nu\sim100\,\mathrm{TeV}\) 的中微子，模型通常要求 \(E_p\sim2\,\mathrm{PeV}\) 的父质子。到达地球后，长基线振荡会使 flavor 比例接近 \(\nu_e:\nu_\mu:\nu_\tau\simeq1:1:1\)，这一步把强子源与中微子望远镜的能段联系起来。</p>
+<p>第六步：许多致密源或喷流环境中，靶不是冷气体而是光子场。对 \(p\gamma\) 反应，先求阈值而不是效率；在共动系中，质子能量 \(E_p'\)、靶光子能量 \(\epsilon'\) 与碰撞角 \(\theta'\) 需满足</p>
+<div class="math-display">\[E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}.\]</div>
+<p>这个式子说明靶光子越软，所需父质子能量越高；同一 \(N_p(E_p)\) 放在不同光子场中，会产生不同能段的中微子和二次伽马射线。达到阈值以后，下一步才估算相互作用概率。</p>
+<p>第七步：若源区尺度为 \(R\)，靶光子数密度为 \(n_\gamma\)，\(p\gamma\) 截面和非弹性系数分别为 \(\sigma_{p\gamma}\) 与 \(\kappa_{p\gamma}\)，薄靶近似下效率为</p>
+<div class="math-display">\[f_{p\gamma}\simeq Rn_\gamma\kappa_{p\gamma}\sigma_{p\gamma}\simeq\frac{t_{\rm dyn}}{t_{p\gamma}}.\]</div>
+<p>这里 \(t_{\rm dyn}\sim R/c\) 是动力学时间。高光度、小半径源因 \(n_\gamma\) 大而更容易产生中微子；但同样的高光子密度也会提高 \(\gamma\gamma\) 吸收，因此必须检查伴随高能伽马射线能否逃逸。</p>
+<p>第八步：对 \(\gamma\gamma\to e^+e^-\)，求解对象是高能光子是否能被软光子吸收。若高能光子能量为 \(E_\gamma\)，软光子能量为 \(\epsilon\)，夹角为 \(\theta\)，阈值为</p>
+<div class="math-display">\[E_\gamma\epsilon(1-\cos\theta)\ge2m_e^2c^4.\]</div>
+<p>在头碰撞近似 \((1-\cos\theta)\simeq2\) 下，有 \(E_\gamma\epsilon\gtrsim m_e^2c^4\)。这解释了为什么 \(\rm TeV\) 光子容易被红外到光学背景吸收，而更高能的 \(\rm PeV\) 光子会受到远红外或微波背景影响。</p>
+<p>第九步：阈值只说明反应能否发生，真正决定逃逸概率的是光深。沿传播路径 \(l\)，若软光子场分布为 \(n(\epsilon,\Omega,l)\)，则</p>
+<div class="math-display">\[\tau_{\gamma\gamma}(E_\gamma)=\int dl\int d\epsilon\int d\Omega\,n(\epsilon,\Omega,l)\sigma_{\gamma\gamma}(E_\gamma,\epsilon,\theta)(1-\cos\theta).\]</div>
+<p>当 \(\tau_{\gamma\gamma}<1\) 时，高能光子相对透明；当 \(\tau_{\gamma\gamma}>1\) 时，直接伽马谱被显著压低。读论文中的 opacity 图时，\(\tau_{\gamma\gamma}=1\) 的交点就是透明与不透明的关键边界。</p>
+<p>第十步：把内禀谱、吸收和级联写成可观测关系。若源的内禀高能伽马谱为 \(F_{\rm int}(E)\)，传播或源内吸收由 \(\tau_{\gamma\gamma}(E,z)\) 描述，则观测谱应写为</p>
+<div class="math-display">\[F_{\rm obs}(E,z)=F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]+F_{\rm cas}(E,z).\]</div>
+<p>第一项是幸存的直接光子，第二项是被吸收能量经二次 \(e^\pm\) 再辐射形成的 cascade 分量。因此，不能把吸收理解为能量消失；它可能在 \(\rm MeV\)、\(\rm GeV\)、\(\rm TeV\) 或 \(\rm X\)-ray 能段重新出现。</p>
+<p>第十一步：为了判断 cascade 分量落在哪个能段，需要比较二次电子的同步辐射和逆康普顿冷却。若二次电子 Lorentz 因子为 \(\gamma_e\)，磁能密度为 \(U_B\)，辐射能密度为 \(U_{\rm rad}\)，则</p>
+<div class="math-display">\[P_{\rm syn}=\frac{4}{3}\sigma_TcU_B\gamma_e^2,\qquad P_{\rm IC}=\frac{4}{3}\sigma_TcU_{\rm rad}\gamma_e^2f_{\rm KN}.\]</div>
+<p>其中 \(f_{\rm KN}\) 表示 Klein-Nishina 抑制。若 \(U_B\gg U_{\rm rad}f_{\rm KN}\)，cascade 能量主要进入同步辐射；若 \(U_B\ll U_{\rm rad}f_{\rm KN}\)，则逆康普顿级联更重要。这个比较直接决定模型是否会违反 \(\rm X\)-ray 上限或造成 \(\rm GeV\) 过量。</p>
+<p>第十二步：最后用能量守恒闭合多信使预算。若源注入质子功率为 \(L_p\)，进入 meson 通道的总效率为 \(f_{\rm mes}\)，则中微子、伽马射线和二次对辐射的总输出必须满足</p>
+<div class="math-display">\[L_\nu+L_\gamma+L_{e^\pm}\lesssim f_{\rm mes}L_p.\]</div>
+<p>这里 \(f_{\rm mes}\) 可代表 \(f_{pp}\) 或 \(f_{p\gamma}\) 的相应贡献。这个不等式是读强子模型时的底线：若模型声称隐藏了伽马射线，就必须说明能量进入了 cascade、同步辐射、热化或逃逸；若所需 \(L_p\) 或 \(W_p\) 超过源可用能量，即使 \(\rm SED\) 曲线穿过数据点，也不能算物理上闭合。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一步先把拟合对象说清楚：本讲的模型拟合不是“画一条强子曲线穿过 \(\rm SED\) 点”，而是把上一讲给出的非热质子谱作为输入，检验它在气体场、光子场和传播背景中是否能同时满足谱形、通量、上限、能量预算和多信使约束。最基础的 \(pp\) pion-decay 模型通常从 \(N_p(E_p)=N_{p,0}(E_p/E_0)^{-s}\exp(-E_p/E_{p,\max})\) 出发，拟合参数包括 \(s\)、\(E_{p,\max}\)、\(W_p\)、\(n_{\rm H}\)、距离 \(d\)、源年龄或逃逸时间 \(t_{\rm esc}\)。其中 \(W_p=\int E_pN_p(E_p)dE_p\) 是最重要的能量预算量，而 \(F_\gamma\propto W_p n_{\rm H}/d^2\) 给出一个必须反复检查的退化：气体密度 \(n_{\rm H}\) 或距离 \(d\) 一变，所需质子总能量 \(W_p\) 就会显著改变。</p>
+<p>对 \(pp\) 模型，拟合流程应从物理可行性开始。先问源是否有足够的气体靶，气体模板是否来自 \(\rm CO\)、\(\rm H\,I\)、尘埃或其他替代示踪；再问质子是否能在源区停留足够久，使 \(f_{pp}=1-\exp(-t_{\rm esc}/t_{pp})\) 不至于太小。若拟合要求极大的 \(W_p\)，就要与超新星爆炸能、喷流能、星风能或吸积能比较。若论文只给出 best-fit 的 \(W_p\)，而没有展示 \(W_p\) 随 \(n_{\rm H}\) 和 \(d\) 的不确定范围变化，读者应把该结论视为不完整。</p>
+<p>第二类是 \(p\gamma\) 中微子与伽马联合模型。这里参数更多，通常包括父质子谱 \(N_p(E_p)\)、靶光子谱 \(n_\gamma(\epsilon)\)、源区尺度 \(R\)、bulk Lorentz factor \(\Gamma\)、磁场 \(B\)、baryon loading、逃逸处方和辐射场几何。读这类模型时，不能只看它是否产生某个 \(E_\nu\) 处的中微子通量，而要先检查阈值 \(E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}\) 是否把靶光子能量和父质子能量连接到了正确的观测能段。还要注意，减小 \(R\) 或增大 \(n_\gamma\) 会提高 \(f_{p\gamma}\simeq Rn_\gamma\kappa_{p\gamma}\sigma_{p\gamma}\)，但也常常提高 \(\tau_{\gamma\gamma}\)，使伴随高能伽马射线被隐藏并转入 cascade。</p>
+<p>第三类是吸收和传播修正模型。最简形式是 \(F_{\rm obs}(E,z)=F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]\)，但当吸收能量不能忽略时，必须使用 \(F_{\rm obs}(E,z)=F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]+F_{\rm cas}(E,z)\)。拟合参数可能包括内禀谱指数、曲率、截断能量、红移 \(z\)、EBL 归一化因子以及源内光子场参数。读论文时要分清 observed points、intrinsic model、de-absorbed points 和 cascade component；去吸收后的点不是望远镜直接测量点，而是依赖 \(\tau_{\gamma\gamma}\)、红移、EBL 模型和统计处理的推断量。</p>
+<p>第四类是 electromagnetic cascade 模型。它需要同时处理 \(\gamma\gamma\to e^+e^-\)、二次 \(e^\pm\) 的同步冷却和逆康普顿冷却，以及可能的角扩展和时间延迟。关键参数包括 \(B\)、\(U_{\rm rad}\)、源持续时间、注入谱、距离、星系际磁场和观测时间窗。这里的残差检查非常具体：\(\rm GeV\) 端是否出现过量，\(\rm TeV\) 端是否过硬，\(\rm X\)-ray 同步分量是否超过上限，级联分量是否会被仪器的点扩散函数或时间窗漏掉。若模型声称隐藏了伽马射线，却没有说明能量进入 \(F_{\rm cas}(E,z)\)、同步辐射、热化或逃逸通道，就没有完成多信使闭合。</p>
+<p>统计上，优先在 counts 空间拟合，而不是只拟合 unfolded \(\rm SED\) 点。对伽马射线数据，常用 Poisson likelihood：</p>
+<div class="math-display">\[\ln\mathcal{L}=\sum_i\left[k_i\ln\mu_i-\mu_i-\ln(k_i!)\right],\qquad \mu_i=\mu_{{\rm src},i}(\theta)+\mu_{{\rm bkg},i}.\]</div>
+<p>这里 \(k_i\) 是第 \(i\) 个 bin 的观测计数，\(\mu_i\) 是源模型、背景模型、有效面积、曝光、能量弥散和点扩散函数共同给出的期望计数。若论文只对展开后的 flux 点做 \(\chi^2\) 拟合，读者要警惕点间相关、非高斯误差、upper limit 处理和 instrument response 被简化后带来的偏差。</p>
+<p>后验解释要围绕物理可行域，而不仅是最佳拟合值。需要看 credible interval、参数相关、upper limit、lower limit 和 prior 敏感性。强子模型常见退化包括 \(W_p\)-\(n_{\rm H}\)、\(E_{p,\max}\)-谱截断、\(R\)-\(f_{p\gamma}\)、\(B\)-cascade \(\rm X\)-ray、baryon loading-\(\Phi_\nu\)。如果后验的高概率区域要求极端 \(W_p\)、极端 baryon loading、过小 \(R\) 或不合理 \(B\)，即使 best-fit 曲线漂亮，也应被视为物理上紧张。</p>
+<p>残差诊断应形成固定清单。低能端要看是否真的有 \(\pi^0\) bump，而不是 \(\rm GeV\) 以上幂律外推；高能端要看是否需要 \(\exp(-E/E_{\rm cut})\) 型截断；\(\rm TeV\) 软化要比较 EBL、源内 \(\gamma\gamma\)、内禀 \(E_{p,\max}\)、能量标定和背景模型；\(\rm GeV\)-\(\rm TeV\) 之间要看是否存在 cascade 填充；空间残差要检查是否跟气体、壳层、PWN、pulsar halo 或未建模点源相关。中微子未探测同样是约束：若模型预测的 \(E_\nu^2\Phi_\nu\) 超过 IceCube 上限，则对应的 \(f_{p\gamma}\)、\(f_{pp}\) 或 baryon loading 必须下调。</p>
+<p>系统误差必须进入结论，而不是放在附录里被忽略。常见来源包括气体模板、距离、背景模型、有效面积、能量标定、EBL 模型、源混叠、非同时多波段数据、红移不确定性、中微子角分辨率、时间窗选择和 trial factor。实际读论文时，可以用一句话检验模型是否合格：它不仅要拟合 \(\rm SED\)，还要同时通过 residual、upper limit、posterior、systematics 和能量预算 \(L_\nu+L_\gamma+L_{e^\pm}\lesssim f_{\rm mes}L_p\) 的检查。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读本讲相关经典工作时，要先建立“章节功能”的意识，而不是从头到尾平均用力。Hillas 类工作最该读的是物理压缩：它把极高能宇宙线源的第一道门槛写成 \(r_L=E/(ZeB)\) 与 \(r_L<R\)。这一节应与上一讲的最大能量讨论连起来看：\(r_L<R\) 是几何必要条件，后面还要满足 \(t_{\rm acc}<t_{\rm loss}\)、\(t_{\rm acc}<t_{\rm esc}\) 和 \(t_{\rm acc}<t_{\rm age}\)。如果一篇论文只引用 Hillas 图来宣称某源是 PeVatron，而没有讨论损失、逃逸和能量预算，读者应主动补上这些检查。</p>
+<p>读 \(pp\) pion-decay 经典结果时，重点章节通常是质子谱假设、气体靶估计和低能伽马谱形。先找作者如何定义 \(N_p(E_p)\)、\(s\)、\(E_{p,\max}\) 和 \(W_p\)，再看气体密度 \(n_{\rm H}\) 或气体模板如何得到。真正的 \(\pi^0\) bump 诊断不在于 \(\rm GeV\) 以上有一条幂律，而在于 \(\rm 100\,MeV\) 附近的低能转折是否被数据约束，并且是否能与 bremsstrahlung 和 IC 区分。读这些段落时，应把 \(E_\gamma\sim0.05E_p\) 当成快速检查工具，用观测到的最高 \(E_\gamma\) 反推所需父质子能量。</p>
+<p>读 \(p\gamma\) 中微子论文时，最重要的章节往往不是最后的多信使图，而是靶光子场和阈值估算。要问靶光子来自同步辐射、热光球、外部辐射区还是人为参数化；再用 \(E_p'\epsilon'(1-\cos\theta')\gtrsim0.3\,\mathrm{GeV^2}\) 检查作者声称的中微子能段是否自然。接着读 \(f_{p\gamma}\) 和 \(\tau_{\gamma\gamma}\) 的段落：高 \(p\gamma\) 效率经常伴随高源内 opacity，因此“中微子亮而伽马暗”可能合理，但必须有 cascade 或能量再处理的说明。</p>
+<p>读 \(\gamma\gamma\) absorption 与 EBL 论文时，要抓住三层谱：内禀谱 \(F_{\rm int}(E)\)、直接衰减谱 \(F_{\rm int}(E)\exp[-\tau_{\gamma\gamma}(E,z)]\)、以及级联谱 \(F_{\rm cas}(E,z)\)。这类论文中的关键段落通常解释 \(\tau_{\gamma\gamma}(E,z)\) 如何由软光子场、红移和截面积分得到。读图和读文时都要记住：de-absorbed spectrum 是模型依赖推断，不是直接观测。若去吸收后的内禀谱异常硬或上翘，可能指向系统误差、红移错误、EBL 模型不合适或源模型过于简单。</p>
+<p>读 Li-Ma 显著性或伽马射线统计基础工作时，应把它定位为第 \(5\) 讲的桥梁。它回答的是 ON 区和 OFF 区计数如何转化为显著性，而不是某个辐射机制是否正确。强子论文中常见的 \(TS\) map、significance map 和 residual map 都建立在背景假设之上；一个 \(5\sigma\) 检测说明有相对于背景的统计偏离，但不自动说明偏离来自 \(pp\)、IC 或 cascade。机制判断仍要回到谱形、形态、时间和多信使闭合。</p>
+<p>读多信使关联论文时，先看统计设计，再看物理解释。时间窗是否预先定义，方向误差是否与候选源重叠，trial correction 是否计入，中微子能量代理如何使用，伽马射线上限是否与同一活动期对应，这些都应在模型解释前完成。只有当统计关联、能量映射 \(E_\nu\sim0.05E_p\)、伽马吸收 \(\tau_{\gamma\gamma}\)、cascade 约束和能量预算同时合理时，一个中微子候选才真正增强强子解释。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<ol>
+<li>
+<p>Hillas 图或 \(B\)-\(R\) 图：横轴通常是源尺度 \(R\)，纵轴是磁场 \(B\)，斜线代表固定最大刚度或固定能量。要看候选源是否满足 \(r_L<R\)，并确认图中是否包含速度因子 \(\beta\)、bulk Lorentz factor \(\Gamma\) 或损失限制。位于某条线之上只是必要条件，不是成功加速证明。</p>
+</li>
+<li>
+<p>\(\pi^0\) bump 的 \(\rm MeV\)-\(\rm GeV\) 谱图：横轴是 photon energy，纵轴常为 \(E^2dN/dE\) 或 \(\nu F_\nu\)。重点看 \(\rm 100\,MeV\) 附近的低能转折是否由数据点约束，并比较 pion-decay、bremsstrahlung 和 IC 分量。若只有 \(\rm GeV\) 以上数据，不应轻易宣称探测到 \(\pi^0\) bump。</p>
+</li>
+<li>
+<p>宽带 leptonic 与 hadronic \(\rm SED\) 对比图：要逐一识别 synchrotron、IC、bremsstrahlung、\(\pi^0\) gamma、secondary synchrotron、neutrino band 和 cascade component。检查总模型线之外，还要看单个分量是否违反 radio、\(\rm X\)-ray、\(\rm GeV\) 或 \(\rm TeV\) 上限。</p>
+</li>
+<li>
+<p>\(\gamma\gamma\) opacity 曲线：横轴为 \(E_\gamma\)，纵轴为 \(\tau_{\gamma\gamma}\)。最重要的是 \(\tau_{\gamma\gamma}=1\) 的交点，它给出透明与不透明的边界。若图中比较不同 \(R\)、\(L\)、\(\Gamma\)、\(z\) 或靶光子谱，要看哪一个参数主导透明窗口变化。</p>
+</li>
+<li>
+<p>EBL attenuation 与 de-absorbed spectrum 图：要区分 observed points、intrinsic model、de-absorbed points、attenuated model 和 cascade component。重点检查红移 \(z\)、EBL 模型、能量标定和系统误差。去吸收后的谱点不能当成望远镜直接测量点。</p>
+</li>
+<li>
+<p>中微子通量、有效面积或 upper limit 图：横轴常为 \(E_\nu\)，纵轴常为 \(E_\nu^2\Phi_\nu\)。要确认曲线是 single flavor 还是 all flavor，是否包含振荡，时间窗是否匹配源活动期，模型是否超过 IceCube 或其他中微子望远镜的上限。</p>
+</li>
+<li>
+<p>\(TS\) map、significance map 或 residual map：坐标轴是天球位置，颜色表示 \(TS\)、显著性或残差。重点看伽马形态是否与气体、壳层、PWN、pulsar halo 或点源模板相关，并注意 PSF、平滑尺度、背景模板和 trial correction。</p>
+</li>
+<li>
+<p>corner plot 或参数相关图：对角线是单参数后验，非对角线是二维相关。重点看 \(W_p\)-\(n_{\rm H}\)、\(B\)-cascade \(\rm X\)-ray、\(R\)-\(f_{p\gamma}\)、\(E_{p,\max}\)-谱截断、baryon loading-\(\Phi_\nu\) 的退化。</p>
+</li>
+</ol>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 \(1\)：Hillas 图。横轴通常是源尺度 \(R\)，纵轴是磁场 \(B\)，斜线代表固定最大能量或固定刚度条件。读图第一步是确认斜线采用的粒子电荷 \(Z\)、速度因子 \(\beta\) 和是否包含 bulk Lorentz factor \(\Gamma\)。第二步才看候选源落在哪些线之上。结论只能是几何上可能满足 \(r_L<R\)，不能直接推出源能达到 \(10^{15}\,\mathrm{eV}\)、\(10^{18}\,\mathrm{eV}\) 或更高；真正的 PeVatron 判断还要结合加速时间、损失时间、逃逸时间和观测到的 \(E_\gamma\sim0.05E_p\) 或 \(E_\nu\sim0.05E_p\)。</p>
+<p>图 \(2\)：\(\pi^0\) bump 的 \(\rm SED\)。横轴是 photon energy，纵轴多为 \(E^2dN/dE\) 或 \(\nu F_\nu\)，模型线常包含 pion-decay、bremsstrahlung 和 IC。读图时先看 \(\rm 100\,MeV\) 附近是否有足够数据点和误差条来约束低能转折，再看高能端是否需要 \(E_{p,\max}\) 或指数截断。常见误读是看到 \(\rm GeV\) 以上 hadronic 曲线穿过数据点就称为 \(\pi^0\) bump；实际上，没有低能转折约束时，电子模型也可能给出相似高能斜率。</p>
+<p>图 \(3\)：宽带 leptonic 与 hadronic 模型对比图。横轴跨 radio、optical、\(\rm X\)-ray、\(\rm GeV\) 和 \(\rm TeV\)，纵轴通常是能量通量。读图时不要只看黑色总曲线，而要逐条识别 synchrotron、IC、bremsstrahlung、\(\pi^0\) gamma、secondary synchrotron、neutrino band 和 cascade component。残差检查包括：hadronic cascade 是否超过 \(\rm X\)-ray 上限，leptonic IC 是否需要不合理低磁场，\(\rm TeV\) 端是否被 EBL 或源内 \(\gamma\gamma\) 改写。误读风险是把非同时多波段点拼成单一稳态 \(\rm SED\)，忽略变源的时间差。</p>
+<p>图 \(4\)：\(\gamma\gamma\) opacity 曲线。横轴为 \(E_\gamma\)，纵轴为 \(\tau_{\gamma\gamma}\)，水平线 \(\tau_{\gamma\gamma}=1\) 是最重要的读图辅助线。若曲线在某能量以上超过 \(1\)，直接高能伽马射线会被压低；若同时画出不同 \(R\)、\(L\) 或 \(\Gamma\)，要判断透明窗口是由源区大小、光子密度还是相对论运动控制。常见误读是把观测谱的高能下降自动归因于 \(\gamma\gamma\) 吸收，而没有排除内禀 \(E_{p,\max}\)、电子冷却截断、EBL 或仪器能量标定误差。</p>
+<p>图 \(5\)：EBL attenuation 与 de-absorbed spectrum。横轴是 \(E_\gamma\)，纵轴可为 differential flux 或 \(E^2dN/dE\)。图中通常同时出现 observed points、attenuated model、intrinsic model 和 de-absorbed points。读图第一步是确认红移 \(z\) 和 EBL 模型，第二步看去吸收后谱指数是否物理合理。若 corrected spectrum 变得异常硬或在最高能端上翘，可能不是新物理信号，而是红移、背景、能量标定、EBL 选择或内禀谱参数化造成的系统效应。</p>
+<p>图 \(6\)：中微子模型与上限图。横轴常为 \(E_\nu\)，纵轴为 \(E_\nu^2\Phi_\nu\)。读图时要确认模型曲线对应 single flavor 还是 all flavor，是否已经考虑传播后的 flavor mixing，以及时间窗是全天、长期堆叠还是某次 flare。数据点若是候选事件，不能当作谱测量点；upper limit 低于模型才形成排除，模型低于 upper limit 只代表尚未被排除。误读风险是把一个方向接近的中微子事件直接等同于源关联，而不检查 trial correction 和角误差。</p>
+<p>图 \(7\)：\(TS\) map、significance map 或 residual map。横纵坐标是天球位置，颜色表示 \(TS\)、显著性或残差。若论文支持 \(pp\) 解释，应检查伽马形态是否跟气体柱密度、分子云或壳层相关；若支持 leptonic IC，应检查是否更接近 PWN、pulsar halo 或 \(\rm X\)-ray 电子结构。读残差图时一定要看 PSF、平滑尺度、背景模板和 trial correction。常见误读是把平滑后的噪声团块看成扩展源，或把未建模点源残差解释成弥散强子辐射。</p>
+<p>图 \(8\)：corner plot。对角线显示单参数后验，非对角线显示二维相关或置信区域。读图时先找最强退化，例如 \(W_p\) 与 \(n_{\rm H}\) 的反相关、\(B\) 与 cascade \(\rm X\)-ray 的相关、\(R\) 与 \(f_{p\gamma}\) 的相关、\(E_{p,\max}\) 与高能截断的相关。结论不应只引用 best-fit 表，而要描述哪些参数组合被数据真正限制，哪些只是 prior 或物理边界限制。误读风险是把窄后验当成强物理结论，却没有检查系统误差是否进入 likelihood。</p>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从宇宙线起源和加速条件进入强子源判据。先读 Hillas 关于磁场 \(B\)、源尺度 \(R\) 与回旋半径 \(r_L\) 的经典讨论，理解 \(r_L<R\) 为什么只是必要条件；再读现代 PeVatron、SNR、星爆星系、AGN jet 和 GRB 论文，观察作者如何把几何条件与 \(t_{\rm acc}\)、\(t_{\rm loss}\)、\(t_{\rm esc}\)、\(E_{p,\max}\) 和能量预算结合。这样可以避免把 Hillas 图当作“源类排名图”。</p>
+<p>第二条路径是从 \(pp\) pion-decay 伽马射线进入多信使诊断。建议围绕关键词 \(pp\) gamma-ray emission、pion-decay bump、hadronic gamma-ray model 和 molecular cloud interaction 阅读。重点不是记住某个源类结论，而是训练三件事：低能 \(\pi^0\) bump 是否被数据约束，\(F_\gamma\propto W_p n_{\rm H}/d^2\) 的退化如何处理，所需 \(W_p\) 是否在源可提供能量内。随后再接中微子文献，用 \(E_\nu\sim0.05E_p\) 把伽马射线、中微子和父质子能量放在同一张能量账本上。</p>
+<p>第三条路径是从 \(p\gamma\) 阈值进入隐藏源和中微子天文学。可选择 GRB、TDE、AGN flare 或致密喷流环境作为案例，重点读靶光子场、\(p\gamma\) 效率、baryon loading 和源内 \(\gamma\gamma\) opacity 的段落。现代研究越来越强调“中微子亮、伽马暗”的可能性，但这不是逃避伽马上限的万能理由；读者必须追踪被吸收能量如何进入 \(F_{\rm cas}(E,z)\)、同步辐射、热化或逃逸。</p>
+<p>第四条路径是从 \(\gamma\gamma\) absorption、EBL attenuation 和 electromagnetic cascade 进入传播物理。先掌握阈值 \(E_\gamma\epsilon(1-\cos\theta)\ge2m_e^2c^4\) 与光深 \(\tau_{\gamma\gamma}\) 的含义，再读 TeV blazar、GRB 高能光子和 LHAASO PeV photon 相关论文。阅读时要持续区分内禀截断、源内吸收、EBL 衰减、级联再处理和仪器系统误差；这些效应都能造成高能谱软化。</p>
+<p>第五条路径是统计与图表阅读。Li-Ma 显著性是理解 ON/OFF 计数的经典入口，但真实高能论文还需要 likelihood、instrument response、upper limit、\(TS\) map、residual map 和 corner plot。下一讲会系统训练这些图的读法；本讲的后续阅读可以先把每篇论文中的模型图、残差图、上限图和后验图单独整理出来，练习判断哪些结论来自数据，哪些来自先验、模板或系统假设。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>同一系列第 \(5\) 讲最自然的方向是“高能天体物理论文图表与统计判断入门”。本讲已经补齐 \(pp\)、\(p\gamma\)、\(\pi^0\) 衰变、中微子、\(\gamma\gamma\) 吸收、EBL 和 cascade 的机制框架；下一讲应把第 \(1\) 至第 \(4\) 讲的物理工具用于真实论文图表，系统训练如何读 light curve、spectrum、\(\rm SED\)、\(TS\) map、residual map、upper limit、corner plot 和多信使关联图。边界要明确：第 \(5\) 讲不再重新推导同步辐射、IC、Fermi 加速、\(pp\)、\(p\gamma\) 或 \(\gamma\gamma\) 基础公式，而是训练如何判断数据是否真的支持某个模型。</p>
+<p>第二个可并入第 \(5\) 讲的方向是“仪器响应与 likelihood 的读论文版本”。它承接本讲中 \(\ln\mathcal{L}=\sum_i[k_i\ln\mu_i-\mu_i-\ln(k_i!)]\) 的思想，解释 counts、exposure、effective area、PSF、energy dispersion、background model、response matrix、test statistic 和 upper limit。这个模块的目标不是把学生变成数据分析专家，而是让他们读论文时能判断作者是否在正确的数据空间比较模型和观测。</p>
+<p>第三个后续方向可以作为桥梁课之后的短案例系列：选择 GRB prompt、SNR PeVatron、pulsar halo、TeV blazar 或 TDE neutrino candidate 之一，做完整论文精读。它与本讲的边界关系是：本讲给出机制词典和诊断链，案例系列则把这些链条应用到具体源，检查 \(\rm SED\)、形态、变时标、中微子候选、EBL、cascade 和能量预算是否彼此一致。</p>
+<p><strong>检索关键词</strong>：<br />
+- hadronic gamma ray emission pp p gamma pion decay neutrinos<br />
+- gamma gamma absorption pair cascade high energy astrophysics<br />
+- EBL attenuation TeV gamma rays electromagnetic cascade<br />
+- multimessenger neutrino gamma ray source diagnostics<br />
+- Hillas 1984 origin cosmic rays magnetic field size<br />
+- Li Ma 1983 significance gamma ray astronomy<br />
+- pion decay bump Fermi LAT supernova remnant<br />
+- p gamma neutrino production threshold astrophysical sources</p>
+<p><strong>确信的公开链接</strong>：<br />
+- https://ui.adsabs.harvard.edu/abs/1984ARA%26A..22..425H/abstract<br />
+- https://ui.adsabs.harvard.edu/abs/1983ApJ...272..317L/abstract</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
