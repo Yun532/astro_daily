@@ -77,6 +77,7 @@ def generate_html_report(md_path: str) -> str:
     .report-nav {{ display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }}
     .report-nav a,
     .report-nav span {{ flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }}
+    .report-nav .home {{ text-align: center; }}
     .report-nav .next {{ text-align: right; }}
     .report-nav span {{ color: var(--muted); background: rgba(248, 251, 255, 0.78); }}
     .eyebrow {{ margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }}
@@ -171,6 +172,7 @@ def generate_html_report(md_path: str) -> str:
       .page {{ padding: 18px 10px 36px; }}
       .hero {{ padding: 24px 20px; border-radius: 22px; }}
       .report-nav {{ flex-direction: column; }}
+      .report-nav .home {{ text-align: left; }}
       .report-nav .next {{ text-align: left; }}
       main {{ padding: 18px 14px; border-radius: 20px; }}
       h2 {{ font-size: 1.25rem; }}
@@ -358,12 +360,13 @@ def _report_nav_html(report_date: str, previous_date: str | None, next_date: str
         if previous_date
         else '<span class="previous">← 没有更早的报告</span>'
     )
+    home = '<a class="home" href="../index.html">⌂ 返回主页</a>'
     next_link = (
         f'<a class="next" href="{next_date}.html">下一期：{next_date} →</a>'
         if next_date
         else '<span class="next">没有更新的报告 →</span>'
     )
-    return f'<!-- REPORT_NAV_START -->\n    <nav class="report-nav" aria-label="日报前后导航" data-report-date="{escape(report_date)}">\n      {previous}\n      {next_link}\n    </nav>\n    <!-- REPORT_NAV_END -->'
+    return f'<!-- REPORT_NAV_START -->\n    <nav class="report-nav" aria-label="日报前后导航" data-report-date="{escape(report_date)}">\n      {previous}\n      {home}\n      {next_link}\n    </nav>\n    <!-- REPORT_NAV_END -->'
 
 
 def _adjacent_report_dates(target_dir: Path, report_date: str) -> tuple[str | None, str | None]:
