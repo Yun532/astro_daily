@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-05-30</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-05-30</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-05-30">
+      <a class="previous" href="2026-05-29.html">← 上一期：2026-05-29</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-05-30T11:11:14+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1">1. 高能天体物理零基础课（五）：望远镜、探测器、响应矩阵和多波段数据</h3>
+<ul>
+<li>课程系列：高能天体物理零基础桥梁课（第 5/5 讲）</li>
+<li>本讲边界：本讲讲观测数据怎样从光子/计数变成光变、能谱、图像和显著性：响应矩阵、有效面积、背景、PSF、曝光、触发阈值、多波段非同时性和选择效应。不深入某个软件包的操作教程。</li>
+<li>上下文承接：前四讲建立了观测量、轻子辐射、粒子加速冷却和强子/级联过程；本讲补上仪器和数据层，避免后续把模型问题误读成探测器或样本选择问题。</li>
+<li>主题：observational instruments and data analysis foundations for high-energy astrophysics</li>
+<li>经典工作：从 Fermi/Swift、Chandra/XMM、VLA/ALMA、HAWC/LHAASO/IACT 到光学巡天，建立 response、exposure、background、PSF、effective area 和 selection effect 的共同读法。</li>
+<li>为什么经典：专业读论文必须知道数据不是直接等于物理量。GRB prompt 谱、TDE X-ray/optical 分类、PWN/halo TeV 形态都强烈依赖仪器响应、背景和选择效应。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一段：本讲是“高能天体物理零基础桥梁课”的第 \(5/5\) 讲，也是前四讲的收束。前四讲已经回答了源如何产生高能辐射：从基本观测量到同步辐射、逆康普顿、粒子加速冷却，再到强子过程与级联过程；这些模型最终给出的通常是天空上的 differential photon flux，例如 \(\phi(E,\Omega,t;\theta)\)。本讲要补上的不是新的辐射机制，而是数据层的关键桥梁：探测器并不直接记录 \(\phi(E,\Omega,t;\theta)\)，而是记录经过仪器响应、触发、重建、筛选和背景混合之后的离散 counts。因此，本讲的核心问题是：给定一个源模型，怎样预测在某个仪器、某个能道、某个空间像素和某个时间窗中应该看到多少计数？</p>
+<p>第二段：这条桥梁可以概括为一条主线：\(\phi\rightarrow{\cal R}\rightarrow\mu\rightarrow{\cal L}\)。其中 \(\phi(E,\Omega,t;\theta)\) 是源物理模型给出的真实天空通量，\({\cal R}\) 代表有效面积、曝光、能量弥散、点扩散函数、死时间和事件选择等响应信息，\(\mu_i=s_i+b_i\) 是第 \(i\) 个数据 bin 的期望总计数，\({\cal L}\) 是把期望计数与观测计数 \(k_i\) 比较的 likelihood。这个顺序非常重要：现代高能天文学通常不是先把数据“反卷积”为若干通量点再随意拟合，而是从物理模型出发，经过响应折叠后在 counts 空间进行统计比较。</p>
+<p>第三段：历史动机也正来自这里。早期高能观测常常接近“数光子”的状态，但随着 X-ray CCD、pair-conversion \(\gamma\)-ray 望远镜、成像大气切伦科夫望远镜、空气簇射阵列和大规模光学巡天的发展，人们逐渐发现“计数多”并不自动等于“源亮”。同一个源通量在不同能量、不同入射角、不同 event class、不同天顶角和不同筛选条件下会产生不同 counts；同一个显著性峰也可能来自真实源、背景模板残差、邻近源污染、点扩散函数尾部或多重试验带来的偶然波动。Li-Ma on/off 显著性、maximum likelihood template fitting、响应矩阵、曝光图和选择函数的成熟，正是高能天文学从发现型观测走向精密推断的基础。</p>
+<p>第四段：本讲的关键结果是让学生建立一种 response-aware 的论文读法。读光变曲线时，要问纵轴是 count rate 还是 flux，是否同时给出 exposure、cadence 和 upper limit；读能谱时，要问点是否为 unfolded flux point，是否依赖参考谱 \(\phi_{\rm ref}(E)\)，误差条是否包含系统误差；读图像和显著性图时，要问模型是否与 \(P(\Omega_{\rm rec}\mid\Omega_{\rm true},E)\) 卷积，背景是否经过同样的空间处理，颜色条显示的是 counts、residual、\({\rm TS}\) 还是 significance；读 SED 时，要问不同仪器是否同时、孔径是否一致、upper limit 的 confidence level 与谱形假设是什么。</p>
+<p>第五段：方法上，本讲把源模型到数据空间的推断过程拆成连续步骤。第一，定义真实 photon flux \(\phi(E,\Omega,t;\theta)\)。第二，引入有效面积 \(A_{\rm eff}(E,\Omega,t)\)，说明它包含探测、触发、重建和 selection cut。第三，把 \(A_{\rm eff}\) 对时间积分成曝光 \({\cal E}(E,\Omega)\)。第四，用能量弥散 \(D(E_{\rm rec}\mid E_{\rm true})\) 描述 true energy 到 reconstructed energy 的迁移。第五，用点扩散函数 \(P(\Omega_{\rm rec}\mid\Omega_{\rm true},E)\) 描述方向重建误差。第六，加入背景 \(b_{ip}(\eta)\)。第七，在 Poisson likelihood 中比较 \(\mu_{ip}(\theta,\eta)=s_{ip}(\theta)+b_{ip}(\eta)\) 与观测计数 \(k_{ip}\)。这条推导链把前四讲的辐射模型真正接到观测数据上。</p>
+<p>第六段：本讲还特别强调非探测和 upper limit 的正确含义。一个源没有被探测到，并不意味着源不存在；可能是曝光不足、触发阈值过高、源太扩展导致表面亮度低、谱形假设不合适、能量范围不匹配、EBL attenuation 很强，或观测窗口错过了爆发时段。类似地，upper limit 不是一个纯粹几何点，而依赖 confidence level、背景模型、能量范围、源形态、参考谱和响应矩阵。把 upper limit 当作“模型必须低于这条线”的简单硬边界，是初学者读多波段 SED 时最常见的误区之一。</p>
+<p>第七段：局限性也必须在本讲中说清。仪器响应来自地面标定、Monte Carlo、在轨校准或标准烛光交叉检查，因而必然带有系统误差。能量尺度偏差会影响 cutoff、line、spectral peak 或 EBL absorption 的判断；有效面积误差主要影响 normalization；点扩散函数误差会影响 extension 和 centroid；背景模板误差会影响 weak source significance 和 extended emission。对于 IACT、HAWC 和 LHAASO，还要考虑大气透明度、夜空背景、镜面老化、hadron rejection、event class 和能量重建偏差。对于多波段数据，还要额外考虑非同时性、不同孔径、不同角分辨率和不同选择函数。</p>
+<p>第八段：本讲的后续影响是把学生从“看一张漂亮 SED 图”训练到“能检查一篇观测论文的统计链条”。完成本讲后，学生应能理解为什么 Fermi-LAT 论文会强调 \({\rm TS}\)、exposure map、Galactic diffuse template 和 source model；为什么 Chandra、XMM-Newton 或 Swift-XRT 光谱必须说明 \({\rm RMF}\)、\({\rm ARF}\)、background region、pile-up 和 absorption；为什么 HAWC、LHAASO 与 IACT 对扩展源需要报告不同背景方案和形态假设下的系统误差；也应理解为什么 triggered GRB sample、optical-selected TDE sample 和 flux-limited \(\gamma\)-ray catalog 不能直接代表 intrinsic population。本系列到这里完成基础闭环；下一阶段应进入 GRB afterglow、PWN 或 SNR PeVatron 等案例精读，而不是在本讲中展开具体软件教程。</p>
+<h4 id="_3">背景知识</h4>
+<p>第一段：高能天体物理的观测对象通常又暗、又少、又容易被背景淹没。低能光学成像中，人们常能直观看到源的形态；但在 X-ray、GeV \(\gamma\)-ray 和 TeV \(\gamma\)-ray 中，数据经常是有限光子、有限能道、有限空间像素和复杂背景的组合。早期直觉会把“探测到多少 counts”近似当作“源有多亮”，但这只有在响应平坦、背景可忽略、计数很多且能量分辨率不重要时才近似成立。高能天文学恰恰通常不满足这些条件，因此从 counts 到 flux 的转换本身就是科学推断的一部分。</p>
+<p>第二段：历史上，\(\gamma\)-ray 天文学的成熟并不只是因为望远镜变大，还因为统计方法和响应建模变得可靠。地面 Cherenkov 观测需要从强大的 cosmic-ray background 中识别少量 \(\gamma\)-ray events；空气簇射阵列需要从地面粒子分布反推原初光子的能量和方向；pair-conversion \(\gamma\)-ray 望远镜需要处理能量依赖的有效面积、较宽的低能点扩散函数和明亮的 Galactic diffuse emission。Li 与 Ma 的 on/off 显著性公式、Hillas 图像参数、空气簇射重建、最大似然模板拟合和后来的机器学习分类，都是把“有一些事件”转化为“有统计意义的天体源”的关键步骤。</p>
+<p>第三段：X-ray 天文学的发展也提供了同样的教训。X-ray CCD 或 grating 并不是把每个光子完美放到真实能量上，而是通过 redistribution matrix 和 ancillary response 把真实能量、探测概率和重建能道联系起来。因此，吸收柱密度、软 X-ray excess、emission line、pile-up 和 particle background 都可能影响谱形解释。如果不检查 \({\rm RMF}\)、\({\rm ARF}\)、source extraction region、background region 和统计量选择，就很容易把仪器或背景效应误读成吸积盘、喷流或热等离子体物理。</p>
+<p>第四段：多波段天文学进一步放大了这些困难。一个 GRB afterglow 的 optical 点、X-ray 点、radio 点和 TeV upper limit 可能来自完全不同的观测时间；一个 TDE 的 optical selection 会偏向蓝色、尘埃消光小、演化较慢的事件，而 X-ray selection 会偏向高能亮源；一个 pulsar halo 的 TeV 形态可能要与 radio pulsar catalog、X-ray PWN 和 GeV pulsation 信息共同解释，但这些数据的角分辨率、灵敏度和选择函数并不相同。把它们简单画在同一张 SED 上，只是教学可视化的第一步，不是完整统计推断。</p>
+<p>第五段：本讲之所以重要，是因为高能天体物理中的许多错误解释都发生在“物理模型”和“数据产品”之间。一个谱在低能端变弯，可能是吸收或冷却，也可能是有效面积阈值附近的响应误差；一个 TeV 源看似扩展，可能是真实扩散 halo，也可能是点扩散函数、背景泄漏或平滑尺度造成的假象；一个 catalog 中的源看似集中在某类环境，可能是源物理，也可能是 sky coverage、Galactic latitude cut 或 follow-up completeness 的结果。若不把响应和选择函数纳入分析，后续所有物理结论都会失去可靠基础。</p>
+<p>第六段：常见误区可以归纳为五类。第一，把 unfolded flux points 当成原始观测，忽略它们依赖响应、背景和参考谱 \(\phi_{\rm ref}(E)\)。第二，把 \({\rm TS}\) 或 \(5\sigma\) 当作无条件发现声明，不检查 pre-trial significance、post-trial significance、look-elsewhere effect 和系统误差。第三，把 residual map 或 significance map 当成天空真实亮度图，而不检查 smoothing kernel、PSF、背景模板和邻近源。第四，把 nondetection 直接解释为源不存在，而不检查 exposure、threshold、duration、spectral assumption 和 source extension。第五，把 flux-limited sample 或 triggered sample 当作 intrinsic population，忽略 \(P_{\rm det}(x)\) 对观测样本的塑形。</p>
+<p>第七段：因此，本讲的背景不是某一个仪器的操作手册，而是建立跨仪器的共同语言。无论是 Fermi、Swift、Chandra、XMM-Newton、VLA、ALMA、HAWC、LHAASO、IACT，还是光学时域巡天，根本问题都可以写成：给定真实天空模型 \(\phi(E,\Omega,t;\theta)\)，经过仪器响应后，期望观测计数 \(\mu_i(\theta)\) 是多少？给定观测计数 \(k_i\)，模型的 likelihood \({\cal L}\) 有多大？给定触发阈值和选择函数，观测样本 \(p_{\rm obs}(x\mid\psi)\) 与真实母体 \(p_{\rm int}(x\mid\psi)\) 有何不同？</p>
+<p>第八段：本讲也要明确边界。我们不在这里深入某个软件包，不讲完整的 Fermi Science Tools、XSPEC、Sherpa、ctools、Gammapy 或 CASA 操作流程；也不在这里展开 GRB afterglow、PWN halo 或 SNR PeVatron 的完整物理建模。那些是后续案例精读课的任务。本讲要做的是训练学生看到任何观测论文时，都能先问数据空间、响应、背景、likelihood、残差、系统误差和选择函数，然后再讨论天体物理解释。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一段：本讲从一个最基本的区分开始：源模型预言的是连续的 differential photon flux，而仪器记录的是离散的 counts。前四讲中的同步辐射、逆康普顿、强子相互作用和级联模型，最终都可以把输出写成类似 \(\phi(E,\Omega,t;\theta)={\rm d}N_\gamma/({\rm d}E\,{\rm d}A\,{\rm d}t\,{\rm d}\Omega)\) 的量。这里的 \(E\) 是真实能量，\(\Omega\) 是真实方向，\(t\) 是真实到达时间，\(\theta\) 是源物理参数。探测器并不直接给出这个函数，而是在有限能道、有限空间像素和有限时间 bin 中记录事件数 \(k_i\)。</p>
+<p>第二段：把 flux 变成 counts 的第一块积木是有效面积 \(A_{\rm eff}(E,\Omega,t)\)。它表示一个入射 photon 最终被探测、触发、重建并通过分析 cut 的等效面积，因此不等于几何面积。对 X-ray 望远镜，\(A_{\rm eff}\) 受镜面反射率、探测器量子效率、滤光片和坏像素影响；对 GeV \(\gamma\)-ray 望远镜，\(A_{\rm eff}\) 受入射角、conversion layer、track reconstruction 和 event class 影响；对 IACT 和空气簇射阵列，\(A_{\rm eff}\) 还与大气、天顶角、image size、shower containment 和 gamma/hadron separation 有关。只要 \(A_{\rm eff}\) 随能量变化明显，阈值附近的谱形就必须谨慎解释。</p>
+<p>第三段：把有效面积对时间积分，就得到曝光 \({\cal E}(E,\Omega)=\int A_{\rm eff}(E,\Omega,t)\,{\rm d}t\)。曝光不是简单的 wall-clock observing time，而是能量、方向和观测条件相关的探测能力。扫描式望远镜的 exposure 会随天区变化；地面阵列的 exposure 会随天顶角和观测季节变化；时域巡天的有效约束还取决于 cadence、weather、moon phase 和触发策略。因此，读 light curve 或 nondetection 时，必须同时看 flux/count rate 和 exposure；没有数据点的时间段可能只是未观测，而不一定是源熄灭。</p>
+<p>第四段：第二块积木是能量弥散 \(D(E_{\rm rec}\mid E_{\rm true})\)。真实能量为 \(E_{\rm true}\) 的 photon 不一定被重建为同样的 \(E_{\rm rec}\)，而是有一个概率分布。对 steep spectrum，低能 photon 数量很多，少量向高能迁移的事件也可能影响高能尾部；对 sharp cutoff、line feature 或 EBL absorption，能量弥散会把本来尖锐的结构抹宽，甚至在 unfolded 图上制造看似平滑的弯曲。因此，判断 cutoff、PeVatron tail 或 line-like excess 时，不能只看 SED 点是否弯曲，而要检查响应矩阵是否已在 likelihood 中使用。</p>
+<p>第五段：第三块积木是空间响应，也就是点扩散函数 \(P(\Omega_{\rm rec}\mid\Omega_{\rm true},E)\)。它描述真实方向为 \(\Omega_{\rm true}\) 的 photon 被重建到 \(\Omega_{\rm rec}\) 的概率。点源会因为 PSF 被看成有宽度，扩展源的真实形态也必须先与 PSF 卷积后才能和 counts map 比较。低能 Fermi-LAT 事件的 PSF 可很宽，IACT 的 PSF 较窄但受 event quality 和 offset 影响，HAWC 与 LHAASO 的角分辨率随能量和事件大小变化。对 PWN、pulsar halo、SNR shell 和 Galactic diffuse structure，不能把平滑后的显著性斑块直接等同于真实源边界。</p>
+<p>第六段：第四块积木是背景 \(b_i(\eta)\)。高能数据中的背景不是“减掉就完”的附属项，而常常决定结论是否成立。X-ray 背景包括 particle background、cosmic X-ray background、readout artifact、nearby sources 和 soft proton contamination；GeV \(\gamma\)-ray 背景包括 Galactic diffuse emission、isotropic component、unresolved sources 和邻近 catalog 源；TeV 地面观测的背景主要来自 cosmic-ray hadrons、electrons 和大气条件；optical transient 搜索还要面对宿主星系、天空背景和差分成像残差。正式模型通常写成 \(\mu_i(\theta,\eta)=s_i(\theta)+b_i(\eta)\)，其中 \(\eta\) 是背景归一化、谱形、模板或系统误差参数。</p>
+<p>第七段：有了这些组件，最基本的 forward-folding 光谱模型可以写成 \(s_i(\theta)=\int \phi(E;\theta){\cal E}(E)R_i(E)\,{\rm d}E\)，其中 \(R_i(E)\) 表示真实能量 \(E\) 的 photon 落入第 \(i\) 个重建能道的概率。若加入空间像素 \(p\)，则形式扩展为 \(s_{ip}(\theta)=\int\int \phi(E,\Omega;\theta){\cal E}(E,\Omega)R_i(E)P_p(E,\Omega)\,{\rm d}E\,{\rm d}\Omega\)。这两个式子表达了本讲的核心思想：观测数据应与经过响应折叠后的模型比较，而不是与未经响应处理的理论曲线直接比较。</p>
+<p>第八段：统计层面上，高能数据常常应使用 Poisson likelihood。若观测计数为 \(k_{ip}\)，期望计数为 \(\mu_{ip}\)，则 \(\ln{\cal L}=\sum_{i,p}[k_{ip}\ln\mu_{ip}-\mu_{ip}-\ln(k_{ip}!)]\)。当计数很高且误差近似高斯时，\(\chi^2\) 方法可以作为近似；但在低计数、高背景、upper limit 或稀疏高能尾部中，直接把 flux point 当作高斯点会误导参数和显著性。源探测、谱形比较和形态比较常用 likelihood ratio，例如 \({\rm TS}=2[\ln{\cal L}(\hat{\theta},\hat{\eta})-\ln{\cal L}(\theta_0,\hat{\eta}_0)]\)，但 \({\rm TS}\) 到 significance 的转换还要检查大样本条件、边界参数和 trial factor。</p>
+<p>第九段：在实际读论文时，理论主线必须落实到拟合诊断。首先看数据空间：作者是在 counts spectrum、events、counts map、visibility、light curve bin，还是 unfolded SED points 上拟合？其次看响应：是否使用 \(A_{\rm eff}\)、\({\cal E}\)、\(D(E_{\rm rec}\mid E_{\rm true})\) 和 \(P(\Omega_{\rm rec}\mid\Omega_{\rm true},E)\)？再次看背景：\(b_i(\eta)\) 是从 off region、模板、空场、simulation 还是同时拟合得到？然后看不确定性：posterior interval 或 profile likelihood interval 是否包含 nuisance parameter、交叉定标、能量尺度和背景系统误差？最后看残差：能量 residual 是否系统弯曲，空间 residual 是否与 PSF 或 diffuse template 相关，时间 residual 是否提示非同时性或变源行为。</p>
+<p>第十段：本讲的最后一层是选择效应。单源分析回答“这个模型能否解释这些数据”；样本分析还要回答“为什么这些源进入了样本，而另一些没有”。若真实母体分布为 \(p_{\rm int}(x\mid\psi)\)，探测概率为 \(P_{\rm det}(x)\)，观测分布应写成 \(p_{\rm obs}(x\mid\psi)=P_{\rm det}(x)p_{\rm int}(x\mid\psi)/\int P_{\rm det}(x')p_{\rm int}(x'\mid\psi)\,{\rm d}x'\)。这说明 flux-limited catalog、triggered GRB sample、optical-selected TDE sample 和 TeV source survey 都不能直接代表 intrinsic population。到这里，五讲基础系列完成闭合：前四讲给出源如何发光，本讲说明这些光如何被仪器和统计过程转化为可解释的数据；下一步应进入具体天体类别的案例精读。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步，先明确前四讲的源物理模型输出什么。假设源由参数 \(\theta\) 描述，真实光子能量为 \(E\)，真实天球方向为 \(\Omega\)，到达时间为 \(t\)，则模型预言的是 differential photon flux：</p>
+<div class="math-display">\[\phi(E,\Omega,t;\theta)=\frac{{\rm d}N_\gamma}{{\rm d}E\,{\rm d}A\,{\rm d}t\,{\rm d}\Omega}.\]</div>
+<p>这里 \(\phi(E,\Omega,t;\theta)\) 是辐射机制与源几何给出的真实天空量，不是探测器直接记录的量；下一步要把它通过仪器有效面积转化为期望源计数。</p>
+<p>第二步，采用最简单的零阶近似：暂时忽略能量弥散、点扩散函数和背景，只考虑一个观测时间窗 \([t_1,t_2]\) 与一个真实能量区间 \([E_1,E_2]\)。期望源计数为</p>
+<div class="math-display">\[s(\theta)=\int_{t_1}^{t_2}\int_{E_1}^{E_2}\phi(E,t;\theta)A_{\rm eff}(E,t)\,{\rm d}E\,{\rm d}t.\]</div>
+<p>其中 \(A_{\rm eff}(E,t)\) 是有效面积，已经包含探测、触发、重建和事件筛选效率，因此不等于几何面积；这一步求出的 \(s(\theta)\) 是源在理想能段和时间窗内贡献的期望计数。</p>
+<p>第三步，把时间依赖的探测能力整理成曝光。若源在选定时间窗内的谱形可用时间平均通量近似，定义</p>
+<div class="math-display">\[{\cal E}(E)=\int_{t_1}^{t_2}A_{\rm eff}(E,t)\,{\rm d}t,\qquad s(\theta)=\int_{E_1}^{E_2}\phi(E;\theta){\cal E}(E)\,{\rm d}E.\]</div>
+<p>这里 \({\cal E}(E)\) 不是简单的钟表观测时长，而是能量依赖的探测能力；它把扫描策略、死时间、天顶角和质量筛选等因素压缩进从 \(\phi(E;\theta)\) 到 \(s(\theta)\) 的转换。</p>
+<p>第四步，加入能量弥散。真实能量为 \(E\) 的光子不一定被重建到同一能量，而是服从能量响应 \(D(E_{\rm rec}\mid E)\)。第 \(i\) 个重建能道接收真实能量 \(E\) 光子的概率为</p>
+<div class="math-display">\[R_i(E)=\int_{E_{i,\rm rec}^{\rm min}}^{E_{i,\rm rec}^{\rm max}}D(E_{\rm rec}\mid E)\,{\rm d}E_{\rm rec},\qquad s_i(\theta)=\int \phi(E;\theta){\cal E}(E)R_i(E)\,{\rm d}E.\]</div>
+<p>这一步求出第 \(i\) 个能道中的期望源计数 \(s_i(\theta)\)；它说明 sharp cutoff、line-like feature、steep spectrum 和最高能尾部都必须在响应折叠后解释。</p>
+<p>第五步，加入空间响应。真实方向 \(\Omega\) 的光子会被重建到附近方向，点扩散函数为 \(P(\Omega_{\rm rec}\mid\Omega,E)\)。第 \(p\) 个空间像素的响应可写为</p>
+<div class="math-display">\[P_p(E,\Omega)=\int_{\Omega_p}P(\Omega_{\rm rec}\mid\Omega,E)\,{\rm d}\Omega_{\rm rec},\qquad s_{ip}(\theta)=\int\int\phi(E,\Omega;\theta){\cal E}(E,\Omega)R_i(E)P_p(E,\Omega)\,{\rm d}E\,{\rm d}\Omega.\]</div>
+<p>这一步把光谱拟合推广到图像和形态拟合：无论点源、扩展源还是模板源，都应先与点扩散函数和曝光相乘卷积后，再与观测计数图比较。</p>
+<p>第六步，加入背景和 nuisance 参数。真实数据中的总期望计数不仅有源项，还包括粒子背景、弥散辐射、邻近源、宿主星系或仪器残差等背景项，因此</p>
+<div class="math-display">\[\mu_{ip}(\theta,\eta)=s_{ip}(\theta)+b_{ip}(\eta).\]</div>
+<p>这里 \(\eta\) 表示背景归一化、谱形、空间模板或仪器系统误差参数；弱源、扩展源和弥散结构研究常常主要受 \(b_{ip}(\eta)\) 的不确定性限制。</p>
+<p>第七步，在计数空间建立统计比较。若第 \((i,p)\) 个能量—空间 bin 中观测到的计数为 \(k_{ip}\)，并假设在给定 \(\mu_{ip}(\theta,\eta)\) 时各 bin 服从 Poisson 统计，则 likelihood 为</p>
+<div class="math-display">\[\ln {\cal L}(\theta,\eta)=\sum_{i,p}\left[k_{ip}\ln\mu_{ip}(\theta,\eta)-\mu_{ip}(\theta,\eta)-\ln(k_{ip}!)\right].\]</div>
+<p>这一步是 forward folding 的统计闭合：正式拟合比较的是经过响应和背景折叠后的 \(\mu_{ip}(\theta,\eta)\) 与观测 \(k_{ip}\)，而不是把低计数能道强行当作高斯通量点。</p>
+<p>第八步，用 likelihood ratio 做探测或模型比较。若 \(\theta_0\) 表示无源模型或某个嵌套零假设，帽号表示在相应假设下使 likelihood 最大的参数，则</p>
+<div class="math-display">\[{\rm TS}=2\left[\ln {\cal L}(\hat{\theta},\hat{\eta})-\ln {\cal L}(\theta_0,\hat{\eta}_0)\right].\]</div>
+<p>在大样本和正则条件下，\({\rm TS}\) 可近似转化为显著性；但当源强度位于非负边界、计数很低、搜索位置很多或背景系统误差显著时，\({\rm TS}\) 与 \(\sigma\) 的简单换算需要重新检验。</p>
+<p>第九步，把地面 \(\gamma\)-ray 常见的 on/off 问题放进同一逻辑。设 on 区计数为 \(N_{\rm on}\)，off 区计数为 \(N_{\rm off}\)，off 区相对 on 区的曝光归一化为 \(\alpha\)，则 excess 计数与 Li-Ma 显著性为</p>
+<div class="math-display">\[N_{\rm exc}=N_{\rm on}-\alpha N_{\rm off},\qquad S_{\rm Li-Ma}=\left\{2\left[N_{\rm on}\ln\left(\frac{1+\alpha}{\alpha}\frac{N_{\rm on}}{N_{\rm on}+N_{\rm off}}\right)+N_{\rm off}\ln\left((1+\alpha)\frac{N_{\rm off}}{N_{\rm on}+N_{\rm off}}\right)\right]\right\}^{1/2}.\]</div>
+<p>这个公式本质上也是 Poisson likelihood ratio；它提醒我们不要只用 \(N_{\rm exc}\) 除以某个经验误差来宣布发现，还要检查 \(\alpha\)、背景区污染和 trial factor。</p>
+<p>第十步，解释论文中的通量点为什么不是原始观测。若在第 \(j\) 个能段内用 excess 计数构造 unfolded flux point，通常必须假设参考谱 \(\phi_{\rm ref}(E)\)，近似可写成</p>
+<div class="math-display">\[\hat{F}_{j}=\frac{N_{j,\rm exc}}{\int_{E_{j,1}}^{E_{j,2}}\phi_{\rm ref}(E){\cal E}(E)R_j(E)\,{\rm d}E}\int_{E_{j,1}}^{E_{j,2}}\phi_{\rm ref}(E)\,{\rm d}E.\]</div>
+<p>因此 \(\hat{F}_j\) 依赖响应、背景估计和 \(\phi_{\rm ref}(E)\)；读能谱或 \({\rm SED}\) 图时，它适合可视化，但不应被误认为完全独立于模型的原始数据点。</p>
+<p>第十一步，推广到多仪器联合拟合。若第 \(m\) 个仪器提供数据 \(D_m\)，响应为 \({\cal R}_m\)，系统误差或交叉定标参数为 \(\xi_m\)，而所有仪器共享物理源参数 \(\theta\)，则后验可写为</p>
+<div class="math-display">\[p(\theta,\{\xi_m\}\mid\{D_m\})\propto p(\theta)\prod_m p(\xi_m){\cal L}_m(D_m\mid\theta,\xi_m,{\cal R}_m).\]</div>
+<p>这一步说明严肃的 multiwavelength fitting 不是把 radio、optical、X-ray、GeV 和 TeV 点简单连线，而是保留每个仪器自己的数据空间、响应矩阵、时间窗、背景模型和系统误差。</p>
+<p>第十二步，最后把单源推断推广到样本推断。若真实母体变量为 \(x\)，母体参数为 \(\psi\)，内禀分布为 \(p_{\rm int}(x\mid\psi)\)，探测概率为 \(P_{\rm det}(x)\)，则观测样本服从</p>
+<div class="math-display">\[p_{\rm obs}(x\mid\psi)=\frac{P_{\rm det}(x)p_{\rm int}(x\mid\psi)}{\int P_{\rm det}(x')p_{\rm int}(x'\mid\psi)\,{\rm d}x'}.\]</div>
+<p>这一步把本讲从单个源的 \(\phi\rightarrow{\cal R}\rightarrow\mu\rightarrow{\cal L}\) 主线扩展到 catalog 和 population inference：flux-limited sample、triggered GRB sample、optical-selected TDE sample 或 TeV survey catalog 都必须经过 selection function 校正后，才能讨论真实母体物理。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合部分要把前四讲的物理谱形真正接到数据空间。前四讲讨论的 synchrotron、inverse Compton、hadronic 与 cascade 模型，或更经验的 power law、broken power law、log parabola、exponential cutoff power law、blackbody plus power law，最终都先给出真实天空通量 \(\phi(E,\Omega,t;\theta)\)。拟合时不要把这些模型直接画到观测点上就结束，而要经过响应折叠得到每个能道、空间像素或时间 bin 的期望计数 \(\mu_i(\theta,\eta)=s_i(\theta)+b_i(\eta)\)。这里 \(\theta\) 是源物理参数，例如 normalization、photon index、cutoff energy、temperature、magnetic field 或 particle normalization；\(\eta\) 是背景、交叉定标、能量尺度或模板归一化等 nuisance 参数。课程中的基本判断句是：论文的最佳拟合参数应来自 counts 或 event likelihood，而不应只来自对 unfolded \({\rm SED}\) 点的肉眼连线。</p>
+<p>第二段：单仪器光谱拟合可以作为第一层训练。以 X-ray 为例，观测数据常是 \({\rm PHA}\) spectrum，响应由 \({\rm RMF}\) 与 \({\rm ARF}\) 给出，前者描述真实能量到探测能道的 redistribution，后者描述能量依赖有效面积。若计数很低，应优先使用 Cash statistic 或 Poisson likelihood；若每个 bin 计数足够高且分组合理，\(\chi^2\) 才是近似可用的。读论文时要检查 source extraction region、background region、吸收柱密度 \(N_{\rm H}\)、pile-up、soft proton background、坏像素和交叉定标常数是否被说明。一个 absorbed power-law fit 的 photon index 与 \(N_{\rm H}\) 常有退化：低能端变弯可能是吸收，也可能是响应、背景或 pile-up 的处理问题。</p>
+<p>第三段：GeV \(\gamma\)-ray 拟合提供第二层训练。类似 Fermi-LAT 的分析通常采用 binned 或 unbinned likelihood，模型包含目标源、邻近 catalog 源、Galactic diffuse template、isotropic component、exposure、PSF 与 energy dispersion。核心 likelihood 仍可理解为 \(\ln{\cal L}=\sum_i[k_i\ln\mu_i-\mu_i-\ln(k_i!)]\)，只是 \(i\) 可以同时包含 energy、position 与 event class。拟合参数除了目标源的 normalization、spectral index、cutoff energy、位置和 extension，还包括弥散背景归一化与邻近源参数。读结果时应检查 \({\rm TS}\) map、residual counts map、energy-binned residual 与 alternative diffuse model；若换一个 diffuse template 后源的 extension 或 spectral cutoff 消失，物理解释就不能算稳健。</p>
+<p>第四段：TeV IACT、HAWC 与 LHAASO 的拟合要把能谱与形态放在一起看。一个源可以被拟合为 point source、Gaussian disk、shell、gas template、X-ray template 或 diffusion profile，正式比较时模型必须先与能量依赖的 PSF 和 exposure 卷积。常见参数包括 centroid、extension、spectral index、cutoff energy、flux normalization、energy scale nuisance、background normalization 与 event class 相关参数。地面 \(\gamma\)-ray 数据还要特别检查 on/off 背景、\(\alpha\) 归一化、gamma/hadron separation、大气透明度、zenith angle、smoothing kernel 与源外泄到 off region 的可能性。扩展源最容易被误读：一个宽的 significance blob 不自动等于真实 halo，必须看 convolved model 与 residual。</p>
+<p>第五段：多波段 \({\rm SED}\) fitting 是本讲从基础走向前沿的连接点。教学图可以把 radio、optical、X-ray、GeV 与 TeV 点画在同一张图上，帮助理解 synchrotron 峰、inverse Compton 峰或 hadronic component；但正式推断应写成联合后验 \(p(\theta,\{\xi_m\}\mid\{D_m\})\propto p(\theta)\prod_m p(\xi_m){\cal L}_m(D_m\mid\theta,\xi_m,{\cal R}_m)\)。这里每个仪器 \(m\) 保留自己的数据空间、响应 \({\cal R}_m\)、时间窗、孔径、背景模型与系统误差 \(\xi_m\)。共同物理参数可以是电子谱 normalization、break energy、magnetic field、source radius、age、diffusion coefficient、target photon field 或 proton energy budget。若多波段点非同时，尤其对 GRB、TDE、blazar flare 与 magnetar burst，非同时性可能比统计误差更重要。</p>
+<p>第六段：posterior 或 profile likelihood 的读法要从“误差条”升级为“信息来源”。一个参数的 credible interval 或 confidence interval 变宽，可能来自低计数统计误差，也可能来自背景模板、有效面积、能量尺度、PSF、交叉定标和参数退化。典型退化包括 magnetic field \(B\) 与电子 normalization 的退化、cutoff energy 与 energy scale 的退化、diffusion coefficient 与 source age 的退化、source extension 与 PSF 宽度的退化，以及 absorption column \(N_{\rm H}\) 与 intrinsic soft component 的退化。读论文时要看作者是固定 nuisance 参数、profile 掉 nuisance 参数，还是用 prior 对其边缘化；只报告 statistical error 而不报告 systematic error 的结论，要谨慎使用。</p>
+<p>第七段：残差诊断是模型拟合章节的核心练习。能量 residual 若呈系统弯曲，可能说明谱形过于简单、energy dispersion 未正确处理、background spectrum 错误或 threshold 附近响应不稳；空间 residual 若呈环状、双叶状或沿 Galactic plane 延展，可能说明 PSF、diffuse template、邻近源或 extension model 有问题；时间 residual 若集中在某些 epoch，可能说明源本身变时、仪器状态变化、曝光不均匀或多波段非同时。一个可信模型不只是让 \({\rm SED}\) 曲线穿过几个点，而应同时解释 counts、spectrum、morphology、light curve 与 residual map。实际读论文时，最好按 data、model、residual、alternative model、systematic check 的顺序阅读，而不是先看 abstract 中的最佳拟合参数。</p>
+<p>第八段：系统误差处理决定拟合结论能走多远。常用方法包括 nuisance parameter、profile likelihood、alternate response、bracketing \({\rm IRF}\)、background template replacement、Monte Carlo injection-and-recovery、blank-sky test、jackknife by event class、cross-calibration constant 与 energy scale scan。能量尺度偏差会导致 \(\Delta E_{\rm scale}\rightarrow\Delta E_{\rm cut}\)，有效面积偏差会导致 \(\Delta A_{\rm eff}\rightarrow\Delta\) normalization，PSF 偏差会导致 \(\Delta {\rm PSF}\rightarrow\Delta\) extension。课程要求学生养成一个检查习惯：若一个 discovery、cutoff、extension 或 population trend 只在单一背景模型、单一 event selection 或单一响应版本下成立，它还不是强结论。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>第一，读方法部分时先定位数据空间。作者到底在 events、counts spectrum、counts map、\({\rm PHA}\) spectrum、visibility、light curve bin，还是 unfolded flux points 上拟合？如果论文只展示最终 \({\rm SED}\) 而没有说明 response、background 与 likelihood，那么这些通量点适合教学可视化，却不足以支撑精确物理参数。要把每篇论文的方法段翻译回本讲主线：\(\phi\rightarrow{\cal R}\rightarrow\mu\rightarrow{\cal L}\)。</p>
+<p>第二，读 response 段落时抓住五个关键词：effective area、exposure、energy dispersion、PSF 与 background。X-ray 论文中它们可能以 \({\rm RMF}\)、\({\rm ARF}\)、extraction region、background region 和 pile-up correction 的形式出现；GeV 或 TeV 论文中它们可能以 instrument response functions、event class、zenith angle cut、diffuse model、on/off method 或 template likelihood 的形式出现。课程读法不是背仪器名，而是问这些描述如何进入 \(s_i(\theta)\) 与 \(b_i(\eta)\)。</p>
+<p>第三，读显著性与探测声明时，不要只看最大 \(\sigma\) 或最大 \({\rm TS}\)。要问零假设是什么，源位置是否预先指定，是否扫描了多个位置、能段、时间窗或模板，显著性是 pre-trial 还是 post-trial，是否存在 look-elsewhere effect。对 on/off 观测，要检查 \(N_{\rm on}\)、\(N_{\rm off}\)、\(\alpha\) 与 Li-Ma 显著性；对复杂模板拟合，要检查 likelihood ratio、边界参数、小样本近似和系统误差。一个 \(5\sigma\) 峰若没有经过 trial factor 与背景稳健性检查，不能自动等同于可靠新源。</p>
+<p>第四，读 upper limit 与 nondetection 段落时，要把“没有探测到”翻译成“在某个响应、背景、谱形、形态和置信水平假设下没有达到探测阈值”。upper limit 依赖 confidence level、energy range、assumed spectral index、source extension、exposure、background model 与 EBL attenuation。对 transient 源，还要看观测窗口是否覆盖关键时间段；对扩展源，还要看 surface brightness 是否被稀释。非探测不能直接解释为源不存在，更不能在多波段图上被当作一个无条件硬边界。</p>
+<p>第五，读多波段结果段落时，首先检查同时性、孔径和角分辨率。一个 GRB afterglow 的 radio 点、X-ray 点和 TeV upper limit 可能相差数小时到数周；一个 TDE 的 optical selected sample 与 X-ray selected sample 探测的是不同偏置下的事件；一个 pulsar halo 的 TeV morphology 与 X-ray PWN 形态可能对应不同能量电子和不同冷却时间。若论文把非同时数据拟合同一个 steady \({\rm SED}\)，就必须说明源在这些时间窗内可近似稳态，或把时间演化纳入模型。</p>
+<p>第六，读 catalog 与 population 论文时，selection function 是重点段落，不是附录细节。flux limit、fluence threshold、sky coverage、cadence、Galactic latitude cut、trigger algorithm、follow-up completeness 与 redshift success rate 会把真实母体 \(p_{\rm int}(x\mid\psi)\) 改造成观测分布 \(p_{\rm obs}(x\mid\psi)\)。因此当论文讨论 luminosity function、rate density、source evolution 或某类源的 rarity 时，必须检查是否建模了 \(P_{\rm det}(x)\)。没有 selection correction 的样本趋势，最多是观测样本趋势，不应直接称为 intrinsic population 结论。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，effective area 与 exposure 图：先看横轴是 true energy 还是 reconstructed energy，纵轴是 \(A_{\rm eff}\) 还是 \({\cal E}\)。重点检查低能阈值、高能端统计稀疏区、off-axis angle、event class 与观测条件差异；不要把 wall-clock exposure time 误当成能量依赖的 exposure。</p>
+<p>二，response matrix 或 energy dispersion 热图：看 true energy 与 reconstructed energy 的对应关系、对角线宽度、偏置和非高斯尾部。特别检查 sharp cutoff、line feature、EBL absorption 与 PeVatron tail 是否可能被能道迁移抹平、放大或伪造。</p>
+<p>三，PSF、counts map、model map 与 residual map 组合图：按 data、PSF-convolved model、residual 的顺序读。看坐标轴、像素大小、PSF 圆圈、smoothing kernel、energy dependence 与 residual 结构；不要把平滑后的 significance blob 当成真实源边界。</p>
+<p>四，on/off region 或 background control 图：看 signal region、background region、exclusion mask、\(\alpha\) 归一化与 background template。对扩展源尤其要检查 off region 是否含有源 emission 或 diffuse emission，否则 \(N_{\rm exc}=N_{\rm on}-\alpha N_{\rm off}\) 会被系统性低估。</p>
+<p>五，\({\rm TS}\)、residual 或 significance map：看 color bar 表示 counts、standardized residual、\({\rm TS}\) 还是 significance；检查 smoothing scale、trial factor、pre-trial 与 post-trial 标注、邻近源污染和 Galactic diffuse structure。峰值不一定是独立天体源，也可能是模板缺陷或统计波动。</p>
+<p>六，spectrum 与 \({\rm SED}\) 图：确认纵轴是 photon flux、energy flux、\(E^2\phi(E)\) 还是 \(\nu F_\nu\)，点是否为 unfolded flux point，误差是否含系统误差，upper limit 的 confidence level 与 assumed spectral shape 是什么。模型线若未说明 forward folding，只能当作可视化。</p>
+<p>七，light curve、exposure 与 threshold 图：同时看 flux 或 count rate、exposure、cadence、trigger threshold 和 upper limit。空白时间可能是未观测而非源熄灭；高 upper limit 可能对模型没有强约束；不同仪器的时间覆盖不能默认同时。</p>
+<p>八，selection function、sky coverage 或 completeness 图：看 detection probability 随 flux、fluence、duration、spectral index、sky position、cadence 或 redshift success rate 的变化。catalog 与 rate 论文中，这类图是连接 \(p_{\rm obs}\) 与 \(p_{\rm int}\) 的核心证据。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图一：effective area 与 exposure 曲线。横轴通常是 energy，纵轴可能是 \(A_{\rm eff}(E)\) 或 \({\cal E}(E)\)。读图时先找曲线快速上升的位置，因为这通常对应分析阈值，也是谱形最容易受响应影响的区域；再看高能端是否因为低统计、有限模拟量或质量筛选而不稳定。若数据点在阈值附近显示 spectral break，不能马上解释为 cooling break、absorption 或 cutoff，必须先检查 response 与 energy threshold。常见误读是把观测时长等同于 \({\cal E}\)，忽略有效面积、dead time、off-axis angle 和 event selection。</p>
+<p>图二：energy dispersion 或 response matrix 热图。横轴可以是 true energy，纵轴可以是 reconstructed energy，颜色表示概率或归一化响应。理想情况下概率集中在对角线附近；对角线越宽，能道迁移越强；非高斯尾部说明少量事件可能迁移到相差很远的能道。读 cutoff、line-like excess、EBL attenuation 或 PeVatron tail 时，要检查高能 bin 是否可能由低能事件上迁移贡献。误读风险是把 reconstructed energy bin 当成 true energy bin，并在 unfolded 点上过度解释尖锐结构。</p>
+<p>图三：counts map、model map 与 residual map。横纵轴通常是 sky coordinates，颜色分别表示 observed counts、convolved source plus background model，以及 data minus model 或 standardized residual。正确读法是先看 counts 是否与 exposure 或 diffuse background 相关，再看模型是否经过 PSF 卷积，最后看 residual 是否呈系统结构。若 residual 围绕源呈环状，可能是 extension 或 PSF 处理错误；若 residual 沿 Galactic plane 延展，可能是 diffuse template 问题。误读风险是把 residual map 当成天空真实亮度图，或把 smoothing 后的边界当成源边界。</p>
+<p>图四：on/off 区域与 Li-Ma significance 图。坐标轴可能是天球位置、相机坐标或选择变量，颜色或纵轴给出 \(S_{\rm Li-Ma}\)。要检查 on region、off region、exclusion mask 和 \(\alpha\) 是否合理，off region 是否代表同一背景条件，是否可能被扩展源污染。若论文在许多位置、能段或时间窗搜索峰值，必须看 pre-trial 与 post-trial significance 的区别。误读风险是只引用最大 \(S\)，而不问 trial factor、背景稳定性与独立验证。</p>
+<p>图五：\({\rm TS}\) map 或 likelihood residual 图。横纵轴通常是 sky coordinates，颜色表示 \({\rm TS}\)、\(\sqrt{{\rm TS}}\) 或 residual significance，图上可能叠加 catalog sources、PSF circle、gas contour 或 X-ray/radio contour。读图时要检查新峰是否与已知邻近源、diffuse structure、exposure edge 或 mask 边界重合。若在加入一个新源模板后大范围 residual 消失，说明模板有解释力；若只消除一个局部噪声峰，结论较弱。误读风险是把 \({\rm TS}\) map 看成 flux map，因为 \({\rm TS}\) 依赖零假设、谱形假设和背景模型。</p>
+<p>图六：spectrum 或 \({\rm SED}\) 与模型曲线。横轴是 energy 或 frequency，纵轴可能是 \(E^2\phi(E)\)、\(\nu F_\nu\)、energy flux 或 photon flux。先确认点是否为 unfolded，误差条是否只含 statistical error，upper limit 是 \(90\%\)、\(95\%\) 还是其他 confidence level，模型线是否来自 forward-folded likelihood 的 best-fit。若不同颜色代表不同仪器，要看是否同时、孔径是否一致、cross-calibration 是否处理。误读风险是把 radio、optical、X-ray、GeV、TeV 的非同时点连成一条真实瞬时谱。</p>
+<p>图七：light curve 与 observing window 图。横轴是 time，纵轴可以是 count rate、flux、fluence、\({\rm TS}\) 或 upper limit。读图时必须同时看 exposure、cadence、trigger threshold 和数据缺口；一个没有点的时间段可能只是未观测，一个高 upper limit 可能无法排除任何合理模型。若不同仪器点的时间 bin 宽度差异很大，短时 flare 可能被平均掉。误读风险是把稀疏采样的 transient light curve 当成连续演化，或把 nondetection 当成物理熄灭。</p>
+<p>图八：selection function、sky coverage 或 completeness 图。横轴可以是 flux、fluence、duration、spectral index、sky position 或 redshift，纵轴是 detection probability、surveyed area 或 completeness。读 population 结论时，这张图往往比最亮源图更关键，因为它告诉我们 \(P_{\rm det}(x)\) 如何把 \(p_{\rm int}(x\mid\psi)\) 变成 \(p_{\rm obs}(x\mid\psi)\)。若 detection probability 随 duration 或 spectrum 强烈变化，观测到的 luminosity distribution 或 redshift distribution 就不能直接代表母体。误读风险是把 flux-limited sample 的中位 luminosity 当作 intrinsic population 的中位 luminosity。</p>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从显著性统计进入现代 \(\gamma\)-ray 发现声明。建议先读 Li 与 Ma \(1983\) 的 on/off significance 经典工作，重点不是机械记忆公式，而是理解为什么 Poisson likelihood ratio 比简单的 excess 除以误差更可靠。随后读一篇现代 IACT、HAWC 或 LHAASO 源表的方法部分，比较经典 on/off 计数如何扩展为多能段、多空间像素、模板形态和系统误差扫描。读的时候始终问：\(N_{\rm on}\)、\(N_{\rm off}\)、\(\alpha\)、trial factor 与 background control 如何进入发现声明？</p>
+<p>第二条路径是从 X-ray 光谱响应学习 forward folding。选择一篇 Chandra、XMM-Newton 或 Swift-XRT 的观测论文，专门阅读 source extraction、background extraction、\({\rm RMF}\)、\({\rm ARF}\)、absorbed power-law model、Cash statistic 与 pile-up correction 的段落。练习把文字翻译成 \(\mu_i=s_i+b_i\)：哪些项来自源模型，哪些项来自响应，哪些项是背景或 nuisance parameter。完成这个练习后，再读更复杂的 thermal plasma、reflection 或 line feature 论文，会更容易判断谱线和 soft excess 是否稳健。</p>
+<p>第三条路径是从多波段 \({\rm SED}\) 图走向联合 likelihood。可以选择一个 GRB afterglow、PWN、SNR、blazar 或 pulsar halo 论文，先用前四讲的辐射物理识别 synchrotron、inverse Compton、hadronic \(\pi^0\) decay 或 cascade 分量；再用本讲的方法追问每个点来自哪个仪器、是否同时、是否 unfolded、upper limit 假设了什么谱形、误差是否包含系统误差。现代研究的方向不是只让一条模型曲线穿过 \({\rm SED}\)，而是把各仪器的 likelihood、响应和系统误差联合起来。</p>
+<p>第四条路径是从单源推断走向 catalog 与 population inference。读 GRB、TDE、blazar 或 \(\gamma\)-ray source catalog 时，不要只看最亮源和代表性光谱，而要重点读 completeness、sky coverage、trigger threshold、cadence、redshift success rate 与 follow-up selection。把观测分布写成 \(p_{\rm obs}(x\mid\psi)=P_{\rm det}(x)p_{\rm int}(x\mid\psi)/\int P_{\rm det}(x')p_{\rm int}(x'\mid\psi)\,{\rm d}x'\)，再判断论文是否真的有资格讨论 intrinsic rate、luminosity function 和 cosmic evolution。</p>
+<p>第五条路径是进入后续案例精读时反复回看本讲。读 GRB afterglow 时，用本讲检查 upper limit、non-simultaneous SED 与 X-ray absorption；读 PWN 或 pulsar halo 时，用本讲检查 PSF、extension、diffuse background 与 TeV morphology；读 SNR PeVatron 时，用本讲检查 gas template、energy dispersion、cutoff significance 与 hadronic/leptonic 模型比较。这样前四讲的辐射机制与第五讲的响应意识才能合在一起，形成真正可用于论文判断的工作流。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>本系列 \(5/5\) 到这里完成闭环：前四讲回答源如何产生高能辐射，本讲回答探测器和统计分析如何把这些辐射转化为 counts、light curve、spectrum、image、significance 与 sample。下一步最自然的安排不是继续增加基础公式，也不是进入某个软件包教程，而是开启案例精读短系列，把 \(\phi\rightarrow{\cal R}\rightarrow\mu\rightarrow{\cal L}\) 的读法用于具体天体类别。</p>
+<p>方向一是 GRB afterglow 精读。从 Blandford-McKee 动力学、synchrotron break、closure relation 与 jet break 开始，连接到 Swift、Fermi、optical、radio 与 TeV upper limit 的实际读法。它与本讲的边界关系是：本讲不展开 GRB afterglow 的完整物理建模，但下一讲可以把本讲的 response、upper limit、non-simultaneity 与 selection effect 用在 GRB 数据上。</p>
+<p>方向二是 PWN 与 pulsar halo 精读。重点可放在 TeV morphology、diffusion cooling、energy-dependent extension、HAWC/LHAASO/IACT 系统误差、PSF 与 Galactic diffuse background。它延续本讲的图像和 residual 训练，但把物理问题推进到电子扩散、冷却和源年龄诊断。</p>
+<p>方向三是 SNR PeVatron 证据链精读。课程可以比较 hadronic \(\pi^0\) spectrum、leptonic inverse Compton spectrum、gas template、molecular cloud correlation、cutoff significance、energy dispersion 与 background systematics。它与本讲的关系是：本讲只教如何检查响应和统计链条，下一阶段才讨论如何把这些链条用于判断一个 SNR 是否真能加速粒子到 PeV 能区。</p>
+<p><strong>检索关键词</strong>：<br />
+- high energy astrophysics response matrix effective area background PSF<br />
+- forward folding spectral fitting gamma ray astronomy<br />
+- time domain astronomy selection effects multiwavelength<br />
+- Li Ma 1983 significance gamma ray astronomy on off method<br />
+- Gaisser Hillas air shower longitudinal development<br />
+- Fermi LAT likelihood analysis instrument response functions<br />
+- XMM Chandra RMF ARF spectral fitting Cash statistic<br />
+- IACT effective area energy dispersion PSF background systematics</p>
+<p><strong>确信的公开链接</strong>：<br />
+- https://ui.adsabs.harvard.edu/abs/1983ApJ...272..317L/abstract</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
