@@ -12,6 +12,10 @@ PLACEHOLDER_MARKERS = (
     "summary generation failed",
     "fallback summary",
     "auto-generated section was not reliable",
+    "\u672c\u7bc7\u8bba\u6587\u5df2\u901a\u8fc7\u63a8\u8350\u7b5b\u9009",
+    "\u81ea\u52a8\u8be6\u7ec6\u89e3\u8bfb\u751f\u6210\u5931\u8d25",
+    "LLM \u6458\u8981 JSON \u89e3\u6790\u5931\u8d25",
+    "\u5b89\u5168\u5360\u4f4d",
 )
 FORMULA_RE = re.compile(r"\$\$.*?\$\$|\\\[.*?\\\]|\\\(.*?\\\)", re.DOTALL)
 SUMMARY_MIN_FORMULAS = 5

@@ -19,7 +19,7 @@ from astro_daily.config import (
 )
 from astro_daily.formula_integrity import FormulaIntegrityResult
 from astro_daily.models import ExtractedFigure, FigureSelection, Paper, PaperScore, PaperSummary, ScoredPaper, ScoreResult, WeekendLesson
-from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, evaluate_source_freshness, fetch_all_sources, run_pipeline
+from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, _summary_repair_fields, evaluate_source_freshness, fetch_all_sources, run_pipeline
 from astro_daily.seen import SeenStore
 from astro_daily.sources.arxiv import ArxivDailyListing
 
@@ -1138,6 +1138,15 @@ def test_summary_quality_repair_updates_thin_sections(monkeypatch, tmp_path):
     assert "修复后章节" in report
     summary_end = next(record for record in read_run_log(tmp_path) if record["stage"] == "summaries_and_figures" and record["event"] == "end")
     assert summary_end["data"]["repaired_summary_count"] == 1
+
+
+def test_summary_repair_fields_include_short_summary_for_fallback_placeholder():
+    fields = _summary_repair_fields(["contains placeholder or fallback text"])
+
+    assert "summary_cn" in fields
+    assert "why_important_cn" in fields
+    assert "value_cn" in fields
+    assert "why_care_cn" in fields
 
 
 def test_weekday_fallback_does_not_trigger_without_today_updates(monkeypatch, tmp_path):

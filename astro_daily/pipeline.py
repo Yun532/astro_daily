@@ -518,6 +518,8 @@ def _summary_repair_fields(issues: list[str]) -> list[str]:
         fields.add("formula_derivation_cn")
     if "figure guidance" in joined:
         fields.update({"figures_to_check_cn", "key_figure_analysis_cn"})
+    if "placeholder" in joined or "fallback" in joined:
+        fields.update({"summary_cn", "why_important_cn", "value_cn", "why_care_cn"})
     if "summary_cn" in joined:
         fields.add("summary_cn")
     if "why_important_cn" in joined:

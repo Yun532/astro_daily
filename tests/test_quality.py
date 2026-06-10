@@ -27,6 +27,41 @@ def test_quality_flags_thin_summary():
     assert quality_log_summary([result])["repair_needed"] == 1
 
 
+def test_quality_flags_chinese_fallback_summary_even_when_long():
+    long = "This section explains the concrete science context, method, result, limitation, and reading guidance. " * 5
+    formulas = " ".join(
+        [
+            "$$E=mc^2$$",
+            "\\(F_\\nu\\propto t^{-1}\\)",
+            "\\[L=4\\pi D^2F\\]",
+            "\\(\\chi^2=\\sum r_i^2\\)",
+            "$$\\tau=n\\sigma R$$",
+        ]
+    )
+    summary = PaperSummary(
+        paper_id="2605.11894",
+        title_cn="Title",
+        summary_cn="\u672c\u7bc7\u8bba\u6587\u5df2\u901a\u8fc7\u63a8\u8350\u7b5b\u9009\uff0c\u4f46\u81ea\u52a8\u8be6\u7ec6\u89e3\u8bfb\u751f\u6210\u5931\u8d25\u3002" + long,
+        why_important_cn=long,
+        value_cn="\u7531\u4e8e LLM \u6458\u8981 JSON \u89e3\u6790\u5931\u8d25\uff0c\u672c\u8282\u4fdd\u7559\u4e3a\u5b89\u5168\u5360\u4f4d\u3002" + long,
+        why_care_cn=long,
+        detailed_explanation_cn=long,
+        background_cn=long,
+        basic_theory_cn=long,
+        formula_derivation_cn=long + formulas,
+        model_fitting_cn=long,
+        key_sections_cn=long,
+        figures_to_check_cn=long,
+        key_figure_analysis_cn=long,
+        related_work_cn=long,
+    )
+
+    result = check_summary_quality([make_item(summary)])[0]
+
+    assert result.repair_needed
+    assert "contains placeholder or fallback text" in result.issues
+
+
 def test_quality_accepts_detailed_summary():
     long = "This section explains the concrete science context, method, result, limitation, and reading guidance. " * 5
     formulas = " ".join(
