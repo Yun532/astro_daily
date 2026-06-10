@@ -67,6 +67,30 @@ def test_report_contains_summary_fields():
     assert "Dry-run" in report
 
 
+def test_report_strips_literal_newline_prefixes_but_keeps_latex_commands():
+    paper = Paper(paper_id="1", title="A gamma-ray result", url="https://example.com", source="arXiv", category="astro-ph.HE")
+    scored = ScoredPaper(
+        paper=paper,
+        score=PaperScore(novelty_score=8, importance_score=8, relevance_to_me=9, final_score=8.4, keep=True, reason="important"),
+        summary=PaperSummary(
+            paper_id="1",
+            title_cn="标题",
+            summary_cn="摘要",
+            why_important_cn="重要",
+            value_cn="价值",
+            why_care_cn="关注",
+            detailed_explanation_cn="第一段。\n\\nPWN 的辐射继续讨论。",
+            formula_derivation_cn="\\nu_{\\rm syn}=1",
+        ),
+    )
+
+    report = render_report(run_date=date(2026, 5, 2), title_prefix="Astro Daily", scored_papers=[scored], source_errors=[], dry_run=True)
+
+    assert "\\nPWN" not in report
+    assert "PWN 的辐射继续讨论" in report
+    assert "\\nu_{\\rm syn}=1" in report
+
+
 def test_report_groups_iact_papers_with_he_priority():
     paper = Paper(paper_id="2", title="CTA transient alert pipeline", url="https://example.com/2", source="arXiv", category="astro-ph.IM")
     scored = ScoredPaper(

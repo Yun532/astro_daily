@@ -60,6 +60,74 @@ NEUTRINO_CONTEXT_PHRASES = (
     "pwn",
 )
 
+PRESTIGE_ASTRONOMY_SOURCE_PHRASES = (
+    "nature astronomy",
+    "astronomy and astrophysics",
+)
+
+PRESTIGE_ASTRONOMY_PHRASES = (
+    "black hole",
+    "neutron star",
+    "white dwarf",
+    "gravitational wave",
+    "dark matter",
+    "dark energy",
+    "cosmic ray",
+    "cosmic-ray",
+    "gamma ray",
+    "gamma-ray",
+    "x ray",
+    "x-ray",
+    "fast radio burst",
+    "star formation",
+    "planet formation",
+    "solar system",
+    "exoplanet atmosphere",
+)
+
+PRESTIGE_ASTRONOMY_TERMS = {
+    "astronomy",
+    "astrophysics",
+    "cosmology",
+    "cosmological",
+    "galaxy",
+    "galaxies",
+    "galactic",
+    "stellar",
+    "exoplanet",
+    "exoplanets",
+    "planetary",
+    "comet",
+    "asteroid",
+    "supernova",
+    "supernovae",
+    "pulsar",
+    "pulsars",
+    "magnetar",
+    "magnetars",
+    "quasar",
+    "quasars",
+    "blazar",
+    "blazars",
+    "agn",
+    "nebula",
+    "nebulae",
+    "neutrino",
+    "neutrinos",
+    "redshift",
+    "redshifts",
+    "jwst",
+    "hubble",
+    "chandra",
+    "fermi",
+    "euclid",
+    "roman",
+    "alma",
+    "ligo",
+    "virgo",
+    "kagra",
+}
+
 
 class Paper(BaseModel):
     paper_id: str
@@ -105,6 +173,8 @@ class Paper(BaseModel):
         if self.is_high_energy:
             return True
         text = " ".join([self.title, self.abstract, " ".join(self.tags)]).casefold()
+        if self.is_prestige_journal_source and self.is_prestige_astronomy_topic:
+            return True
         if any(phrase in text for phrase in IACT_PHRASES):
             return True
         tokens = set(re.findall(r"[a-z0-9]+", text))
@@ -116,6 +186,17 @@ class Paper(BaseModel):
     def is_prestige_journal_source(self) -> bool:
         text = " ".join([self.source, self.journal or ""]).casefold()
         return "nature" in text or "science" in text
+
+    @property
+    def is_prestige_astronomy_topic(self) -> bool:
+        source_text = " ".join([self.source, self.journal or ""]).casefold()
+        if any(phrase in source_text for phrase in PRESTIGE_ASTRONOMY_SOURCE_PHRASES):
+            return True
+        text = " ".join([self.title, self.abstract, " ".join(self.tags)]).casefold()
+        if any(phrase in text for phrase in PRESTIGE_ASTRONOMY_PHRASES):
+            return True
+        tokens = set(re.findall(r"[a-z0-9]+", text))
+        return bool(tokens & PRESTIGE_ASTRONOMY_TERMS)
 
 
 class PaperScore(BaseModel):

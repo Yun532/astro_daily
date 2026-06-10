@@ -57,6 +57,39 @@ def test_unrelated_non_he_paper_is_not_priority_topic():
     assert not paper.is_priority_topic
 
 
+def test_prestige_astronomy_feed_is_priority_topic():
+    paper = Paper(
+        paper_id="nature-astro",
+        title="Instantaneous jet power measured in an accreting black hole",
+        abstract="A high-impact astronomy result.",
+        url="https://example.com/nature-astro",
+        source="Nature Astronomy",
+    )
+    assert paper.is_priority_topic
+
+
+def test_prestige_journal_astronomy_article_is_priority_topic():
+    paper = Paper(
+        paper_id="science-astro",
+        title="A gravitational wave standard siren measurement",
+        abstract="The paper constrains cosmology with neutron star mergers.",
+        url="https://example.com/science-astro",
+        source="Science",
+    )
+    assert paper.is_priority_topic
+
+
+def test_unrelated_prestige_journal_article_is_not_priority_topic():
+    paper = Paper(
+        paper_id="nature-bio",
+        title="A protein structure atlas for immune signalling",
+        abstract="A molecular biology resource.",
+        url="https://example.com/nature-bio",
+        source="Nature",
+    )
+    assert not paper.is_priority_topic
+
+
 def test_score_bounds_are_normalized():
     score = PaperScore(
         novelty_score=11,

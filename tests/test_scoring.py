@@ -82,17 +82,46 @@ def test_non_he_astrophysical_neutrino_paper_gets_priority_threshold_and_boost()
 
 
 
-def test_prestige_journal_source_uses_normal_non_he_threshold():
+def test_prestige_astronomy_source_gets_priority_threshold_and_boost():
     config = ScoringConfig()
-    paper = Paper(paper_id="nature", title="A transient result", url="https://example.com/nature", source="Nature", category=None)
+    paper = Paper(
+        paper_id="nature",
+        title="Instantaneous jet power measured in an accreting black hole",
+        url="https://example.com/nature",
+        source="Nature Astronomy",
+        category=None,
+    )
     result = ScoreResult(
         paper_id="nature",
+        novelty_score=6,
+        importance_score=6,
+        relevance_to_me=6,
+        final_score=6,
+        keep=True,
+        reason="major journal astronomy result",
+    )
+    kept = apply_policy([paper], [result], config)
+    assert len(kept) == 1
+    assert kept[0].score.final_score == 7.0
+
+
+def test_unrelated_prestige_journal_source_uses_normal_non_he_threshold():
+    config = ScoringConfig()
+    paper = Paper(
+        paper_id="nature-bio",
+        title="A protein structure atlas for immune signalling",
+        url="https://example.com/nature-bio",
+        source="Nature",
+        category=None,
+    )
+    result = ScoreResult(
+        paper_id="nature-bio",
         novelty_score=7,
         importance_score=7,
         relevance_to_me=7,
         final_score=7,
         keep=True,
-        reason="major journal astronomy result",
+        reason="major journal but not astronomy",
     )
     assert apply_policy([paper], [result], config) == []
 

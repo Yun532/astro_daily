@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from datetime import date, datetime
 from pathlib import Path
+import re
 
 from astro_daily.models import ExtractedFigure, ScoredPaper, WeekendLesson
 
@@ -83,7 +84,7 @@ def render_report(
                     "",
                 ]
             )
-        return "\n".join(lines).strip() + "\n"
+        return _finalize_report_text(lines)
 
     he = [item for item in scored_papers if item.paper.is_priority_topic]
     non_he = [item for item in scored_papers if not item.paper.is_priority_topic]
@@ -101,7 +102,16 @@ def render_report(
             "",
         ]
     )
-    return "\n".join(lines).strip() + "\n"
+    return _finalize_report_text(lines)
+
+
+def _finalize_report_text(lines: list[str]) -> str:
+    text = "\n".join(lines).strip() + "\n"
+    return _strip_literal_newline_prefixes(text)
+
+
+def _strip_literal_newline_prefixes(text: str) -> str:
+    return re.sub(r"(?m)^\\n(?=[A-Z\u4e00-\u9fff])", "", text)
 
 
 def _append_fallback_papers(lines: list[str], supplemental_papers: list[ScoredPaper], classic_papers: list[ScoredPaper]) -> None:

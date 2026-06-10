@@ -4,8 +4,8 @@ from astro_daily.models import Paper, WeekendLesson
 from astro_daily.seen import SeenStore, deduplicate_papers
 
 
-def paper(paper_id: str, title: str = "Title") -> Paper:
-    return Paper(paper_id=paper_id, title=title, url=f"https://example.com/{paper_id}", source="test")
+def paper(paper_id: str, title: str = "Title", *, source: str = "test", url: str | None = None) -> Paper:
+    return Paper(paper_id=paper_id, title=title, url=url or f"https://example.com/{paper_id}", source=source)
 
 
 def lesson(title: str = "经典课程", anchor: str = "classic anchor") -> WeekendLesson:
@@ -51,6 +51,64 @@ def test_deduplicate_by_title():
     first = paper("1", "Same Title")
     second = paper("2", " same   title ")
     assert deduplicate_papers([first, second]) == [first]
+
+
+def test_deduplicate_prefers_prestige_journal_version_over_arxiv():
+    arxiv = paper(
+        "2605.00001",
+        "Instantaneous jet power measured in an accreting black hole",
+        source="arXiv",
+        url="https://arxiv.org/abs/2605.00001",
+    )
+    nature = paper(
+        "rss:10.1038/s41550-026-02829-2",
+        "Instantaneous jet power measured in an accreting black hole",
+        source="Nature Astronomy",
+        url="https://www.nature.com/articles/s41550-026-02829-2",
+    )
+
+    assert deduplicate_papers([arxiv, nature]) == [nature]
+
+
+def test_deduplicate_matches_loose_title_variants():
+    arxiv = paper(
+        "2605.00002",
+        "LHAASO J1849-0002: A Hybrid Lepto-Hadronic Interpretation of PeV Gamma-Ray Emission",
+        source="arXiv",
+    )
+    nature = paper(
+        "rss:nature",
+        "LHAASO J1849 0002 -- a hybrid lepto hadronic interpretation of PeV gamma ray emission",
+        source="Nature",
+    )
+
+    assert deduplicate_papers([arxiv, nature]) == [nature]
+
+
+def test_seen_matches_loose_title_variant_after_marking(tmp_path):
+    path = tmp_path / "seen.json"
+    store = SeenStore.load(path)
+    store.mark_many(
+        [
+            paper(
+                "2605.00003",
+                "Charge-dependent spectral softenings of primary cosmic rays below the knee",
+                source="arXiv",
+            )
+        ],
+        seen_date=date(2026, 5, 2),
+    )
+    store.save()
+
+    loaded = SeenStore.load(path)
+
+    assert loaded.is_seen(
+        paper(
+            "rss:nature",
+            "Charge dependent spectral softenings of primary cosmic-rays below the knee",
+            source="Nature",
+        )
+    )
 
 
 def test_mark_lessons_and_history(tmp_path):

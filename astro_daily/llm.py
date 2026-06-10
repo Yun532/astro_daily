@@ -50,7 +50,7 @@ astro-ph.HE 是主方向，可以用较低阈值保留；其中伽马射线天�
 IACT / 大气切伦科夫望远镜相关论文与 astro-ph.HE 同等优先，包括 CTA、MAGIC、H.E.S.S.、HESS、VERITAS、LST、MST、SST 等主题。
 高能中微子天文学也属于重点兴趣，应比一般 HE 论文更优先，但权重低于伽马射线天文；只有在论文与天体源、高能宇宙线、强子伽马/中微子辐射或多信使高能天体物理明显相关时按重点处理；普通中微子振荡、质量、反应堆/加速器中微子或无天体物理关联的探测器论文不要因此加权。
 其他方向只有在明显新颖、重要，或会影响高能天文/宇宙线/伽马射线/中微子天文学/仪器方法时才保留。
-Nature、Science 及其子刊来源不享受硬性配额或固定加权；但这类期刊文章往往经过更强筛选，评分时可以把期刊来源作为重要性线索之一，最终仍要根据文章内容本身判断。
+Nature、Science、Nature Astronomy、Nature Physics、Nature Communications、Science Advances 等高影响期刊中，若论文明确属于天文、天体物理、宇宙学、行星/系外行星、黑洞/致密天体、引力波、宇宙线、伽马射线或高能中微子相关主题，应按 astro-ph.HE 同级优先级处理；如果只是普通生命科学、材料、化学、地球科学或与天文无关的物理文章，则不要因为期刊名加权。
 不要因为论文看起来宏大就自动高分。优先考虑清楚的新结果、强观测证据、重要理论约束、方法突破或可复用仪器技术。
 只输出符合 schema 的 JSON。"""
 
@@ -159,6 +159,7 @@ class ClaudePaperAnalyst:
                     "SST",
                     "high-energy neutrino astronomy with clear astrophysical-source or cosmic-ray context",
                     "IceCube/KM3NeT/Baikal-GVD source or multimessenger neutrino results",
+                    "prestige-journal astronomy or astrophysics papers from Nature/Science/Nature Astronomy/Nature Physics/Nature Communications/Science Advances",
                 ],
                 "secondary_rule": "IACT / 大气切伦科夫望远镜相关论文按 HE 同等优先级处理；高能中微子方向只有在明显关联天体源、高能宇宙线、强子伽马/中微子辐射或多信使高能天体物理时按重点处理；普通中微子振荡、质量、反应堆/加速器中微子或无天体物理关联的探测器论文不要因为中微子关键词而加权。其他非 HE 方向只有在明显影响高能天文、宇宙线、伽马射线、中微子天文学或仪器方法时才保留。",
                 "weights": scoring_config.weights.model_dump(),

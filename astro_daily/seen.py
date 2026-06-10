@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import logging
+import re
+import unicodedata
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -31,7 +33,11 @@ class SeenStore:
         return cls(path, {str(key): value for key, value in raw.items() if isinstance(value, dict)})
 
     def is_seen(self, paper: Paper) -> bool:
-        return paper.paper_id in self.records or _title_key(paper) in self.records
+        return (
+            paper.paper_id in self.records
+            or _title_key(paper) in self.records
+            or _loose_title_key(paper) in self.records
+        )
 
     def filter_new(self, papers: list[Paper]) -> list[Paper]:
         return [paper for paper in papers if not self.is_seen(paper)]
@@ -51,6 +57,13 @@ class SeenStore:
                 "paper_id": paper.paper_id,
                 "first_seen": seen_date.isoformat(),
             }
+            loose_title_key = _loose_title_key(paper)
+            if loose_title_key:
+                self.records[loose_title_key] = {
+                    "type": "paper_title_loose",
+                    "paper_id": paper.paper_id,
+                    "first_seen": seen_date.isoformat(),
+                }
 
     def mark_lessons(self, lessons: list[WeekendLesson], *, seen_date: date) -> None:
         for lesson in lessons:
@@ -111,19 +124,66 @@ class SeenStore:
 
 
 def deduplicate_papers(papers: list[Paper]) -> list[Paper]:
-    seen: set[str] = set()
+    index_by_key: dict[str, int] = {}
     unique: list[Paper] = []
     for paper in papers:
-        keys = {paper.paper_id, paper.url, _title_key(paper)}
-        if seen.intersection(keys):
+        keys = _dedupe_keys(paper)
+        duplicate_indexes = [index_by_key[key] for key in keys if key in index_by_key]
+        if duplicate_indexes:
+            index = min(duplicate_indexes)
+            if _prefer_paper(paper, unique[index]):
+                unique[index] = paper
+                for key, existing_index in list(index_by_key.items()):
+                    if existing_index == index:
+                        del index_by_key[key]
+                for key in keys:
+                    index_by_key[key] = index
             continue
-        seen.update(keys)
+        index = len(unique)
         unique.append(paper)
+        for key in keys:
+            index_by_key[key] = index
     return unique
+
+
+def _dedupe_keys(paper: Paper) -> set[str]:
+    keys = {paper.paper_id, paper.url, _title_key(paper)}
+    loose_title_key = _loose_title_key(paper)
+    if loose_title_key:
+        keys.add(loose_title_key)
+    return keys
+
+
+def _prefer_paper(candidate: Paper, existing: Paper) -> bool:
+    candidate_rank = _source_preference_rank(candidate)
+    existing_rank = _source_preference_rank(existing)
+    if candidate_rank != existing_rank:
+        return candidate_rank > existing_rank
+    return _paper_timestamp(candidate) > _paper_timestamp(existing)
+
+
+def _source_preference_rank(paper: Paper) -> int:
+    if paper.is_prestige_journal_source:
+        return 3
+    if paper.source == "arXiv":
+        return 2
+    return 1
+
+
+def _paper_timestamp(paper: Paper) -> str:
+    timestamp = paper.updated or paper.published
+    return timestamp.isoformat() if timestamp else ""
 
 
 def _title_key(paper: Paper) -> str:
     return "title:" + _normalize_key_text(paper.title)
+
+
+def _loose_title_key(paper: Paper) -> str | None:
+    normalized = _normalize_loose_title(paper.title)
+    if len(normalized) < 24:
+        return None
+    return "title_loose:" + normalized
 
 
 def _lesson_title_key(title: str) -> str:
@@ -139,3 +199,11 @@ def _lesson_anchor_key(anchor_work: str) -> str | None:
 
 def _normalize_key_text(text: str) -> str:
     return " ".join(text.casefold().split())
+
+
+def _normalize_loose_title(text: str) -> str:
+    text = unicodedata.normalize("NFKD", text.casefold())
+    text = text.replace("$", " ")
+    text = re.sub(r"\\[a-zA-Z]+", " ", text)
+    text = re.sub(r"[{}_^~]", " ", text)
+    return re.sub(r"[^a-z0-9]+", "", text)
