@@ -148,6 +148,7 @@ def _required_fields(summary: PaperSummary) -> dict[str, str]:
         "value_cn": summary.value_cn,
         "why_care_cn": summary.why_care_cn,
         "detailed_explanation_cn": summary.detailed_explanation_cn,
+        "key_result_walkthrough_cn": summary.key_result_walkthrough_cn,
         "background_cn": summary.background_cn,
         "basic_theory_cn": summary.basic_theory_cn,
         "formula_derivation_cn": summary.formula_derivation_cn,
@@ -185,7 +186,7 @@ def _minimum_length(name: str) -> int:
         return 160
     if name == "formula_derivation_cn":
         return 500
-    if name in {"basic_theory_cn", "model_fitting_cn", "detailed_explanation_cn", "background_cn", "followup_reading_cn"}:
+    if name in {"basic_theory_cn", "model_fitting_cn", "detailed_explanation_cn", "key_result_walkthrough_cn", "background_cn", "followup_reading_cn"}:
         return 260
     return 160
 

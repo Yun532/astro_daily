@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 SUMMARY_DEPTH_CONTRACT = {
     "goal": "Make each selected-paper detail section read like a compact graduate reading note, not a news summary.",
     "detail_multiplier": "The collapsible detail should be at least 5-8 times richer than the short summary.",
+    "key_result_walkthrough_cn": "Write 4-7 paragraphs that stay tightly attached to this paper's evidence chain: data/sample selection, event counts or sample size, significance/confidence calculation, likelihood/statistical test/model comparison, which figures or tables support the claim, systematics, and robustness checks. Do not turn this into generic background.",
     "basic_theory_cn": "Write 4-6 paragraphs. Start from the physical picture and prerequisite concepts, then introduce the paper-specific assumptions, key quantities, observational/statistical method, and common degeneracies or systematics.",
     "formula_derivation_cn": (
         "Write a coherent derivation ladder with 6-12 LaTeX formulas. Use steps such as: basic conservation law or radiative/statistical principle; "
@@ -902,6 +903,10 @@ def _summary_schema() -> dict[str, Any]:
                         "value_cn": {"type": "string"},
                         "why_care_cn": {"type": "string"},
                         "detailed_explanation_cn": {"type": "string", "description": "至少 4 段，按科学问题、作者怎么做、关键结果、局限和下一步详细讲解整篇文章。"},
+                        "key_result_walkthrough_cn": {
+                            "type": "string",
+                            "description": "至少 4 段，紧扣本文最重要的结果，具体说明数据/样本如何选择、事件数或样本量、显著性或置信度如何计算、用了什么统计/似然/模型比较、哪几张图表支撑结论、主要系统误差和稳健性检验是什么。不要写通用背景课。",
+                        },
                         "background_cn": {"type": "string", "description": "至少 4 段，解释研究对象、历史问题、观测/理论背景、为什么现在值得重新看，以及该领域常见误区。"},
                         "basic_theory_cn": {"type": "string", "description": "至少 4 段，从基础物理图像讲到本文模型假设、关键量、观测方法或仪器/数据分析逻辑。"},
                         "formula_derivation_cn": {"type": "string", "description": "包含 6–12 个 LaTeX 公式，按推导阶梯解释每个符号和步骤，从基础假设连接到论文核心方程、可观测量或统计诊断。"},
@@ -923,6 +928,7 @@ def _summary_schema() -> dict[str, Any]:
                         "value_cn",
                         "why_care_cn",
                         "detailed_explanation_cn",
+                        "key_result_walkthrough_cn",
                         "background_cn",
                         "basic_theory_cn",
                         "formula_derivation_cn",
@@ -946,6 +952,7 @@ def _summary_schema() -> dict[str, Any]:
 def _summary_repair_schema(fields: list[str]) -> dict[str, Any]:
     descriptions = {
         "detailed_explanation_cn": "至少 4 段，按科学问题、方法、关键结果、局限和下一步修复为具体讲解。",
+        "key_result_walkthrough_cn": "至少 4 段，紧扣本文主结果，具体拆解数据/样本、事件数、显著性或置信度、似然/统计检验、模型比较、关键图表证据、系统误差和稳健性检验；不要写泛化背景。",
         "background_cn": "至少 4 段，补足历史背景、研究对象、动机和常见误区。",
         "basic_theory_cn": "至少 4 段，从基础物理图像连接到本文模型、观测量或分析方法。",
         "formula_derivation_cn": "包含 6-12 个 LaTeX 公式，形成连续推导链，并解释符号和适用条件。",

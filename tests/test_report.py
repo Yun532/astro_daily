@@ -17,6 +17,7 @@ def test_report_contains_summary_fields():
             value_cn="对观测有价值。",
             why_care_cn="值得关注后续样本。",
             detailed_explanation_cn="文章详细解释了科学问题、观测方法和关键结果。",
+            key_result_walkthrough_cn="重点拆解样本选择、事件数、显著性计算、似然分析和系统误差。",
             background_cn="背景是伽马射线暴余辉偏振观测。",
             basic_theory_cn="基础理论涉及同步辐射和法拉第旋转。",
             formula_derivation_cn="关键公式为 $$F_\\nu \\propto t^{-\\alpha}\\nu^{-\\beta}$$，用于连接光变和谱指数。",
@@ -49,6 +50,8 @@ def test_report_contains_summary_fields():
     assert "<details class=\"paper-detail\" markdown=\"1\">" in report
     assert "展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作" in report
     assert "#### 文章详细讲解" in report
+    assert "#### 关键结果是怎么做出来的" in report
+    assert "重点拆解样本选择、事件数、显著性计算、似然分析和系统误差。" in report
     assert "#### 背景知识" in report
     assert "#### 基础理论 / 方法脉络" in report
     assert "#### 公式与推导" in report

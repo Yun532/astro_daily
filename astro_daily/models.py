@@ -247,6 +247,7 @@ class PaperSummary(BaseModel):
     value_cn: str
     why_care_cn: str
     detailed_explanation_cn: str = ""
+    key_result_walkthrough_cn: str = ""
     background_cn: str = ""
     basic_theory_cn: str = ""
     formula_derivation_cn: str = ""

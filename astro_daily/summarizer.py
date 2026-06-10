@@ -76,6 +76,7 @@ def _fallback_summary(paper: Paper, *, reason: str) -> PaperSummary:
         value_cn="由于 LLM 摘要 JSON 解析失败，本节保留为安全占位，不编造论文未确认的公式、图号或链接。",
         why_care_cn="日报仍保留这篇论文，是为了避免单篇摘要失败导致整份日报缺失。请把它作为需要人工快速复核的高优先级候选。",
         detailed_explanation_cn=f"自动详细解读失败，错误摘要：{short_reason}\n\n建议先阅读原文 abstract、introduction 和 conclusion，确认其核心问题、数据或模拟方法、主要结论以及与高能天体物理的关联。",
+        key_result_walkthrough_cn="自动重点拆解失败。建议人工核查论文的数据选择、样本或事件数、显著性/似然检验、主图表证据、系统误差和稳健性检验。",
         background_cn="本节为占位背景。为了避免幻觉，系统没有在摘要失败后补写未经核实的具体背景；建议结合论文引言中的动机和相关工作继续阅读。",
         basic_theory_cn="本节为占位理论说明。建议从论文中识别核心物理量、模型假设、观测量或模拟变量，再决定是否需要展开公式推导。",
         formula_derivation_cn="本节未自动生成可靠公式推导。请以论文正文中的公式为准，避免使用未经核验的自动推导。",

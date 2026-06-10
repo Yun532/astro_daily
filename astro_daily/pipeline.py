@@ -504,6 +504,7 @@ def _repair_summary_quality(
 def _summary_repair_fields(issues: list[str]) -> list[str]:
     fields = {
         "detailed_explanation_cn",
+        "key_result_walkthrough_cn",
         "background_cn",
         "basic_theory_cn",
         "formula_derivation_cn",
