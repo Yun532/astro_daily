@@ -39,6 +39,33 @@ def test_send_clawbot_text_posts_expected_payload(monkeypatch):
     assert client_id.startswith("astro-daily:")
 
 
+def test_send_clawbot_text_escapes_non_ascii_payload(monkeypatch):
+    calls = []
+
+    class Response:
+        ok = True
+        text = "{}"
+
+        def json(self):
+            return {"ret": 0}
+
+    def post(url, data, headers, timeout):
+        calls.append((data, headers))
+        return Response()
+
+    monkeypatch.setattr("src.clawbot_client.requests.post", post)
+    account = ClawBotAccount(token="token", base_url="https://example.com")
+
+    send_clawbot_text(account, "user@im.wechat", "完整报告：测试")
+
+    data, headers = calls[0]
+    raw_body = data.decode("ascii")
+    assert "完整报告" not in raw_body
+    assert "\\u5b8c\\u6574\\u62a5\\u544a" in raw_body
+    assert json.loads(raw_body)["msg"]["item_list"][0]["text_item"]["text"] == "完整报告：测试"
+    assert headers["Content-Type"] == "application/json; charset=utf-8"
+
+
 def test_get_clawbot_updates_extracts_text_and_sync(monkeypatch):
     class Response:
         ok = True

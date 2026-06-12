@@ -165,7 +165,7 @@ def _save_context_tokens(messages: list[ClawBotMessage]) -> None:
 
 
 def _post(account: ClawBotAccount, endpoint: str, payload: dict[str, Any], *, timeout: int) -> dict[str, Any]:
-    body = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    body = json.dumps(payload, ensure_ascii=True, separators=(",", ":"))
     response = requests.post(
         urljoin(f"{account.base_url.rstrip('/')}/", endpoint),
         data=body.encode("utf-8"),
@@ -183,7 +183,7 @@ def _post(account: ClawBotAccount, endpoint: str, payload: dict[str, Any], *, ti
 
 def _headers(token: str, body: str) -> dict[str, str]:
     return {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json; charset=utf-8",
         "Content-Length": str(len(body.encode("utf-8"))),
         "AuthorizationType": "ilink_bot_token",
         "Authorization": f"Bearer {token}",
