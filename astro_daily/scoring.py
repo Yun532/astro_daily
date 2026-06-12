@@ -25,7 +25,13 @@ def apply_policy(
     scored = _build_scored_papers(papers, score_results, config)
     kept = [item for item in scored if _passes_threshold(item.paper, item.score, config)]
     kept.sort(key=_scored_sort_key, reverse=True)
-    return kept[: config.max_papers_per_report]
+    regular = kept[: config.max_papers_per_report]
+    overflow = [
+        item
+        for item in kept[config.max_papers_per_report :]
+        if _passes_important_overflow(item.paper, item.score, config)
+    ][: config.important_overflow_papers]
+    return [*regular, *overflow]
 
 
 def prepare_supplemental_candidates(papers: list[Paper], config: ScoringConfig, *, run_date: date) -> list[Paper]:
@@ -102,6 +108,16 @@ def _passes_threshold(paper: Paper, score: PaperScore, config: ScoringConfig) ->
     if paper.is_priority_topic:
         return score.final_score >= config.thresholds.high_energy
     return score.final_score >= config.thresholds.non_he and score.relevance_to_me >= config.non_he_min_relevance
+
+
+def _passes_important_overflow(paper: Paper, score: PaperScore, config: ScoringConfig) -> bool:
+    if config.important_overflow_papers <= 0:
+        return False
+    return (
+        paper.is_priority_topic
+        and score.final_score >= config.important_overflow_min_final_score
+        and score.relevance_to_me >= config.important_overflow_min_relevance
+    )
 
 
 def _sort_candidates(papers: list[Paper]) -> list[Paper]:

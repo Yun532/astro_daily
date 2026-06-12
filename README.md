@@ -122,6 +122,10 @@ sources:
         url: https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv
 
 scoring:
+  max_papers_per_report: 15
+  important_overflow_papers: 5
+  important_overflow_min_final_score: 8.5
+  important_overflow_min_relevance: 8
   daily_content_floor: 3
 
 report:

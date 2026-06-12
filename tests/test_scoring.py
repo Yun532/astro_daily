@@ -126,6 +126,58 @@ def test_unrelated_prestige_journal_source_uses_normal_non_he_threshold():
     assert apply_policy([paper], [result], config) == []
 
 
+def test_apply_policy_allows_important_priority_overflow_after_regular_limit():
+    config = ScoringConfig(
+        max_papers_per_report=15,
+        important_overflow_papers=5,
+        important_overflow_min_final_score=8.5,
+        important_overflow_min_relevance=8,
+    )
+    papers = [make_paper(f"he-{index:02d}", "astro-ph.HE") for index in range(25)]
+    results = [
+        ScoreResult(
+            paper_id=paper.paper_id,
+            novelty_score=8,
+            importance_score=8,
+            relevance_to_me=8,
+            final_score=8,
+            keep=True,
+            reason="important HE paper",
+        )
+        for paper in papers
+    ]
+
+    selected = apply_policy(papers, results, config)
+
+    assert len(selected) == 20
+
+
+def test_apply_policy_does_not_overflow_with_non_priority_papers():
+    config = ScoringConfig(
+        max_papers_per_report=15,
+        important_overflow_papers=5,
+        important_overflow_min_final_score=8.5,
+        important_overflow_min_relevance=8,
+    )
+    papers = [make_paper(f"co-{index:02d}", "astro-ph.CO") for index in range(25)]
+    results = [
+        ScoreResult(
+            paper_id=paper.paper_id,
+            novelty_score=10,
+            importance_score=10,
+            relevance_to_me=10,
+            final_score=10,
+            keep=True,
+            reason="high quality but not priority",
+        )
+        for paper in papers
+    ]
+
+    selected = apply_policy(papers, results, config)
+
+    assert len(selected) == 15
+
+
 def test_prepare_candidates_uses_only_same_day_when_enough_are_available():
     config = ScoringConfig(max_candidates=10, same_day_target=3, max_backfill_papers=5)
     same_day = [make_paper(f"same-{index}", "astro-ph.HE") for index in range(3)]

@@ -80,6 +80,9 @@ publish:
     assert settings.site_base_url == "https://example.github.io/astro-daily"
     assert settings.scoring.max_candidates == 120
     assert settings.scoring.max_papers_per_report == 15
+    assert settings.scoring.important_overflow_papers == 5
+    assert settings.scoring.important_overflow_min_final_score == 8.5
+    assert settings.scoring.important_overflow_min_relevance == 8
     assert settings.scoring.same_day_target == 5
     assert settings.scoring.max_backfill_papers == 5
     assert settings.scoring.non_he_min_relevance == 6

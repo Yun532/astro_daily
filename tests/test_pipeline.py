@@ -257,7 +257,7 @@ def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
     result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 1), dry_run=False, ignore_seen=True)
 
     assert batch_sizes == [20, 20, 5]
-    assert result.kept_count == settings.scoring.max_papers_per_report
+    assert result.kept_count == settings.scoring.max_papers_per_report + settings.scoring.important_overflow_papers
 
 
 

@@ -81,6 +81,9 @@ class Thresholds(BaseModel):
 class ScoringConfig(BaseModel):
     max_candidates: int = Field(default=120, ge=1, le=300)
     max_papers_per_report: int = Field(default=15, ge=1, le=50)
+    important_overflow_papers: int = Field(default=5, ge=0, le=20)
+    important_overflow_min_final_score: float = Field(default=8.5, ge=0, le=10)
+    important_overflow_min_relevance: int = Field(default=8, ge=1, le=10)
     daily_content_floor: int = Field(default=3, ge=0, le=10)
     weights: ScoringWeights = Field(default_factory=ScoringWeights)
     category_boost: dict[str, float] = Field(default_factory=lambda: {"astro-ph.HE": 0.10})
