@@ -274,13 +274,20 @@ def _append_section(lines: list[str], title: str, papers: list[ScoredPaper], *, 
                     "",
                     summary.related_work_cn or "(Not provided)",
                     "",
+                    "**同一事件 / 同类源线索**：",
+                    "",
+                    *_link_lines(summary.source_context_links),
+                    "",
                     "**相似工作**：",
+                    "",
                     *_link_lines(summary.similar_work_links),
                     "",
                     "**基础理论 / 方法工作**：",
+                    "",
                     *_link_lines(summary.foundational_work_links),
                     "",
                     "**相反观点 / 张力线索**：",
+                    "",
                     *_link_lines(summary.tension_or_opposing_links),
                     "",
                     "</details>",
@@ -372,9 +379,11 @@ def _append_weekend_lessons(lines: list[str], lessons: list[WeekendLesson]) -> N
                 lesson.next_lesson_suggestions_cn or "(Not provided)",
                 "",
                 "**检索关键词**：",
+                "",
                 *_link_lines(lesson.search_keywords),
                 "",
                 "**确信的公开链接**：",
+                "",
                 *_link_lines(lesson.links),
                 "",
                 "</details>",
@@ -426,4 +435,10 @@ def _image_lines(urls: list[str]) -> list[str]:
 def _link_lines(links: list[str]) -> list[str]:
     if not links:
         return ["（未提供）"]
-    return [f"- {link}" for link in links]
+    lines: list[str] = []
+    for link in links:
+        if re.match(r"https?://", link):
+            lines.append(f"- <{link}>")
+        else:
+            lines.append(f"- {link}")
+    return lines

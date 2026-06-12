@@ -39,6 +39,7 @@ def test_report_contains_summary_fields():
                 )
             ],
             related_work_cn="相关工作包括早期余辉偏振和磁场结构研究。",
+            source_context_links=["https://arxiv.org/abs/2606.09992"],
             similar_work_links=["https://arxiv.org/abs/0000000"],
             foundational_work_links=["https://arxiv.org/abs/1111111"],
             tension_or_opposing_links=["https://arxiv.org/abs/2222222"],
@@ -67,6 +68,9 @@ def test_report_contains_summary_fields():
     assert "入选理由：这张图对应模型残差。" in report
     assert "来源与置信度：arxiv_source；high；main.tex" in report
     assert "#### 强相关工作" in report
+    assert "**同一事件 / 同类源线索**" in report
+    assert "- <https://arxiv.org/abs/2606.09992>" in report
+    assert "https://arxiv.org/abs/2606.09992" in report
     assert "https://arxiv.org/abs/0000000" in report
     assert "Dry-run" in report
 

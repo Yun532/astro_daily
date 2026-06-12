@@ -258,6 +258,7 @@ class PaperSummary(BaseModel):
     figure_image_urls: list[str] = Field(default_factory=list)
     extracted_figures: list[ExtractedFigure] = Field(default_factory=list)
     related_work_cn: str = ""
+    source_context_links: list[str] = Field(default_factory=list)
     similar_work_links: list[str] = Field(default_factory=list)
     foundational_work_links: list[str] = Field(default_factory=list)
     tension_or_opposing_links: list[str] = Field(default_factory=list)

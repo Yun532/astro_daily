@@ -104,7 +104,11 @@ Do not write the full lesson here. Return only JSON matching the schema. Do not 
 REPORT_MATH_FORMAT_CONTRACT = """
 Math formatting is part of the content contract. Wrap every variable, equation, relation, and symbolic expression in valid LaTeX delimiters: use \\(...\\) for inline math and \\[...\\] for displayed equations. Do not write bare expressions such as E_peak, L_iso, N(E)=..., Γ_min, α, β, or τ_{γγ} in prose. Do not split a LaTeX command across lines, and do not use raw control characters inside math."""
 
+RELATED_SOURCE_CONTEXT_CONTRACT = """
+Related-source context is part of the report contract. When the paper concerns a named event, source, transient, supernova, GRB, neutrino alert, pulsar, SNR, PWN, AGN, or survey object, explicitly identify whether there are same-event, same-source, same-class, prototype, review, catalog, or historical-analogue papers. Put reliable public URLs in source_context_links. Prefer arXiv, NASA ADS, journal pages, collaboration pages, or official catalogs. Do not invent URLs or paper identifiers; if unsure, leave source_context_links empty and describe search keywords in related_work_cn."""
+
 SUMMARY_SYSTEM_PROMPT += REPORT_MATH_FORMAT_CONTRACT
+SUMMARY_SYSTEM_PROMPT += RELATED_SOURCE_CONTEXT_CONTRACT
 WEEKEND_LESSON_SYSTEM_PROMPT += REPORT_MATH_FORMAT_CONTRACT
 WEEKEND_LESSON_SECTION_SYSTEM_PROMPT += REPORT_MATH_FORMAT_CONTRACT
 
@@ -124,6 +128,8 @@ SUMMARY_REPAIR_SYSTEM_PROMPT = """你是 Astro Daily 的中文论文精读修复
 不要编造 URL、DOI、图像链接或论文没有的具体结论；如果不确定，就写成应重点核查的论文内容和诊断方法。
 只输出符合 schema 的 JSON。"""
 
+
+SUMMARY_REPAIR_SYSTEM_PROMPT += RELATED_SOURCE_CONTEXT_CONTRACT
 
 class ClaudePaperAnalyst:
     def __init__(self, config: LlmConfig, *, api_key: str):
@@ -916,6 +922,11 @@ def _summary_schema() -> dict[str, Any]:
                         "key_figure_analysis_cn": {"type": "string", "description": "按图 1/图 2/图 3 逐图导读坐标轴、模型线、数据点、残差、置信区间和主要结论。"},
                         "figure_image_urls": {"type": "array", "items": {"type": "string"}, "description": "只有确信为官方真实图片 URL 时才填写，不确定则留空。"},
                         "related_work_cn": {"type": "string", "description": "至少 2 段，说明与相似观测、基础理论、相反观点或已有张力的关系，并给出检索关键词。"},
+                        "source_context_links": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                            "description": "同一事件/同一源/同类源/历史原型/综述或目录的可靠公开链接；只填确信存在的 arXiv、ADS、期刊或官方页面。",
+                        },
                         "similar_work_links": {"type": "array", "items": {"type": "string"}},
                         "foundational_work_links": {"type": "array", "items": {"type": "string"}},
                         "tension_or_opposing_links": {"type": "array", "items": {"type": "string"}},
@@ -938,6 +949,7 @@ def _summary_schema() -> dict[str, Any]:
                         "key_figure_analysis_cn",
                         "figure_image_urls",
                         "related_work_cn",
+                        "source_context_links",
                         "similar_work_links",
                         "foundational_work_links",
                         "tension_or_opposing_links",

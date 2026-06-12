@@ -85,6 +85,7 @@ def _fallback_summary(paper: Paper, *, reason: str) -> PaperSummary:
         figures_to_check_cn="建议检查论文中展示主要数据、模型比较、参数约束、残差或灵敏度预测的图表。",
         key_figure_analysis_cn="自动图表导读未能可靠生成。请以论文图注和正文解释为准，重点看坐标轴、样本选择、模型曲线、置信区间和系统误差。",
         related_work_cn="相关工作未能自动可靠整理。建议使用论文 introduction 和 bibliography 中反复出现的关键词检索。",
+        source_context_links=[],
         similar_work_links=[],
         foundational_work_links=[],
         tension_or_opposing_links=[],
