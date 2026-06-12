@@ -48,6 +48,7 @@ def test_report_contains_summary_fields():
     assert "高能天体物理重点" in report
     assert "一个伽马射线结果" in report
     assert "<details class=\"paper-detail\" markdown=\"1\">" in report
+    assert "<details class=\"paper-subdetail\" markdown=\"1\">" in report
     assert "展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作" in report
     assert "#### 文章详细讲解" in report
     assert "#### 关键结果是怎么做出来的" in report
@@ -159,6 +160,7 @@ def test_report_renders_weekend_classic_lessons_when_no_papers():
     assert "GRB 余辉经典专题" in report
     assert "展开经典专题课" in report
     assert "#### 公式与推导" in report
+    assert "<details class=\"paper-subdetail\" markdown=\"1\">" in report
     assert "E \\sim" in report
     assert "#### 经典拟合 / 应用方法" in report
     assert "#### 关键图表逐图导读" in report

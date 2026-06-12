@@ -150,7 +150,7 @@ def generate_html_report(md_path: str) -> str:
       overflow: hidden;
     }}
     details.paper-detail[open] {{ border-color: #60a5fa; }}
-    details.paper-detail summary {{
+    details.paper-detail > summary {{
       cursor: pointer;
       list-style: none;
       padding: 1rem 1.15rem;
@@ -158,7 +158,7 @@ def generate_html_report(md_path: str) -> str:
       color: #173b73;
       font-weight: 800;
     }}
-    details.paper-detail summary::-webkit-details-marker {{ display: none; }}
+    details.paper-detail > summary::-webkit-details-marker {{ display: none; }}
     details.paper-detail summary::before {{ content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }}
     details.paper-detail[open] summary::before {{ content: "收起"; background: #0891b2; }}
     details.paper-detail > *:not(summary) {{ margin-left: 1.15rem; margin-right: 1.15rem; }}
@@ -168,6 +168,27 @@ def generate_html_report(md_path: str) -> str:
       padding-top: 1rem;
       border-top: 1px dashed #bfdbfe;
     }}
+    details.paper-subdetail {{
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }}
+    details.paper-subdetail[open] {{ border-color: #93c5fd; }}
+    details.paper-subdetail > summary {{
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }}
+    details.paper-subdetail > summary::-webkit-details-marker {{ display: none; }}
+    details.paper-detail details.paper-subdetail > summary::before {{ content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }}
+    details.paper-detail details.paper-subdetail[open] > summary::before {{ content: "收起"; background: #2563eb; }}
+    details.paper-subdetail > *:not(summary) {{ margin-left: 0.95rem; margin-right: 0.95rem; }}
+    details.paper-subdetail > :last-child {{ margin-bottom: 1rem; }}
     @media (max-width: 720px) {{
       .page {{ padding: 18px 10px 36px; }}
       .hero {{ padding: 24px 20px; border-radius: 22px; }}

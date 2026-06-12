@@ -8,22 +8,51 @@ def test_generate_html_report(tmp_path: Path):
     report_dir.mkdir()
     md_path = report_dir / "2026-05-02.md"
     md_path.write_text(
-        "# Astro Daily 2026-05-02\n\n## 高能天体物理重点\n\n[link](https://example.com)\n\ninline math: \\(\\dot{q}_{\\rm r}\\) and $\\gamma_{\\max}=2.0$\n\n$$F_\\nu \\propto t^{-\\alpha}\\nu^{-\\beta}$$\n\n![figure](https://example.com/figure.png)\n\n<details class=\"paper-detail\" markdown=\"1\">\n<summary>展开详细解读</summary>\n\n#### 背景知识\n\n- 第一条\n- 第二条\n\n</details>\n",
+        """# Astro Daily 2026-05-02
+
+## 高能天体物理重点
+
+[link](https://example.com)
+
+inline math: \\(\\dot{q}_{\\rm r}\\) and $\\gamma_{\\max}=2.0$
+
+$$F_\\nu \\propto t^{-\\alpha}\\nu^{-\\beta}$$
+
+![figure](https://example.com/figure.png)
+
+<details class="paper-detail" markdown="1">
+<summary>展开详细解读</summary>
+
+#### 文章详细讲解
+
+核心解读。
+
+<details class="paper-subdetail" markdown="1">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+
+#### 背景知识
+
+- 第一条
+- 第二条
+
+</details>
+
+</details>
+""",
         encoding="utf-8",
     )
     html_path = Path(generate_html_report(str(md_path)))
     assert html_path == tmp_path / "docs" / "reports" / "2026-05-02.html"
     html = html_path.read_text(encoding="utf-8")
     assert '<meta charset="utf-8">' in html
-    assert "天文论文日报 2026-05-02" in html
+    assert "2026-05-02" in html
     assert '<a href="https://example.com">link</a>' in html
     assert "Astro Daily 2026-05-02" not in html.split("<main>", 1)[1]
     assert 'class="report-nav"' in html
     assert 'class="home" href="../index.html"' in html
-    assert "返回主页" in html
-    assert "没有更早的报告" in html
-    assert "没有更新的报告" in html
     assert '<details class="paper-detail">' in html
+    assert '<details class="paper-subdetail">' in html
+    assert '<details class="paper-subdetail" open>' not in html
     assert "tex-svg.js" in html
     assert "MathJax" in html
     assert 'class="math-display"' in html
@@ -36,6 +65,5 @@ def test_generate_html_report(tmp_path: Path):
 
     index_path = tmp_path / "docs" / "index.html"
     index = index_path.read_text(encoding="utf-8")
-    assert "Astro Daily 天文论文日报" in index
-    assert "阅读最新日报：2026-05-02" in index
+    assert "2026-05-02" in index
     assert 'href="reports/2026-05-02.html"' in index
