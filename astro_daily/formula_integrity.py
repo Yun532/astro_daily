@@ -80,7 +80,8 @@ class HtmlFormulaValidationError(RuntimeError):
 
 def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> FormulaIntegrityResult:
     original = md_path.read_text(encoding="utf-8")
-    repaired_text, result = repair_formula_sections(original, repair=repair)
+    normalized = _normalize_overescaped_latex(original) if repair else original
+    repaired_text, result = repair_formula_sections(normalized, repair=repair)
     repaired_text, prose_result = repair_bare_latex_in_prose(repaired_text, repair=repair)
     repaired_lines = {issue.line_number for issue in prose_result.issues if issue.repaired}
     result.issues = [issue for issue in result.issues if not (issue.kind == "bare_latex" and issue.line_number in repaired_lines)]
@@ -96,6 +97,37 @@ def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> Formu
         log = logger.info if issue.repaired else logger.warning
         log(message, issue.kind, issue.line_number, issue.section_title, issue.snippet)
     return result
+
+
+def _normalize_overescaped_latex(markdown_text: str) -> str:
+    lines = markdown_text.split("\n")
+    normalized: list[str] = []
+    in_fence = False
+    in_display_math = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            normalized.append(line)
+            continue
+        if in_fence or _is_markdown_link_or_image(line):
+            normalized.append(line)
+            continue
+        current = (
+            line.replace("\\\\(", "\\(")
+            .replace("\\\\)", "\\)")
+            .replace("\\\\[", "\\[")
+            .replace("\\\\]", "\\]")
+        )
+        if in_display_math or _has_math_delimiter(current):
+            current = _normalize_latex_commands(current)
+        normalized.append(current)
+        in_display_math = _update_display_math_state(current, in_display_math)
+    return "\n".join(normalized)
+
+
+def _normalize_latex_commands(text: str) -> str:
+    return re.sub(r"\\\\([A-Za-z]+)", r"\\\1", text)
 
 
 def validate_html_latex_formulas(html_path: str | Path) -> FormulaIntegrityResult:

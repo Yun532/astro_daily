@@ -63,6 +63,26 @@ def test_does_not_report_lines_inside_display_math_as_bare_latex():
     assert result.issue_count == 0
 
 
+def test_repairs_double_escaped_inline_latex(tmp_path: Path):
+    path = tmp_path / "2026-06-19.md"
+    path.write_text(
+        "# Astro Daily\n\n"
+        "#### 文章详细讲解\n\n"
+        "虽然 \\\\(8\\\\)PN 和 \\\\(f\\\\)-mode 是公式片段，\\\\(\\\\tilde{\\\\Lambda}\\\\) 也应正常渲染。\n",
+        encoding="utf-8",
+    )
+
+    result = repair_report_latex_formulas(path)
+    repaired = path.read_text(encoding="utf-8")
+
+    assert "\\\\(8\\\\)PN" not in repaired
+    assert "\\\\(f\\\\)-mode" not in repaired
+    assert "\\(8\\)PN" in repaired
+    assert "\\(f\\)-mode" in repaired
+    assert "\\(\\tilde{\\Lambda}\\)" in repaired
+    assert result.unresolved_count == 0
+
+
 def test_does_not_touch_non_formula_sections():
     original = "# Astro Daily\n\n#### 背景知识\n\n关键公式为 $F_\\nu \\propto t^{-\\alpha}\n"
 
