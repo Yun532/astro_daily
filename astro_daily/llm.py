@@ -534,7 +534,7 @@ def _loads_json(text: str) -> dict[str, Any]:
     return json.loads(text)
 
 
-def _loads_json_with_targeted_repairs(text: str, *, max_repairs: int = 20) -> dict[str, Any]:
+def _loads_json_with_targeted_repairs(text: str, *, max_repairs: int = 200) -> dict[str, Any]:
     candidate = text
     seen: set[str] = set()
     last_error: json.JSONDecodeError | None = None

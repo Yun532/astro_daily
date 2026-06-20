@@ -42,6 +42,16 @@ def test_parse_json_repairs_invalid_escape_at_error_position():
     assert data["value"] == r"latex \(E_{\max}\) and \mathrm{eV}"
 
 
+def test_parse_json_repairs_many_invalid_latex_escapes():
+    pieces = [r"\epsilon_e", r"\gamma_m", r"\Gamma", r"\nu_{\rm syn}"] * 20
+    text = '{"value": "' + " ".join(pieces) + '"}'
+
+    data = _parse_json_text(text)
+
+    assert r"\epsilon_e" in data["value"]
+    assert r"\nu_{\rm syn}" in data["value"]
+
+
 
 def test_paper_prompt_includes_update_and_source_batch_dates():
     paper = Paper(
