@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-06-21</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-06-21</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-06-21">
+      <a class="previous" href="2026-06-20.html">← 上一期：2026-06-20</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-06-21T11:12:16+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">数据源警告</h2>
+<ul>
+<li>本次有 1 个数据源访问异常；完整错误已保留在运行日志中，日报只显示摘要。</li>
+<li>arXiv API：1 个分类访问异常，候选池可能不完整；程序会基于已成功获取的数据继续兜底。</li>
+<li>主要错误类型：其他 1 次。</li>
+</ul>
+<h2 id="_2">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-grb">1. GRB 从零到前沿（四）：光球辐射、亚光球耗散和磁重联模型</h3>
+<ul>
+<li>课程系列：GRB 从零到前沿课程（第 4/6 讲）</li>
+<li>本讲边界：本讲讲光球半径、热谱展宽、亚光球 Compton 化、磁化喷流和重联耗散如何回应 Band 谱、效率和低能谱指数问题。不重复内激波推导。</li>
+<li>上下文承接：上一讲说明了最简内激波同步辐射的效率和谱斜率张力；本讲讲现代 prompt 模型如何修正这些张力。</li>
+<li>主题：GRB photospheric emission and magnetic reconnection</li>
+<li>经典工作：GRB prompt 模型从内激波同步辐射走向光球、多成分谱、Poynting-flux dominated jet 和 magnetic reconnection 的理论发展。</li>
+<li>为什么经典：这是从经典 GRB prompt 模型进入前沿争论的关键台阶。现代论文常在同步、光球和磁重联之间比较，必须知道它们分别解决什么问题、制造什么新问题。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_3">经典工作详细讲解</h4>
+<p>本讲的科学问题可以压缩成一句话：GRB prompt 光子是在什么光深、什么半径、由哪一种能量载体释放出来的？上一讲已经把最简内激波同步辐射模型讲到它的边界：若耗散发生在光学薄区，非热谱和快速变时标都很自然，但辐射效率、快冷却低能谱斜率以及部分事件中过硬的低能光子指数都带来张力。因此本讲不再重复两壳层碰撞、内激波半径和快冷同步辐射谱的推导，而是把问题改写为一个更一般的半径—光深—能量载体问题：耗散发生在 \(R_{\rm diss}<R_{\rm ph}\)、\(R_{\rm diss}\sim R_{\rm ph}\) 还是 \(R_{\rm diss}>R_{\rm ph}\)；喷流能量主要存在于 radiation/internal energy、bulk kinetic energy 还是 magnetic energy；观测到的 Band-like 宽谱、热成分、偏振和 GeV 延迟能否被同一套参数同时解释。</p>
+<p>历史动机从相对论火球理论本身开始。早期 fireball 图像中，中心引擎在很小尺度内释放巨大能量，初态必然是由光子、电子、正负电子和少量重子组成的高光学深度等离子体。这样的系统在膨胀时自然会加速到很大的 Lorentz 因子，并在 Thomson 光深降到 \(\tau_{\rm T}\sim 1\) 时释放 photospheric radiation。也就是说，光球不是后来为了拟合某些谱峰而随意添加的黑体成分，而是相对论火球一旦存在就很难完全避免的辐射出口。真正的困难在于：BATSE 和 Fermi 时代的 prompt 光谱通常不是窄的 Planck 谱，而是由经验 Band 函数描述的宽谱，包含低能指数 \(\alpha\)、高能指数 \(\beta\) 和谱峰能量 \(E_{\rm pk}\)。这迫使理论从“纯热光球”走向“多温光球、角向展宽、亚光球耗散和 Compton 化”的更复杂图像。</p>
+<p>本讲的方法路线先建立一个无耗散重子光球的基准模型。用无量纲熵 \(\eta\equiv L/(\dot{M}c^2)\) 归一化质量流率，用质量守恒把 luminosity 和重子载荷转化为共动电子密度，再用相对论外流中的 Thomson 光深积分定义 \(R_{\rm ph}\)。在 coasting 区，最常用的标度是 \(R_{\rm ph}\simeq L\sigma_{\rm T}/(8\pi m_p c^3\Gamma^3)\)，它显示光球半径对 \(\Gamma\) 极其敏感。随后比较 \(R_{\rm ph}\) 与饱和半径 \(R_s\simeq R_0\eta\)，判断透明发生在加速区还是 coasting 区；再由绝热冷却得到光球温度和热峰 \(E_{\rm pk,th}\simeq 3.92 k_{\rm B}T'_{\rm ph}\Gamma/(1+z)\)。这条推导链的目的不是给出唯一答案，而是建立所有后续模型都必须面对的基准：如果没有耗散，光球高效但谱太窄。</p>
+<p>在这个基准上，第一类修正是把“单温黑体”替换为“物理光球”。相对论喷流不是一个静止球面，观测者接收的是等到达时间面上不同角度、不同 Doppler factor 和不同有效 photosphere 的叠加。Doppler factor \({\cal D}=[\Gamma(1-eta\cos	heta)]^{-1}\) 使不同纬度贡献不同的观测温度，时间演化和喷流角结构又会把多个瞬时热谱叠加成更宽的谱峰。但几何和多温效应通常只能部分展宽谱形，未必自然产生完整的高能 Band 尾。因此第二类修正是亚光球耗散：若能量在 \(1\lesssim 	au_{\rm T}\lesssim 10^2\) 的区域注入电子或产生 pairs，光子会经历有限次 Compton 散射，谱峰被展宽，高能尾可被建立；若耗散太深，辐射重新热化或 Wien 化；若耗散太浅，模型就更接近光学薄同步辐射或逆 Compton 辐射。</p>
+<p>另一条现代路线是改变能量载体，把喷流从重子动能主导推进到 Poynting flux 主导。用磁化参数 \(\sigma\equiv L_B/L_k\) 描述 magnetic luminosity 与 kinetic luminosity 的比例，总功率可写为 \(L=L_k+L_B=L_k(1+\sigma)\)。当 \(\sigma\gg 1\) 时，主要可释放能量储存在磁场中，内激波不一定是主要耗散机制；磁重联可以在较大半径持续释放能量，并可能带来较高辐射效率、有序磁场偏振以及较低的 \(\gamma\gamma\) 不透明度。粗略地，若重联释放效率为 \(\epsilon_{\rm rec}\)，辐射效率为 \(\epsilon_{\rm rad}\)，prompt 辐射效率可写成 \(\epsilon_\gamma\simeq \epsilon_{\rm rad}\epsilon_{\rm rec}\sigma/(1+\sigma)\)。但这个公式也暴露出新问题：高效率并非自动成立，它依赖重联速率、粒子加热、非热粒子谱和冷却过程。</p>
+<p>本讲的关键结果不是把光球模型、薄区同步辐射模型和磁重联模型放进三个互斥盒子，而是建立一套连续诊断。一个高磁化喷流同样有光球；磁能可以在 \(R_{\rm diss}<R_{\rm ph}\) 的区域释放，形成 dissipative photosphere，也可以在 \(R_{\rm diss}\sim R_{\rm ph}\) 附近释放，产生强辐射转移和 Compton 化，还可以在 \(R_{\rm diss}>R_{\rm ph}\) 的光学薄区释放，形成 synchrotron-like prompt emission。真正需要比较的是 \(R_{\rm diss}/R_{\rm ph}\)、\(\sigma\)、Compton 参数 \(y\)、thermal fraction \(f_{\rm th}\)、低能指数 \(\alpha\)、高能尾 \(eta\)、偏振和高能光子逃逸之间是否自洽。</p>
+<p>局限性首先来自理论简化。实际喷流可能具有角结构、时间结构、湍动磁场、局部 mini-jet、pair loading 和非稳态辐射转移，而课堂推导中的球对称、稳态、单一 \(\Gamma\) 与单一 \(R_{\rm ph}\) 只是第一近似。其次，观测拟合存在严重退化：Band、CPL、blackbody plus Band、多温黑体、Comptonized photosphere 和磁化同步辐射模板都可能在有限能段中给出相似曲线。第三，单一证据并不决定机制：一个 blackbody 成分不等于完整光球模型，一个高偏振测量不等于唯一支持磁重联，一个 GeV 延迟也不能单独排除亚光球耗散，因为外激波、\(\gamma\gamma\) opacity 和 pair cascade 都可能参与。</p>
+<p>本讲对后续研究的影响在于，它把 prompt emission 的讨论从“哪条经验谱最好拟合”推进到“半径、光深、能量预算和观测诊断是否闭合”。读 Fermi 时代论文时，应检查作者是否从 photon model 经过响应矩阵折叠到 counts space，是否报告后验退化和 residuals，是否用 posterior predictive check 或模拟检验热成分显著性，是否讨论背景、能段选择、响应版本和 time binning 的系统误差。到本讲结束，我们故意不继续扩展 prompt 辐射转移的全部细节，而把问题交给第 \(5/6\) 讲：若某个 prompt 模型声称高效率，它是否与 afterglow 推断的剩余动能、早期外激波和全局能量预算一致，即 \(E_{\gamma,\rm iso}\)、\(E_{k,\rm iso}\) 与 \(\epsilon_\gamma=E_\gamma/(E_\gamma+E_k)\) 是否能够闭合。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_4">背景知识</h4>
+<p>第一层背景来自 compactness problem 之后的必然追问。前面课程已经说明，若 GRB 在宇宙学距离释放巨大能量并在毫秒到秒级时标内变化，非相对论源会产生灾难性的 pair opacity，因此源必须以 \(\Gamma\gg 1\) 的 bulk Lorentz factor 向外运动。但一旦接受相对论火球，就不能只拿走“大 Lorentz 因子”这一结论，而忘记火球初态本身是高光学深度辐射等离子体。高光深意味着光子最初被困在流体中，直到 \(	au_{\rm T}\sim 1\) 才能自由逃逸；这就是 photosphere 的物理起点。</p>
+<p>第二层背景是 prompt 光谱的经验事实。Band 函数用 \(\alpha\)、\(eta\) 和 \(E_{\rm pk}\) 对谱形作压缩描述，方便比较大量事件，却不是辐射机制本身。许多 burst 的 \(\alpha\) 接近 \(-1\)，高能端 \(eta<-2\)，(<br />
+u F_<br />
+u) 峰位于几十 \({\rm keV}\) 到数 \({\rm MeV}\)。这些性质一方面要求模型产生宽的非热状谱，另一方面又给光球留下入口：如果低能端偏硬、谱峰附近有窄残差、或者时间分辨谱中出现平滑演化的 thermal component，那么 photospheric contribution 就需要被认真检查。</p>
+<p>第三层背景是上一讲留下的内激波困境。最简 optically thin fast-cooling synchrotron 图像把耗散放在 \(R_{\rm diss}>R_{\rm ph}\) 的光学薄区，变时标和非热粒子加速都很直观。但快冷却同步辐射常给出偏软的低能谱，慢冷却同步辐射又有 \(\alpha=-2/3\) 的硬极限；同时，两个或少数几个壳层的内激波把 bulk kinetic energy 转成内能的效率通常有限。若观测和 afterglow 能量预算暗示 prompt 阶段效率很高，就必须考虑更复杂的动力学、强磁化喷流或光球附近的高效释放。</p>
+<p>第四层背景是“光球等于黑体”的常见误区。单温 Planck 谱当然太窄，难以直接解释大多数 Band-like prompt spectra；但物理光球并不等同于在经验 Band 函数旁边加一个 blackbody。真实 photosphere 可能是多温的、角向依赖的、时间演化的，也可能经历亚光球电子加热、核子碰撞、pair creation 和 Comptonization。经验拟合中的 blackbody plus Band 只是数据压缩方式，它不能自动替代完整辐射转移模型。</p>
+<p>第五层背景是磁化喷流思想的兴起。若中心引擎是快速旋转黑洞—吸积盘系统或毫秒磁星，喷流初始能量很可能大量储存在 Poynting flux 中，用 \(\sigma=L_B/L_k\) 描述磁能流与物质动能流的比例。当 \(\sigma\gg 1\) 时，传统内激波可能效率低，因为同一速度扰动中可碰撞的 matter kinetic energy 不是总能量主体；相反，磁重联、current-driven instability、湍动和 ICMART 类过程可能在较大半径释放磁能。它们有潜力解释高效率、有序磁场偏振和部分 GeV 延迟，但也必须面对重联速率、粒子加速、辐射冷却和快速变时标之间的约束。</p>
+<p>第六层背景是现代观测诊断已经多维化。一个时间积分 Band 谱几乎不能区分 optically thin synchrotron、dissipative photosphere 和 magnetic reconnection。需要同时看时间分辨谱、谱宽、\(E_{\rm pk}\)-flux 轨迹、blackbody temperature 与 flux 的平滑演化、thermal fraction \(f_{\rm th}\)、LAT 高能光子、偏振度与偏振角、以及 afterglow 推断的剩余 kinetic energy。换句话说，模型判断不应停留在“曲线像不像”，而应检查一组物理量是否在同一半径—光深—能量载体框架中闭合。</p>
+<p>第七层背景是本讲在系列中的边界。第 \(3/6\) 讲已经处理了内激波和最简同步辐射，本讲只把它作为 \(R_{\rm diss}>R_{\rm ph}\) 的一种参照极限；第 \(4/6\) 讲新增的是 \(R_{\rm ph}\)、\(	au_{\rm T}\)、亚光球 Compton 化和 \(\sigma\) 主导的磁重联图像；第 \(5/6\) 讲将不再深入 prompt 辐射转移，而是转向 prompt-afterglow 能量闭合、早期外激波和剩余动能。因此，本讲的目标不是裁决唯一机制，而是给学生一套读 prompt 论文时可执行的诊断语言。</p>
+<h4 id="_5">基础理论 / 方法脉络</h4>
+<p>第一，先把本讲的空间图像搭起来。相对论喷流从中心引擎尺度 \(R_0\) 出发，若初始由辐射和热能主导，会在内压驱动下加速；若最终由重子惯性承载动能，常用无量纲熵 \(\eta\equiv L/(\dot{M}c^2)\) 表示每单位静质量携带的总能量。弱磁化、无强耗散的 coasting 阶段通常有 \(\Gamma\simeq\eta\)。在这个图像中，最重要的半径包括饱和半径 \(R_s\simeq R_0\eta\)、光球半径 \(R_{\rm ph}\)、耗散半径 \(R_{\rm diss}\)、内激波半径以及磁重联半径。所有 prompt 模型首先要回答的是这些半径的相对顺序，而不是只给出一个经验谱形。</p>
+<p>第二，photosphere 的定义是 Thomson 光深降到一附近，即 \(	au_{\rm T}\sim 1\)。对相对论外流，光深不能按静态介质简单估计，因为光子与流体几乎同向传播，光子只是在缓慢追上前方等离子体。质量守恒给出 \(\dot{M}=4\pi R^2\Gamma n'_p m_p c\)，在暂不考虑 pairs 时 \(n'_e\simeq n'_p\)。相对论径向光深近似为 \(	au_{\rm T}(R)\simeq\int_R^\infty n'_e\sigma_{\rm T}dR/(2\Gamma^2)\)。若光球位于 coasting 区，就得到 \(R_{\rm ph}\simeq L\sigma_{\rm T}/(8\pi m_p c^3\Gamma^3)\)。这条标度说明 \(R_{\rm ph}\) 对 \(\Gamma\) 的依赖极强，因此小的 Lorentz factor 变化会显著改变发射区是否光学厚。</p>
+<p>第三，光球与饱和半径的比较决定无耗散热辐射的基本性质。若 \(R_{\rm ph}>R_s\)，喷流已经进入 coasting 阶段，光子在继续被困的过程中经历绝热冷却，光球释放的热成分温度降低、辐射能量也被部分转化为 bulk kinetic energy。若 \(R_{\rm ph}<R_s\)，透明发生在加速阶段，因 \(\Gamma\propto R\) 且共动温度近似 \(T'\propto R^{-1}\)，观测温度 \(T_{\rm obs}\sim \Gamma T'/(1+z)\) 可以近似保持不变。纯热峰常写为 \(E_{\rm pk,th}\simeq 3.92 k_{\rm B}T'_{\rm ph}\Gamma/(1+z)\)。这一基准模型的优点是高效率，缺点是单温热谱相对 Band-like 宽谱明显太窄。</p>
+<p>第四，要理解“物理光球不等于单温黑体”，需要加入几何和时间效应。观测者接收的是等到达时间面上的辐射，不同角度 \(	heta\) 的 Doppler factor 为 \({\cal D}=[\Gamma(1-eta\cos	heta)]^{-1}\)，因而不同纬度贡献不同的 \(T_{\rm obs}(	heta)\propto{\cal D}T'/(1+z)\)。如果喷流还有角结构，不同方向的 luminosity、\(\Gamma\) 和有效 \(R_{\rm ph}\) 也不相同。再加上时间分辨 bin 内的快速温度演化，多个窄热谱可以叠加成更宽的多温谱峰。不过，这类展宽通常有上限，特别是要同时解释低能斜率、高能尾和峰附近 residuals 时，往往还需要额外耗散。</p>
+<p>第五，亚光球耗散提供了从热谱走向 Band-like 宽谱的关键机制。若电子在 \(R_{\rm diss}<R_{\rm ph}\) 或 \(R_{\rm diss}\sim R_{\rm ph}\) 被加热，光子会经历有限次 Thomson 或 Compton 散射。Compton 化强度可用 \(y=4	heta_e\max(	au_{\rm T},	au_{\rm T}^2)\) 衡量，其中 \(	heta_e=k_{\rm B}T_e/(m_e c^2)\)。当 \(y\ll 1\) 时谱形几乎保持热谱；当 \(y\sim 1\) 时热峰适度展宽；当 \(y\gg 1\) 时可能饱和并趋向 Wien-like 峰。若 coasting 区满足 \(	au_{\rm T}\propto R^{-1}\)，耗散光深可近似写为 \(	au_{\rm diss}\simeq R_{\rm ph}/R_{\rm diss}\)。经验上，\(1\lesssim	au_{\rm diss}\lesssim 10^2\) 是产生 Comptonized photosphere 的重要窗口；太深会热化，太浅会转向光学薄非热辐射。</p>
+<p>第六，磁化喷流把问题从“热能或动能如何释放”扩展到“磁能如何释放”。用 \(\sigma\equiv L_B/L_k\) 描述磁化程度，总功率为 \(L=L_k+L_B=L_k(1+\sigma)\)。当 \(\sigma\gg 1\) 时，Poynting flux 是主要能库，磁重联可以把有序磁场能转化为粒子能量和辐射。重联时间可用 \(t'_{\rm rec}\sim \lambda'/(\epsilon_{\rm rec}v_A)\) 估计，其中 \(\lambda'\) 是共动磁场反转尺度，\(\epsilon_{\rm rec}\) 是重联速率参数，\(v_A\) 是 Alfvén 速度。观测脉冲宽度还受角向时间 \(t_{\rm ang}\simeq(1+z)R/(2\Gamma^2c)\) 限制。因此，大半径磁重联模型虽然有利于高能透明性和 GeV 延迟，却必须解释快速变时标；小半径磁耗散模型则必须面对光深和辐射转移。</p>
+<p>第七，实际诊断时不要把“光球”“同步辐射”“磁重联”当作互斥标签。一个 Poynting-dominated jet 仍有 \(R_{\rm ph}\)，磁重联也可能发生在光球下方、光球附近或光球外部。若 \(R_{\rm diss}/R_{\rm ph}<1\)，需要处理 sub-photospheric radiative transfer；若 \(R_{\rm diss}/R_{\rm ph}\sim 1\)，谱形对 \(	au_{\rm diss}\)、\(T_e\)、pair loading 和 \(y\) 极其敏感；若 \(R_{\rm diss}/R_{\rm ph}>1\)，模型更接近 optically thin synchrotron 或 inverse Compton。观测上应联合检查 \(f_{\rm th}=F_{\rm BB}/F_{\rm tot}\)、表观热半径 \({\cal R}=(F_{\rm BB}/\sigma_{\rm SB}T_{\rm obs}^4)^{1/2}\)、\(E_{\rm pk}\)、\(\alpha\)、\(eta\)、偏振和 LAT 高能光子，而不是凭单一 blackbody 拟合、单一高偏振或单一 GeV 延迟下结论。</p>
+<p>第八，本讲与后续课程的连接点是能量闭合。光球和磁重联模型都可能声称高 prompt 辐射效率，但高效率必须与 afterglow 推断的剩余 kinetic energy 相容。到第 \(5/6\) 讲，我们会把本讲得到的 prompt 诊断量与 \(E_{\gamma,\rm iso}\)、\(E_{k,\rm iso}\) 和 \(\epsilon_\gamma=E_\gamma/(E_\gamma+E_k)\) 联系起来，讨论早期外激波、afterglow onset 和能量预算。也就是说，本讲停在 prompt 辐射区的半径—光深—能量载体框架；下一讲将检验这些 prompt 模型在全局动力学上是否站得住。</p>
+<h4 id="_6">公式与推导</h4>
+<p>第一步：先把重子火球的能量和质量归一化。假设喷流近似稳态、球对称、弱磁化，中心引擎给出的各向同性等效功率为 \(L\)，质量流率为 \(\dot{M}\)。定义无量纲熵</p>
+<div class="math-display">\[\eta\equiv {L\over \dot{M}c^2}\]</div>
+<p>它表示每单位静质量携带的总能量。若后续没有显著磁能继续加速或强辐射损失，喷流进入 coasting 阶段后有 \(\Gamma\simeq\eta\)。这一步解出的 \(\eta\) 决定最终 bulk Lorentz factor，也决定下一步粒子密度的归一化。</p>
+<p>第二步：由质量守恒求共动粒子数密度。假设半径 \(R\) 处外流 Lorentz factor 为 \(\Gamma\)，重子主要由质子提供，暂不考虑正负电子对增殖，则</p>
+<div class="math-display">\[\dot{M}=4\pi R^2\Gamma n'_p m_p c,\qquad n'_e\simeq n'_p={L\over 4\pi R^2\Gamma\eta m_p c^3}\]</div>
+<p>这里 \(n'_p\) 和 \(n'_e\) 是共动系质子与电子数密度。该式说明密度随 \(R^{-2}\) 稀释，并随 \(\Gamma\) 与 \(\eta\) 增大而降低；把 \(n'_e\) 代入光深积分即可定义 photosphere。</p>
+<p>第三步：写出相对论外流中的径向 Thomson 光深。假设光子近似沿喷流方向向外逃逸，由于光子只缓慢追上前方等离子体，有效柱密度比静态介质小，径向光深近似为</p>
+<div class="math-display">\[\tau_{\rm T}(R)\simeq \int_R^\infty n'_e\sigma_{\rm T}{dR\over 2\Gamma^2}\]</div>
+<p>其中 \(\sigma_{\rm T}\) 是 Thomson 截面，\(2\Gamma^2\) 是相对论逃逸因子。这一步把“透明”变成可计算条件；photosphere 由 \(\tau_{\rm T}\sim 1\) 给出。</p>
+<p>第四步：推导 coasting 区重子光球半径。若光球在饱和半径之外，\(\Gamma\simeq\eta\) 近似为常数，且 \(n'_e\propto R^{-2}\)，对上式积分并令 \(\tau_{\rm T}(R_{\rm ph})=1\)，得到</p>
+<div class="math-display">\[R_{\rm ph}\simeq {L\sigma_{\rm T}\over 8\pi m_p c^3\Gamma^3}\]</div>
+<p>这就是最常用的重子 photosphere 标度。它显示 \(R_{\rm ph}\) 对 \(\Gamma\) 极敏感，因此同一 \(L\) 下，较大的 \(\Gamma\) 会显著降低光深并把透明半径推向内侧。下一步需要判断这个 \(R_{\rm ph}\) 是否真的位于 coasting 区。</p>
+<p>第五步：比较光球半径与饱和半径。假设重子火球从注入尺度 \(R_0\) 开始辐射压加速，在无强耗散近似下 \(\Gamma\propto R\)，直到饱和半径</p>
+<div class="math-display">\[R_s\simeq R_0\eta,\qquad \eta_*\simeq \left({L\sigma_{\rm T}\over 8\pi m_p c^3R_0}\right)^{1/4}\]</div>
+<p>其中 \(\eta_*\) 由 \(R_{\rm ph}=R_s\) 得到。若 \(\eta<\eta_*\)，通常有 \(R_{\rm ph}>R_s\)，光球在 coasting 区；若 \(\eta>\eta_*\)，透明可能发生在加速区。这个分界决定热辐射的绝热冷却程度。</p>
+<p>第六步：估计初始辐射温度。假设 \(R_0\) 附近火球为 radiation dominated，luminosity 主要由黑体辐射能量密度携带，则</p>
+<div class="math-display">\[L\simeq 4\pi R_0^2 c aT_0^4,\qquad T_0\simeq \left({L\over 4\pi R_0^2ca}\right)^{1/4}\]</div>
+<p>其中 \(a\) 是辐射常数，\(T_0\) 是初始温度。该式把可观测 luminosity 和未知注入半径 \(R_0\) 联系起来，并为下一步的温度演化提供起点。</p>
+<p>第七步：沿喷流传播热温度。无耗散绝热膨胀下，加速区有 \(T'\propto R^{-1}\) 且 \(\Gamma\propto R\)，所以观测温度近似冻结；coasting 区有 \(T'\propto R^{-2/3}\)。因此若 \(R_{\rm ph}>R_s\)，</p>
+<div class="math-display">\[T'_{\rm ph}\simeq {T_0\over \eta}\left({R_{\rm ph}\over R_s}\right)^{-2/3},\qquad T_{\rm obs}\simeq {\Gamma T'_{\rm ph}\over 1+z}\]</div>
+<p>这里 \(z\) 是红移。该式说明 coasting photosphere 的观测温度会因绝热冷却降低，而加速区 photosphere 的温度更接近初始火球温度。</p>
+<p>第八步：把光球温度连接到热峰能量。对近似 Planck 谱，\(\nu F_\nu\) 热峰可写为</p>
+<div class="math-display">\[E_{\rm pk,th}\simeq {3.92\,k_{\rm B}T'_{\rm ph}\Gamma\over 1+z}\]</div>
+<p>其中 \(k_{\rm B}\) 是 Boltzmann 常数。这个结果给出纯热光球的基准预测：它通常辐射效率高，但谱峰宽度接近热谱，难以直接解释大多数 Band-like prompt spectrum。因此下一步需要加入几何和多温效应。</p>
+<p>第九步：加入角向 Doppler 展宽。观测者接收等到达时间面上不同纬度 \(\theta\) 的发射，局部 Doppler factor 为</p>
+<div class="math-display">\[{\cal D}(\theta)=[\Gamma(1-\beta\cos\theta)]^{-1},\qquad T_{\rm obs}(\theta)\propto {{\cal D}(\theta)T'\over 1+z}\]</div>
+<p>其中 \(\beta c\) 是喷流速度。不同 \(\theta\) 的 Planck 成分叠加会把单温黑体展宽；若喷流还存在角结构或时间演化，谱峰会进一步变宽。但这通常仍不足以自动产生完整高能 Band 尾，于是需要考虑亚光球耗散。</p>
+<p>第十步：用 Compton 参数刻画亚光球谱展宽。假设在 \(R_{\rm diss}\lesssim R_{\rm ph}\) 处有电子加热，光子经历有限次散射，则 Compton 化强度可写为</p>
+<div class="math-display">\[y=4\theta_e\max(\tau_{\rm T},\tau_{\rm T}^2),\qquad \theta_e={k_{\rm B}T_e\over m_ec^2}\]</div>
+<p>其中 \(T_e\) 是电子温度，\(m_e\) 是电子质量。若 \(y\ll 1\)，谱形接近原热谱；若 \(y\sim 1\)，热峰可被适度展宽；若 \(y\gg 1\)，散射趋于饱和并可能形成 Wien-like 峰。这个量直接诊断 dissipative photosphere 能否产生 Band-like 宽谱。</p>
+<p>第十一步：把耗散半径转换为耗散光深。若耗散发生在 \(R_{\rm diss}\)，且 coasting 区满足 \(\tau_{\rm T}\propto R^{-1}\)，则</p>
+<div class="math-display">\[\tau_{\rm diss}\simeq {R_{\rm ph}\over R_{\rm diss}}\]</div>
+<p>当 \(\tau_{\rm diss}\gg 100\) 时，注入能量往往被重新热化；当 \(1\lesssim\tau_{\rm diss}\lesssim 100\) 时，有限次 Compton 散射最容易产生 Comptonized photosphere；当 \(\tau_{\rm diss}\ll 1\) 时，辐射更接近光学薄同步辐射或逆 Compton 极限。因此 \(R_{\rm diss}/R_{\rm ph}\) 是本讲分类 prompt 模型的核心坐标。</p>
+<p>第十二步：引入磁化喷流的能量预算。若喷流能量不只在重子动能中，还大量储存在 Poynting flux 中，定义磁化参数</p>
+<div class="math-display">\[\sigma={L_B\over L_k},\qquad L=L_k+L_B=L_k(1+\sigma),\qquad \epsilon_\gamma\simeq {\epsilon_{\rm rad}\epsilon_{\rm rec}\sigma\over 1+\sigma}\]</div>
+<p>其中 \(L_B\) 是磁能流，\(L_k\) 是物质动能流，\(\epsilon_{\rm rec}\) 是磁重联释放效率，\(\epsilon_{\rm rad}\) 是粒子能量转为辐射的效率。该式说明高 \(\sigma\) 喷流有潜力缓解内激波低效率问题，但只有当重联和辐射都足够有效时，\(\epsilon_\gamma\) 才会真正升高。</p>
+<p>第十三步：连接重联半径、变时标和观测闭合量。若共动磁场反转尺度为 \(\lambda'\)，重联入流速度为 \(v_{\rm rec}=\epsilon_{\rm rec}v_A\)，则</p>
+<div class="math-display">\[t'_{\rm rec}\sim {\lambda'\over \epsilon_{\rm rec}v_A},\qquad R_{\rm rec}\sim \Gamma ct'_{\rm rec},\qquad t_{\rm ang}\simeq {(1+z)R\over 2\Gamma^2c},\qquad {\cal R}=\left({F_{\rm BB}\over \sigma_{\rm SB}T_{\rm obs}^4}\right)^{1/2},\qquad f_{\rm th}={F_{\rm BB}\over F_{\rm tot}}\]</div>
+<p>这里 \(v_A\) 是 Alfvén 速度，\(t_{\rm ang}\) 是角向时间，\({\cal R}\) 是由黑体通量 \(F_{\rm BB}\) 和观测温度 \(T_{\rm obs}\) 定义的表观热半径，\(f_{\rm th}\) 是热成分比例。大 \(R_{\rm rec}\) 有利于高能光子逃逸和解释部分 GeV 延迟，但必须满足快速变时标约束；显著且平滑演化的 \(f_{\rm th}\) 支持 photospheric contribution。最终诊断不能只靠单一谱形，而要联合检查 \(R_{\rm diss}/R_{\rm ph}\)、\(\tau_{\rm diss}\)、\(y\)、\(\sigma\)、\(f_{\rm th}\)、偏振和高能透明性是否同时闭合。</p>
+<h4 id="_7">经典拟合 / 应用方法</h4>
+<p>第一，拟合从一个基本原则开始：论文中真正被仪器记录的是计数，而不是已经“去响应”的能谱点。因此无论你比较的是 Band、CPL、blackbody、CPL plus blackbody、Band plus blackbody，还是更物理的 dissipative photosphere 或 magnetic reconnection 模板，都应先写出 photon model \(N(E;\theta)\)，再经过探测器响应折叠到计数空间：</p>
+<div class="math-display">\[\mu_i(\theta)=\int R_i(E)N(E;\theta)dE+B_i .\]</div>
+<p>这里 \(R_i(E)\) 是响应矩阵，\(B_i\) 是背景贡献，\(\mu_i\) 是第 \(i\) 个能道的期望计数。若观测计数为 \(n_i\)，最基本的 Poisson likelihood 为</p>
+<div class="math-display">\[\ln {\cal L}=\sum_i\left[n_i\ln\mu_i-\mu_i-\ln(n_i!)\right].\]</div>
+<p>在实际 Fermi/GBM 或联合 GBM/LAT 分析中，常见统计量是 \({\rm C\mbox{-}stat}\) 或 \({\rm PG\mbox{-}stat}\)，但核心思想不变：不要把 unfolded spectrum 当作独立高斯数据点直接拟合。</p>
+<p>第二，经验模型的作用是建立参照系，而不是提供最终物理解释。Band 模型用 \(\alpha\)、\(\beta\) 和 \(E_{\rm pk}\) 压缩谱形；CPL 模型在高能尾不够显著时更稳定；blackbody 用 \(k_{\rm B}T\) 和归一化描述窄热峰；组合模型则检查数据是否需要一个窄成分叠加在宽非热成分上。读论文时要问：作者是否在相同时间分辨 bin、相同背景区间和相同能段范围内比较了这些模型？如果只展示某个 unfolded \(\nu F_\nu\) 图上曲线“看起来更好”，而没有给出折叠计数谱与残差，那么该结论只能作为示意，不能作为强证据。</p>
+<p>第三，识别可能的光球成分时，要从残差和时间演化一起判断。若单一 Band 或 CPL 在峰附近留下系统性窄峰残差，加入 blackbody 后 \({\rm C\mbox{-}stat}\) 明显改善，且 \(k_{\rm B}T\)、\(F_{\rm BB}\) 与 \(f_{\rm th}=F_{\rm BB}/F_{\rm tot}\) 随时间平滑演化，这才构成较有说服力的 photospheric contribution 线索。进一步还可计算表观热半径量</p>
+<div class="math-display">\[{\cal R}=\left({F_{\rm BB}\over \sigma_{\rm SB}T_{\rm obs}^4}\right)^{1/2},\]</div>
+<p>检查 \({\cal R}\) 是否呈现连续趋势。反过来，如果 blackbody 只在个别 bin 中出现、温度跳变无规律、或只在某个探测器边界附近改善残差，就要优先怀疑背景、响应或时间分辨造成的伪信号。</p>
+<p>第四，物理 photosphere 模板的参数比经验 blackbody 多得多，也更容易退化。常见参数包括 \(L\)、\(\Gamma\)、\(R_0\)、\(R_{\rm ph}\)、\(R_{\rm diss}\)、\(\tau_{\rm diss}\)、\(T_e\)、电子加热分数、pair multiplicity、喷流角结构和 viewing angle。读后验图时尤其要检查 \(T_e\)-\(\tau_{\rm diss}\)、\(L\)-\(\Gamma\)-\(R_0\) 以及 heating fraction-pair multiplicity 的相关性。许多不同参数组合都可能产生相似的 \(E_{\rm pk}\) 和谱宽；因此只报告 best-fit \(\Gamma\) 或 best-fit \(R_{\rm ph}\) 而不给置信区间和退化方向，是不够的。</p>
+<p>第五，耗散光球模型的残差诊断应围绕三处展开。低能端要看模型是否能解释观测到的 \(\alpha\)，尤其是是否过硬到接近纯热谱，或过软到重新落入快冷同步辐射张力。峰附近要看 Compton 化是否真正展宽了热峰，而不是只用多个窄成分拼出曲率。高能端要看 \(\beta\) 或 LAT 能段是否被模型解释；若 \(y=4\theta_e\max(\tau_{\rm T},\tau_{\rm T}^2)\) 太小，高能尾不足；若 \(y\gg1\)，谱可能过度 Wien 化。好的论文应展示 posterior predictive residual，而不仅是一个最优模型曲线。</p>
+<p>第六，磁重联或磁化同步辐射模型的拟合不能只看 prompt 光谱。参数通常包括发射半径 \(R\)、bulk Lorentz factor \(\Gamma\)、共动磁场 \(B'\)、磁化参数 \(\sigma\)、电子注入指数 \(p\)、最小电子 Lorentz 因子 \(\gamma_m\)、重联效率 \(\epsilon_{\rm rec}\)、局部 mini-jet 或湍动参数。模型应同时面对脉冲宽度、最短变时标、谱滞后、偏振度、偏振角和 LAT 高能光子的到达时间。若模型要求很大的 \(R\) 以降低 \(\gamma\gamma\) 不透明度，就必须用 \(t_{\rm ang}\simeq(1+z)R/(2\Gamma^2c)\) 检查是否还能解释快速光变。</p>
+<p>第七，模型比较要避免“多一个成分一定更好”的陷阱。加入 blackbody、额外 cutoff 或重联模板通常会增加自由参数，因此应使用 Bayesian evidence、\({\rm AIC}\)、\({\rm BIC}\)、cross-validation 或模拟恢复实验，而不是只看 \(\Delta C\)。更重要的是，物理模型若真正优于经验 Band，应能减少跨 time bins 的自由度，或给出额外可检验预言，例如 \(f_{\rm th}\) 的连续演化、\(E_{\rm pk}\)-flux 轨迹、偏振随脉冲相位变化，或 \(R_{\rm diss}/R_{\rm ph}\) 与谱宽之间的关系。</p>
+<p>第八，系统误差审计是本讲拟合部分的最后关口。背景区间会影响高能尾 \(\beta\)，能段选择会影响 \(k_{\rm B}T\) 和 blackbody 显著性，响应版本会改变峰附近残差，time binning 会把多个快速演化的窄谱叠加成一个宽谱，探测器交叉定标会在 NaI、BGO 与 LAT 接缝处制造假结构。实际读论文时，应检查作者是否改变背景区间、能量范围和时间 bin 后重复拟合；是否在多个探测器中看到同一残差改善；是否把光谱结论与 \(R_{\rm ph}\)、\(R_{\rm diss}\)、\(\Gamma\)、\(\sigma\)、\(f_{\rm th}\)、偏振和 afterglow 能量预算联合起来。只有这些诊断同时通过，才可以说某个 photosphere 或 reconnection 解释获得了较强支持。</p>
+<h4 id="_8">重点章节 / 结果段落怎么读</h4>
+<p>读早期 fireball 经典工作时，第一遍不要急着寻找现代 Fermi 论文中的 Band 拟合语言，而要抓住物理链条：中心引擎在小尺度释放巨大能量，初态自然是高光深 radiation-dominated plasma；高光深导致光子被困在流体中；相对论膨胀既降低 compactness，又在 \(\tau_{\rm T}\sim1\) 处释放 photospheric radiation。把这些段落翻译成本讲语言，就是从 \(R_0\)、\(\eta\)、\(R_s\)、\(R_{\rm ph}\) 到 \(E_{\rm pk,th}\) 的推导链。阅读重点不是记历史符号，而是理解光球并非后来人为添加的黑体，而是相对论火球模型本身的自然出口。</p>
+<p>读内激波经典论文时，本讲只把它作为上一讲的参照极限。上一讲已经处理了两壳层碰撞、内激波半径、光学薄同步辐射和快冷却谱斜率张力；本讲阅读这些段落时，只需要问一个问题：它为什么把主要耗散放在 \(R_{\rm diss}>R_{\rm ph}\) 的光学薄区？这样读可以帮助学生把内激波放进统一分类：它是半径—光深图上的一个极限，而不是 prompt emission 的唯一默认机制。</p>
+<p>读 dissipative photosphere 论文时，最重要的是模型设定段。要逐项检查耗散是在固定 \(R_{\rm diss}\) 注入，还是在固定 \(\tau_{\rm diss}\) 注入；电子分布是 Maxwellian、power-law，还是混合分布；是否包含 pair creation 与 annihilation；辐射转移是 Monte Carlo、Fokker-Planck，还是用近似 Compton 参数 \(y\) 描述。不同设定会导致完全不同的谱宽、高能尾和低能斜率，因此不要把所有“光球模型”混成同一个物理模型。</p>
+<p>读亚光球 Compton 化结果段时，应按照本讲推导链回头定位参数。若论文声称产生 Band-like spectrum，就要问 \(1\lesssim\tau_{\rm diss}\lesssim100\) 是否满足，\(T_e\) 与 \(y=4\theta_e\max(\tau_{\rm T},\tau_{\rm T}^2)\) 是否落在合理范围，谱峰是否由热种子光子经有限次散射形成，高能尾是否需要额外非热电子。还要注意过深耗散会重新热化，过浅耗散则接近光学薄非热辐射；这正是 \(R_{\rm diss}/R_{\rm ph}\) 作为本讲分类坐标的意义。</p>
+<p>读 magnetic reconnection、Poynting-flux dominated jet 或 ICMART 类论文时，重点不是示意图有多复杂，而是能量预算是否闭合。要找出初始 \(\sigma\) 多大，\(\sigma\) 在什么半径下降，磁能如何转为粒子能，重联速率 \(\epsilon_{\rm rec}\) 是来自模拟还是自由参数，电子谱 \(p\) 如何产生，冷却是否会破坏低能谱。若论文用偏振或 GeV 延迟支持磁化喷流，还要检查它是否同时满足最短变时标、\(\gamma\gamma\) 透明性和辐射效率约束。</p>
+<p>读观测论文时，应把“经验拟合结论”和“物理解释结论”分开。经验拟合告诉我们数据需要几个曲率成分，例如 Band、CPL 或 blackbody plus Band；物理解释才把这些曲率解释为 photosphere、synchrotron 或 reconnection。若作者宣称发现热成分，应寻找 posterior predictive check、模拟显著性、时间分辨连续性和响应系统误差分析。若作者宣称高偏振证明磁重联，应检查 polarization degree、polarization angle、置信区间、仪器系统学和几何选择效应。若作者用 LAT 延迟支持大半径耗散，也要同时考虑外激波、\(\gamma\gamma\) opacity 和 pair cascade 的替代解释。</p>
+<p>最后，读现代综合论文时，要不断提醒自己本讲与下一讲的边界。本讲负责判断 prompt 光子是在什么光深、什么半径、由什么能量载体释放；下一讲将检查 prompt 释放的 \(E_{\gamma,\rm iso}\) 与 afterglow 推断的 \(E_{k,\rm iso}\) 是否给出合理的 \(\epsilon_\gamma=E_\gamma/(E_\gamma+E_k)\)。因此，任何声称“高效率”的 prompt 模型，都要准备接受下一讲的能量闭合检验。</p>
+<h4 id="_9">建议重点查看的图表</h4>
+<p>一，半径层级图。应寻找 \(R_0\)、\(R_s\)、\(R_{\rm ph}\)、\(R_{\rm diss}\)、\(R_{\rm is}\) 与 \(R_{\rm rec}\) 的相对顺序。重点看耗散发生在 \(R_{\rm diss}<R_{\rm ph}\)、\(R_{\rm diss}\sim R_{\rm ph}\) 还是 \(R_{\rm diss}>R_{\rm ph}\)，不要把 \(R_{\rm ph}\) 误当作固定半径。</p>
+<p>二，谱宽比较图。横轴通常是 photon energy，纵轴通常是 \(\nu F_\nu\) 或 \(E^2N(E)\)。应比较 Planck、multi-color blackbody、Comptonized photosphere、Band 和 synchrotron-like spectra。重点看低能斜率、半高宽、高能尾和峰附近残差，而不是只看 \(E_{\rm pk}\) 是否对齐。</p>
+<p>三，时间分辨参数演化图。横轴为触发后时间，纵轴可能是 \(E_{\rm pk}\)、\(k_{\rm B}T\)、flux、\(\alpha\)、\(\beta\) 或 \(f_{\rm th}\)。重点看 hard-to-soft 与 intensity-tracking 行为、blackbody 温度是否平滑演化，以及 time binning 是否把多个窄谱混成宽谱。</p>
+<p>四，folded counts 与残差图。上面板应是计数谱和经响应折叠的模型，下面板应是 residuals。重点看加入 blackbody、Comptonization 或物理模板后，残差是否在多个探测器和多个能段同步改善，而不是只在某个边界能道改善。</p>
+<p>五，\(E_{\rm pk}\)-flux 或 \(E_{\rm pk}\)-luminosity 相关图。重点区分单个 burst 内部 track 与跨样本相关。photosphere、同步辐射和磁重联模型对斜率、散布和多脉冲分支有不同预期，不能把跨样本相关直接当作单个脉冲的物理演化。</p>
+<p>六，\(\sigma\)-\(R\) 演化图或磁化喷流示意图。重点看磁能在哪里占优，\(\sigma\) 在何处从 \(\gg1\) 降到 \(\lesssim1\)，reconnection 区域与 \(R_{\rm ph}\) 是否重叠。艺术示意图中的亮斑数量不是直接可拟合参数。</p>
+<p>七，偏振与 LAT 延迟诊断图。偏振图要看 polarization degree、polarization angle 和置信区间；LAT 图要看 GBM 与 LAT 光变的相对延迟。高偏振可支持有序磁场，但不唯一证明重联；GeV 延迟可提示大半径耗散或外激波，也不能单独排除耗散光球。</p>
+<h4 id="_10">关键图表逐图导读</h4>
+<p>图 1：半径层级图。横轴通常是 \(\log R\)，从中心引擎附近的 \(R_0\) 延伸到 \(R_s\)、\(R_{\rm ph}\)、\(R_{\rm is}\) 和 \(R_{\rm rec}\)。读图第一步是标出 \(R_{\rm diss}/R_{\rm ph}\)：若 \(R_{\rm diss}<R_{\rm ph}\)，需要亚光球辐射转移；若 \(R_{\rm diss}\sim R_{\rm ph}\)，谱形对 \(\tau_{\rm diss}\)、\(T_e\) 和 pair loading 非常敏感；若 \(R_{\rm diss}>R_{\rm ph}\)，模型更接近光学薄同步辐射或逆 Compton。误读风险是把图上的半径当成普适常数，而忘记 \(R_{\rm ph}\propto L\Gamma^{-3}\) 的强依赖。</p>
+<p>图 2：纯热谱、多温光球与 Band 谱的谱宽比较图。横轴是 photon energy，纵轴多为 \(\nu F_\nu\) 或 \(E^2N(E)\)。单温 Planck 曲线最窄，multi-color blackbody 因角向与时间叠加而变宽，Comptonized photosphere 可进一步产生高能尾，Band 曲线提供经验参照。读图时要同时检查半高宽、低能端斜率、高能端衰减和峰附近 residuals。常见误读是只要模型峰位与 \(E_{\rm pk}\) 对齐就认为解释成功；实际上峰宽和尾部才是区分机制的关键。</p>
+<p>图 3：时间分辨光谱参数图。横轴是触发后时间，纵轴可能包括 \(k_{\rm B}T\)、\(F_{\rm BB}\)、\(f_{\rm th}\)、\(E_{\rm pk}\)、\(\alpha\) 和 total flux。若 photospheric contribution 真实，\(k_{\rm B}T\) 与 \(F_{\rm BB}\) 常应呈相对连续的演化，\({\cal R}=(F_{\rm BB}/\sigma_{\rm SB}T_{\rm obs}^4)^{1/2}\) 也不应无物理理由地剧烈跳变。需要特别检查 time bin 宽度：过宽的 bin 会把快速演化的多个窄热谱叠加成一个貌似宽的非热谱。误读风险是把时间积分谱中的宽峰直接解释为单时刻辐射机制。</p>
+<p>图 4：模型残差对比图。上面板应显示 folded counts model 与观测计数，下面板显示 residuals。比较 Band、CPL、CPL plus blackbody、Band plus blackbody 和物理 photosphere 模型时，重点看残差改善是否跨 NaI、BGO 和 LAT 等不同探测器稳定出现。若改善只集中在探测器接缝、背景主导能段或少数能道，可能是响应矩阵、背景选择或交叉定标问题。误读风险是只看 \(\Delta C\) 增大，而没有通过模拟检验新增成分在无热成分假设下出现的概率。</p>
+<p>图 5：\(E_{\rm pk}\)-flux 轨迹图。横轴可以是 bolometric flux 或 luminosity，纵轴是 \(E_{\rm pk}\)。单个 burst 内部轨迹反映脉冲演化，跨样本点则混合了红移、喷流结构和选择效应。photosphere 模型中 \(E_{\rm pk}\) 与温度、\(L\)、\(R_0\) 和 \(\Gamma\) 相关；磁化同步或重联模型中 \(E_{\rm pk}\) 还依赖 \(B'\)、\(\gamma_m\)、\(\Gamma\) 和局部 Doppler boosting。读图时要看不同脉冲是否形成不同分支，不能把所有点强行拟合成一条全局关系。</p>
+<p>图 6：磁重联或 ICMART 示意图。许多论文会画出有序磁场、current sheets、湍动区域、mini-jets 和多个发光斑点。读这类图不能停留在艺术图层面，而要追问三个定量问题：\(\sigma\) 在哪里大，磁能在哪里释放，重联时间 \(t'_{\rm rec}\sim\lambda'/(\epsilon_{\rm rec}v_A)\) 与观测角向时间 \(t_{\rm ang}\simeq(1+z)R/(2\Gamma^2c)\) 是否允许快速光变。误读风险是把示意图中的局部亮斑数量当作观测可直接测量的重联层数量。</p>
+<p>图 7：偏振与 LAT 延迟图。偏振图通常给出 polarization degree、polarization angle 和置信区域；LAT 延迟图给出低能 GBM 光变与高能 LAT 光变之间的时间差。高 polarization degree 和稳定 polarization angle 可支持有序磁场或几何不对称，但也可能来自特殊 viewing geometry 或 photospheric scattering。GeV 延迟可支持较大 \(R_{\rm diss}\) 或外激波贡献，但也可能由 \(\gamma\gamma\) opacity、pair cascade 或探测阈值造成。误读风险是把单一高偏振或单一 GeV 延迟当作磁重联的决定性证据。</p>
+</details>
+<h4 id="_11">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_12">后续阅读路径</h4>
+<p>第一条路径是从相对论火球到无耗散光球。建议先读早期 fireball 透明性和加速论证，关注高光深初态、无量纲熵 \(\eta\)、饱和半径 \(R_s\)、光球半径 \(R_{\rm ph}\) 与观测温度 \(T_{\rm obs}\) 的关系。读完后应能自己重建本讲的基准推导：由 \(\eta=L/(\dot{M}c^2)\) 到 \(R_{\rm ph}\simeq L\sigma_{\rm T}/(8\pi m_pc^3\Gamma^3)\)，再到 \(E_{\rm pk,th}\simeq3.92k_{\rm B}T'_{\rm ph}\Gamma/(1+z)\)。这一路径的目标是理解为什么 photosphere 是火球模型不可避免的组成，而不是某个经验黑体拟合技巧。</p>
+<p>第二条路径是从热成分观测到 dissipative photosphere。可以选择 Fermi/GBM 时间分辨光谱中报道 blackbody plus nonthermal component 的论文，再对照 sub-photospheric dissipation、Monte Carlo Comptonization 和 pair-loaded photosphere 模型。阅读时建议做一张表，记录每篇文章的 \(\tau_{\rm diss}\)、\(R_{\rm diss}/R_{\rm ph}\)、电子加热方式、是否包含 pairs、是否能解释 \(\alpha\)、\(\beta\) 和 \(E_{\rm pk}\)，以及是否在 counts space 中完成拟合。这样能避免把“经验黑体成分”和“完整光球辐射转移模型”混为一谈。</p>
+<p>第三条路径是从 Poynting-flux dominated jet 到 magnetic reconnection prompt emission。先读磁化喷流和 \(\sigma\) 演化的综述，再读 striped wind reconnection、ICMART、relativistic turbulence 或 mini-jet 模型。重点不是记住模型名称，而是检查 \(\sigma\) 如何从 \(\gg1\) 降低，\(\epsilon_{\rm rec}\) 如何设定，电子分布 \(p\) 是否有 PIC 或 MHD 支持，辐射冷却是否能保留观测低能斜率，以及模型是否对偏振、GeV 延迟和快速变时标给出可检验预言。</p>
+<p>第四条路径是把 prompt 诊断和多信使、多波段约束接起来。读 prompt 光谱论文时同步查找偏振、LAT 高能光子和早期 afterglow 资料；读 afterglow 能量预算时回头检查 prompt 模型声称的辐射效率。若模型要求大半径发射，就用最短变时标和 \(\gamma\gamma\) 透明性检验；若模型要求强 photospheric contribution，就检查 \(f_{\rm th}\)、\({\cal R}\) 和谱宽演化；若模型声称高效率，就准备在下一讲用 \(E_{\gamma,\rm iso}\)、\(E_{k,\rm iso}\) 和 \(\epsilon_\gamma=E_\gamma/(E_\gamma+E_k)\) 做全局闭合。</p>
+<h4 id="_13">下一讲建议</h4>
+<p>第 \(5/6\) 讲最自然的方向是“prompt 到 afterglow 的能量预算与早期外激波”。本讲已经回答 prompt 光子可能在什么 \(R_{\rm diss}/R_{\rm ph}\)、什么 \(\tau_{\rm diss}\)、什么 \(\sigma\) 条件下产生；下一讲应检查这些 prompt 模型声称的高效率是否与 afterglow 推断的剩余动能一致。核心入口量是 \(E_{\gamma,\rm iso}\)、\(E_{k,\rm iso}\) 和 \(\epsilon_\gamma=E_\gamma/(E_\gamma+E_k)\)。</p>
+<p>第二个方向是“GRB afterglow 入门：外激波减速、Blandford-McKee 解、同步辐射 break 与 closure relation”。这会把重点从 prompt 辐射转移转向 ejecta 与 circumburst medium 的相互作用，不再继续扩展本讲的 photosphere 和 magnetic reconnection 细节。</p>
+<p>第三个方向可作为第 \(6/6\) 讲的前沿收束：喷流结构、jet break、多信使事件、TeV afterglow 和 prompt polarization 的综合诊断。它与本讲的关系是共享 \(\Gamma\)、\(R\)、\(\sigma\) 和 viewing angle 等参数，但问题重心会从单次 prompt 光谱机制转向喷流几何、环境和全局能量释放。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>GRB photospheric emission subphotospheric dissipation Band spectrum</li>
+<li>GRB magnetic reconnection prompt emission ICMART</li>
+<li>GRB prompt polarization photosphere synchrotron reconnection</li>
+<li>Goodman 1986 gamma ray burst fireball photosphere</li>
+<li>dissipative photosphere gamma ray bursts Comptonization</li>
+<li>Poynting flux dominated GRB jet magnetic reconnection</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1986ApJ...308L..47G/abstract">https://ui.adsabs.harvard.edu/abs/1986ApJ...308L..47G/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1994ApJ...430L..93R/abstract">https://ui.adsabs.harvard.edu/abs/1994ApJ...430L..93R/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
