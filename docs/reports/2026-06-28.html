@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-06-28</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-06-28</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-06-28">
+      <a class="previous" href="2026-06-27.html">← 上一期：2026-06-27</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-06-28T11:20:11+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">数据源警告</h2>
+<ul>
+<li>本次有 1 个数据源访问异常；完整错误已保留在运行日志中，日报只显示摘要。</li>
+<li>arXiv API：1 个分类访问异常，候选池可能不完整；程序会基于已成功获取的数据继续兜底。</li>
+<li>主要错误类型：其他 1 次。</li>
+</ul>
+<h2 id="_2">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-grb">1. GRB 从零到前沿（六）：喷流结构、多信使和下一代观测</h3>
+<ul>
+<li>课程系列：GRB 从零到前沿课程（第 6/7 讲）</li>
+<li>本讲边界：本讲整合 GRB 模型前沿：结构化喷流、偏轴视角、short GRB/kilonova、多信使约束和未来探测。不重新推导 Band 函数或 afterglow 基础公式；下一讲专门做论文研读训练。</li>
+<li>上下文承接：前五讲分别讲了 prompt 和 afterglow 的基础模型；本讲把它们合并到现代观测和 population 问题。</li>
+<li>主题：GRB structured jets, multimessenger observations and frontier models</li>
+<li>经典工作：从 Swift/Fermi 到 GW170817/GRB 170817A，GRB 模型进入结构化喷流、偏轴观测、多信使约束和 population inference 阶段。</li>
+<li>为什么经典：现代 GRB 研究不再只问某个 burst 如何拟合，而是问喷流结构、观测角、中心引擎和多信使事件如何共同限制模型。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_3">经典工作详细讲解</h4>
+<p>第一段：本讲位于《GRB 从零到前沿课程》的第 \(6/7\) 讲。前五讲已经分别建立了 prompt emission 的基本观测量、Band 谱拟合入口、外激波 afterglow、同步辐射谱段、顶帽喷流与 jet break，以及短暴和致密双星并合的基本联系。本讲不重新推导 Band 函数，也不重复标准 afterglow 的完整公式体系，而是把这些已学模块放入一个更现代的问题中：如果喷流不是理想顶帽，而是具有角向结构，那么同一个中心引擎在不同观测角下会呈现怎样不同的 prompt、afterglow、kilonova 和多信使表现？下一讲则会转入论文精读训练，学习如何阅读数据、模型、似然、corner plot、残差和讨论，而不是继续引入新的大模型。</p>
+<p>第二段：本讲的核心科学问题可以写成一句话：当喷流的单位立体角能量 \(\epsilon(\theta)=dE/d\Omega\) 和初始洛伦兹因子 \(\Gamma_0(\theta)\) 随离喷流轴角度 \(\theta\) 变化时，观测到的 \(E_{\rm iso}\)、峰值流量、余辉峰值时间、jet break 形状和事件率会如何改变？在顶帽喷流中，观测者首先问自己是在喷流内还是喷流外；在结构化喷流中，观测者必须问自己相对于核心角宽 \(\theta_c\) 的位置，即观测角 \(\theta_{\rm obs}\) 与 \(\theta_c\) 的关系。同一个物理喷流，如果从核心方向观察，可以像普通短暴；如果从核心外观察，可能只产生极弱 prompt、迟现射电余辉、orphan afterglow，甚至只被 kilonova 和引力波发现。</p>
+<p>第三段：历史动机并不是“理论家想增加参数”，而是观测逐步迫使模型升级。Swift 时代已经发现许多余辉复杂性，例如 achromatic break、X 射线 plateau、能量注入、多波段不同步和晚期再增亮，但这些现象本身并不唯一指向结构化喷流，也可能来自微物理演化、外部密度变化或中心引擎活动。真正把结构化喷流推到核心位置的是 GW170817/GRB 170817A：引力波确认了近距离双中子星并合，随后观测到极弱的伽马射线、快速演化的 kilonova，以及数十到百余天持续上升的 X 射线和射电余辉。一个简单同轴顶帽喷流很难同时解释这些现象，而偏轴结构化喷流或 cocoon/shock-breakout 场景成为必须比较的模型族。</p>
+<p>第四段：关键物理图像来自相对论 beaming。洛伦兹因子为 \(\Gamma\) 的材料主要把辐射集中在角宽约为 \(1/\Gamma\) 的可见锥内。若观测者位于核心外，早期只看到视线附近较弱、较慢的材料，核心辐射被强烈去增强；随着外激波减速，\(1/\Gamma\) 逐渐变大，明亮核心进入可见区域，余辉可长期上升并在近似满足 \(\Gamma(t_{\rm pk})\sim(\theta_{\rm obs}-\theta_c)^{-1}\) 时达到峰值。这个图像解释了为什么 prompt 很弱不等于喷流本身很弱，也解释了为什么晚峰余辉是几何信息的重要诊断量。</p>
+<p>第五段：把图像变成计算模型时，常用的工作形式包括 Gaussian structured jet、power-law structured jet、two-component jet、off-axis top-hat 和 cocoon/shock-breakout。以 Gaussian 结构为例，可写作 \(\epsilon(\theta)=\epsilon_c\exp[-\theta^2/(2\theta_c^2)]\) 与 \(\Gamma_0(\theta)=1+(\Gamma_c-1)\exp[-\theta^2/(2\theta_c^2)]\)。局部方向上的等效各向同性能量近似为 \(E_{\rm iso}(\theta)\sim4\pi\epsilon(\theta)\)，但这只适合作为 prompt 方向亮度的入口估计；afterglow 来自不同角向发射元的延迟叠加，不能只用视线方向的 \(E_{\rm iso}(\theta_{\rm obs})\) 代替完整角向积分。真实总能量还需要积分，窄而亮的核心可以有很大的 \(E_{\rm iso}\)，但总能量并不必无限大。</p>
+<p>第六段：观测诊断必须是多证据链闭合，而不是只看一条最佳拟合光变线。若 X 射线和射电同步上升、同步转折，并且谱指数可由同一电子谱指数 \(p\) 解释，则支持共同前向激波起源；若早期光学/红外表现为热谱和颜色快速演化，则更可能是 kilonova，而不是同步辐射 afterglow。VLBI 质心运动尤其关键，因为偏轴窄核结构化喷流可以产生明显的 apparent superluminal motion，其定性表达为 \(\beta_{\rm app}=\beta\sin\theta/(1-eta\cos\theta)\)。这类空间运动信息能区分窄相对论核心与近似准球形 cocoon，而单靠光变往往不足。</p>
+<p>第七段：本讲还要把单源拟合扩展到统计推断。实际 forward model 的参数通常包括 \(E_{\rm core}\)、\(\theta_c\)、\(\theta_{\rm obs}\)、\(n\)、\(p\)、\(\epsilon_e\)、\(\epsilon_B\)、\(D_L\) 和 \(z\)，若联合 kilonova 和引力波，还需加入抛射物质量、速度、不透明度、倾角和距离似然。电磁数据常用 flux 空间高斯似然 \(\ln{\cal L}_{\rm EM}=-\frac12\sum_i[(F_i-F_{\rm mod}(t_i,\nu_i))/\sigma_i]^2+{\rm const}\)，低计数 X 射线或伽马射线更应在 counts 空间结合仪器响应使用 Poisson likelihood。联合后验可概括为 \(p(\boldsymbol{\Theta}|d_{\rm EM},d_{\rm GW})\propto{\cal L}_{\rm EM}{\cal L}_{\rm GW}\pi(\boldsymbol{\Theta})\)，它体现了现代 GRB 研究从“拟合单个爆发”走向“联合几何、动力学、微物理和多信使先验”。</p>
+<p>第八段：结构化喷流不是万能解释。\(E_{\rm core}\)、\(n\)、\(\epsilon_B\)、\(\theta_c\) 和 \(\theta_{\rm obs}\) 之间存在强退化，例如 \(t_{\rm pk}\propto(E_{\rm core}/n)^{1/3}(\theta_{\rm obs}-\theta_c)^{8/3}\) 说明峰值时间同时受能量密度比和几何离轴角控制。若固定微物理参数，几何后验可能显得过窄；若全部放开，多波段数据又可能不足以唯一约束模型。更大的前沿问题是 population inference：观测到的 luminosity function 不等于内禀分布，因为探测器阈值、视场、触发算法、follow-up 策略和引力波选择效应都会偏向近轴高亮事件。下一讲的论文精读将把这些检查清单应用到具体文献中，训练学生判断哪些结论由数据支持，哪些结论依赖模型假设。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_4">背景知识</h4>
+<p>第一段：GRB 研究早期常把问题简化为两个层次：prompt 阶段看持续时间、谱硬度、fluence、peak flux 和 \(E_{\rm iso}\)；afterglow 阶段用外激波同步辐射解释多波段衰减，并用 jet break 推断喷流开角。这个框架非常成功，因为它让我们能从有限观测量估计爆发能量、环境密度和电子加速参数。但它也隐含了一个强近似：喷流常被当作顶帽，即喷流内部性质近似均匀，边界外几乎没有能量。</p>
+<p>第二段：前五讲已经说明，顶帽喷流给出了清晰的教学入口。若喷流半开角为 \(\theta_j\)，当外激波减速到 \(\Gamma(t_j)\sim\theta_j^{-1}\) 时，观测者开始感受到喷流边缘，光变可能出现 jet break。这个模型能解释许多长暴和短暴余辉的基本行为，也提供了 beaming correction 的概念。但在偏轴观测、弱 prompt、长期上升余辉和复杂多信使事件中，顶帽模型的“在喷流内/在喷流外”二分法过于粗糙。</p>
+<p>第三段：结构化喷流的历史动机来自两条线索。第一条线索来自 Swift 和 Fermi 时代的 GRB 样本：许多余辉不表现为简单幂律衰减，而是有 plateau、flare、break、再增亮或多波段不同步。第二条线索来自理论和数值模拟：相对论喷流穿过恒星包层或并合抛射物时，很难保持完美顶帽边界，喷流核心、sheath、cocoon 和外部 ejecta 会相互作用，形成角向能量和速度结构。因此，\(\epsilon(\theta)\) 与 \(\Gamma_0(\theta)\) 随角度变化不是任意装饰，而是喷流传播的自然结果。</p>
+<p>第四段：GW170817/GRB 170817A 是本讲的历史转折点。引力波首先确认了双中子星并合，并给出了距离、定位和轨道倾角相关信息；随后 Fermi 和 INTEGRAL 探测到一个极弱短伽马暴；光学/红外巡天发现快速变红的 kilonova；X 射线和射电在较晚时间出现并持续上升。这组事实无法被单一同轴普通短暴图像轻松解释，却非常适合用偏轴几何来组织：我们没有沿着最亮喷流核心看过去，而是在核心外看到一个随时间逐渐进入视线的相对论 outflow。</p>
+<p>第五段：这里必须避免一个常见误区：不能简单说 GRB 170817A 只是“普通短暴从侧面看”。这句话只表达了偏轴方向，但忽略了模型差异。off-axis top-hat、Gaussian structured jet、power-law structured jet、two-component jet、mildly relativistic cocoon 和 shock-breakout 都可能在某些阶段产生弱 prompt 或迟现余辉，但它们对光变上升斜率、峰后衰减、宽频谱、VLBI 质心运动和事件率的预言不同。因此，本讲的目标不是背诵“正确模型名称”，而是学习如何用数据逐步排除或支持模型。</p>
+<p>第六段：另一个常见误区是把 kilonova 和 GRB 当成互不相关的两个信号。实际上，双中子星并合抛射物一方面通过 \(r\)-process 放射性衰变产生热辐射，形成 kilonova；另一方面又构成喷流必须穿过的环境。喷流若成功穿出，可形成相对论核心和 cocoon；若被阻塞，则可能形成 choked jet 和 shock breakout。于是，kilonova 的颜色、速度和质量不仅是核合成信息，也间接影响 GRB 喷流传播和结构。</p>
+<p>第七段：为什么本讲重要？因为现代 GRB 前沿已经从“单个 burst 的最佳拟合参数”转向“几何、动力学、多信使先验和选择效应的联合推断”。观测到的短暴样本偏向近轴、高亮、容易触发的事件；引力波样本又有自己的距离和倾角选择效应；电磁 follow-up 的深度和时间覆盖也不均匀。如果不处理 selection function，就会把 observed luminosity function 误认为 intrinsic luminosity function，从而错误估计真实事件率、成功喷流比例和喷流结构普适性。</p>
+<p>第八段：因此，本讲的背景可以概括为三个边界。第一，前五讲给出的 prompt 和 afterglow 公式仍然有效，但在这里作为模块使用，而不是重新推导。第二，本讲增加的是角向结构、偏轴观测、多信使联合约束和 population inference。第三，下一讲不再继续扩展模型，而是训练读论文：看作者如何定义 \(\epsilon(\theta)\)、\(\Gamma_0(\theta)\)、\(\theta_c\)、\(\theta_{\rm obs}\)，如何处理 upper limits、系统误差、corner plot 和残差，以及模型结论是否真正由数据支持。</p>
+<h4 id="_5">基础理论 / 方法脉络</h4>
+<p>第一段：本讲的基础图像从相对论 beaming 开始。一个以洛伦兹因子 \(\Gamma\) 运动的发射元，其辐射并不是各向同性地到达观测者，而是集中在角宽约为 \(1/\Gamma\) 的可见锥内。早期 \(\Gamma\) 很大，偏轴观测者看不到最亮的喷流核心，只能看到视线附近较弱或较慢的材料；随着外激波扫掠外部介质并减速，\(1/\Gamma\) 增大，核心辐射逐渐进入视线，于是偏轴 afterglow 可以先上升、后达到峰值、再进入衰减。</p>
+<p>第二段：顶帽喷流把喷流几何压缩为一个半开角 \(\theta_j\) 和近似均匀的内部能量，而结构化喷流把这个常数升级为函数。最基本定义是单位立体角能量 \(\epsilon(\theta)=dE/d\Omega\)，其中 \(\theta\) 是离喷流轴的角距离；观测角 \(\theta_{\rm obs}\) 描述视线相对于喷流轴的位置；核心角宽 \(\theta_c\) 描述明亮窄核的角尺度。局部方向上的 prompt 亮度可粗略写成 \(E_{\rm iso}(	heta)\sim4\pi\epsilon(	heta)\)，但这不是完整 afterglow 模型，因为 afterglow 需要叠加不同角向发射元在不同到达时间的贡献。</p>
+<p>第三段：常用结构化喷流模型包括 Gaussian、power-law、two-component 和数值模拟导出的 angular profile。Gaussian 模型常写作 \(\epsilon(\theta)=\epsilon_c\exp[-\theta^2/(2\theta_c^2)]\)，其核心明亮、翼部平滑下降；power-law 模型在大角度保留更多能量，可能产生更多低亮度事件；two-component 模型把窄核和宽鞘分开，直观但参数更多；cocoon/shock-breakout 则强调喷流与并合抛射物相互作用后的 mildly relativistic 成分。课程中应把这些看成模型族，而不是把某一个参数化当作唯一真实结构。</p>
+<p>第四段：从动力学上看，可以把结构化喷流近似分解为许多角向 patch。每个 patch 具有自己的 \(E_{\rm iso}(	heta)\) 和 \(Γ_0(\theta)\)，在外部密度 \(n\) 中减速并产生前向激波同步辐射。局部减速半径可由扫掠质量条件得到，近似为 \(R_{\rm dec}(\theta)\simeq[3E_{\rm iso}(\theta)/(4\pi n m_p c^2\Gamma_0^2(\theta))]^{1/3}\)。这个表达式提醒我们，偏轴光变不是同轴光变的简单时间平移，而是不同角向材料的动力学和到达时间共同叠加。</p>
+<p>第五段：观测时间和亮度对几何非常敏感。若发射元与视线夹角为 \(\alpha\)，观测时间近似满足 \(t_{\rm obs}\simeq(1+z)R(1-β\cos\alpha)/c\)，Doppler 因子为 \(\delta_D=[\Gamma(1-β\cos\alpha)]^{-1}\)。当共动系谱为幂律时，观测流量常近似按 \(F_\nu\propto\delta_D^{3+\beta_\nu}\) 增强，其中 \(F_\nu\propto\nu^{-\beta_\nu}\)。这说明很小的角度差异可以造成巨大的 prompt 亮度差异，因此弱 prompt 不应被直接解释为弱喷流。</p>
+<p>第六段：偏轴 afterglow 的峰值时间给出一个重要诊断。若峰值大致发生在核心进入可见锥时，则有 \(\Gamma(t_{\rm pk})\sim(\theta_{\rm obs}-\theta_c)^{-1}\)。结合均匀介质中 Blandford-McKee 标度，可得到 \(t_{\rm pk}\propto(1+z)(E_{\rm core}/n)^{1/3}(\theta_{\rm obs}-\theta_c)^{8/3}\)。这条关系的课程意义很大：峰值越晚通常说明视线离核心更远、能量更高或密度更低；但它同时也暴露了参数退化，不能只凭 \(t_{\rm pk}\) 唯一确定 \(\theta_{\rm obs}\)。</p>
+<p>第七段：多波段观测用来打破这些退化。若射电、光学和 X 射线位于同一同步辐射谱段，例如 \(\nu_m<\nu<\nu_c\)，则谱指数满足类似 \(\beta_\nu=(p-1)/2\) 的闭合关系，光变归一化还依赖 \(E\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\) 和 \(D_L\)。读论文时要检查不同波段是否同步转折、SED 是否同时、早期光学是否被 kilonova 污染、低频射电是否受自吸收或闪烁影响。一个模型如果只穿过若干数据点，却无法解释谱指数、残差和系统误差，就不能算可靠。</p>
+<p>第八段：多信使框架把引力波、kilonova、afterglow 和 prompt 放入同一推断问题。引力波提供 \(D_L\)、inclination 和定位信息，但存在距离—倾角退化；afterglow 对 \(\theta_{\rm obs}\) 和 \(\theta_c\) 敏感，可帮助打破该退化；kilonova 约束抛射物质量、速度和不透明度，同时影响喷流传播环境。进一步到 population inference 时，单个事件参数 \(\boldsymbol{\Theta}_j\) 要与总体超参数 \(\boldsymbol{\Lambda}\) 连接，并通过 selection factor \(\xi(\boldsymbol{\Lambda})\) 修正探测偏差。这样，本讲完成了从基础相对论 beaming 到结构化喷流、多信使拟合和总体推断的连续物理链条。</p>
+<h4 id="_6">公式与推导</h4>
+<p>第一步：定义角向结构。假设喷流轴对称，所有角向依赖只由离喷流轴的角度 \(\theta\) 决定，并先采用 Gaussian structured jet 作为工作模型，而不是声称它是唯一真实结构。要求解的是单位立体角能量 \(\epsilon(\theta)\) 与初始洛伦兹因子 \(\Gamma_0(\theta)\)：</p>
+<div class="math-display">\[\epsilon(\theta)=\epsilon_c\exp\left[-\frac{\theta^2}{2\theta_c^2}\right],\qquad \Gamma_0(\theta)=1+\left(\Gamma_c-1\right)\exp\left[-\frac{\theta^2}{2\theta_c^2}\right].\]</div>
+<p>这里 \(\epsilon_c\) 是核心单位立体角能量，\(\theta_c\) 是核心角宽，\(\Gamma_c\) 是核心初始洛伦兹因子。物理上，\(\theta\lesssim\theta_c\) 的区域构成明亮窄核，\(\theta\gtrsim\theta_c\) 的区域构成逐渐变暗、变慢的翼部。下一步要把这种真实角向能量翻译成观测论文中常报告的等效各向同性能量。</p>
+<p>第二步：定义局部等效各向同性能量。假设观测者大致位于某一角向发射元的 beaming cone 内，prompt 方向亮度可用该方向的局部能量估计。要求解的是方向 \(\theta\) 上的 \(E_{\rm iso}(\theta)\)：</p>
+<div class="math-display">\[E_{\rm iso}(\theta)=4\pi\epsilon(\theta)=4\pi\epsilon_c\exp\left[-\frac{\theta^2}{2\theta_c^2}\right].\]</div>
+<p>这个量把真实的 \(dE/d\Omega\) 转换成“如果各向同性释放同样 fluence，需要多少能量”的观测语言。它适合帮助理解 prompt 弱化，但不能代替完整 afterglow 角向积分；因此下一步需要计算喷流的真实总能量，避免只被 \(E_{\rm iso}\) 误导。</p>
+<p>第三步：计算总喷流能量。假设喷流轴对称、\(\theta_c\ll1\)，且角向积分上限 \(\theta_{\rm max}\) 远大于 \(\theta_c\)。要求解的是真实能量 \(E_{\rm tot}\)：</p>
+<div class="math-display">\[E_{\rm tot}=2\pi\int_0^{\theta_{\rm max}}\epsilon(\theta)\sin\theta\,d\theta\simeq2\pi\epsilon_c\theta_c^2.\]</div>
+<p>这里近似使用了小角度下的 \(\sin\theta\simeq\theta\)。这一步说明，一个窄而亮的核心可以给出很大的 \(E_{\rm iso}(0)\)，但真实能量还乘上核心立体角尺度 \(\sim\theta_c^2\)。下一步把能量标度放入外激波动力学，求每个角向 patch 何时减速。</p>
+<p>第四步：写出局部减速条件。假设短时间内忽略角向能量交换，把每个角向 patch 近似看成局部球对称 blast wave，并假设外部介质为均匀数密度 \(n\)。要求解的是减速半径 \(R_{\rm dec}\) 的条件：</p>
+<div class="math-display">\[\frac{4\pi}{3}R_{\rm dec}^3 n m_p c^2\Gamma_0^2(	heta)\simeq E_{\rm iso}(	heta).\]</div>
+<p>左边表示被扫掠外部物质在相对论运动中的惯性能量尺度，右边是该角向 patch 的等效各向同性能量。物理含义是：当扫掠质量足以显著影响 ejecta 时，局部外激波开始减速。下一步从这个条件显式解出 \(R_{\rm dec}(\theta)\)。</p>
+<p>第五步：解出局部减速半径。沿用均匀外介质和局部球对称近似，要求解的是角向依赖的 \(R_{\rm dec}(\theta)\)：</p>
+<div class="math-display">\[R_{\rm dec}(	heta)\simeq\left[\frac{3E_{\rm iso}(	heta)}{4\pi n m_p c^2\Gamma_0^2(	heta)}\right]^{1/3}.\]</div>
+<p>这一步告诉我们，核心高能高速材料与翼部低能低速材料不会在同一半径、同一时间进入减速阶段。偏轴 afterglow 因此不是把同轴 afterglow 简单向后平移，而是不同角向发射元的动力学与到达时间叠加。下一步需要把发射半径 \(R\) 和角度 \(\alpha\) 转换为观测时间。</p>
+<p>第六步：建立观测时间的几何延迟。假设半径 \(R\) 处的发射元以速度 \(\beta c\) 运动，并与观测者视线夹角为 \(\alpha\)。要求解的是到达时间 \(t_{\rm obs}\)：</p>
+<div class="math-display">\[t_{\rm obs}\simeq(1+z)\frac{R}{c}\left(1-\beta\cos\alpha\right).\]</div>
+<p>在同轴极限 \(\alpha\simeq0\)、\(\Gamma\gg1\) 下，有 \(1-eta\simeq1/(2\Gamma^2)\)，因此恢复熟悉的 \(t_{\rm obs}\simeq(1+z)R/(2c\Gamma^2)\)。在偏轴情形下，\(\alpha\) 相关的几何延迟可以主导早期观测时间。下一步要说明为什么同样的角度也会极大改变观测亮度。</p>
+<p>第七步：引入 Doppler 因子。假设发射元的共动系谱近似为幂律，且相对论变换主要由 Doppler beaming 控制。要求解的是 Doppler 因子 \(\delta_D\) 及其对观测流量的影响：</p>
+<div class="math-display">\[\delta_D=\left[\Gamma\left(1-\beta\cos\alpha\right)\right]^{-1},\qquad F_\nu\propto\delta_D^{3+\beta_\nu}.\]</div>
+<p>这里 \(\beta_\nu\) 由谱形 \(F_\nu\propto\nu^{-\beta_\nu}\) 定义。物理上，小的 \(\alpha\) 变化会通过 \(\delta_D\) 的高次幂造成巨大的 prompt 和早期 afterglow 亮度差异，这解释了弱 prompt 可以与强相对论核心共存。下一步用可见锥条件估计偏轴 afterglow 的峰值时刻。</p>
+<p>第八步：写出偏轴峰值的可见锥条件。假设余辉峰值大致发生在明亮核心进入观测者可见锥时，并暂时忽略横向扩展和精细角向积分。要求解的是峰值时刻的洛伦兹因子条件：</p>
+<div class="math-display">\[\Gamma(t_{\rm pk})\sim\left(\theta_{\rm obs}-\theta_c\right)^{-1}.\]</div>
+<p>这里 \(\theta_{\rm obs}\) 是观测角，\(\theta_c\) 是核心角宽，\(\theta_{\rm obs}-\theta_c\) 近似描述视线离明亮核心边缘的角距离。这个关系说明 \(t_{\rm pk}\) 是几何信息的重要诊断量，但它还需要动力学模型才能转化为能量和密度约束。下一步引入 Blandford-McKee 标度。</p>
+<p>第九步：使用均匀介质中的 Blandford-McKee 动力学。假设核心材料已经进入绝热相对论自相似减速阶段，外部介质密度为 \(n\)。要求解的是核心洛伦兹因子 \(\Gamma(t)\) 随观测时间的标度：</p>
+<div class="math-display">\[\Gamma(t)\simeq\left[\frac{17E_{\rm core}(1+z)^3}{16\pi n m_p c^5 t^3}\right]^{1/8}.\]</div>
+<p>这里 \(E_{\rm core}\) 表示核心等效动力学能量尺度。物理上，较大的 \(E_{\rm core}\) 或较小的 \(n\) 会让外激波减速更慢，使核心更晚进入偏轴观测者的可见锥。下一步把这个标度代入峰值条件，得到可直接读图的 \(t_{\rm pk}\) 关系。</p>
+<p>第十步：推出峰值时间的几何—动力学标度。把 \(\Gamma(t_{\rm pk})\sim(\theta_{\rm obs}-\theta_c)^{-1}\) 代入 Blandford-McKee 标度，并只保留主导幂律依赖。要求解的是 \(t_{\rm pk}\) 的参数依赖：</p>
+<div class="math-display">\[t_{\rm pk}\propto(1+z)\left(\frac{E_{\rm core}}{n}\right)^{1/3}\left(\theta_{\rm obs}-\theta_c\right)^{8/3}.\]</div>
+<p>这条关系是本讲最重要的诊断式之一：晚峰可以来自更大的 \(\theta_{\rm obs}-\theta_c\)、更大的 \(E_{\rm core}\)，或更小的 \(n\)。由于角度项以 \(8/3\) 次方出现，光变峰值对几何很敏感；但它也清楚暴露了 \(E_{\rm core}/n\) 与几何之间的退化。下一步需要用谱形和流量归一化加入微物理信息。</p>
+<p>第十一步：调用标准同步辐射谱段作为模块。假设观测频率位于慢冷却谱段 \(\nu_m<\nu<\nu_c\)，且辐射来自同一前向激波电子群。要求解的是观测流量 \(F_\nu\) 对动力学、微物理和距离的依赖：</p>
+<div class="math-display">\[F_\nu\propto E^{(p+3)/4}n^{1/2}\epsilon_e^{p-1}\epsilon_B^{(p+1)/4}D_L^{-2}t^{3(1-p)/4}\nu^{-(p-1)/2}.\]</div>
+<p>这里 \(p\) 是非热电子能谱指数，\(\epsilon_e\) 与 \(\epsilon_B\) 是电子和磁场能量分数，\(D_L\) 是光度距离。这个式子沿用前面 afterglow 课程的结果，不在本讲重新推导。它说明几何只能解释一部分光变形状，流量归一化还强烈依赖 \(E\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\) 和 \(D_L\)。下一步把这些参数放进多信使联合后验。</p>
+<p>第十二步：连接到多信使联合推断。假设电磁数据 \(d_{\rm EM}\)、引力波数据 \(d_{\rm GW}\) 与先验 \(π(\boldsymbol{\Theta})\) 共同约束同一组物理参数 \(\boldsymbol{\Theta}\)。要求解的是后验分布：</p>
+<div class="math-display">\[p(\boldsymbol{\Theta}\mid d_{\rm EM},d_{\rm GW})\propto{\cal L}_{\rm EM}(d_{\rm EM}\mid\boldsymbol{\Theta}){\cal L}_{\rm GW}(d_{\rm GW}\mid\boldsymbol{\Theta})\pi(\boldsymbol{\Theta}).\]</div>
+<p>其中 \(\boldsymbol{\Theta}\) 可包含 \(E_{\rm core}\)、\(\theta_c\)、\(\theta_{\rm obs}\)、\(n\)、\(p\)、\(\epsilon_e\)、\(\epsilon_B\)、\(D_L\)、\(z\) 以及 kilonova 抛射物参数。物理上，电磁光变主要约束喷流几何、动力学和微物理，引力波数据提供距离与倾角信息，二者联合后才能部分打破 \(D_L\)、能量和观测角之间的退化。这一步把本讲从单条光变公式推进到现代 GRB 前沿：用统一后验同时诊断结构化喷流、偏轴观测、多信使约束和后续 population inference。</p>
+<h4 id="_7">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合部分要承接前五讲而不是重复前五讲。前五讲已经教过 prompt 谱、标准外激波余辉、顶帽喷流和 jet break 的入口公式；这里的新增内容是把这些模块放进角向结构和偏轴几何中，建立从单源 forward model 到多信使联合后验的工作流。实际读论文时，第一步不是看哪条曲线最漂亮，而是先列清模型族：off-axis top-hat、Gaussian structured jet、power-law structured jet、two-component jet，以及 cocoon 或 shock-breakout。off-axis top-hat 参数少，适合作为基线模型，但边界过硬，常给出过陡上升或过尖峰值；Gaussian structured jet 用平滑核心和翼部描述角向结构，常用于解释类似 GW170817/GRB 170817A 的迟现余辉；power-law structured jet 在大角度保留更多能量，影响低亮度事件比例；two-component jet 直观地区分窄核与宽鞘，但自由度更高；cocoon 或 shock-breakout 则强调喷流与并合抛射物相互作用后的 mildly relativistic 成分，不能只用光变形状草率排除。</p>
+<p>第二段：建立 forward model 时，要先写出参数表，而不是直接运行采样器。最小的非热余辉参数通常包括核心能量尺度 \(E_{\rm core}\)、核心角宽 \(\theta_c\)、观测角 \(\theta_{\rm obs}\)、外部数密度 \(n\)、电子谱指数 \(p\)、电子能量分数 \(\epsilon_e\)、磁场能量分数 \(\epsilon_B\)、光度距离 \(D_L\) 和红移 \(z\)。如果模型显式包含初始角向速度结构，还要加入 \(\Gamma_0(\theta)\) 或核心初始洛伦兹因子 \(\Gamma_c\)。如果同时拟合 kilonova，则必须加入抛射物质量 \(M_{\rm ej}\)、速度 \(v_{\rm ej}\)、不透明度 \(\kappa\)、lanthanide fraction 或多组分 ejecta 参数；如果联合引力波数据，则 \(D_L\)、inclination 和 sky localization 不能被当成普通自由参数，而应通过外部先验或联合似然进入。</p>
+<p>第三段：电磁数据的似然要与数据类型匹配。若论文给出的是已经校准的流量密度及近似高斯误差，可以使用</p>
+<div class="math-display">\[\ln {\cal L}_{\rm EM}=-\frac12\sum_i\left[\frac{F_i-F_{\rm mod}(t_i,\nu_i\mid\boldsymbol{\Theta})}{\sigma_i}\right]^2+{\rm const}.\]</div>
+<p>这里 \(F_i\) 是第 \(i\) 个观测流量，\(F_{\rm mod}(t_i,\nu_i\mid\boldsymbol{\Theta})\) 是模型在时间 \(t_i\) 和频率 \(\nu_i\) 的预测，\(\sigma_i\) 是总误差。若是低计数 X 射线或伽马射线数据，更严谨的做法是在 counts 空间折叠 instrument response，并使用 Poisson likelihood，而不是先把 counts 转成 unfolded flux 再做高斯拟合。课程中要强调：展示图上的 unfolded SED 很有用，但统计约束最好在真实观测空间完成。</p>
+<p>第四段：upper limits 是结构化喷流拟合中非常有信息量的数据，尤其能排除早期过亮模型、宽角高能翼部或过强 cocoon。不能把上限当成 \(F=0\) 的普通点，也不能随意丢掉。若某一观测给出阈值 \(F_{\rm lim}\)，可用单边似然表达模型预测低于阈值的概率，例如把高斯测量误差积分到 \(F_{\rm lim}\) 以下；在更复杂样本中也可使用 survival-analysis 风格处理。读论文时要检查作者是否说明 upper limits 的置信水平、频率、时间、曝光深度和是否纳入拟合，因为这些细节会直接影响 \(\theta_{\rm obs}\)、\(\theta_c\) 与宽角能量的后验。</p>
+<p>第五段：多信使联合后验应写成同一组物理参数的联合约束，而不是把电磁拟合和引力波拟合简单并列。概念上可写为</p>
+<div class="math-display">\[p(\boldsymbol{\Theta}\mid d_{\rm EM},d_{\rm GW})\propto {\cal L}_{\rm EM}(d_{\rm EM}\mid\boldsymbol{\Theta}){\cal L}_{\rm GW}(d_{\rm GW}\mid\boldsymbol{\Theta})\pi(\boldsymbol{\Theta}).\]</div>
+<p>其中 \(d_{\rm EM}\) 包含 prompt、afterglow、kilonova 和 VLBI 数据，\(d_{\rm GW}\) 包含引力波波形、距离和倾角信息，\(\pi(\boldsymbol{\Theta})\) 是先验。引力波数据常有 \(D_L\)-inclination 退化，而偏轴余辉对 \(\theta_{\rm obs}\) 和 \(\theta_c\) 敏感，因此二者联合可部分打破距离、能量和几何之间的退化。但这种打破依赖模型假设，不能把联合后验的窄区间误读为完全模型无关的测量。</p>
+<p>第六段：解释后验时，要训练学生优先看参数组合而不是单个最佳拟合值。峰值时间近似满足</p>
+<div class="math-display">\[t_{\rm pk}\propto(1+z)\left(\frac{E_{\rm core}}{n}\right)^{1/3}\left(\theta_{\rm obs}-\theta_c\right)^{8/3},\]</div>
+<p>所以数据往往更直接约束 \(E_{\rm core}/n\) 和 \(\theta_{\rm obs}-\theta_c\)，而不是分别精确测量 \(E_{\rm core}\)、\(n\)、\(\theta_{\rm obs}\) 和 \(\theta_c\)。在 corner plot 中，\(E_{\rm core}\)-\(n\)、\(\epsilon_B\)-\(n\)、\(\theta_c\)-\(\theta_{\rm obs}\) 的相关性通常不是坏事，而是物理退化的体现。若某个 posterior 紧贴 prior 边界，说明数据没有真正约束该参数；若固定 \(\epsilon_e\)、\(\epsilon_B\) 或 \(n\)，则几何参数的 credible interval 可能显得过窄。</p>
+<p>第七段：残差诊断要按物理成分分开检查。X 射线、射电和光学若来自同一个前向激波，在同一谱段内应能用一致的谱指数和时间演化解释；若早期光学系统性高于非热模型，优先考虑 kilonova 热辐射，而不是立即修改 \(p\) 或 \(\epsilon_B\)。若低频射电偏低，要检查 synchrotron self-absorption、interstellar scintillation、自由-自由吸收和宿主背景；若晚期 X 射线偏高，要考虑中心引擎、能量注入、额外外流或背景源污染。好的拟合章节应该展示残差随时间、频率和仪器的分布，而不仅是总的 \(\chi^2\) 或最大后验曲线。</p>
+<p>第八段：系统误差和选择效应是从单源拟合通向前沿研究的关键。单源层面要检查仪器交叉定标、银河消光、宿主吸收柱密度、非同时 SED、k-correction、VLBI 参考源系统误差和射电闪烁；样本层面还要检查触发阈值、视场、follow-up 深度、引力波探测选择和红移不完备性。若进入 population inference，单个事件参数 \(\boldsymbol{\Theta}_j\) 应从总体分布 \(p(\boldsymbol{\Theta}_j\mid\boldsymbol{\Lambda})\) 抽样，并显式除以 selection factor \(\xi(\boldsymbol{\Lambda})\)。否则，样本会被近轴、高亮、容易触发的 GRB 主导，进而把 observed luminosity function 误读为 intrinsic luminosity function。</p>
+<h4 id="_8">重点章节 / 结果段落怎么读</h4>
+<p>第一部分应先读论文的 model 或 methods 段，而不是先读结论图。读者要找出作者如何定义角向结构：单位立体角能量是否写成 \(\epsilon(\theta)=dE/d\Omega\)，初始洛伦兹因子是否给出 \(\Gamma_0(\theta)\)，核心角宽 \(\theta_c\) 与观测角 \(\theta_{\rm obs}\) 如何进入模型，局部等效各向同性能量是否用 \(E_{\rm iso}(	heta)\sim4\pi\epsilon(\theta)\) 表示。还要判断模型是 analytic patch model、半解析 afterglow code、hydrodynamic simulation library，还是经验光变模板。这个选择决定后面所有参数的物理含义，也决定哪些结论能推广到真实喷流结构。</p>
+<p>第二部分读 observations 或 data 段时，要按物理成分而不是按望远镜名称整理数据。prompt 伽马射线约束触发时间、fluence、峰值流量和方向亮度；早期紫外、光学和红外常主要属于 kilonova，需要热辐射模型；X 射线和射电长期演化常属于非热 afterglow；VLBI 位置和图像尺寸约束质心运动与几何；引力波数据给出距离、定位、质量和倾角相关信息。课程阅读时可以让学生把每个数据点标注为 prompt、kilonova、afterglow、VLBI 或 gravitational-wave prior，避免把所有多波段点都强行归入同一个同步辐射模型。</p>
+<p>第三部分读 fitting 或 statistics 段时，重点找似然和先验。要检查作者是否写出类似 \({\cal L}_{\rm EM}\) 的光变似然，是否对低计数数据使用 Poisson likelihood，是否把 instrument response 纳入 counts 空间，是否用单边似然处理 upper limits，是否说明系统误差如何加入 \(\sigma_i\)。如果论文把引力波 posterior 当作先验，需要看它是否保持了 \(D_L\)-inclination 相关性；如果采用联合似然，需要看 \({\cal L}_{\rm GW}\) 与 \({\cal L}_{\rm EM}\) 是否共享同一组几何参数。很多所谓“物理模型差异”，在实际论文中往往来自 prior、upper limits 或数据选择的差异。</p>
+<p>第四部分读 results 段时，不要只摘录 maximum likelihood 或 best-fit 参数。应先读 credible interval，再读参数相关性，最后读模型比较。若作者声称 Gaussian structured jet 优于 cocoon，要问证据来自哪里：是长期上升斜率、峰后陡衰减、射电到 X 射线的单一谱段、VLBI apparent superluminal motion，还是事件率论证？若只用光变曲线区分结构化喷流和 cocoon，结论通常不够稳健；若同时满足光变、SED 和 VLBI，模型判别力才明显增强。</p>
+<p>第五部分读 discussion 段时，要把单篇论文放回系列主线中。前五讲告诉我们 prompt 与 afterglow 的基本物理；本讲增加的是角向结构、偏轴观测、多信使约束和 selection effect；下一讲将训练论文精读。因此读 discussion 时应问三个层次的问题：这个事件是否只是一个特殊个案？它是否能代表普通短暴 population？如果未来发现更多偏轴事件，最可能被修正的是 \(\theta_c\)、\(E_{\rm core}\)、成功喷流比例、cocoon 贡献，还是选择函数 \(\xi(\boldsymbol{\Lambda})\)？这样读，学生就不会把单篇论文结论当作教科书定理。</p>
+<h4 id="_9">建议重点查看的图表</h4>
+<p>一，角向结构图：横轴通常是 \(\theta\)，纵轴是 \(\epsilon(\theta)\)、\(E_{\rm iso}(\theta)\) 或 \(\Gamma_0(\theta)\)。要看 \(\theta_c\) 的定义、核心是否窄、翼部是 Gaussian 下降还是 power-law 下降、\(\theta_{\rm obs}\) 是否在核心外，以及是否存在宽角 cocoon 成分。</p>
+<p>二，偏轴 afterglow 多波段光变图：横轴是 observer time 或 rest-frame time，纵轴是 \(F_\nu\)、luminosity 或 magnitude。要检查射电、光学和 X 射线是否同步上升、同步峰值和同步衰减；早期光学/红外是否被 kilonova 主导；模型线是否只是穿过若干点，还是同时解释整体形状。</p>
+<p>三，SED 或谱指数图：横轴是频率 \(\nu\)，纵轴是 \(F_\nu\) 或 \(\nu F_\nu\)。要看射电到 X 射线是否可由同一 synchrotron segment 连接，谱指数 \(\beta_\nu\) 是否与 \(p\) 的闭合关系一致，cooling break \(\nu_c\) 是否需要放在观测频段之间，并检查 SED 是否真正同时。</p>
+<p>四，残差图：横轴可为时间、频率或仪器，纵轴是 \((F_i-F_{\rm mod})/\sigma_i\) 或 log residual。要看残差是否随机分布，是否某个波段系统性偏离，是否早期光学、低频射电或晚期 X 射线有额外成分迹象。</p>
+<p>五，posterior corner plot：对角线是一维后验，非对角线是二维相关。要重点检查 \(E_{\rm core}\)-\(n\)、\(\theta_c\)-\(\theta_{\rm obs}\)、\(\epsilon_B\)-\(n\) 和 \(D_L\)-\(\theta_{\rm obs}\) 的退化。若 posterior 贴 prior 边界，说明数据约束不足。</p>
+<p>六，VLBI 质心运动或图像尺寸图：横轴通常是时间，纵轴是天球位置偏移、角尺寸或 apparent velocity。要看误差椭圆、参考源系统误差、模型线是否同时满足光变和位置演化；这是区分窄核结构化喷流与准球形 cocoon 的关键诊断。</p>
+<p>七，kilonova 颜色演化图：横轴是爆发后时间，纵轴是 magnitude、luminosity、temperature 或 color。要看蓝色低不透明度成分与红色 lanthanide-rich 成分如何演化，并确认热辐射点没有被错误纳入非热 afterglow 拟合。</p>
+<p>八，population 或 selection function 图：横轴可能是 luminosity、\(E_{\rm iso}\)、\(\theta_{\rm obs}\)、redshift 或 detector threshold，纵轴是事件率密度、探测概率或 posterior density。要看是否进行了 selection correction，是否包含 \(\xi(\boldsymbol{\Lambda})\)，以及 observed distribution 是否被错误当作 intrinsic distribution。</p>
+<h4 id="_10">关键图表逐图导读</h4>
+<p>图 1：结构化喷流角向剖面图。横轴读作离喷流轴角度 \(\theta\)，纵轴可能是 \(dE/d\Omega\)、\(E_{\rm iso}(\theta)\) 或 \(\Gamma_0(\theta)\)。如果实线是 Gaussian structured jet，核心内应相对平坦，超过 \(\theta_c\) 后快速下降；如果虚线是 power-law structured jet，翼部在大角度处会更亮。读图时要先找 \(\theta_c\) 和 \(\theta_{\rm obs}\) 的标记，再判断观测者在核心内、核心边缘还是核心外。常见误读是把翼部材料当成完全独立的宽喷流；更合理的读法是把它看成喷流传播、剪切层和 cocoon 相互作用后形成的角向结构候选。</p>
+<p>图 2：偏轴 afterglow 多波段光变图。横轴通常是爆发后时间 \(t\)，纵轴是 \(F_\nu\)、luminosity 或 magnitude，不同颜色代表射电、光学、X 射线或红外。模型线可能分别对应 off-axis top-hat、Gaussian structured jet、cocoon 或 two-component jet。读图时要检查三件事：早期是否长期上升，峰值时间 \(t_{\rm pk}\) 是否在多波段一致，峰后衰减是否足够陡。若模型只穿过 X 射线点却系统性错过射电点，说明谱段、微物理或角向结构存在问题；若早期光学明显高于非热模型，优先考虑 kilonova 污染，而不是把所有光学点硬塞进 afterglow。</p>
+<p>图 3：SED 或宽频谱图。横轴是频率 \(\nu\)，纵轴是 \(F_\nu\) 或 \(\nu F_\nu\)，有时会在多个 epoch 画多条谱线。若射电到 X 射线可由单一幂律 \(F_\nu\propto\nu^{-\beta_\nu}\) 连接，并且 \(\beta_\nu=(p-1)/2\) 与光变拟合得到的 \(p\) 一致，则支持共同前向激波起源。若 X 射线谱明显更陡，要考虑 cooling break \(\nu_c\) 是否位于光学与 X 射线之间。常见误读是把不同时间的点拼成一个“同时 SED”，从而错误推断 \(\nu_c\)、\(p\) 或额外辐射成分。</p>
+<p>图 4：残差图。横轴可以是 \(t\)、\(\nu\) 或观测编号，纵轴通常是 \((F_i-F_{\rm mod})/\sigma_i\) 或对数流量差。好模型的残差不应只是在总 \(\chi^2\) 上可接受，还应在不同波段没有系统偏差。若早期光学残差连续为正，可能是 kilonova；若低频射电残差连续为负，可能是自吸收或 scintillation；若晚期 X 射线残差连续为正，可能提示中心引擎或额外外流。误读风险是只看主图中模型线“差不多穿过数据”，而忽略残差已经显示出物理成分混合。</p>
+<p>图 5：corner plot。对角线是一维边缘后验，非对角线是二维联合后验。读图时要特别看 \(E_{\rm core}\)-\(n\)、\(\theta_c\)-\(\theta_{\rm obs}\)、\(\epsilon_B\)-\(n\) 和 \(D_L\)-inclination 的相关。若二维后验呈细长 banana shape，说明数据主要约束某个组合量，例如 \(\theta_{\rm obs}-\theta_c\) 或 \(E_{\rm core}/n\)，而不是分别精确约束两个参数。若一维后验被 prior 截断，不能把峰值位置当成真实测量。常见误读是引用 best-fit 点，却忽略大范围参数组合给出几乎同等好的光变。</p>
+<p>图 6：VLBI apparent motion 图。横轴是观测时间 \(t\)，纵轴是天球位置偏移、质心位置或 apparent velocity。偏轴窄核结构化喷流可产生明显的 apparent superluminal motion，其定性关系可由 \(\beta_{\rm app}=\beta\sin\theta/(1-eta\cos\theta)\) 理解；准球形 cocoon 的质心运动通常较弱。读图时要看误差椭圆、参考源校准、系统误差和模型是否同时解释光变与位置。误读风险是只用光变区分 jet 和 cocoon，而忽略 VLBI 几何信息才是关键判据之一。</p>
+<p>图 7：kilonova 光变和颜色演化图。横轴是爆发后时间 \(t\)，纵轴是 magnitude、bolometric luminosity、temperature 或 color，不同滤光片显示蓝到红的快速演化。蓝色早期成分通常对应较低不透明度、较快 ejecta；红色晚期成分对应 lanthanide-rich ejecta 和较高不透明度。读图时要把 thermal kilonova 与 synchrotron afterglow 分开，因为前者的谱形接近热辐射并随温度演化，后者通常是幂律谱。误读风险是把早期光学点当成 afterglow，从而错误推高 \(E_{\rm core}\) 或改变 \(p\)。</p>
+<p>图 8：population inference 或 selection function 图。横轴可能是 luminosity、\(E_{\rm iso}\)、\(\theta_{\rm obs}\)、\(z\) 或 detector threshold，纵轴是事件率密度、探测概率或 posterior density。要检查图中是否区分 observed distribution 和 selection-corrected intrinsic distribution，是否给出 selection factor \(\xi(\boldsymbol{\Lambda})\)，以及低亮度、偏轴和无 prompt 事件是否被纳入。常见误读是看到观测样本中高亮近轴事件多，就断言宇宙中高亮近轴事件也占多数；实际上这往往是触发阈值和 follow-up 策略造成的偏差。</p>
+</details>
+<h4 id="_11">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_12">后续阅读路径</h4>
+<p>第一条路径是从标准 afterglow 读到结构化喷流。先复习外激波同步辐射、特征频率和 jet break 的经典工作，明确哪些关系来自基本动力学和辐射物理，例如 \(F_\nu\) 的谱段依赖和 \(\Gamma(t_j)\sim\theta_j^{-1}\) 的顶帽近似。随后阅读 off-axis top-hat 和 orphan afterglow 的早期理论，理解偏轴观测如何改变到达时间和 Doppler 增强。最后再进入 Gaussian structured jet、power-law structured jet 和 two-component jet 的现代应用，这样学生能区分“afterglow 基础公式”与“角向几何假设”各自贡献了什么。</p>
+<p>第二条路径是围绕 GW170817/GRB 170817A 做事件时间线阅读。建议按观测顺序整理：引力波发现给出双中子星并合、距离和倾角相关信息；prompt 伽马射线显示一个极弱短暴；光学/红外发现 kilonova 并给出抛射物热辐射；X 射线和射电长期上升揭示迟现非热余辉；VLBI 质心运动提供相对论窄核的几何证据。每读一篇都问它新增的是 \(D_L\)、\(\theta_{\rm obs}\)、\(\theta_c\)、\(E_{\rm core}\)、\(n\)、ejecta mass 还是 apparent motion，而不是只记住“支持结构化喷流”这一句结论。</p>
+<p>第三条路径是从单源拟合进入 population inference。读短暴 luminosity function、structured jet population、binary neutron star merger rate 和 joint gravitational-wave/electromagnetic selection effect 的论文时，重点不是背某个事件率数字，而是看作者如何定义总体超参数 \(\boldsymbol{\Lambda}\)、单事件参数 \(\boldsymbol{\Theta}_j\)、总体分布 \(p(\boldsymbol{\Theta}_j\mid\boldsymbol{\Lambda})\) 和 selection factor \(\xi(\boldsymbol{\Lambda})\)。这一层阅读能帮助学生理解为什么 observed luminosity function 不能直接等同于 intrinsic luminosity function，为什么一个 GW170817-like 事件既重要又不能单独代表全部短暴。</p>
+<p>第四条路径是为下一讲论文精读做准备。选择一篇包含多波段光变、SED、corner plot、VLBI 或模型比较的结构化喷流论文，先遮住摘要结论，自己按本讲清单标注：哪些数据属于 prompt，哪些属于 kilonova，哪些属于 afterglow，哪些 upper limits 真正限制模型，哪些参数被 prior 驱动，哪些残差显示系统误差。下一讲的目标不是再引入新的大模型，而是把本讲的模型、似然、残差和图表检查方法应用到具体论文中。</p>
+<h4 id="_13">下一讲建议</h4>
+<p>第 \(7/7\) 讲最自然的方向是“GRB 前沿论文精读训练：从摘要到后验图”。它与本讲的关系是应用而不是扩展：本讲已经建立结构化喷流、偏轴观测、多信使联合后验和 selection effect 的框架；下一讲应选取一篇结构化喷流或多信使 GRB 论文，逐段训练如何读 abstract、data selection、model assumptions、likelihood、upper limits、corner plot、residuals 和 discussion，并判断哪些结论由数据直接支持，哪些依赖模型假设。</p>
+<p>第二个可选方向是“GRB population inference 专题加餐”。如果课程之后要扩展，可把本讲第六、七章中提到的单源后验推广到层级贝叶斯样本模型，重点讲触发阈值、luminosity function、beaming correction、成功喷流比例和 \(ξ(\boldsymbol{\Lambda})\) 的计算。但这应作为加餐或新小系列，不应挤占第 \(7/7\) 讲的论文精读训练。</p>
+<p>第三个可选方向是“下一代观测中的偏轴 GRB 与 TeV afterglow”。它可以连接 CTA、LHAASO、SVOM、Einstein Probe、THESEUS 和未来引力波探测网络，讨论更早触发、更深 follow-up 与更大样本如何改善 \(\theta_{\rm obs}\)、\(\theta_c\)、\(E_{\rm core}\) 和 population 的约束。但这属于本系列之后的前沿展望，不应在下一讲继续堆叠新的结构化喷流公式。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>structured jet gamma ray burst GW170817 afterglow</li>
+<li>GRB 170817A off-axis jet afterglow</li>
+<li>gamma ray burst population synthesis structured jets</li>
+<li>GW170817 VLBI superluminal motion structured jet</li>
+<li>short GRB kilonova multimessenger afterglow</li>
+<li>Gaussian structured jet GRB afterglow fitting</li>
+<li>off-axis gamma ray burst orphan afterglow</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<p>（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
