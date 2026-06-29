@@ -1,12 +1,9 @@
-name: Deploy docs to Tencent COS
+name: Disabled - Deploy docs to Tencent COS
 
+# Disabled on 2026-06-29 because this Tencent COS deployment kept failing on
+# every report publish. Keep workflow_dispatch so it can still be tested
+# manually after the COS credentials/bucket configuration is fixed.
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "docs/**"
-      - ".github/workflows/deploy-to-cos.yml"
   workflow_dispatch:
 
 jobs:
