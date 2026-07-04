@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-07-04</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-07-04</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-07-04">
+      <a class="previous" href="2026-07-03.html">← 上一期：2026-07-03</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-07-04T11:30:25+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">数据源警告</h2>
+<ul>
+<li>本次有 1 个数据源访问异常；完整错误已保留在运行日志中，日报只显示摘要。</li>
+<li>arXiv API：1 个分类访问异常，候选池可能不完整；程序会基于已成功获取的数据继续兜底。</li>
+<li>主要错误类型：限流 1 次。</li>
+</ul>
+<h2 id="_2">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-grb-promptafterglow">1. GRB 从零到前沿（七）：前沿论文研读课，怎样判断 prompt/afterglow 新模型是否可信</h3>
+<ul>
+<li>课程系列：GRB 从零到前沿课程（第 7/7 讲）</li>
+<li>本讲边界：本讲不是再讲一个新模型，而是训练专业读论文：如何拆解一个 GRB 新模型的核心假设、可观测预言、拟合自由度、与旧模型的可区分性和真正的新意。</li>
+<li>上下文承接：前六讲已经建立 GRB 的物理主线；本讲把这些知识转化为阅读和评审最新论文的能力。</li>
+<li>主题：GRB literature lab for prompt emission, afterglow and multimessenger frontier papers</li>
+<li>经典工作：以 prompt emission 未解问题、photosphere/synchrotron/reconnection 比较、structured jet afterglow 和 GW170817 后续文献为训练材料。</li>
+<li>为什么经典：学会 GRB 不是记住所有模型，而是能判断一篇新论文到底解决了 compactness、效率、谱斜率、偏振、GeV 延迟、afterglow 结构中的哪一个问题，还是只是换了参数。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_3">经典工作详细讲解</h4>
+<p>第一，本讲是“GRB 从零到前沿课程”的第七讲，也是全系列的收束课。前六讲已经分别建立了 prompt emission 的观测语言、相对论喷流的尺度估计、外激波余辉的同步辐射框架、结构化喷流与偏轴观测、多信使短暴以及基本统计拟合的知识基础。本讲不再新增一个辐射机制或喷流模型，而是把这些知识转化为前沿论文研读能力：当一篇论文声称提出新的 prompt、afterglow 或多信使模型时，我们要能判断它究竟解决了什么张力，依赖了哪些假设，是否在正确数据空间中拟合，新增自由度是否值得，残差是否真的减少，以及是否给出可证伪预言。</p>
+<p>第二，本讲的科学问题可以概括为一句话：给定同一组 GRB 观测，什么模型在假设最少、统计证据最强、物理尺度自洽、残差结构最少、可观测预言最清楚的意义下更可信？这比“哪个模型听起来更物理”要严格得多。prompt 领域常见竞争包括 optically thin synchrotron、photospheric emission、sub-photospheric Comptonization、magnetic reconnection 与 relativistic turbulence；它们都可能在某些时间片拟合出相似的 \(\nu F_\nu\) 峰，但对低能光子谱指数 \(\alpha\)、高能谱指数 \(\beta\)、峰值能量 \(E_{\rm pk}\)、谱宽、偏振、热成分比例、GeV 延迟和辐射效率 \(\epsilon_\gamma\) 的自然预言并不相同。afterglow 领域也是如此：forward shock、能量注入、反向激波、structured jet、cocoon 或 late prompt 都可能改善某段光变，但它们对 closure relation、多波段同时性、谱断演化和上限数据的要求不同。</p>
+<p>第三，历史动机来自 GRB 领域长期的“观测张力推动模型更新”。BATSE 时代的 Band 函数统一了 prompt 谱描述，但没有说明辐射机制；BeppoSAX 与 Swift 时代的余辉发现建立了宇宙学距离和外激波框架，同时暴露了 plateau、chromatic break、jet break 缺失和早期 flare 等问题；Fermi 时代的 GeV 延迟、高能光子和时间分辨光谱强化了 compactness、发射半径和低能谱指数问题；GW170817 与 GRB 170817A 则让 structured jet、偏轴余辉、VLBI centroid motion 和引力波距离先验成为短暴解释中的核心约束。每一轮观测进步都会制造多个可行解释，但能在多波段、多时段、多仪器和样本统计中长期存活的模型很少。</p>
+<p>第四，方法上本讲坚持“从数据空间到物理空间”的阅读顺序。任何物理主张都应能写成一条模型链：\(\boldsymbol{\theta}\rightarrow F_\nu(t;\boldsymbol{\theta})\rightarrow \mu_i(\boldsymbol{\theta})\rightarrow {\cal L}\rightarrow p(\boldsymbol{\theta}|D,M)\)。也就是说，源参数 \(\boldsymbol{\theta}\) 先通过辐射和传播模型给出真实通量 \(F_\nu(t;\boldsymbol{\theta})\)，再经过仪器响应变成探测器通道中的期望计数 \(\mu_i(\boldsymbol{\theta})\)，然后由似然 \({\cal L}\) 与先验给出后验 \(p(\boldsymbol{\theta}|D,M)\)。如果论文只展示 unfolded spectrum、SED 点或 best-fit 曲线，而没有说明响应矩阵、背景模型、能量弥散、时间分箱、交叉定标和 upper limits 如何进入似然，那么其物理结论就必须降级理解。</p>
+<p>第五，读论文时要把“经验模型”和“物理模型”的职责分开。Band 函数、CPL 或 broken power law 的作用是提供公平的经验基线，而不是辐射机制本身；physical synchrotron、photosphere 或 reconnection 模型的责任则是解释参数的数值、演化和相互关系。一个 Band+blackbody 模型若比 Band 函数多出若干自由度并改善了 \(\Delta C\)-stat，并不自动证明光球主导；还要检查黑体温度 \(kT\)、thermal fraction、非热谱斜率与 \(R_{\rm ph}\)、\(\Gamma\)、\(L\) 的尺度估计是否一致。类似地，一个 structured jet 模型若拟合了 GRB 170817A 的慢升光变，也要检查 \(\theta_{\rm obs}\)、\(\theta_c\)、\(E_c\)、\(n\)、\(\epsilon_B\) 和 \(p\) 的后验简并是否被 VLBI 超光速运动、引力波距离、射电上限和 X 射线谱指数共同打破。</p>
+<p>第六，本讲的关键结果不是给出“最佳 GRB 模型排行榜”，而是建立一套可复用的评审流程。第一步看基线模型是否公平，prompt 至少应与 PL、CPL、Band、Band+BB 或相应物理模型比较，afterglow 至少应与标准 forward shock、ISM 或 wind 环境、能量注入、jet break、偏轴或 structured jet 备选比较。第二步看数据空间是否正确，低计数高能数据应优先使用 Poisson 或 C-stat 类似然，upper limits 应以 censored likelihood 或积分概率处理，而不是粗暴当作普通 flux 点。第三步看新增参数是否被数据约束，corner plot 中若后验贴着先验边界、呈长尾、多峰或强简并，结论就不能写成强探测。第四步看残差是否按能量、时间、波段和仪器分层检查，尤其要警惕 NaI/BGO 拼接区、LAT 低计数区、XRT pile-up、光学 host extinction、射电 scintillation、TeV 的 EBL 修正和多信使先验带来的系统误差。</p>
+<p>第七，本讲也明确指出局限。GRB 前沿论文的失败模式常来自三类地方：微物理参数被过度常数化、选择效应没有建模、比较的模型族不完备。很多 afterglow 拟合把 \(\epsilon_e\)、\(\epsilon_B\)、\(p\)、\(n\)、\(A_*\)、\(\Gamma_0\) 视作简单常数，但真实喷流可能角向分层、时间演化、磁化程度变化，外部介质也可能从 wind-like 过渡到 ISM-like。若论文把所有不匹配都解释成“额外成分”，读者应先检查是否已排除能量注入、反向激波、host extinction、dust scattering、late prompt、kilonova contamination、calibration offset 或 selection effects。</p>
+<p>第八，本讲的后续影响在于训练一种可迁移能力。Band et al. 的经典意义在于建立可比较的 prompt 谱语言，Sari、Piran、Narayan 的经典意义在于把余辉谱断和时间衰减写成 closure relations；现代前沿论文若要真正有影响，也应提供能被后续样本复用的诊断量，例如 \(\alpha(t)\) 与 \(E_{\rm pk}(t)\) 的演化轨迹、thermal fraction 的样本分布、polarization-angle swing、structured-jet posterior predictive check、VLBI proper motion 预言或 multi-messenger rate consistency。本系列到第七讲结束，population inference、TeV afterglow 和高能瞬变论文评审工作坊只是下一阶段独立专题的入口，本讲只给出边界，不在这里展开。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_4">背景知识</h4>
+<p>第一，GRB 研究史可以理解为一条由观测张力驱动的模型更新链。BATSE 时代发现大量 prompt 光谱可由 Band 函数经验描述，这让研究者能统一讨论 \(\alpha\)、\(\beta\) 和 \(E_{\rm pk}\)，但它没有回答这些谱形来自同步辐射、光球辐射还是磁耗散。BeppoSAX 和 Swift 时代通过余辉定位确认 GRB 位于宇宙学距离，并把外激波同步辐射推到中心位置；然而 Swift 也带来了 X 射线 plateau、早期 steep decay、flare、chromatic break 和 jet break 缺失等新问题。Fermi 时代的 GBM 与 LAT 进一步揭示 GeV 延迟、高能光子和时间分辨谱演化，使 compactness、透明性、发射半径和低能谱指数成为 prompt 机制的硬约束。GW170817 与 GRB 170817A 则把短暴研究推入多信使阶段，structured jet 与偏轴 afterglow 不再只是理论选项，而成为必须会读的论文类型。</p>
+<p>第二，本讲的历史背景不是模型百科，而是训练读者理解为什么 GRB 领域经常出现“多个模型解释同一组观测”的局面。GRB 的数据通常稀疏、瞬变、跨仪器、跨能段，并且强烈依赖时间分箱、背景扣除和响应卷积。同一个 prompt 谱峰可以被 Band 函数、CPL、synchrotron with cooling break、photosphere plus Comptonization 或 multi-zone emission 拟合；同一个 afterglow plateau 可以被能量注入、偏轴观测、late prompt、变化的微物理参数或额外辐射成分解释。历史经验告诉我们，单图解释往往传播很快，但能经受多波段、多时段和样本统计检验的模型才值得信任。</p>
+<p>第三，为什么这件事重要？因为 GRB 是研究相对论喷流、致密星死亡、双中子星并合、宇宙高红移恒星形成和高能粒子加速的核心探针。一个 prompt 模型如果错误地估计了辐射效率 \(\epsilon_\gamma=E_{\gamma,\rm iso}/(E_{\gamma,\rm iso}+E_{k,\rm iso})\)，就会误导我们对喷流能量库和耗散机制的理解；一个 afterglow 模型如果错误地把 plateau 解释成能量注入，就会影响对中心引擎寿命的判断；一个 structured jet 模型如果忽略选择效应，就会错误推断短暴真实发生率和引力波对应体探测概率。因此，评审模型不是形式主义，而是决定 GRB 物理结论是否可靠的必要步骤。</p>
+<p>第四，常见误区之一是把经验拟合当成物理证明。Band 函数拟合得好，不意味着存在某种叫 Band 的辐射机制；CPL 拟合得好，不自动说明高能截断来自 \(\gamma\gamma\) 吸收；黑体成分统计显著，也不必然说明纯未耗散光球主导；afterglow 光变出现 break，也不必然就是 jet break。经验模型负责压缩数据，物理模型必须解释参数为什么取这些值、为什么随时间这样演化、为什么与其他波段和其他观测量一致。若一篇论文只把经验参数换成物理名词，而没有增加可检验预言，它的新意就很有限。</p>
+<p>第五，常见误区之二是把 unfolded spectrum、SED 点或漂亮光变曲线当成原始证据。高能天文的原始比较通常发生在 counts space 或 response-folded space 中，期望计数可写为 \(\mu_i(\boldsymbol{\theta})=t_{\rm exp}\int dE\,R_i(E)A_{\rm eff}(E)\Phi(E;\boldsymbol{\theta})+b_i\)。如果论文没有说明 \(R_i(E)\)、\(A_{\rm eff}(E)\)、背景 \(b_i\)、时间分箱、能段选择和交叉定标如何处理，那么读者不能只凭 unfolded \(\nu F_\nu\) 曲线判断模型优劣。afterglow 中也类似，published flux points 往往已经假设了某个谱形和时间区间；若新模型与这些假设不兼容，就应回到更接近原始的数据层级。</p>
+<p>第六，常见误区之三是把单一图表当作决定性证据。一个时间积分谱中的 \(\alpha>-2/3\) 可能来自多个时间演化谱的混合；一个 \(E_{\rm pk}\)-flux 相关可能受探测阈值和时间分箱影响；一个 X 射线 plateau 可能不是外激波的自然延续；一个 TeV excess 可能与 SSC 有关，也可能受 EBL、内部吸收、仪器有效面积和低计数统计影响。论文阅读的核心训练，就是把“这张图看起来支持某模型”改写成“哪些数据、通过什么似然、在什么系统误差假设下，排除了哪些基线模型”。</p>
+<p>第七，GRB 的困难还在于物理尺度跨度极大。prompt 的毫秒至秒级变时标对应相对论几何尺度 \(R_{\rm var}\sim 2\Gamma^2c\delta t/(1+z)\)，而 afterglow 的天至年级演化对应外激波从超相对论到非相对论的减速；短暴多信使事件还要同时满足引力波距离与倾角、kilonova 热辐射、VLBI centroid motion 和并合率约束。任何新模型若只在一个尺度上成功，仍需通过全局能量预算、透明性、几何一致性和观测选择效应检查。</p>
+<p>第八，读前沿论文时应区分三类新意。第一类是真正的新物理机制，例如耗散方式从壳层碰撞转为 magnetic reconnection，或 prompt 谱由纯薄同步辐射转为光球加亚光球 Compton 化。第二类是新的统计或观测联合方式，例如把 GBM、LAT、XRT、光学、射电、VLBI 与 GW posterior 放入同一后验。第三类是新的参数化，例如把 jet angular profile 从 Gaussian 改成 power-law，或把微物理参数设为随时间变化。三者都可能有价值，但证据门槛不同：新物理需要尺度和预言自洽，新联合需要似然和系统误差透明，新参数化需要证明结论不只是先验形状的产物。</p>
+<h4 id="_5">基础理论 / 方法脉络</h4>
+<p>第一，所有 GRB 前沿论文都可以先画成同一张“源参数到探测器计数”的流程图。源模型给出参数 \(\boldsymbol{\theta}\)，例如 prompt 的 \(\Gamma\)、\(R\)、\(L\)、\(\sigma\)、\(p\)、\(B\)、\(kT\)，或 afterglow 的 \(E_{k,\rm iso}\)、\(n\)、\(A_*\)、\(\epsilon_e\)、\(\epsilon_B\)、\(\theta_j\)、\(\theta_{\rm obs}\)。这些参数通过辐射模型给出 \(F_\nu(t;\boldsymbol{\theta})\) 或光子谱 \(\Phi(E;\boldsymbol{\theta})\)，再经仪器响应得到 \(\mu_i(\boldsymbol{\theta})\)，最后进入似然 \({\cal L}\) 和后验 \(p(\boldsymbol{\theta}|D,M)\)。因此，读论文不要从“作者结论”开始，而要从这条链是否闭合开始。</p>
+<p>第二，prompt 论文的基础图像是一个相对论喷流在极短时间内释放大量伽马射线。快速变时标 \(\delta t\) 给出尺度估计 \(R_{\rm var}\sim 2\Gamma^2c\delta t/(1+z)\)，高能光子要求喷流对 \(\gamma\gamma\) 吸收足够透明，谱形又必须解释 \(\alpha\)、\(\beta\)、\(E_{\rm pk}\)、谱宽、偏振和高能延迟。最小经验基线通常是 PL、CPL 和 Band 函数，其中 \(E_{\rm pk}=(2+\alpha)E_0\)。物理模型若声称优于经验基线，应说明它在哪些时间片、能段或残差结构上带来不可由自由参数任意吸收的改进。</p>
+<p>第三，prompt 机制判断的第一道物理门槛是谱指数。薄同步辐射的单电子低频渐近行为给出 \(F_\nu\propto\nu^{1/3}\)，对应光子谱 \(N(E)\propto E^{-2/3}\)，所以最简单 optically thin synchrotron 难以自然解释 \(\alpha>-2/3\)。但这并不意味着所有 \(\alpha>-2/3\) 都自动证明 photosphere；读者还要检查时间分箱、谱演化叠加、探测器能段、背景系统误差、pitch-angle 效应、衰减磁场、慢加热和多区叠加等可能性。课程中的边界是：本讲不重新系统推导各 prompt 机制，而训练如何用这些限制评审论文。</p>
+<p>第四，afterglow 论文的基础图像是外激波同步辐射。标准 forward shock 用谱断 \(\nu_a\)、\(\nu_m\)、\(\nu_c\) 和 \(F_{\nu,\max}\) 组织多波段 SED，用 \(F_\nu\propto t^{-\alpha_t}\nu^{-\beta_\nu}\) 描述光变和谱斜率。在均匀介质、慢冷却且 \(\nu_m<\nu<\nu_c\) 的基线情形下，电子分布 \(N_e(\gamma_e)\propto\gamma_e^{-p}\) 给出 \(\beta_\nu=(p-1)/2\)，时间衰减满足 \(\alpha_t=3(p-1)/4\)，因此有 closure relation \(\alpha_t=3\beta_\nu/2\)。读 afterglow 新模型时，先检查数据是否真的偏离这些基线关系，再讨论 wind 环境、能量注入、jet break、观测角效应或额外成分。</p>
+<p>第五，结构化喷流和多信使论文的基础图像是“几何先验通过观测角投影成光变”。角向能量分布可以写成示例形式 \(dE/d\Omega=(E_c/4\pi)\exp[-\theta^2/(2\theta_c^2)]\)，但这不是数据直接测得的量，而是模型假设。偏轴观测会使 prompt 信号变弱，使 afterglow 慢升并在峰后衰减；但 \(\theta_{\rm obs}\)、\(\theta_c\)、\(E_c\)、\(\Gamma_c\)、\(n\) 和 \(\epsilon_B\) 往往强烈简并。真正有力的 structured jet 论文应同时利用光变、SED、VLBI centroid motion、GW 距离或倾角先验、射电上限和样本发生率，而不是只凭一条慢升光变曲线下结论。</p>
+<p>第六，模型拟合的基础统计逻辑是：先定义公平基线，再选择与数据匹配的似然，最后解释后验和残差。低计数 prompt 或 LAT 数据通常应使用 Poisson 或 C-stat 类似然，例如 \(\ln{\cal L}=\sum_i[k_i\ln\mu_i-\mu_i-\ln(k_i!)]\)；高信噪比光学或射电 flux 点可近似 Gaussian；upper limits 应用积分概率或 censored likelihood 处理。贝叶斯形式为 \(p(\boldsymbol{\theta}|D,M)={\cal L}(D|\boldsymbol{\theta},M)\pi(\boldsymbol{\theta}|M)/Z_M\)，其中 \(Z_M=\int d\boldsymbol{\theta}\,{\cal L}\pi\)。corner plot 不是装饰，读者要检查后验是否被数据约束、是否撞到 prior 边界、是否有多峰、长尾或强简并。</p>
+<p>第七，模型复杂度和残差诊断是从“能拟合”走向“可信”的关键。多成分 prompt、Band+BB、能量注入、structured jet 或 multi-zone 模型通常会增加自由参数 \(K\)，因此需要用 \({\rm AIC}=2K-2\ln{\cal L}_{\max}\)、\({\rm BIC}=K\ln N-2\ln{\cal L}_{\max}\)、Bayesian evidence 或 posterior predictive performance 评估新增成分是否值得。残差应按时间、能量、波段和仪器分层查看：prompt 要注意 NaI/BGO 拼接区、LAT 低计数端和背景区间；afterglow 要注意早期 flare、plateau、host extinction、absorption、射电 scintillation、TeV 的 EBL 修正和非同时观测。可信模型的残差应无明显结构，而不是只在 best-fit 曲线上看起来贴合。</p>
+<p>第八，本讲的最终读法可以压缩为“三问法”。第一问：相对基线模型，新论文新增了什么物理假设或统计假设？第二问：这些新增假设推出了哪些不能靠调参随意改变的可观测预言，例如偏振、早期光学、射电峰值、TeV 上限、VLBI proper motion、thermal fraction 演化或样本发生率？第三问：论文是否在正确数据空间、合理似然、复杂度惩罚、残差检查和系统误差预算下检验了这些预言？回答完这三问，读者就能把前六讲学到的 prompt、afterglow、喷流几何和多信使知识转化为真正的论文评审能力。</p>
+<h4 id="_6">公式与推导</h4>
+<p>第一步：把“物理模型”放回探测器数据空间。假设论文给出的源模型参数为 \(\boldsymbol{\theta}\)，它先产生入射光子谱 \(\Phi(E;\boldsymbol{\theta})\)，再经过仪器响应、有效面积和背景进入第 \(i\) 个探测器通道的期望计数：</p>
+<div class="math-display">\[\mu_i(\boldsymbol{\theta})=t_{\rm exp}\int dE\,R_i(E)A_{\rm eff}(E)\Phi(E;\boldsymbol{\theta})+b_i .\]</div>
+<p>这里 \(t_{\rm exp}\) 是曝光时间，\(R_i(E)\) 是能量到通道的响应，\(A_{\rm eff}(E)\) 是有效面积，\(b_i\) 是背景计数。读前沿论文时，第一件事不是看 unfolded \(\nu F_\nu\) 曲线，而是确认作者是否真的比较了 \(\mu_i(\boldsymbol{\theta})\) 与观测计数 \(k_i\)。这一步给出下一步似然函数的输入。</p>
+<p>第二步：为低计数数据选择合适似然。假设每个通道计数服从 Poisson 统计，则对数似然为：</p>
+<div class="math-display">\[\ln {\cal L}(\boldsymbol{\theta})=\sum_i\left[k_i\ln \mu_i(\boldsymbol{\theta})-\mu_i(\boldsymbol{\theta})-\ln(k_i!)\right] .\]</div>
+<p>若背景区间、交叉定标或响应矩阵存在系统不确定性，应写成 \(\mu_i(\boldsymbol{\theta},\boldsymbol{\eta})\)，其中 \(\boldsymbol{\eta}\) 是 nuisance parameters。物理含义是：模型是否更可信，首先看它是否在正确计数空间中提高 \(\ln {\cal L}\)，而不是只看图上曲线是否贴合。建立似然后，才能公平定义 prompt 谱的经验基线。</p>
+<p>第三步：建立 prompt 谱的最小经验基线。Band 函数不是辐射机制，而是比较 prompt 光谱的共同语言，可写为：</p>
+<div class="math-display">\[N(E)=A\begin{cases}
+\left(\dfrac{E}{100\,{\rm keV}}\right)^{\alpha}\exp\left(-\dfrac{E}{E_0}\right), & E<E_b,\\
+C\left(\dfrac{E}{100\,{\rm keV}}\right)^{\beta}, & E\ge E_b,
+\end{cases}\]</div>
+<p>其中连续性给出 \(E_b=(\alpha-\beta)E_0\)，而能谱峰值满足：</p>
+<div class="math-display">\[E_{\rm pk}=(2+\alpha)E_0 .\]</div>
+<p>这里 \(\alpha\) 和 \(\beta\) 是低能与高能光子谱指数，\(E_{\rm pk}\) 是 (<br />
+u F_<br />
+u) 峰值能量。任何 photosphere、synchrotron 或 reconnection 模型若声称优于 Band 或 CPL，都必须说明它在哪些时间片、能段或残差结构上改进，而不只是换了物理名称。</p>
+<p>第四步：把同步辐射模型连接到可观测谱指数。假设加速电子分布为幂律：</p>
+<div class="math-display">\[N_e(\gamma_e)\propto \gamma_e^{-p} .\]</div>
+<p>在慢冷却且观测频率位于 \(\nu_m<\nu<\nu_c\) 的谱段中，同步辐射通量满足：</p>
+<div class="math-display">\[F_\nu\propto \nu^{-(p-1)/2},\qquad \beta_\nu=\frac{p-1}{2} .\]</div>
+<p>这一步解出的物理量是电子能谱指数 \(p\) 与观测谱指数 \(\beta_\nu\) 的对应关系。读 afterglow 论文时，可由 X 射线或光学谱斜率反推 \(p\)；若不同波段给出的 \(p\) 不一致，就要检查 extinction、absorption、谱断位置或额外辐射成分。</p>
+<p>第五步：检查 prompt 薄同步辐射的低能极限。假设辐射区光学薄，且低频端由单电子同步辐射渐近行为控制，则：</p>
+<div class="math-display">\[F_\nu\propto \nu^{1/3},\qquad N(E)\propto E^{-2/3} .\]</div>
+<p>因此最简单 optically thin synchrotron 预言的低能光子谱指数不能自然硬于 \(\alpha=-2/3\)。若论文声称解决 synchrotron line of death，就必须说明额外假设来自 pitch-angle 分布、慢加热、衰减磁场、多区叠加、光球混合，还是时间分箱造成的谱演化混合。这个限制把 prompt 经验谱基线推进到物理机制诊断。</p>
+<p>第六步：用外激波闭合关系建立 afterglow 基线。假设均匀介质 \(k=0\)、绝热 forward shock、慢冷却，且观测频率满足 \(\nu_m<\nu<\nu_c\)，光变与谱形写作：</p>
+<div class="math-display">\[F_\nu\propto t^{-\alpha_t}\nu^{-\beta_\nu},\qquad \alpha_t=\frac{3(p-1)}{4},\qquad \beta_\nu=\frac{p-1}{2} .\]</div>
+<p>消去 \(p\) 得到 closure relation：</p>
+<div class="math-display">\[\alpha_t=\frac{3\beta_\nu}{2} .\]</div>
+<p>这一步把可观测的时间衰减指数 \(\alpha_t\) 与谱指数 \(\beta_\nu\) 联系起来。若数据偏离该关系，应先检查 wind 环境、能量注入、jet break、观测角效应或谱断穿越，而不是立即接受一个新模型。</p>
+<p>第七步：用 prompt 与 afterglow 的能量闭合检查全局自洽。假设 prompt 释放的各向同性等效伽马射线能量为 \(E_{\gamma,\rm iso}\)，afterglow 推断的剩余动能为 \(E_{k,\rm iso}\)，则辐射效率定义为：</p>
+<div class="math-display">\[\epsilon_\gamma=\frac{E_{\gamma,\rm iso}}{E_{\gamma,\rm iso}+E_{k,\rm iso}} .\]</div>
+<p>这一步求解的是爆发能量库中转化为 prompt 辐射的比例。若某 prompt 机制要求 \(\epsilon_\gamma\) 极高，而 afterglow 拟合又要求很大的 \(E_{k,\rm iso}\)，则模型在能量预算上存在张力。能量闭合之后，还要检查 prompt 发射半径是否与快速变时标一致。</p>
+<p>第八步：由快速变时标估计 prompt 发射半径。假设观测到的最短变时标 \(\delta t\) 主要受相对论几何光行时限制，喷流洛伦兹因子为 \(\Gamma\)，红移为 \(z\)，则：</p>
+<div class="math-display">\[R_{\rm var}\sim \frac{2\Gamma^2c\delta t}{1+z} .\]</div>
+<p>这一步把观测量 \(\delta t\) 转换成源区尺度 \(R_{\rm var}\)。若论文采用很大的耗散半径却解释毫秒级快变，或采用很小的半径却要求光学薄非热辐射，就要检查几何、透明性和辐射区假设。下一步把该半径与光球半径比较。</p>
+<p>第九步：用光球半径检验 photosphere 解释。假设喷流重子主导、近似稳态且 Thomson 光深约为 \(1\) 的位置定义光球，则可估计：</p>
+<div class="math-display">\[R_{\rm ph}\simeq \frac{L\sigma_T}{8\pi m_pc^3\Gamma^3} .\]</div>
+<p>这里 \(L\) 是各向同性等效光度，\(\sigma_T\) 是 Thomson 截面，\(m_p\) 是质子质量。若论文从黑体温度或热成分推出 photosphere 主导，就要检查 \(R_{\rm ph}\)、\(R_{\rm var}\)、\(L\) 与 \(\Gamma\) 是否同时合理；不能只因为存在窄热峰就宣称纯光球模型成立。</p>
+<p>第十步：把结构化喷流角分布视为模型先验。偏轴 afterglow 常假设某种角向能量分布，例如高斯结构：</p>
+<div class="math-display">\[\frac{dE}{d\Omega}(\theta)=\frac{E_c}{4\pi}\exp\left(-\frac{\theta^2}{2\theta_c^2}\right) .\]</div>
+<p>这里 \(E_c\) 表示核心能量尺度，\(\theta_c\) 是核心角宽，\(\theta\) 是相对喷流轴的角度。关键是 \(dE/d\Omega\) 不是直接观测量，而是先验参数化；它会影响 \(\theta_{\rm obs}\)、\(E_c\)、\(n\)、\(\epsilon_B\) 等后验。若换成 power-law profile 后结论大变，则所谓结构化喷流证据并不稳健。</p>
+<p>第十一步：用信息准则惩罚多参数模型。假设模型有 \(K\) 个自由参数，数据点数或有效通道数为 \(N\)，最大似然为 \({\cal L}_{\max}\)，常用近似比较量为：</p>
+<div class="math-display">\[{\rm AIC}=2K-2\ln {\cal L}_{\max},\qquad {\rm BIC}=K\ln N-2\ln {\cal L}_{\max} .\]</div>
+<p>这一步把“拟合变好”与“自由度变多”放在同一标尺上。若 Band\(+\)BB、能量注入、multi-zone prompt 或 structured jet 只是用更多参数换来很小的 \(\Delta\ln {\cal L}\)，不能据此宣称新物理已被探测。</p>
+<p>第十二步：用贝叶斯后验和证据收束论文评审。给定数据 \(D\)、模型 \(M\)、先验 \(\pi(\boldsymbol{\theta}|M)\) 与似然 \({\cal L}(D|\boldsymbol{\theta},M)\)，后验为：</p>
+<div class="math-display">\[p(\boldsymbol{\theta}|D,M)=\frac{{\cal L}(D|\boldsymbol{\theta},M)\pi(\boldsymbol{\theta}|M)}{Z_M},\qquad Z_M=\int d\boldsymbol{\theta}\,{\cal L}(D|\boldsymbol{\theta},M)\pi(\boldsymbol{\theta}|M) .\]</div>
+<p>这一步要求读者同时检查三件事：参数后验是否被数据而非先验约束，证据 \(Z_M\) 是否真的支持新模型，以及 posterior predictive distribution 是否能覆盖未参与拟合的数据、upper limits 和未来可观测量。到这里，前六讲的 prompt、afterglow、结构化喷流与多信使知识被串成一条评审链：从 \(oldsymbol{\theta}\) 到 \(\mu_i\)，从 \({\cal L}\) 到后验，再从物理尺度、自洽性和可证伪预言判断一篇 GRB 新模型论文是否可信。</p>
+<h4 id="_7">经典拟合 / 应用方法</h4>
+<p>第一，拟合从“公平基线”开始，而不是从作者最喜欢的新模型开始。本讲是“GRB 从零到前沿课程”的第七讲，也是收束课：前六讲已经分别建立了 prompt emission 的观测语言、相对论喷流尺度、外激波余辉、结构化喷流、偏轴观测和多信使约束；本讲新增的是评审流程。读 prompt 论文时，至少要问作者是否在相同时间区间、相同能段、相同背景模型和相同响应矩阵下比较了 power law、cutoff power law、Band、Band 加黑体，以及相应的 physical synchrotron、photosphere 或 reconnection 模型。经验模型不是物理解释，但它们给出最低限度的对照。如果一个 photosphere 模型没有说明它相对 Band 或 cutoff power law 在 \(\Delta \ln {\cal L}\)、残差结构、参数演化或可证伪预言上增加了什么，它就不能只凭“更物理”而获胜。</p>
+<p>第二，数据空间决定似然形式。prompt 光谱、LAT 光子、XRT 低计数谱和 TeV 数据常常不应被粗暴转换成 Gaussian flux points。更基本的写法是先预测第 \(i\) 个探测器通道的期望计数 \(\mu_i(\boldsymbol{\theta})\)，再用 Poisson 或 C-stat 类似然比较观测计数 \(k_i\)：</p>
+<div class="math-display">\[\ln {\cal L}=\sum_i\left[k_i\ln \mu_i-\mu_i-\ln(k_i!)\right] .\]</div>
+<p>若背景、响应矩阵或交叉定标有不确定性，应把 \(\mu_i\) 写成 \(\mu_i(\boldsymbol{\theta},\boldsymbol{\eta})\)，其中 \(\boldsymbol{\eta}\) 是 nuisance parameters。读论文时要检查这些 nuisance parameters 是被固定、边缘化，还是只在系统误差段落里口头提到。</p>
+<p>第三，prompt 拟合要区分时间积分成功和时间分辨成功。许多模型都能拟合一个积分谱，但真正的物理压力来自 \(\alpha(t)\)、\(\beta(t)\)、\(E_{\rm pk}(t)\)、flux tracking、hard-to-soft evolution、thermal fraction 和 GeV 延迟是否能被同一组物理假设连续解释。若论文声称发现热成分，应检查黑体温度 \(kT\)、热成分光度、thermal fraction 与总光度是否随时间平滑演化；若只在少数高信噪比时间 bin 中显著，而其他 bin 中消失或参数乱跳，结论应降级为“可能存在额外窄成分”，而不是“证明光球主导”。</p>
+<p>第四，afterglow 拟合的基线是 forward-shock synchrotron。核心参数通常包括 \(E_{k,\rm iso}\)、\(n\) 或 \(A_*\)、\(p\)、\(\epsilon_e\)、\(\epsilon_B\)、\(\xi_e\)、\(\theta_j\)、\(\theta_{\rm obs}\)、host extinction、host absorption 和 cross-calibration offset。读论文时先检查作者是否报告了谱段识别和 closure relation，例如在某个谱段是否满足 \(F_\nu\propto t^{-\alpha_t}\nu^{-\beta_\nu}\)。再看是否真的需要能量注入、wind 环境、jet break、反向激波、偏轴结构化喷流或额外辐射成分。不要让复杂模型替代最基本的闭合关系检查。</p>
+<p>第五，后验解释必须超过 best-fit 数值。贝叶斯拟合应写成</p>
+<div class="math-display">\[p(\boldsymbol{\theta}|D,M)=\frac{{\cal L}(D|\boldsymbol{\theta},M)\pi(\boldsymbol{\theta}|M)}{Z_M},\qquad Z_M=\int d\boldsymbol{\theta}\,{\cal L}(D|\boldsymbol{\theta},M)\pi(\boldsymbol{\theta}|M) .\]</div>
+<p>读 corner plot 时要看对角线上的边缘后验是否窄于先验，二维图中是否有香蕉形简并、多峰、长尾或边界堆积。结构化喷流中常见的简并包括 \(E_c\) 与 \(n\)、\(\epsilon_B\) 与 \(E_{k,\rm iso}\)、\(\theta_{\rm obs}\) 与 \(\theta_c\)。若关键结论来自一个贴着先验边界的参数，论文应被理解为“在该先验下允许”，而不是“被数据测量”。</p>
+<p>第六，模型比较要惩罚自由度。多加黑体、多区发射、能量注入、随时间变化的微物理参数或 structured jet profile 都会增加参数数目 \(K\)。近似比较可用 \({\rm AIC}=2K-2\ln {\cal L}_{\max}\) 和 \({\rm BIC}=K\ln N-2\ln {\cal L}_{\max}\)，更完整的比较可用 Bayesian evidence \(Z_M\) 或 posterior predictive performance。若新增模型只带来很小的 \(\Delta \ln {\cal L}\)，但增加多个自由参数，其物理解释不应写成强探测。相反，若一个模型不仅改善拟合，还能预测未参与拟合的射电峰、VLBI proper motion、偏振演化或 TeV 上限，它的可信度才明显提高。</p>
+<p>第七，残差诊断要分层，而不是只看总 \(\chi^2\) 或总 C-stat。prompt 中应按时间 bin、能量通道和探测器分别看 residual，特别注意 NaI/BGO 交叠区、低能阈值、高能低计数端和背景区间。afterglow 中应分 radio、optical、X-ray、GeV 和 TeV 检查残差：早期 X 射线 excess 可能是 flare 或 prompt tail，光学偏低可能来自 host extinction，射电起伏可能来自 interstellar scintillation，TeV 残差可能受 EBL、内部吸收和有效面积影响。结构性残差通常比单个偏离点更重要。</p>
+<p>第八，系统误差和应用场景必须写入结论。时间分箱会改变 \(\alpha\) 和 \(E_{\rm pk}\)，背景模型会影响弱热成分，published flux points 可能带有固定谱形假设，upper limits 若处理不当会误导 SSC 或 cocoon 结论，GW inclination prior 会改变 \(\theta_{\rm obs}\)，VLBI 数据会强烈约束 structured jet。实际评审时可使用一句话清单：基线是否公平，数据空间是否正确，似然是否匹配计数和上限，新增参数是否被数据约束，残差是否无结构，系统误差是否定量讨论，模型是否给出未来可证伪预言。</p>
+<h4 id="_8">重点章节 / 结果段落怎么读</h4>
+<p>读摘要时，第一步不是接受作者的“新模型”标签，而是圈出它声称解决的具体张力：是 prompt 的 \(\alpha>-2/3\)，还是 \(E_{\rm pk}\) 演化、GeV 延迟、辐射效率 \(\epsilon_\gamma\)、热成分、afterglow plateau、jet break 缺失、偏轴慢升余辉、VLBI centroid motion，或多信使 rate consistency。好的摘要会说明相对哪个基线模型取得改进；较弱的摘要只会说模型 fits the data well，却不说明被排除的替代模型是什么。</p>
+<p>读引言时，要把历史脉络转化为“失败点表格”。Band 函数统一了 prompt 谱语言，但没有给出辐射机制；最简单 optically thin synchrotron 面临低能谱指数限制；photosphere 需要解释谱宽和非热尾；magnetic reconnection 需要给出可计算的时间演化和偏振预言；标准 afterglow 需要面对 plateau、chromatic break、早期 excess 和 jet break 缺失；structured jet 需要处理角向 profile 先验和参数简并。这样读，引言就不是文献堆砌，而是模型比较的入口。</p>
+<p>读模型部分时，重点寻找作者做出的不可逆假设。prompt 模型要看发射区是单区还是多区，电子分布 \(N_e(\gamma_e)\) 是手设还是由加速冷却计算得到，磁场是否衰减，是否包含 \(\gamma\gamma\) 吸收、pair loading、Comptonization 和辐射转移。afterglow 模型要看介质是 ISM 还是 wind，\(\epsilon_e\)、\(\epsilon_B\) 和 \(p\) 是否固定，是否允许能量注入、jet spreading、反向激波或微物理演化。结构化喷流论文要看角向能量分布是 Gaussian、power law 还是 top-hat 加 cocoon；这些 profile 不是观测事实，而是模型先验。</p>
+<p>读数据部分时，要检查时间区间、能段、响应矩阵、背景、交叉定标和 upper limits 如何进入似然。prompt 论文若只给 unfolded \(\nu F_\nu\) 图，而不说明 response-folded counts fitting，证据强度应下降。afterglow 论文若使用 published flux points，要问这些点是否假设了固定谱指数、固定吸收或某个时间平均区间；若新模型的谱形与原始假设不同，原则上应回到更接近原始的数据空间。</p>
+<p>读拟合和结果部分时，要把“数据直接支持的量”和“模型解释得到的量”分开。数据可能支持一个先升后降的射电/X 射线余辉，但具体 \(\theta_c\)、\(\theta_{\rm obs}\) 和 \(E_c\) 依赖 structured jet profile；数据可能支持一个窄谱成分，但把它解释为光球半径 \(R_{\rm ph}\) 和洛伦兹因子 \(\Gamma\) 需要额外物理假设；数据可能显示 closure relation 偏离，但偏离可以来自 wind 环境、能量注入、谱断穿越或系统误差，不必立即接受全新机制。</p>
+<p>读讨论部分时，要寻找 falsifiable prediction。强论文会给出未来观测如何排除模型，例如偏振度和偏振角演化、早期光学闪光、射电峰值时间、TeV 上限、VLBI proper motion、thermal fraction 的样本分布或短暴真实发生率。弱论文常停在“consistent with observations”。本讲的读法要求把 consistent 改写为一个更严格的问题：在复杂度惩罚、系统误差和替代模型都考虑后，哪些观测会让这个模型失败？</p>
+<h4 id="_9">建议重点查看的图表</h4>
+<p>一，prompt 光变与时间分箱图。横轴通常是 observer-frame time，纵轴是 counts rate、energy flux 或 photon flux；要看时间 bin 是否按信噪比自适应，是否把硬到软演化混入单个宽 bin，是否只在少数峰值 bin 中支持额外热成分。</p>
+<p>二，response-folded spectrum 与 residual 图。优先看 counts-space 或 detector-space 的上面板，以及 residual、\(\Delta C\) 或 sigma residual 的下面板；检查模型线是否经过响应卷积，残差是否集中在 NaI/BGO 交叠区、低能边界、高能低计数区或背景主导区。</p>
+<p>三，\(\alpha(t)\)、\(\beta(t)\)、\(E_{\rm pk}(t)\)、flux 和 hardness evolution 图。重点看误差条、参数连续性、\(\alpha=-2/3\) 与 \(\alpha=-3/2\) 参考线，以及所谓 line-of-death 问题是否由少数低置信度点驱动。</p>
+<p>四，多波段 afterglow light curve 图。横轴多为 \(t-t_0\) 的对数时间，纵轴为 flux density、energy flux 或 luminosity；要看 radio、optical、X-ray、GeV 和 TeV 是否由同一模型解释，break 是否 achromatic，upper limits 是否进入拟合而不是只画在图上。</p>
+<p>五，宽波段 SED 与谱断图。横轴是 frequency 或 photon energy，纵轴是 \(F_\nu\)、\(\nu F_\nu\) 或 luminosity；要看 \(\nu_a\)、\(\nu_m\)、\(\nu_c\)、SSC 峰、host extinction 和 absorption 是否被标出，尤其检查多波段点是否近同时。</p>
+<p>六，closure relation 或 \(\alpha_t\)-\(\beta_\nu\) 诊断图。要看数据误差椭圆落在 ISM、wind、slow-cooling、fast-cooling、post-jet 或 energy-injection 区域的哪里；边缘偏离不能自动证明新成分。</p>
+<p>七，corner plot 或 posterior triangle 图。要看单参数边缘后验、二维简并、长尾、多峰和 prior 边界堆积；重点关注 \(E_{k,\rm iso}\)、\(n\)、\(A_*\)、\(\epsilon_B\)、\(p\)、\(\theta_{\rm obs}\) 和 \(\theta_c\) 的相关性。</p>
+<p>八，posterior predictive、model comparison 或 selection-effect 图。要看后验预测带是否覆盖未参与拟合的数据和 upper limits，预测带是否过窄或过宽，以及 detection threshold、redshift distribution、luminosity function、beaming correction 是否改变物理结论。</p>
+<h4 id="_10">关键图表逐图导读</h4>
+<p>图一：prompt 光变与时间分箱图。横轴通常是 observer-frame time，纵轴是 counts rate 或 energy flux，不同颜色代表不同能段。读图先看触发时刻 \(t_0\)、背景区间和 binning 方法：固定 bin、Bayesian blocks 或按信噪比自适应 bin 会给出不同的时间分辨谱。模型线若只在积分光变上贴合，不代表能解释每个 bin 的 \(\alpha(t)\) 和 \(E_{\rm pk}(t)\)。常见误读是把一个宽 bin 的宽谱当成真实宽辐射机制，而忽略了谱演化叠加。</p>
+<p>图二：response-folded spectrum 与残差图。横轴是 detector channel 或 photon energy，纵轴是 counts、count rate 或 count spectrum；模型线可能是 Band、cutoff power law、Band 加 blackbody、synchrotron 或 photosphere。上面板看整体拟合，下面板更关键，要看 residual、\(\Delta C\) 或 normalized residual 是否成片偏离。若新增黑体只消除了某个仪器边界附近的残差，要先怀疑 response、background 或 cross-normalization，而不是立刻解释为光球。</p>
+<p>图三：\(\alpha\)-\(E_{\rm pk}\)-flux 演化图。横轴可为时间、flux 或 hardness，纵轴为 \(\alpha\)、\(E_{\rm pk}\)、\(kT\) 或 thermal fraction。若论文讨论 synchrotron line of death，应看 \(\alpha=-2/3\) 和 \(\alpha=-3/2\) 参考线，以及每个点的可信区间是否真正跨不过参考线。若论文讨论 photosphere，应看 \(kT\) 与 luminosity 是否有可解释关系。误读风险是把误差很大的硬谱点当成强证据，或忽略 bin 间参数协方差。</p>
+<p>图四：多波段 afterglow 光变图。横轴通常是 \(t-t_0\) 的 log scale，纵轴是 flux density、energy flux 或 luminosity，不同颜色对应 radio、optical、X-ray、GeV 或 TeV。读图要看模型是否同时穿过多波段数据，break 是否 achromatic，峰值时间是否随频率按同步辐射谱断演化，upper limits 是否真的限制模型。若模型只拟合 X 射线而系统性错过射电上限，不能声称完成 afterglow 解释。</p>
+<p>图五：宽波段 SED 与谱断图。横轴是 frequency，纵轴为 \(F_\nu\) 或 \(\nu F_\nu\)，模型线通常标出 synchrotron 分段、\(\nu_a\)、\(\nu_m\)、\(\nu_c\) 和 SSC 峰。读图第一步是检查数据是否近同时；如果 optical、X-ray 和 radio 来自相差很久的观测，直接连成一个 SED 会制造假谱断。常见误读是把 optical 到 X-ray 的弯曲立即解释为 cooling break，而没有考虑 host extinction、X-ray absorption、kilonova contamination 或非同时性。</p>
+<p>图六：closure relation 图。横轴常为 \(\beta_\nu\)，纵轴为 \(\alpha_t\)，不同线或区域代表 ISM、wind、slow cooling、fast cooling、post-jet、energy injection 等情形。读图时要看观测误差椭圆是否真的排除标准 forward shock 区域；若只是略微偏离，可能来自谱断穿越、能量注入结束时间不确定或系统误差。该图的价值是把“光变看起来异常”变成可检验的 \(\alpha_t\)-\(\beta_\nu\) 判断。</p>
+<p>图七：corner plot。对角线是单参数边缘后验，非对角线是二维联合后验。读 structured jet 或 afterglow corner plot 时，重点看 \(\theta_{\rm obs}\)、\(\theta_c\)、\(E_c\)、\(n\)、\(\epsilon_B\) 和 \(p\) 是否被数据约束，还是沿着先验范围拉成长尾。若后验在 prior 边界堆积，说明数据只给出上限或下限。误读风险是把最优点当成测量值，而忽略整条简并方向。</p>
+<p>图八：posterior predictive 或 model comparison 图。横轴可以是时间、能量、频率或样本变量，纵轴是观测量与后验预测区间。可信模型应让未参与拟合的数据、upper limits 和未来观测落在合理预测带内，同时残差无系统结构。若 best-fit 曲线很好但预测带极窄并漏掉多个上限，说明不确定性被低估；若预测带宽到覆盖任何可能结果，说明模型可证伪性弱。</p>
+</details>
+<h4 id="_11">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_12">后续阅读路径</h4>
+<p>第一条路径从 prompt 经验语言走向辐射机制评审。先读 Band et al. 1993，重点不是背诵函数形式，而是理解为什么统一的 \(\alpha\)、\(\beta\) 和 \(E_{\rm pk}\) 参数化让样本比较成为可能。随后读 BATSE 和 Fermi/GBM 的 time-resolved spectroscopy 工作，训练如何从 \(\alpha(t)\)、\(E_{\rm pk}(t)\)、谱宽和 flux tracking 判断 optically thin synchrotron、photosphere、sub-photospheric Comptonization 和 magnetic reconnection 的压力点。</p>
+<p>第二条路径从外激波基线走向复杂余辉。先读 Sari、Piran、Narayan 1998 关于余辉谱断和 closure relations 的经典工作，掌握为什么 \(F_\nu\propto t^{-\alpha_t}\nu^{-\beta_\nu}\) 是 afterglow 论文的第一检验。再读 Swift 时代关于 X-ray plateau、chromatic break、jet break 缺失和 early flare 的文献。现代 structured jet、cocoon 和 energy injection 论文应放在这个基线之后读，否则容易把任何异常光变都解释成新几何。</p>
+<p>第三条路径进入多信使和结构化喷流。以 GW170817/GRB 170817A 后续文献为训练材料，把光变、SED、VLBI centroid motion、GW distance-inclination posterior、kilonova contamination 和射电上限放在同一评审表中。重点不是记住某个 \(\theta_{\rm obs}\) 数值，而是理解 \(\theta_{\rm obs}\)、\(\theta_c\)、\(E_c\)、\(n\) 和 \(\epsilon_B\) 如何在不同先验和不同数据组合下改变。</p>
+<p>第四条路径是方法补强。若要真正进入前沿研究，需要系统学习 Poisson likelihood、C-stat、Bayesian evidence、nested sampling、posterior predictive checks、censored likelihood、selection effects 和 hierarchical Bayesian inference。GRB 论文常把这些内容放在附录或方法段，但前沿结论越来越依赖它们。读到 population inference 时，要把单源后验 \(p(\boldsymbol{\theta}|D,M)\) 推广为总体超参数 \(\Lambda\) 的层级模型，而这已经超出本七讲主线，可作为下一独立专题。</p>
+<h4 id="_13">下一讲建议</h4>
+<p>本系列是 \(7/7\)，到本讲正式完结；不建议在同一“从零到前沿”主线中硬加第八讲。最自然的后续方向一是“GRB population inference 专题”：把本讲的单个 GRB 模型评审推广到 luminosity function、beaming correction、trigger efficiency、redshift evolution 和 rate density 的层级贝叶斯推断。它延续本讲的选择效应边界，但不再重复 prompt 或 afterglow 基础。</p>
+<p>方向二是“TeV afterglow 与下一代高能仪器专题”：专门讲 SSC、EBL 吸收、内部 \(\gamma\gamma\) 吸收、TeV upper limits、CTA/LHAASO 数据空间和高能低计数似然。它与本讲的关系是把 residual、upper limits 和系统误差训练深化到 TeV 波段，而不是再介绍一个普通 afterglow 模型。</p>
+<p>方向三是“高能瞬变论文评审工作坊”：把本讲形成的清单迁移到 TDE、magnetar flare、SNR PeVatron、pulsar halo 或 fast X-ray transient。边界很清楚：本讲训练的是 GRB 模型评审方法，工作坊则训练跨源类的论文拆解能力，包括基线模型、数据空间、似然、后验、残差、系统误差和可证伪预言。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>GRB prompt emission unsolved puzzle photosphere synchrotron reconnection review</li>
+<li>gamma ray burst prompt emission relativistic turbulence magnetic reconnection</li>
+<li>structured jet Bayesian inference gamma ray burst afterglow</li>
+<li>Band et al 1993 gamma ray burst spectra BATSE</li>
+<li>Sari Piran Narayan 1998 spectra and light curves of gamma-ray burst afterglows</li>
+<li>GW170817 GRB 170817A structured jet afterglow Bayesian inference</li>
+<li>GRB posterior predictive check afterglow modeling</li>
+<li>GRB prompt spectral fitting Band blackbody residuals</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1993ApJ...413..281B/abstract">https://ui.adsabs.harvard.edu/abs/1993ApJ...413..281B/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1998ApJ...497L..17S/abstract">https://ui.adsabs.harvard.edu/abs/1998ApJ...497L..17S/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
