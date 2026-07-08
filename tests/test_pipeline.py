@@ -778,6 +778,50 @@ def test_html_formula_validation_failure_blocks_publish(monkeypatch, tmp_path):
     assert not publish_called
 
 
+def test_publish_health_failure_blocks_publish(monkeypatch, tmp_path):
+    settings = make_settings(tmp_path)
+    settings.publish.enabled = True
+    settings.site_base_url = "https://example.com/astro_daily"
+    publish_called = False
+
+    class FakeAnalyst:
+        def __init__(self, *_args, **_kwargs):
+            pass
+
+        def generate_weekend_lessons(self, **_kwargs):
+            return [make_lesson()]
+
+    def fake_write_daily_report(**_kwargs):
+        path = tmp_path / "reports" / "2026-05-03.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("# report\n", encoding="utf-8")
+        return path
+
+    def fake_generate_html_report(_path):
+        html_path = tmp_path / "docs" / "reports" / "2026-05-03.html"
+        html_path.parent.mkdir(parents=True, exist_ok=True)
+        html_path.write_text("<html><body><p>正文。</p></body></html>", encoding="utf-8")
+        return str(html_path)
+
+    def fake_publish(*_args, **_kwargs):
+        nonlocal publish_called
+        publish_called = True
+        raise AssertionError("publish should not run")
+
+    monkeypatch.setattr("astro_daily.pipeline.load_settings", lambda _path: settings)
+    monkeypatch.setattr("astro_daily.pipeline.fetch_all_sources", lambda _settings: ([], []))
+    monkeypatch.setattr("astro_daily.pipeline.ClaudePaperAnalyst", FakeAnalyst)
+    monkeypatch.setattr("astro_daily.pipeline.write_daily_report", fake_write_daily_report)
+    monkeypatch.setattr("astro_daily.pipeline.generate_html_report", fake_generate_html_report)
+    monkeypatch.setattr("astro_daily.pipeline.compress_weekend_lessons", lambda _lessons, _date, url: f"Astro Daily ????\n??????????\n{url}")
+    monkeypatch.setattr("astro_daily.pipeline.publish_report_if_enabled", fake_publish)
+
+    with pytest.raises(RuntimeError, match="Publish health check failed"):
+        run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 3), dry_run=False)
+
+    assert not publish_called
+
+
 
 def test_defers_on_temporary_primary_arxiv_error_before_report_generation(monkeypatch, tmp_path):
     settings = make_settings(tmp_path)

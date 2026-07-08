@@ -12,6 +12,7 @@ from astro_daily.feedback import feedback_context_for_scoring, load_feedback
 from astro_daily.formula_integrity import HtmlFormulaValidationError, ensure_html_latex_formulas_valid, repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
+from astro_daily.publish_health import ensure_publish_health
 from astro_daily.quality import check_summary_quality, check_weekend_lesson_quality, quality_log_summary
 from astro_daily.report import render_report, write_daily_report
 from astro_daily.run_logging import RunLogger
@@ -288,10 +289,7 @@ def run_pipeline(
             html_formula_result = ensure_html_latex_formulas_valid(html_report_path)
         stage.update(_formula_result_log_data(html_formula_result))
     logger.info("HTML formula validation: checked=%s issues=%s", html_formula_result.checked_sections, html_formula_result.issue_count)
-    with run_logger.stage("publish", dry_run=dry_run) as stage:
-        publish_result = publish_report_if_enabled(settings, html_report_path, run_date, dry_run=dry_run)
-        stage.update(published=publish_result.published, published_url=publish_result.url)
-    report_url_value = publish_result.url or report_url(settings.site_base_url, run_date)
+    report_url_value = report_url(settings.site_base_url, run_date)
     with run_logger.stage("wechat_compression") as stage:
         if weekend_lessons:
             wechat_message = compress_weekend_lessons(weekend_lessons, run_date.isoformat(), report_url_value)
@@ -317,6 +315,19 @@ def run_pipeline(
     logger.info("WeChat selected papers: %s", len(selected_for_wechat))
     logger.info("WeChat HE ratio: %.2f", he_ratio)
     logger.info("WeChat message length: %s", len(wechat_message))
+
+    with run_logger.stage("publish_health_check") as stage:
+        health_result = ensure_publish_health(
+            settings=settings,
+            html_report_path=html_report_path,
+            wechat_message=wechat_message,
+            report_url=report_url_value,
+        )
+        stage.update(health_result.to_log_data())
+    with run_logger.stage("publish", dry_run=dry_run) as stage:
+        publish_result = publish_report_if_enabled(settings, html_report_path, run_date, dry_run=dry_run)
+        stage.update(published=publish_result.published, published_url=publish_result.url)
+    report_url_value = publish_result.url or report_url_value
 
     push_succeeded = dry_run or not settings.wechat.enabled
     publish_succeeded = dry_run or not settings.publish.enabled or publish_result.published or not settings.publish.require_success_before_push
