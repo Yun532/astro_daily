@@ -83,6 +83,28 @@ def test_repairs_double_escaped_inline_latex(tmp_path: Path):
     assert result.unresolved_count == 0
 
 
+def test_repairs_json_escape_damaged_latex_control_characters(tmp_path: Path):
+    path = tmp_path / "2026-07-08.md"
+    damaged = (
+        "公式被 JSON 转义污染后可能出现\n"
+        "\\[\n"
+        f"F=\\{chr(12)}rac{{E}}{{\\{chr(12)}rac{{1}}{{2}}}}+\\sin^2\\{chr(9)}heta_B+\\{chr(8)}ig[x]\n"
+        "\\]"
+    )
+    path.write_text(formula_section(damaged), encoding="utf-8")
+
+    result = repair_report_latex_formulas(path)
+    repaired = path.read_text(encoding="utf-8")
+
+    assert "\\frac{E}{\\frac{1}{2}}" in repaired
+    assert "\\theta_B" in repaired
+    assert "\\big[x]" in repaired
+    assert chr(12) not in repaired
+    assert chr(8) not in repaired
+    assert chr(9) not in repaired
+    assert result.unresolved_count == 0
+
+
 def test_does_not_touch_non_formula_sections():
     original = "# Astro Daily\n\n#### 背景知识\n\n关键公式为 $F_\\nu \\propto t^{-\\alpha}\n"
 

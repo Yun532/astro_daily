@@ -9,7 +9,7 @@ from datetime import date
 from astro_daily.classics import select_classic_paper
 from astro_daily.config import Settings, load_settings
 from astro_daily.feedback import feedback_context_for_scoring, load_feedback
-from astro_daily.formula_integrity import ensure_html_latex_formulas_valid, repair_report_latex_formulas
+from astro_daily.formula_integrity import HtmlFormulaValidationError, ensure_html_latex_formulas_valid, repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
 from astro_daily.quality import check_summary_quality, check_weekend_lesson_quality, quality_log_summary
@@ -275,7 +275,17 @@ def run_pipeline(
         html_report_path = generate_html_report(str(report_path))
         stage["html_report_path"] = html_report_path
     with run_logger.stage("html_formula_validation") as stage:
-        html_formula_result = ensure_html_latex_formulas_valid(html_report_path)
+        try:
+            html_formula_result = ensure_html_latex_formulas_valid(html_report_path)
+        except HtmlFormulaValidationError as exc:
+            logger.warning("HTML formula validation failed; retrying after Markdown formula repair: %s", exc)
+            stage.update(_formula_result_log_data(exc.result))
+            stage["retry_after_markdown_repair"] = True
+            retry_repair_result = repair_report_latex_formulas(report_path)
+            stage["retry_markdown_repair"] = _formula_result_log_data(retry_repair_result)
+            html_report_path = generate_html_report(str(report_path))
+            stage["retry_html_report_path"] = html_report_path
+            html_formula_result = ensure_html_latex_formulas_valid(html_report_path)
         stage.update(_formula_result_log_data(html_formula_result))
     logger.info("HTML formula validation: checked=%s issues=%s", html_formula_result.checked_sections, html_formula_result.issue_count)
     with run_logger.stage("publish", dry_run=dry_run) as stage:

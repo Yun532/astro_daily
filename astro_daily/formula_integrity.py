@@ -10,6 +10,13 @@ logger = logging.getLogger(__name__)
 FORMULA_HEADING = "#### 公式与推导"
 FORMULA_BOUNDARY_RE = re.compile(r"^####\s+")
 LATEX_COMMAND_RE = re.compile(r"\\[A-Za-z]+")
+JSON_ESCAPED_LATEX_CONTROL_RE = re.compile(r"\\([\b\f\r\t])(?=[A-Za-z])")
+JSON_ESCAPED_LATEX_CONTROL_MAP = {
+    "\b": "b",
+    "\f": "f",
+    "\r": "r",
+    "\t": "t",
+}
 PROTECTED_MARKDOWN_RE = re.compile(
     r"`[^`]*`"
     r"|!\[[^\]]*\]\([^)]*\)"
@@ -100,6 +107,7 @@ def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> Formu
 
 
 def _normalize_overescaped_latex(markdown_text: str) -> str:
+    markdown_text = _normalize_json_escaped_latex_controls(markdown_text)
     lines = markdown_text.split("\n")
     normalized: list[str] = []
     in_fence = False
@@ -128,6 +136,20 @@ def _normalize_overescaped_latex(markdown_text: str) -> str:
 
 def _normalize_latex_commands(text: str) -> str:
     return re.sub(r"\\\\([A-Za-z]+)", r"\\\1", text)
+
+
+def _normalize_json_escaped_latex_controls(text: str) -> str:
+    r"""Undo JSON escape damage in LaTeX commands such as \frac or \theta.
+
+    If a model emits a JSON string containing bare LaTeX like ``\frac``,
+    a permissive parser may turn ``\f`` into a form-feed control character
+    before the report-level repair step sees it.  At that point the Markdown
+    contains ``\<form-feed>rac`` instead of ``\frac``.  This repair is kept
+    narrow: it only restores control characters immediately after a backslash
+    and immediately before letters, which is the LaTeX-command shape.
+    """
+
+    return JSON_ESCAPED_LATEX_CONTROL_RE.sub(lambda match: "\\" + JSON_ESCAPED_LATEX_CONTROL_MAP[match.group(1)], text)
 
 
 def validate_html_latex_formulas(html_path: str | Path) -> FormulaIntegrityResult:
