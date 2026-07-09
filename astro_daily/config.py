@@ -170,6 +170,12 @@ class RunLogConfig(BaseModel):
     dir: str = "logs"
 
 
+class MaintenanceConfig(BaseModel):
+    enabled: bool = True
+    figure_cache_retention_days: int = Field(default=14, ge=1, le=365)
+    figure_asset_keep_recent_dates: int = Field(default=10, ge=1, le=60)
+
+
 class Settings(BaseModel):
     sources: SourcesConfig
     scoring: ScoringConfig
@@ -180,6 +186,7 @@ class Settings(BaseModel):
     publish: PublishConfig = Field(default_factory=PublishConfig)
     figure_extraction: FigureExtractionConfig = Field(default_factory=FigureExtractionConfig)
     run_log: RunLogConfig = Field(default_factory=RunLogConfig)
+    maintenance: MaintenanceConfig = Field(default_factory=MaintenanceConfig)
     site_base_url: str = "本地HTML报告"
     anthropic_api_key: str | None = None
     root_dir: Path = Field(default_factory=lambda: Path.cwd())

@@ -7,6 +7,7 @@ from datetime import date
 
 from astro_daily.config import load_settings
 from astro_daily.feedback import VALID_RATINGS, append_feedback
+from astro_daily.maintenance import cleanup_runtime_artifacts
 from astro_daily.pipeline import DEFERRED_RETRY_EXIT_CODE, DeferredRetryNeeded, fetch_all_sources, run_pipeline
 from astro_daily.process_lock import single_process_lock
 from src.clawbot_chat import run_clawbot_chat_loop, run_clawbot_chat_once
@@ -61,6 +62,27 @@ def main(argv: list[str] | None = None) -> int:
                 for error in errors:
                     print(f"- {error}")
             return 0 if papers else 1
+        if args.command == "cleanup":
+            settings = load_settings(args.config)
+            run_date = date.fromisoformat(args.date) if args.date else date.today()
+            result = cleanup_runtime_artifacts(settings, run_date=run_date, dry_run=not args.apply)
+            data = result.to_log_data()
+            mode = "Applied cleanup" if args.apply else "Dry-run cleanup"
+            print(f"{mode}: total={data['total_removed_mb']} MB; cache={data['cache_removed_mb']} MB; assets={data['asset_removed_mb']} MB")
+            print("Kept asset dates: " + ", ".join(result.kept_asset_dates))
+            if result.removed_paths:
+                print("Removed paths:" if args.apply else "Would remove paths:")
+                for path in result.removed_paths[:100]:
+                    print(f"- {path}")
+                if len(result.removed_paths) > 100:
+                    print(f"... {len(result.removed_paths) - 100} more")
+            if result.failed_paths:
+                print("Failed paths:")
+                for path in result.failed_paths[:50]:
+                    print(f"- {path}")
+                if len(result.failed_paths) > 50:
+                    print(f"... {len(result.failed_paths) - 50} more")
+            return 0
         if args.command == "feedback":
             settings = load_settings(args.config)
             feedback_date = date.fromisoformat(args.date) if args.date else None
@@ -151,6 +173,11 @@ def build_parser() -> argparse.ArgumentParser:
     test_fetch = subparsers.add_parser("test-fetch", help="Fetch and parse configured sources without LLM calls")
     test_fetch.add_argument("--config", default="config.yaml")
 
+    cleanup = subparsers.add_parser("cleanup", help="Remove old figure cache and old local figure assets")
+    cleanup.add_argument("--config", default="config.yaml")
+    cleanup.add_argument("--date", help="Reference date for cache retention, YYYY-MM-DD")
+    cleanup.add_argument("--apply", action="store_true", help="Actually delete files; default is dry-run")
+
     feedback = subparsers.add_parser("feedback", help="Record paper feedback for future recommendations")
     feedback.add_argument("--config", default="config.yaml")
     feedback.add_argument("rating", choices=sorted(VALID_RATINGS))
@@ -188,3 +215,7 @@ def _update_note_message(title: str, text: str) -> str:
 
 def _clawbot_report_link_message(site_base_url: str, run_date: date) -> str:
     return f"Astro Daily {run_date.isoformat()} 完整报告：\n{site_base_url.rstrip('/')}/reports/{run_date.isoformat()}.html"
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -11,6 +11,7 @@ from astro_daily.config import Settings, load_settings
 from astro_daily.feedback import feedback_context_for_scoring, load_feedback
 from astro_daily.formula_integrity import HtmlFormulaValidationError, ensure_html_latex_formulas_valid, repair_report_latex_formulas
 from astro_daily.llm import ClaudePaperAnalyst
+from astro_daily.maintenance import cleanup_runtime_artifacts
 from astro_daily.models import Paper, ScoredPaper, WeekendLesson
 from astro_daily.publish_health import ensure_publish_health
 from astro_daily.quality import check_summary_quality, check_weekend_lesson_quality, quality_log_summary
@@ -315,6 +316,13 @@ def run_pipeline(
     logger.info("WeChat selected papers: %s", len(selected_for_wechat))
     logger.info("WeChat HE ratio: %.2f", he_ratio)
     logger.info("WeChat message length: %s", len(wechat_message))
+
+    with run_logger.stage("maintenance_cleanup", dry_run=dry_run) as stage:
+        if settings.maintenance.enabled:
+            cleanup_result = cleanup_runtime_artifacts(settings, run_date=run_date, dry_run=dry_run)
+            stage.update(cleanup_result.to_log_data())
+        else:
+            stage["enabled"] = False
 
     with run_logger.stage("publish_health_check") as stage:
         health_result = ensure_publish_health(

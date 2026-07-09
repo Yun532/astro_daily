@@ -81,7 +81,7 @@ def _index_page_paths(settings: Settings) -> list[Path]:
 
 
 def _figure_asset_paths(settings: Settings, run_date: date) -> list[Path]:
-    asset_path = settings.root_dir / settings.figure_extraction.asset_dir / run_date.isoformat()
+    asset_path = settings.root_dir / settings.figure_extraction.asset_dir
     if not asset_path.exists():
         return []
     return [asset_path.resolve().relative_to(settings.root_dir.resolve())]

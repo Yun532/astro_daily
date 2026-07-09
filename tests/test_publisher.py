@@ -95,7 +95,7 @@ def test_enabled_publisher_runs_git_for_report_nav_and_assets(tmp_path, monkeypa
     result = publish_report_if_enabled(settings, str(write_html(tmp_path)), date(2026, 5, 2))
 
     assert result.published
-    assert ["add", "--", "docs/reports/2026-05-01.html", "docs/reports/2026-05-02.html", "docs/index.html", "docs/assets/figures/2026-05-02"] in calls
+    assert ["add", "--", "docs/reports/2026-05-01.html", "docs/reports/2026-05-02.html", "docs/index.html", "docs/assets/figures"] in calls
     assert ["commit", "-m", "Publish Astro Daily report 2026-05-02"] in calls
     assert ["push", "origin", "main"] in calls
 
