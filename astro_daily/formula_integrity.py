@@ -108,6 +108,7 @@ def repair_report_latex_formulas(md_path: Path, *, repair: bool = True) -> Formu
 
 def _normalize_overescaped_latex(markdown_text: str) -> str:
     markdown_text = _normalize_json_escaped_latex_controls(markdown_text)
+    markdown_text = _normalize_line_broken_latex_rm(markdown_text)
     lines = markdown_text.split("\n")
     normalized: list[str] = []
     in_fence = False
@@ -150,6 +151,21 @@ def _normalize_json_escaped_latex_controls(text: str) -> str:
     """
 
     return JSON_ESCAPED_LATEX_CONTROL_RE.sub(lambda match: "\\" + JSON_ESCAPED_LATEX_CONTROL_MAP[match.group(1)], text)
+
+
+def _normalize_line_broken_latex_rm(text: str) -> str:
+    r"""Undo line-broken ``\rm`` fragments in generated LaTeX.
+
+    A common failure mode is ``N_m^{\`` followed by a newline and ``m surv}``,
+    which should have been ``N_m^{\rm surv}``.  Inline math sometimes arrives
+    as ``N_m^{\}}\)`` followed by ``m surv}\)``.  Both shapes are narrow enough
+    to repair before the broader formula scanner runs.
+    """
+
+    text = text.replace("\\[\\n", "\\[\n").replace("\\]\\n", "\\]\n")
+    text = re.sub(r"([_^])\{\\\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}", r"\1{\\rm \2}", text)
+    text = re.sub(r"([_^])\{\\\}\}\\\)\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}\\\)", r"\1{\\rm \2}\\)", text)
+    return text
 
 
 def validate_html_latex_formulas(html_path: str | Path) -> FormulaIntegrityResult:

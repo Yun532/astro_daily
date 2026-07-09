@@ -105,6 +105,34 @@ def test_repairs_json_escape_damaged_latex_control_characters(tmp_path: Path):
     assert result.unresolved_count == 0
 
 
+def test_repairs_line_broken_rm_fragments(tmp_path: Path):
+    path = tmp_path / "2026-07-09.md"
+    damaged = (
+        "第九步，计算量压缩可写为\n"
+        "\\[\\nC_{\\\n"
+        "m prune}=\\sum_m N_m^{\\\n"
+        "m surv}c_m,\\qquad C_{\\\n"
+        "m full}=\\sum_m N_m^{\\\n"
+        "m all}c_m\n"
+        "\\]\n"
+        "其中 \\(N_m^{\\}}\\)\n"
+        "m surv}\\) 是幸存模板数，\\(T_{\\}}\\)\n"
+        "m coh}\\) 是相干时间。"
+    )
+    path.write_text(formula_section(damaged), encoding="utf-8")
+
+    result = repair_report_latex_formulas(path)
+    repaired = path.read_text(encoding="utf-8")
+
+    assert "\\[\nC_{\\rm prune}" in repaired
+    assert "N_m^{\\rm surv}c_m" in repaired
+    assert "C_{\\rm full}" in repaired
+    assert "N_m^{\\rm all}c_m" in repaired
+    assert "\\(N_m^{\\rm surv}\\)" in repaired
+    assert "\\(T_{\\rm coh}\\)" in repaired
+    assert result.unresolved_count == 0
+
+
 def test_does_not_touch_non_formula_sections():
     original = "# Astro Daily\n\n#### 背景知识\n\n关键公式为 $F_\\nu \\propto t^{-\\alpha}\n"
 
