@@ -20,8 +20,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Publish docs to gh-pages
+      - name: Prepare Pages site
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp -a docs/. _site/
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          import shutil
+
+          figures = Path("_site/assets/figures")
+          keep_latest = 5
+          if figures.exists():
+              dated_dirs = sorted(
+                  path
+                  for path in figures.iterdir()
+                  if path.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", path.name)
+              )
+              for path in dated_dirs[:-keep_latest]:
+                  shutil.rmtree(path)
+          PY
+          du -sh _site
+
+      - name: Publish site to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./_site
