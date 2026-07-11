@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-07-11</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-07-11</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-07-11">
+      <a class="previous" href="2026-07-10.html">← 上一期：2026-07-10</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-07-11T11:23:16+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">数据源警告</h2>
+<ul>
+<li>本次有 1 个数据源访问异常；完整错误已保留在运行日志中，日报只显示摘要。</li>
+<li>arXiv API：1 个分类访问异常，候选池可能不完整；程序会基于已成功获取的数据继续兜底。</li>
+<li>主要错误类型：超时 1 次。</li>
+</ul>
+<h2 id="_2">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-tde">1. TDE 从零到前沿（一）：恒星怎样被黑洞撕碎</h3>
+<ul>
+<li>课程系列：TDE 从零到前沿课程（第 1/5 讲）</li>
+<li>本讲边界：本讲从零讲 TDE：潮汐半径、事件视界、最束缚物质返回、fallback 率和 \(t^{-5/3}\) 近似。不讲辐射转移和统一模型细节。</li>
+<li>上下文承接：这是 TDE 系列第一讲，与 GRB 的相对论喷流不同，TDE 的第一性问题是恒星自引力和黑洞潮汐力的竞争。</li>
+<li>主题：tidal disruption event basics, tidal radius, event horizon and fallback</li>
+<li>经典工作：Hills 1975、Rees 1988 和 Phinney 1989 建立的 tidal radius、fallback debris 和 flare 基本图像。</li>
+<li>为什么经典：TDE 入门必须先学会 \(R_{\rm t}\)、\(R_{\rm S}\)、\(\Delta E\)、\(t_{\rm min}\)、\(\dot M_{\rm fb}\) 这条推导链，否则后面的光学/X-ray/radio 差异会失去物理锚点。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_3">经典工作详细讲解</h4>
+<p>第一段：本讲是“TDE 从零到前沿课程”的第一讲，主题不是先问“为什么会亮”，而是先问“恒星怎样被黑洞撕碎，以及被撕碎后的质量供应率如何确定”。与前面学生可能熟悉的 GRB afterglow 不同，这里没有从相对论喷流、外激波和辐射谱开始，而是从恒星自引力与黑洞外部潮汐场的竞争开始。黑洞在恒星尺度上造成的差分加速度可估为 \(a_{\rm tide}\sim GM_{\rm BH}R_*/R^3\)，恒星表面自引力可估为 \(a_*\sim GM_*/R_*^2\)。当 \(a_{\rm tide}\) 与 \(a_*\) 同量级时，恒星不能再近似看成一个保持整体静水平衡的自引力球体，潮汐破坏事件的动力学入口由此打开。本讲只建立供给端动力学：\(R_{\rm t}\)、\(R_{\rm S}\)、\(\beta\)、\(\Delta E\)、\(t_{\rm min}\) 和 \(\dot M_{\rm fb}\)。圆化、吸积盘、风、再处理和完整辐射转移留到第二讲。</p>
+<p>第二段：历史上，Hills 1975、Rees 1988 和 Phinney 1989 形成了一条非常清晰的经典链条。Hills 强调星系核中的大质量黑洞与恒星近距离相遇时，可以在动力学上破坏恒星；Rees 把这种破坏同暂现 flare 联系起来，并指出在近抛物线遭遇中，碎片自然分成束缚和逃逸两部分；Phinney 进一步指出，若碎片质量分布 \({\rm d}M/{\rm d}E\) 在 \(E=0\) 附近近似平坦，那么回落率 \(\(\dot\) M_{\rm fb}=({\rm d}M/{\(\rm\) d}E)|{<br />
+m d}E/{\(\rm\) d}t|) 在晚期会趋向 \(\dot M_{\rm fb}\propto t^{-5/3}\)。这些经典工作给出的不是现代多波段 TDE 的完整统一模型，而是一个动力学底座：先计算有多少物质在什么时候回到黑洞附近，再讨论这些物质是否能变成可观测辐射。</p>
+<p>第三段：完整推导链的第一步是潮汐半径。采用牛顿引力并把恒星用 \(M_*\) 和 \(R_*\) 描述，令 \(GM_{\rm BH}R_*/R^3\sim GM_*/R_*^2\)，可得 \(R_{\rm t}\simeq R_*(M_{\rm BH}/M_*)^{1/3}\)。这一步解出的是恒星开始被潮汐场显著破坏的空间尺度。第二步是可见性判断：对非旋转黑洞，\(R_{\rm S}=2GM_{\rm BH}/c^2\)，若要求破坏发生在视界外，需满足 \(R_{\rm t}\gtrsim R_{\rm S}\)。令二者相等可得太阳型恒星的 Hills mass 数量级，\(M_{\rm BH,max}\sim (c^2R_*/2G)^{3/2}M_*^{-1/2}\)，大约落在 \(10^8M_\odot\) 附近，但黑洞自旋、捕获截面和相对论轨道会改变这个边界。</p>
+<p>第四段：第三步是描述遭遇深浅。定义穿透因子 \(\beta\equiv R_{\rm t}/R_{\rm p}\)，其中 \(R_{\rm p}\) 是近心距离，因此 \(R_{\rm p}=R_{\rm t}/\beta\)。\(\beta\sim1\) 表示临界破坏数量级，\(\beta>1\) 表示更深的近心通过，\(\beta<1\) 则可能只是剥离或扰动。这里要避免一个常见误区：较大的 \(\beta\) 不必然意味着更亮的观测 flare，因为恒星结构、流体响应、相对论进动、圆化效率和辐射再处理都会改变从动力学到光度的映射。本讲只把 \(\beta\) 作为轨道深浅参数，不展开 partial disruption 的数值模拟细节。</p>
+<p>第五段：第四步是碎片能量展宽。若恒星质心近似沿抛物线轨道进入黑洞势阱，则质心单位质量轨道能量接近零。黑洞势在恒星尺度上的梯度给碎片带来能量散布，零阶估计为 \(\Delta E\sim GM_{\rm BH}R_*/R_{\rm t}^2\)。代入 \(R_{\rm t}\) 后得到 \(\Delta E\sim GM_{\rm BH}^{1/3}M_*^{2/3}/R_*\)。这一步解出的是碎片单位质量轨道能量的典型宽度：能量为负的碎片束缚并最终回落，能量为正的碎片逃逸。随后用开普勒束缚轨道关系 \(E=-GM_{\rm BH}/(2a)\)，对最束缚碎片取 \(E\simeq-\Delta E\)，得到 \(a_{\rm min}\simeq GM_{\rm BH}/(2\Delta E)\)。</p>
+<p>第六段：第五步是最早回落时间。束缚碎片近似沿高偏心开普勒轨道返回近心点，周期满足 \(P(E)=2\pi a^{3/2}/(GM_{\rm BH})^{1/2}\)。将 \(a_{\rm min}\) 代入，得到 \(t_{\rm min}\simeq 2\pi GM_{\rm BH}(2\Delta E)^{-3/2}\)。对太阳型标度，常写为 \(t_{\rm min}\sim 41\,{\rm d}\,(M_{\rm BH}/10^6M_\odot)^{1/2}(M_*/M_\odot)^{-1}(R_*/R_\odot)^{3/2}\)。这个时间不是从 \(R_{\rm t}\) 自由落体到黑洞的时间，而是最束缚碎片完成高偏心轨道并首次返回近心点的时间，因此它把潮汐破坏瞬间的能量分布连接到了可观测瞬变的时间尺度。</p>
+<p>第七段：第六步是推导经典 \(t^{-5/3}\) fallback 律。任一束缚碎片的回落时间可写为 \(t(E)=2\pi GM_{\rm BH}(2|E|)^{-3/2}\)。反解得到 \(|E(t)|=\frac{1}{2}(2\pi GM_{\rm BH})^{2/3}t^{-2/3}\)，进一步有 (|{<br />
+m d}E/{\(\rm\) d}t|=\frac{1}{3}(2\pi GM_{\rm BH})^{2/3}t^{-5/3})。若晚期对应 \(E\to0^-\) 的碎片，并且 \({\rm d}M/{\rm d}E\) 在 \(E=0\) 附近近似常数，则 \(\(\dot\) M_{\rm fb}=({\rm d}M/{\(\rm\) d}E)|{<br />
+m d}E/{\(\rm\) d}t|\(\propto\) \(t^{-5/3}\))。常用归一化为 \(\dot M_{\rm fb}(t)\simeq M_*/(3t_{\rm min})(t/t_{\rm min})^{-5/3}\)，适用于 \(t\gtrsim t_{\rm min}\) 的零阶估算。必须强调：这里得到的是 \(\dot M_{\rm fb}\)，不是 \(\dot M_{\rm acc}\)，更不是任意波段观测光度 \(L_{\rm obs}\)。</p>
+<p>第八段：为了把动力学底座与观测诊断连接起来，可以引入 Eddington 标度。Eddington 光度为 \(L_{\rm Edd}=4\pi GM_{\rm BH}m_pc/\sigma_T\)，若名义辐射效率为 \(\eta\)，则 \(\dot M_{\rm Edd}=L_{\rm Edd}/(\eta c^2)\)。比较 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 可以判断早期质量供应是否可能超 Eddington，但不能把它直接等同于 \(L/L_{\rm Edd}\)。教学上可暂时写出最低阶闭合 \(L(t)\simeq \eta_{\rm eff}\dot M_{\rm fb}(t)c^2\)，但 \(\eta_{\rm eff}\) 折叠了圆化、吸积、盘风、再处理、观测角和 bolometric correction，不是普适常数。这个闭合只是帮助学生从供给率走向光变拟合的桥梁。</p>
+<p>第九段：读论文和做拟合时，第一层检查是模型是否只在检验 fallback supply，还是把观测光度直接当作 fallback。最小经验模型可写为 \(F(t)=F_0[(t-t_0)/t_0']^{-5/3}+F_{\rm host}\)，用于检验晚期是否相容于经典斜率；更灵活的模型可写为 \(L(t)=L_{\rm pk}[1+(t-t_{\rm pk})/t_s]^{-n}\)，再检查 \(n\) 是否接近 \(5/3\)。若数据是计数，应在计数空间使用 Poisson 似然，例如 \(\ln {\cal L}=\sum_i[k_i\ln\mu_i-\mu_i-\ln(k_i!)]\)；若使用校正后 flux，则需确认高斯误差、协方差和上限处理是否合理。贝叶斯解释应写为 \(p(\theta|D)\propto {\cal L}(D|\theta)p(\theta)\)，并检查 \(t_0\) 与 \(n\)、\(A_V\) 与 \(L_{\rm bol}\)、\(M_{\rm BH}\) 与 \(t_{\rm min}\)、宿主扣除与晚期斜率之间的退化。</p>
+<p>第十段：图像阅读同样要服务于物理链条，而不是只看 best-fit 曲线。半径比较图中要看 \(R_{\rm t}\propto M_{\rm BH}^{1/3}\) 与 \(R_{\rm S}\propto M_{\rm BH}\) 的交点，避免误以为黑洞越大越容易产生可见 TDE。轨道示意图中要把束缚碎片和逃逸碎片同正负轨道能量联系起来。\({\rm d}M/{\rm d}E\) 图中要看 \(E=0\) 附近是否平坦，因为这决定晚期 \(t^{-5/3}\) 是否自然出现。fallback rate 图中要确认 log-log 斜率、时间零点和晚期覆盖长度。Eddington 比图中要区分 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 与 \(L/L_{\rm Edd}\)。多波段黑体图中要同时检查 \(L_{\rm bol}\)、\(T_{\rm bb}\) 和 \(R_{\rm bb}\)，并记住黑体半径可能只是再处理光球。残差图和 corner 图中要关注系统偏离、置信区间和参数退化；曲线穿过数据点不等于物理参数已经被精确测量。本讲的结尾边界很清楚：下一讲从 \(\dot M_{\rm fb}\) 作为输入，讨论 circularization、\(\dot M_{\rm acc}\)、超 Eddington 风和再处理如何决定真实的 \(L_\nu(t)\)。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_4">背景知识</h4>
+<p>第一段：TDE 的重要性在于，它能把一个原本安静的星系核临时点亮，让我们看到低活动性或休眠超大质量黑洞如何突然获得气体供应。对许多星系来说，中心黑洞平时没有明亮 AGN，因此很难直接研究其吸积物理；而当一颗恒星进入损失锥并经过黑洞附近时，潮汐场可能把恒星撕裂，形成一次持续数周到数年的暂现事件。TDE 因而连接了核星团动力学、黑洞质量函数、瞬变巡天、吸积盘物理和高能辐射过程。</p>
+<p>第二段：入门时最常见的误区是把 TDE 说成“黑洞吃掉恒星所以发光”。这个说法忽略了三个关键环节。第一，恒星是否在视界外被破坏取决于 \(R_{\rm t}\) 与 \(R_{\rm S}\) 的比较，并非黑洞越大越容易看到 flare。第二，恒星被撕碎后并不会立刻全部吸积，碎片首先形成具有不同轨道能量的 debris stream。第三，观测到的光学、紫外或 X-ray 光度通常经过圆化、吸积、风和再处理等环节，不能简单等同于 \(\dot M_{\rm fb}c^2\)。</p>
+<p>第三段：TDE 与超新星、AGN 和 GRB 的差别也应在第一讲说清楚。超新星主要由恒星内部能量释放和抛射物膨胀控制，AGN 是长期气体供应和稳定或准稳定吸积的结果，GRB afterglow 通常围绕相对论喷流与外部介质相互作用展开。TDE 的第一性标度则来自外部潮汐场压倒恒星自引力，核心量是 \(R_{\rm t}\)、\(\Delta E\)、\(t_{\rm min}\) 和 \(\dot M_{\rm fb}\)。因此，本讲的基础不是辐射谱线或喷流动力学，而是潮汐力、开普勒轨道和质量回落。</p>
+<p>第四段：经典理论能够早于大样本观测建立，是因为 TDE 的零阶标度非常强。Hills 1975 从星系核黑洞与恒星近距离相遇的动力学可能性出发，指出恒星可被大质量黑洞破坏。Rees 1988 进一步把视界外破坏与暂现 flare 联系起来，强调近抛物线遭遇中约一半碎片束缚、约一半碎片逃逸。Phinney 1989 则把 \({\rm d}M/{\rm d}E\) 与 \(\dot M_{\rm fb}\) 联系起来，说明在 \(E=0\) 附近平坦的能量分布自然导出晚期 \(t^{-5/3}\) 回落。这条历史链条并不依赖复杂辐射转移模型，却为后来的观测解释提供了共同语言。</p>
+<p>第五段：从观测史看，早期 TDE 候选多来自软 X-ray 暂现，后来紫外和光学巡天显著扩大了样本，少数事件还显示射电外流或相对论喷流。不同样本之间的表观差异很大：有些事件 X-ray 亮，有些光学和紫外亮，有些温度近似恒定，有些出现延迟 X-ray 或再亮。这些差异说明观测光变并非 \(t^{-5/3}\) 的简单投影，但所有解释仍然需要回答同一个底层问题：恒星被撕裂后，质量以怎样的速率回到黑洞附近，即 \(\dot M_{\rm fb}(t)\) 的形状和归一化是什么。</p>
+<p>第六段：本讲作为系列第一讲，需要明确边界。我们会推导 \(R_{\rm t}\simeq R_*(M_{\rm BH}/M_*)^{1/3}\)，比较 \(R_{\rm t}\) 与 \(R_{\rm S}=2GM_{\rm BH}/c^2\)，定义 \(\beta=R_{\rm t}/R_{\rm p}\)，估计 \(\Delta E\sim GM_{\rm BH}R_*/R_{\rm t}^2\)，再由开普勒轨道得到 \(t_{\rm min}\) 和 \(\dot M_{\rm fb}\propto t^{-5/3}\)。我们不会在本讲系统展开 circularization shocks、disk formation、outflow photosphere、reprocessing layer 或统一多波段模型；这些属于第二讲及之后的内容。</p>
+<p>第七段：学习本讲后，学生应该能对一个给定的 \(M_{\rm BH}\)、\(M_*\) 和 \(R_*\) 做零阶判断：潮汐破坏是否可能发生在视界外，最早回落时间大约是几天、几十天还是几个月，早期 \(\dot M_{\rm fb}\) 是否可能超过 \(\dot M_{\rm Edd}\)，以及为什么观测光变偏离 \(t^{-5/3}\) 不必然否定 TDE 解释。更重要的是，学生应能在读论文时主动区分 \(\dot M_{\rm fb}\)、\(\dot M_{\rm acc}\) 和 \(L_{\rm obs}\)，并知道任何把三者直接等同的模型都只是最低阶近似。</p>
+<p>第八段：另一个常见误区是只用一条幂律曲线识别 TDE。实际读图时，必须同时看半径比较、轨道示意、\({\rm d}M/{\rm d}E\)、fallback rate、Eddington 比、多波段黑体参数、残差和后验分布。若数据覆盖时间很短，\(t_0\) 未被峰前观测约束，宿主扣除不稳定，或 \(A_V\) 与 bolometric correction 不确定，那么表观幂律指数 \(n\) 的置信区间会很宽。第一讲的目标不是训练学生把所有 TDE 都塞进 \(t^{-5/3}\) 模板，而是训练他们知道这个模板从哪里来、何时可靠、何时只是一个对照基准。</p>
+<h4 id="_5">基础理论 / 方法脉络</h4>
+<p>第一段：基础图像从两个加速度开始。恒星表面物质被恒星自身束缚，其自引力数量级为 \(a_*\sim GM_*/R_*^2\)。当恒星质心距离黑洞为 \(R\) 时，黑洞在恒星近端和远端造成的差分引力数量级为 \(a_{\rm tide}\sim GM_{\rm BH}R_*/R^3\)。若 \(a_{\rm tide}\ll a_*\)，恒星可以近似保持整体结构；若 \(a_{\rm tide}\gtrsim a_*\)，恒星不同部分受到的外部引力差异足以破坏自引力平衡。令两者相等得到潮汐半径 \(R_{\rm t}\simeq R_*(M_{\rm BH}/M_*)^{1/3}\)。这一式子是 TDE 入门的第一个锚点。</p>
+<p>第二段：\(R_{\rm t}\) 的物理含义不是“黑洞表面”或“发光半径”，而是恒星自引力与黑洞潮汐场相当的距离。它可以改写为与恒星平均密度相关的尺度，因此致密恒星更难被撕碎，膨胀恒星更容易在较远处受扰动。太阳型恒星、红巨星和白矮星面对同一黑洞时会有非常不同的 \(R_{\rm t}\)。这也解释了为什么 TDE 不是单一类型事件：被扰动恒星的结构不同，后续碎片能量分布和回落曲线也会不同。</p>
+<p>第三段：有了 \(R_{\rm t}\)，下一步必须问破坏是否发生在事件视界外。对非旋转 Schwarzschild 黑洞，视界尺度为 \(R_{\rm S}=2GM_{\rm BH}/c^2\)。由于 \(R_{\rm t}\propto M_{\rm BH}^{1/3}\)，而 \(R_{\rm S}\propto M_{\rm BH}\)，黑洞质量增大时视界半径增长更快。因此对太阳型恒星，超过某一黑洞质量后，恒星可能在产生可见潮汐破坏 flare 前就被直接吞没。令 \(R_{\rm t}\sim R_{\rm S}\) 可得 \(M_{\rm BH,max}\sim (c^2R_*/2G)^{3/2}M_*^{-1/2}\) 的数量级，这就是 Hills mass 的入门估计。</p>
+<p>第四段：真实遭遇还需要描述轨道有多深。近心距离记为 \(R_{\rm p}\)，穿透因子定义为 \(\beta\equiv R_{\rm t}/R_{\rm p}\)，因此 \(R_{\rm p}=R_{\rm t}/\beta\)。\(\beta\sim1\) 对应临界破坏数量级，\(\beta>1\) 是更深穿透，\(\beta<1\) 可能对应部分剥离或潮汐扰动。教学中应强调，\(\beta\) 是轨道几何参数，不是直接的光度旋钮；更深的遭遇可能改变 \({\rm d}M/{\rm d}E\)、冲击强度、相对论进动和剩余核心行为，但本讲只把它作为连接轨道与潮汐尺度的第一参数。</p>
+<p>第五段：碎片为何一半回落、一半逃逸，需要引入轨道能量。若恒星质心近似沿抛物线轨道进入黑洞势阱，其质心单位质量轨道能量接近 \(E=0\)。潮汐场在恒星半径尺度上造成势能差，给碎片赋予能量展宽 \(\Delta E\sim GM_{\rm BH}R_*/R_{\rm t}^2\)。代入潮汐半径可得 \(\Delta E\sim GM_{\rm BH}^{1/3}M_*^{2/3}/R_*\)。能量为负的碎片满足束缚轨道关系 \(E=-GM_{\rm BH}/(2a)\)，会在未来回到近心点；能量为正的碎片则逃逸到无穷远。这一步把“恒星被撕碎”的空间图像转化为“质量分布在轨道能量上”的动力学图像。</p>
+<p>第六段：最束缚物质决定第一批回落时间。取最束缚碎片的能量为 \(E\simeq-\Delta E\)，由 \(E=-GM_{\rm BH}/(2a)\) 得到 \(a_{\rm min}\simeq GM_{\rm BH}/(2\Delta E)\)。再用开普勒周期 \(P(E)=2\pi a^{3/2}/(GM_{\rm BH})^{1/2}\)，可得 \(t_{\rm min}\simeq 2\pi GM_{\rm BH}(2\Delta E)^{-3/2}\)。常用标度为 \(t_{\rm min}\sim 41\,{\rm d}\,(M_{\rm BH}/10^6M_\odot)^{1/2}(M_*/M_\odot)^{-1}(R_*/R_\odot)^{3/2}\)。这说明 TDE 的早期时间尺度主要由黑洞质量和恒星结构决定，而不是简单的从潮汐半径自由落体时间。</p>
+<p>第七段：经典 \(t^{-5/3}\) 律来自能量到时间的映射。任意束缚碎片的返回时间可写为 \(t(E)=2\pi GM_{\rm BH}(2|E|)^{-3/2}\)，因此 \(|E(t)|=\frac{1}{2}(2\pi GM_{\rm BH})^{2/3}t^{-2/3}\)，并有 (|{<br />
+m d}E/{\(\rm\) d}t|=\frac{1}{3}(2\pi GM_{\rm BH})^{2/3}t^{-5/3})。回落率为 \(\(\dot\) M_{\rm fb}=({\rm d}M/{\(\rm\) d}E)|{<br />
+m d}E/{\(\rm\) d}t|)。若 \({\rm d}M/{\rm d}E\) 在 \(E=0\) 附近平坦，晚期自然得到 \(\dot M_{\rm fb}\propto t^{-5/3}\)，常用归一化为 \(\dot M_{\rm fb}(t)\simeq M_*/(3t_{\rm min})(t/t_{\rm min})^{-5/3}\)。这里的限制条件必须记住：完整破坏、近抛物线遭遇、平坦能量分布、开普勒映射和晚期近似。</p>
+<p>第八段：最后要把理论量与观测量分层。\(\dot M_{\rm fb}\) 是碎片回到近心点附近的质量供应率，\(\dot M_{\rm acc}\) 是真正通过内盘并释放引力能的吸积率，\(L_{\rm obs}\) 或 \(L_\nu(t)\) 是经过辐射转移、吸收、再处理和仪器选择后看到的光度。可以用 \(L_{\rm Edd}=4\pi GM_{\rm BH}m_pc/\sigma_T\) 与 \(\dot M_{\rm Edd}=L_{\rm Edd}/(\eta c^2)\) 估计早期是否超 Eddington，也可以用教学闭合 \(L(t)\simeq \eta_{\rm eff}\dot M_{\rm fb}(t)c^2\) 建立第一联系，但不能把这个闭合当成完整辐射模型。读论文时应检查拟合是否允许 \(t_0\)、幂律指数 \(n\)、宿主背景、消光 \(A_V\) 和 bolometric correction 自由变化；应看残差是否在峰值、晚期或不同波段系统偏离；应看 corner 图中 \(M_{\rm BH}\)、\(t_{\rm min}\)、\(n\) 和 \(A_V\) 的退化。至此，本讲完成供给端动力学；下一讲将在此基础上解释圆化、吸积盘、超 Eddington 风和再处理如何把 \(\dot M_{\rm fb}\) 转化为真实多波段光变。</p>
+<h4 id="_6">公式与推导</h4>
+<p>第一步：先建立潮汐半径，这是整条推导链的入口。假设恒星可用质量 \(M_*\) 和半径 \(R_*\) 描述，黑洞质量为 \(M_{\rm BH}\)，恒星质心到黑洞的距离为 \(R\)，并采用牛顿引力的数量级估计。黑洞在恒星尺度上造成的差分加速度与恒星表面自引力分别为</p>
+<div class="math-display">\[a_{\rm tide}\sim \frac{GM_{\rm BH}R_*}{R^3},\qquad a_*\sim \frac{GM_*}{R_*^2}.\]</div>
+<p>令 \(a_{\rm tide}\sim a_*\)，解出潮汐半径</p>
+<div class="math-display">\[R_{\rm t}\simeq R_*\left(\frac{M_{\rm BH}}{M_*}\
+ight)^{1/3}.\]</div>
+<p>这一步解出的 \(R_{\rm t}\) 不是发光半径，而是恒星自引力与黑洞潮汐场相当的动力学半径；下一步要判断这个半径是否位于事件视界之外。</p>
+<p>第二步：把潮汐破坏条件与黑洞视界可见性连接起来。先只考虑非旋转 Schwarzschild 黑洞，不加入自旋、捕获截面和相对论轨道修正，其视界尺度为</p>
+<div class="math-display">\[R_{\rm S}=\frac{2GM_{\rm BH}}{c^2}.\]</div>
+<p>若要在视界外发生可见潮汐破坏，粗略要求 \(R_{\rm t}\gtrsim R_{\rm S}\)。令 \(R_{\rm t}=R_{\rm S}\) 可得最大可见黑洞质量的数量级</p>
+<div class="math-display">\[M_{\
+m BH,max}\sim \left(\frac{c^2R_*}{2G}\
+ight)^{3/2}M_*^{-1/2}.\]</div>
+<p>这个结果说明 \(R_{\rm S}\) 随 \(M_{\rm BH}\) 增长快于 \(R_{\rm t}\)，因此更大黑洞并不必然更容易产生可见 ({\<br />
+m TDE})；完成可见性判断后，下一步需要描述轨道进入潮汐半径的深浅。</p>
+<p>第三步：用穿透因子给近心遭遇定参。假设恒星沿近抛物线轨道经过黑洞，近心距离为 \(R_{\rm p}\)，定义</p>
+<div class="math-display">\[\beta\equiv \frac{R_{\rm t}}{R_{\rm p}},\qquad R_{\rm p}=\frac{R_{\rm t}}{\beta}.\]</div>
+<p>这里 \(\beta\) 是轨道几何参数：\(\beta\sim 1\) 对应临界破坏数量级，\(\beta>1\) 表示更深穿透，\(\beta<1\) 可能对应部分剥离或潮汐扰动。它为估计近心处的潮汐能量注入提供尺度，但不能被直接解释为观测光度的唯一旋钮。</p>
+<p>第四步：估计碎片获得的单位质量轨道能量展宽。假设恒星质心轨道近似抛物线，因此质心单位质量轨道能量接近 \(0\)；再采用冻结近似，认为碎片在潮汐半径附近获得由黑洞势梯度造成的能量差。于是</p>
+<div class="math-display">\[\Delta E\sim \frac{GM_{\rm BH}R_*}{R_{\rm t}^2}\sim \frac{G M_{\rm BH}^{1/3}M_*^{2/3}}{R_*}.\]</div>
+<p>这一步解出的是碎片单位质量轨道能量的典型宽度。能量为负的碎片将被束缚并回落，能量为正的碎片将逃逸；下一步把这个能量宽度转化为束缚轨道的空间尺度。</p>
+<p>第五步：由最束缚能量求最束缚碎片的半长轴。对束缚的开普勒两体轨道，单位质量轨道能量与半长轴满足</p>
+<div class="math-display">\[E=-\frac{GM_{\rm BH}}{2a}.\]</div>
+<p>最束缚碎片的能量取 \(E\simeq -\Delta E\)，于是得到</p>
+<div class="math-display">\[a_{\rm min}\simeq \frac{GM_{\rm BH}}{2\Delta E}.\]</div>
+<p>这一步把潮汐破坏时的能量展宽 \(\Delta E\) 转化为第一批回落物质的轨道尺度 \(a_{\rm min}\)；接下来用开普勒周期得到最早回落时间。</p>
+<p>第六步：推导最束缚碎片的回落时间。忽略流体相互作用、圆化冲击和相对论修正，束缚碎片沿高偏心开普勒轨道返回近心点。轨道周期给出</p>
+<div class="math-display">\[t_{\rm min}\simeq 2\pi GM_{\rm BH}(2\Delta E)^{-3/2}.\]</div>
+<p>代入上一步的 \(\Delta E\) 后，太阳型恒星的常用标度为</p>
+<div class="math-display">\[t_{\rm min}\sim 41\\,{\
+m d}\left(\frac{M_{\rm BH}}{10^6M_\odot}\
+ight)^{1/2}\left(\frac{M_*}{M_\odot}\
+ight)^{-1}\left(\frac{R_*}{R_\odot}\
+ight)^{3/2}.\]</div>
+<p>这里解出的 \(t_{\rm min}\) 是最束缚碎片完成高偏心轨道并首次返回近心点的时间，而不是从 \(R_{\rm t}\) 自由落体的时间；有了最早回落时间，下一步要推广到任意束缚能量的碎片。</p>
+<p>第七步：建立能量到回落时间的映射。对任意束缚碎片，回落时间由其单位质量束缚能 \(|E|\) 决定，开普勒关系可写为</p>
+<div class="math-display">\[t(E)=2\pi GM_{\rm BH}(2|E|)^{-3/2},\qquad |E(t)|=\frac{1}{2}(2\pi GM_{\rm BH})^{2/3}t^{-2/3}.\]</div>
+<p>这一步说明越接近 \(E=0^-\) 的碎片半长轴越大，返回越晚；因此晚期回落实际是在探测 \(E=0\) 附近的碎片质量分布。</p>
+<p>第八步：对能量时间映射求导，得到经典幂律的动力学来源。由上式直接得到</p>
+<div class="math-display">\[\left|\frac{{\
+m d}E}{{\
+m d}t}\
+ight|=\frac{1}{3}(2\pi GM_{\rm BH})^{2/3}t^{-5/3}.\]</div>
+<p>这里的 \(-5/3\) 指数首先来自开普勒动力学，即 \(t\propto |E|^{-3/2}\)，还没有使用任何辐射过程假设；下一步只需乘上质量在能量空间的分布。</p>
+<p>第九步：从碎片质量能量分布得到回落率。回落率定义为单位时间返回近心点附近的质量供应率，满足</p>
+<div class="math-display">\[\dot M_{\rm fb}=\frac{{\
+m d}M}{{\
+m d}E}\left|\frac{{\
+m d}E}{{\
+m d}t}\
+ight|.\]</div>
+<p>若完整破坏的碎片在 \(E=0\) 附近满足近似平坦分布 ({\<br />
+m d}M/{\<br />
+m d}E\approx {\<br />
+m const})，则晚期自然得到 \(\dot M_{\rm fb}\propto t^{-5/3}\)。因此经典 \(t^{-5/3}\) 是 fallback supply rate 的晚期渐近律，而不是任意波段观测光度的必然模板。</p>
+<p>第十步：给出入门估算常用的归一化形式。若约一半恒星质量被束缚，并把回落从 \(t_{\rm min}\) 开始计时，则常用零阶表达为</p>
+<div class="math-display">\[\dot M_{\rm fb}(t)\simeq \frac{M_*}{3t_{\rm min}}\left(\frac{t}{t_{\rm min}}\
+ight)^{-5/3},\qquad t\gtrsim t_{\rm min}.\]</div>
+<p>这个式子可用于估计质量供应率的数量级和晚期斜率，但早期峰值形状会受恒星结构、\(\beta\)、部分破坏和流体效应影响，因此不能过度解释。</p>
+<p>第十一步：把 fallback 供给率与 Eddington 标度比较。采用电子散射给出的 Eddington 光度，并引入名义辐射效率 \(\eta\)，有</p>
+<div class="math-display">\[L_{\rm Edd}=\frac{4\pi GM_{\rm BH}m_pc}{\sigma_T},\qquad \dot M_{\rm Edd}=\frac{L_{\rm Edd}}{\eta c^2}.\]</div>
+<p>比较 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 可判断早期质量供应是否可能超 Eddington；但 \(\dot M_{\rm fb}\) 是回到近心点附近的供给率，不等于真正通过内盘的 \(\dot M_{\rm acc}\)，更不等于直接观测到的 \(L_{\rm obs}\)。</p>
+<p>第十二步：写出最低阶观测闭合，并明确本讲边界。为了把动力学推导同光变拟合建立第一联系，可暂时把圆化、吸积、风、再处理、观测角和 bolometric correction 折叠进有效效率 \(\eta_{\rm eff}\)，写成</p>
+<div class="math-display">\[L(t)\simeq \eta_{\rm eff}\dot M_{\rm fb}(t)c^2.\]</div>
+<p>这个闭合只是一座教学桥梁：它说明为什么 \(\dot M_{\rm fb}\) 是解释 ({\<br />
+m TDE}) 光变的物理底座，但 \(\eta_{\rm eff}\) 不是普适常数，真实的 (L_\<br />
+u(t)) 可能因圆化延迟、吸积盘形成、超 Eddington 风和再处理而显著偏离 \(t^{-5/3}\)。这些从 \(\dot M_{\rm fb}\) 到 \(\dot M_{\rm acc}\) 再到多波段辐射的过程，将作为下一讲的主题。</p>
+<h4 id="_7">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合目标必须先分层：我们拟合的到底是 fallback supply、吸积率，还是观测光度。第一讲只建立供给端动力学，因此最小模型应被理解为“用观测光变检验是否与经典回落率相容”，而不是证明 \(L_{\rm obs}(t)\) 逐点等于 \(\dot M_{\rm fb}(t)c^2\)。入门时可从晚期幂律模型开始，例如</p>
+<div class="math-display">\[F(t)=F_0\left[\frac{t-t_0}{t_s}\right]^{-5/3}+F_{\rm host},\qquad t>t_0,\]</div>
+<p>其中 \(F_0\) 是归一化，\(t_0\) 是参考爆发时刻，\(t_s\) 是任意尺度化时间，\(F_{\rm host}\) 是宿主星系或核背景。这个模型的物理用途是检查晚期斜率是否接近 fallback 的 \(t^{-5/3}\)，而不是解释峰值形状、上升段或多波段差异。</p>
+<p>第二段：实际论文中更常见的是把指数设为自由参数，例如</p>
+<div class="math-display">\[L(t)=L_{\rm pk}\left[1+\frac{t-t_{\rm pk}}{t_s}\right]^{-n}+L_{\rm host},\]</div>
+<p>拟合参数包括 \(L_{\rm pk}\)、\(t_{\rm pk}\)、\(t_s\)、\(n\) 和 \(L_{\rm host}\)。读这种模型时，第一步不是看最佳拟合的 \(n\) 是否恰好等于 \(5/3\)，而是看 \(n\) 的置信区间是否包含 \(5/3\)、\(t_0\) 或 \(t_{\rm pk}\) 是否由峰前数据约束、晚期数据是否足够长。若只有峰后短时间覆盖，\(t_0\) 与 \(n\) 会强烈退化，一条看似漂亮的 \(t^{-5/3}\) 线可能只是时间零点选择的结果。</p>
+<p>第三段：如果要把动力学参数放入拟合，应从本讲推导链出发。物理参数可包括 \(M_{\rm BH}\)、\(M_*\)、\(R_*\)、\(\beta\)、\(t_{\rm min}\)、\(\dot M_{\rm peak}\) 和有效效率 \(\eta_{\rm eff}\)。其中 \(t_{\rm min}\) 与 \(M_{\rm BH}^{1/2}M_*^{-1}R_*^{3/2}\) 相关，\(\dot M_{\rm peak}\sim M_*/(3t_{\rm min})\)，最低阶光度闭合可写成</p>
+<div class="math-display">\[L(t)\simeq \eta_{\rm eff}\dot M_{\rm fb}(t)c^2.\]</div>
+<p>但 \(\eta_{\rm eff}\) 折叠了圆化、吸积盘形成、风、再处理、观测角和 bolometric correction，因此不能把它当成普适辐射效率。若模型同时声称测量 \(M_{\rm BH}\)、\(M_*\)、\(\beta\) 和 \(\eta_{\rm eff}\)，要特别检查这些量是否真的由数据独立约束。</p>
+<p>第四段：似然函数要跟数据类型一致。若数据是 X-ray、UV 或光学计数，应优先在计数空间与模型比较，使用 Poisson 似然，例如</p>
+<div class="math-display">\[\ln {\cal L}=\sum_i\left[k_i\ln \mu_i-\mu_i-\ln(k_i!)\right],\]</div>
+<p>其中 \(k_i\) 是观测计数，\(\mu_i\) 是源模型、宿主、天空背景、曝光时间和仪器响应卷积后的期望计数。若使用校正后的 flux 或 luminosity，且误差近似高斯，可写</p>
+<div class="math-display">\[\ln {\cal L}=-\frac{1}{2}(D-M)^T C^{-1}(D-M)-\frac{1}{2}\ln |C|,\]</div>
+<p>其中 \(D\) 是数据向量，\(M\) 是模型向量，\(C\) 是协方差矩阵。读论文时要警惕只拟合 unfolded flux 点、忽略上限、忽略滤光片间协方差或把非同时多波段数据当成同时 bolometric 点的做法。</p>
+<p>第五段：贝叶斯表述应写成</p>
+<div class="math-display">\[p(\theta|D)\propto {\cal L}(D|\theta)p(\theta),\]</div>
+<p>其中 \(\theta\) 可包含 \(M_{\rm BH}\)、\(M_*\)、\(R_*\)、\(\beta\)、\(t_0\)、\(A_V\)、\(T_{\rm bb}\)、\(R_{\rm bb}\)、\(F_{\rm host}\)、\(n\) 和 bolometric correction。后验解释要问两个问题：第一，先验是否已经把答案写进模型，例如强行固定 \(n=5/3\) 或固定 \(A_V\)；第二，后验宽度是否允许有物理意义的结论。常见退化包括 \(t_0\) 与 \(n\)、\(A_V\) 与 \(L_{\rm bol}\)、\(M_{\rm BH}\) 与 \(t_{\rm min}\)、宿主扣除与晚期斜率、\(T_{\rm bb}\) 与 \(R_{\rm bb}\)。</p>
+<p>第六段：残差诊断是本讲观测部分的核心训练。对每个拟合都应分段检查：上升段是否被模型系统低估，峰值附近是否存在平台，峰后是否有再亮，晚期是否比 \(t^{-5/3}\) 更浅或更陡，不同波段残差是否同号，X-ray 是否延迟出现或突然增强。如果残差在多个波段同一时间同号，通常说明模型遗漏了物理成分，而不是单个数据点偶然偏离。可能缺失的成分包括 circularization delay、disk viscous delay、outflow photosphere、reprocessing layer、AGN stochastic variability 和 dust echo；这些属于下一讲及后续内容，本讲只要求学生能识别它们会污染 \(\dot M_{\rm fb}\) 的直接检验。</p>
+<p>第七段：系统误差要作为拟合结论的一部分报告。宿主星系扣除会影响晚期斜率和峰值光度；尘埃消光 \(A_V\) 会强烈改变 UV luminosity 和 bolometric correction；\(M_{\rm BH}\) 常由宿主恒星速度弥散或星系质量关系估计，误差可达数倍；观测 cadence 和触发阈值会导致峰值时间 \(t_{\rm pk}\) 偏移；非同时多波段插值会制造假的温度演化；AGN 背景变率会模仿核区暂现。实际读论文时，可靠结论应写成“在这些先验和系统误差下，数据与某类 fallback 斜率相容或不相容”，而不是只报一个最佳拟合 \(n\) 或 \(M_{\rm BH}\)。</p>
+<h4 id="_8">重点章节 / 结果段落怎么读</h4>
+<p>阅读 Hills 1975 时，应把它放在第一性动力学问题中理解：星系核中的大质量黑洞是否能通过近距离 encounter 破坏恒星。课程阅读重点不是寻找现代光学、UV 或 X-ray 光变模板，而是看早期工作如何从黑洞质量、恒星半径、恒星质量和近心距离出发，提出“视界外潮汐破坏”这一可能性。读这类段落时，学生应主动在旁边写出 \(a_{\rm tide}\sim GM_{\rm BH}R_*/R^3\)、\(a_*\sim GM_*/R_*^2\) 和 \(R_{\rm t}\simeq R_*(M_{\rm BH}/M_*)^{1/3}\)，这样才能把文字论证转化为可计算标度。</p>
+<p>阅读 Rees 1988 时，应抓住从“破坏”到“flare”的桥梁。关键段落通常包含三个逻辑环节：第一，恒星若在 \(R_{\rm S}\) 外被破坏，就有机会产生可观测暂现；第二，近抛物线遭遇中质心能量接近 \(0\)，潮汐能量展宽 \(\Delta E\) 使碎片自然分为负能量束缚部分和正能量逃逸部分；第三，束缚碎片回到近心点附近后可为吸积和辐射提供燃料。阅读时不要把“约一半回落、约一半逃逸”理解成所有事件的精确比例，它是抛物线 encounter 和近似对称能量分布下的零阶图像。</p>
+<p>阅读 Phinney 1989 的相关论述时，要把每一句与推导链对应起来。先从开普勒关系得到 \(t(E)=2\pi GM_{\rm BH}(2|E|)^{-3/2}\)，再反解 \(|E(t)|\propto t^{-2/3}\)，然后求导得到 \(|{\rm d}E/{\rm d}t|\propto t^{-5/3}\)，最后乘以 \({\rm d}M/{\rm d}E\)。只有当 \({\rm d}M/{\rm d}E\) 在 \(E=0\) 附近近似平坦时，晚期才自然得到 \(\dot M_{\rm fb}\propto t^{-5/3}\)。这段阅读的训练目标是让学生知道 \(-5/3\) 指数首先来自开普勒能量—时间映射，而不是来自某个辐射机制。</p>
+<p>读现代 TDE 论文的 introduction 和 model section 时，要先标出作者讨论的是哪一层物理量：\(\dot M_{\rm fb}\)、\(\dot M_{\rm acc}\)、\(L_{\rm bol}\) 还是某个波段的 \(L_\nu\)。如果一篇文章直接把观测 optical luminosity 拟合成 \(t^{-5/3}\)，应检查作者是否说明了 bolometric correction、reprocessing 和宿主扣除；如果文章声称测量了黑洞质量或恒星质量，应检查这些量是由 \(t_{\rm min}\) 标度得到，还是来自独立宿主观测。课程中应要求学生在论文边栏写出“这是 supply model、accretion model 还是 radiation model”。</p>
+<p>读 methods 和 appendix 时，最重要的是检查拟合是否在正确的数据空间完成。对于计数数据，要找 Poisson likelihood、背景模型和仪器响应；对于光学测光，要找宿主模板、消光修正、滤光片转换和非探测上限；对于黑体拟合，要检查 \(T_{\rm bb}\)、\(R_{\rm bb}\) 与 \(L_{\rm bol}\) 的联合误差。若论文只给出一条 best-fit 曲线而没有残差、后验或系统误差讨论，就不能把其中的 \(t^{-5/3}\) 斜率当成强物理证据。</p>
+<p>最后读 discussion 时，要把作者结论放回本讲边界。若作者讨论 circularization、disk wind、X-ray reprocessing 或 delayed accretion，这些已经超出第一讲的动力学底座，应暂时记作“下一讲需要解释的辐射与吸积环节”。本讲的阅读目标是用 \(R_{\rm t}\)、\(R_{\rm S}\)、\(\Delta E\)、\(t_{\rm min}\) 和 \(\dot M_{\rm fb}\) 判断文章的底层动力学是否自洽，而不是在第一讲就解决所有多波段现象。</p>
+<h4 id="_9">建议重点查看的图表</h4>
+<p>一、潮汐半径与视界半径比较图：横轴通常是 \(M_{\rm BH}\)，纵轴是半径。应检查 \(R_{\rm t}\propto M_{\rm BH}^{1/3}\) 与 \(R_{\rm S}\propto M_{\rm BH}\) 的交点，并判断太阳型恒星在何种 \(M_{\rm BH}\) 范围内能在视界外被破坏。图上陷阱是只看 \(R_{\rm t}\) 随 \(M_{\rm BH}\) 增大，而忽略 \(R_{\rm S}\) 增长更快。</p>
+<p>二、近心轨道与 debris stream 示意图：应标出 \(R_{\rm p}\)、\(R_{\rm t}\)、\(\beta\)、束缚碎片和逃逸碎片。重点看箭头或颜色是否对应正负轨道能量，而不是把整颗恒星误读为直接落入黑洞。若图中没有能量标记，读者应自己补上 \(E<0\) 回落、\(E>0\) 逃逸。</p>
+<p>三、\({\rm d}M/{\rm d}E\) 分布图：横轴是单位质量轨道能量 \(E\)，纵轴是质量能量分布。应检查 \(E=0\) 附近是否平坦，因为这决定晚期 \(\dot M_{\rm fb}\propto t^{-5/3}\) 是否自然成立。图上陷阱是把早期尖峰或非对称结构也强行解释为标准 \(t^{-5/3}\) 行为。</p>
+<p>四、fallback rate 光变图：横轴为时间 \(t\) 或 \(t-t_0\)，纵轴为 \(\dot M_{\rm fb}\)、\(L_{\rm bol}\) 或 flux。若是 log-log 图，应检查晚期斜率是否接近 \(-5/3\)，同时确认时间基准 \(t_0\) 是否被数据约束。图上陷阱是用很短的下降段宣称发现 \(t^{-5/3}\)。</p>
+<p>五、Eddington 比较图：横轴为时间，纵轴可能是 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 或 \(L/L_{\rm Edd}\)。应检查作者画的是供给率还是光度比，并看超 Eddington 阶段持续多久。图上陷阱是把 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 直接等同于 \(L/L_{\rm Edd}\)。</p>
+<p>六、多波段光变与黑体参数图：应同时看 \(L_{\rm bol}\)、\(T_{\rm bb}\)、\(R_{\rm bb}\) 随时间变化。重点检查不同波段是否同步、温度是否近似恒定、黑体半径是否过大或随时间异常演化。图上陷阱是把 \(R_{\rm bb}\) 直接解释为真实吸积盘半径，而忽略再处理光球。</p>
+<p>七、残差图与后验 corner 图：残差图应检查峰前、峰后、晚期和不同波段是否存在系统偏离；corner 图应检查 \(t_0\)、\(n\)、\(M_{\rm BH}\)、\(A_V\)、\(F_{\rm host}\) 和 bolometric correction 的退化。图上陷阱是只看 best-fit 曲线穿过数据点，而忽略极宽的置信区间和系统误差。</p>
+<h4 id="_10">关键图表逐图导读</h4>
+<p>图 1：潮汐半径—视界半径图。横轴通常是 \(M_{\rm BH}\)，纵轴是半径，模型线包括 \(R_{\rm t}\propto M_{\rm BH}^{1/3}\)、\(R_{\rm S}\propto M_{\rm BH}\)，有时还包括 innermost stable circular orbit 或捕获半径。读图时先找 \(R_{\rm t}=R_{\rm S}\) 的交点，交点以下的黑洞质量更容易让太阳型恒星在视界外破坏，交点以上可能发生 direct capture。常见误读是认为黑洞越大潮汐越强，所以越容易看到 TDE；正确理解是 \(R_{\rm S}\) 随 \(M_{\rm BH}\) 增长更快，可见性反而受限。</p>
+<p>图 2：轨道与 debris stream 示意图。坐标轴可能不是定量坐标，而是空间示意，应标出黑洞、\(R_{\rm p}\)、\(R_{\rm t}\)、被拉长的 stream、逃逸端和回落端。模型含义是恒星质心近似抛物线入射，潮汐势差给碎片分配正负能量。读图时要问：图中哪一侧是 \(E<0\)，哪一侧是 \(E>0\)，\(\beta=R_{\rm t}/R_{\rm p}\) 是否可从示意中读出。误读风险是把回落理解成从 \(R_{\rm t}\) 直接自由落体，而不是高偏心开普勒轨道返回。</p>
+<p>图 3：\({\rm d}M/{\rm d}E\) 分布图。横轴 \(E\) 的零点通常对应抛物线质心能量，纵轴是单位能量质量。若模型线在 \(E=0\) 附近近似水平，则晚期 \(\dot M_{\rm fb}\) 容易趋向 \(t^{-5/3}\)；若出现尖峰、台阶、缺口或明显非对称，则早期 fallback 形状会偏离经典模板。读数据点或模拟曲线时要检查分辨率、恒星结构模型和 partial disruption 设置。误读风险是把 \(E=0\) 以外的结构也当成晚期斜率证据。</p>
+<p>图 4：fallback rate 随时间图。横轴多为 \(t\) 或 \(t-t_0\)，纵轴是 \(\dot M_{\rm fb}\)，常用 log-log 标度。模型线中的 \(t^{-5/3}\) 在 log-log 图上是斜率 \(-5/3\) 的直线；数据点或模拟点应在足够晚期才与这条线比较。读图时要检查峰值位置是否接近 \(t_{\rm min}\)、早期是否受 \({\rm d}M/{\rm d}E\) 形状影响、晚期是否有足够动态范围。误读风险是把 \(L_{\rm obs}\) 图当成 \(\dot M_{\rm fb}\) 图，或者忽略 \(t_0\) 的不确定性。</p>
+<p>图 5：观测光变与幂律拟合图。横轴是观测时间，纵轴可能是 flux、magnitude 或 \(L_{\rm bol}\)，模型线可能包括固定 \(n=5/3\) 与自由 \(n\) 的衰减。读图时先确认纵轴是线性还是对数、magnitude 是否已转换为 luminosity、宿主背景是否已扣除。然后看残差：峰前、峰值和晚期是否同一模型都能解释。误读风险是 best-fit 曲线穿过几个点就被称为物理验证，而没有报告 \(n\)、\(t_0\) 和 \(F_{\rm host}\) 的联合不确定性。</p>
+<p>图 6：Eddington 比随时间图。横轴是时间，纵轴为 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\) 或 \(L/L_{\rm Edd}\)。如果曲线早期远大于 \(1\)，说明超 Eddington 供给、风和再处理可能重要；如果观测 \(L/L_{\rm Edd}\) 没有同样高，不应直接否定 fallback 模型，因为 \(\dot M_{\rm fb}\)、\(\dot M_{\rm acc}\) 和 \(L_{\rm obs}\) 之间存在多层转换。误读风险是把供给率 Eddington 比和辐射 Eddington 比画在同一轴上却不加区分。</p>
+<p>图 7：黑体参数演化图。横轴是时间，纵轴分面显示 \(L_{\rm bol}\)、\(T_{\rm bb}\) 和 \(R_{\rm bb}\)。若 \(T_{\rm bb}\) 近似恒定而 \(L_{\rm bol}\) 下降，则由 \(L_{\rm bol}=4\pi R_{\rm bb}^2\sigma T_{\rm bb}^4\) 推出的 \(R_{\rm bb}\) 会缩小，但这不一定代表真实气体半径收缩。应检查波段覆盖、消光、宿主扣除和 UV 缺失对 \(T_{\rm bb}\) 的影响。误读风险是把黑体半径直接等同于 \(R_{\rm t}\)、圆化半径或吸积盘外半径。</p>
+<p>图 8：后验 corner 图与残差图。corner 图的坐标轴可能包括 \(M_{\rm BH}\)、\(M_*\)、\(\beta\)、\(t_0\)、\(A_V\)、\(n\)、\(F_{\rm host}\) 和归一化。重点看二维等高线是否呈长条形，例如 \(t_0\) 与 \(n\) 相关、\(A_V\) 与 \(L_{\rm bol}\) 相关、\(M_{\rm BH}\) 与 \(t_{\rm min}\) 相关。残差图则要看是否有时间相关结构，而不是随机散布。误读风险是把狭窄的某个一维边缘分布当成所有参数都被精确测量，忽略多参数退化。</p>
+</details>
+<h4 id="_11">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_12">后续阅读路径</h4>
+<p>第一条路径是从经典解析标度走向流体模拟。完成本讲后，应先回到 Hills、Rees 和 Phinney 的推导链，确认自己能独立写出 \(R_{\rm t}\)、\(\Delta E\)、\(t_{\rm min}\) 和 \(\dot M_{\rm fb}\propto t^{-5/3}\)。随后阅读包含 stellar structure、polytropic index、main-sequence mass-radius relation 和 partial disruption 的现代模拟工作。目标是理解真实 \({\rm d}M/{\rm d}E\) 为什么可能不平坦、早期 fallback 为什么会偏离标准模板，以及 surviving core 如何改变后续回落。</p>
+<p>第二条路径是从 fallback supply 走向辐射光变。读光学和 UV TDE 样本论文时，把每篇文章拆成四层：事件选择、宿主扣除、黑体或 SED 拟合、物理解释。特别关注作者是否直接令 \(L_{\rm bol}(t)\propto \dot M_{\rm fb}(t)\)，还是加入 reprocessing、outflow photosphere、disk emission 或 delayed accretion。这个路径自然连接到本系列第二讲：从 \(\dot M_{\rm fb}\) 到 \(\dot M_{\rm acc}\) 再到 \(L_\nu(t)\) 的转换。</p>
+<p>第三条路径是从单个事件走向事件率。潮汐半径告诉我们什么样的 encounter 能破坏恒星，但一个星系中多久发生一次 TDE 由 loss cone dynamics、two-body relaxation、nuclear star cluster density profile 和 black hole occupation fraction 决定。后续阅读可以围绕 empty loss cone、full loss cone、mass segregation 和星系核动力学展开。这样可以把本讲的单事件动力学与巡天发现率、宿主星系偏好和黑洞质量函数联系起来。</p>
+<p>第四条路径是从非相对论标度走向广义相对论修正。本讲用 \(R_{\rm S}\) 和牛顿开普勒轨道建立入门图像，但高 \(M_{\rm BH}\)、高 \(\beta\) 或自旋黑洞附近会出现 relativistic precession、spin-dependent capture boundary 和轨道平面效应。阅读这类工作时，应把它们看成对本讲 \(R_{\rm t}\gtrsim R_{\rm S}\) 和 \(t(E)\) 映射的修正，而不是推翻经典推导链。</p>
+<p>第五条路径是从热 TDE 走向多信使和喷流事件。少数 TDE 候选显示射电外流、相对论喷流或可能的高能中微子关联。阅读这些前沿论文时仍要保留本讲分层：先问是否有合理 \(\dot M_{\rm fb}\)，再问是否形成 \(\dot M_{\rm acc}\) 和 jet power，最后才问辐射或粒子加速诊断。本讲不处理喷流物理，但它提供判断能量供应是否足够的底座。</p>
+<h4 id="_13">下一讲建议</h4>
+<p>下一讲最自然的方向是“TDE 从零到前沿（二）：从 fallback 到发光，圆化、吸积盘、超 Eddington 风和再处理”。本讲结束在 \(\dot M_{\rm fb}\)：碎片以什么速率回到近心点附近。第二讲应从这个输入出发，解释为什么 \(\dot M_{\rm acc}\) 可以相对 \(\dot M_{\rm fb}\) 延迟，为什么光学、UV 和 X-ray 的 \(L_\nu(t)\) 不一定跟随 \(t^{-5/3}\)，并系统讲 circularization shocks、apsidal precession、viscous time、outflow photosphere 和 reprocessing layer。</p>
+<p>第二个自然方向是“TDE 多波段观测与图像诊断”。它应放在圆化和辐射基础之后，重点训练学生读真实数据：黑体温度、黑体半径、宽发射线、软 X-ray 成分、射电外流、延迟 X-ray 和宿主星系性质。它不应重复本讲的 \(R_{\rm t}\) 与 \(t^{-5/3}\) 推导，而应把这些量作为判断观测解释是否自洽的背景标尺。</p>
+<p>第三个方向是“从单事件到前沿问题：partial disruption、loss cone rate、黑洞自旋和相对论修正”。这部分应在学生已经掌握供给端动力学和辐射转换之后展开。它与本讲的边界关系是：本讲给出完整破坏、近抛物线遭遇和牛顿开普勒映射的基准模型；前沿讲则讨论这些假设如何被恒星结构、残余核心、星系核动力学和强引力效应逐一修正。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>tidal disruption event tidal radius fallback t^-5/3</li>
+<li>Rees 1988 tidal disruption stars black holes</li>
+<li>Phinney 1989 tidal disruption fallback rate</li>
+<li>Hills 1975 tidal disruption black hole star</li>
+<li>TDE partial disruption stellar structure fallback</li>
+<li>TDE loss cone rates</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1975Natur.254..295H/abstract">https://ui.adsabs.harvard.edu/abs/1975Natur.254..295H/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1988Natur.333..523R/abstract">https://ui.adsabs.harvard.edu/abs/1988Natur.333..523R/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1989IAUS..136..543P/abstract">https://ui.adsabs.harvard.edu/abs/1989IAUS..136..543P/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
