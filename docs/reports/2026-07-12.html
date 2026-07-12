@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-07-12</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-07-12</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-07-12">
+      <a class="previous" href="2026-07-11.html">← 上一期：2026-07-11</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-07-12T11:11:38+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-tde-fallback">1. TDE 从零到前沿（二）：fallback 不等于发光，圆化、吸积盘和再处理</h3>
+<ul>
+<li>课程系列：TDE 从零到前沿课程（第 2/5 讲）</li>
+<li>本讲边界：本讲讲为什么 fallback 率不是直接观测光变：stream self-intersection、圆化效率、盘形成、外流和再处理层。不讲 jetted TDE。</li>
+<li>上下文承接：上一讲给出物质如何返回黑洞；本讲问返回物质怎样变成可见光、UV 和 X-ray。</li>
+<li>主题：TDE circularization, accretion disk formation, reprocessing and outflows</li>
+<li>经典工作：Evans &amp; Kochanek 1989 的早期流体图像、Lodato-King-Pringle 2009 对 fallback 光变的修正，以及现代 circularization/reprocessing 讨论。</li>
+<li>为什么经典：很多 TDE 论文的核心争论都在 fallback 与 observed luminosity 之间。本讲能帮助新人避免把 \(t^{-5/3}\) 当成万能解释。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一，本讲的科学问题不是“潮汐瓦解事件能不能产生 \(t^{-5/3}\) 光变”，而是更基本的分层问题：上一讲得到的 \(\dot M_{\rm fb}\) 只是束缚碎片返回近心点附近的供给率，它能否、何时、以多高效率变成观测到的 \(L_\nu\)？最常见的简化写法是 \(L(t)=\eta\,\dot M_{\rm fb}(t)c^2\)，但在本讲中这不是默认定律，而是一个需要被观测检验的强假设。它同时假定圆化很快、粘滞输运很快、外流不重要、辐射效率 \(\eta\) 近似常数、内区辐射能直接逃逸且视角效应可以忽略。只要其中任一条件失败，观测光变就不再是 \(\dot M_{\rm fb}\) 的简单镜像。</p>
+<p>第二，本讲延续第 \(1/5\) 讲的逻辑边界。上一讲解决“物质怎样返回黑洞”，核心量是碎片能量分布 \(dM/d\epsilon\)、最束缚物质返回时间 \(t_{\rm min}\) 和晚期返回率 \(\dot M_{\rm fb}(t)\simeq {1\over3}{M_*\over t_{\rm min}}(t/t_{\rm min})^{-5/3}\)。本讲在此基础上增加返回之后的转换层：\(\dot M_{\rm fb}\) 经过流自交与圆化形成 \(\dot M_{\rm circ}\)，再经过粘滞输运形成 \(\dot M_{\rm acc}\)，最后经过辐射、吸收、散射、再处理和几何投影成为观测到的 \(L_\nu\)。因此本讲必须反复区分 \(\dot M_{\rm fb}\neq \dot M_{\rm circ}\neq \dot M_{\rm acc}\)，并且 \(L_\nu\) 还依赖辐射转移和视角。</p>
+<p>第三，历史动机来自两条线索的汇合。早期 TDE 理论把恒星破坏后的碎片视为具有一组轨道能量的气体，成功解释了为什么 fallback 在晚期容易出现 \(t^{-5/3}\) 标度；Evans 与 Kochanek 1989 类型的早期流体工作进一步显示，碎片不是无结构的质量点，而是被拉成长流、在近心点受压、发生冲击并以非轴对称方式返回的流体。Lodato、King 与 Pringle 2009 又强调恒星内部结构会改变 \(dM/d\epsilon\)，从而改变 \(\dot M_{\rm fb}(t)\)。这些经典工作共同提醒我们：即使在只讨论供给端时，光变也并非万能幂律；一旦加入圆化和辐射转移，把观测光度直接等同于 fallback 就更危险。</p>
+<p>第四，现代观测把这个问题推到了中心位置。许多光学和 UV 明亮的 TDE 具有几万开尔文的近似恒定温度、较大的黑体半径 \(R_{\rm bb}=\left(L_{\rm bb}/4\pi\sigma_{\rm SB}T_{\rm bb}^4\right)^{1/2}\)、弱或延迟出现的 X-ray，以及宽发射线或吸收线。这些特征很难用一个始终裸露、稳定、高效率的内盘直接解释。相反，它们提示观测者看到的可能是扩展光球或再处理层：内区产生的 EUV 或软 X-ray 被外流或包层吸收、散射和热化，最终在较大半径以光学和 UV 形式释放。</p>
+<p>第五，从方法上，本讲采用“从轨道到辐射”的链式推理。第一层是弹道返回：碎片沿高偏心率轨道回到近心点 \(R_{\rm p}\)。第二层是相对论进动和流自交：近心点进动角可估计为 \(\Delta\omega\simeq 6\pi GM_\bullet/[c^2a(1-e^2)]\simeq 3\pi R_{\rm S}/R_{\rm p}\)，它决定自交半径 \(R_{\rm si}\sim 2R_{\rm p}/[1-\cos(\Delta\omega/2)]\) 和冲击强度。第三层是圆化与盘形成：若比角动量近似守恒，\(j\simeq (2GM_\bullet R_{\rm p})^{1/2}\)，并由 \(j^2=GM_\bullet R_{\rm circ}\) 得到 \(R_{\rm circ}\simeq 2R_{\rm p}\)。第四层是粘滞输运和外流：\(t_{\rm visc}\simeq \alpha^{-1}(H/R)^{-2}\Omega_{\rm K}^{-1}\) 控制 \(\dot M_{\rm acc}\) 是否滞后于 \(\dot M_{\rm fb}\)，而超 Eddington 阶段的 \(f_{\rm out}\) 会把部分质量分流到外流。</p>
+<p>第六，关键结果是：观测光度通常是供给、圆化、吸积和再处理共同作用后的结果，而不是单一物理量的直接读数。当 \(\dot M_{\rm fb}\gg\dot M_{\rm Edd}\) 时，系统不会无限制地满足 \(L\propto\dot M_{\rm fb}\)，因为 \(L_{\rm Edd}=4\pi GM_\bullet m_{\rm p}c/\sigma_{\rm T}\) 给出了辐射压力相关的自然尺度，\(\dot M_{\rm Edd}=L_{\rm Edd}/\eta c^2\) 又表明所谓“效率”本身依赖吸积状态。外流可写作零阶形式 \(\dot M_{\rm out}=f_{\rm out}\dot M_{\rm fb}\) 与 \(\dot M_{\rm acc}=(1-f_{\rm out})\dot M_{\rm fb}\)，其光球半径可估计为 \(R_{\rm ph}\simeq \kappa\dot M_{\rm out}/(4\pi v_{\rm w})\)。若 \(R_{\rm ph}\) 远大于 \(R_{\rm circ}\)，则大的 \(R_{\rm bb}\) 不再奇怪。</p>
+<p>第七，本讲还要求把物理图像落实到论文阅读和拟合诊断。读光变图时，不能只看晚期斜率是否接近 \(-5/3\)，还要看峰值是否延迟、峰宽是否被粘滞响应展宽、不同波段残差是否有颜色结构。读 SED 图时，要检查模型是否在 flux density 空间并经过滤光片响应积分，UV 点是否真正约束 \(T_{\rm bb}\)，红端是否受宿主污染，X-ray upper limit 是否排除裸内盘。读后验图时，要检查 \(M_\bullet\) 与 \(t_{\rm visc}\)、\(A_V\) 与 \(T_{\rm bb}\)、\(f_{\rm out}\) 与 \(R_{\rm ph}\) 的退化；若后验贴着先验边界，就不能声称该参数被数据测得。</p>
+<p>第八，本讲的局限也必须在课堂中明确。圆化效率依赖 \(M_\bullet\)、\(\beta\)、\(R_{\rm p}\)、黑洞自旋、轨道倾角、恒星结构和磁场；三维辐射磁流体模拟仍难完整覆盖从潮汐半径到光球、从动力学时间到粘滞时间的尺度。半解析模型中的 \(t_{\rm circ}\)、\(t_{\rm visc}\)、\(f_{\rm out}\) 和 \(R_{\rm ph}\) 往往是有效参数，而非可直接逐一对应的局部物理量。本讲不展开 jetted TDE、群体率和宿主统计；这些边界使我们能够集中训练一个核心能力：判断观测到的是 fallback、圆化冲击、内盘吸积，还是再处理后的光球辐射。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一，TDE 理论的早期成功来自一个非常优美的供给端图像。恒星经过潮汐半径附近后，被黑洞潮汐力撕裂成束缚和非束缚两部分；束缚碎片具有不同轨道能量 \(\epsilon\)，因此以不同开普勒周期返回近心点附近。如果 \(dM/d\epsilon\) 在 \(\epsilon=0\) 附近近似平坦，那么晚期自然得到 \(\dot M_{\rm fb}(t)\simeq {1\over3}{M_*\over t_{\rm min}}(t/t_{\rm min})^{-5/3}\)。这个结果之所以重要，是因为它把一次复杂的流体破坏事件转化为可计算、可比较的时间标度。</p>
+<p>第二，但这个成功也带来了最常见的误区：把 \(\dot M_{\rm fb}\) 当作观测光度。\(\dot M_{\rm fb}\) 的定义是质量返回率，不是辐射率；它没有说明气体在哪里碰撞、是否能快速圆化、是否形成吸积盘、是否有风带走质量，也没有说明光子在离开系统前是否被吸收和再处理。因此 \(L(t)=\eta\,\dot M_{\rm fb}(t)c^2\) 只能作为一个待检验的最简模型，而不能作为解释所有 TDE 光变的默认出发点。</p>
+<p>第三，Evans 与 Kochanek 1989 类型的早期流体图像对这个误区有很强的纠偏作用。它们展示了恒星破坏后形成的是空间上延展、密度不均、速度场复杂的碎片流，而不是瞬间进入圆盘的连续介质。碎片会被拉伸成细长 stream，在近心点附近经历压缩和冲击，并在返回过程中与先前物质发生相互作用。这意味着“返回”与“发光”之间必然存在流体动力学转换层。</p>
+<p>第四，Lodato、King 与 Pringle 2009 的意义在于提醒我们，即便只讨论 fallback，恒星结构也会留下痕迹。不同恒星的密度剖面会改变 \(dM/d\epsilon\)，进而改变早期 \(\dot M_{\rm fb}(t)\) 的形状和峰值附近的行为。因此，观测光变偏离 \(t^{-5/3}\) 并不自动说明有圆化延迟或再处理；它也可能来自供给端本身。反过来，即使 fallback 具有漂亮的理论标度，观测端仍可能因为吸积和辐射转移而完全不同。</p>
+<p>第五，现代光学和 UV 巡天发现的大量 TDE 使问题更加突出。许多事件的黑体温度 \(T_{\rm bb}\) 约为几万开尔文，且随时间变化不大；由 \(R_{\rm bb}=\left(L_{\rm bb}/4\pi\sigma_{\rm SB}T_{\rm bb}^4\right)^{1/2}\) 推出的黑体半径常达到 \(10^{14}\) 至 \(10^{15}\,{\rm cm}\)，明显大于一个 \(10^6\,M_\odot\) 黑洞附近的内盘尺度。若把 \(R_{\rm bb}\) 直接解释为盘半径，就会遇到温度、半径和能量预算之间的不自洽。</p>
+<p>第六，X-ray 多样性进一步说明观测到的不是单一层。有些 TDE 早期就软 X-ray 明亮，似乎内区较直接可见；有些光学明亮但 X-ray 极弱，可能存在光学厚再处理层或视线遮挡；还有一些事件在光学峰值之后很久才出现 X-ray，提示再处理层消退或内盘形成存在延迟。若所有 TDE 都满足 \(L\propto\dot M_{\rm fb}\)，这种多样性很难自然解释。</p>
+<p>第七，另一个常见误区是把圆化想象成“一次碰撞形成标准薄盘”。实际上，高偏心率碎片要形成近圆盘，必须耗散大量轨道能，同时近似守恒角动量。相对论近心点进动越强，自交半径 \(R_{\rm si}\) 通常越小，冲击越强；若进动角 \(\Delta\omega\) 很小，自交可能发生在很大半径，单位质量可耗散能量低，圆化就会慢。圆化效率因此不是一个普适常数，而是由轨道几何和冷却条件共同决定。</p>
+<p>第八，还要避免把再处理当成任意调节光谱的黑箱。一个物理上可信的再处理层必须同时满足几件事：光学深度 \(\tau\) 要足够大以吸收或散射内区高能光子；扩散时间 \(t_{\rm diff}\sim\tau R_{\rm env}/c\) 不能远大于观测光变时间，否则光变会被过度抹平；能量预算中 \(L_{\rm opt}+L_{\rm UV}+L_{\rm X}+E_{\rm out}/t\) 不应超过可用吸积或冲击能；谱线速度和射电信号也应与外流质量和速度相容。</p>
+<p>第九，从课程结构上，本讲是从第 \(1/5\) 讲到第 \(3/5\) 讲的桥梁。上一讲给出了供给率，本讲解释供给率如何经过圆化、吸积、外流和再处理变成多波段辐射；下一讲将不重复这些推导，而是用真实多波段图表训练分类和诊断，包括黑体半径、软 X-ray、宽发射线和射电外流。本讲也明确不讨论 jetted TDE，不把相对论喷流、高能伽马辐射和喷流余辉作为核心内容。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一，进入本讲前先建立四层变量的语言。\(\dot M_{\rm fb}\) 是束缚碎片回到近心点附近的速率；\(\dot M_{\rm circ}\) 是返回碎片通过冲击、能量耗散和角动量重分配后进入较低偏心率流的速率；\(\dot M_{\rm acc}\) 是气体经过粘滞输运真正到达黑洞附近的速率；\(L_\nu\) 是经过吸收、散射、热化、再处理和投影后在频率 \(\nu\) 处被观测到的谱光度。只有当圆化时间、粘滞时间和扩散时间都足够短，且外流与遮挡可以忽略时，\(L(t)=\eta\,\dot M_{\rm fb}(t)c^2\) 才可能近似成立。</p>
+<p>第二，第一层物理是弹道返回与相对论进动。上一讲的 fallback 结果说明碎片何时回来，但没有说明回来后是否相撞。在牛顿势中，理想椭圆轨道闭合；在黑洞附近，广义相对论导致近心点进动。对近似 Schwarzschild 黑洞，高偏心率轨道的进动角可写为 \(\Delta\omega\simeq 6\pi GM_\bullet/[c^2a(1-e^2)]\simeq 3\pi R_{\rm S}/R_{\rm p}\)。进动角越大，后一圈返回流越容易与前一圈流在较小半径相交。</p>
+<p>第三，自交把轨道几何转化为冲击能量。常用标度 \(R_{\rm si}\sim 2R_{\rm p}/[1-\cos(\Delta\omega/2)]\) 表明，小 \(\Delta\omega\) 会把碰撞推到大半径，大 \(\Delta\omega\) 会使碰撞更靠近黑洞。在自交处，若局部速度近似 \(v_{\rm si}\simeq (2GM_\bullet/R_{\rm si})^{1/2}\)，交叉角为 \(\psi\)，则相对速度 \(v_{\rm rel}\simeq 2v_{\rm si}\sin(\psi/2)\)，单位质量冲击能可估计为 \(\epsilon_{\rm sh}\simeq v_{\rm rel}^2/2\)。冲击功率的量级是 \(L_{\rm sh}\simeq f_{\rm th}\dot M_{\rm fb}\epsilon_{\rm sh}\)，其中 \(f_{\rm th}\) 包含热化和冷却效率。</p>
+<p>第四，第二层物理是圆化半径与角动量约束。高偏心率碎片的比角动量主要由近心点决定，可写为 \(j\simeq (2GM_\bullet R_{\rm p})^{1/2}\)。若圆化过程中角动量近似守恒，圆轨道满足 \(j^2=GM_\bullet R_{\rm circ}\)，于是 \(R_{\rm circ}\simeq 2R_{\rm p}\)。这一步非常重要：盘形成半径是轨道动力学给出的数量级，而观测黑体半径 \(R_{\rm bb}\) 是辐射转移给出的有效半径；二者不应被直接等同。若观测到 \(R_{\rm bb}\gg R_{\rm circ}\)，它更像是光球或再处理层的提示，而不是裸露内盘的直接尺寸。</p>
+<p>第五，第三层物理是粘滞输运与吸积延迟。圆化后的气体是否迅速进入内区，取决于角动量输运效率。用 \(\alpha\) 参数化时，粘滞时间可写为 \(t_{\rm visc}\simeq \alpha^{-1}(H/R)^{-2}\Omega_{\rm K}^{-1}\)，其中 \(\Omega_{\rm K}=(GM_\bullet/R^3)^{1/2}\)。厚盘具有较大的 \(H/R\)，因此 \(t_{\rm visc}\) 可较短；薄盘具有较小的 \(H/R\)，因此 \(t_{\rm visc}\) 可远长于动力学时间。实际建模时常用响应核表达吸积延迟，例如 \(\dot M_{\rm acc}(t)=\int_0^t [\dot M_{\rm circ}(t')/t_{\rm visc}]\exp[-(t-t')/t_{\rm visc}]dt'\)。这个卷积说明 \(\dot M_{\rm acc}\) 是供给历史的低通滤波版本。</p>
+<p>第六，第四层物理是超 Eddington 阶段的外流与能量预算。TDE 峰值附近常有 \(\dot M_{\rm fb}\) 或 \(\dot M_{\rm acc}\) 超过 \(\dot M_{\rm Edd}\)，其中 \(L_{\rm Edd}=4\pi GM_\bullet m_{\rm p}c/\sigma_{\rm T}\)，\(\dot M_{\rm Edd}=L_{\rm Edd}/\eta c^2\)。在这种状态下，辐射效率不一定为常数，光子可能被俘获，质量可能被风带走。零阶参数化可写为 \(\dot M_{\rm out}=f_{\rm out}\dot M_{\rm fb}\) 与 \(\dot M_{\rm acc}=(1-f_{\rm out})\dot M_{\rm fb}\)。外流不仅改变进入内盘的质量，也为再处理层提供物质。</p>
+<p>第七，第五层物理是再处理层和光球。若外流速度为 \(v_{\rm w}\)，不透明度为 \(\kappa\)，近似球对称稳态外流的光球半径可估计为 \(R_{\rm ph}\simeq \kappa\dot M_{\rm out}/(4\pi v_{\rm w})\)。在这个半径上，内区 EUV 或软 X-ray 光子被吸收、散射并热化，观测有效温度满足 \(T_{\rm eff}\simeq [L/(4\pi\sigma_{\rm SB}R_{\rm ph}^2)]^{1/4}\)。如果 \(L\) 下降的同时 \(R_{\rm ph}\) 也收缩，\(T_{\rm eff}\) 可以保持近似恒定，这为许多光学 TDE 的温度演化提供了自然解释。</p>
+<p>第八，理论链条必须闭合到观测诊断。多波段 SED 给出 \(L_{\rm bb}=4\pi R_{\rm bb}^2\sigma_{\rm SB}T_{\rm bb}^4\) 和 \(R_{\rm bb}=\left(L_{\rm bb}/4\pi\sigma_{\rm SB}T_{\rm bb}^4\right)^{1/2}\)；X-ray upper limit 检验内盘是否直接可见；谱线宽度可用 \(v\sim {\rm FWHM}\) 粗略关联外流或动力学速度；包层自洽性还要检查 \(\tau\sim \kappa M_{\rm env}/(4\pi R_{\rm env}^2)\) 与 \(t_{\rm diff}\sim\tau R_{\rm env}/c\)。因此，本讲的基本分析逻辑不是用单一 \(t^{-5/3}\) 拟合宣布成功，而是同时检查光变、颜色、黑体半径、X-ray、谱线、外流证据、残差结构和后验退化。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：从上一讲的供给率出发，但先切断“返回率等于光度”的默认等号。上一讲在束缚碎片能量分布于零能附近近似平坦、最束缚物质在 \(t_{\rm min}\) 返回的假设下，得到晚期 fallback 率</p>
+<div class="math-display">\[\dot M_{\rm fb}(t)\simeq {1\over 3}{M_*\over t_{\rm min}}\left({t\over t_{\rm min}}\right)^{-5/3} .\]</div>
+<p>这里 \(M_*\) 是被撕裂恒星质量，\(t_{\rm min}\) 是最束缚碎片返回时间，\(\dot M_{\rm fb}\) 只表示物质回到近心点附近的供给率。若直接写 \(L(t)=\eta\dot M_{\rm fb}(t)c^2\)，就已经假设圆化、粘滞输运、辐射逃逸和视角效应都不重要；本讲后面的推导正是逐层检查这些假设何时失效。</p>
+<p>第二步：判断返回流是否会因轨道不闭合而自交。假设碎片沿近似 Schwarzschild 黑洞周围的高偏心率轨道运动，半长轴为 \(a\)，偏心率为 \(e\)，近心点为 \(R_{\rm p}=a(1-e)\)，则每圈近心点进动角可估计为</p>
+<div class="math-display">\[\Delta\omega\simeq {6\pi GM_\bullet\over c^2a(1-e^2)}\simeq {3\pi R_{\rm S}\over R_{\rm p}},\qquad R_{\rm S}={2GM_\bullet\over c^2} .\]</div>
+<p>这个式子解出的量是 \(\Delta\omega\)：它越大，后续返回的碎片流越偏离上一圈轨道，越容易在较小半径发生 stream self-intersection。下一步要把 \(\Delta\omega\) 转化为自交位置。</p>
+<p>第三步：由自交几何估计碰撞半径。对高度偏心的相邻返回流，若两条轨道主要相差近心点进动角 \(\Delta\omega\)，常用数量级关系为</p>
+<div class="math-display">\[R_{\rm si}\sim {2R_{\rm p}\over 1-\cos(\Delta\omega/2)} .\]</div>
+<p>这里解出的 \(R_{\rm si}\) 是自交半径，而不是圆化半径或黑体半径。小 \(\Delta\omega\) 给出大的 \(R_{\rm si}\)，冲击弱且圆化慢；大 \(\Delta\omega\) 给出小的 \(R_{\rm si}\)，冲击更强。知道 \(R_{\rm si}\) 后，才能估计碰撞速度和可热化能量。</p>
+<p>第四步：把自交位置转化为冲击能量。假设自交处局部速度近似为自由落体速度，交叉角为 \(\psi\)，则</p>
+<div class="math-display">\[v_{\rm si}\simeq \left({2GM_\bullet\over R_{\rm si}}
+ight)^{1/2},\qquad v_{\rm rel}\simeq 2v_{\rm si}\sin{\psi\over2},\qquad \epsilon_{\rm sh}\simeq {1\over2}v_{\rm rel}^2 .\]</div>
+<p>这一步解出的是单位质量可由自交冲击热化的能量 \(\epsilon_{\rm sh}\)。它说明轨道几何只给出可耗散能量的上限，并不保证这些能量立刻作为观测光子逃逸。下一步用 \(\dot M_{\rm fb}\) 把单位质量能量变成功率。</p>
+<p>第五步：估计圆化冲击的能量输入率。若返回流以 \(\dot M_{\rm fb}\) 进入自交区，且只有比例 \(f_{\rm th}\) 的冲击能被热化并能参与辐射，则</p>
+<div class="math-display">\[L_{\rm sh}\simeq f_{\rm th}\,\dot M_{\rm fb}\,\epsilon_{\rm sh} .\]</div>
+<p>这里 \(L_{\rm sh}\) 是冲击功率的量级，不一定等于观测到的 \(L_{\rm opt}\) 或 \(L_{\rm UV}\)。若冲击发生在大半径且冷却有效，它可能直接贡献光学、UV；若能量被绝热损失或转化为动能，光度会低得多。接下来要问：气体是否能在耗散能量后形成近圆盘。</p>
+<p>第六步：用角动量近似守恒得到圆化半径。对高偏心率返回流，比角动量主要由近心点控制；若圆化过程中总角动量近似守恒，则</p>
+<div class="math-display">\[j\simeq (2GM_\bullet R_{\rm p})^{1/2},\qquad j^2=GM_\bullet R_{\rm circ}\quad \Rightarrow\quad R_{\rm circ}\simeq 2R_{\rm p} .\]</div>
+<p>这一步解出的 \(R_{\rm circ}\) 是盘形成的动力学尺度。它通常只有数倍 \(R_{\rm p}\)，而许多光学 TDE 的 \(R_{\rm bb}\) 可大得多；因此 \(R_{\rm bb}\) 不能未经检验就被解释为内盘半径。下一步进入圆化流如何输运到内区。</p>
+<p>第七步：建立粘滞时间尺度。假设圆化后的气体可用 \(\alpha\) 参数化角动量输运，盘厚度由 \(H/R\) 表征，开普勒角频率为 \(\Omega_{\rm K}\)，则</p>
+<div class="math-display">\[t_{\rm visc}\simeq \alpha^{-1}\left({H\over R}
+ight)^{-2}\Omega_{\rm K}^{-1},\qquad \Omega_{\rm K}=\left({GM_\bullet\over R^3}
+ight)^{1/2} .\]</div>
+<p>这里解出的 \(t_{\rm visc}\) 决定 \(\dot M_{\rm acc}\) 是否滞后于 \(\dot M_{\rm fb}\)。厚盘中 \(H/R\sim1\)，\(t_{\rm visc}\) 可接近动力学时间；薄盘中 \(H/R\ll1\)，\(t_{\rm visc}\) 会显著变长。下一步用响应核把供给历史变成吸积历史。</p>
+<p>第八步：用卷积表示从圆化供给到内盘吸积的低通滤波。若 \(\dot M_{\rm circ}\) 经过具有特征时间 \(t_{\rm visc}\) 的内盘响应，则一个最小模型为</p>
+<div class="math-display">\[\dot M_{\rm acc}(t)=\int_0^t {\dot M_{\rm circ}(t')\over t_{\rm visc}}\exp\left[-{t-t'\over t_{\rm visc}}
+ight]dt' .\]</div>
+<p>这个式子解出的是 \(\dot M_{\rm acc}(t)\)，它不再只由当前 \(\dot M_{\rm circ}\) 决定，而是由过去供给历史共同决定。因此峰值可延迟，下降可变缓，观测光变即使来自内盘也未必呈现 \(\dot M_{\rm fb}\) 的原始形状。下一步要判断 \(\dot M_{\rm acc}\) 是否处于超 Eddington 状态。</p>
+<p>第九步：定义 Eddington 尺度并检验线性效率模型。辐射压力与引力平衡给出</p>
+<div class="math-display">\[L_{\rm Edd}={4\pi GM_\bullet m_{\rm p}c\over \sigma_{\rm T}},\qquad \dot M_{\rm Edd}={L_{\rm Edd}\over \eta c^2} .\]</div>
+<p>这里 \(L_{\rm Edd}\) 是 Eddington 光度，\(\dot M_{\rm Edd}\) 依赖假定辐射效率 \(\eta\)。若 \(\dot M_{\rm fb}/\dot M_{\rm Edd}\gg1\) 或 \(\dot M_{\rm acc}/\dot M_{\rm Edd}\gg1\)，固定 \(\eta\) 的 \(L\propto\dot M c^2\) 模型通常失效，因为光子俘获、辐射压力和外流会重新分配质量与能量。下一步引入外流分流。</p>
+<p>第十步：参数化外流带来的质量损失。零阶近似下，可写</p>
+<div class="math-display">\[\dot M_{\rm out}=f_{\rm out}\dot M_{\rm fb},\qquad \dot M_{\rm acc}=(1-f_{\rm out})\dot M_{\rm fb} .\]</div>
+<p>这里 \(f_{\rm out}\) 是外流质量分数，实际可随时间、半径和 Eddington 比变化。这个关系强调 \(\dot M_{\rm fb}\neq\dot M_{\rm acc}\)：进入内区的质量可能只是返回质量的一部分。外流同时提供一个扩展、可能光学厚的介质，下一步用它估计光球半径。</p>
+<p>第十一步：由外流光学深度估计光球半径。假设外流近似球对称、速度为 \(v_{\rm w}\)、不透明度为 \(\kappa\)，并令光球处光学深度约为 \(	au(R_{\rm ph})\sim1\)，得到</p>
+<div class="math-display">\[R_{\rm ph}\simeq {\kappa\dot M_{\rm out}\over 4\pi v_{\rm w}} .\]</div>
+<p>这一步解出的 \(R_{\rm ph}\) 是再处理层的有效逃逸半径。它可以远大于 \(R_{\rm circ}\)，因此为光学、UV TDE 中大的 \(R_{\rm bb}\) 提供自然解释。下一步把这个半径与光度联系到温度。</p>
+<p>第十二步：用能量守恒得到有效温度。若内区 EUV 或软 X-ray 在光球附近被吸收、散射并近似热化，则</p>
+<div class="math-display">\[T_{\rm eff}\simeq \left({L\over 4\pi\sigma_{\rm SB}R_{\rm ph}^2}
+ight)^{1/4} .\]</div>
+<p>这里 \(T_{\rm eff}\) 是再处理辐射的有效温度。若 \(L\) 下降的同时 \(R_{\rm ph}\) 也收缩，\(T_{\rm eff}\) 可以变化很慢；这正连接到许多光学 TDE 中近似恒定的 \(T_{\rm bb}\)。下一步把理论半径与观测黑体半径做闭合检验。</p>
+<p>第十三步：建立黑体半径的观测闭合关系。多波段光学、UV SED 若可用单温黑体近似，则由拟合得到的 \(L_{\rm bb}\) 与 \(T_{\rm bb}\) 给出</p>
+<div class="math-display">\[R_{\rm bb}=\left({L_{\rm bb}\over 4\pi\sigma_{\rm SB}T_{\rm bb}^4}
+ight)^{1/2} .\]</div>
+<p>若观测上 \(R_{\rm bb}\gg R_{\rm circ}\)，应把它看作再处理层或光球的提示，而不是裸露内盘半径的直接测量。这个闭合关系也要求读论文时同时检查 \(L_{\rm bb}\)、\(T_{\rm bb}\) 和 \(R_{\rm bb}\) 的误差相关性，而不能只引用单个半径数值。</p>
+<p>第十四步：用扩散时间检验再处理层是否自洽。若包层质量为 \(M_{\rm env}\)、半径为 \(R_{\rm env}\)、不透明度为 \(\kappa\)，则</p>
+<div class="math-display">\[au\sim {\kappa M_{\rm env}\over 4\pi R_{\rm env}^2},\qquad t_{\rm diff}\sim {	au R_{\rm env}\over c} .\]</div>
+<p>再处理层必须同时满足两点：\(	au\) 要足够大以热化或遮挡内区高能辐射，\(t_{\rm diff}\) 又不能远大于观测光变时间尺度，否则光变会被过度抹平。到这里，推导链从 \(\dot M_{\rm fb}\) 依次连接到 \(R_{\rm si}\)、\(L_{\rm sh}\)、\(R_{\rm circ}\)、\(t_{\rm visc}\)、\(\dot M_{\rm acc}\)、\(R_{\rm ph}\)、\(T_{\rm eff}\) 和 \(R_{\rm bb}\)，也就给出了后续拟合与读图的核心诊断：不能用单一 \(t^{-5/3}\) 斜率证明光度追踪 fallback，而要联合检查光变形状、SED、黑体半径、X-ray 上限、外流速度和扩散时间。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一，拟合要从最小模型开始，而不是一上来把所有圆化、吸积盘、外流和再处理参数都放进去。最小模型是假设观测 bolometric 光度直接追踪 fallback：\(L(t)=\eta_{\rm eff}\dot M_{\rm fb}(t)c^2\)。这里可拟合的量通常包括爆发时间 \(t_0\)、归一化或有效效率 \(\eta_{\rm eff}\)、与 \(t_{\rm min}\) 相关的时间尺度、黑洞质量 \(M_\bullet\) 的先验、宿主消光 \(A_V\)，以及可能的背景宿主通量。课堂上要强调：这个模型的作用是建立基线，而不是宣称真实物理就是 \(\dot M_{\rm fb}\to L\) 的一步转换。若该模型在峰值附近、颜色演化或 X-ray 上限处失败，失败本身就是诊断信息。</p>
+<p>第二，下一层模型加入圆化和粘滞响应。可以把圆化供给率 \(\dot M_{\rm circ}(t)\) 经过响应核转化为内区吸积率 \(\dot M_{\rm acc}(t)\)，例如</p>
+<div class="math-display">\[\dot M_{\rm acc}(t)=\int_0^t {\dot M_{\rm circ}(t')\over t_{\rm visc}}\exp\left[-{t-t'\over t_{\rm visc}}\right]dt' .\]</div>
+<p>这一层拟合的核心参数是粘滞时间 \(t_{\rm visc}\)、可能的圆化延迟 \(t_{\rm circ}\)、冲击热化效率 \(f_{\rm th}\) 和光度归一化。读论文时要检查作者是否把 \(t_{\rm visc}\) 当成真实可测的局部粘滞时间，还是只是一个有效展宽参数；还要检查 \(M_\bullet\)、\(t_{\rm min}\) 与 \(t_{\rm visc}\) 是否严重退化，因为它们都能改变光变峰宽和峰时。</p>
+<p>第三，光学和 UV 数据应在 flux density 空间做多 epoch SED 拟合，而不是只拟合一个 bolometric 光变点。对每个 epoch，模型应由 \(T_{\rm bb}(t)\)、\(R_{\rm bb}(t)\) 或 \(L_{\rm bb}(t)\) 给出，并经过红移、银河消光、宿主消光、\(K\) 修正和滤光片响应积分后与观测通量比较。常用高斯似然可写为</p>
+<div class="math-display">\[\ln {\cal L}_{\rm Gauss}=-{1\over2}\sum_i\left[{(F_i-F_{{\rm mod},i})^2\over \sigma_i^2}+\ln(2\pi\sigma_i^2)\right] .\]</div>
+<p>这里 \(F_i\) 是观测 flux density，\(F_{{\rm mod},i}\) 是模型在相应滤光片中的预测值，\(\sigma_i\) 不应只包含测光统计误差，还应尽量包含宿主模板减除、非同时观测和校准误差。</p>
+<p>第四，X-ray 数据不能简单用 unfolded flux 点来拟合，尤其在低计数情况下应在 counts 空间建模。给定谱模型、吸收柱 \(N_{\rm H}\)、响应矩阵和有效面积后，模型预测每个能道的期望计数 \(\mu_i\)，观测计数为 \(k_i\)，Poisson 似然为</p>
+<div class="math-display">\[\ln {\cal L}_{\rm Pois}=\sum_i\left[k_i\ln\mu_i-\mu_i-\ln(k_i!)\right] .\]</div>
+<p>若只有 X-ray upper limit，也不能在解释中忽略；它约束内盘是否直接可见、再处理层光学深度是否足够、以及吸收柱 \(N_{\rm H}\) 是否需要很高。课堂上应要求学生检查 upper limit 的能段、置信度、谱模型假设和吸收修正，因为这些选择会显著改变 X-ray luminosity 上限。</p>
+<p>第五，联合后验必须有清楚的参数层级。一个较完整但仍半解析的模型可能包含 \(M_\bullet\)、\(M_*\)、\(\beta\)、\(t_0\)、\(t_{\rm visc}\)、\(t_{\rm circ}\)、\(f_{\rm out}\)、\(v_{\rm w}\)、\(\kappa\)、\(R_{\rm ph}(t)\)、\(A_V\) 和 \(N_{\rm H}\)。这些参数不能都指望由一条光变单独测出；应使用物理先验，例如宿主星系速度弥散或质量关系给出 \(M_\bullet\) 先验，谱线宽度给出 \(v_{\rm w}\) 的数量级，X-ray 上限约束 \(N_{\rm H}\) 或再处理光学深度，总辐射能与外流动能共同限制 \(f_{\rm out}\)。若 posterior 主要复制 prior，就只能说参数被先验限制，而不能说被数据测量。</p>
+<p>第六，残差诊断是判断模型是否可信的核心。多波段光变残差若呈颜色相关结构，可能说明 \(T_{\rm bb}(t)\) 演化没有建模，或不同波段存在再处理延迟；SED 残差若在 UV 端系统偏高，可能提示额外高温成分或消光曲线错误；红端残差若系统偏高，常见原因是宿主污染、尘埃回声或模板减除不足；X-ray 残差或 upper limit tension 若明显，则裸露内盘模型不应被接受。不要只看 reduced \(\chi^2\) 或最大似然值，还要看残差随时间、波长和能段是否有结构。</p>
+<p>第七，系统误差需要在解释层面单独列出。爆发时间 \(t_0\) 的不确定会改变上升段和 \(t_{\rm min}\) 推断；滤光片覆盖不足会让 \(T_{\rm bb}\) 与 \(R_{\rm bb}\) 强退化；UV 消光曲线不确定会直接影响温度；宿主模板不完美会污染红端和晚期光变；X-ray 软谱与吸收柱 \(N_{\rm H}\) 之间存在退化；光学巡天与 X-ray 巡天的触发阈值会选择不同类型的 TDE。实际读论文时，拟合模型、posterior、残差图和系统误差表必须一起看，不能只引用最优参数。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 Evans 与 Kochanek 1989 类型的早期流体工作时，第一步不要急着寻找现代意义上的精确光变模型，而要抓住它的课程功能：它把上一讲的能量分布与返回率图像推进到真实流体层面。重点段落通常是模拟设置、碎片形态、近心点压缩、冲击和返回流结构。学生应问：作者如何从恒星被拉伸成 stream 的图像，说明 \(\dot M_{\rm fb}\) 之后还有一个流体动力学转换层？这正是本讲“fallback 不等于发光”的历史起点。</p>
+<p>读 Lodato、King 与 Pringle 2009 时，重点是他们如何把恒星结构映射到 \(dM/d\epsilon\)，再由 \(dM/d\epsilon\) 推出 \(\dot M_{\rm fb}(t)\)。这部分应与上一讲相连：上一讲给出晚期 \(t^{-5/3}\) 标度，本讲提醒学生，即使只在供给端，早期和峰值附近的光变也会因恒星密度剖面而改变。因此，观测光变偏离 \(t^{-5/3}\) 不能立刻归因于圆化延迟或再处理；也可能是 fallback 本身就不是简单幂律。</p>
+<p>读现代 circularization 论文时，建议从几何和能量预算入手，而不是先看摘要里的“圆化快”或“圆化慢”。关键段落通常包括相对论近心点进动 \(\Delta\omega\)、自交半径 \(R_{\rm si}\)、交叉角 \(\psi\)、冲击能 \(\epsilon_{\rm sh}\) 和圆化时间 \(t_{\rm circ}\) 的估计。读者要特别检查作者是否区分 \(R_{\rm si}\)、\(R_{\rm circ}\)、\(R_{\rm ph}\) 和 \(R_{\rm bb}\)。许多误读都来自把这些半径混成一个“发光半径”。</p>
+<p>读 reprocessing 与 outflow 论文时，应把注意力放在闭合检验上。若作者声称内区 EUV 或 soft X-ray 被外层气体再处理成 optical 或 UV，必须说明再处理层的光学深度 \(\tau\)、扩散时间 \(t_{\rm diff}\)、光球半径 \(R_{\rm ph}\)、质量来源和速度 \(v_{\rm w}\) 是否合理。漂亮的黑体拟合只说明 SED 可被一个温度近似描述，不自动证明存在物理自洽的包层。</p>
+<p>读观测论文时，建议按“数据先于解释”的顺序：先看发现方式和选择效应，再看宿主减除和消光处理，然后看多波段光变、SED、\(T_{\rm bb}(t)\)、\(R_{\rm bb}(t)\)、X-ray detection 或 upper limit，最后再读模型解释。若一篇论文的 discussion 把 \(L(t)\) 直接写成 \(\eta\dot M_{\rm fb}c^2\)，学生应主动检查它是否讨论了 \(\dot M_{\rm circ}\)、\(\dot M_{\rm acc}\)、外流和再处理；若没有，这个结论就只是最小模型下的解释，而不是唯一物理图像。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，供给率、吸积率与观测光度对比图。应检查 \(\dot M_{\rm fb}(t)\)、\(\dot M_{\rm acc}(t)\) 和 \(L(t)\) 是否被分开画出，峰值是否延迟，下降斜率是否真的接近 \(-5/3\)，以及归一化是否需要不合理的 \(\eta_{\rm eff}\)。</p>
+<p>二，stream self-intersection 几何图或模拟密度图。应看黑洞位置、近心点 \(R_{\rm p}\)、进动角 \(\Delta\omega\)、自交半径 \(R_{\rm si}\)、交叉角 \(\psi\) 和冲击区。重点是判断冲击发生在大半径还是小半径，而不是把自交点直接当成光球。</p>
+<p>三，\(T_{\rm bb}(t)\)、\(R_{\rm bb}(t)\) 与 \(L_{\rm bb}(t)\) 三联图。应检查温度是否真的恒定，半径是否随时间收缩，误差条是否相关，以及 \(L_{\rm bb}=4\pi R_{\rm bb}^2\sigma_{\rm SB}T_{\rm bb}^4\) 是否在数值上自洽。</p>
+<p>四，多 epoch SED 与黑体拟合图。应看横轴是频率 \(\nu\) 还是波长，纵轴是 flux density、\(\nu L_\nu\) 还是 luminosity density；还要检查模型是否经过滤光片响应积分，UV 点是否真正约束 \(T_{\rm bb}\)，红端是否受宿主污染，X-ray 点或 upper limit 是否属于同一辐射成分。</p>
+<p>五，X-ray detections 或 upper limits 与模型预测图。应检查能段、谱模型、吸收柱 \(N_{\rm H}\)、upper limit 置信度和模型是否预测裸露内盘软 X-ray。若预测超过上限，就必须引入遮挡、再处理或延迟内盘形成，而不能只说 X-ray 数据“不重要”。</p>
+<p>六，外流诊断图。包括谱线 \({\rm FWHM}\)、吸收线速度、等效宽度、射电余辉或光球速度随时间变化。应把观测速度与 \(v_{\rm w}\)、外流质量 \(f_{\rm out}\dot M_{\rm fb}\) 和动能预算做数量级比较，避免把所有宽线都解释成 Keplerian disk line。</p>
+<p>七，posterior 或 corner plot。应重点看 \(M_\bullet\) 与 \(t_{\rm visc}\)、\(A_V\) 与 \(T_{\rm bb}\)、\(f_{\rm out}\) 与 \(R_{\rm ph}\)、\(N_{\rm H}\) 与 X-ray intrinsic luminosity 的退化。若后验贴着先验边界，说明该参数没有被数据真正测得。</p>
+<p>八，残差图。应分开看多波段光变残差、SED 残差、黑体温度和半径残差、X-ray upper limit tension。系统性残差通常比单个最优 \(\chi^2\) 更能说明模型缺少哪一层物理。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 1：\(\dot M_{\rm fb}\)、\(\dot M_{\rm acc}\) 与 \(L_{\rm bol}\) 的三曲线图。横轴通常为相对爆发时间 \(t-t_0\)，纵轴可能是质量率或 luminosity，论文有时会把它们归一化后画在同一轴上。读图顺序是：先找 \(\dot M_{\rm fb}\) 的峰值和晚期 \(-5/3\) 参考线，再看粘滞卷积后的 \(\dot M_{\rm acc}\) 是否峰值延迟、峰宽变大，最后比较观测 \(L_{\rm bol}\)。常见误读是只因晚期斜率相似就宣称 \(L\propto\dot M_{\rm fb}\)；正确做法还要检查峰值时间、归一化、颜色演化和 X-ray 约束。</p>
+<p>图 2：stream self-intersection 的几何示意或流体模拟密度图。坐标轴多为以黑洞为中心的平面坐标，颜色表示密度、温度或内能。要找出 \(R_{\rm p}\)、\(\Delta\omega\)、\(R_{\rm si}\)、交叉角 \(\psi\) 和冲击区域。若 \(R_{\rm si}\gg R_{\rm circ}\)，说明冲击在远处发生，圆化可能慢，但光学辐射可能较容易产生；若 \(R_{\rm si}\) 接近几倍 \(R_{\rm p}\)，冲击强，内区高能辐射和再处理会更重要。误读风险是把模拟图中的亮区直接当作观测黑体半径 \(R_{\rm bb}\)。</p>
+<p>图 3：\(T_{\rm bb}(t)\)、\(R_{\rm bb}(t)\) 和 \(L_{\rm bb}(t)\) 的三联图。横轴是时间，纵轴分别是温度、半径和光度。学生应检查 \(T_{\rm bb}\) 的误差条是否足以支持“近似恒定”，\(R_{\rm bb}\) 是否随 \(L_{\rm bb}\) 下降而收缩，并核对 \(L_{\rm bb}=4\pi R_{\rm bb}^2\sigma_{\rm SB}T_{\rm bb}^4\)。若 \(R_{\rm bb}\gg R_{\rm circ}\)，更自然的解释是光球或再处理层，而不是裸露吸积盘半径。误读风险是忽略 \(T_{\rm bb}\) 与 \(R_{\rm bb}\) 的强相关误差。</p>
+<p>图 4：多 epoch SED 与黑体模型图。横轴可能是频率 \(\nu\) 或波长，纵轴可能是 \(F_\nu\)、\(\nu F_\nu\)、\(L_\nu\) 或 \(\nu L_\nu\)。模型线应经过红移、消光和滤光片响应处理后再与数据点比较。读图时要看 UV 点是否决定温度，光学红端是否受宿主污染，晚期是否出现红外或尘埃回声成分，X-ray 点或 upper limit 是否能与同一黑体外推相容。误读风险是把 unfolded X-ray 点或未卷积滤光片的理论曲线当成直接观测量。</p>
+<p>图 5：X-ray upper limits 与内盘模型预测图。横轴为时间，纵轴为 X-ray flux 或 luminosity，数据可能包括 detection、non-detection 和 upper limit 箭头。若模型线代表裸露内盘软 X-ray，它必须低于相应能段和置信度下的 upper limit；若超过，则需要再处理层、吸收柱 \(N_{\rm H}\)、视角遮挡或内盘形成延迟。读图时要特别看作者采用的谱形、吸收修正和能段，因为 \(0.3\)--\(10\,{\rm keV}\) 与更软能段的约束含义不同。</p>
+<p>图 6：corner plot 或 posterior diagnostic。对角线显示一维后验，非对角线显示二维相关。重点检查 \(M_\bullet\) 与 \(t_{\rm visc}\) 是否共同控制时间尺度，\(A_V\) 与 \(T_{\rm bb}\) 是否共同控制颜色，\(f_{\rm out}\) 与 \(R_{\rm ph}\) 是否共同控制光球大小，\(N_{\rm H}\) 与 intrinsic X-ray luminosity 是否退化。若后验边界与 prior 边界重合，说明数据只给出限制而非测量。误读风险是只引用 median 和 credible interval，却不看 posterior 是否多峰或 prior-dominated。</p>
+<p>图 7：外流速度、谱线宽度或射电诊断图。横轴为时间，纵轴可能是 \({\rm FWHM}\)、吸收线速度、等效宽度、radio luminosity 或推断的动能。若观测速度达到 \(v\sim10^4\,{\rm km\,s^{-1}}\)，应与风速 \(v_{\rm w}\)、逃逸速度和 \(f_{\rm out}\dot M_{\rm fb}\) 的质量预算比较。宽线不一定来自 Keplerian disk，也可能来自外流、散射、非球对称再处理层或多个速度分量。误读风险是把线宽单独当成半径测量，而不检查线形成区域和几何。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从供给端读到流体端。先复习经典 TDE 图像中潮汐半径、束缚碎片、\(dM/d\epsilon\)、\(t_{\rm min}\) 和 \(\dot M_{\rm fb}\) 的推导，再读 Evans 与 Kochanek 1989 类型的流体模拟，重点理解碎片流的空间结构、近心点压缩和冲击。然后读 Lodato、King 与 Pringle 2009，训练自己区分恒星结构对 fallback 的影响与后续圆化对观测光变的影响。</p>
+<p>第二条路径是 circularization 专题。围绕 apsidal precession、stream self-intersection、circularization shocks 和 relativistic hydrodynamic simulations 阅读现代论文。每读一篇都做同一张检查表：作者如何估计 \(\Delta\omega\)？如何得到 \(R_{\rm si}\)？冲击能 \(\epsilon_{\rm sh}\) 是否足以解释观测 luminosity？冷却时间和圆化时间 \(t_{\rm circ}\) 是否短于观测上升时间？是否考虑黑洞自旋、轨道倾角和三维效应？这样才能避免只记住“圆化快”或“圆化慢”的结论。</p>
+<p>第三条路径是 super-Eddington outflow 与 reprocessing。阅读 optical TDE reprocessing、TDE photosphere、super-Eddington wind 和 delayed X-ray emission 相关工作时，应始终问四个问题：能量从哪里来，质量从哪里来，光学深度 \(\tau\) 是否足以热化或遮挡高能光子，扩散时间 \(t_{\rm diff}\) 是否不会把光变过度抹平。再处理模型如果不能同时满足 \(R_{\rm bb}\)、\(T_{\rm bb}\)、X-ray upper limit 和谱线速度，就只是一个形式拟合。</p>
+<p>第四条路径是事件对比阅读。选择一个 optical bright 且 X-ray weak 的 TDE，再选择一个 X-ray bright 的 TDE，分别整理 \(L_{\rm bol}(t)\)、\(T_{\rm bb}(t)\)、\(R_{\rm bb}(t)\)、X-ray light curve、谱线宽度和射电约束。用本讲的数量级关系估计 \(R_{\rm circ}\)、\(R_{\rm ph}\)、\(t_{\rm visc}\) 和 \(t_{\rm diff}\)，再判断观测到的主要是内盘、外流光球，还是再处理层。这个练习自然连接到下一讲的多波段诊断。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第一，最自然的第 \(3/5\) 讲方向是“TDE 多波段观测诊断：黑体半径、软 X-ray、宽发射线和射电外流”。本讲建立了从 \(\dot M_{\rm fb}\) 到 \(\dot M_{\rm circ}\)、\(\dot M_{\rm acc}\) 和 \(L_\nu\) 的物理转换层；下一讲应把这些概念用于真实图表，训练学生判断一个事件是内盘直接可见、被再处理层遮挡，还是有明显外流或射电成分。边界是：下一讲不再重复 stream self-intersection 和粘滞卷积推导，而把它们作为读图工具。</p>
+<p>第二，第 \(4/5\) 讲可自然进入“前沿物理：partial disruption、恒星结构、黑洞自旋和相对论效应”。本讲只把 \(M_\bullet\)、\(\beta\)、自旋和轨道倾角作为影响圆化效率的因素提到；第 \(4/5\) 讲可以系统展开这些因素如何改变 \(dM/d\epsilon\)、\(\Delta\omega\)、\(R_{\rm si}\) 和观测多样性。</p>
+<p>第三，第 \(5/5\) 讲可转向“从单事件到样本：TDE rate、宿主偏好、选择效应和多信使候选”。本讲讨论的是单事件中供给、吸积和再处理的物理闭合；最后一讲则应把这些参数放进巡天选择函数、宿主星系统计和群体推断中，解释为什么 optical-selected 与 X-ray-selected TDE 样本会呈现不同表观性质。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>TDE circularization stream self intersection reprocessing outflow</li>
+<li>stellar disruption light curve really proportional t^-5/3</li>
+<li>tidal disruption event super Eddington outflow reprocessing</li>
+<li>Evans Kochanek 1989 tidal disruption hydrodynamic simulation</li>
+<li>Lodato King Pringle 2009 tidal disruption fallback light curve</li>
+<li>TDE delayed X-ray reprocessing photosphere optical UV</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1989ApJ...346L..13E/abstract">https://ui.adsabs.harvard.edu/abs/1989ApJ...346L..13E/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/2009MNRAS.392..332L/abstract">https://ui.adsabs.harvard.edu/abs/2009MNRAS.392..332L/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
