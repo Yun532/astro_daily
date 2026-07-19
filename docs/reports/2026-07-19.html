@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-07-19</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-07-19</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-07-19">
+      <a class="previous" href="2026-07-18.html">← 上一期：2026-07-18</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-07-19T11:10:42+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-tde-tderadio-afterglow">1. TDE 从零到前沿（四）：喷流 TDE、radio afterglow 和黑洞周围介质</h3>
+<ul>
+<li>课程系列：TDE 从零到前沿课程（第 4/5 讲）</li>
+<li>本讲边界：本讲讲 jetted TDE 和 radio TDE 的能量估计、速度、密度反演、喷流视角和黑洞环境。不讲 GRB prompt 内激波。</li>
+<li>上下文承接：前三讲主要讲非喷流 TDE 的 fallback、圆化和热辐射；本讲进入非热喷流/外流。</li>
+<li>主题：jetted TDEs, radio synchrotron, outflows and circumnuclear medium</li>
+<li>经典工作：Swift J1644+57 等 jetted TDE、radio synchrotron afterglow 和外流/喷流与 circumnuclear medium 相互作用的观测框架。</li>
+<li>为什么经典：radio 和 jetted TDE 把 TDE 从吸积盘问题扩展为黑洞喷流、外流和核区介质探针，是连接 TDE 与高能暂现源前沿的重要桥梁。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>本讲位于《TDE 从零到前沿课程》的第 \(4/5\) 讲。前三讲已经把非喷流 TDE 的主线铺好：恒星被撕裂后形成 fallback，碎片经历圆化并向黑洞供给质量，随后在 optical/UV/X-ray 波段表现为热辐射或近热辐射耀发。本讲故意不重复黑体半径、黑体温度和热光度拟合，而是把问题转向一个新的能量通道：中心引擎是否把一部分 fallback 供给转化为 jet 或宽角 outflow，并让它们在更大半径处撞击黑洞周围介质，产生 radio synchrotron afterglow。下一讲会从单源物理进入样本、rate、host preference、selection function、多信使候选和巡天策略；因此本讲的边界是单个 jetted 或 radio TDE 的物理反演框架。</p>
+<p>本讲的核心科学问题有三层。第一，TDE 是否能产生 relativistic jet，如果能，其动能、速度、开角和视角如何由数据约束。第二，若一个 ordinary optical/UV TDE 在 radio 被探测到，信号究竟来自 on-axis jet、off-axis jet、宽角亚相对论 outflow、盘风、持续能量注入，还是黑洞周围介质的密度结构。第三，radio 光变和多频谱峰能否被用来反演 circumnuclear medium 的密度剖面，从而把一次恒星撕裂事件变成探测星系核气体环境的实验。这里需要始终记住：radio 不是热辐射黑体尾部的简单延伸，而是外流动能与外部介质相互作用后的非热诊断。</p>
+<p>历史动机来自 Swift J1644+57 等经典 jetted TDE。早期 TDE 理论主要关注 fallback rate 和 accretion flare，radio 并不是核心证据。Swift J1644+57 的重要性在于，它同时给出了核位置、强 X-ray、快速变时标和长期 radio 余辉。快速 X-ray 变时标可用 \(t_{\rm var}\gtrsim R_{\rm em}/(c\delta_D)\) 约束辐射区尺度，并提示内区活动或 relativistic beaming；观测亮度可近似写成 \(L_{\rm obs}\sim \delta_D^q L'\)，说明若 \(\delta_D\) 较大，喷流方向性会显著放大高能辐射。另一方面，长期 radio 余辉说明有外流在较大半径扫掠外部介质，将动能耗散为非热电子和磁场。正是内区高能证据与外区 radio 证据共同构成了 jetted TDE 的证据链。</p>
+<p>方法上，本讲从中心引擎供能开始。若 fallback 供给的一部分进入 jet 或 outflow，可以用 \(E_{\rm j}=\int \eta_{\rm j}\dot M_{\rm fb}c^2\,dt\) 定义可用于外流的能量尺度，其中 \(\eta_{\rm j}\) 是能量转化效率。本讲不重新推导 \(\dot M_{\rm fb}\)，而是把 \(E_{\rm j}\) 或 \(E_{\rm k}\) 当作 radio 模型要反演的动能参数。外流向外传播时扫掠介质，若外部密度先用低维幂律 \(n(R)=n_0(R/R_0)^{-k}\) 描述，则扫掠质量为 \(M_{\rm sw}(R)=4\pi m_p\int_0^R n(r)r^2\,dr\)。这一步把 radio light curve 和黑洞周围介质联系起来：光变不是单纯的亮度变化，而是动力学、密度和辐射共同作用的结果。</p>
+<p>动力学反演的关键是把能量、半径和速度连接起来。对亚相对论或 mildly relativistic outflow，可用 \(E_{\rm k}\simeq M_{\rm sw}v^2/2\) 估计动能；对相对论喷流，常用等效各向同性形式 \(E_{\rm k,iso}\simeq \Gamma^2M_{\rm sw}c^2\)。观测时间与半径的关系也依赖动力学极限：非相对论近似下 \(R\simeq vt/(1+z)\)，而相对论同轴情形下 \(t_{\rm obs}\simeq (1+z)R/(2c\Gamma^2)\)。因此，晚期 radio 不必然意味着慢速外流，早期 radio 亮度也不必然唯一指向 on-axis jet；必须结合谱峰、光变和几何共同判断。</p>
+<p>辐射部分的入口是 synchrotron self-absorption。冲击后电子通常被参数化为 \(N(\gamma_e)\propto \gamma_e^{-p}\)，磁场满足 \(B^2/(8\pi)=\epsilon_B e_{\rm int}\)。单个电子的特征同步辐射频率可写为 \(\nu(\gamma_e)=3eB\gamma_e^2\delta_D/(4\pi m_ec(1+z))\)。若频段处于 \(\nu_m<\nu<\nu_c\)，optically thin 谱斜率为 \(F_\nu\propto \nu^{-(p-1)/2}\)；若处于 \(\nu>\nu_c\)，则 \(F_\nu\propto \nu^{-p/2}\)。但是读论文时不能只凭高频斜率估计 \(p\)，必须先确认 \(\nu_a\)、\(\nu_m\) 和 \(\nu_c\) 的相对位置。低频 self-absorption 谱峰 \((\nu_p,F_{\nu,p})\) 才是估计半径、磁场和能量的第一标尺。</p>
+<p>实际分析通常从经验谱峰拟合开始，再进入 equipartition 反演，最后才做完整 forward-shock 模型。每个历元先拟合 broken power-law spectrum，得到 \(\nu_p\)、\(F_{\nu,p}\)、低频斜率和高频斜率。由于峰值通量与投影面积密切相关，可用 \(F_{\nu,p}\sim (\pi R^2/D_L^2)(2kT_b\nu_p^2/c^2)\) 理解为什么谱峰对 \(R\) 敏感。再结合磁场能量 \(E_B=(B^2/8\pi)(4\pi R^3/3)f_V\) 和 \(E_{\rm eq}\approx E_e+E_B\)，得到 \(R_{\rm eq}\)、\(B_{\rm eq}\) 和 \(E_{\rm eq}\)。这里必须强调：\(E_{\rm eq}\) 是特定几何和微物理假设下的能量下限或比较标尺，不是无模型的真实总能量测量。</p>
+<p>多历元反演后，课程进入诊断层面。由源静止系时间 \(t_{\rm src}=t_{\rm obs}/(1+z)\) 和半径演化可得 \(\beta(t)=c^{-1}dR/dt_{\rm src}\)。若 \(R(t)\) 近似线性，外流可能处于 coasting；若斜率下降，说明开始 deceleration；若 \(E(t)\) 上升，则可能存在持续能量注入、速度分层 ejecta 追赶 shock，或模型假设不足。进一步结合 \(n(R)\sim [4\pi R^2m_p]^{-1}dM_{\rm sw}/dR\)，可以把 radio TDE 转化为 circumnuclear medium 探针。但少数反演点不能被过度解释为精确云团结构，因为几何、\(\epsilon_e\)、\(\epsilon_B\)、离轴效应和吸收系统误差都会投影到 \(n(R)\)。</p>
+<p>几何解释是本讲最容易产生误判的部分。on-axis jet 通常伴随强早期高能辐射和较亮 radio；off-axis jet 可在 \(\Gamma(t)\lesssim 1/(\theta_{\rm obs}-\theta_j)\) 后因 beaming cone 变宽而进入视线；Doppler factor \(δ_D=[\Gamma(1-\beta\cos\theta)]^{-1}\) 决定不同视角下的亮度增强或压低；真实能量还需用 \(E_{\rm true}\sim f_bE_{\rm iso}\) 和 \(f_b\approx 1-\cos\theta_j\) 从等效各向同性量修正。但 late-time radio bump 不能自动等同于 off-axis jet，因为 density jump、refreshed shock、delayed outflow 和持续能量注入也可能产生相似光变。课程目标不是给事件贴标签，而是建立 evidence chain。</p>
+<p>拟合和读图应服务于这条证据链。完整模型参数可写为 \(\Theta=\{E_{\rm k},n_0,k,p,\epsilon_e,\epsilon_B,\theta_j,\theta_{\rm obs}\}\)，模型预测 \(F_{\nu_i}^{\rm mod}(t_j)=F_\nu(t_j,\nu_i\mid\Theta)\)。对探测点常用 flux-density 空间的 Gaussian likelihood，\(\ln{\cal L}=-\frac{1}{2}\sum_i[(F_i-F_i^{\rm mod})^2/\sigma_i^2+\ln(2\pi\sigma_i^2)]\)；对 upper limits 应使用截断高斯积分或 survival likelihood，而不能当成普通探测点。读论文图表时要依次检查 X-ray/optical 时间线、多频 radio light curves、单历元 radio spectra、\(R(t)\)、\(B(t)\)、\(E(t)\)、\(n(R)\)、模型比较图、corner plot 和 residual plot。尤其要看早期 nondetection 是否真的约束 on-axis jet，低频残差是否提示吸收或闪烁，晚期同号残差是否提示能量注入或介质结构。</p>
+<p>本讲的关键结果并不是“所有 radio TDE 都有 jet”。更准确的结论是：jetted TDE 可以把 TDE 变成 relativistic outflow 和黑洞喷流实验场；ordinary TDE 的 radio 探测则显示许多事件可能存在亚相对论或 mildly relativistic outflow；radio nondetection 同样能限制强喷流比例和外流能量。局限在于数据常常频率稀疏、时间采样不均、宿主核区可能有 AGN contamination、低频可能受 scintillation 或吸收影响，且 \(E_{\rm k}\)、\(n_0\)、\(\epsilon_B\)、\(\theta_{\rm obs}\) 和 \(\Gamma_0\) 之间存在强退化。后续影响是，radio TDE 把 TDE 研究与 GRB afterglow、AGN jet、超新星 radio、X-ray binary jet 和多信使高能天体物理连接起来，并自然引向第 \(5/5\) 讲的样本统计、选择函数和巡天发现问题。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>在前三讲里，我们主要把 TDE 视为恒星被大质量黑洞潮汐撕裂后形成 fallback、圆化、吸积和热辐射的过程。这个图像能够解释许多 optical/UV TDE 的蓝色连续谱、近似黑体温度、宽发射线，以及一部分 soft X-ray TDE 的内盘或再处理层可见性。但是这个热辐射框架并没有回答高能天体物理中更广的问题：当瞬时供给率可能远高于 Eddington 限制时，黑洞是否会把一部分能量以 relativistic jet、mildly relativistic outflow 或宽角盘风的形式抛出。</p>
+<p>radio 视角之所以重要，是因为它更接近动能诊断。optical/UV 黑体主要告诉我们辐射层的温度、面积和再处理环境；X-ray 可能来自内盘、corona、jet 内区或吸收后的高能辐射；而 radio synchrotron 常常来自外流与 circumnuclear medium 相互作用形成的 forward shock。换句话说，radio 测量的不是光球温度，而是外流携带的 \(E_{\rm k}\)、速度 \(v\) 或 Lorentz 因子 \(\Gamma\)、磁场 \(B\)、电子分布和外部密度 \(n(R)\)。</p>
+<p>TDE 的外部介质也使 radio 诊断具有特殊价值。GRB afterglow 通常探测恒星形成环境或恒星风环境，超新星 radio 常常探测爆前恒星风；TDE radio 则探测黑洞周围亚秒差距到秒差距尺度的核区气体。这个区域可能包含恒星风、分子云、低亮度 AGN 遗迹、盘状结构和多相介质。用低维模型时常写作 \(n(R)=n_0(R/R_0)^{-k}\)，但真实核区未必是光滑球对称幂律。正因如此，radio TDE 不仅是暂现源，也是星系核环境探针。</p>
+<p>历史转折点是 Swift J1644+57 等 jetted TDE。它们把 TDE 从“热耀发”扩展为“黑洞喷流暂现源”。Swift J1644+57 的证据链并不只是“X-ray 很亮”，而是核位置、强烈非热高能辐射、短时标 X-ray variability、长期 radio afterglow 以及与普通超新星或普通 AGN flare 的差异共同组成。若用 \(t_{\rm var}\gtrsim R_{\rm em}/(c\delta_D)\) 理解快速变时标，辐射区可能很靠近黑洞；若再用 \(L_{\rm obs}\sim \delta_D^qL'\) 理解 beaming，则近轴喷流可以解释异常高的观测高能光度。radio 余辉则补上了外区动能耗散证据。</p>
+<p>本讲需要纠正的第一个常见误区是：只要 TDE 有 radio 探测，就把它称为 jet。radio 探测首先说明存在非热电子、磁场和某种外流与介质相互作用；它不自动说明外流高度准直，也不自动说明 \(\Gamma\gg1\)，更不自动说明我们处在喷流轴上。区分 on-axis jet、off-axis jet、wide-angle outflow 和 delayed disk wind，需要联合使用速度、峰值时间、峰后衰减、谱峰演化、X-ray/radio 比例、早期 upper limits 和模型残差。</p>
+<p>第二个误区是把 GRB afterglow 公式不加边界地搬到 TDE。两者确实共享外激波、非热电子、磁场放大、自吸收和冷却这些基本语言，但 TDE 的中心引擎可持续数天到数月，fallback 供给可能导致持续能量注入，黑洞质量和尺度与 GRB progenitor 完全不同，观测常覆盖数周到数年，外部介质是星系核气体而不是普通星际介质或恒星风。因此，本讲会借用 afterglow 的物理框架，但不讲 GRB prompt 内激波，也不默认瞬时爆炸近似总是成立。</p>
+<p>第三个误区是把 equipartition energy 当成无模型真实能量。实际中由 radio 谱峰得到的 \(E_{\rm eq}\) 依赖几何 filling factor、\(\epsilon_e\)、\(\epsilon_B\)、源是否离轴、谱峰是否真由 synchrotron self-absorption 控制，以及频率覆盖是否充分。它非常有用，因为它给出透明的能量标尺和源尺寸估计；但它不是对 \(E_{\rm true}\) 的直接观测。若论文只给出一个 \(E_{\rm eq}\) 数字而没有讨论假设和误差，读者需要主动追问模型边界。</p>
+<p>第四个误区是把 late-time radio rebrightening 自动解释为 off-axis jet。off-axis jet 的确可以在喷流减速后满足 \(\Gamma(t)\lesssim1/(\theta_{\rm obs}-\theta_j)\)，从而因 beaming cone 变宽进入视线并造成晚期上升。但 density jump、refreshed shock、速度分层 ejecta、delayed outflow 或持续 engine power 也能产生相似的 radio bump。判断时不能只看曲线形状，而要看多频谱是否同步移动、早期 upper limits 是否有效、峰后衰减是否足够长、模型 residual 是否系统偏离。</p>
+<p>本讲还承担承上启下的作用。它承接前三讲的 fallback 与热辐射背景，加入非热外流、喷流几何、同步辐射谱峰、动力学反演和 circumnuclear medium 诊断；它有意把 rate、host preference、selection function、radio nondetection 的样本统计意义、多信使候选的群体证据和巡天策略留给第 \(5/5\) 讲。学完本讲后，学生应该能够读懂单个 radio 或 jetted TDE 论文中的 evidence chain，而不是只记住某个事件被贴上了“喷流”或“非喷流”的标签。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一层基础图像是能量从 fallback 转移到外流。前三讲已经讨论了 \(\dot M_{\rm fb}\)、圆化和热辐射，本讲从这里接上：中心引擎可能把一部分质量供给的能量注入 jet 或 outflow，其尺度可写为 \(E_{\rm j}=\int \eta_{\rm j}\dot M_{\rm fb}c^2\,dt\)。这里 \(\eta_{\rm j}\) 不是直接可观测量，而是把 accretion power 与外流动能联系起来的参数。radio afterglow 关心的主要不是瞬时热光度，而是这部分外流动能 \(E_{\rm k}\) 如何在较大半径被外部介质耗散。</p>
+<p>第二层是外激波动力学。外流以速度 \(v\) 或 Lorentz 因子 \(\Gamma\) 向外传播，扫过 circumnuclear medium 并形成 forward shock。若外部密度用 \(n(R)=n_0(R/R_0)^{-k}\) 近似，则扫掠质量为 \(M_{\rm sw}(R)=4\pi m_p\int_0^R n(r)r^2\,dr\)。在亚相对论极限下，动能近似满足 \(E_{\rm k}\simeq M_{\rm sw}v^2/2\)；在相对论等效各向同性描述中，常写作 \(E_{\rm k,iso}\simeq \Gamma^2M_{\rm sw}c^2\)。因此，radio 光变之所以能反演速度和密度，是因为它记录了外流扫掠物质并减速的过程。</p>
+<p>第三层是观测时间与半径的关系。对非相对论 outflow，半径和时间的直觉关系可写为 \(R\simeq vt/(1+z)\)；对同轴相对论喷流，到达时间被相对论效应压缩，近似为 \(t_{\rm obs}\simeq (1+z)R/(2c\Gamma^2)\)。这说明同样的观测时间可以对应不同半径和速度，不能只凭“radio 在晚期出现”就判断外流慢。多历元半径反演给出 \(\beta(t)=c^{-1}dR/dt_{\rm src}\)，其中 \(t_{\rm src}=t_{\rm obs}/(1+z)\)，从而区分 coasting、deceleration 和 continuous injection。</p>
+<p>第四层是冲击后的微物理。forward shock 把一部分内能给电子，一部分给磁场。非热电子通常写成 \(N(\gamma_e)\propto \gamma_e^{-p}\)，磁场能量密度满足 \(B^2/(8\pi)=\epsilon_B e_{\rm int}\)。电子在磁场中产生 synchrotron radiation，其特征频率为 \(\nu(\gamma_e)=3eB\gamma_e^2\delta_D/(4\pi m_ec(1+z))\)。因此，谱峰随时间向低频移动，通常反映 \(B\)、典型电子能量或 Doppler boosting 随时间下降，但具体解释要结合动力学和几何。</p>
+<p>第五层是 radio spectrum 的三个关键 break。最小电子能量对应 \(\nu_m\)，冷却对应 \(\nu_c\)，自吸收对应 \(\nu_a\)。若观测频段处在 \(\nu_m<\nu<\nu_c\)，则 optically thin slope 为 \(F_\nu\propto \nu^{-(p-1)/2}\)；若处在 \(\nu>\nu_c\)，则为 \(F_\nu\propto \nu^{-p/2}\)。低频侧如果被 synchrotron self-absorption 控制，则会出现上升谱并形成谱峰。读 radio TDE 论文时，必须先确认 \(\nu_a\)、\(\nu_m\) 和 \(\nu_c\) 的排序，再谈 \(p\)、冷却和能量。</p>
+<p>第六层是从谱峰到物理量的入门反演。每个历元先用 broken power-law spectrum 拟合 \(\nu_p\) 和 \(F_{\nu,p}\)，再用 self-absorption 和 equipartition 思路估计 \(R\)、\(B\) 和 \(E\)。一个直观关系是 \(F_{\nu,p}\sim (\pi R^2/D_L^2)(2kT_b\nu_p^2/c^2)\)，它说明峰值通量对发射区投影面积非常敏感。磁场能量可写为 \(E_B=(B^2/8\pi)(4\pi R^3/3)f_V\)，equipartition 标尺则为 \(E_{\rm eq}\approx E_e+E_B\)。这些量适合作为第一标尺，但必须随几何、filling factor、\(\epsilon_e\)、\(\epsilon_B\) 和离轴效应修正。</p>
+<p>第七层是几何与视角。on-axis jet、off-axis jet 和宽角 outflow 可以在部分数据上表现相似，但物理含义不同。on-axis jet 往往有强早期 X-ray 和较早较亮 radio；off-axis jet 的可见性随 \(\Gamma\) 下降而改变，典型条件是 \(\Gamma(t)\lesssim1/(\theta_{\rm obs}-\theta_j)\)；Doppler factor \(\delta_D=[\Gamma(1-\beta\cos\theta)]^{-1}\) 控制观测亮度。若要从等效各向同性能量转为真实能量，还需 \(E_{\rm true}\sim f_bE_{\rm iso}\) 和 \(f_b\approx1-\cos\theta_j\)。宽角 outflow 没有尖锐视角门槛，通常速度更低、能量分布更平滑。</p>
+<p>第八层是观测和拟合逻辑。一个合格的分析应从多频 light curves 和单历元 spectra 出发，先描述 \(\nu_p\)、\(F_{\nu,p}\)、峰值时间和谱斜率，再给出 equipartition 标尺，最后用 forward-shock 模型在 flux-density 数据空间拟合。模型参数可写为 \(\Theta=\{E_{\rm k},n_0,k,p,\epsilon_e,\epsilon_B,\theta_j,\theta_{\rm obs}\}\)，预测量为 \(F_{\nu_i}^{\rm mod}(t_j)=F_\nu(t_j,\nu_i\mid\Theta)\)。读图时要检查横轴是 observer frame 还是 source frame，纵轴是 flux density 还是 luminosity，upper limits 是否正确使用，residual 是否按频率或历元呈系统偏差。最终目标是让观测量 \(F_\nu^{\rm obs}\) 与 \(\{R(t),B(t),E(t),n(R),\theta_{\rm obs}\}\) 建立可检验的联系，而不是把某一次 radio 探测简单命名为 jet。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：从前三讲的 \(\dot M_{\rm fb}\) 接到本讲的非热外流。这里不再重新推导 fallback，而是假设中心引擎把一部分供给功率转化为 jet 或宽角 outflow 的动能，先解出可供 \({\rm radio}\) 反演的能量尺度：</p>
+<div class="math-display">\[E_{\rm j}(t)=\int^{t}\eta_{\rm j}(t')\dot M_{\rm fb}(t')c^2\,dt' .\]</div>
+<p>式中 \(\eta_{\rm j}\) 是进入外流的效率，\(E_{\rm j}\) 或后续的 \(E_{\rm k}\) 不是热黑体光度，而是外激波需要耗散的动能。下一步要问这份动能遇到多少黑洞周围介质。</p>
+<p>第二步：用低维密度模型写出扫掠质量。先假设 circumnuclear medium 可以近似为球对称幂律，要求解外流到半径 \(R\) 时扫过的质量：</p>
+<div class="math-display">\[n(R)=n_0\left({R\over R_0}\right)^{-k},\qquad M_{\rm sw}(R)=4\pi m_p\int_0^R n(r)r^2\,dr .\]</div>
+<p>这里 \(n_0\) 和 \(k\) 是环境参数，\(M_{\rm sw}\) 决定何时减速，也把 \({\rm radio}\) 光变和黑洞周围气体剖面联系起来。下一步用 \(M_{\rm sw}\) 写动力学能量。</p>
+<p>第三步：建立非相对论与相对论两个极限。若外流是亚相对论或 mildly relativistic，可以解速度 \(v\) 与能量的关系；若是相对论 jet，则用等效各向同性能量和 Lorentz 因子 \(\Gamma\)：</p>
+<div class="math-display">\[E_{\rm k}\simeq {1\over 2}M_{\rm sw}(R)v^2,\qquad E_{{\rm k},\rm iso}\simeq \Gamma^2M_{\rm sw}(R)c^2 .\]</div>
+<p>这一步说明同一组 \({\rm radio}\) 数据可能由不同的 \(E_{\rm k}\)、\(n_0\)、\(k\)、\(v\) 或 \(\Gamma\) 组合解释，是后面参数退化的根源。下一步必须把半径和观测时间连接起来。</p>
+<p>第四步：把半径映射到观测时间。对非相对论外流，使用几何传播近似；对同轴相对论喷流，使用到达时间压缩近似：</p>
+<div class="math-display">\[R\simeq {v t_{\rm obs}\over 1+z},\qquad t_{\rm obs}\simeq {(1+z)R\over 2c\Gamma^2} .\]</div>
+<p>这两个极限提醒我们，晚期 \({\rm radio}\) 不必然等于慢速外流，早期亮 \({\rm radio}\) 也不自动证明 on-axis jet。下一步需要用同步辐射谱峰给 \(R\) 和 \(B\) 独立标尺。</p>
+<p>第五步：把冲击内能分配到磁场。假设 forward shock 后的内能密度为 \(e_{\rm int}\)，其中比例 \(\epsilon_B\) 进入磁场，则要求解磁场强度 \(B\)：</p>
+<div class="math-display">\[{B^2\over 8\pi}=\epsilon_B e_{\rm int},\qquad e_{\rm int}\sim n m_p v^2\;{\rm 或}\;e_{\rm int}\sim \Gamma^2 n m_p c^2 .\]</div>
+<p>因此 \(B\) 同时编码外部密度和 shock strength，是从动力学进入 synchrotron emission 的桥梁。下一步用 \(B\) 写电子辐射频率。</p>
+<p>第六步：由非热电子得到特征同步辐射频率。假设冲击加速电子满足 \(N(\gamma_e)\propto \gamma_e^{-p}\)，单个电子在观测系中的特征频率为</p>
+<div class="math-display">\[\nu(\gamma_e)={3eB\over 4\pi m_e c}\gamma_e^2{\delta_D\over 1+z} .\]</div>
+<p>这里 \(\gamma_e\) 是电子 Lorentz 因子，\(\delta_D\) 是 Doppler factor。若观测到 \(\nu_p\) 随时间向低频移动，通常意味着 \(B\)、典型 \(\gamma_e\) 或 \(\delta_D\) 正在下降。下一步用 optically thin 斜率约束 \(p\)。</p>
+<p>第七步：用谱斜率诊断电子指数，但先限定频段。若观测频率位于 \(\nu_m<\nu<\nu_c\)，未冷却电子给出</p>
+<div class="math-display">\[F_\nu\propto \nu^{-(p-1)/2},\qquad \nu_m<\nu<\nu_c .\]</div>
+<p>若观测频率位于冷却频率以上，则为</p>
+<div class="math-display">\[F_\nu\propto \nu^{-p/2},\qquad \nu>\nu_c .\]</div>
+<p>所以高频斜率可以估计 \(p\)，但只有在确认 (<br />
+\(u_a\))、(<br />
+\(u_m\)) 和 (<br />
+\(u_c\)) 的相对位置后才可靠。下一步转向低频 self-absorption 谱峰，因为它直接约束源尺寸。</p>
+<p>第八步：用 synchrotron self-absorption 谱峰估计半径。若观测峰值 \((\nu_p,F_{\nu,p})\) 主要由自吸收 photosphere 决定，可用 brightness-temperature 形式写出投影面积约束：</p>
+<div class="math-display">\[F_{\nu,p}\sim {\pi f_A R^2\over D_L^2}{2k_B T_b\nu_p^2\over c^2} .\]</div>
+<p>这里 \(f_A\) 是面积 filling factor，\(D_L\) 是 luminosity distance，\(T_b\) 是等效亮温。该式说明 \(F_{\nu,p}\) 对 \(R^2\) 很敏感，因此多频谱峰是半径反演的核心。下一步用能量最小化打破 \(R\) 与 \(B\) 的部分退化。</p>
+<p>第九步：用 equipartition 得到 \(R\)、\(B\) 和能量标尺。先把磁场能量写成体积积分，并把电子能量与磁场能量相加：</p>
+<div class="math-display">\[E_{\rm eq}\approx E_e+E_B,\qquad E_B={B^2\over 8\pi}{4\pi R^3\over 3}f_V .\]</div>
+<p>在给定 \(\nu_p\)、\(F_{\nu,p}\)、\(D_L\)、\(f_A\) 和 \(f_V\) 后，最小化总能量可得到 \(R_{\rm eq}\)、\(B_{\rm eq}\) 与 \(E_{\rm eq}\)。这里 \(E_{\rm eq}\) 是假设依赖的能量下限或比较标尺，不是无模型的真实总能量。下一步把多个历元的 \(R_{\rm eq}\) 串成动力学轨迹。</p>
+<p>第十步：由多历元半径求速度并判断动力学阶段。把观测时间修正到源静止系后，可由半径演化求得外流速度：</p>
+<div class="math-display">\[t_{\rm src}={t_{\rm obs}\over 1+z},\qquad \beta(t)={1\over c}{dR\over dt_{\rm src}} .\]</div>
+<p>若 \(R(t)\) 近似线性，说明可能处于 coasting；若斜率下降，说明 deceleration；若 \(E_{\rm eq}(t)\) 或模型 \(E_{\rm k}(t)\) 上升，可能提示持续能量注入或速度分层 ejecta。下一步用动力学关系把这些量反推为 \(n(R)\)。</p>
+<p>第十一步：从动力学回推出 circumnuclear density profile。在已估计 \(R(t)\)、\(v(t)\) 和 \(E_{\rm k}\) 的前提下，可先由能量式得到 \(M_{\rm sw}(R)\)，再求局部密度：</p>
+<div class="math-display">\[n(R)\sim {1\over 4\pi R^2m_p}{dM_{\rm sw}\over dR} .\]</div>
+<p>随后可与 \(n(R)=n_0(R/R_0)^{-k}\) 比较，得到 \(n_0\) 和 \(k\) 的约束。需要强调的是，少数反演点不应被过度解释为精确云团结构，因为 \(\epsilon_e\)、\(\epsilon_B\)、几何和离轴效应都会投影到 \(n(R)\)。下一步加入 viewing angle 来区分 jet 与宽角 outflow。</p>
+<p>第十二步：用 beaming cone 写出 off-axis jet 的可见性条件。若外流是准直 relativistic jet，观测亮度取决于 \(\theta_j\)、\(\theta_{\rm obs}\) 和 \(\Gamma(t)\)：</p>
+<div class="math-display">\[\Gamma(t)\lesssim {1\over \theta_{\rm obs}-\theta_j},\qquad \delta_D=[\Gamma(1-\beta\cos\theta)]^{-1} .\]</div>
+<p>当 \(\Gamma\) 下降到 beaming cone 覆盖视线时，off-axis jet 可以产生晚期 \({\rm radio}\) 上升；但 density jump、refreshed shock、delayed outflow 或持续能量注入也可能产生相似形态。下一步必须把所有候选模型投射回数据空间。</p>
+<p>第十三步：建立观测闭合与拟合目标。完整 forward-shock 模型由参数集 \(\Theta\) 控制，并直接预测每个时间和频率的 flux density：</p>
+<div class="math-display">\[\Theta=\{E_{\rm k},n_0,k,p,\epsilon_e,\epsilon_B,\theta_j,\theta_{\rm obs}\},\qquad F_{\nu_i}^{\rm mod}(t_j)=F_\nu(t_j,\nu_i\mid\Theta) .\]</div>
+<p>对探测点可在 flux-density 空间使用</p>
+<div class="math-display">\[\ln {\cal L}=-{1\over 2}\sum_i\left[{(F_i-F_i^{\rm mod})^2\over \sigma_i^2}+\ln(2\pi\sigma_i^2)\right] .\]</div>
+<p>对 upper limits 则应使用截断高斯积分或 survival likelihood。至此，推导链从 \(\dot M_{\rm fb}\) 的供能尺度出发，经过 \(M_{\rm sw}\)、\(R(t)\)、\(B(t)\)、\(E(t)\)、\(n(R)\) 和 \(\theta_{\rm obs}\)，最终闭合到可观测的多频 \(F_\nu(t)\)、谱峰、残差和后验分布。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>模型拟合要从“事实描述”开始，而不是一上来就把事件命名为喷流。本讲承接前三讲的 \(\dot M_{\rm fb}\)、圆化和热辐射，但拟合对象已经从 optical/UV 黑体转为多频 \({\rm radio}\) flux density。第一层模型通常是经验谱模型：对每个观测历元拟合同步辐射自吸收的 broken power-law spectrum，核心参数是峰频 \(\nu_p\)、峰值通量 \(F_{\nu,p}\)、低频 optically thick 斜率、高频 optically thin 斜率和平滑参数。这个阶段的目标只是稳定地量出谱峰如何随时间移动，而不是直接宣布 \(E_{\rm k}\)、\(n(R)\) 或 \(\theta_{\rm obs}\) 已被唯一确定。</p>
+<p>第二层是 synchrotron self-absorption 与 equipartition 反演。由每个历元的 \(\nu_p\)、\(F_{\nu,p}\)、luminosity distance \(D_L\) 和几何 filling factor，可以得到 \(R_{\rm eq}\)、\(B_{\rm eq}\)、\(E_{\rm eq}\) 和 \(\beta\) 的第一标尺。这里必须在课程中反复强调：\(E_{\rm eq}\) 是给定几何、\(\epsilon_e\)、\(\epsilon_B\)、面积因子和体积因子后的能量下限或比较量，不是无模型的真实总能量。若论文只展示一个 \(E_{\rm eq}\) 数字，读者应主动检查作者是否说明了 \(f_A\)、\(f_V\)、谱峰是否真由 \(\nu_a\) 控制，以及是否存在离轴 beaming 修正。</p>
+<p>第三层才进入 forward-shock dynamical model。模型参数可写为 \(\Theta=\{E_{\rm k},n_0,k,p,\epsilon_e,\epsilon_B,\Gamma_0,\beta_0,\theta_j,\theta_{\rm obs}\}\)，有时还需要加入能量注入历史 (E_{<br />
+m k}(t)) 或速度分层 ejecta。模型从动力学演化预测 \(R(t)\)、\(\Gamma(t)\)、\(B(t)\)、\(\nu_m(t)\)、\(\nu_c(t)\)、\(\nu_a(t)\) 和 (F_{<br />
+u,\max}(t))，再投影为每个时间和频率的 (F_{<br />
+u_i}^{\rm mod}(t_j)=F_\nu(t_j,\nu_i\mid\Theta))。这一步的优点是物理闭合，缺点是参数维度高，容易用退化参数解释稀疏数据。</p>
+<p>似然函数必须写在观测的 flux-density 空间。对探测点，在误差近似高斯时可用 \(\ln{\cal L}=-\frac{1}{2}\sum_i[(F_i-F_i^{\rm mod})^2/\sigma_i^2+\ln(2\pi\sigma_i^2)]\)。若存在 upper limits 或 nondetections，不能把上限当作普通测量点，而应使用截断高斯积分、survival likelihood，或在图像层面使用 forced photometry 的噪声分布。对低信噪 radio 图像，还要注意局部背景、beam size、源位置固定与否会改变 \(F_i\) 和 \(\sigma_i\)。</p>
+<p>后验分布的解读应围绕“哪些组合量被数据约束”展开。常见退化包括 \(E_{\rm k}\) 与 \(n_0\) 的补偿、\(E_{\rm k}\) 与 \(\epsilon_B\) 的补偿、\(\theta_{\rm obs}\) 与 \(\Gamma_0\) 的补偿、\(k\) 与能量注入指数的补偿，以及 \(p\) 与谱峰位置不确定性的耦合。若 corner plot 中 \(E_{\rm k}\) 和 \(\epsilon_B\) 呈长条状相关，说明单独报告最佳 \(E_{\rm k}\) 容易误导；更稳健的表述往往是某个能量密度组合、谱峰演化或最小能量标尺被约束。</p>
+<p>残差诊断要按频率和按历元分别检查。按频率看，如果低频残差持续同号，可能是 synchrotron self-absorption 位置、free-free absorption、scintillation 或 host contamination 处理不当；如果高频残差系统偏离，可能是 \(p\)、\(\nu_c\) 或多区结构的问题。按历元看，如果晚期所有频率都高于模型，可能需要 energy injection、density jump 或 refreshed shock；如果早期上限与模型冲突，on-axis jet 或高 \(\Gamma_0\) 解可能应被排除。残差不是附录里的装饰图，而是判断模型是否真的解释数据的核心。</p>
+<p>系统误差是 radio TDE 拟合的高发区。需要检查 flux calibration、非同时多频观测、interstellar scintillation、beam confusion、宿主星系或低亮度 AGN 的 persistent radio core、AGN variability、绝对时间零点、红移修正和 luminosity distance。特别是核区暂现源，必须查历史 radio 图像、宿主核位置、光学窄线诊断和长期基线；否则一个缓慢变化的 AGN core 可能被误当作 TDE afterglow。最终报告顺序应是：先陈述多频数据事实，再给 \(\nu_p\) 和 \(F_{\nu,p}\)，再给 equipartition 标尺，随后展示完整模型 posterior、残差和不能排除的替代解释。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>阅读 Swift J1644+57 及后续 jetted TDE、radio TDE 经典工作时，第一步要读 introduction 和 discovery context，但不要只记“这是一个 jetted TDE”。课程式读法是先问：前三讲的热 TDE 图像在哪些观测上不够用？事件是否位于星系核？X-ray 是否过亮、过快、过长？radio 是否持续存在并显示 synchrotron afterglow？这些问题决定它为什么不是普通超新星、普通 AGN flare 或典型 GRB afterglow 的简单替代品。</p>
+<p>第二步要细读 localization、high-energy variability 和 multiwavelength timeline。快速 X-ray 变时标通常被用来约束内区尺度，形式上可与 \(t_{\rm var}\gtrsim R_{\rm em}/(c\delta_D)\) 联系；高观测光度可与 \(L_{\rm obs}\sim \delta_D^qL'\) 联系。但这并不等于所有 X-ray 都来自外激波。读者应区分内区 engine 或 jet emission 与较大半径的 radio forward shock emission，并检查论文是否把不同波段的辐射区混为一谈。</p>
+<p>第三步要读 radio observation 和 spectral modeling。这通常是最值得慢读的技术段落：频率覆盖是否足够定位 \(\nu_p\) 和 \(F_{\nu,p}\)？各频点是否同时或准同时？低频上升和高频下降是否都被采到？作者是否讨论 flux calibration、scintillation、host contamination 和 beam confusion？如果一个历元只有一两个频点，就不能把谱峰位置当作强约束，更不能由此精确反演 \(R\)、\(B\) 和 \(E_{\rm eq}\)。</p>
+<p>第四步要读 model assumptions，而不是只读 abstract 的结论。作者采用的是 spherical outflow、wide-angle outflow、on-axis top-hat jet、off-axis jet、structured jet，还是 energy injection 模型？外部介质是否写为 \(n(R)=n_0(R/R_0)^{-k}\)？\(\epsilon_e\)、\(\epsilon_B\)、\(p\)、\(f_A\) 和 \(f_V\) 是固定、拟合，还是由先验限制？这些假设直接决定 \(E_{\rm k}\)、\(R(t)\)、\(B(t)\)、\(n(R)\) 和 \(\theta_{\rm obs}\) 的含义。</p>
+<p>第五步要读与 GRB afterglow 的比较段。可以借用外激波、非热电子、自吸收和冷却这些语言，但不能机械搬用 GRB prompt 或瞬时爆炸图像。TDE 的中心引擎可能持续数天到数月，外部介质是星系核气体，观测时标可达数年，且宿主核区背景复杂。凡是论文把 late-time radio bump 直接解释成 off-axis jet，都要追问是否比较了 density jump、refreshed shock、delayed outflow 和 continuous injection。</p>
+<p>第六步要读 discussion 和 limitations。经典论文的价值不仅在于给出某个事件的参数，也在于建立证据链：\(F_\nu^{\rm obs}\) 如何通过 \(\nu_p\)、\(F_{\nu,p}\)、\(R(t)\)、\(B(t)\)、\(E(t)\)、\(n(R)\) 和 \(\theta_{\rm obs}\) 连接到物理结论。读到现代工作时，还要特别重视 nondetection；radio 上限能限制强 on-axis jet 的比例、普通 TDE 的外流能量和 off-axis 搜索的选择函数。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，X-ray 与 optical/UV 时间线。检查横轴是触发后时间、发现后时间还是源静止系时间，纵轴是 flux、luminosity 还是 count rate。重点看快速 X-ray flare、陡降、plateau、热峰和 radio 开始时间的相对顺序，避免把所有 X-ray 都解释为外激波 synchrotron。</p>
+<p>二，多频 radio light curves。检查颜色或符号对应的频率、采样是否同时、是否包含 upper limits。重点看高频是否先峰、低频是否后峰，峰后衰减是否按频率一致，以及观测窗口是否真正覆盖峰值。</p>
+<p>三，单历元 radio spectrum 或 SED。检查横轴 \(\nu\)、纵轴 \(F_\nu\)、低频上升段和高频下降段是否都被观测到。重点读 \(\nu_p\)、\(F_{\nu,p}\)、optically thick slope 和 optically thin slope；若只覆盖一侧斜率，谱峰反演很不稳健。</p>
+<p>四，equipartition 反演图。检查 \(R(t)\)、\(B(t)\)、\(E_{\rm eq}(t)\) 和 \(\beta(t)\) 的坐标、误差条和源静止系时间修正。重点看外流是否 coasting、是否 decelerating、能量是否随时间上升；不要把 \(E_{\rm eq}\) 误读为真实总能量。</p>
+<p>五，circumnuclear density profile 图。检查横轴半径 \(R\)、纵轴 number density \(n\)、参考幂律 \(n(R)=n_0(R/R_0)^{-k}\) 和误差范围。重点看 \(k\) 的允许范围，而不是把少数反演点的散布解释为精确云团结构。</p>
+<p>六，几何模型比较图。比较 spherical 或 wide-angle outflow、on-axis jet、off-axis jet、structured jet、energy injection 和 density jump 模型。重点看是否同时拟合所有频率、是否使用早期 upper limits、峰后衰减是否足够长，以及残差是否有系统偏离。</p>
+<p>七，posterior corner plot 与 residual plot。检查 \(E_{\rm k}\)、\(n_0\)、\(\epsilon_B\)、\(p\)、\(\Gamma_0\)、\(\theta_j\) 和 \(\theta_{\rm obs}\) 的相关性。重点看长条状退化、先验边界截断和按频率分组的残差；不要只摘取最大后验点作为物理测量值。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 \(1\)：X-ray 与 optical/UV 时间线。横轴通常是 trigger 后、discovery 后或 disruption time 后的 \(t_{\rm obs}\)，需要确认是否换算到 \(t_{\rm src}=t_{\rm obs}/(1+z)\)。纵轴可能是 flux、luminosity 或 count rate，读图前要统一量纲。模型线若展示 fallback-like decline，只说明与 \(t^{-5/3}\) 类似，不自动证明 X-ray 完全追踪 \(\dot M_{\rm fb}\)。常见误读是把早期快速 X-ray variability 与晚期 radio afterglow 放在同一辐射区解释；更合理的检查是把 X-ray 视为内区或 beamed emission 候选，把 radio 视为外激波诊断。</p>
+<p>图 \(2\)：多频 radio light curves。横轴是时间，纵轴是 \(F_\nu\)，不同颜色代表不同 \(\nu\)。应看高频曲线是否先达到峰值、低频曲线是否滞后，这通常支持 \(\nu_a\) 或 \(\nu_p\) 随膨胀向低频移动。模型线如果只穿过少数峰值点，却系统错过上升段或下降段，说明动力学或吸收处理可能有问题。常见误读是把采样中最大的点当作真实峰值；若峰前或峰后没有覆盖，\(t_p\) 和 (F_{<br />
+u,p}) 都只能作为弱约束。</p>
+<p>图 \(3\)：单历元 radio spectrum。横轴是 \(\nu\)，纵轴是 \(F_\nu\)，数据点应覆盖低频 optically thick 段、中间谱峰和高频 optically thin 段。broken power-law 模型线的峰值给出 \(\nu_p\) 和 \(F_{\nu,p}\)，高频斜率可在确认 \(\nu_m<\nu<\nu_c\) 后用于估计 \(p\)。若低频点低于模型，可能是 free-free absorption、scintillation 或多区结构；若高频点偏高，可能有额外组件或冷却 break 位置错误。常见误读是只用高频斜率直接读出 \(p\)，而没有检查 \(\nu_a\)、\(\nu_m\) 和 \(\nu_c\) 的排序。</p>
+<p>图 \(4\)：\(R(t)\)、\(B(t)\) 和 \(E(t)\) 的演化。横轴应使用源静止系时间，纵轴分别是半径、磁场和能量标尺。若 \(R(t)\) 近似线性，可解释为 coasting；若 \(R(t)\) 斜率降低，说明可能 deceleration；若 \(B(t)\) 持续下降，通常符合膨胀和冲击减弱图像。若 \(E_{\rm eq}(t)\) 上升，不应立即说能量不守恒，而应比较 continuous injection、velocity stratification、geometry evolution 和 equipartition 假设变化。</p>
+<p>图 \(5\)：circumnuclear density profile。横轴是 \(R\)，纵轴是 \(n(R)\)，常叠加 \(n\propto R^{-k}\) 的参考线。应看误差条是否允许不同 \(k\)，以及密度 bump 是否超过微物理、几何和谱峰误差。模型线若非常平滑而数据点很少，说明 \(n_0\) 和 \(k\) 只是低维描述，不是对真实核区多相气体的精确成像。常见误读是把每个反演点都当作一个物理云团；实际上 \(\epsilon_B\)、\(f_V\) 和 viewing angle 的变化也会造成类似结构。</p>
+<p>图 \(6\)：on-axis、off-axis 与 wide-angle outflow 的模型比较。横轴是时间，纵轴是各频率 \(F_\nu\)，不同曲线代表不同几何或动力学假设。off-axis jet 通常在满足 \(\Gamma(t)\lesssim1/(\theta_{\rm obs}-\theta_j)\) 后变亮，但 density jump、refreshed shock 或 delayed outflow 也能产生 late-time bump。读图时要看早期 upper limits 是否排除了 on-axis 解，峰后下降是否足够长以区分 jet break，所有频率是否被同一组参数同时解释。常见误读是看到晚期上升就自动写成 off-axis jet。</p>
+<p>图 \(7\)：corner plot 与 residual plot。corner plot 的坐标轴通常是 \(E_{\rm k}\)、\(n_0\)、\(k\)、\(p\)、\(\epsilon_e\)、\(\epsilon_B\)、\(\Gamma_0\)、\(\theta_j\) 和 \(\theta_{\rm obs}\)。若等高线沿对角方向拉长，说明数据约束的是参数组合而非单个参数；若后验贴着先验边界，结论可能由先验驱动。residual plot 要按频率和时间分组检查：低频同号残差提示吸收或闪烁，高频同号残差提示谱斜率或冷却问题，晚期全频段同号残差提示动力学缺少能量注入或介质结构。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从 TDE 基础理论读到 jetted TDE 经典事件。先回到 Rees 型 tidal disruption flare 的基本图像，复习为什么 \(\dot M_{\rm fb}\)、圆化和 accretion flare 能解释许多热 TDE；再读 Swift J1644+57 等事件的 discovery、X-ray variability 和 radio afterglow 论文。阅读重点不是背诵“它有 jet”，而是重建证据链：核位置、非热高能辐射、短时标 variability、长期 radio synchrotron、外激波能量和环境密度如何共同支持 jetted TDE 解释。</p>
+<p>第二条路径是从 GRB afterglow 方法迁移到 TDE radio，但要保留边界意识。可以系统复习 forward shock、synchrotron self-absorption、cooling break、equipartition energy 和 off-axis afterglow 的经典方法，然后逐项比较 TDE 与 GRB 的差别：TDE 的 engine duration 更长，外部介质是 circumnuclear medium，观测时标从数周到数年，宿主核区存在 AGN contamination 风险。这样读能避免把 GRB prompt 内激波或瞬时爆炸近似机械套用到 TDE。</p>
+<p>第三条路径是读 ordinary optical/UV TDE 的 radio follow-up 与 nondetection。现代研究不只关注少数明亮 jetted TDE，也关心普通 TDE 是否普遍有亚相对论 outflow、disk wind 或 off-axis jet。读这些论文时要看作者如何处理 upper limits，如何把 nondetection 转化为 \(E_{\rm k}\)、\(n_0\)、\(\epsilon_B\) 和 \(\theta_{\rm obs}\) 的限制，以及如何区别 host radio core 与真正的 transient emission。nondetection 是样本统计的重要组成部分，不是“没有结果”。</p>
+<p>第四条路径通向前沿问题：late-time radio rebrightening、off-axis jetted TDE searches、structured jets 和多信使候选。读这些工作时要坚持本讲建立的检查表：late-time bump 是否真的需要 \(\theta_{\rm obs}>\theta_j\) 的 jet？是否比较了 density jump、continuous injection 和 refreshed shock？若论文讨论 neutrino association，hadronic power、磁场、半径、密度和 \(\gamma\gamma\) opacity 是否与 radio 推断相容？这条路径自然连接到更高能的粒子加速和多信使 TDE 研究。</p>
+<p>第五条路径是从单源建模走向群体研究。把每个事件的 \(R(t)\)、\(B(t)\)、\(E_{\rm eq}\)、\(E_{\rm k}\)、\(n(R)\) 和 upper limits 放在一起，才能讨论 jetted fraction、radio luminosity function、host preference 和 selection function。这个方向正是下一讲的核心：本讲教会学生如何读懂单个 radio TDE，下一讲要问真实巡天为什么只看到某些事件、漏掉哪些事件，以及 nondetection 如何改变总体结论。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第 \(5/5\) 讲最自然的方向是“TDE 从单事件到前沿样本：rate、host preference、selection function、多信使候选和巡天策略”。本讲已经完成单个 jetted 或 radio TDE 的物理反演语言，包括 \(\nu_p\)、\(F_{\nu,p}\)、\(R(t)\)、\(B(t)\)、\(E_{\rm k}\)、\(n(R)\) 和 \(\theta_{\rm obs}\)；下一讲应把这些量放进 optical-selected、X-ray-selected 和 radio-selected 样本中，讨论为什么不同选择方式会得到不同的 TDE 图像。</p>
+<p>第二个方向是系统讨论 radio nondetection、off-axis jet 搜索和 delayed radio emission 的选择效应。本讲已经说明 upper limits 不能当作普通探测点，也说明 late-time radio bump 不能自动等同于 off-axis jet；下一讲可以进一步问，在真实巡天 cadence、灵敏度和 follow-up 策略下，哪些 jet 或 outflow 会被错过，哪些普通 AGN variability 会被误收进样本。</p>
+<p>第三个方向是在收束课中加入多信使和高能粒子候选的小节，但保持边界清楚。下一讲可以讨论 TDE-neutrino candidate 的样本证据、关联统计和能量预算，不必重新推导本讲的 synchrotron self-absorption 或 forward-shock 公式。若要深入 \(p\gamma\)、\(pp\)、cascade 和内部吸收，应在本系列之后另开“TDE 多信使与高能粒子”专题。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>Swift J1644 tidal disruption event jet radio afterglow</li>
+<li>TDE radio synchrotron outflow circumnuclear medium</li>
+<li>tidal disruption event neutrino candidate</li>
+<li>off-axis jetted tidal disruption event radio</li>
+<li>late-time radio rebrightening tidal disruption event</li>
+<li>equipartition analysis radio tidal disruption event</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<p>（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
