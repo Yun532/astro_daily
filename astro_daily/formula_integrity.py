@@ -164,7 +164,18 @@ def _normalize_line_broken_latex_rm(text: str) -> str:
 
     text = text.replace("\\[\\n", "\\[\n").replace("\\]\\n", "\\]\n")
     text = re.sub(r"([_^])\{\\\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}", r"\1{\\rm \2}", text)
+    text = re.sub(r"\{\\\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)", r"{\\rm \1", text)
     text = re.sub(r"([_^])\{\\\}\}\\\)\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}\\\)", r"\1{\\rm \2}\\)", text)
+    text = re.sub(r"\\\s*\n\s*ight\b", r"\\right", text)
+    text = re.sub(r"\\\s*\n\s*u(?=[={}_/\\\s])", r"\\nu", text)
+    text = re.sub(r"\\\(\\\s*\n\s*\\\(ho_0\\\)\\\)", r"\\(\\rho_0\\)", text)
+    text = re.sub(r"\\\(\\\s*\n\s*ho\\\)", r"\\(\\rho\\)", text)
+    text = re.sub(r"\\\(\\\s*\n\s*\\\(u_", r"\\(\\nu_", text)
+    text = re.sub(
+        r"\\\(F_\{\\\}\}\\\)\s*\n\s*u_i\}\^\{\\rm obs\}",
+        r"\\(F_{\\nu_i}^{\\rm obs}",
+        text,
+    )
     return text
 
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from astro_daily.formula_integrity import ensure_html_latex_formulas_valid, repair_formula_sections, repair_report_latex_formulas, validate_html_latex_formulas
+from astro_daily.formula_integrity import _normalize_line_broken_latex_rm, ensure_html_latex_formulas_valid, repair_formula_sections, repair_report_latex_formulas, validate_html_latex_formulas
 
 
 def formula_section(body: str) -> str:
@@ -115,6 +115,8 @@ def test_repairs_line_broken_rm_fragments(tmp_path: Path):
         "m full}=\\sum_m N_m^{\\\n"
         "m all}c_m\n"
         "\\]\n"
+        "E_{{\\\n"
+        "m cut},i}\n"
         "其中 \\(N_m^{\\}}\\)\n"
         "m surv}\\) 是幸存模板数，\\(T_{\\}}\\)\n"
         "m coh}\\) 是相干时间。"
@@ -128,9 +130,21 @@ def test_repairs_line_broken_rm_fragments(tmp_path: Path):
     assert "N_m^{\\rm surv}c_m" in repaired
     assert "C_{\\rm full}" in repaired
     assert "N_m^{\\rm all}c_m" in repaired
+    assert "E_{{\\rm cut},i}" in repaired
     assert "\\(N_m^{\\rm surv}\\)" in repaired
     assert "\\(T_{\\rm coh}\\)" in repaired
     assert result.unresolved_count == 0
+
+
+def test_repairs_other_line_broken_latex_commands():
+    slash = chr(92)
+    damaged = "\\left(x" + slash + "\night) + S_" + slash + "\nu + \\" + "(" + slash + "\n\\(ho_0\\)\\)"
+
+    repaired = _normalize_line_broken_latex_rm(damaged)
+
+    assert "\\left(x\\right)" in repaired
+    assert "S_\\nu" in repaired
+    assert "\\(\\rho_0\\)" in repaired
 
 
 def test_does_not_touch_non_formula_sections():
