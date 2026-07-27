@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-07-26</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-07-26</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-07-26">
+      <a class="previous" href="2026-07-24.html">← 上一期：2026-07-24</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <a class="next" href="2026-07-27.html">下一期：2026-07-27 →</a>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-07-26T11:10:11+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-tde">1. TDE 从零到前沿（五）：从单个爆发到统计样本、黑洞人口和前沿模型</h3>
+<ul>
+<li>课程系列：TDE 从零到前沿课程（第 5/6 讲）</li>
+<li>本讲边界：本讲整合 TDE 模型前沿：发生率、黑洞质量函数、星系核环境、partial/repeating TDE、样本选择和新巡天前沿。不重复 fallback 基础推导；下一讲做论文研读训练。</li>
+<li>上下文承接：前四讲建立了单个 TDE 从破坏到发光的链条；本讲转向 population 和巡天科学。</li>
+<li>主题：TDE demographics, rates, black hole occupation, partial disruptions and surveys</li>
+<li>经典工作：从经典 rate/loss-cone 理论到 ZTF、eROSITA、LSST/Rubin 时代的 TDE 样本统计和模型选择。</li>
+<li>为什么经典：未来 TDE 的突破很可能来自大样本和时域巡天。新人需要学会把单事件模型与 selection effect、rate 和黑洞人口联系起来。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>本讲的中心问题是：当我们从一个漂亮的单个 TDE 光变，走向几十、几百甚至未来上万候选事件时，哪些结论仍然成立，哪些结论会被选择效应改写？前四讲已经建立了单事件链条：恒星在潮汐半径内被破坏，碎片产生 fallback，随后经历圆化、吸积、再处理，并在 optical、UV、X-ray 和 radio 中留下不同诊断。本讲不重复 \(t^{-5/3}\) 的基础推导，而是把单事件模型放进总体框架：真实总体、光变族和巡天选择函数共同决定观测样本。最简洁的课程图像是</p>
+<div class="math-display">\[N_{\rm obs}\sim {\rm Population}\otimes {\rm Light\ Curve\ Family}\otimes S({\rm survey}) .\]</div>
+<p>因此，\(R_{\rm obs}\ne R_{\rm int}\) 是本讲第一条原则。发现了多少个 TDE，并不等于宇宙中真实发生了多少个 TDE；发表样本也不等于触发样本，更不等于 intrinsic population。</p>
+<p>历史动机来自一个看似简单却非常深的问题：星系核中的恒星怎样被送到足够低角动量的轨道上？经典 TDE rate 理论首先不是辐射转移理论，而是 loss-cone feeding 理论。给定黑洞质量 \(M_\bullet\)、恒星质量 \(M_\star\) 和恒星半径 \(R_\star\)，潮汐半径为</p>
+<div class="math-display">\[R_{\rm t}=R_\star\left(\frac{M_\bullet}{M_\star}\right)^{1/3} .\]</div>
+<p>近抛物线轨道进入 loss cone 的角动量边界近似为</p>
+<div class="math-display">\[J_{\rm lc}^2\simeq 2GM_\bullet R_{\rm t} .\]</div>
+<p>于是单星系的真实破坏率可写成相空间通量积分</p>
+<div class="math-display">\[\Gamma_{\rm TDE}=\int {\cal F}(E,J)\,dE\,dJ .\]</div>
+<p>这里的核心不是某个固定 rate 数字，而是 \({\cal F}(E,J)\) 如何由两体弛豫、共振弛豫、三轴势、核星团密度坡度、星暴后结构和双黑洞扰动共同决定。早期常见的每星系每年 \(10^{-5}\) 到 \(10^{-4}\) 的数量级，只应被理解为模型依赖的参考尺度，而不是宇宙常数。</p>
+<p>从单星系到宇宙体积率，需要加入黑洞人口学。高质量端受到直接吞没边界限制：当 \(R_{\rm t}\) 小于有效俘获半径 \(R_{\rm cap}\) 时，典型明亮 TDE 会被抑制。令 \(R_{\rm t}=R_{\rm cap}\)，可得到近似 Hills mass</p>
+<div class="math-display">\[M_{\rm H}\sim 10^8M_\odot\left(\frac{R_\star}{R_\odot}\right)^{3/2}\left(\frac{M_\star}{M_\odot}\right)^{-1/2}f_{\rm cap}^{-3/2} .\]</div>
+<p>低质量端则受黑洞占有率、宿主星系质量函数、事件光度和巡天灵敏度共同限制。因此真实体积率应写成</p>
+<div class="math-display">\[\dot n_{\rm int}(z)=\int \Phi(M_\bullet,z)f_{\rm occ}(M_{\rm gal},z)\langle\Gamma_{\rm TDE}\mid M_\bullet\rangle d\log M_\bullet .\]</div>
+<p>这一步说明，TDE 对 \(10^5\) 到 \(10^7M_\odot\) 黑洞特别敏感，但这个敏感窗口不是纯粹物理窗口，而是黑洞质量函数、占有率、Hills cutoff 和 selection function 的合成结果。</p>
+<p>即使真实 TDE 已经发生，它也未必进入样本。每个事件有潜变量 \(\theta\)，包括 \(M_\bullet\)、\(M_\star\)、穿透因子 \(\beta\)、发光效率、再处理结构、消光、视角和宿主背景。某一波段 \(b\) 的观测通量应写为</p>
+<div class="math-display">\[F_b(t_{\rm obs})=\frac{1+z}{4\pi D_L^2(z)}\int L_{\nu'}(t_{\rm rest};\theta)T_b(\nu)d\nu .\]</div>
+<p>巡天选择函数则至少应分解为</p>
+<div class="math-display">\[S(\theta,z,h;{\cal S})=P_{\rm trig}P_{\rm quality}P_{\rm spec}P_{\rm class} .\]</div>
+<p>其中 \(P_{\rm trig}\) 对 cadence、limiting magnitude 和模板差分敏感，\(P_{\rm spec}\) 对光谱资源和宿主亮度敏感，\(P_{\rm class}\) 对 AGN contamination、核区位置、颜色和谱线标准敏感。现代 rate 论文的关键步骤是 injection-recovery：把模拟 TDE 注入真实图像或 alert stream，再通过同一管线恢复 \(S\)。</p>
+<p>有了 \(S\) 以后，模型才能预测某个巡天应发现多少事件。若巡天时长为 \(T_{\rm surv}\)、覆盖天区为 \(\Omega\)，期望发现数为</p>
+<div class="math-display">\[\mu=T_{\rm surv}\int dz\frac{dV}{dz}\frac{\Omega}{4\pi}\frac{1}{1+z}\int d\theta\,R_{\rm int}(\theta,z)S(\theta,z;{\cal S}) .\]</div>
+<p>这条式子把 intrinsic rate density、宇宙体积、时间膨胀、潜变量分布和选择函数放进同一个积分。观测到 \(N\) 个事件且每个事件数据为 \(D_i\) 时，非齐次 Poisson 点过程似然可写为</p>
+<div class="math-display">\[\ln {\cal L}=-\mu(\Lambda)+\sum_{i=1}^{N}\ln\int d\theta_i\,p(D_i\mid\theta_i)R_{\rm int}(\theta_i\mid\Lambda)S(\theta_i) .\]</div>
+<p>这里 \(\Lambda\) 是总体超参数，例如 luminosity function 斜率、host enhancement、occupation fraction、partial fraction、X-ray visible fraction 和 dust distribution。这个似然同时利用总发现数和事件属性分布，而不是只拟合一个直方图。</p>
+<p>本讲的一个重点应用是宿主偏好。光学 TDE 样本常显示 post-starburst 或 quiescent Balmer-strong 宿主超额。物理解释可能包括核恒星密度升高、最近并合、中心非球对称扰动、星暴后质量分布改变或双黑洞动力学增强；选择解释可能包括宿主更安静、AGN 污染更少、差分成像更干净、光谱分类更容易。若宿主类别为 \(k\)，可写</p>
+<div class="math-display">\[\Gamma_{{\rm TDE},k}=\eta_k\Gamma_0(M_\bullet,\psi),\qquad p(k\mid {\rm detected})\propto n_k\eta_k\langle S_k\rangle .\]</div>
+<p>因此 \(\eta_k\ne N_k/N_{\rm all}\) 在没有 selection correction 时成立。观测宿主超额必须同时除以 parent population 和 \(\langle S_k\rangle\)，否则会把分类便利性误读为真实 rate 增强。</p>
+<p>另一个前沿应用是 partial 与 repeating TDE。complete disruption 的计数单位通常是一颗恒星一次进入 loss cone；partial disruption 中残余核心可能存活并再次回归，产生多个可见 flare。此时 flare rate 与 entry rate 的关系可以写为</p>
+<div class="math-display">\[\Gamma_{\rm flare}=\Gamma_{\rm entry}\left[f_{\rm full}+f_{\rm part}\langle N_{\rm rep}\rangle\right] .\]</div>
+<p>模型还必须追踪质量损失分数 \(\Delta M/M_\star\)、残余核心生存概率 \(P_{\rm survive}(n)\)、轨道能量改变、每次 flare 的颜色温度、谱线和能量。重复 TDE 解释不能只看峰间距，还必须与 changing-look AGN、盘不稳定和 AGN red-noise 模型比较。</p>
+<p>读图和拟合是本讲的训练落点。黑洞质量直方图应按</p>
+<div class="math-display">\[\frac{dN_{\rm obs}}{d\log M_\bullet}\propto \Phi(M_\bullet)f_{\rm occ}(M_\bullet)\Gamma_{\rm TDE}(M_\bullet)\langle S(M_\bullet)\rangle\]</div>
+<p>拆解，而不是直接当作黑洞质量函数。redshift–peak magnitude 图要检查点是否贴近 limiting magnitude；host color–mass 图要检查 parent sample 是否经过同样选择；efficiency 图要检查是否来自 injection-recovery；cumulative rate 图要分辨 bright end 小数统计和 faint end incompleteness；multi-survey forecast 要区分 \(N_{\rm classified}<N_{\rm triggered}\)。本讲最后的边界是：我们提供 rate、selection function、likelihood、宿主偏好、黑洞占有率和 partial/repeating TDE 的框架；第六讲不再扩展新的辐射机制，而用这些工具逐段训练前沿论文研读。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一层背景是本系列的连续性。前四讲已经完成从单个 TDE 物理到多波段诊断的基础：潮汐破坏条件、fallback、圆化、吸积、再处理、谱线和 radio 外流。本讲的对象不再是“一个事件为什么这样亮”，而是“为什么巡天看见的是这些事件而不是另一些事件”。换句话说，前四讲解决单事件的 forward modeling，本讲解决 population 与 survey 的 forward modeling；下一讲则会把这些工具用于论文研读训练。</p>
+<p>第二层背景是 TDE rate 的理论传统。TDE 发生率的起点不是光度函数，而是星系核动力学。恒星必须通过角动量扩散进入 loss cone，才可能被黑洞潮汐破坏。empty loss cone 与 full loss cone 描述的是角动量扩散相对于轨道周期的快慢极限；两体弛豫、共振弛豫、三轴势、核星团、最近并合和双黑洞扰动都可能改变供给率。因此，当论文给出每星系每年 \(10^{-5}\) 或 \(10^{-4}\) 的数量级时，我们要追问其核恒星密度、速度弥散、黑洞质量关系和 loss-cone 处理，而不是把它当成普适常数。</p>
+<p>第三层背景是“发生率”这个词本身非常危险。\(R_{\rm int}\) 指真实发生率，\(R_{\rm obs}\) 指被某类观测条件看见的率，discovery rate 指被管线触发的率，classified rate 指最终有足够证据进入分类样本的率，published sample rate 还会受到论文发表和 follow-up 策略影响。若一篇文章没有清楚说明 \(S(\theta,z;{\cal S})\)，那么它的 rate 数字只能在非常有限的语境下比较。最常见的错误，是把发现数 \(N\) 直接除以星系数和巡天时间，然后声称得到 intrinsic TDE rate。</p>
+<p>第四层背景是黑洞占有率问题。低质量星系中是否普遍存在 \(10^4\) 到 \(10^6M_\odot\) 黑洞，是种子黑洞模型和星系—黑洞共同演化的关键检验。TDE 对这个问题很有吸引力，因为静默黑洞不需要长期吸积也能通过一次恒星破坏暴露出来。但 TDE 只是间接探针：低质量端的观测缺口可能来自 \(f_{\rm occ}\) 低，也可能来自事件暗弱、宿主红移不完备、黑洞质量 proxy 散布、光谱 follow-up 不足或管线对低对比核瞬变不敏感。</p>
+<p>第五层背景是高质量端的 Hills mass 边界。对太阳型恒星，足够大质量的黑洞可能在恒星被撕裂并产生明亮电磁辐射之前就将其直接俘获。因此观测到的 TDE 黑洞质量分布在高质量端下降，并不必然说明高质量黑洞不产生低角动量恒星供给，也不必然说明黑洞质量函数下降；它可能是 \(R_{\rm t}\) 与 \(R_{\rm cap}\) 的物理边界、黑洞自旋、恒星类型和选择函数共同塑造的结果。</p>
+<p>第六层背景是宿主偏好。许多 optical-selected TDE 样本显示 post-starburst 或 quiescent Balmer-strong 宿主超额。这个现象很重要，因为它可能指向星暴后核恒星密度增强、最近并合扰动或特殊动力学结构。但它也很容易被误读：安静宿主中 transient 更容易从背景中显露，AGN contamination 更少，光谱分类更清楚，差分图像残差可能更少。因此课程要求始终区分 \(p({\rm host}\mid {\rm detected})\) 与 intrinsic host rate enhancement。</p>
+<p>第七层背景是 partial 和 repeating TDE 使“计数单位”变复杂。传统入门图像常把一次恒星破坏对应一次 flare；但如果恒星只被剥离外层，残余核心可在后续轨道中再次接近黑洞，产生重复 flare。此时样本中的 flare 数不再等于恒星首次进入 loss cone 的次数。用 flare counts 反推 \(\Gamma_{\rm TDE}\)、loss-cone feeding 或 \(f_{\rm occ}\) 时，就必须引入 \(f_{\rm part}\)、\(\langle N_{\rm rep}\rangle\) 和 \(P_{\rm survive}(n)\)。</p>
+<p>第八层背景是时域巡天改变了研究方式。小样本时代可以逐个事件讲物理故事；ZTF、eROSITA 和 Rubin/LSST 时代必须先讲样本怎样来。cadence、limiting magnitude、nuclear offset cut、host surface brightness、alert filter、spectroscopic bottleneck、classification rule 和 publication bias 都是科学结论的一部分。未来发现的候选数会大幅增加，但真正可用于人口推断的不是全部 trigger，而是经过定义清楚的 classified 或 well-characterized sample。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一，population TDE 的基础图像是一条从真实宇宙到观测目录的映射链。真实宇宙包含黑洞质量函数 \(Φ(M_\bullet,z)\)、黑洞占有率 \(f_{\rm occ}\)、星系核恒星结构 \(\psi\) 和 loss-cone feeding rate \(\Gamma_{\rm TDE}\)。每次破坏再通过光变族 \(L_{\nu}(t;\theta)\) 投影到不同波段，最后被具体巡天的选择函数 \(S(\theta,z,h;{\cal S})\) 筛选。课程中要反复记住：观测样本是 population、light-curve family 与 survey selection 的卷积，而不是总体本身。</p>
+<p>第二，loss cone 是从单事件物理进入 rate 理论的门。潮汐半径 \(R_{\rm t}=R_\star(M_\bullet/M_\star)^{1/3}\) 给出破坏条件；近抛物线轨道满足 \(J_{\rm lc}^2\simeq 2GM_\bullet R_{\rm t}\)，于是角动量小于 \(J_{\rm lc}\) 的轨道属于危险区域。两体弛豫和其他动力学机制不断把恒星送入这个区域。若一次轨道周期内角动量扩散很小，就是 empty loss cone；若扩散足够快，就是 full loss cone。不同极限会给出不同的 \(\Gamma_{\rm TDE}(M_\bullet,\psi)\) 质量依赖。</p>
+<p>第三，单星系 rate 必须连接到黑洞人口。对每个黑洞质量 \(M_\bullet\)，平均 TDE rate 不是只由 \(M_\bullet\) 决定，还依赖核星团密度、速度弥散、恒星质量函数和星系形状。但在 population 模型中，我们常把这些复杂性压缩成条件平均 \(\langle\Gamma_{\rm TDE}\mid M_\bullet\rangle\)，再与 \(\Phi(M_\bullet,z)\) 和 \(f_{\rm occ}\) 相乘积分。这个压缩很有用，但也隐藏了系统误差：不同星系核结构可能在同一 \(M_\bullet\) 下给出数量级不同的 rate。</p>
+<p>第四，Hills mass 决定了可见样本的高质量端。若 \(R_{\rm t}=R_{\rm cap}\)，可得 \(M_{\rm H}\sim 10^8M_\odot(R_\star/R_\odot)^{3/2}(M_\star/M_\odot)^{-1/2}f_{\rm cap}^{-3/2}\)。这里 \(f_{\rm cap}\) 吸收黑洞自旋、轨道倾角和俘获半径等因素。这个边界说明，观测到的高质量端下降可能来自直接吞没，而不是 loss-cone feeding 消失。反过来，若发现高质量黑洞上的明亮 TDE，可能提示黑洞自旋、巨星破坏或特殊轨道几何。</p>
+<p>第五，低质量端的解释更依赖选择效应和占有率。若 \(f_{\rm occ}\) 在矮星系中下降，TDE 数量会减少；若低质量黑洞产生的事件更暗、更快、更难光谱分类，也会造成相似观测结果。黑洞质量常由宿主 proxy 推断，例如 \(M_\bullet\)-\(\sigma\) 或 \(M_\bullet\)-bulge 关系；其散布 \(\sigma_{\log M_\bullet,{\rm proxy}}\) 必须传播到后验。否则低质量端的 occupation fraction 推断会被 Eddington bias 和 proxy scatter 明显扭曲。</p>
+<p>第六，选择函数是连接理论和观测的核心对象。对某个事件，巡天看到的不是 bolometric luminosity，而是经过红移、K 修正、滤光片响应、宿主消光和 cadence 采样后的 \(F_b(t_{\rm obs})\)。因此 \(S\) 不只是 limiting magnitude，而是 \(P_{\rm trig}\)、\(P_{\rm quality}\)、\(P_{\rm spec}\) 和 \(P_{\rm class}\) 的乘积。optical、soft X-ray 和 radio 样本不能被当作同一总体的无偏随机切片，因为它们的 \(S_{\rm optical}\)、\(S_{\rm X}\) 和 \(S_{\rm radio}\) 不同，且 \(S_{\rm joint}\ne S_{\rm optical}=S_{\rm X}\)。</p>
+<p>第七，统计推断应使用 forward modeling，而不是事后修补直方图。给定 population 超参数 \(\Lambda\)，先生成 intrinsic events，再通过光变族和 \(S\) 得到 predicted observed distribution，最后用非齐次 Poisson 似然比较总数和事件属性。拟合后不能只看 best-fit rate，而要检查后验置信区间、参数退化和残差：红移分布、峰值光度、持续时间、宿主质量、黑洞质量 proxy、温度和谱线类别是否同时匹配。若模型只拟合 \(dN_{\rm obs}/d\log M_\bullet\)，却无法解释 redshift 或 peak magnitude residuals，就不能作为可靠人口结论。</p>
+<p>第八，读论文图表时要有固定检查清单。黑洞质量分布图要拆成 \(\Phi f_{\rm occ}\Gamma_{\rm TDE}\langle S\rangle\)；redshift–magnitude 图要看样本是否贴近 limiting magnitude；host color–mass 图要问 parent sample 是否经过同样选择；efficiency 图要问是否来自 injection-recovery；repeating light curve 要比较每次 flare 的颜色、温度、谱线和残差，而不只看周期；multi-survey forecast 要区分 trigger、classified 和 well-characterized 数量。本讲到这里为止，下一讲将不再扩展新的 TDE 物理模块，而是用这些 rate、selection 和 likelihood 工具读前沿论文。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：先把“一个星系一年产生多少次 TDE”定义为动力学供给问题，而不是发光问题。给定星系核中的黑洞质量 \(M_\bullet\) 和核恒星结构参数 \(\psi\)，真实破坏率由进入 loss cone 的相空间通量给出：</p>
+<div class="math-display">\[\Gamma_{\rm TDE}(M_\bullet,\psi)=\int {\cal F}(E,J;M_\bullet,\psi)\,dE\,dJ .\]</div>
+<p>这里 \(E\) 是轨道能量，\(J\) 是轨道角动量，\({\cal F}\) 表示恒星被弛豫、三轴势或核扰动送入低角动量区域的通量。这一步解出的量是单星系真实 entry rate；它本身还不是可观测发现率，下一步需要说明哪些轨道属于 loss cone。</p>
+<p>第二步：用单事件破坏条件定义 loss cone 边界。假设恒星质量为 \(M_\star\)、半径为 \(R_\star\)，并且轨道近似为抛物线；当近心点 \(r_{\rm p}\) 小于潮汐半径 \(R_{\rm t}\) 时，恒星会被破坏：</p>
+<div class="math-display">\[R_{\rm t}=R_\star\left(\frac{M_\bullet}{M_\star}\right)^{1/3},\qquad J_{\rm lc}^2\simeq 2GM_\bullet R_{\rm t} .\]</div>
+<p>这里 \(J_{\rm lc}\) 是 loss cone 的角动量边界。这一步把前四讲的单事件潮汐条件翻译成星系核相空间边界；接下来，\(J<J_{\rm lc}\) 的恒星是否产生明亮 TDE，还要看它们是否在被撕裂前已经被黑洞直接俘获。</p>
+<p>第三步：加入高质量黑洞的直接俘获限制。若有效俘获半径为 \(R_{\rm cap}\)，当 \(R_{\rm t}\lesssim R_{\rm cap}\) 时，典型太阳型恒星可能在产生明亮电磁信号前被吞没；令边界满足 \(R_{\rm t}=R_{\rm cap}\)，得到近似 Hills mass：</p>
+<div class="math-display">\[M_{\rm H}\sim 10^8M_\odot\left(\frac{R_\star}{R_\odot}\right)^{3/2}\left(\frac{M_\star}{M_\odot}\right)^{-1/2}f_{\rm cap}^{-3/2} .\]</div>
+<p>其中 \(f_{\rm cap}\) 吸收黑洞自旋、轨道倾角和俘获半径定义的不确定性。这一步解出可见 TDE 的高质量端物理截断；因此观测到的 \(M_\bullet\) 高质量端下降，不能立即解释为黑洞质量函数下降。</p>
+<p>第四步：从单星系破坏率推进到宇宙体积率。设黑洞质量函数为 \(\Phi(M_\bullet,z)=dN/(dV\,d\log M_\bullet)\)，低质量星系中的黑洞占有率为 \(f_{\rm occ}(M_{\rm gal},z)\)，则真实体积发生率为：</p>
+<div class="math-display">\[\dot n_{\rm int}(z)=\int \Phi(M_\bullet,z)\,f_{\rm occ}(M_{\rm gal},z)\,\langle \Gamma_{\rm TDE}\mid M_\bullet\rangle\,d\log M_\bullet .\]</div>
+<p>这一步解出的 \(\dot n_{\rm int}(z)\) 是 intrinsic volumetric rate；它包含黑洞数量、占有率和单黑洞供给率，但尚未包含巡天是否能看到这些事件。</p>
+<p>第五步：把真实事件映射到观测波段。令单事件潜变量为 \(\theta\)，其中包括 \(M_\bullet\)、\(M_\star\)、穿透因子 \(\beta\)、发光效率、再处理结构、宿主消光和视角；在滤光片 \(b\) 中观测到的通量为：</p>
+<div class="math-display">\[F_b(t_{\rm obs})=\frac{1+z}{4\pi D_L^2(z)}\int L_{\nu'}(t_{\rm rest};\theta)\,T_b(\nu)\,d\nu,\qquad \nu'=(1+z)\nu .\]</div>
+<p>这里 \(D_L(z)\) 是光度距离，\(T_b(\nu)\) 是滤光片响应，\(t_{\rm obs}=(1+z)t_{\rm rest}\)。这一步说明巡天选择发生在观测通量、颜色和 cadence 空间中，而不是简单发生在 bolometric luminosity 上。</p>
+<p>第六步：定义从真实事件到目录事件的选择函数。一个事件必须经过触发、图像质量筛选、光谱或多波段跟进、分类标准，才会进入统计样本，因此可写为：</p>
+<div class="math-display">\[S(\theta,z,h;{\cal S})=P_{\rm trig}\,P_{\rm quality}\,P_{\rm spec}\,P_{\rm class} .\]</div>
+<p>其中 \(h\) 表示宿主性质，\({\cal S}\) 表示巡天策略。这里解出的 \(S(\theta,z,h;{\cal S})\) 是 population inference 的核心对象；它把 intrinsic population 投影成 triggered、classified 或 published sample。</p>
+<p>第七步：计算某个巡天的期望发现数。若巡天持续时间为 \(T_{\rm surv}\)，天区覆盖为 \(\Omega\)，则非齐次暂现源过程的期望发现数为：</p>
+<div class="math-display">\[\mu(\Lambda)=T_{\rm surv}\int dz\,\frac{dV}{dz}\frac{\Omega}{4\pi}\frac{1}{1+z}\int d\theta\,R_{\rm int}(\theta,z\mid\Lambda)\,S(\theta,z;{\cal S}) .\]</div>
+<p>其中 \(R_{\rm int}(\theta,z\mid\Lambda)\) 是由总体超参数 \(\Lambda\) 控制的真实率密度，\((1+z)^{-1}\) 是宇宙学时间膨胀修正。这一步把真实率、宇宙体积、光变潜变量和选择函数卷积为可观测的期望计数。</p>
+<p>第八步：写出用于拟合的非齐次 Poisson 点过程似然。若观测到 \(N\) 个事件，每个事件的数据为 \(D_i\)，则似然为：</p>
+<div class="math-display">\[\ln {\cal L}(\Lambda)=-\mu(\Lambda)+\sum_{i=1}^{N}\ln\int d\theta_i\,p(D_i\mid\theta_i)\,R_{\rm int}(\theta_i\mid\Lambda)\,S(\theta_i) .\]</div>
+<p>第一项 \(-\mu(\Lambda)\) 约束总发现数，求和项约束事件属性分布，积分则传播单事件参数不确定性。这一步把 rate 估计从“发现数除以时间”提升为 forward modeling。</p>
+<p>第九步：把宿主偏好写入同一个层级框架。若宿主类别为 \(k\)，其真实 TDE 增强因子为 \(\eta_k\)，母体宿主数密度为 \(n_k\)，则：</p>
+<div class="math-display">\[\Gamma_{{\rm TDE},k}=\eta_k\Gamma_0(M_\bullet,\psi),\qquad p(k\mid {\rm detected})\propto n_k\eta_k\langle S_k\rangle .\]</div>
+<p>这一步解出的不是简单的 observed host fraction，而是宿主数密度、真实增强和平均选择效率的乘积。标准诊断是：若没有除以 \(n_k\) 和 \(\langle S_k\rangle\)，就不能把 post-starburst 超额直接解释为 \(\eta_k\) 很大。</p>
+<p>第十步：把 partial 与 repeating TDE 改写为 flare rate 问题。若一次 loss-cone entry 可以是完全破坏，也可以是部分破坏；完全破坏比例为 \(f_{\rm full}\)，部分破坏比例为 \(f_{\rm part}\)，平均重复可见次数为 \(\langle N_{\rm rep}\rangle\)，则：</p>
+<div class="math-display">\[\Gamma_{\rm flare}=\Gamma_{\rm entry}\left[f_{\rm full}+f_{\rm part}\langle N_{\rm rep}\rangle\right] .\]</div>
+<p>这里 \(\Gamma_{\rm entry}\) 是恒星进入危险轨道的率，\(\Gamma_{\rm flare}\) 是巡天可能计数的 flare 率。若 \(f_{\rm part}\langle N_{\rm rep}\rangle\) 不可忽略，则用 flare counts 反推 loss-cone feeding 或黑洞占有率会产生系统偏差。</p>
+<p>第十一步：给出最重要的观测闭合关系。对黑洞质量分布图，观测到的直方图应理解为四个因子的乘积：</p>
+<div class="math-display">\[\frac{dN_{\rm obs}}{d\log M_\bullet}\propto \Phi(M_\bullet)\,f_{\rm occ}(M_\bullet)\,\Gamma_{\rm TDE}(M_\bullet)\,\langle S(M_\bullet)\rangle .\]</div>
+<p>这条式子是读 population TDE 论文的核心诊断：\(dN_{\rm obs}/d\log M_\bullet\) 不是黑洞质量函数本身，也不是 intrinsic TDE rate 本身，而是黑洞人口、动力学供给、occupation fraction 和巡天选择函数的卷积。</p>
+<p>第十二步：最终把拟合结果写成后验，而不是单个 rate 数字。给定先验 \(p(\Lambda)\)，总体参数的后验为：</p>
+<div class="math-display">\[p(\Lambda\mid \{D_i\})\propto {\cal L}(\Lambda)\,p(\Lambda) .\]</div>
+<p>实际读论文时要检查 \(\Lambda\) 的置信区间、参数退化和残差投影：模型是否同时解释红移分布、峰值光度、时标、宿主质量、黑洞质量 proxy 和多波段检出率。只有当这些投影在同一个 \(S(\theta,z,h;{\cal S})\) 下闭合时，才能把结论用于黑洞占有率、宿主增强或 partial/repeating TDE 的人口推断。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一层拟合是最小可用的表观发生率模型，用来让学生先理解计数统计的基线。若一个样本边界非常清楚，可以把发现数 \(N\)、有效控制时间 \(T_{\rm eff}\) 和有效星系数 \(N_{{\rm gal},{\rm eff}}\) 放进 Poisson 模型：\(N\sim {\rm Poisson}(\Gamma T_{\rm eff}N_{{\rm gal},{\rm eff}})\)。这里拟合参数通常只有每星系发生率 \(\Gamma\)，但课程上必须强调：这个 \(\Gamma\) 只是在特定样本定义和特定选择边界下的表观 rate。读论文时要检查 \(T_{\rm eff}\) 是否随光变时标、峰值光度、红移、宿主背景和 cadence 变化；如果作者把所有事件当成同一个控制时间，误差往往被低估。</p>
+<p>第二层拟合是 luminosity function 或 peak magnitude function，这是从“多少个事件”走向“事件属性分布”的第一步。常见超参数包括归一化 \(\phi_0\)、斜率 \(\alpha_L\)、暗端截断 \(L_{\rm min}\)、亮端截断 \(L_{\rm max}\)，以及光变时标与光度的相关参数。合适的似然不是普通直方图的 \(\chi^2\)，而是带截断和选择函数的非齐次 Poisson 点过程：\(\ln {\cal L}=-\mu(\Lambda)+\sum_i\ln \lambda(D_i\mid \Lambda)\)。这里 \(\mu(\Lambda)\) 是模型经巡天选择函数后的期望发现数，\(\lambda(D_i\mid \Lambda)\) 是第 \(i\) 个事件在观测空间中的强度。残差检查不能只看峰值光度直方图，还要同时比较红移、持续时间、颜色温度和宿主亮度；否则 Malmquist bias 很容易被误读为真实亮端增强。</p>
+<p>第三层拟合是宿主偏好模型。课程中建议把宿主类别 \(k\) 的真实增强写成 \(\Gamma_{{\rm TDE},k}=\eta_k\Gamma_0(M_\bullet,\psi)\)，再用 \(p(k\mid {\rm detected})\propto n_k\eta_k\langle S_k\rangle\) 解释观测宿主比例。拟合参数 \(\eta_k\) 可以对应 star-forming、quiescent、post-starburst、quiescent Balmer-strong 或 AGN-like 宿主，也可以扩展为颜色、恒星质量、星形成率、Balmer 吸收强度和核星团指标的连续函数。后验解释的关键是：\(\eta_k\) 不是 \(N_k/N_{\rm all}\)，因为 \(N_k/N_{\rm all}\) 还乘上了母体星系数 \(n_k\) 和平均选择效率 \(\langle S_k\rangle\)。读论文时要问 parent galaxy sample 是否经过同样红移、宿主亮度、核区 transient 可探测性和光谱分类选择。</p>
+<p>第四层拟合是黑洞质量函数与 occupation fraction。TDE 对低质量静默黑洞很有吸引力，但 \(f_{\rm occ}\) 不能从 observed \(M_•\) 直方图直接读出。模型通常要结合外部先验，例如 \(M_•\)-\(\sigma\)、\(M_•\)-bulge mass、星系质量函数或 AGN mass function，并显式传播黑洞质量 proxy 的散布 \(\sigma_{\log M_•,{\rm proxy}}\)。可拟合的 occupation 模型可以包含低质量端转折质量 \(M_{\rm turn}\)、斜率 \(a_{\rm occ}\) 和高质量端饱和值。残差诊断要检查 \(dN_{\rm obs}/d\log M_•\)、宿主恒星质量分布、红移分布和峰值光度分布是否同时匹配；如果模型只解释 \(M_•\) 投影，却错过了红移或宿主质量投影，就不能声称可靠测量了 \(f_{\rm occ}\)。</p>
+<p>第五层拟合是多波段联合模型。Optical-selected、soft X-ray-selected 和 radio-followed 样本可以共享同一个 intrinsic rate \(R_{\rm int}(\theta,z\mid \Lambda)\)，但必须拥有不同的选择函数 \(S_{\rm optical}\)、\(S_{\rm X}\) 和 \(S_{\rm radio}\)。模型参数可以包括 X-ray visible fraction \(f_{\rm X}\)、再处理覆盖因子 \(f_{\rm rep}\)、吸收柱密度分布 \(p(N_{\rm H})\)、外流比例 \(f_{\rm out}\) 和喷流比例 \(f_{\rm jet}\)。实际拟合时，非探测上限也应进入似然，例如用 (p(F_{<br />
+m X}&lt;\(F_{{\rm lim},i}\mid\) \theta_i)) 约束 X-ray 暗弱事件。若只拿 X-ray-bright 事件与 optical-bright 事件相除，很容易把不同选择函数误读成不同物理子类比例。</p>
+<p>第六层拟合是 partial 与 repeating TDE 的层级模型。单事件层面要拟合每次 flare 的峰值时间、振幅、rise time、decay time、颜色温度、谱线强度和总辐射能；总体层面拟合 partial fraction \(f_{\rm part}\)、完全破坏比例 \(f_{\rm full}\)、平均重复次数 \(\langle N_{\rm rep}\rangle\) 和生存概率 \(P_{\rm survive}(n)\)。核心关系是 \(\Gamma_{\rm flare}=\Gamma_{\rm entry}[f_{\rm full}+f_{\rm part}\langle N_{\rm rep}\rangle]\)。残差检查必须逐次 flare 展开：模型是否同时解释峰间距、每次 flare 的颜色温度、谱线演化和能量预算；若只拟合近似周期，却没有同 AGN red-noise、changing-look AGN 或 accretion disk instability 比较，partial TDE 解释就不稳固。</p>
+<p>第七层拟合是 injection-recovery 校准，它不是技术附录，而是人口推断的中心。做法是把模拟 TDE 光变 \(L_\nu(t;\theta)\) 注入真实图像或 alert stream，经过同一差分成像、质量过滤、alert filter、光谱跟进和分类流程，测得 \(S(\theta,z,h;{\cal S})\)。系统误差包括 template subtraction 残差、nuclear offset cut、host surface brightness、天气与 cadence gaps、limiting magnitude 漂移、K 修正、宿主消光、光谱资源瓶颈和人类 follow-up 决策。好的论文会把这些不确定性作为 nuisance parameters 或 efficiency uncertainty 传播到 \(p(\Lambda\mid \{D_i\})\)，而不是只给一个无误差的效率曲线。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读经典 loss-cone 与 rate 理论文献时，第一遍不要从结论里的每星系每年数字开始，而要从相空间结构开始。先找作者怎样定义 \({\cal F}(E,J)\)、\(J_{\rm lc}\)、empty loss cone 和 full loss cone；再看星系核是否假设球对称、恒星密度坡度怎样设定、速度弥散和黑洞质量怎样关联。课程目标是让学生理解 \(\Gamma_{\rm TDE}=\int {\cal F}(E,J)\,dE\,dJ\) 的物理来源，而不是背诵 \(10^{-5}\,{\rm yr}^{-1}\) 或 \(10^{-4}\,{\rm yr}^{-1}\) 这样的数量级。</p>
+<p>读包含 Hills mass 或高质量端截断的工作时，要把重点放在 \(R_{\rm t}=R_{\rm cap}\) 的假设。对太阳型恒星，\(M_{\rm H}\sim 10^8M_\odot(R_\star/R_\odot)^{3/2}(M_\star/M_\odot)^{-1/2}f_{\rm cap}^{-3/2}\) 说明高质量黑洞上的明亮 TDE 会被直接俘获抑制。读这类段落时要问：作者采用的 \(R_{\rm cap}\) 是否包含黑洞自旋、轨道倾角和恒星类型？如果样本高质量端下降，论文是否区分了黑洞质量函数下降、loss-cone feeding 改变和直接吞没边界？</p>
+<p>读流体模拟与 fallback 曲线族工作时，本讲只取其中与 population 相关的部分。重点不是重新推导 \(t^{-5/3}\)，而是看模型怎样给出 \(L_\nu(t;\theta)\)、fallback 时标、峰值回落率、partial disruption、质量损失分数 \(\Delta M/M_\star\) 和 \(P_{\rm survive}(n)\)。这些结果会成为 forward modeling 中的事件族。如果论文把单一光变模板用于所有 TDE，学生要警惕：选择函数 \(S\) 会对不同 \(\theta\) 的事件非常不一样。</p>
+<p>读 ZTF 或其他 optical-selected 样本论文时，应按管线顺序阅读：alert stream 怎样触发，nuclear cut 怎样定义，怎样排除 supernova 和 AGN，哪些候选没有光谱，哪些事件进入 classified sample，哪些只停留在 candidate sample。然后再读 rate 计算：control time 是否来自 injection-recovery，limiting magnitude 和 cadence 是否逐场处理，host surface brightness 是否影响恢复概率。凡是没有明确定义 \(S(\theta,z,h;{\cal S})\) 的 rate 数字，都只能在该论文的有限样本语境内使用。</p>
+<p>读 eROSITA、Einstein Probe 或 soft X-ray TDE 样本时，要把重点从 optical color 转移到 X-ray baseline、吸收修正和 AGN contamination。X-ray-selected TDE 可能更接近内区吸积盘直接可见的子总体，也可能只是被软 X-ray 吸收、扫描 cadence 和历史 X-ray 资料可用性强烈筛选后的结果。读这类论文要检查 \(F_{\rm X}\) 上限、光学对应体、长期 AGN 变异基线和 X-ray-to-optical ratio 是否进入模型，而不能用 \(N_{\rm X}/N_{\rm optical}\) 直接定义物理分数。</p>
+<p>读宿主偏好与 post-starburst 超额论文时，要把 \(p({\rm host}\mid {\rm detected})\) 与 intrinsic host enhancement 分开。关键段落通常包括 parent galaxy sample 的构造、宿主光谱分类标准、Balmer 吸收或星形成率指标、红移完备性和 follow-up 策略。学生应主动把结论改写为 \(p(k\mid {\rm detected})\propto n_k\eta_k\langle S_k\rangle\)，然后检查论文是否真的约束了 \(\eta_k\)，还是只展示了观测样本中的 \(N_k/N_{\rm all}\)。</p>
+<p>读 Rubin/LSST 或未来巡天 forecast 时，最重要的段落不是最大发现数，而是 forecast 的层级定义。要区分 triggered、classified 和 well-characterized sample，因为 \(N_{\rm classified}<N_{\rm triggered}\)。读预测表格时要问：作者是否使用真实 cadence、weather gaps、filter strategy、host background、alert filter、光谱瓶颈和 redshift completeness？如果 forecast 只报告 trigger 数，那么它更像工程告警预测，不等于可用于黑洞人口学的科学样本预测。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，黑洞质量分布图。检查横轴是 \(M_\bullet\)、\(\log M_\bullet\) 还是宿主 proxy；纵轴是 observed counts、volumetric rate、per-galaxy rate 还是 selection-corrected rate。读图公式是 \(dN_{\rm obs}/d\log M_\bullet\propto \Phi(M_\bullet)f_{\rm occ}(M_\bullet)\Gamma_{\rm TDE}(M_\bullet)\langle S(M_\bullet)\rangle\)。重点看高质量端是否受 Hills cutoff 影响，低质量端是否受 \(f_{\rm occ}\)、光度阈值和宿主 follow-up 影响。</p>
+<p>二，redshift–peak magnitude 或 redshift–luminosity 图。检查数据点是否贴近 limiting magnitude、spectroscopic follow-up threshold 或 survey volume boundary。若样本堆在阈值附近，luminosity function、rate normalization 和红移演化都会强烈依赖 \(S(\theta,z)\)。模型线必须是经过 forward selection 的 observed prediction，而不是 intrinsic population 曲线。</p>
+<p>三，host color–mass、SFR–mass 或 Balmer-strong 诊断图。检查背景 parent galaxy sample 是否经过同样红移、星等、宿主光谱完备性和核区 transient 可探测性筛选。图上 TDE 宿主的集中分布只能说明 detected host distribution，不能单独证明 intrinsic enhancement \(\eta_k\)。</p>
+<p>四，detection efficiency、control time 或 injection-recovery 图。横轴可能是 \(M_{\rm peak}\)、decline time、\(z\)、host surface brightness、nuclear offset 或 cadence gap；纵轴可能是恢复概率 \(S\) 或控制时间 \(T_{\rm ctrl}\)。要看效率是否来自真实图像或真实 alert stream 注入，是否覆盖样本所在参数空间，是否把效率不确定性传播进 \(p(\Lambda\mid \{D_i\})\)。</p>
+<p>五，luminosity function 或 cumulative rate 图。横轴常为 luminosity threshold、absolute magnitude threshold 或 \(L_{\rm peak}\)，纵轴为 \(\dot n(>L)\)、\(N(>L)\) 或差分 rate。重点看 bright end 是否由少数事件控制，faint end 是否受 incompleteness 控制，阴影区是否包含 Poisson uncertainty 与 selection uncertainty。</p>
+<p>六，partial/repeating TDE 光变图。检查多次 flare 的峰间距、rise time、decay time、颜色温度、谱线、总能量和宿主核活动基线。图上若只有周期相似而颜色、谱线或能量不相似，就不能直接归入 repeating partial TDE；必须同时比较 AGN red-noise、changing-look AGN 和 disk instability 模型。</p>
+<p>七，多巡天 yield forecast 或 optical–X-ray–radio comparison 图。比较不同巡天曲线前，先读它们各自的 \(S_{\rm optical}\)、\(S_{\rm X}\)、\(S_{\rm radio}\) 和分类标准。图中不同波段样本的数量差异不一定代表物理子类比例差异，也可能只是 cadence、depth、absorption、follow-up 和 classification bottleneck 的投影。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 \(1\)：黑洞质量直方图或 inferred \(M_\bullet\) distribution。横轴通常是 \(\log M_\bullet\)，纵轴可能是 observed counts、rate density 或 selection-corrected counts。读图时先问 \(M_\bullet\) 是由 \(M_\bullet\)-\(\sigma\)、\(M_\bullet\)-bulge relation 还是光变模型推断；若来自宿主 proxy，就必须寻找 \(σ_{\log M_\bullet,{\rm proxy}}\) 是否进入误差。模型线若在 \(10^6M_\odot\) 附近有峰，不应立刻解释为黑洞质量函数在这里峰值最高；正确分解是 \(\Phi f_{\rm occ}\Gamma_{\rm TDE}\langle S\rangle\)。误读风险是把 observed histogram 当成 intrinsic black-hole mass function。</p>
+<p>图 \(2\)：redshift versus peak apparent magnitude 或 redshift versus peak absolute magnitude。横轴为 \(z\)，纵轴为 \(m_{\rm peak}\) 或 \(M_{\rm peak}\)，常叠加 limiting magnitude、spectroscopic threshold 或 survey selection boundary。数据点若沿检测边界排列，说明样本强烈受 selection function 控制；此时任何 luminosity function 斜率 \(\alpha_L\) 都会与 rate normalization 退化。读模型线时要确认它表示 \(R_{\rm int}\) 经过 \(S(\theta,z)\) 后的 predicted detected distribution，而不是 intrinsic distribution。误读风险是把高红移缺少暗事件解释为真实物理缺失。</p>
+<p>图 \(3\)：host color–mass、SFR–mass 或 post-starburst 诊断图。横轴常为宿主恒星质量 \(M_\star^{\rm host}\)，纵轴为颜色、specific star formation rate 或 Balmer 吸收指标；TDE 宿主通常以特殊符号覆盖在星系母体云图上。读图时要看 parent sample 是否与 TDE search 有同样 redshift cut、magnitude cut、spectroscopic completeness 和 nuclear detectability。若 TDE 点集中在 quiescent Balmer-strong 区域，只能初步说明 \(p(k\mid {\rm detected})\) 偏高；要推出 \(\eta_k\) 增强，必须除以 \(n_k\langle S_k\rangle\)。误读风险是把宿主分类便利性当成真实动力学增强。</p>
+<p>图 \(4\)：detection efficiency 或 control time curve。横轴可能是 \(M_{\rm peak}\)、decline time、\(z\)、host surface brightness 或 nuclear offset；纵轴为 recovery probability \(S\) 或 control time \(T_{\rm ctrl}\)。读图时先判断效率来自 injection-recovery 还是解析估计；真实 injection-recovery 应该通过同一差分成像、alert filter 和分类规则。若效率曲线在样本区域很陡，rate posterior 会对光变模板、宿主背景和 cadence gap 极敏感。误读风险是只引用平均效率 \(\langle S\rangle\)，忽略 \(S\) 在 \(\theta\) 空间中的强烈变化。</p>
+<p>图 \(5\)：cumulative rate versus luminosity threshold。横轴可能是 luminosity threshold \(L_{\rm th}\) 或 absolute magnitude threshold \(M_{\rm th}\)，纵轴为 \(\dot n(>L_{\rm th})\) 或 \(N(>L_{\rm th})\)。模型线的斜率反映 luminosity function，阴影带应同时包含 Poisson uncertainty、selection uncertainty 和 light-curve family uncertainty。bright end 若由一两个事件决定，置信区间应很宽；faint end 若出现 flattening，要检查它是否来自 incompleteness。误读风险是把 faint-end flattening 当成真实 \(L_{\rm min}\)，但实际上是巡天达不到更暗事件。</p>
+<p>图 \(6\)：repeating 或 partial TDE 候选的多波段光变。横轴为 observer-frame time 或 rest-frame time，纵轴为 flux、magnitude 或 luminosity，不同滤光片和 X-ray 数据常用不同颜色。读图时不要只量峰间距，还要逐次检查 rise time、decay slope、颜色温度 \(T_{\rm BB}\)、黑体半径 \(R_{\rm BB}\)、谱线强度和总能量 \(E_{\rm rad}\)。模型残差应分别显示在 rise、peak 和 tail；如果残差集中在某一次 flare 的峰前或尾部，说明单一 repeating partial TDE 模板可能不足。误读风险是把准周期核变异直接等同于残余核心回归。</p>
+<p>图 \(7\)：multi-survey yield forecast。横轴可能是 survey year、limiting magnitude、redshift 或 exposure strategy，纵轴是 expected number of events。曲线可能对应 ZTF、eROSITA、Rubin/LSST、ULTRASAT、Einstein Probe 或 radio follow-up。读图时首先区分 \(N_{\rm triggered}\)、\(N_{\rm classified}\) 和 \(N_{\rm well\mbox{-}characterized}\)，因为 \(N_{\rm classified}<N_{\rm triggered}\)。若 forecast 没有建模 spectroscopic bottleneck 和 redshift completeness，它对 population inference 的价值有限。误读风险是把庞大的 trigger 数当成可用于黑洞占有率测量的样本数。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径从经典动力学到现代 rate 推断。先读 loss-cone feeding、empty/full loss cone、两体弛豫、共振弛豫、三轴势和核星团结构的经典工作，目标是理解 \({\cal F}(E,J)\) 如何决定 \(\Gamma_{\rm TDE}\)。随后读把星系样本、黑洞质量关系和 occupation fraction 纳入 rate 计算的现代人口论文。这样读下来，学生会明白每星系 rate 不是常数，而是 \(M_\bullet\)、\(\psi\)、核环境和动力学机制共同决定的函数。</p>
+<p>第二条路径从单事件模拟连接到 population light-curve family。选择几篇研究 complete disruption、partial disruption、stellar structure、penetration factor \(\beta\) 和 fallback diversity 的模拟论文，重点记录它们怎样给出 \(L_\nu(t;\theta)\)、\(\Delta M/M_\star\)、\(P_{\rm survive}(n)\) 和 \(\langle N_{\rm rep}\rangle\)。然后回到 population rate 论文，检查作者是否只用了单一模板，还是把光变族的不确定性传播进 \(S(\theta,z)\)。</p>
+<p>第三条路径从 optical samples 入手做复现实训。选一篇 ZTF 或类似 optical-selected TDE sample 论文，逐项复现 sample construction：alert cuts、nuclear offset、AGN rejection、spectroscopic classification、host fitting、blackbody fitting、redshift completeness 和 control time。练习任务是把论文中的 rate calculation 改写为 \(\ln {\cal L}=-\mu(\Lambda)+\sum_i\ln\int d\theta_i p(D_i\mid\theta_i)R_{\rm int}(\theta_i\mid\Lambda)S(\theta_i)\)，并指出哪些 \(S\) 的组成部分是显式建模的，哪些只是隐含假设。</p>
+<p>第四条路径进入 X-ray 与多波段样本。比较 optical-selected 与 soft X-ray-selected TDE 的 host distribution、temperature、light-curve duration、AGN contamination 和 selection function。再读 eROSITA、Einstein Probe、ULTRASAT 或 Rubin/LSST 的预测论文，训练自己区分 trigger yield、classified yield 和 well-characterized yield。目标不是背未来会发现多少个 TDE，而是理解多巡天联合如何约束 \(f_{\rm X}\)、\(f_{\rm rep}\)、\(f_{\rm out}\)、\(f_{\rm jet}\) 和 \(f_{\rm occ}\)。</p>
+<p>第五条路径专门读宿主偏好与 repeating candidates。宿主偏好方向应把 post-starburst TDE 论文与星系演化、并合、核星团和选择效应文献一起读；repeating 方向应把候选事件论文与 AGN variability、changing-look AGN、disk instability 和 quasi-periodic nuclear transient 文献一起读。每读一篇新模型，都用同一个问题检验：它是否同时解释了数据、选择函数、残差和竞争模型，而不是只解释最显眼的一条光变特征。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第 \(6/6\) 讲最自然的方向是“TDE 前沿论文研读课：从摘要、样本选择到后验图，怎样判断一个 TDE 新模型是否可信”。本讲已经完成从单事件物理到 population、selection function、rate、black-hole occupation、host preference、partial/repeating TDE 和多巡天预测的框架；下一讲不再增加新的辐射机制，而是用这些工具逐段阅读代表性论文的 abstract、sample construction、model assumptions、likelihood、corner plot、efficiency curve、residuals 和 discussion。</p>
+<p>第二个方向是“ZTF/eROSITA/Rubin 样本推断工作坊”。它与本讲边界的关系是：本讲讲清 \(S(\theta,z,h;{\cal S})\)、\(\mu(\Lambda)\) 和非齐次 Poisson 似然的概念，下一讲让学生实际判断一篇 rate 论文中哪些结论由数据支持，哪些结论由 selection correction、host proxy 或 follow-up completeness 支撑。这个方向适合把课程收束到可操作的论文批判能力。</p>
+<p>第三个方向可以留到本系列之后另开短专题：“TDE 多信使与高能粒子”。那里再讲 TDE-neutrino candidates、\(p\gamma\)、\(pp\)、cascade、内部吸收和关联统计。它不应挤进第 \(6/6\) 讲，因为当前系列最后一讲的目标是论文研读训练，而不是扩展新的高能辐射模块。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>TDE rates black hole occupation fraction survey selection effects</li>
+<li>repeating partial tidal disruption event</li>
+<li>Rubin LSST eROSITA tidal disruption events</li>
+<li>loss cone theory tidal disruption event rate</li>
+<li>ZTF tidal disruption event sample rate host galaxy preference</li>
+<li>quiescent Balmer strong post starburst TDE host overrepresentation</li>
+<li>TDE luminosity function selection function injection recovery</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<p>（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
