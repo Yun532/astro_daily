@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import subprocess
+import time
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -48,7 +49,7 @@ def publish_report_if_enabled(settings: Settings, html_report_path: str, run_dat
         logger.info("No report changes to publish for %s", relative_path.as_posix())
         return PublishResult(enabled=True, published=True, url=url)
     _run_git(root, ["commit", "-m", _commit_message(settings, run_date)])
-    _run_git(root, ["push", "origin", settings.publish.branch])
+    _push_with_retry(root, settings)
     return PublishResult(enabled=True, published=True, url=url)
 
 
@@ -94,6 +95,33 @@ def _has_staged_changes(root: Path, relative_paths: Iterable[Path]) -> bool:
     if result.returncode == 1:
         return True
     raise RuntimeError("Failed to inspect staged report changes")
+
+
+def _push_with_retry(root: Path, settings: Settings) -> None:
+    attempts = settings.publish.push_max_attempts
+    delay_seconds = settings.publish.push_retry_delay_seconds
+    last_error: RuntimeError | None = None
+
+    for attempt in range(1, attempts + 1):
+        try:
+            _run_git(root, ["push", "origin", settings.publish.branch])
+            return
+        except RuntimeError as exc:
+            last_error = exc
+            if attempt == attempts:
+                break
+            wait_seconds = delay_seconds * attempt
+            logger.warning(
+                "GitHub push attempt %s/%s failed; retrying in %.1f seconds: %s",
+                attempt,
+                attempts,
+                wait_seconds,
+                exc,
+            )
+            time.sleep(wait_seconds)
+
+    assert last_error is not None
+    raise last_error
 
 
 def _run_git(root: Path, args: Sequence[str], *, capture_output: bool = True, check: bool = True) -> subprocess.CompletedProcess[str]:

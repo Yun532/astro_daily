@@ -148,6 +148,8 @@ class PublishConfig(BaseModel):
     docs_dir: str = "docs"
     commit_message_template: str = "Publish Astro Daily report {date}"
     require_success_before_push: bool = True
+    push_max_attempts: int = Field(default=3, ge=1, le=10)
+    push_retry_delay_seconds: float = Field(default=5.0, ge=0.0, le=300.0)
 
 
 class FigureExtractionConfig(BaseModel):

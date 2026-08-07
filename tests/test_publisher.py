@@ -119,3 +119,38 @@ def test_no_staged_changes_counts_as_published(tmp_path, monkeypatch):
     assert result.published
     assert not any(call and call[0] == "commit" for call in calls)
     assert not any(call and call[0] == "push" for call in calls)
+
+
+def test_enabled_publisher_retries_transient_push_failure(tmp_path, monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_MODEL", raising=False)
+    settings = load_settings(
+        write_config(
+            tmp_path,
+            "publish:\n  enabled: true\n  push_max_attempts: 3\n  push_retry_delay_seconds: 0",
+        )
+    )
+    calls = []
+    push_attempts = 0
+
+    def fake_run_git(root, args, *, capture_output=True, check=True):
+        nonlocal push_attempts
+        calls.append(args)
+        if args[:1] == ["push"]:
+            push_attempts += 1
+            if push_attempts == 1:
+                raise RuntimeError("git push origin main failed: TLS handshake interrupted")
+
+        class Result:
+            returncode = 0
+            stdout = "origin\n" if args == ["remote"] else ""
+            stderr = ""
+
+        if args[:3] == ["diff", "--cached", "--quiet"]:
+            Result.returncode = 1
+        return Result()
+
+    monkeypatch.setattr("src.publisher._run_git", fake_run_git)
+    result = publish_report_if_enabled(settings, str(write_html(tmp_path)), date(2026, 5, 2))
+
+    assert result.published
+    assert push_attempts == 2
