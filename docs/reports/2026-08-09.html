@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-09</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-09</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-09">
+      <a class="previous" href="2026-08-08.html">← 上一期：2026-08-08</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-09T11:11:15+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-pwn-pulsar-halo">1. PWN 与 pulsar halo 从零到前沿（一）：脉冲星怎样把自转能变成粒子风</h3>
+<ul>
+<li>课程系列：PWN 与 pulsar halo 从零到前沿课程（第 1/5 讲）</li>
+<li>本讲边界：本讲只讲中心引擎：中子星自转能、spin-down、磁层电荷、open field lines 和 pulsar wind 功率。不讲 PWN 星云演化和 TeV halo 扩散。</li>
+<li>上下文承接：这是 PWN/pulsar halo 系列第一讲，先把能量源讲清楚。</li>
+<li>主题：pulsar spin-down, magnetospheres and pulsar wind power</li>
+<li>经典工作：Goldreich-Julian pulsar electrodynamics、磁偶极 spin-down 和 pulsar wind luminosity 的基础图像。</li>
+<li>为什么经典：PWN 和 pulsar halo 的共同根源都是脉冲星把自转能注入相对论粒子。若不懂 spin-down luminosity，后面所有能量预算都会漂浮。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>本讲是“PWN 与 pulsar halo 从零到前沿课程”的第一讲，位置非常清楚：先不讨论星云如何膨胀、终止激波如何形成、同步辐射谱如何冷却，也不讨论 TeV halo 中电子正电子如何扩散；本讲只回答中心引擎问题。核心科学问题是：一个半径只有 \(R_*\sim10\,\mathrm{km}\) 的旋转磁化中子星，怎样把宏观自转能转化为向外传播的 Poynting flux、相对论 \(e^\pm\) 粒子流和 pulsar wind 功率？后续所有 PWN 和 pulsar halo 的能量预算，都要从这里得到输入量，例如 \(\dot E\)、\(\dot E(t)\)、\(\dot N\)、\(\Phi_{\rm open}\) 与 \(\sigma\)。</p>
+<p>历史动机首先来自 Crab 系统。脉冲星发现之后，人们意识到稳定的周期性脉冲很自然地来自中子星自转；Crab pulsar 与 Crab Nebula 的对应进一步说明，中心紧致星不仅在磁层中产生脉冲辐射，还长期给周围星云注入非热粒子和电磁能。Crab Nebula 的高亮同步辐射要求高能电子被持续补充，因为这些电子会辐射冷却；因此，必须有一个持续功率源。脉冲星自转能损失率 \(\dot E\) 正好提供了最自然的功率尺度。后来 Geminga、Monogem 等 pulsar halo 现象把同一问题推广到更老、更大尺度的系统：即使没有明亮紧致 PWN，脉冲星历史上注入的 \(e^\pm\) 也可能在周围介质中形成扩展 TeV 辐射。</p>
+<p>本讲的推导链从最保守的能量守恒开始。第一步，把中子星近似为转动惯量 \(I\) 近似恒定的刚体，角速度为 \(\Omega\)，自转能为 </p>
+<div class="math-display">\[E_{\rm rot}=\frac{1}{2}I\Omega^2.\]</div>
+<p>这一步解出的量是自转能库，它是后面所有非热粒子和场能的最终来源。第二步，假设外部电磁转矩使 \(\Omega\) 下降，并忽略 \(I\) 的长期变化，则定义 spin-down luminosity 为 </p>
+<div class="math-display">\[\dot E\equiv-\frac{dE_{\rm rot}}{dt}=I\Omega|\dot\Omega|.\]</div>
+<p>这里的 \(\dot E\) 不是某个波段的光度，而是中心引擎当前向外释放能量的总功率尺度。第三步，timing 观测通常给出周期 \(P\) 和周期导数 \(\dot P\)，用 \(\Omega=2\pi/P\) 可得 </p>
+<div class="math-display">\[\dot E=4\pi^2I\frac{\dot P}{P^3}.\]</div>
+<p>这条关系把可观测的 timing 量直接连接到 PWN 与 halo 能量预算。</p>
+<p>接下来需要解释是什么转矩带走了自转能。第四步，在零阶模型中把脉冲星看作旋转磁偶极子，磁偶极矩为 \(\mu\)，磁轴与自转轴夹角为 \(\alpha\)，真空磁偶极辐射功率为 </p>
+<div class="math-display">\[L_{\rm dip}=\frac{2\mu^2\Omega^4\sin^2\alpha}{3c^3}.\]</div>
+<p>这个式子说明，功率对快速自转极其敏感，因为它随 \(\Omega^4\) 增长。第五步，采用 \(\mu=B_*R_*^3/2\)，并令 \(L_{\rm dip}=\dot E\)，可得表面磁场估计 </p>
+<div class="math-display">\[B_*\simeq\left(\frac{6c^3IP\dot P}{4\pi^2R_*^6\sin^2\alpha}\right)^{1/2}.\]</div>
+<p>教材中常写成 </p>
+<div class="math-display">\[B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G},\]</div>
+<p>但这个简式隐含了 \(I\)、\(R_*\)、\(\alpha\) 和真空偶极转矩模型的取值，因此 \(B_*\) 是模型派生量，不是直接观测量。</p>
+<p>第六步，把长期转矩写成更一般的幂律形式 </p>
+<div class="math-display">\[\dot\Omega=-K\Omega^n,\]</div>
+<p>其中 \(K\) 近似常数，\(n\) 是 braking index。对该式求导可得诊断定义 </p>
+<div class="math-display">\[n=\frac{\Omega\ddot\Omega}{\dot\Omega^2}.\]</div>
+<p>真空偶极理想预言是 \(n=3\)，但许多年轻脉冲星的实测 \(n\) 偏离 \(3\)，提示磁层电流、倾角、磁场强度或粒子风转矩正在演化。第七步，对 \(\dot\Omega=-K\Omega^n\) 积分，在 \(n\neq1\) 时得到 </p>
+<div class="math-display">\[t=\frac{\Omega^{1-n}-\Omega_0^{1-n}}{(n-1)K}.\]</div>
+<p>若进一步取 \(n=3\) 且初始角速度满足 \(\Omega_0\gg\Omega\)，才得到常用特征年龄 </p>
+<div class="math-display">\[\tau_c=\frac{P}{2\dot P}.\]</div>
+<p>因此 \(	au_c\) 是有条件的年龄诊断量，不能无条件当成真实年龄。</p>
+<p>真空磁偶极给出能量尺度，但真实脉冲星周围不会保持真空。第八步，考虑高导电中子星表面和近似共转磁层，理想 MHD 图像给出共转电场 </p>
+<div class="math-display">\[\mathbf{E}=-\frac{(\mathbf{\Omega}\times\mathbf{r})\times\mathbf{B}}{c}.\]</div>
+<p>若磁层中缺少电荷，沿磁场方向的电场 \(E_\parallel\) 会拉出粒子并触发加速。第九步，用高斯定律估计维持近似共转所需的电荷密度，得到 Goldreich-Julian 密度 </p>
+<div class="math-display">\[\rho_{\rm GJ}\simeq-\frac{\mathbf{\Omega}\cdot\mathbf{B}}{2\pi c},\qquad n_{\rm GJ}=\frac{|\rho_{\rm GJ}|}{e}.\]</div>
+<p>这个量给出最低电荷供应尺度，它会随 \(\mathbf{\Omega}\cdot\mathbf{B}\) 的符号改变而改变，因此在 null charge surface 附近可能变号。</p>
+<p>第十步，开放磁力线的几何由光柱决定。共转速度为 \(v=\Omega r\)，当 \(v=c\) 时定义光柱半径 </p>
+<div class="math-display">\[R_{\rm LC}=\frac{c}{\Omega}=\frac{cP}{2\pi}.\]</div>
+<p>光柱不是物质壳层，而是刚性共转近似失效的尺度；穿过光柱的磁力线无法保持闭合共转，因而形成 open field lines。第十一步，在偶极几何下，最后一条闭合场线与光柱相切，极冠角半径和面积的量级为 </p>
+<div class="math-display">\[\theta_{\rm pc}\simeq\left(\frac{R_*}{R_{\rm LC}}\right)^{1/2},\qquad A_{\rm pc}\simeq\pi R_*^2\theta_{\rm pc}^2.\]</div>
+<p>把 \(n_{\rm GJ}\) 与 \(A_{\rm pc}\) 合并，可估计最低 Goldreich-Julian 粒子外流率 </p>
+<div class="math-display">\[\dot N_{\rm GJ}\sim n_{\rm GJ}cA_{\rm pc}.\]</div>
+<p>第十二步，真实 pulsar wind 通常不只含有最低 Goldreich-Julian 电荷，而是通过 pair cascade 产生大量 \(e^\pm\) 对，因此写成 </p>
+<div class="math-display">\[\dot N=\kappa\dot N_{\rm GJ},\]</div>
+<p>其中 \(\kappa\) 是 pair multiplicity。第十三步，开放磁通对应的可用电势降量级为 </p>
+<div class="math-display">\[\Phi_{\rm open}\sim\frac{\Omega^2B_*R_*^3}{2c^2}.\]</div>
+<p>若进入电子正电子动能的功率为 \(\eta_e\dot E\)，平均粒子 Lorentz 因子满足量级关系 </p>
+<div class="math-display">\[\langle\gamma\rangle m_ec^2\sim\frac{\eta_e\dot E}{\kappa\dot N_{\rm GJ}}.\]</div>
+<p>这说明在 \(\eta_e\dot E\) 固定时，\(\kappa\) 越大，单个粒子平均分得的能量越低。第十四步，中心引擎输出分为粒子动能和电磁场能流，满足 </p>
+<div class="math-display">\[L_{\rm w}=L_{\rm particle}+L_{\rm Poynting}\lesssim\dot E,\qquad \sigma=\frac{L_{\rm Poynting}}{L_{\rm particle}}.\]</div>
+<p>这就是本讲通向下一讲 PWN 动力学的边界条件。</p>
+<p>实际读论文时，还要把这些公式放回观测和拟合框架中。timing 分析通常拟合相位模型 </p>
+<div class="math-display">\[\phi(t)=\phi_0+\nu(t-t_0)+\frac{1}{2}\dot\nu(t-t_0)^2+\frac{1}{6}\ddot\nu(t-t_0)^3+\cdots,\]</div>
+<p>再由 \(\nu\)、\(\dot\nu\) 和必要时的 \(\ddot\nu\) 派生 \(P\)、\(\dot P\)、\(\dot E\)、\(B_*\)、\(\tau_c\) 与 \(n\)。入门似然可写成高斯残差形式 </p>
+<div class="math-display">\[\ln\mathcal{L}=-\frac{1}{2}\sum_i\left(\frac{r_i^2}{\sigma_i^2}+\ln(2\pi\sigma_i^2)\right),\]</div>
+<p>但真实数据必须检查红噪声、glitch、双星效应、色散量变化、位置误差和仪器系统误差。若要估计 \(n=\nu\ddot\nu/\dot\nu^2\)，必须确认观测基线足够长，并且 glitch 恢复或 timing noise 没有被错误吸收到 \(\ddot\nu\) 中。</p>
+<p>本讲的局限需要在最后明确。\(\dot E\) 是总能量预算上限，不等于 \(L_X\)、\(L_\gamma\) 或 \(L_{\rm TeV}\)；应把 \(L_{\rm band}/\dot E\) 理解为效率或经验诊断，而不是恒等式。\(B_*\) 和 \(\tau_c\) 依赖转矩模型与初始条件；\(\kappa\)、\(\eta_e\)、\(\sigma\) 和粒子谱不能只由 \(\rho_{\rm GJ}\) 唯一决定。下一讲将不重复本讲推导，而是把 \(\dot E(t)\)、\(L_{\rm w}\)、\(\dot N\)、\(\Phi_{\rm open}\) 与 \(\sigma\) 作为边界条件，进入 pulsar wind 与超新星抛射物相互作用形成 PWN 的动力学。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>本系列从中心脉冲星开始，而不是从漂亮的 X 射线星云图或 TeV halo 图开始，是因为 PWN 与 pulsar halo 的共同根源都是能量守恒。后续看到的同步辐射、反康普顿辐射、扩展 TeV 光晕和高能粒子谱，都不是孤立存在的现象；它们必须追问同一个上游问题：中心脉冲星在过去和现在到底向外注入了多少能量？本讲要建立的就是这台中心电磁机器的骨架。</p>
+<p>历史上，脉冲星的发现首先证明了中子星自转可以成为极稳定的时钟。周期性脉冲说明辐射束随星体自转扫过视线，而周期缓慢增加说明星体正在损失自转能。Crab pulsar 与 Crab Nebula 的关联让这个图像更进一步：中心脉冲星不仅是一个“灯塔”，也是一个持续供能的发动机。Crab Nebula 的高能电子会通过同步辐射冷却，若没有长期补充，星云不可能维持现在的非热亮度。</p>
+<p>从 Crab 到一般 PWN，核心问题不是某个波段为什么亮，而是功率从哪里来。超新星爆炸提供初始动能，星际介质提供外部环境，但 PWN 内持续更新的相对论粒子和磁场主要来自 pulsar wind。于是，spin-down luminosity \(\dot E\) 成为所有模型的第一性输入。若一个模型要求的粒子注入功率长期超过 \(\dot E\)，或者要求的累计能量超过 \(E_{\rm inj}(t)=\int_0^t\dot E(t')dt'\)，就必须重新检查距离、年龄、效率、源关联或辐射模型。</p>
+<p>pulsar halo 的发现使这个能量预算问题不再局限于年轻明亮星云。Geminga、Monogem 等较老脉冲星周围的扩展 TeV 辐射通常被解释为脉冲星注入的 \(e^\pm\) 在周围介质中传播，并通过反康普顿散射背景光子产生高能伽马射线。这里当前 \(\dot E\) 可能已经不高，但历史累计注入能量仍然重要。因此读 halo 论文时要同时区分当前功率 \(\dot E\) 和历史注入 \(\int\dot E(t)dt\)。</p>
+<p>第一个常见误区是把 \(\dot E\) 等同于某个观测光度。事实上，\(\dot E\) 是自转能损失率，是所有输出通道的总预算上限；某个波段的 \(L_X\)、\(L_\gamma\) 或 \(L_{\rm TeV}\) 只是经过粒子加速、辐射、输运、吸收、几何投影和探测选择之后的一部分表现。能量预算思想应写成 \(L_{\rm band}\leq\dot E\) 的量级约束，而不是把 \(L_{\rm band}=\dot E\) 当作默认关系。</p>
+<p>第二个常见误区是把教材公式中的 \(B_*\) 和 \(\tau_c\) 当作直接观测量。timing 最接近直接给出的量是 \(P\)、\(\dot P\)，有时还有 \(\ddot P\) 或等价的 \(\nu\)、\(\dot\nu\)、\(\ddot\nu\)。表面磁场估计 \(B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G}\) 来自磁偶极转矩假设；特征年龄 \(\tau_c=P/(2\dot P)\) 来自 \(n=3\) 且 \(P_0\ll P\) 的极限。真实年轻脉冲星可能有 glitch、timing noise、倾角演化、磁场演化和额外风转矩，因此这些派生量必须带着模型标签阅读。</p>
+<p>第三个常见误区是把光柱想象成真实的物质边界。光柱半径 \(R_{\rm LC}=c/\Omega\) 只是共转速度达到光速的几何尺度，说明刚性共转近似不能继续向外延伸。闭合磁力线、开放磁力线、极冠和电流片的结构由磁层等离子体和全球电流共同决定；因此简单静态偶极图只能作为光柱内的入门几何，不应直接外推到整个 wind 区。</p>
+<p>第四个常见误区是把 Goldreich-Julian 密度 \(\rho_{\rm GJ}\) 当成真实等离子体密度的完整答案。\(\rho_{\rm GJ}\simeq-\mathbf{\Omega}\cdot\mathbf{B}/(2\pi c)\) 描述的是维持近似共转、屏蔽沿磁场方向电场所需的最低电荷密度尺度。真实磁层中，曲率辐射、逆康普顿散射和强磁场中的 pair production 可产生大量 \(e^\pm\) 对，使粒子数流率达到 \(\dot N=\kappa\dot N_{\rm GJ}\)。因此 \(\kappa\) 是连接磁层与 PWN 或 halo 粒子数预算的关键不确定量。</p>
+<p>本讲的学习路径是从历史动机进入基础物理，再从 \(P\) 和 \(\dot P\) 推到 \(\dot E\)、\(B_*\)、\(\tau_c\)、\(\rho_{\rm GJ}\)、\(R_{\rm LC}\)、\(A_{\rm pc}\)、\(\dot N\)、\(\Phi_{\rm open}\) 和 \(L_{\rm w}\)。读图时要重点看 \(P\)-\(\dot P\) 图中的等 \(\dot E\)、等 \(B_*\) 和等 \(\tau_c\) 线，磁层示意图中的开放磁通区，\(\dot E(t)\) 图中的历史积分，以及高能光度对 \(\dot E\) 图中的散布、upper limits、距离误差和选择效应。课程边界也要记牢：本讲只建立中心引擎和 pulsar wind 功率，PWN bubble、termination shock、多波段 SED 冷却和 TeV halo 扩散留给后续课程。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>本讲从最小物理图像开始。中子星可以先近似为一个转动惯量为 \(I\) 的刚体，以角速度 \(\Omega\) 自转，周期为 \(P\)，二者满足 \(\Omega=2\pi/P\)。它储存的自转能为 \(E_{\rm rot}=\frac{1}{2}I\Omega^2\)。当 timing 观测发现 \(\dot P>0\) 时，说明周期变长、角速度下降，自转能正在被外部转矩带走。定义 \(\dot E\equiv-dE_{\rm rot}/dt\)，并假设 \(I\) 近似不变，就得到 \(\dot E=I\Omega|\dot\Omega|=4\pi^2I\dot P/P^3\)。这是本讲最重要的观测闭合关系：从 timing 进入中心引擎功率。</p>
+<p>零阶转矩模型是旋转磁偶极。若中子星有磁偶极矩 \(\mu\)，磁轴与自转轴夹角为 \(\alpha\)，真空中时变偶极场会以 \(L_{\rm dip}=2\mu^2\Omega^4\sin^2\alpha/(3c^3)\) 的功率辐射电磁能。令 \(L_{\rm dip}=\dot E\)，再用 \(\mu=B_*R_*^3/2\)，即可由 \(P\) 和 \(\dot P\) 估计 \(B_*\)。常见教材公式 \(B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G}\) 很有用，但它依赖 \(I\)、\(R_*\)、\(\alpha\) 和真空转矩假设。因此在读论文时，\(B_*\) 应被看作派生模型量，而不是像 \(P\) 那样的直接观测量。</p>
+<p>为了描述转矩随自转频率的标度，常把长期 spin-down 写成 \(\dot\Omega=-K\Omega^n\)。这里 \(n\) 是 braking index，可由 \(n=\Omega\ddot\Omega/\dot\Omega^2\) 或等价的 (n=<br />
+u\ddot<br />
+u/\(\dot\)<br />
+\(u^2\)) 估计。理想真空磁偶极给出 \(n=3\)，但真实脉冲星常不等于 \(3\)，这提示磁层电流、倾角、磁场或风转矩可能演化。对 \(\dot\Omega=-K\Omega^n\) 积分后，在 \(n=3\) 且 \(P_0\ll P\) 的极限才得到 \(	au_c=P/(2\dot P)\)。因此 \(	au_c\) 是有条件的年龄指示器，不能不加说明地等同于真实年龄。</p>
+<p>接下来必须离开“真空”图像。中子星表面导电性极强，旋转磁化导体会感生电场。在近似共转区域，电场可写为 \(\mathbf{E}=-[(\mathbf{\Omega}\times\mathbf{r})\times\mathbf{B}]/c\)。如果磁层中电荷不足，沿磁场方向的电场 \(E_\parallel\) 不能被屏蔽，就会把粒子从星体表面拉出，或加速粒子产生高能光子并触发 pair cascade。Goldreich-Julian 图像的关键不是说磁层密度处处等于某个常数，而是指出维持近似共转需要一个最低电荷密度尺度：\(\rho_{\rm GJ}\simeq-\mathbf{\Omega}\cdot\mathbf{B}/(2\pi c)\)，对应 \(n_{\rm GJ}=|\rho_{\rm GJ}|/e\)。</p>
+<p>磁层几何的核心尺度是光柱。共转速度为 \(v=\Omega r\)，当 \(r=R_{\rm LC}=c/\Omega=cP/(2\pi)\) 时，刚性共转速度达到光速。光柱不是实体墙，而是共转近似失效的半径。闭合磁力线不能在光柱外保持共转，因此一部分磁力线必须打开，成为 open field lines。这些开放磁力线是粒子和 Poynting flux 离开磁层、形成 pulsar wind 的通道。</p>
+<p>open field lines 在中子星表面的足迹叫极冠。对偶极几何，最后一条闭合场线与光柱相切，可得极冠角半径 \(	heta_{\rm pc}\simeq(R_*/R_{\rm LC})^{1/2}\)，极冠面积 \(A_{\rm pc}\simeq\pi R_*^2	heta_{\rm pc}^2\)。这说明快转脉冲星因为 \(R_{\rm LC}\) 更小，所以开放磁通比例更大，极冠面积更大，能够支持更强的电流和更高的风功率。把 \(n_{\rm GJ}\) 与 \(A_{\rm pc}\) 相乘，可估计最低外流粒子数率 \(\dot N_{\rm GJ}\sim n_{\rm GJ}cA_{\rm pc}\)。</p>
+<p>真实 wind 的粒子数通常远大于最低 Goldreich-Julian 外流，因为磁层加速区和电流片中可以产生大量 \(e^\pm\) 对。于是写成 \(\dot N=\kappa\dot N_{\rm GJ}\)，其中 \(\kappa\) 是 pair multiplicity。开放磁通还对应可用电势 \(\Phi_{\rm open}\sim\Omega^2B_*R_*^3/(2c^2)\)，它给出单电荷最大加速能量的量级。如果进入粒子动能的功率为 \(\eta_e\dot E\)，则平均粒子能量满足 \(\(\langle\gamma\)<br />
+angle \(m_ec^2\sim\eta_e\dot\) E/(\(\kappa\dot\) N_{\rm GJ}))。因此同样的 \(\dot E\) 下，较大的 \(\kappa\) 意味着更多粒子分享能量，平均 Lorentz 因子降低。</p>
+<p>最后，pulsar wind 的能量不只在粒子中，也在电磁场中。可以写成 \(L_{\rm w}=L_{\rm particle}+L_{\rm Poynting}\lesssim\dot E\)，并定义磁化度 \(\sigma=L_{\rm Poynting}/L_{\rm particle}\)。靠近光柱的风可能高度磁化，而在 PWN 终止激波附近，为解释强非热辐射，常需要有效 \(\sigma\) 降低，这就是后续 PWN 课程会展开的 \(\sigma\) problem。本讲只到这里停止：我们建立中心引擎输出，不进入 PWN bubble、termination shock、辐射冷却谱或 TeV halo 扩散。</p>
+<p>观测分析上，timing 是入口。实际论文会用相位模型 (\phi(t)=\phi_0+<br />
+u(t-t_0)+\dot<br />
+u(t-t_0)^2/2+\ddot<br />
+u(t-t_0)^3/6+\cdots) 拟合 (<br />
+u)、\(\(\dot\)<br />
+u)、必要时的 \(\(\ddot\)<br />
+u)、位置、自行、双星轨道和 glitch 参数。入门残差似然可写为 \(\ln\mathcal{L}=-rac{1}{2}\sum_i[r_i^2/\sigma_i^2+\ln(2\pi\sigma_i^2)]\)，但读论文时要检查 timing residual 是否有红噪声、glitch 后恢复、周期结构、色散量变化或未建模双星效应。若图上给出 \(P\)-\(\dot P\) 分布，要看等 \(\dot E\)、等 \(B_*\)、等 \(	au_c\) 线是否只是模型辅助线；若图上给出 \(L_X\)、\(L_\gamma\) 或 \(L_{\rm TeV}\) 与 \(\dot E\) 的关系，要检查距离误差、beaming、upper limits、选择效应和散布，而不是把经验相关当成无散布定律。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：本讲先把脉冲星当作转动惯量近似恒定的刚体，暂不讨论星云、终止激波或 halo 扩散。要求解的第一个物理量是自转能库，它定义为</p>
+<div class="math-display">\[E_{\rm rot}=\frac{1}{2}I\Omega^2.\]</div>
+<p>这里 \(I\) 是中子星转动惯量，\(\Omega\) 是角速度。这个能量库是后续 \(e^\pm\) 粒子风、Poynting flux、PWN 与 pulsar halo 的共同上游；下一步要把它的减少率转成当前中心引擎功率。</p>
+<p>第二步：假设外部电磁转矩使星体缓慢自转变慢，且 \(I\) 的长期变化可忽略。对 \(E_{\rm rot}\) 求导并取正的能量流出率，得到 spin-down luminosity：</p>
+<div class="math-display">\[\dot E\equiv-\frac{dE_{\rm rot}}{dt}=I\Omega|\dot\Omega|.\]</div>
+<p>这里 \(\dot E\) 是总自转能损失率，不是 \(L_X\)、\(L_\gamma\) 或 \(L_{\rm TeV}\) 中任一波段光度。下一步要把 \(\Omega\) 和 \(\dot\Omega\) 换成 timing 更直接给出的 \(P\) 与 \(\dot P\)。</p>
+<p>第三步：timing 观测通常测得周期 \(P\) 及其导数 \(\dot P\)，正常 spin-down 脉冲星满足 \(\dot P>0\)。由 \(\Omega=2\pi/P\) 可得当前功率的观测闭合式：</p>
+<div class="math-display">\[\dot E=4\pi^2I\frac{\dot P}{P^3}.\]</div>
+<p>这一步解出的 \(\dot E\) 是本讲最重要的诊断量：给定 \(I\) 的先验后，\(P\) 和 \(\dot P\) 就能给出 PWN 与 halo 建模的当前功率入口。下一步需要解释是什么转矩带走这部分自转能。</p>
+<p>第四步：零阶解释采用真空旋转磁偶极模型。假设中子星磁偶极矩为 \(\mu\)，磁轴与自转轴夹角为 \(\alpha\)，外部先近似为真空，则偶极辐射功率为</p>
+<div class="math-display">\[L_{\rm dip}=\frac{2\mu^2\Omega^4\sin^2\alpha}{3c^3}.\]</div>
+<p>该式说明 spin-down 对快速自转非常敏感，因为功率随 \(\Omega^4\) 增长。下一步令 \(L_{\rm dip}\) 与 \(\dot E\) 相等，把不可直接测量的磁场尺度连接到 timing 量。</p>
+<p>第五步：采用磁矩与表面偶极场的常用关系 \(\mu=B_*R_*^3/2\)，并令真空偶极功率等于自转能损失率，可以得到表面磁场估计：</p>
+<div class="math-display">\[B_*\simeq\left(\frac{6c^3IP\dot P}{4\pi^2R_*^6\sin^2\alpha}\right)^{1/2}.\]</div>
+<p>这里解出的 \(B_*\) 是模型派生量，依赖 \(I\)、\(R_*\)、\(\alpha\) 和真空转矩假设。若取教材标准参数，常写成 \(B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G}\)，但读论文时要记住它不是像 \(P\) 那样的直接观测量。下一步用更一般的转矩幂律检验真空偶极的限制。</p>
+<p>第六步：把长期 spin-down 写成经验幂律转矩，假设转矩系数 \(K\) 在观测时段内近似常数：</p>
+<div class="math-display">\[\dot\Omega=-K\Omega^n.\]</div>
+<p>这里要求解和诊断的是 braking index \(n\)，它描述转矩随自转频率的标度。真空磁偶极的理想极限给出 \(n=3\)，但真实脉冲星若存在磁层电流、倾角演化、磁场演化或额外粒子风转矩，\(n\) 就可能偏离 \(3\)。下一步把 \(n\) 写成可由 timing 高阶导数估计的形式。</p>
+<p>第七步：对 \(\dot\Omega=-K\Omega^n\) 求导，并消去 \(K\)，得到 braking index 的观测诊断式：</p>
+<div class="math-display">\[n=\frac{\Omega\ddot\Omega}{\dot\Omega^2}.\]</div>
+<p>等价地，若用自转频率 \(\nu\)，可写作 \(n=\nu\ddot\nu/\dot\nu^2\)。这一步把转矩物理连接到长期相干 timing；下一步对同一个微分方程积分，得到年龄和初始自转的关系。</p>
+<p>第八步：假设 \(n\neq1\) 且 \(K\) 不随时间显著变化，从初始角速度 \(\Omega_0\) 演化到当前 \(\Omega\)，积分得到</p>
+<div class="math-display">\[t=\frac{\Omega^{1-n}-\Omega_0^{1-n}}{(n-1)K}.\]</div>
+<p>这个式子解出的是真实年龄 \(t\) 与初始条件的关系，说明年龄估计不只由当前 \(P\) 和 \(\dot P\) 决定。下一步取标准极限，得到常用但有条件的特征年龄。</p>
+<p>第九步：在真空偶极式的标准极限 \(n=3\)、\(K\) 恒定、且初始自转远快于当前自转即 \(\Omega_0\gg\Omega\) 时，年龄关系化为</p>
+<div class="math-display">\[\tau_c=\frac{P}{2\dot P}.\]</div>
+<p>这里的 \(\tau_c\) 是特征年龄，而不是普适真实年龄；当 \(P_0\) 不可忽略、\(n\neq3\)、存在 glitch 或转矩演化时，\(\tau_c\) 会系统偏离真实年龄。到这里为止完成真空转矩链条；下一步必须进入非真空磁层，因为真实脉冲星会供应电荷。</p>
+<p>第十步：考虑高导电中子星表面和局部近似共转磁层，理想 MHD 条件给出共转电场：</p>
+<div class="math-display">\[\mathbf{E}=-\frac{(\mathbf{\Omega}\times\mathbf{r})\times\mathbf{B}}{c}.\]</div>
+<p>这一步求得的是旋转磁化导体诱导的电场。若磁层缺少足够电荷，沿磁场方向的 \(E_\parallel\) 无法被屏蔽，就会加速粒子并触发 pair cascade。下一步用高斯定律求维持近似共转所需的最低电荷密度。</p>
+<p>第十一步：对共转电场取散度，并在局部偶极近似下应用高斯定律，得到 Goldreich-Julian 电荷密度尺度：</p>
+<div class="math-display">\[\rho_{\rm GJ}\simeq-\frac{\mathbf{\Omega}\cdot\mathbf{B}}{2\pi c},\qquad n_{\rm GJ}=\frac{|\rho_{\rm GJ}|}{e}.\]</div>
+<p>这里 \(\rho_{\rm GJ}\) 是屏蔽共转磁层中 \(E_\parallel\) 所需的最低电荷密度，\(n_{\rm GJ}\) 是对应数密度。它随 \(\mathbf{\Omega}\cdot\mathbf{B}\) 变号，不等于真实 pair plasma 的全部密度。下一步要确定哪些磁力线能把这些电荷和能量带到无穷远。</p>
+<p>第十二步：开放磁力线的几何由光柱决定。要求刚性共转速度 \(v=\Omega r\) 不超过光速 \(c\)，定义光柱半径为</p>
+<div class="math-display">\[R_{\rm LC}=\frac{c}{\Omega}=\frac{cP}{2\pi}.\]</div>
+<p>\(R_{\rm LC}\) 不是物质壳层，而是共转近似失效的几何尺度；穿过该尺度的场线必须打开，成为 pulsar wind 的通道。下一步用偶极场线几何求这些开放场线在星体表面的足迹，即极冠。</p>
+<p>第十三步：在光柱内采用偶极几何，并令最后一条闭合场线与光柱相切，得到极冠角半径、极冠面积和最低 Goldreich-Julian 外流率的量级：</p>
+<div class="math-display">\[\theta_{\rm pc}\simeq\left(\frac{R_*}{R_{\rm LC}}\right)^{1/2},\qquad A_{\rm pc}\simeq\pi R_*^2\theta_{\rm pc}^2,\qquad \dot N_{\rm GJ}\sim n_{\rm GJ}cA_{\rm pc}.\]</div>
+<p>这一步把磁层电荷密度与开放磁通面积连接起来，说明快转脉冲星因 \(R_{\rm LC}\) 较小而有更大的开放通道和更高的最低粒子流率。真实风还会被 pair cascade 放大，所以下一步引入 \(\kappa\)、开放电势和风功率。</p>
+<p>第十四步：假设真实电子正电子流率为最低 Goldreich-Julian 流率的 \(\kappa\) 倍，开放磁通区可用电势给出单电荷最大能量尺度，而进入粒子动能的功率为 \(\eta_e\dot E\)，则有</p>
+<div class="math-display">\[\dot N=\kappa\dot N_{\rm GJ},\qquad \Phi_{\rm open}\sim\frac{\Omega^2B_*R_*^3}{2c^2},\qquad \langle\gamma\rangle m_ec^2\sim\frac{\eta_e\dot E}{\kappa\dot N_{\rm GJ}},\qquad L_{\rm w}=L_{\rm particle}+L_{\rm Poynting}\lesssim\dot E,\qquad \sigma=\frac{L_{\rm Poynting}}{L_{\rm particle}}.\]</div>
+<p>这一步完成本讲推导闭合：\(\dot N\) 给出粒子数输入，\(\Phi_{\rm open}\) 给出电势尺度，\(\langle\gamma\rangle\) 给出平均粒子能量诊断，\(L_{\rm w}\) 和 \(\sigma\) 给出 pulsar wind 的能量分配边界条件。下一讲将把这些量作为输入，研究 pulsar wind 如何与超新星抛射物相互作用形成 PWN；本讲不进入 PWN 动力学、终止激波、多波段冷却谱或 TeV halo 扩散。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一，拟合入口不是高能图像，而是 timing 数据。本讲作为系列第一讲，前面没有 PWN 动力学基础，任务是先把中心引擎的输入量定出来：由脉冲到达时刻拟合相位模型，再派生 \(P\)、\(\dot P\)、\(\dot E\)、\(B_*\)、\(\tau_c\) 与可能的 braking index \(n\)。常用相位模型可写为 </p>
+<div class="math-display">\[\phi(t)=\phi_0+\nu(t-t_0)+\frac{1}{2}\dot\nu(t-t_0)^2+rac{1}{6}\ddot\nu(t-t_0)^3+\cdots .\]</div>
+<p>这里直接拟合的通常是 \(\nu\)、\(\dot\nu\)、必要时的 \(\ddot\nu\)，以及天体位置、自行、双星轨道参数、glitch 发生时刻、glitch 幅度和恢复项。随后才用 \(P=1/\nu\)、\(\dot E=4\pi^2I\dot P/P^3\)、\(\tau_c=P/(2\dot P)\) 等关系得到物理诊断量。读论文时要特别区分“拟合参数”和“派生参数”：\(P\) 与 \(\dot P\) 最接近 timing 观测，\(B_*\)、\(\tau_c\)、\(\dot E\) 都已经引入了模型或先验。\n\n第二，入门似然可以从高斯残差开始，但不能停在那里。若 \(r_i\) 是第 \(i\) 个到达时刻相对于 timing 模型的残差，\(\sigma_i\) 是测量不确定度，基础 likelihood 可写为 </p>
+<div class="math-display">\[\ln\mathcal{L}=-\frac{1}{2}\sum_i\left(\frac{r_i^2}{\sigma_i^2}+\ln(2\pi\sigma_i^2)\right).\]</div>
+<p>这个式子适合教学中说明“模型预测相位”和“观测相位”如何比较，但真实脉冲星常有红噪声、色散量变化、仪器钟差、太阳风传播效应、双星轨道未建模项和 glitch 恢复。现代分析往往需要把协方差矩阵写成 \(C=C_{\rm white}+C_{\rm red}+C_{\rm DM}+C_{\rm sys}\)，再用 \(\ln\mathcal{L}=-\frac{1}{2}(\mathbf{r}^{\rm T}C^{-1}\mathbf{r}+\ln|2\pi C|)\) 形式评估似然。若论文只给一个很小的 \(\chi^2\) 或一个漂亮的残差图，却没有说明红噪声和 glitch 如何处理，读者就应对 \(\ddot\nu\) 和 \(n\) 的物理解释保持谨慎。\n\n第三，braking index 的拟合是本讲最容易被误读的部分。形式上可由 </p>
+<div class="math-display">\[n=\frac{\nu\ddot\nu}{\dot\nu^2}\]</div>
+<p>得到，但 \(\ddot\nu\) 很容易被 timing noise、glitch 后恢复和长期磁层态变化污染。实际读论文时，要检查观测基线是否远长于典型 timing noise 时间尺度，是否跨过 glitch，glitch 后恢复项是否单独建模，残差中是否仍有低频结构。如果残差在扣除二阶相位模型后仍呈现长波纹，那么把 \(\ddot\nu\) 解释为稳定转矩幂律就很危险。后验中 \(n\) 的误差也不应只看形式统计误差；系统误差往往大于由 \(\sigma_i\) 传播出的误差。\n\n第四，从 \(P\) 与 \(\dot P\) 推 \(B_*\) 时，拟合模型必须写清楚转矩假设。真空磁偶极给出 \(L_{\rm dip}=2\mu^2\Omega^4\sin^2\alpha/(3c^3)\)，再结合 \(\mu=B_*R_*^3/2\) 得到常见估计 \(B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G}\)。但如果使用 force-free 或等离子体充满磁层的转矩，角度依赖和归一化会改变，例如常见标度更接近 \(L\propto\mu^2\Omega^4(1+\sin^2\alpha)/c^3\)。因此严肃的后验估计应把 \(I\)、\(R_*\)、\(\alpha\) 和转矩模型作为 nuisance parameters 或模型比较对象。一个只报 \(B_*\) 到三位有效数字的表格，并不意味着表面磁场真的被测到了三位有效数字。\n\n第五，spin-down 历史建模连接本讲和后续 PWN 或 halo 课程。常用输入函数为 </p>
+<div class="math-display">\[\dot E(t)=\dot E_0\left(1+\frac{t}{\tau_0}\right)^{-(n+1)/(n-1)} .\]</div>
+<p>拟合或设定的参数包括初始功率 \(\dot E_0\)、初始 spin-down 时间尺度 \(\tau_0\)、braking index \(n\)、真实年龄 \(t\)、初始周期 \(P_0\) 和当前 \(P\)、\(\dot P\) 的约束。这里存在强简并：较小的 \(P_0\) 与较大的 \(\dot E_0\) 可增加早期注入能量；不同 \(n\) 会改变早期功率衰减速度；真实年龄若来自超新星遗迹动力学，也会与 \(\tau_c\) 不一致。本讲只把 \(\dot E(t)\) 建成中心引擎输入函数，下一讲才把它放入 PWN bubble 和 termination shock 的动力学方程。\n\n第六，多波段能量预算拟合要把当前功率和累计注入分开。对年轻紧致 PWN，当前 X 射线同步辐射可能更直接响应近期 \(\dot E\)；对较老 pulsar halo，TeV 电子库可能更接近历史累计 \(E_{\rm inj}=\int_0^t\dot E(t')dt'\)。因此检查模型时，不应只比较 \(L_X/\dot E\)、\(L_\gamma/\dot E\) 或 \(L_{\rm TeV}/\dot E\)，还要问模型所需总电子能量是否超过 \(E_{\rm inj}\)，所需粒子数是否能由 \(\dot N=\kappa\dot N_{\rm GJ}\) 支持，平均能量是否满足 \(\langle\gamma\rangle m_ec^2\sim\eta_e\dot E/(\kappa\dot N_{\rm GJ})\)。若某源的 \(L_{\rm band}/\dot E\) 看似超过合理效率，优先检查距离、关联、beaming、背景扣除和历史注入，而不是立刻宣称能量守恒失败。\n\n第七，残差诊断应分三层进行。第一层是 timing residual：看是否有白噪声之外的红噪声、周期结构、glitch、双星效应或色散量变化。第二层是派生物理残差：把 \(P\)、\(\dot P\)、\(\dot E\)、\(B_*\)、\(\tau_c\) 放到 \(P\)-\(\dot P\) 图和源族群中，检查是否与 young energetic pulsar、magnetar 或 millisecond pulsar 的区域一致。第三层是能量预算残差：比较 \(L_X\)、\(L_\gamma\)、\(L_{\rm TeV}\) 与 \(\dot E\) 或 \(E_{\rm inj}\) 的关系，看异常点是否由距离误差、未解析星云污染、吸收修正、探测阈值或源分类偏差造成。系统误差清单必须进入结论：距离误差使 \(L\propto d^2\) 和物理尺寸 \(R\propto d\) 同时偏移；倾角 \(\alpha\)、转动惯量 \(I\)、半径 \(R_*\) 和方程状态会传播到 \(B_*\) 与 \(\dot E\)；pair multiplicity \(\kappa\) 和磁化度 \(\sigma\) 则不能只靠 timing 唯一确定。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 Goldreich-Julian pulsar electrodynamics 的经典结果时，第一段要读“问题为什么存在”。旋转磁化中子星如果周围是真空，共转电场中的沿磁场方向分量会加速电荷；而一旦电荷被拉出，它们又会反过来屏蔽 \(E_\parallel\)。所以经典工作的出发点不是直接给出一个密度公式，而是问：为了让磁层近似共转，需要怎样的电荷分布？从这个问题自然导出 \(\mathbf{E}=-[(\mathbf{\Omega}\times\mathbf{r})\times\mathbf{B}]/c\)，再由高斯定律得到 \(\rho_{\rm GJ}\simeq-\mathbf{\Omega}\cdot\mathbf{B}/(2\pi c)\)。读到这里要明白，\(\rho_{\rm GJ}\) 是最低电荷供应尺度，不是真实 pair plasma 密度的完整答案。\n\n第二段要读光柱和开放磁力线。光柱半径 \(R_{\rm LC}=c/\Omega=cP/(2\pi)\) 来自共转速度不能超过光速这一运动学限制，它不是物质壳层，也不是辐射突然开始的边界。经典图像中，闭合磁力线区维持近似共转，穿过光柱的 open field lines 成为粒子、电流和 Poynting flux 离开磁层的通道。接着极冠角半径 \(\theta_{\rm pc}\simeq(R_*/R_{\rm LC})^{1/2}\) 与极冠面积 \(A_{\rm pc}\simeq\pi R_*^2\theta_{\rm pc}^2\) 给出粒子外流尺度。读这部分时要沿着“光柱限制 \(\rightarrow\) 磁力线开放 \(\rightarrow\) 极冠面积 \(\rightarrow\) 外流粒子数”的链条，而不是把图中的场线当作静态装饰。\n\n第三段要把磁偶极 spin-down 当作零阶能量计。真空磁偶极公式 \(L_{\rm dip}=2\mu^2\Omega^4\sin^2\alpha/(3c^3)\) 与 timing 推得的 \(\dot E=4\pi^2I\dot P/P^3\) 结合，可以估计 \(B_*\) 并建立 \(P\)-\(\dot P\) 图的辅助线。但这部分的课程重点不是“背出 \(B_*\simeq3.2\times10^{19}(P\dot P)^{1/2}\,\mathrm{G}\)”，而是识别它的假设：固定 \(I\)、固定 \(R_*\)、给定倾角 \(\alpha\)、采用真空转矩。现代 force-free 与 PIC 磁层会改变转矩归一化和角度依赖，所以读论文时必须问作者使用的是 vacuum dipole、force-free torque，还是经验 \(\dot\Omega=-K\Omega^n\)。\n\n第四段要读 braking index 和年龄关系的条件。一般 spin-down law 写作 \(\dot\Omega=-K\Omega^n\)，诊断量为 \(n=\Omega\ddot\Omega/\dot\Omega^2\)。理想真空偶极对应 \(n=3\)，而许多年轻脉冲星的观测值偏离 \(3\)，说明真实转矩可能受到磁层电流、倾角演化、磁场演化或粒子风影响。特征年龄 \(\tau_c=P/(2\dot P)\) 只在 \(n=3\)、\(P_0\ll P\)、\(K\) 近似不变时才接近真实年龄。读到论文中列出 \(\tau_c\) 时，应立即检查是否有独立年龄，例如超新星遗迹动力学年龄或历史超新星记录。\n\n第五段要读 pair multiplicity 和 wind power 的接口。Goldreich-Julian 密度给出最低电荷流率 \(\dot N_{\rm GJ}\sim n_{\rm GJ}cA_{\rm pc}\)，真实风则写成 \(\dot N=\kappa\dot N_{\rm GJ}\)。开放电势 \(\Phi_{\rm open}\sim\Omega^2B_*R_*^3/(2c^2)\) 给出单电荷最大能量尺度，而 \(\langle\gamma\rangle m_ec^2\sim\eta_e\dot E/(\kappa\dot N_{\rm GJ})\) 说明粒子数和平均能量之间存在预算约束。最后 \(L_{\rm w}=L_{\rm particle}+L_{\rm Poynting}\lesssim\dot E\) 与 \(\sigma=L_{\rm Poynting}/L_{\rm particle}\) 是下一讲 PWN 动力学的边界条件。本讲到这里停止：不进入 PWN bubble、termination shock、多波段 SED 冷却或 TeV halo 扩散。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，\(P\)-\(\dot P\) 诊断图。横轴通常为周期 \(P\)，纵轴为周期导数 \(\dot P\)，多用对数坐标。要看等 \(\dot E\)、等 \(B_*\)、等 \(\tau_c\) 线如何划分 young energetic pulsar、magnetar、normal radio pulsar 和 millisecond pulsar。陷阱是把 \(B_*\) 与 \(\tau_c\) 当作直接观测量，而不是由转矩模型派生的辅助量。\n\n二，磁层几何示意图。重点识别自转轴、磁轴、中子星半径 \(R_*\)、光柱半径 \(R_{\rm LC}\)、闭合磁力线、开放磁力线和极冠。图上应看 open field lines 如何提供 pulsar wind 的几何通道。陷阱是把光柱看成实体边界，或把光柱外仍画成静态偶极的线当成真实解。\n\n三，\(\dot E(t)\) 和累计注入能量图。横轴是年龄 \(t\)，纵轴可能是当前功率 \(\dot E(t)\) 或累计能量 \(E_{\rm inj}=\int_0^t\dot E(t')dt'\)。要比较不同 \(n\)、\(P_0\)、\(\tau_0\) 下曲线的早期衰减和后期尾部。陷阱是用当前 \(\dot E\) 单独判断老 pulsar halo 的总电子能量。\n\n四，Goldreich-Julian 密度、gap 或电流分布图。颜色条或纵轴可能表示 \(\rho_{\rm GJ}\)、\(E_\parallel\)、电流密度或 pair production rate。要看 \(\mathbf{\Omega}\cdot\mathbf{B}=0\) 附近的符号变化、null charge surface 的位置和未屏蔽 \(E_\parallel\) 的区域。陷阱是把 \(\rho_{\rm GJ}\) 当成处处均匀常数，或把某个 gap 名称当成唯一物理解。\n\n五，force-free 或 PIC 模拟能流图。先读清颜色条：它表示 Poynting flux、粒子能流、耗散率还是电流密度。再看能量流集中在开放磁通区、极区还是赤道 current sheet。陷阱是忽略边界条件、pair supply、数值电阻和分辨率收敛性，把某张颜色图直接当成真实磁层照片。\n\n六，高能光度对 \(\dot E\) 的相关图。横轴通常是 \(\dot E\)，纵轴可能是 \(L_X\)、\(L_\gamma\)、\(L_{\rm TeV}\) 或效率 \(L_{\rm band}/\dot E\)。要看散布、upper limits、距离误差、beaming 修正和选择效应。陷阱是把经验幂律或固定效率线当成无散布的物理定律。\n\n七，pair multiplicity 与平均粒子能量图。横轴可能为 \(\kappa\)、\(\dot N\) 或 pair injection rate，纵轴可能为 \(\langle\gamma\rangle\)、粒子能量通量或能量分配比例。要看在 \(\eta_e\dot E\) 固定时，较大 \(\kappa\) 如何降低平均粒子能量。陷阱是只用 PWN 或 halo 的单一约束决定 \(\kappa\)，而不检查磁层 pair cascade、PWN radio 电子数和 TeV 电子数是否同时相容。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图一：\(P\)-\(\dot P\) 图。横轴为 \(P\)，纵轴为 \(\dot P\)，通常双对数显示；数据点代表不同脉冲星族群，模型辅助线给出等 \(\dot E\)、等 \(B_*\) 和等 \(\tau_c\)。读图时先看高 \(\dot E\) 年轻脉冲星位于较短 \(P\)、较大 \(\dot P\) 区域，再看 magnetar 的高 \(B_*\) 区域和 millisecond pulsar 的短 \(P\)、低 \(\dot P\) 区域。残差意义在这里不是单源拟合残差，而是族群偏离：某些源是否由于选择效应、双星加速度或 Shklovskii effect 改变了表观 \(\dot P\)。误读风险是把图上辅助线当作直接测量结果，尤其把 \(\tau_c\) 当成真实年龄。\n\n图二：timing residual 图。横轴是观测时间 \(t\) 或 MJD，纵轴是到达时刻残差 \(r_i\)，模型线通常是零残差基线；数据点若随机围绕零线且无长周期结构，说明相位模型较好。要检查残差是否有红噪声、glitch 处的相位跳变、glitch 后指数恢复、双星轨道周期信号或色散量变化。若论文由此给出 \(\ddot\nu\) 和 \(n=\nu\ddot\nu/\dot\nu^2\)，必须看残差扣除高阶项后是否仍有结构。误读风险是把短时间基线上的弯曲残差解释成长期 braking index。\n\n图三：磁层结构图。坐标轴通常是示意性的空间坐标，标注 \(R_*\)、\(R_{\rm LC}\)、自转轴、磁轴、闭合场线、开放场线和极冠。模型线代表偶极近似下的磁力线形状，以及光柱附近闭合区终止的位置。读图时要沿着 \(R_{\rm LC}=c/\Omega\) 的定义理解：光柱标志共转速度达到 \(c\)，穿过该尺度的磁力线必须打开。误读风险是把光柱当成物质壳层，或把二维静态图误当作三维时变磁层的完整描述。\n\n图四：\(\dot E(t)\) 与 \(E_{\rm inj}(t)\) 图。横轴为年龄 \(t\)，纵轴为当前功率 \(\dot E(t)\) 或累计能量 \(E_{\rm inj}=\int_0^t\dot E(t')dt'\)。模型线常由 \(\dot E(t)=\dot E_0(1+t/\tau_0)^{-(n+1)/(n-1)}\) 给出，不同颜色表示不同 \(n\)、\(P_0\) 或 \(\tau_0\)。读图要看早期高功率阶段贡献了多少累计能量，以及当前 \(\dot E\) 是否仍能支撑观测光度。误读风险是用当前 \(\dot E\) 直接否定老 halo 的历史注入，或忽略 \(P_0\) 与 \(n\) 的简并。\n\n图五：Goldreich-Julian 密度或 gap 图。横轴可能是磁纬、磁层半径、磁力线标号或相位，纵轴或颜色条表示 \(\rho_{\rm GJ}\)、\(E_\parallel\)、电流密度或 pair production rate。模型线通常标出 \(\mathbf{\Omega}\cdot\mathbf{B}=0\) 的 null charge surface，数据点若来自脉冲光曲线拟合则反映几何约束。读图要看 \(\rho_{\rm GJ}\) 符号变化如何允许电荷不足区和加速区出现。误读风险是把 \(\rho_{\rm GJ}\) 理解为真实粒子密度 \(n\) 的全部，忽略 \(\dot N=\kappa\dot N_{\rm GJ}\) 中的 pair multiplicity。\n\n图六：force-free 或 PIC 能流图。坐标通常是磁层二维切片或三维投影，颜色条可能为 Poynting flux、粒子能量通量、耗散率或电流密度，箭头表示磁场方向、速度或能流方向。读图先确认颜色条物理量，再看开放磁通区和赤道 current sheet 是否主导能量外流或耗散。这里的“残差”主要表现为数值诊断：不同分辨率、不同 pair supply、不同边界条件下结构是否稳定。误读风险是把某次模拟的颜色结构当作唯一真实磁层，而不问电荷供应是否足够和能量守恒是否闭合。\n\n图七：\(L_X\)、\(L_\gamma\) 或 \(L_{\rm TeV}\) 对 \(\dot E\) 的经验相关图。横轴是 \(\dot E\)，纵轴是某波段光度或效率 \(L_{\rm band}/\dot E\)，模型线可能是固定效率线或经验幂律。数据点的误差条通常包含流量误差和距离误差，upper limits 对选择效应特别重要。读图要看散布是否跨越数个数量级，以及异常高效率源是否可能来自距离、beaming、背景扣除或源关联错误。误读风险是把 \(L_{\rm band}\leq\dot E\) 的预算思想误写成 \(L_{\rm band}=\dot E\)。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径是从经典电动力学到教材级中心引擎。先读 Goldreich-Julian pulsar electrodynamics 的基本思想，再读脉冲星教材中关于自转能、磁偶极 spin-down、光柱、极冠和开放磁力线的章节。阅读目标不是只记公式，而是能从 timing 量 \(P\) 与 \(\dot P\) 逐步推出 \(\dot E\)、\(B_*\)、\(\tau_c\)、\(\rho_{\rm GJ}\)、\(R_{\rm LC}\)、\(\dot N_{\rm GJ}\) 和 \(\Phi_{\rm open}\)，并能说明每个量依赖哪些假设。\n\n第二条阅读路径是从 vacuum dipole 走向 force-free 与 PIC 磁层。真空磁偶极给出清晰的能量尺度，但真实脉冲星磁层由等离子体、电流闭合和 pair supply 决定。force-free 研究回答在充足电荷供应时全球磁场和电流如何组织，PIC 研究进一步追踪粒子加速、pair production、current sheet 耗散和风的能量分配。读这些现代论文时，重点检查边界条件、pair injection prescription、数值电阻、能量守恒和分辨率收敛性，而不是只看漂亮的磁层颜色图。\n\n第三条阅读路径是从中心引擎进入 PWN 动力学。下一讲会把本讲得到的 \(\dot E(t)\)、\(L_{\rm w}\)、\(\dot N\)、\(\Phi_{\rm open}\) 和 \(\sigma\) 当作边界条件，研究 pulsar wind 与超新星抛射物相互作用后如何形成 PWN bubble、termination shock 和磁化星云。阅读时应把问题从“脉冲星能给多少功率”推进到“这些功率如何压缩、热化和辐射”。这一步不需要重新推导 \(\rho_{\rm GJ}\)，而要学习风的压力平衡、星云半径演化和激波能量转换。\n\n第四条阅读路径是从 PWN 再走向 pulsar halo。halo 研究关心 \(e^\pm\) 离开 PWN 后在周围介质中的扩散、冷却和反康普顿辐射，因此同一个中心引擎量 \(E_{\rm inj}=\int_0^t\dot E(t')dt'\) 会以更长时间尺度出现。读现代 TeV halo 论文时，要同时检查当前 \(\dot E\)、历史累计能量、距离、年龄、扩散系数和源关联。这样可以避免把 halo 亮度简单归因于当前 \(\dot E\)，也避免把本讲的磁层参数过度外推到星际尺度。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>下一讲最自然的方向是“PWN 与 pulsar halo 从零到前沿（二）：pulsar wind 撞上超新星抛射物后怎样形成 PWN”。本讲已经完成中心引擎边界条件：\(\dot E\)、\(\dot E(t)\)、\(L_{\rm w}\)、\(\dot N\)、\(\Phi_{\rm open}\) 与 \(\sigma\)。下一讲应把这些量作为输入，进入 freely expanding ejecta、PWN bubble pressure、termination shock、reverse shock interaction 和基本半径演化，而不回头重复 Goldreich-Julian 推导。\n\n第二个后续方向是第三讲“PWN 的同步辐射与反康普顿谱建模”。它应建立在第二讲的动力学结构之上，讨论粒子注入谱、冷却 break、磁场演化、多波段 SED、\(L_X\)、\(L_\gamma\)、\(L_{\rm TeV}\) 和参数简并。本讲只说明 \(L_{\rm band}/\dot E\) 是效率诊断，不负责展开辐射冷却和谱拟合。\n\n第三个后续方向是第四或第五讲“pulsar halo 与 TeV 扩散前沿”。那里再讨论 \(e^\pm\) 从 PWN 或 pulsar wind 环境进入星际介质后的扩散方程、能量损失、角向亮度剖面以及 HAWC、LHAASO、CTA 的观测诊断。本讲的边界很清楚：只给中心粒子与能量预算，不进入 TeV halo 扩散系数、ISM 湍流或大尺度反康普顿辐射建模。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>pulsar spin down luminosity Goldreich Julian density</li>
+<li>pulsar magnetosphere pair cascade PIC simulation</li>
+<li>pulsar wind magnetization sigma problem</li>
+<li>Goldreich Julian 1969 pulsar electrodynamics</li>
+<li>pulsar P Pdot diagram spin down luminosity characteristic age</li>
+<li>force-free pulsar magnetosphere spin-down torque</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1969ApJ...157..869G/abstract">https://ui.adsabs.harvard.edu/abs/1969ApJ...157..869G/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
