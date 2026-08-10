@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-10</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-10</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-10">
+      <a class="previous" href="2026-08-09.html">← 上一期：2026-08-09</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-10T11:08:44+08:00<br />
+今日保留论文数：3<br />
+内容构成：今日新文 3 篇；补充推荐 0 篇；经典旧文精读 0 篇</p>
+<h2 id="_1">高能天体物理重点</h2>
+<h3 id="1-search-for-gamma-ray-spectral-lines-from-dark-matter-annihilation-with-the-hess-inner-galaxy-survey">1. Search for gamma-ray spectral lines from dark matter annihilation with the H.E.S.S. Inner Galaxy Survey</h3>
+<ul>
+<li>来源：arXiv / astro-ph.HE</li>
+<li>链接：https://arxiv.org/abs/2608.07234v1</li>
+<li>作者：H. E. S. S. Collaboration, F. Aharonian, H. Ashkar, V. Barbosa Martins, R. Batzofin, Y. Becherini, D. Berge, K. Bernlohr</li>
+<li>评分：novelty 8/10，importance 9/10，relevance 10/10，final 10.00/10</li>
+<li>推荐理由：H.E.S.S.内银河巡天546小时数据搜索TeV伽马射线谱线暗物质湮灭，给出目前最强限制并触及Wino/Higgsino等模型；IACT和VHE伽马射线暗物质主题高度相关，值得重点阅读。</li>
+</ul>
+<p><strong>中文题目</strong>：用 H.E.S.S. 内银河巡天搜寻暗物质湮灭产生的伽马射线谱线</p>
+<p><strong>做了什么</strong>：这篇论文用 H.E.S.S. 对银河中心内几度区域的 \(546\) 小时甚高能伽马射线观测，搜寻暗物质粒子湮灭可能产生的窄谱线信号。作者没有发现显著谱线，因此用同时包含能谱和空间分布信息的二维对数似然比方法，给出暗物质质量约 \(1\) 到 \(10\) TeV 量级的湮灭线截面 \(\langle\sigma v\rangle_{\rm line}\) 上限。在 Einasto 银河暗物质晕假设下，上限在 \(m_\chi=1\,\mathrm{TeV}\) 处达到 \(2.3\times10^{-28}\,\mathrm{cm^3\,s^{-1}}\)，在 \(m_\chi=10\,\mathrm{TeV}\) 处为 \(2.4\times10^{-27}\,\mathrm{cm^3\,s^{-1}}\)。论文进一步把这些上限用于限制 Wino、Higgsino 和 Quintuplet 等电弱多重态暗物质模型，并声称首次在某些银河暗物质分布假设下触及热遗迹 Higgsino 参数空间。</p>
+<p><strong>为什么重要</strong>：伽马射线谱线是间接探测暗物质中最干净的信号之一：常规天体过程很难在 TeV 能段产生接近单色的窄线，而 \(\chi\chi\to\gamma\gamma\)、\(\chi\chi\to\gamma Z\) 或 \(\chi\chi\to\gamma h\) 会直接给出与 \(m_\chi\) 相关的线能量。银河中心又是暗物质柱密度最大的方向之一，因此大气切伦科夫望远镜在 TeV 质量区间能达到直接探测和对撞机很难覆盖的灵敏度。</p>
+<p><strong>理论 / 观测 / 仪器方法价值</strong>：这项工作的价值不只是给出更强的排除曲线，还在于把 H.E.S.S. 内银河巡天的大曝光量、空间模板和能谱线搜索结合起来，用二维似然充分利用暗物质信号相对于宇宙线背景和弥散伽马背景的空间差异。对理论方面，它把抽象的 \(\langle\sigma v\rangle_{\rm line}\) 上限转译到 Wino、Higgsino、Quintuplet 等具体模型；对观测方面，它展示了下一代 CTA 做同类搜索时最需要控制的能量分辨率、背景建模和银河中心暗物质轮廓系统误差。</p>
+<p><strong>为什么应该关注</strong>：如果你关心 TeV 暗物质，这篇文章相当于更新了目前最强的一组窄线约束；如果你关心银河中心高能观测，它给出了如何在强背景、复杂弥散辐射和仪器响应限制下做谱线搜索的实用范例；如果你做模型，它会直接告诉你哪些电弱热遗迹候选已经开始被间接探测压到核心参数区。即使没有发现信号，这类结果也在实质性收缩可行的 TeV 暗物质模型空间。</p>
+<details class="paper-detail">
+<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>
+<h4 id="_2">文章详细讲解</h4>
+<p>科学问题：暗物质湮灭若能产生 \(\gamma\gamma\)、\(\gamma Z\) 或 \(\gamma h\) 末态，就会在伽马射线能谱中留下窄线或准窄线。线信号的天体背景很低，因此一旦发现，会比连续谱超额更容易与普通宇宙线加速源、脉冲星风云、超新星遗迹或弥散辐射区分。问题在于这类过程通常是圈图压低的，截面很小，需要在暗物质柱密度很高、曝光量很大、能量分辨率足够好的数据中寻找。银河中心附近正满足高 \(J\) 因子条件，但同时也是伽马射线背景最复杂的区域。</p>
+<p>作者怎么做：论文使用 H.E.S.S. Inner Galaxy Survey 的 \(546\) 小时数据，覆盖银河中心内几度区域，针对一系列暗物质质量 \(m_\chi\) 搜索线状能谱特征。不同于只做一维能谱拟合的搜索，作者构建二维对数似然比统计量，同时利用重建能量维度和天空位置维度。暗物质信号模板由银河暗物质密度分布给出，基准采用 Einasto 轮廓；背景则依赖观测数据驱动和仪器响应建模，在每个能量窗口内比较有无谱线信号的似然。</p>
+<p>关键结果：没有发现全局显著的谱线超额，因此作者给出 \(\langle\sigma v\rangle_{\rm line}\) 的排除上限。在 Einasto 假设下，\(m_\chi=1\,\mathrm{TeV}\) 处达到 \(2.3\times10^{-28}\,\mathrm{cm^3\,s^{-1}}\)，\(m_\chi=10\,\mathrm{TeV}\) 处达到 \(2.4\times10^{-27}\,\mathrm{cm^3\,s^{-1}}\)。这些数值意味着 H.E.S.S. 在 TeV 线搜索上已经进入很多具体电弱暗物质模型的关键区间，尤其对 Wino、Higgsino 和高维 \(SU(2)_L\) 多重态暗物质具有直接约束力。</p>
+<p>局限和下一步：结果最敏感的系统误差来自银河中心暗物质密度轮廓、能量刻度和分辨率、背景空间模板、掩膜区域选择以及残余宇宙线背景的能谱形状。Einasto 轮廓给出较强约束；若银河中心存在暗物质核心，\(J\) 因子会显著下降，上限相应变弱。下一步的关键不是简单增加曝光，而是把 CTA 的更大有效面积、更好角分辨率和更精细仪器响应与稳健的银河中心背景建模结合起来，并与 Fermi-LAT、MAGIC、VERITAS、HAWC、LHAASO 等不同能段结果做联合解释。</p>
+<h4 id="_3">关键结果是怎么做出来的</h4>
+<p>这篇论文最核心的证据链从样本选择开始：作者采用 H.E.S.S. Inner Galaxy Survey 对银河中心内区的 \(546\) 小时观测，而不是只使用单个指向或早期小样本。样本选择的意义在于，一方面银河中心附近的暗物质 \(J\) 因子高，另一方面巡天式覆盖允许把信号区和背景控制区、不同角距离环带或空间像素的统计信息一起纳入似然。读者应特别注意论文如何定义感兴趣区域、如何处理明亮天体源掩膜、如何排除银河面复杂区域，以及这些选择是否影响最强上限所在的质量区间。</p>
+<p>事件层面，H.E.S.S. 的原始观测不是直接的光子计数，而是空气簇射图像重建后的伽马候选事件。作者需要在重建能量和空间位置上建立事件分布，并用仪器响应函数描述真实能量到重建能量的迁移。线信号在真实能量上接近 \(E_\gamma\simeq m_\chi\) 或略低于 \(m_\chi\)，在观测能量上则被能量分辨率展宽。因此结论并非来自某个能量 bin 的肉眼尖峰，而是来自多个能量窗口中信号模板与背景模板的似然比较。</p>
+<p>显著性和置信区间方面，论文使用二维 log-likelihood ratio test statistic。对每一个假设质量 \(m_\chi\)，拟合一个非负信号归一化，等价于 \(\langle\sigma v\rangle_{\rm line}\)，并比较有信号与无信号模型的似然差。没有局部或全局显著超额后，上限通常通过 \(\Delta TS\) 或剖面似然条件给出。读者应区分局部显著性和扫描多个 \(m_\chi\) 后的 look-elsewhere effect；线搜索在很多质量点重复试验，局部小涨落不能直接解释为物理信号。</p>
+<p>支撑结论的图表通常包括：预期信号空间模板与背景区域定义图、不同质量下的 \(\langle\sigma v\rangle_{\rm line}\) 上限曲线、局部显著性随 \(m_\chi\) 的变化、以及与 Wino、Higgsino、Quintuplet 理论预言的叠加图。最关键的不是某个单独质量点，而是整条上限曲线相对于期望灵敏度带是否平滑、是否存在未解释的宽尺度起伏、以及观测上限是否系统性偏离背景-only 预期。</p>
+<p>系统误差方面，暗物质轮廓是最大 astrophysical uncertainty。Einasto、NFW、cored profile 会给出不同 \(J\) 因子，进而几乎按比例改变 \(\langle\sigma v\rangle_{\rm line}\) 上限。仪器方面，能量刻度偏差会移动谱线位置，能量分辨率误差会改变线模板宽度，有效面积误差会影响归一化。背景方面，若残余宇宙线或弥散伽马背景在小能量窗口内不是光滑函数，可能伪造或掩盖弱线特征。稳健性检验应包括改变感兴趣区域、掩膜、背景参数化、暗物质轮廓和能量窗口宽度后上限是否稳定。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_4">背景知识</h4>
+<p>暗物质间接探测的基本思想是：如果暗物质粒子能湮灭或衰变，其产物中可能包含伽马射线、正负电子、反质子、中微子等。伽马射线的优势是传播方向基本保持源方向，因而可以利用空间分布来区分暗物质晕信号与局域天体源。银河中心因距离近且理论上暗物质密度高，一直是间接探测的主战场之一。</p>
+<p>谱线搜索在暗物质间接探测中特别重要。多数湮灭末态产生的是连续谱，例如 \(b\bar b\)、\(W^+W^-\)、\(\tau^+\tau^-\) 通过级联衰变给出宽能谱，这类信号容易与普通天体过程混淆。相反，\(\chi\chi\to\gamma\gamma\) 给出接近单色的光子，\(\chi\chi\to\gamma Z\) 或 \(\chi\chi\to\gamma h\) 给出能量略低的线；这类窄特征很难由常规非热辐射自然产生，因此尽管截面小，判别力很强。</p>
+<p>历史上，Fermi-LAT 曾在几十到几百 GeV 能段推动过谱线搜索，尤其围绕所谓 \(130\,\mathrm{GeV}\) 线特征产生过大量讨论，但后来更大数据集和仪器系统学分析没有形成稳健发现。在 TeV 能段，大气切伦科夫望远镜如 H.E.S.S.、MAGIC 和 VERITAS 具有更大的有效面积和更好的瞬时灵敏度，适合搜索 TeV 粒子暗物质，但视场、背景控制和绝对能量刻度也带来不同挑战。</p>
+<p>现在值得重新看的原因有三点。第一，H.E.S.S. 积累了更长的银河中心曝光和更成熟的仪器响应；第二，电弱多重态暗物质模型在 TeV 质量区间有明确理论预言，特别是 Sommerfeld 增强会显著改变湮灭截面；第三，CTA 即将把同类搜索推进到更高灵敏度，当前 H.E.S.S. 分析可以作为方法学基准。</p>
+<p>该领域常见误区包括：把没有发现谱线误读为排除所有 TeV 暗物质；忽略 \(J\) 因子对上限的线性影响；把局部显著性当成全局显著性；以及认为谱线一定是严格的 delta function。实际上，观测到的线宽主要由仪器能量分辨率决定，理论上 \(\gamma Z\) 与 \(\gamma h\) 的线能量也不同，而暗物质速度弥散带来的本征展宽通常远小于 H.E.S.S. 的能量分辨率。</p>
+<h4 id="_5">基础理论 / 方法脉络</h4>
+<p>从物理图像看，暗物质湮灭通量由三部分组成：粒子物理因子、天体物理因子和仪器响应。粒子物理因子包括暗物质质量 \(m_\chi\)、湮灭截面 \(\langle\sigma v\rangle\) 和每次湮灭产生的光子谱 \(dN_\gamma/dE\)。天体物理因子是沿视线积分的密度平方，因为湮灭率正比于 \(\rho_\chi^2\)。仪器响应则把真实光子能量和方向映射到重建能量、重建方向和事件选择效率。</p>
+<p>对谱线信号，真实光子谱可以近似为窄线。若末态为 \(\gamma\gamma\)，每次湮灭产生两个能量近似为 \(m_\chi\) 的光子；若末态为 \(\gamma Z\)，线能量为 \(m_\chi\left(1-m_Z^2/(4m_\chi^2)\right)\)。在 H.E.S.S. 数据中，真实窄线会被能量分辨率卷积成一个有限宽度峰，因此搜索的本质是检查局部能量窗口内是否存在与能量响应一致的窄峰，而不是寻找无限尖锐的 bin 超额。</p>
+<p>本文的关键方法假设是：暗物质信号在空间上遵循选定的银河晕轮廓，例如 Einasto profile；背景在相同区域内可由数据和模型约束，并且在小能量窗口内相对平滑。二维似然的优势在于同时利用能谱和空间信息。普通残余宇宙线背景往往在相机坐标或曝光图中有特定结构，但不应严格跟随银河中心暗物质 \(J\) 因子；弥散伽马背景可能更接近银河面而非球对称暗物质晕。</p>
+<p>常见退化关系主要有三类。第一，\(\langle\sigma v\rangle_{\rm line}\) 与 \(J\) 因子近似反比，因此暗物质轮廓从 cuspy 变为 cored 会直接削弱约束。第二，有效面积归一化与信号截面存在归一化退化，但空间和能谱形状可部分打破。第三，能量刻度偏差与质量 \(m_\chi\) 的线位置退化，可能让某个质量点的上限变强或变弱。对线搜索而言，系统误差通常不是“有没有峰”这么简单，而是峰的宽度、位置、空间分布是否同时匹配暗物质预期。</p>
+<h4 id="_6">公式与推导</h4>
+<p>第一步是从暗物质数密度出发。若暗物质质量为 \(m_\chi\)，质量密度为 \(\rho_\chi(\mathbf{r})\)，则数密度为</p>
+<div class="math-display">\[n_\chi(\mathbf{r})=\frac{\rho_\chi(\mathbf{r})}{m_\chi}.\]</div>
+<p>这里 \(\mathbf{r}\) 是银河坐标中的位置。湮灭率正比于两粒子相遇概率，因此密度平方会进入最终通量。</p>
+<p>第二步是写出单位体积湮灭率。对自共轭暗物质，单位体积单位时间的湮灭率为</p>
+<div class="math-display">\[q_{\rm ann}(\mathbf{r})=\frac{1}{2}\langle\sigma v\rangle n_\chi^2(\mathbf{r})=\frac{\langle\sigma v\rangle}{2m_\chi^2}\rho_\chi^2(\mathbf{r}).\]</div>
+<p>因子 \(1/2\) 避免重复计数粒子对；若暗物质不是自共轭，前因子会不同。</p>
+<p>第三步把粒子物理和视线积分分离。单位能量、单位立体角的伽马射线通量可写为</p>
+<div class="math-display">\[\frac{d\Phi_\gamma}{dE\,d\Omega}=\frac{\langle\sigma v\rangle}{8\pi m_\chi^2}\frac{dN_\gamma}{dE}\,J(\psi),\]</div>
+<p>其中 \(\psi\) 是相对银河中心的角距离，\(dN_\gamma/dE\) 是每次湮灭的光子谱，\(J(\psi)\) 是沿该方向的密度平方积分。</p>
+<p>第四步定义感兴趣区域上的 \(J\) 因子：</p>
+<div class="math-display">\[J(\Delta\Omega)=\int_{\Delta\Omega}d\Omega\int_{\rm l.o.s.}ds\,\rho_\chi^2\!\left(r(s,\psi)\right).\]</div>
+<p>这里 \(s\) 是视线距离，\(\Delta\Omega\) 是分析区域。本文采用 Einasto 等银河晕模型时，主要差别就体现在该积分的大小和角分布上。</p>
+<p>第五步给出常用的 Einasto 密度轮廓：</p>
+<div class="math-display">\[\rho_\chi(r)=\rho_s\exp\left[-\frac{2}{\alpha_E}\left(\left(\frac{r}{r_s}\right)^{\alpha_E}-1\right)\right].\]</div>
+<p>其中 \(\rho_s\)、\(r_s\) 和 \(\alpha_E\) 分别是标度密度、标度半径和形状参数。该轮廓在银河中心较尖，通常比有核心轮廓给出更大的内区 \(J\) 因子。</p>
+<p>第六步写出谱线光子产额。对 \(\chi\chi\to\gamma\gamma\)，可近似为</p>
+<div class="math-display">\[\frac{dN_\gamma}{dE}=2\delta(E-m_\chi),\]</div>
+<p>而对 \(\chi\chi\to\gamma X\) 可写成</p>
+<div class="math-display">\[E_\gamma=m_\chi\left(1-\frac{m_X^2}{4m_\chi^2}\right),\]</div>
+<p>其中 \(X\) 可为 \(Z\) 或 \(h\)。实际观测中，\(\delta\) 函数必须与能量响应卷积。</p>
+<p>第七步连接到 H.E.S.S. 的预期计数。第 \(i\) 个空间 bin 和第 \(j\) 个重建能量 bin 的信号计数可写为</p>
+<div class="math-display">\[\mu^{\rm sig}_{ij}=T\int_{\Delta\Omega_i}d\Omega\int dE_{\rm true}\,\frac{d\Phi_\gamma}{dE_{\rm true}d\Omega}\,A_{\rm eff}(E_{\rm true},\Omega)\,R_j(E_{\rm reco}|E_{\rm true}),\]</div>
+<p>其中 \(T\) 是曝光时间，\(A_{\rm eff}\) 是有效面积，\(R_j\) 是真实能量到第 \(j\) 个重建能量 bin 的迁移概率。</p>
+<p>第八步是统计似然。若每个二维 bin 的观测计数为 \(n_{ij}\)，背景为 \(\mu^{\rm bkg}_{ij}\)，总期望为 \(\mu_{ij}=\mu^{\rm bkg}_{ij}+\mu^{\rm sig}_{ij}\)，泊松似然为</p>
+<div class="math-display">\[\mathcal{L}(\langle\sigma v\rangle,\boldsymbol{\theta})=\prod_{i,j}\frac{\mu_{ij}^{n_{ij}}e^{-\mu_{ij}}}{n_{ij}!}\,\Pi(\boldsymbol{\theta}),\]</div>
+<p>其中 \(\boldsymbol{\theta}\) 表示背景和仪器系统参数，\(\Pi(\boldsymbol{\theta})\) 是约束项或先验。</p>
+<p>第九步定义剖面似然比统计量：</p>
+<div class="math-display">\[TS=-2\ln\frac{\mathcal{L}(\langle\sigma v\rangle=0,\widehat{\widehat{\boldsymbol{\theta}}})}{\mathcal{L}(\widehat{\langle\sigma v\rangle},\widehat{\boldsymbol{\theta}})}.\]</div>
+<p>帽号表示在相应假设下最大化似然。若没有显著信号，上限可由 \(\Delta TS\) 条件给出，例如单参数近似下常用 \(\Delta TS=2.71\) 对应约 \(95\%\) 单边置信上限。</p>
+<p>第十步给出上限的尺度关系。若背景主导且其他条件相同，线截面灵敏度近似满足</p>
+<div class="math-display">\[\langle\sigma v\rangle_{\rm lim}\propto \frac{m_\chi^2}{J\,A_{\rm eff}\,T}\sqrt{B\,\Delta E\,\Delta\Omega},\]</div>
+<p>其中 \(B\) 是背景率，\(\Delta E\) 是有效线宽，\(\Delta\Omega\) 是分析区域。这个式子解释了为什么更大曝光、更好能量分辨率、更强 \(J\) 因子和更低背景都会改善谱线搜索。</p>
+<h4 id="_7">模型拟合 / 应用方法</h4>
+<p>本文的拟合对象可以理解为二维计数图：一个维度是重建能量，另一个维度是空间区域或角距离 bin。对每个暗物质质量 \(m_\chi\)，信号模板的能谱位置和宽度由线能量与仪器能量响应决定，空间模板由 \(J\) 因子角分布决定；待拟合的主要物理参数是 \(\langle\sigma v\rangle_{\rm line}\)，同时还需要处理背景归一化、背景谱形和仪器响应不确定性。</p>
+<p>似然通常是泊松计数似然，或在高计数近似下等价于带协方差的 \(\chi^2\) 型统计，但线搜索更自然使用泊松似然和剖面似然。由于信号强度物理上非负，\(\widehat{\langle\sigma v\rangle}\) 常会落在边界 \(0\) 附近；这会影响 \(TS\) 分布，特别是在计算局部显著性和上限时。扫描许多 \(m_\chi\) 还需要考虑试验因子，否则会高估某个局部涨落的意义。</p>
+<p>残差诊断应看两个方向。能谱方向上，背景-only 模型的残差不应在仪器能量分辨率尺度上出现反复的尖峰；空间方向上，候选残差应与暗物质模板相符，而不是只集中在银河面、已知源附近或相机接受度异常区域。如果一个超额只在能量上像线但空间上不像暗物质，或者空间上接近银河中心但能谱过宽，都不应被解释为稳健暗物质候选。</p>
+<p>主要退化包括 \(J\) 因子与截面归一化退化、有效面积与截面退化、能量刻度与 \(m_\chi\) 退化、背景曲率与宽线或邻近双线退化。对 Wino 或 Higgsino 这类模型，还存在理论截面计算的不确定性，例如电弱修正、Sommerfeld 增强、束缚态效应以及银河速度分布假设。论文把观测上限投影到模型参数时，读者要确认采用的是哪个暗物质轮廓和哪套理论截面。</p>
+<p>模型可能失败的场景也很明确：如果银河中心暗物质分布有大核心，Einasto 上限会过强；如果未建模的弥散伽马结构在小尺度上产生类似暗物质模板的空间分布，背景估计会偏乐观；如果能量响应尾部或刻度存在未充分建模的结构，窄线灵敏度会被系统误差而非统计误差限制。实际应用中，这类拟合框架可推广到 CTA 预测、联合多望远镜线搜索，以及对具体电弱多重态暗物质模型的全局似然分析。</p>
+<h4 id="_8">重点章节 / 结果段落怎么读</h4>
+<p>数据与样本部分应首先阅读。重点看 \(546\) 小时曝光如何组成、观测区域覆盖哪些银河经纬度、质量控制标准是什么、哪些已知源和银河面区域被掩膜。对银河中心线搜索而言，区域定义会直接改变 \(J\) 因子和背景水平，因此这部分不是技术细节，而是结果可信度的基础。</p>
+<p>信号和背景建模部分是第二个重点。读者应检查作者如何从 Einasto 轮廓生成空间模板，如何处理 \(\gamma\gamma\)、\(\gamma Z\) 或合并线贡献，如何构建重建能量响应，以及背景是否由数据驱动。特别要看背景在小能量窗口内是否被假设为平滑函数，以及这种假设是否经过控制区验证。</p>
+<p>统计方法部分决定上限如何产生。这里要重点读二维 log-likelihood ratio 的定义、binning 方式、nuisance parameters 的处理、局部和全局显著性的区分、以及 \(95\%\) 置信上限的构造。若文中给出 Asimov 数据集或期望灵敏度带，应看观测上限是否落在合理范围内。</p>
+<p>结果部分要把上限曲线和显著性曲线一起读。单独看最强上限数值容易误导；更重要的是观测曲线相对于期望曲线的整体行为，是否有异常质量点，是否在高质量端因统计量减少而变差，是否在低质量端受能阈和能量分辨率影响。</p>
+<p>讨论和模型解释部分则把观测约束转成理论约束。读者应看 Wino、Higgsino 和 Quintuplet 的理论线截面是否包括 Sommerfeld 增强，热遗迹质量点如何标注，以及不同银河暗物质轮廓下结论是否仍成立。附录或稳健性检验若给出替代轮廓、替代背景模型和能量尺度系统误差，应优先检查。</p>
+<h4 id="_9">建议重点查看的图表</h4>
+<ol>
+<li>
+<p>观测区域与掩膜图：看银河中心、银河面、已知源和控制区域如何定义；特别注意掩膜是否移除了最强弥散背景，也是否牺牲了大量 \(J\) 因子。</p>
+</li>
+<li>
+<p>暗物质 \(J\) 因子或空间模板图：看 Einasto 模板在内几度的梯度有多强，以及信号区与背景区的预期对比度；这决定二维似然相对一维能谱的增益。</p>
+</li>
+<li>
+<p>能量响应或线模板图：看不同 \(m_\chi\) 下窄线被展宽到何种程度；能量分辨率越差，线越容易与平滑背景退化。</p>
+</li>
+<li>
+<p>局部显著性随 \(m_\chi\) 的曲线：看是否有孤立峰值、峰值宽度是否符合能量分辨率、以及全局修正后是否仍有意义。</p>
+</li>
+<li>
+<p>\(\langle\sigma v\rangle_{\rm line}\) 上限曲线：看观测上限、期望上限和 \(1\sigma\) 或 \(2\sigma\) 灵敏度带的关系；异常偏强或偏弱的质量区间通常反映背景涨落或系统效应。</p>
+</li>
+<li>
+<p>与 Wino、Higgsino、Quintuplet 模型比较图：看理论曲线是否跨过观测上限，热遗迹质量点是否被触及，以及结论对暗物质轮廓假设是否敏感。</p>
+</li>
+<li>
+<p>系统误差表或稳健性检验图：看改变轮廓、能量刻度、背景模型、ROI 和掩膜后，上限变化是否小于主要结论所需的裕量。</p>
+</li>
+</ol>
+<h4 id="_10">关键图表逐图导读</h4>
+<p>图 1：通常应是 H.E.S.S. 内银河观测覆盖、曝光或 ROI 示意图。横轴和纵轴多为银河经度 \(l\) 与银河纬度 \(b\)，颜色可能表示曝光、接受度或 \(J\) 因子权重。读图时不要只看中心最亮区域，还要看哪些已知 TeV 源和银河面区域被排除，因为掩膜会同时降低背景和信号。</p>
+<p>图 2：可能展示暗物质空间模板或各分析区域的 \(J\) 因子。坐标可能是角距离 \(\psi\) 或 ROI 编号，纵轴为归一化信号期望或 \(J\) 因子。模型线若包括 Einasto、NFW 和 cored profile，应注意内区差异会非常大；这不是小修正，而是决定 \(\langle\sigma v\rangle_{\rm line}\) 上限解释的核心系统误差。</p>
+<p>图 3：线搜索的局部显著性或 best-fit 信号强度随 \(m_\chi\) 的曲线。横轴为 \(m_\chi\)，纵轴为局部 significance、\(TS\) 或 \(\widehat{\langle\sigma v\rangle}\)。读图陷阱是把局部 \(2\sigma\) 到 \(3\sigma\) 小峰当作暗物质迹象；由于扫描大量质量点，必须看全局显著性和背景-only 伪实验分布。</p>
+<p>图 4：核心上限图，横轴为 \(m_\chi\)，纵轴为 \(\langle\sigma v\rangle_{\rm line}\)。观测上限通常是一条实线，期望上限及其 \(68\%\) 和 \(95\%\) 波动带可能以绿色、黄色阴影显示。应检查 \(m_\chi=1\,\mathrm{TeV}\) 和 \(m_\chi=10\,\mathrm{TeV}\) 附近是否对应摘要中的数值，并看曲线在高质量端是否因事件统计下降而变弱。</p>
+<p>图 5：模型比较图通常把 H.E.S.S. 上限与 Wino、Higgsino、Quintuplet 的理论线截面叠加。横轴为 \(m_\chi\)，纵轴仍为 \(\langle\sigma v\rangle_{\rm line}\) 或等效线截面。读者要确认理论曲线是否包含 Sommerfeld 增强，以及热遗迹点是不是只在 Einasto 等 cuspy 轮廓下被排除；若换成 cored profile，图上的交叉关系可能改变。</p>
+<p>图 6：若有稳健性或系统误差图，重点看不同分析选择导致的上限比值。横轴可为 \(m_\chi\)，纵轴可为相对于基准上限的变化。若某些质量段对能量刻度或背景参数化高度敏感，说明这些段的结论更像仪器/背景受限，而不是纯统计受限。</p>
+</details>
+<h4 id="_11">论文原图 / 可嵌入图片</h4>
+<p><strong>Fig01</strong><br />
+<img alt="Fig01" src="../assets/figures/2026-08-10/2608.07234/Fig01.png" /><br />
+图注：{\(\it\) Left panel:} 95\% C. L. observed upper limits (solid black line) on the line cross section $\langle \sigma v \rangle_{\rm line}$ versus the DM mass $m_{\rm DM}$ assuming the baseline Einasto profile for the DM distribution. 95\% C. L. mean expected upper limits (black dashed line) together with the 1$\sigma$ (green shaded area) and 2$\sigma$ (yellow shaded area) containment bands, respectively, are also plotted. All these upper limits include systematic uncertainty. The mean expected upper limit without systematic uncertainty is drawn as the red dashed line. \(\textit{Right panel:}\) 95\% C. L. observed upper limits on the line cross section $\langle \sigma v \rangle_{\rm line}$, where $\langle\sigma v \rangle_{\rm line} = \langle\sigma v \rangle_{\gamma\gamma} + 1/2 \langle\sigma v \rangle_{\gamma Z}$, versus the DM mass compared to the theoretical line cross section computed at NLO for three canonical DM SU(2) models: the Wino (light green)~\(\cite{Baumgart:2018yed},\) the Higgsino (light blue)~\(\cite{Beneke:2022eci},\) and Quintuplet (light red)~\(\cite{Baumgart:2023pwn}.\) For each model, the mass for which the correct relic abundance~\(\cite{Planck:2018vyg}\) is obtained from a thermal cosmology is shown as the vertical band~\(\cite{Montanari:2022buj}.\) The corresponding thermal cross sections are highlighted for the Wino, Higgsino, and Quintuplet as green, blue and red dots, respectively. The observed upper limits are shown for all the Milky Way DM density models adopted in this work.<br />
+对应解读：对应“建议重点查看的图表”第5、6项，以及“关键图表逐图导读”中的图4上限曲线和图5模型比较图；也直接支撑关键结果中1 TeV、10 TeV处的线湮灭截面上限与Wino/Higgsino/Quintuplet约束。<br />
+入选理由：这是论文最核心的结果图：左 panel 同时给出观测上限、期望上限、1σ/2σ灵敏度带以及是否包含系统误差的对比，可直接检查摘要中的排除数值和背景涨落；右 panel 把上限与Wino、Higgsino、Quintuplet理论线截面及热遗迹质量区间叠加，正好对应日报强调的模型解释和热Higgsino是否被触及的问题，科学价值最高。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / main.tex:figure[1]</p>
+<p><strong>Fig03</strong><br />
+<img alt="Fig03" src="../assets/figures/2026-08-10/2608.07234/Fig03.png" /><br />
+图注：\(\textit{Left panel:}\) DM mass density profile $\rho$ (GeVcm$^{-3}$) as a function of the distance $r$ (kpc) from the Galactic Centre distance for the DM halo models of the Milk Way discussed here. The Einasto profile is plotted assuming $r_\odot$ = 8.5 kpc (orange dashed line) as in Refs.~\(\cite{HESS:2022ygk,MAGIC:2022acl,Ghez:2008ms}\) and $r_\odot$ = 8.178 kpc (red solid line) following Ref.~\(\cite{GRAVITY:2018ofz}.\) The NFW and cNFW profiles (purple densely dotted and blue dash-dotted lines) are extracted from Refs.~\(\cite{Cautun:2019eaf,PhysRevD.108.083027}.\) The non-parametric geometric mean profiles extracted from the hydrodynamical simulations FIRE-2~\(\cite{McKeown:2021sob}\) and Auriga~\(\cite{Hussein:2025xwm}\) (green long-dash-dotted and black dotted lines), respectively, are also displayed. The profiles are normalized according to $\rho(r_\odot)$ displayed in Tab.~\(\ref{tab:profiles}.\) The vertical grey band encompasses the values used for the solar distance $r_{\odot}$ adopted for the computation of the different J-factor profiles used in this work. \(\textit{Right panel:}\) Integrated J-factors (GeV$^2$cm$^{-5}$) as a function of the angular distance (deg.) from the Galactic Centre for the DM mass density profiles on the left panel. Since exclusion regions mask a part of the solid angle in our analysis, the effective J-factors are reduced compared to the ones displayed here.<br />
+对应解读：对应“建议重点查看的图表”第2项暗物质J因子或空间模板图，以及“关键图表逐图导读”中的图2；也支撑模型拟合段落中关于Einasto、NFW、cored profile和J因子系统误差的讨论。<br />
+入选理由：该图展示不同银河系暗物质密度轮廓及其积分J因子随角距离的变化，是理解Einasto基准上限为何强、换用cored或模拟轮廓后约束为何会变弱的关键。它直接关联二维似然中的空间模板、信号区与背景区对比度，以及日报多次强调的暗物质轮廓系统误差。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / main.tex:figure[3]</p>
+<p><strong>Fig02</strong><br />
+<img alt="Fig02" src="../assets/figures/2026-08-10/2608.07234/Fig02.png" /><br />
+图注：Current constraints on the line cross section $\langle \sigma v \rangle_{\rm line}$ versus the DM mass $m_{\rm DM}$ including previous H.E.S.S. limits from 254 h of observations of the GC~\(\cite{Abdallah:2018qtu}\) (red line), the limits from 223 h of GC observations with MAGIC~\(\cite{MAGIC:2022acl}\) (blue line), and the limits from 5.8 y of observations of the GC with the Fermi satellite~\(\cite{Fermi-LAT:2015kyq}\) (purple line). The limits from dwarf spheroidal galaxy observations with HAWC~\(\cite{HAWC:2019jvm}\) (grey line), H.E.S.S.~\(\cite{HESS:2020zwn}\) (green line), MAGIC~\(\cite{MAGIC:2021mog}\) (yellow line) and VERITAS~\(\cite{VERITAS:2017tif}\) (pink line) are also plotted.<br />
+对应解读：对应详细解读中关于H.E.S.S.结果相对Fermi-LAT、MAGIC、HAWC、VERITAS和既有H.E.S.S.限制的比较，以及关键结果中“most constraining limits so far”的背景说明。<br />
+入选理由：虽然日报的重点图表列表没有单独要求多实验历史约束图，但该图能把本文新上限放入现有TeV线搜索版图中，显示其相对上一代H.E.S.S.银河中心观测、MAGIC、Fermi-LAT和矮星系搜索的改进幅度。其科学价值低于核心上限/模型图和J因子图，但适合作为结果外部对照。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / main.tex:figure[2]</p>
+<h4 id="_12">强相关工作</h4>
+<p>同类工作包括 H.E.S.S. 早期银河中心暗物质谱线搜索、Fermi-LAT 在 GeV 能段的线搜索、MAGIC/VERITAS 对银河中心或矮星系的间接探测，以及 CTA 对未来线搜索灵敏度的预测。这篇论文与早期 H.E.S.S. 结果的关系是同类源、同类仪器、更多曝光和更成熟二维似然方法的升级；与 Fermi-LAT 的关系是能段互补，Fermi-LAT 覆盖较低质量，H.E.S.S. 对 TeV 质量更强。建议检索关键词："H.E.S.S. gamma-ray line dark matter Galactic Centre"、"Fermi LAT gamma-ray line search dark matter"、"CTA dark matter line sensitivity"。</p>
+<p>理论相关工作主要围绕电弱多重态暗物质、热 Wino、热 Higgsino、Sommerfeld enhancement 和 \(SU(2)_L\) Quintuplet minimal dark matter。这里的张力不一定是观测之间的矛盾，而是“自然热遗迹模型预言的线截面”与“银河中心无信号上限”之间的参数空间压缩。另一个重要争议是银河中心暗物质分布：若采用 Einasto 或 NFW，约束很强；若采用 baryonic feedback 造成的 cored profile，约束会显著放松。建议检索关键词："thermal Wino indirect detection HESS"、"Higgsino gamma-ray line Sommerfeld"、"Einasto profile Galactic Centre J factor uncertainty"。</p>
+<p><strong>同一事件 / 同类源线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2608.07234">https://arxiv.org/abs/2608.07234</a></li>
+<li><a href="https://arxiv.org/pdf/2608.07234">https://arxiv.org/pdf/2608.07234</a></li>
+</ul>
+<p><strong>相似工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1805.05741">https://arxiv.org/abs/1805.05741</a></li>
+<li><a href="https://arxiv.org/abs/1506.00013">https://arxiv.org/abs/1506.00013</a></li>
+<li><a href="https://arxiv.org/abs/1305.5597">https://arxiv.org/abs/1305.5597</a></li>
+</ul>
+<p><strong>基础理论 / 方法工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1012.4515">https://arxiv.org/abs/1012.4515</a></li>
+<li><a href="https://arxiv.org/abs/0810.5344">https://arxiv.org/abs/0810.5344</a></li>
+<li><a href="https://arxiv.org/abs/0902.0009">https://arxiv.org/abs/0902.0009</a></li>
+</ul>
+<p><strong>相反观点 / 张力线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1208.5483">https://arxiv.org/abs/1208.5483</a></li>
+<li><a href="https://arxiv.org/abs/1305.5597">https://arxiv.org/abs/1305.5597</a></li>
+</ul>
+</details>
+<h3 id="2-a-search-for-gev-emission-from-magnetar-giant-flare-candidates-with-fermi-lat">2. A Search for GeV Emission from Magnetar Giant Flare Candidates with Fermi-LAT</h3>
+<ul>
+<li>来源：arXiv / astro-ph.HE</li>
+<li>链接：https://arxiv.org/abs/2608.06527v1</li>
+<li>作者：Vikas Chand, Michela Negro, Nicola Omodei, Niccol`o Di Lalla, Eric Burns, Soebur Razzaque, Aaron C. Trigg, Giacomo Principe</li>
+<li>评分：novelty 7/10，importance 8/10，relevance 10/10，final 9.40/10</li>
+<li>推荐理由：Fermi-LAT搜索磁星巨耀发候选的GeV对应体，恢复GRB 200415A并给出候选样本上限和火球模型约束；直接属于GeV伽马射线瞬变/GRB-磁星方向，值得保留。</li>
+</ul>
+<p><strong>中文题目</strong>：用费米 LAT 搜索磁星巨耀发候选体的 GeV 辐射</p>
+<p><strong>做了什么</strong>：这篇文章针对费米 GBM 档案中若干近邻磁星巨耀发候选事件，系统搜索其触发后 \(10^{2}\) 到 \(10^{4}\,\mathrm{s}\) 的费米 LAT GeV 对应体。作者用标准最大似然分析、候选体叠加分析和短时间光子三联事件的等待时间检验，成功恢复了已知的 GRB 200415A 延迟 GeV 信号，但其余六个候选体均未探测到显著辐射。对有 LAT 覆盖的事件，单源 \(95\%\) 置信上限约为 \(F_E\sim10^{-9}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\)，叠加后的群体平均上限约为 \(2\times10^{-10}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\)。文章进一步把这些上限放入相对论火球模型解释：硬的瞬时谱峰倾向于低重子污染外流，早期有 LAT 覆盖的硬谱候选体给出相对论抛射物重子质量 \(M_b\lesssim1\text{--}4\times10^{22}\,\mathrm{g}\) 的约束，而预期 GeV 余辉低于当前 LAT 灵敏度。</p>
+<p><strong>为什么重要</strong>：GRB 200415A 显示磁星巨耀发不一定只是软伽马射线的短闪光，也可能发射相对论外流并产生延迟 GeV 余辉。若这种现象普遍存在，它会改变我们对磁星爆发能量释放、外流成分、短伽马暴污染样本以及近邻星系瞬变源的理解。本文的重要性在于：它不是只讨论一个成功探测，而是把同类候选事件放在统一 LAT 分析框架下，检验 GRB 200415A 是常见现象还是亮端个例。</p>
+<p><strong>理论 / 观测 / 仪器方法价值</strong>：对观测而言，本文给出了磁星巨耀发候选体在 GeV 波段的实用上限、LAT 覆盖空窗的影响和叠加分析能达到的群体约束。对理论而言，文章把非探测转化为相对论火球模型中的重子载荷约束，说明低重子污染条件下的 GeV 余辉本来就可能低于 LAT 阈值。对方法而言，它展示了如何把最大似然、叠加和光子等待时间分析组合起来处理低计数瞬变源。</p>
+<p><strong>为什么应该关注</strong>：如果你关心短伽马暴分类、磁星爆发、相对论外流或高能瞬变源巡天，这篇文章值得看，因为它直接回答了一个关键问题：GRB 200415A 的 GeV 辐射是否暗示所有近邻磁星巨耀发都有可探测高能余辉？答案目前是否定的，但这种否定不是无信息的；它给出了 LAT 灵敏度、早期覆盖和外流重子污染共同限制下的物理边界。</p>
+<details class="paper-detail">
+<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>
+<h4 id="_13">文章详细讲解</h4>
+<p>科学问题：磁星巨耀发候选体是否普遍伴随延迟 GeV 辐射？GRB 200415A 被认为位于近邻 Sculptor 星系，并在 prompt 之后显示 LAT 能区的延迟信号，这提示磁星巨耀发可以发射相对论外流并产生类似短伽马暴余辉的高能辐射。但单个事件无法判断这是常见机制、特殊视角，还是亮端偶然个例。本文要解决的核心问题是：在 GBM 近年识别出的其他近邻磁星巨耀发候选体中，LAT 是否也能看到类似信号；若看不到，这对外流能量、Lorentz 因子和重子载荷意味着什么。</p>
+<p>作者怎么做：文章选取 GBM 档案中已被归类为近邻磁星巨耀发候选体的一组事件，包括已知的 GRB 200415A 和另外六个候选体。对每个事件，作者在触发后 \(10^{2}\) 到 \(10^{4}\,\mathrm{s}\) 的多个时间窗内分析 LAT 数据，采用标准源模型、仪器响应和最大似然方法，寻找候选方向上的 GeV 点源信号。由于 LAT 是扫描仪器，早期时间窗是否有曝光非常关键；文中特别指出有三个事件在 \(10^{2}\,\mathrm{s}\) 时间段经过标准筛选后曝光为零，因此最早期 GeV 发射无法被约束。除单源搜索外，作者还进行了候选体叠加分析，以提高对群体平均弱信号的灵敏度，并使用光子三联的等待时间分析寻找可能被常规似然检验稀释的短时成团光子。</p>
+<p>关键结果：分析恢复了 GRB 200415A 的已知延迟 GeV 信号，这相当于对数据处理链的实证校准；但其余六个候选体没有显著 LAT 对应体。对有足够 LAT 覆盖的单个事件，\(95\%\) 置信能流量上限典型为 \(F_E\sim10^{-9}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\)。叠加分析未显示群体信号，给出约 \(2\times10^{-10}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\) 的群体平均上限。光子三联等待时间检验也没有发现除 GRB 200415A 外稳健的候选成团事件。这些非探测说明，在当前 LAT 灵敏度和覆盖条件下，GRB 200415A 级别的 GeV 发射并不是这些候选体中的普遍可探测现象。</p>
+<p>局限和下一步：最大的观测局限不是单纯的统计噪声，而是 LAT 扫描造成的早期曝光缺失、低计数 regime 下背景建模的离散性、候选体距离和宿主关联的不确定性，以及 prompt 分类本身可能混入短伽马暴或其他硬瞬变源。理论解释也依赖相对论火球模型和 prompt 谱峰对低重子污染条件的映射；如果外流角结构、外部介质密度或辐射效率与假设不同，GeV 余辉预期会显著变化。下一步需要更多近邻候选体、更快的 LAT 或下一代 MeV-GeV 仪器覆盖、与 GBM/Swift/Konus 等 prompt 数据的联合重分析，以及把非探测纳入层级贝叶斯模型来约束磁星巨耀发的群体外流分布。</p>
+<h4 id="_14">关键结果是怎么做出来的</h4>
+<p>本文的证据链从样本选择开始：作者不是盲搜所有短 GRB，而是针对已由 Fermi-GBM 档案研究提出的近邻磁星巨耀发候选体进行 LAT 后随搜索。样本中包含 GRB 200415A 这个正例，以及六个额外候选体。这样的设计有两个优点：一是可用 GRB 200415A 检验 LAT 分析流程能否恢复已知信号；二是可把其他事件的非探测放在同一选择函数下解释，而不是把不同文献的上限机械比较。</p>
+<p>数据分析的关键时间范围是触发后 \(10^{2}\) 到 \(10^{4}\,\mathrm{s}\)。这个选择避开极短 prompt 阶段的复杂死时间和定位问题，聚焦于类似外激波余辉的延迟 GeV 辐射。但 LAT 的全天天区扫描导致曝光强烈依赖事件发生时的视场位置、地球边缘切除和标准质量筛选。文中明确指出三个事件在最早 \(10^{2}\,\mathrm{s}\) 时间窗没有有效曝光，因此对最早期衰减很快的 GeV 分量不能给出实质约束。这一点对读者很重要：非探测并不等价于同等深度地排除了所有时间段的发射。</p>
+<p>统计上，单源搜索使用 LAT 常规非齐次泊松最大似然。候选方向加入一个测试点源，背景包括银河弥散、各向同性背景和邻近目录源；比较有源模型和无源模型的对数似然差，得到测试统计量 \(\mathrm{TS}\)。GRB 200415A 的延迟信号被恢复，说明分析链没有把已知信号洗掉。其余候选体的 \(\mathrm{TS}\) 不显著，因此转而给出 \(95\%\) 置信上限。单源上限约为 \(10^{-9}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\)，但不同事件的上限会随曝光、背景、入射角和时间窗变化。</p>
+<p>叠加分析是本文最有用的非探测结果之一。若每个候选体都有类似但略低于单源阈值的 GeV 余辉，联合似然或等效叠加应提高灵敏度。作者把所有有 LAT 覆盖的候选体合并检验，得到群体平均能流量上限约 \(2\times10^{-10}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\)，仍未发现显著信号。这说明“每个候选体都有接近 GRB 200415A 但略暗的 GeV 发射”的简单图像受到限制，除非距离、外部介质、喷流角度或能量分布有很大离散。</p>
+<p>另一个稳健性检验是光子三联等待时间分析。低计数瞬变源可能只表现为短时间内几个高能光子成团，而时间积分似然会被长时间背景稀释。等待时间方法寻找短间隔三光子事件，并评估其相对于随机背景的罕见程度。除已知正例外未得到可靠关联，增强了非探测结论。系统误差方面，最关键的是 LAT 有效面积、弥散背景模型、候选体定位误差、时间窗选择和零曝光空窗；本文的结论应理解为在这些选择函数下的 GeV 上限，而不是对所有可能高能辐射机制的绝对排除。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_15">背景知识</h4>
+<p>磁星巨耀发是磁星释放磁能的极端爆发，典型表现为亚秒级极亮硬尖峰加较软的调制尾迹。银河系和近邻星系历史上只有少数可靠事件，例如 SGR 0526\(-\)66、SGR 1900\(+\)14 和 SGR 1806\(-\)20 的巨耀发。由于巨耀发 prompt 峰值极亮，若发生在几 Mpc 到十几 Mpc 内，可能在伽马暴探测器中伪装成短 GRB。如何区分近邻磁星巨耀发和宇宙学短 GRB，是高能瞬变分类中的长期问题。</p>
+<p>GRB 200415A 是这个问题的转折点之一。它的持续时间、光谱硬度、定位与 Sculptor 星系方向的关联，以及能量尺度都支持近邻磁星巨耀发解释。更重要的是，LAT 后续探测到延迟 GeV 发射，使人们意识到磁星巨耀发可能不仅是磁层辐射事件，还可能发射相对论物质流，与周围介质相互作用产生高能余辉。这把磁星巨耀发和短 GRB 外流物理之间的界限变得更模糊。</p>
+<p>为什么现在值得重新看？一方面，Fermi-GBM 长时间运行积累了足够多的短硬瞬变，可以从档案中筛选近邻巨耀发候选体。另一方面，LAT 数据同样覆盖多年，使得对这些候选体进行一致的 GeV 后随搜索成为可能。单个事件的漂亮探测容易诱导过度解释；而系统搜索可以回答更统计化的问题：GRB 200415A 是磁星巨耀发的典型高能表现，还是少见的亮例？</p>
+<p>该领域一个常见误区是把“没有 LAT 探测”直接理解为“没有相对论外流”。实际上，LAT 探测率受曝光、距离、外部介质密度、外流 Lorentz 因子、喷流准直、辐射效率和时间窗选择共同控制。另一个误区是把所有短硬 GBM 事件都等同于磁星巨耀发候选体；真实样本可能受到定位不确定、宿主星系偶合概率和 prompt 光谱选择的影响。本文的价值就在于尽量在统一分析框架下把这些选择效应显式化。</p>
+<h4 id="_16">基础理论 / 方法脉络</h4>
+<p>从物理图像看，磁星巨耀发首先释放磁层或近星表区域的巨大磁能，产生短而硬的 prompt 伽马射线尖峰。若部分能量进入相对论外流，外流会在透明化后产生 prompt 辐射，随后与外部介质相互作用形成外激波。激波中加速的电子在磁场中同步辐射，可延伸到 MeV-GeV 能段；这正是 LAT 搜索延迟高能光子的基本动机。</p>
+<p>本文使用的理论解释接近相对论火球框架。一个核心量是维度熵或最大可达 Lorentz 因子 \(\eta\)，它大致等于总能量与重子静质量能的比值。若重子载荷很低，\(\eta\) 很大，火球可在加速阶段或饱和后变得透明，观测到的谱峰与初始温度、透明半径和 Lorentz 因子有关。文中提到 prompt 谱峰偏硬，倾向于 \(\eta>\eta_*\) 的低重子污染 regime；在这种情况下，允许的相对论重子质量 \(M_b\) 会被限制在较小范围。</p>
+<p>观测方法上，LAT 对候选方向的信号不是简单数光子，而是在能量、方向和时间上做泊松似然。每个观测光子的贡献由点源模型、弥散背景、邻近源、仪器有效面积、点扩散函数和能量响应共同决定。低计数情况下，一个高能光子是否重要，取决于它离源位置多近、能量多高、发生在背景多低的时间和方向上，而不是只取决于总光子数。</p>
+<p>主要退化包括：外流能量与外部介质密度的退化、Lorentz 因子与早期峰值时间的退化、距离与各向同性能量的退化，以及时间窗与衰减指数的退化。若真实 GeV 发射在 \(10^{2}\,\mathrm{s}\) 之前快速衰减，而 LAT 早期无曝光，则非探测约束会大幅减弱。若发射强烈准直且视线偏离喷流轴，也可能有相对论外流但没有可见 GeV 余辉。</p>
+<h4 id="_17">公式与推导</h4>
+<p>第一步，把磁星巨耀发释放到外流中的能量写成火球总能量 \(E_0\)，重子载荷为 \(M_b\)。维度熵或最大 Lorentz 因子定义为</p>
+<div class="math-display">\[\eta \equiv \frac{E_0}{M_b c^2} .\]</div>
+<p>这里 \(c\) 是光速。这个式子说明，在固定能量下，重子质量越小，外流越“干净”，可达到的 Lorentz 因子越高；本文给出的 \(M_b\) 上限本质上就是对 \(\eta\) 下限的重写。</p>
+<p>第二步，火球在辐射压驱动下加速，直到饱和半径</p>
+<div class="math-display">\[r_s \simeq r_0 \eta ,\]</div>
+<p>其中 \(r_0\) 是初始能量释放尺度。若光球半径 \(r_{\rm ph}\) 小于或大于 \(r_s\)，观测谱峰的标度不同。本文所说的低重子污染条件 \(\eta>\eta_*\) 对应透明化较早或接近加速阶段透明的情形。</p>
+<p>第三步，对含重子火球，光球半径可用 Thomson 光深 \(\tau_T\sim1\) 估计。在饱和后近似下有</p>
+<div class="math-display">\[r_{\rm ph} \simeq \frac{L\sigma_T}{8\pi m_p c^3 \eta^3} ,\]</div>
+<p>其中 \(L\) 是各向同性等效光度，\(\sigma_T\) 是 Thomson 截面，\(m_p\) 是质子质量。这个关系显示 \(r_{\rm ph}\) 对 \(\eta\) 极敏感，因此 prompt 谱峰可以间接约束重子污染。</p>
+<p>第四步，临界值 \(\eta_*\) 可由 \(r_{\rm ph}=r_s\) 得到数量级标度</p>
+<div class="math-display">\[\eta_* \simeq \left(\frac{L\sigma_T}{8\pi m_p c^3 r_0}\right)^{1/4} .\]</div>
+<p>若 \(\eta>\eta_*\)，火球属于低重子污染 regime；若 \(\eta<\eta_*\)，透明化发生在饱和后。本文用 prompt 硬谱峰支持前一种情形，并进一步把它转化为 \(M_b\) 的限制。</p>
+<p>第五步，重子质量上限直接来自 \(\eta\) 条件：</p>
+<div class="math-display">\[M_b < \frac{E_0}{\eta_* c^2} .\]</div>
+<p>当代入候选事件的 prompt 能量和谱峰约束后，早期有 LAT 覆盖且 prompt 较硬的事件给出 \(M_b\lesssim1\text{--}4\times10^{22}\,\mathrm{g}\) 的量级限制。这个数值不是 LAT 光子直接称出来的质量，而是 prompt 火球条件与 GeV 上限共同支持的物理解释。</p>
+<p>第六步，LAT 的可观测量是能流量。若源光子谱写为幂律</p>
+<div class="math-display">\[\frac{dN}{dE}=K\left(\frac{E}{E_0'}\right)^{-\Gamma},\]</div>
+<p>其中 \(K\) 是归一化，\(E_0'\) 是枢轴能量，\(\Gamma\) 是光子指数，则能流量为</p>
+<div class="math-display">\[F_E = \int_{E_{\min}}^{E_{\max}} E\frac{dN}{dE}\,dE .\]</div>
+<p>本文的上限 \(F_E\sim10^{-9}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\) 就是对这个积分量的限制，依赖假设的谱形和能段。</p>
+<p>第七步，LAT 计数预测要折叠仪器响应：</p>
+<div class="math-display">\[\mu_i(\boldsymbol{\theta})=\int_{\Delta t}\int A_{\rm eff}(E,\Omega,t)\,S(E,\Omega\mid\boldsymbol{\theta})\,dE\,d\Omega\,dt+B_i .\]</div>
+<p>这里 \(\mu_i\) 是第 \(i\) 个分析 bin 的预期计数，\(A_{\rm eff}\) 是有效面积，\(S\) 是源模型，\(B_i\) 是背景预期，\(\boldsymbol{\theta}\) 是源参数。早期零曝光意味着相应时间积分中的 \(A_{\rm eff}\) 近似为零，因此即使源很亮也不能被该窗口约束。</p>
+<p>第八步，最大似然采用泊松形式</p>
+<div class="math-display">\[\ln\mathcal{L}(\boldsymbol{\theta})=\sum_i \left[n_i\ln\mu_i(\boldsymbol{\theta})-\mu_i(\boldsymbol{\theta})-\ln(n_i!)\right] .\]</div>
+<p>其中 \(n_i\) 是观测计数。源显著性常用测试统计量</p>
+<div class="math-display">\[\mathrm{TS}=2\left[\ln\mathcal{L}(\hat{\boldsymbol{\theta}}_{\rm src})-\ln\mathcal{L}(\boldsymbol{\theta}_{\rm null})\right] .\]</div>
+<p>若 \(\mathrm{TS}\) 不显著，则通过增加源归一化直到 \(\Delta\ln\mathcal{L}\) 达到单边 \(95\%\) 置信条件来给出流量上限。叠加分析相当于把多个事件的对数似然相加：</p>
+<div class="math-display">\[\ln\mathcal{L}_{\rm stack}=\sum_j \ln\mathcal{L}_j(F_{E,j}) .\]</div>
+<p>在假设共同平均流量或共同缩放关系时，这个式子给出比单源更深的群体约束。</p>
+<h4 id="_18">模型拟合 / 应用方法</h4>
+<p>本文的拟合首先是 LAT 点源似然拟合。待估参数通常包括候选方向测试源的谱归一化，有时还包括谱指数或固定谱指数下的通量；背景部分包括银河弥散模板、各向同性模板以及区域内目录源的归一化。由于磁星巨耀发候选体是短暂源，空间位置通常由 GBM 或星系关联给出，LAT 分析重点不是重新定位，而是在给定方向和时间窗内估计是否存在额外源项。</p>
+<p>统计量是泊松似然，而不是高斯 \(\chi^2\)。这点在低计数 GeV 瞬变中非常重要：许多时间窗内候选方向附近可能只有零个或几个光子，残差图和 \(\mathrm{TS}\) 图需要结合曝光图一起看。一个事件的 \(\mathrm{TS}\) 低，可能是因为没有光子，也可能是因为有光子但空间或能量权重不支持源关联，还可能是曝光太差导致约束弱。论文把早期零曝光事件单独指出，是正确解读上限的关键。</p>
+<p>上限估计依赖若干模型选择。固定谱指数会影响能流量上限，尤其在 LAT 低能端点扩散函数较宽、背景较高时更明显。时间窗选择也会影响结论：若真实光变为 \(F(t)\propto t^{-\alpha}\)，则较长积分窗口在增加曝光的同时也会加入更多背景和晚期低通量时间。叠加分析还隐含了候选体可比性假设；如果距离差异、能量差异和外部介质密度差异很大，简单平均上限的物理解释需要谨慎。</p>
+<p>理论拟合方面，文章没有声称从 GeV 数据精确测量火球参数，而是把 prompt 谱峰和 LAT 上限投影到相对论火球参数空间。关键退化是 \(E_0\)、\(M_b\)、\(r_0\)、外部介质密度和辐射效率之间的退化。低重子污染可以给出高 \(\eta\)，但高 \(\eta\) 并不保证 LAT 明亮；若外部介质稀薄或微物理参数导致 GeV 同步辐射效率低，余辉仍会低于阈值。因此本文的物理结论应读作“当前上限与低重子污染火球的暗 GeV 余辉预期相容”，而不是“非探测唯一证明低重子污染”。</p>
+<p>实际应用上，这套拟合流程可直接用于未来 GBM 或其他伽马暴监测器触发的磁星巨耀发候选体。理想策略是：触发后尽快检查 LAT 曝光，针对多个时间窗跑似然，给出曝光加权的流量上限，并与 prompt 能量和谱峰联合解释。对于下一代 MeV-GeV 仪器，本文的叠加上限可作为灵敏度目标：若要普遍探测 GRB 200415A 类巨耀发的较暗高能余辉，需要显著改善早期覆盖和低背景有效面积。</p>
+<h4 id="_19">重点章节 / 结果段落怎么读</h4>
+<p>一、样本和动机部分应先看。这里会说明为什么 GRB 200415A 是正例、其余候选体来自哪些 GBM 档案选择，以及这些候选体为什么被认为可能是近邻磁星巨耀发而非普通短 GRB。读者应特别关注候选体的距离或宿主关联假设，因为后续能量和重子质量解释都依赖它们。</p>
+<p>二、LAT 数据选择和时间窗部分是方法核心。重点看能区、ROI、zenith angle cut、good-time interval、仪器响应版本、背景模板和 \(10^{2}\) 到 \(10^{4}\,\mathrm{s}\) 时间窗的定义。尤其要看每个事件的曝光情况；三个事件早期零曝光意味着这些事件不能用于排除快速早期 GeV 闪光。</p>
+<p>三、单源最大似然结果部分给出每个候选体的 \(\mathrm{TS}\)、最佳拟合通量或上限。读者应把 GRB 200415A 当作流程验证，再比较其他候选体的 \(\mathrm{TS}\) 是否接近阈值、是否有个别高能光子驱动、以及上限是否主要由曝光决定。</p>
+<p>四、叠加分析和等待时间分析部分决定了非探测是否具有群体意义。叠加结果回答“是否每个候选体都有弱的共同 GeV 分量”，等待时间分析回答“是否有短时光子成团被长窗口似然漏掉”。这两部分比单个上限更能约束普遍性。</p>
+<p>五、理论解释部分把上限放进相对论火球模型。读者应检查作者如何从 prompt 谱峰判断 \(\eta>\eta_*\)，如何估计 \(M_b\)，以及 LAT 上限在预测余辉曲线中的位置。不要只看最后的 \(M_b\) 数字，还要看它对距离、能量、初始半径和谱假设的依赖。</p>
+<p>六、讨论和局限部分应重点读关于 LAT 覆盖、候选体分类不确定性和未来仪器需求的段落。本文最稳健的结论是当前 LAT 未发现除 GRB 200415A 外的 GeV 对应体；更强的群体物理结论需要更多事件和更均匀的早期覆盖。</p>
+<h4 id="_20">建议重点查看的图表</h4>
+<ol>
+<li>
+<p>样本表或候选体列表：检查每个事件的触发时间、定位、候选宿主或距离、prompt 谱峰和是否有 LAT 覆盖。特别关注哪些事件可真正约束 \(10^{2}\,\mathrm{s}\) 早期发射。</p>
+</li>
+<li>
+<p>LAT 曝光随时间或观测几何图：看触发后 \(10^{2}\) 到 \(10^{4}\,\mathrm{s}\) 内各事件曝光是否连续，是否被地球边缘、SAA 或视场外位置切断。零曝光窗口是解释非探测的关键。</p>
+</li>
+<li>
+<p>单事件 \(\mathrm{TS}\) 或似然结果表：检查 GRB 200415A 的 \(\mathrm{TS}\) 是否被恢复，其余事件的 \(\mathrm{TS}\) 分布是否只是背景涨落。看上限是否随曝光和背景水平变化。</p>
+</li>
+<li>
+<p>能流量上限图：看 \(95\%\) 上限在不同时间窗中的变化。若较早窗口上限反而差，通常是曝光不足；若较晚窗口上限较深，则说明主要约束来自 LAT 扫描重新覆盖后的积分。</p>
+</li>
+<li>
+<p>叠加分析图或联合似然曲线：检查联合似然最小点是否接近零通量，\(95\%\) 上限如何定义，是否有单个事件主导叠加结果。</p>
+</li>
+<li>
+<p>光子三联等待时间诊断：看候选三联的时间间隔、角距离、能量和背景期望。读图陷阱是把任意三个光子成团当作源信号，而不考虑全试验因子。</p>
+</li>
+<li>
+<p>火球模型约束图：检查 \(\eta\)、\(M_b\)、prompt 谱峰和 LAT 上限之间的关系。重点看哪些候选体真正进入 \(\eta>\eta_*\) 区域，以及 GeV 预测曲线是否低于 LAT 灵敏度。</p>
+</li>
+<li>
+<p>残差或源图：若论文给出 counts map、model map 或 residual map，应看候选方向附近是否存在未建模背景结构或邻近目录源污染。</p>
+</li>
+</ol>
+<h4 id="_21">关键图表逐图导读</h4>
+<p>图 1：若为样本天空位置或定位图，横纵轴通常是赤经和赤纬，或银河坐标 \((l,b)\)。数据点表示各磁星巨耀发候选体，误差区域来自 GBM 或其他定位，可能叠加候选宿主星系方向。读这类图时应看候选方向是否靠近银河面，因为银河弥散背景会影响 LAT 灵敏度；也要看定位区域与星系的重合是否足够有说服力。陷阱是把二维投影重合直接当作物理关联，忽略偶合概率。</p>
+<p>图 2：若为 LAT 曝光或时间覆盖图，横轴应是触发后时间，纵轴是曝光、有效面积积分或可见性。不同颜色代表不同候选体或不同时间窗。关键结论是部分事件在 \(10^{2}\,\mathrm{s}\) 早期窗口没有有效曝光，因此早期非探测不能转化为强物理上限。读图时不要只看总积分时间，要看曝光是否覆盖理论预期最亮的早期阶段。</p>
+<p>图 3：若为单事件 \(\mathrm{TS}\) 或能流量上限图，横轴可能是事件编号或时间窗，纵轴是 \(\mathrm{TS}\) 或 \(F_E\) 上限。GRB 200415A 应作为明显正例或被单独标出，其余候选体应落在非显著区域。读者应检查上限的误差或置信定义是否统一，尤其要分辨能流量上限和光子流量上限。</p>
+<p>图 4：若为叠加似然曲线，横轴通常是共同能流量或归一化参数，纵轴是 \(-2\Delta\ln\mathcal{L}\) 或类似统计量。曲线最低点若在零附近，说明没有群体信号；与 \(95\%\) 阈值交点给出约 \(2\times10^{-10}\,\mathrm{erg\,cm^{-2}\,s^{-1}}\) 的上限。读图陷阱是忽略单个高曝光事件可能主导联合约束，因此最好同时看逐事件贡献。</p>
+<p>图 5：若为等待时间或光子三联诊断，横轴可能是触发后时间或三联等待时间，纵轴是 chance probability、局部显著性或光子能量。真正有意义的三联应同时满足短等待时间、小角距离和较低背景概率。只看时间接近触发而不看空间和能量权重，会高估关联可信度。</p>
+<p>图 6：若为火球模型解释图，横轴可能是 \(η\)、\(M_b\) 或时间，纵轴可能是谱峰、预测 GeV 通量或 LAT 上限。模型线表示不同重子载荷、外部密度或能量假设；观测上限以箭头或水平线表示。关键读法是看 LAT 上限是否切入模型预测区域。本文结论倾向于：在 prompt 硬谱支持的低重子污染 regime 下，预测 GeV 余辉低于当前 LAT 灵敏度，因此非探测与模型相容。</p>
+</details>
+<h4 id="_22">论文原图 / 可嵌入图片</h4>
+<p><strong>Fig01</strong><br />
+<img alt="Fig01" src="../assets/figures/2026-08-10/2608.06527/Fig01.png" /><br />
+图注：Photon fluxes (0.1--10\,GeV) from unbinned likelihood fits in post-trigger windows $\Delta T=10^{2},10^{3},10^{4}$~s. Filled circles show the GRB~200415A detections (1$\sigma$ statistical uncertainties). Colored inverted triangles show 95\% confidence ULs for the individual non-detected candidates (photon index fixed to $\Gamma=-2$); symbols with black outlines could be included in the stacked-likelihood analysis for the corresponding time window. Black inverted triangles show the 95\% confidence ULs from the stacked analysis. Note that at $\Delta T = 10^{2}\,$s only two events (GRBs\,081213A and 231115A) effectively contribute to the stacking likelihood; the remaining candidate (GRB\,231024A) has zero detected counts and non-zero exposure, so its individual UL -- derived from Poisson statistics on the exposure alone -- is inherently loose and does not meaningfully tighten the stacked constraint.<br />
+对应解读：对应“建议重点查看的图表”中的单事件能流量/光子流量上限、叠加分析结果，以及“关键图表逐图导读”中图3和图4关于不同时间窗上限与 stacked 95% UL 的解读。<br />
+入选理由：这是最核心的结果图：同时展示 GRB 200415A 的 LAT 检出、其余候选体在 10^2、10^3、10^4 s 时间窗内的 95% 上限，以及黑色三角标出的叠加分析上限。它直接支撑日报中“恢复已知信号、其余六个候选体非探测、单事件上限约 10^-9、叠加上限更深”的主要结论，并且 caption 明确说明 10^2 s 叠加只有少数事件真正贡献，有助于解释早期覆盖不足对物理约束的影响。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / \(MGF_ms_arxiv.tex\):figure[1]</p>
+<p><strong>Fig04</strong><br />
+<img alt="Fig04" src="../assets/figures/2026-08-10/2608.06527/Fig04.png" /><br />
+图注：\chng{LAT TS maps in the post-trigger window for each MGF candidate. \textit{Top:} the single detection, GRB\,200415A, shown both without (left) and with (right) a transient point source at the host position; the with-source map illustrates that the fitted source accounts for the excess. \(\textit{Middle and bottom:}\) the five non-detections (GRB\,081213A, GRB\,180128A, GRB\,231024A; GRB\,231115A, GRB\,200423A), for which only the without-source map is shown, indicating the significance any excess would have to reach. Contours indicate TS levels of 4, 9, 16, and 25; the $3^\circ$-radius circle is centered on the host coordinates. The window is $T_0$ to $T_0{+}500$\,s for all events except GRB\,200423A, whose first LAT exposure begins at ${\sim}619$\,s and which therefore uses $T_0{+}619$ to $T_0{+}1000$\,s.}<br />
+对应解读：对应“建议重点查看的图表”中的单事件 TS 或似然结果、残差/源图，以及模型拟合段落中关于低计数 LAT 点源似然、候选方向附近是否存在显著 excess 的讨论。<br />
+入选理由：这张 TS map 是判断检出与非检出的空间诊断图。它清楚展示 GRB 200415A 在加入瞬变点源前后的 excess 被模型吸收，而其他候选体在宿主方向附近没有达到显著 TS。相比单纯上限图，它能帮助读者检查非探测是否可能来自未建模背景结构、邻近源污染或空间上不一致的光子成团，因此对理解 LAT 似然结果非常关键。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / \(MGF_ms_arxiv.tex\):figure[4]</p>
+<p><strong>Fig03</strong><br />
+<img alt="Fig03" src="../assets/figures/2026-08-10/2608.06527/Fig03.png" /><br />
+图注：\chng{Photon-triplet analysis at the MGF positions. \textit{Top:} distribution of the triplet time interval $\Delta t$ for consecutive-photon triplets at NGC~253 (8375 triplets over 17\,yr), with (green) and without (dashed) the correction for \(\textit{Fermi}--LAT\) orbit and field-of-view gaps, compared to the distribution expected for independent Poisson events (solid black; Erlang-2). The correction shifts the distribution toward the expected form; the gold vertical line marks the GRB\,200415A first post-trigger triplet ($\Delta t = 265$\,s). \(\textit{Bottom:}\) single-triplet waiting-time significance, $\sigma(\Delta t) = \Phi^{-1}[1 - F(\Delta t)]$ with $F$ the Erlang-2 CDF, as a function of $\Delta t$ at each position's background rate $R$ (dashed curves; the four NGC~253 events share one rate). Open circles mark the single-triplet (pre-trial) value on each curve; filled circles mark the per-window trials-corrected (post-trial) value from the one-year photon-time scramble. The pre-specified first triplet of GRB\,200415A lies on its curve at $3.96\sigma$, whereas the six next-best triplets fall below their curves and are at delays of 40--356 days, consistent with background.}<br />
+对应解读：对应“建议重点查看的图表”中的光子三联等待时间诊断，以及“关键图表逐图导读”中图5关于 triplet 时间间隔、trial correction 和背景一致性的解读。<br />
+入选理由：日报专门强调不要把任意三个光子成团误判为源信号，这张图正是该诊断的核心证据。它展示 triplet 时间间隔分布、轨道/视场间隙修正、Erlang-2 背景期望、GRB 200415A 的首个 post-trigger triplet 以及其他候选 triplet 的试验因子校正后显著性。它直接支持“除 GRB 200415A 外没有稳健 photon triplet 关联”的结论。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / \(MGF_ms_arxiv.tex\):figure[3]</p>
+<p><strong>Fig02</strong><br />
+<img alt="Fig02" src="../assets/figures/2026-08-10/2608.06527/Fig02.png" /><br />
+图注：SED constraints in a 500\,s post-trigger interval. Downward arrows indicate 95\% C.L. ULs in each energy bin from the profile-likelihood scans with the index fixed to $\Gamma=-2$. The stacked limits combine the four non-detected events included in the 500\,s stack; GRB~200415A is shown for reference but excluded from the stacking.<br />
+对应解读：对应“建议重点查看的图表”中的能流量上限图和 SED 约束，也关联模型解释段落中 LAT 上限是否切入 GeV 预测区域的讨论。<br />
+入选理由：这张图给出 500 s post-trigger 区间内分能段 SED 上限，并包含非探测事件的 stacked limits 与 GRB 200415A 参考点。虽然它不如 Fig01 直接呈现多时间窗和总体结论，但它补充了能量依赖的约束信息，可用于判断 LAT 非探测在不同 GeV 能段的灵敏度，以及与理论谱形或火球余辉预测比较时应使用哪些上限。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / \(MGF_ms_arxiv.tex\):figure[2]</p>
+<h4 id="_23">强相关工作</h4>
+<p>同一事件层面，最重要的比较对象是 GRB 200415A 的发现、定位、prompt 性质和 LAT 延迟辐射研究。这些工作共同构成本文的正例背景：如果没有 GRB 200415A，搜索其他磁星巨耀发候选体 GeV 余辉的动机要弱得多。建议检索关键词包括“GRB 200415A magnetar giant flare Fermi LAT delayed GeV emission”、“Sculptor galaxy magnetar giant flare”和“Fermi GBM magnetar giant flare candidates”。</p>
+<p>同类源和历史原型方面，应把本文放在 SGR 0526\(-\)66、SGR 1900\(+\)14、SGR 1806\(-\)20 巨耀发以及短 GRB 污染问题的文献链中阅读。历史巨耀发主要建立了磁星极端爆发的能量尺度和光变形态，而 GRB 200415A 加入了相对论外流和 GeV 余辉维度。相反或有张力的观点包括：一些短硬事件可能并非磁星巨耀发，而是普通紧致并合短 GRB；或者即便是磁星巨耀发，GeV 辐射也可能只在特殊视角、特殊外部介质或特殊重子载荷下出现。检索关键词包括“short GRB contamination by magnetar giant flares”、“extragalactic magnetar giant flare candidates GBM”和“relativistic fireball baryon loading magnetar giant flare”。</p>
+<p><strong>同一事件 / 同类源线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2608.06527">https://arxiv.org/abs/2608.06527</a></li>
+<li><a href="https://arxiv.org/search/?query=GRB+200415A+magnetar+giant+flare&amp;searchtype=all">https://arxiv.org/search/?query=GRB+200415A+magnetar+giant+flare&amp;searchtype=all</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=GRB%20200415A%20magnetar%20giant%20flare">https://ui.adsabs.harvard.edu/search/q=GRB%20200415A%20magnetar%20giant%20flare</a></li>
+</ul>
+<p><strong>相似工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/search/?query=Fermi+GBM+magnetar+giant+flare+candidates&amp;searchtype=all">https://arxiv.org/search/?query=Fermi+GBM+magnetar+giant+flare+candidates&amp;searchtype=all</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=Fermi%20GBM%20magnetar%20giant%20flare%20candidates">https://ui.adsabs.harvard.edu/search/q=Fermi%20GBM%20magnetar%20giant%20flare%20candidates</a></li>
+</ul>
+<p><strong>基础理论 / 方法工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/search/?query=SGR+1806-20+giant+flare&amp;searchtype=all">https://arxiv.org/search/?query=SGR+1806-20+giant+flare&amp;searchtype=all</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=SGR%201806-20%20giant%20flare">https://ui.adsabs.harvard.edu/search/q=SGR%201806-20%20giant%20flare</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=SGR%201900%2B14%20giant%20flare">https://ui.adsabs.harvard.edu/search/q=SGR%201900%2B14%20giant%20flare</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=SGR%200526-66%20giant%20flare">https://ui.adsabs.harvard.edu/search/q=SGR%200526-66%20giant%20flare</a></li>
+</ul>
+<p><strong>相反观点 / 张力线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/search/?query=short+GRB+magnetar+giant+flare+contamination&amp;searchtype=all">https://arxiv.org/search/?query=short+GRB+magnetar+giant+flare+contamination&amp;searchtype=all</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/search/q=short%20GRB%20magnetar%20giant%20flare%20contamination">https://ui.adsabs.harvard.edu/search/q=short%20GRB%20magnetar%20giant%20flare%20contamination</a></li>
+</ul>
+</details>
+<h3 id="3-constraining-circum-burst-environments-of-grbs-with-jet-break-features-in-x-ray-afterglows">3. Constraining Circum-burst Environments of GRBs with Jet Break Features in X-ray Afterglows</h3>
+<ul>
+<li>来源：arXiv / astro-ph.HE</li>
+<li>链接：https://arxiv.org/abs/2608.07060v1</li>
+<li>作者：Si-Ji Xin, Yu-Qi Zhou, Sheng-Jin Sun, Cheng-Jie Sun, Shuang-Xi Yi, Yuan-Chuan Zou, Yu-Peng Yang, Yan-Kun Qu</li>
+<li>评分：novelty 7/10，importance 7/10，relevance 9/10，final 8.70/10</li>
+<li>推荐理由：基于170个Swift/XRT GRB喷流折断样本系统推断爆发环境密度剖面，直接涉及GRB余辉、喷流几何和真实能量；虽模型假设较简化，但GRB主题高度相关。</li>
+</ul>
+<p><strong>中文题目</strong>：用 X 射线余辉喷流拐折约束伽马暴爆发周围介质环境</p>
+<p><strong>做了什么</strong>：这篇论文从 2004–2024 年 Swift/XRT 的一千四百多个伽马暴 X 射线余辉中筛选出 170 个具有清晰喷流拐折的事件，用断裂幂律拟合拐折前后的时间衰减指数差 \(\Delta\alpha\)，再在均匀喷流模型下用 \(\Delta\alpha=(3-k)/(4-k)\) 反推出周围介质密度剖面 \(n\propto r^{-k}\) 的指数 \(k\)。结果显示样本几乎对半分：82 个事件更接近常密度星际介质 \(k\approx0\)，88 个事件更接近恒星风环境 \(k\approx2\)。对有光学资料的 35 个事件，X 射线分类与多波段分析总体一致；对有红移的子样本，作者还估计了喷流张角和束流修正后的真实能量。</p>
+<p><strong>为什么重要</strong>：伽马暴周围介质是连接前身星和余辉动力学的关键量。长暴常被认为来自大质量恒星坍缩，直觉上应有 \(k\approx2\) 的风型介质，但许多余辉拟合又偏向 \(k\approx0\) 的均匀介质；短暴则更常预期处在较稀薄、近似均匀的环境中。本文的重要性在于，它不是对少数亮暴做复杂个例建模，而是用一个可批量应用的喷流拐折诊断量，在大样本上重新估计 \(k\) 的分布，从而直接触及“伽马暴前身星环境是否真的符合简单图像”这一长期问题。</p>
+<p><strong>理论 / 观测 / 仪器方法价值</strong>：方法价值在于把 X 射线光变曲线中的几何拐折幅度转化为介质密度剖面指标，给出一种比完整多波段余辉拟合更便宜、更统一的环境分类工具。观测价值在于系统整理 Swift/XRT 二十年样本，明确哪些事件有可用喷流拐折，并将环境分类、红移、喷流张角和束流修正能量放在同一框架下比较。理论价值在于检验均匀喷流模型中 \(\Delta\alpha\) 与 \(k\) 的关系在真实样本上的表现，同时也暴露出喷流结构、能量注入、微物理参数演化等效应可能造成的偏差。</p>
+<p><strong>为什么应该关注</strong>：如果你关心伽马暴前身星、喷流准直、余辉标准能量库或未来高能瞬变巡天的样本解释，这篇文章值得看。它给出的不是某个 GRB 的精细模型，而是一张“X 射线喷流拐折所看到的环境分布图”：一半像 ISM，一半像风。这一结论若稳健，会影响我们对长暴恒星风泡、短暴宿主环境、喷流张角统计和真实能量函数的理解；若不稳健，也能提醒我们仅凭单波段拐折诊断介质时有哪些陷阱。</p>
+<details class="paper-detail">
+<summary>展开详细解读：文章讲解、背景、理论、重点章节、图表与相关工作</summary>
+<h4 id="_24">文章详细讲解</h4>
+<p>科学问题：伽马暴余辉由相对论喷流与外部介质相互作用产生，而外部介质的密度剖面通常写作 \(n\propto r^{-k}\)。若爆发发生在普通星际介质中，\(k\approx0\)；若发生在大质量恒星爆炸前由恒星风塑造的环境中，理想自由风区给出 \(k\approx2\)。问题在于，许多长暴的多波段余辉并不总是显示风型介质，甚至经常更像常密度环境。本文试图回答：在 Swift/XRT 的大样本 X 射线余辉中，若只看喷流拐折前后衰减斜率变化，推得的 \(k\) 分布究竟偏向 ISM、风，还是连续分布。</p>
+<p>作者怎么做：论文从 2004–2024 年超过 1400 条 Swift/XRT X 射线余辉光变曲线出发，挑出 170 个有清晰喷流拐折特征的 GRB。每条光变曲线用断裂幂律拟合，得到拐折前衰减指数 \(\alpha_1\)、拐折后衰减指数 \(\alpha_2\)、拐折时间 \(t_{\rm b}\)，并定义 \(\Delta\alpha=\alpha_2-\alpha_1\)。在均匀顶帽喷流模型中，喷流拐折幅度与介质指数满足 \(\Delta\alpha=(3-k)/(4-k)\)，因此可以由观测的 \(\Delta\alpha\) 反推 \(k\)。这个方法的优点是样本统一、计算直接；代价是把复杂的余辉物理压缩到一个模型关系中。</p>
+<p>关键结果：170 个清晰喷流拐折事件中，82 个约占 \(48\%\) 被分类为常密度 ISM 型，88 个约占 \(52\%\) 被分类为风型。这个近似对半的结果很有意思，因为它既不支持所有长暴都处在标准风环境，也不支持所有余辉都能用均匀介质解释。对 35 个具有光学数据或文献多波段分析的事件，作者比较了 X 射线诊断与独立多波段结论，发现总体一致。对有红移的事件，作者进一步利用拐折时间和介质假设估计喷流半张角 \(\theta_j\)，并由各向同性能量 \(E_{\rm iso}\) 计算束流修正能量 \(E_\gamma\)。</p>
+<p>局限和下一步：核心局限是 \(\Delta\alpha=(3-k)/(4-k)\) 依赖理想均匀喷流和标准余辉假设。真实 X 射线光变可能包含中心引擎持续注入、平台期结束、能谱演化、晚期耀发、逆康普顿成分、结构化喷流和视线角效应；这些都会改变 \(\Delta\alpha\)，从而伪装成不同的 \(k\)。下一步最自然的工作是把该诊断与光学、射电、能谱指数 \(\beta\)、闭合关系、宿主星系环境以及数值喷流模型结合起来，检查 X 射线单波段分类在多大程度上能代表真实外部介质。</p>
+<h4 id="_25">关键结果是怎么做出来的</h4>
+<p>样本选择是本文证据链的第一环。作者没有从少数经典余辉出发，而是从 Swift/XRT 2004–2024 年累计超过 1400 个 GRB X 射线余辉中筛选出有明确喷流拐折特征的 170 个事件。这里“明确”很关键：喷流拐折应表现为无明显能谱变化的光变变陡，而不是 X 射线耀发、平台结束或观测间隙造成的假拐折。读者需要特别关注作者如何定义可接受的断裂、是否要求足够的拐折前后数据点、以及是否排除了早期陡降和晚期弱源背景主导区间。</p>
+<p>拟合量是 \(\alpha_1\)、\(\alpha_2\)、\(t_{\rm b}\) 和归一化通量。对每个事件，作者用断裂幂律或平滑断裂幂律描述 XRT 光变，并从 \(\Delta\alpha=\alpha_2-\alpha_1\) 得到介质指数 \(k\)。由于 \(k=(4\Delta\alpha-3)/(\Delta\alpha-1)\)，当 \(\Delta\alpha\) 接近 \(1\) 时误差传播会很敏感，因此论文中对 \(\Delta\alpha\) 不确定度、异常值和分类边界的处理是判断结果可靠性的重点。若某些事件的 \(\Delta\alpha\) 落在模型允许范围边缘，分类很可能不是强结论，而只是“更接近某类环境”。</p>
+<p>最重要的统计结果是 170 个事件中 82 个被归为 \(k\approx0\) 的 ISM 型，88 个被归为 \(k\approx2\) 的风型。这个结论的统计意义并不在于二者比例差异显著，而在于分布没有强烈偏向单一环境。若样本主要由长暴组成，这会继续加深“长暴为何经常不像自由恒星风环境”的问题；若短暴也占有一定比例，则需要分别检查长暴和短暴子样本的 \(k\) 分布，避免把不同前身星族群混合后解释。</p>
+<p>支撑结论的图表应包括光变拟合实例、\(\Delta\alpha\) 或 \(k\) 的总体分布、ISM/风分类表、多波段交叉验证表，以及有红移子样本的 \(\theta_j\) 和 \(E_\gamma\) 分布。尤其要看 \(k\) 分布是否呈现两个峰，还是作者按阈值把连续散布切成两类；这两种情况对应完全不同的物理解释。若 \(k\) 实际上是宽分布，简单说“48% ISM、52% 风”就可能掩盖中间型介质、风终止激波外均匀区或模型系统误差。</p>
+<p>系统误差方面，最主要的是喷流拐折识别和单波段诊断。X 射线光变的拐折可能来自能量注入结束，其 \(\Delta\alpha\) 可与喷流拐折相似；若没有同时的光学拐折，几何解释就不唯一。作者用 35 个有光学资料的事件做一致性检查，这是一个重要稳健性检验，但该子样本只占 170 个的一部分，而且通常偏向观测条件好、亮度高、红移或多波段资料丰富的 GRB。读者应检查这 35 个事件是否代表总体样本，还是存在明显选择偏差。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_26">背景知识</h4>
+<p>GRB 余辉的标准图像是：中心引擎发射超相对论喷流，喷流撞击外部介质并驱动前向激波，激波加速电子产生同步辐射。光变随时间衰减的斜率由动力学减速、电子能谱、观测频段相对于特征频率的位置、喷流几何和外部密度剖面共同决定。因此，余辉光变不仅是爆发能量释放的尾迹，也是探测爆发周围环境的工具。</p>
+<p>围绕介质类型的历史问题由来已久。长 GRB 与大质量恒星坍缩、Ic 型宽线超新星有强关联，直觉上应发生在被恒星风塑造的 \(n\propto r^{-2}\) 环境中。但从一些光学、X 射线和射电余辉拟合得到的介质却常常近似 \(k\approx0\)。可能解释包括：爆发发生在风终止激波之外的热泡或均匀壳层中；恒星风质量损失率和外部压强与理想模型不同；余辉数据质量不足导致闭合关系误判；或者喷流结构、能量注入等效应被错误归因于介质。</p>
+<p>喷流拐折是另一个核心背景。当相对论洛伦兹因子 \(\Gamma\) 下降到 \(\Gamma\sim1/\theta_j\) 时，观测者开始看到喷流边缘，且喷流可能发生横向扩展，光变会比球对称情况更快衰减。这个拐折时间 \(t_j\) 可用于估计喷流张角 \(\theta_j\)，再把各向同性等效能量 \(E_{\rm iso}\) 修正为真实能量 \(E_\gamma\)。早期研究曾提出 GRB 真实能量可能集中在较窄范围，但后续 Swift 时代发现光变更复杂，喷流拐折识别也更困难。</p>
+<p>现在重新看这个问题有两个原因。第一，Swift/XRT 已积累近二十年的均一 X 射线余辉数据库，样本量足以从个例研究转向统计诊断。第二，多信使和高时域天文学时代需要更可靠的 GRB 环境先验，用于解释高红移爆发、短暴并合环境、甚高能辐射和未来任务触发样本。一个常见误区是把“长暴等于风环境、短暴等于 ISM 环境”当作直接结论；实际观测中，爆发周围介质可能受宿主星系、恒星风泡、二元系统运动、局部星形成区和选择效应共同影响。</p>
+<p>另一个常见误区是把任何光变变陡都叫喷流拐折。真正的几何喷流拐折通常应近似无色，即不同波段在相近时间变陡且能谱不发生明显跃迁。X 射线单波段中的断裂也可能来自冷却频率穿越、中心引擎注入结束、晚期内禀活动、尘埃散射或统计噪声。因此本文的诊断很有价值，但必须和这些混淆因素一起读，而不能把 \(k\) 分类当成无模型的环境测量。</p>
+<h4 id="_27">基础理论 / 方法脉络</h4>
+<p>基础物理图像从外激波开始。爆发释放的相对论物质以洛伦兹因子 \(\Gamma\gg1\) 向外传播，扫掠外部介质后减速。外部数密度通常参数化为 \(n(r)=n_0(r/r_0)^{-k}\)，其中 \(k=0\) 表示近似均匀介质，\(k=2\) 表示稳定恒星风。被扫掠质量随半径增长的速度取决于 \(k\)，因此 \(\Gamma(t)\)、特征频率和峰值通量的时间演化也取决于 \(k\)。</p>
+<p>余辉辐射通常由前向激波同步辐射主导。电子能谱写作 \(N(\gamma_e)\propto\gamma_e^{-p}\)，磁场能量比例为 \(\epsilon_B\)，电子能量比例为 \(\epsilon_e\)。观测到的光谱分段由注入频率 \(\nu_m\)、冷却频率 \(\nu_c\) 和观测频率 \(\nu\) 的相对位置决定。时间衰减指数 \(\alpha\) 和谱指数 \(\beta\) 的闭合关系会随 \(k\) 改变，这也是传统多波段余辉拟合判断介质的基础。</p>
+<p>本文采用的是更简化的喷流拐折诊断。均匀顶帽喷流在早期看起来像球面对称，因为相对论束射角 \(1/\Gamma\) 小于喷流半张角 \(\theta_j\)。当 \(\Gamma\) 降到 \(1/\theta_j\) 左右时，边缘效应使可见发射面积增长变慢，光变出现变陡。理想模型中，拐折前后时间衰减指数的差 \(\Delta\alpha\) 与外部密度指数 \(k\) 存在简单关系，因此可由 X 射线光变形状反推 \(k\)。</p>
+<p>该方法隐含几个重要假设：喷流是均匀顶帽而非结构化喷流；拐折确实是几何喷流拐折而非能量注入结束；X 射线频段处于同一谱段，拐折前后没有显著能谱演化；微物理参数 \(\epsilon_e\)、\(\epsilon_B\) 和 \(p\) 不发生强烈时间演化。若这些假设被破坏，\(\Delta\alpha\) 不再只反映 \(k\)。例如离轴观测结构化喷流可产生平滑变陡，能量注入结束可产生类似的 \(\alpha\) 增量，冷却频率穿越也会改变光变斜率但物理含义完全不同。</p>
+<p>观测和数据分析层面，XRT 光变需要从计数率转换为通量或通量密度，并进行背景扣除、吸收修正和时间分箱。断裂幂律拟合的残差、拐折平滑度、早期耀发剔除和晚期低信噪比点的处理都会影响 \(\alpha_1\) 与 \(\alpha_2\)。因此本文的核心量 \(\Delta\alpha\) 表面上简单，实际包含了样本选择、数据清洗和模型选择的全部系统误差。</p>
+<h4 id="_28">公式与推导</h4>
+<p>第一步是外部介质参数化。本文关心的环境可写为</p>
+<div class="math-display">\[n(r)=n_0\left(\frac{r}{r_0}\right)^{-k},\]</div>
+<p>其中 \(n(r)\) 是半径 \(r\) 处的粒子数密度，\(n_0\) 是参考半径 \(r_0\) 处的密度，\(k\) 是密度剖面指数。\(k=0\) 对应均匀 ISM，\(k=2\) 对应自由恒星风。该式假设介质球对称且在余辉发射区间可用单一幂律描述。</p>
+<p>第二步是扫掠质量。对各向同性等效动力学近似，半径 \(r\) 内扫掠的外部质量满足</p>
+<div class="math-display">\[M(r)=4\pi m_p\int_0^r n(r')r'^2dr'\propto r^{3-k},\quad k<3,\]</div>
+<p>其中 \(m_p\) 是质子质量。这个比例说明风环境中质量累积比均匀介质更慢，从而改变减速规律。</p>
+<p>第三步是相对论能量守恒。在绝热 Blandford-McKee 阶段，各向同性等效能量近似为</p>
+<div class="math-display">\[E_{\rm iso}\sim \Gamma^2 M(r)c^2\propto \Gamma^2 r^{3-k}c^2,\]</div>
+<p>其中 \(\Gamma\) 是激波洛伦兹因子，\(c\) 是光速。若 \(E_{\rm iso}\) 近似守恒，则有 \(\Gamma\propto r^{-(3-k)/2}\)。</p>
+<p>第四步把半径转为观测时间。相对论到达时延给出</p>
+<div class="math-display">\[t_{\rm obs}\simeq \frac{1+z}{2c}\frac{r}{\Gamma^2},\]</div>
+<p>其中 \(z\) 是红移。联立上一式可得</p>
+<div class="math-display">\[\Gamma(t)\propto t^{-\frac{3-k}{2(4-k)}}.\]</div>
+<p>这说明在 \(k=0\) 时 \(\Gamma\propto t^{-3/8}\)，在 \(k=2\) 时 \(\Gamma\propto t^{-1/4}\)。</p>
+<p>第五步是喷流拐折条件。当相对论束射角与喷流半张角相当时，出现几何拐折：</p>
+<div class="math-display">\[\Gamma(t_j)\simeq \theta_j^{-1},\]</div>
+<p>其中 \(t_j\) 是喷流拐折时间，\(\theta_j\) 是喷流半张角。这个条件把观测到的 \(t_j\) 与喷流几何连接起来，但数值系数依赖介质密度、效率和具体动力学模型。</p>
+<p>第六步是光变拟合。X 射线通量常用断裂幂律表示为</p>
+<div class="math-display">\[F_X(t)=F_b\left[\left(\frac{t}{t_b}\right)^{s\alpha_1}+\left(\frac{t}{t_b}\right)^{s\alpha_2}\right]^{-1/s},\]</div>
+<p>其中 \(F_X(t)\) 是 X 射线通量，\(F_b\) 是断裂附近归一化，\(t_b\) 是拟合拐折时间，\(\alpha_1\) 与 \(\alpha_2\) 是拐折前后衰减指数，\(s\) 控制断裂平滑度。若采用非平滑断裂幂律，本式可看作平滑版本的通用写法。</p>
+<p>第七步定义本文的核心可观测量：</p>
+<div class="math-display">\[\Delta\alpha=\alpha_2-\alpha_1.\]</div>
+<p>在理想均匀喷流模型中，几何拐折幅度与介质指数满足</p>
+<div class="math-display">\[\Delta\alpha=\frac{3-k}{4-k}.\]</div>
+<p>该关系是本文环境诊断的核心：它把光变形状而非绝对亮度转化为介质信息。</p>
+<p>第八步反解密度指数。由上式得到</p>
+<div class="math-display">\[k=\frac{4\Delta\alpha-3}{\Delta\alpha-1}.\]</div>
+<p>该表达式也显示出一个重要误差特性：当 \(\Delta\alpha\) 接近 \(1\) 时，分母很小，\(k\) 对 \(\Delta\alpha\) 的误差极敏感。因此分类时必须传播 \(\alpha_1\) 和 \(\alpha_2\) 的不确定度。</p>
+<p>第九步是束流修正能量。若已知红移并可估计 \(\theta_j\)，真实伽马射线能量可写为</p>
+<div class="math-display">\[E_\gamma=(1-\cos\theta_j)E_{\rm iso}\simeq \frac{\theta_j^2}{2}E_{\rm iso},\quad \theta_j\ll1.\]</div>
+<p>这里 \(E_{\rm iso}\) 是各向同性等效辐射能量，小角近似说明喷流越窄，真实能量相对于 \(E_{\rm iso}\) 的修正越大。本文对有红移子样本使用这类关系讨论喷流张角和真实能量分布。</p>
+<h4 id="_29">模型拟合 / 应用方法</h4>
+<p>本文的主要拟合对象是 XRT X 射线余辉光变，而不是完整的多波段谱能量分布。对每个候选 GRB，拟合参数至少包括拐折前衰减指数 \(\alpha_1\)、拐折后衰减指数 \(\alpha_2\)、拐折时间 \(t_b\) 和通量归一化；若使用平滑断裂幂律，还包括平滑参数 \(s\)。拟合的直接目标是获得 \(\Delta\alpha\)，再通过模型关系转化为 \(k\)。因此，\(\Delta\alpha\) 的统计误差和系统误差比单个 \(t_b\) 的数值更关键。</p>
+<p>似然通常可理解为对光变数据点的高斯或近似高斯误差拟合，即最小化 \(\chi^2\) 或最大化对应似然。对于低计数晚期数据，严格处理应回到泊松计数似然，并考虑背景、曝光和响应；但许多 Swift/XRT 发布光变已经提供通量点和误差，实际拟合常在通量空间或对数通量空间进行。读者看这篇文章时应注意作者是否在对数空间拟合、是否对上限进行处理、是否把早期耀发点剔除，以及是否报告每个事件的拟合优度。</p>
+<p>参数退化主要有三类。第一，\(t_b\) 与 \(\alpha_1\)、\(\alpha_2\) 退化：若拐折附近采样稀疏，断裂时间移动会改变两侧斜率。第二，平滑度 \(s\) 与 \(\Delta\alpha\) 退化：过于平滑的断裂可能使斜率差被低估，过于尖锐的断裂可能把噪声当成物理变化。第三，物理模型退化：能量注入结束、冷却频率穿越、结构化喷流视角效应都可能给出类似的 \(\Delta\alpha\)，但对应的 \(k\) 完全不同。</p>
+<p>系统误差还来自样本选择。170 个清晰喷流拐折事件来自超过 1400 个 XRT 余辉，说明只有一小部分事件满足诊断条件。这些事件可能偏亮、持续时间较长、观测覆盖较好，未必代表整个 GRB 群体。若风型环境中的余辉更快变暗或更难捕捉拐折，则分类比例会受选择效应影响。反过来，如果平台期丰富的事件更容易出现可拟合断裂，也可能污染喷流拐折样本。</p>
+<p>实际应用中，本文方法适合做大样本快速环境分类和先验构建，不适合替代个例的多波段余辉建模。对单个 GRB，可靠判断环境仍应联合光学、X 射线、射电数据，检查谱指数 \(\beta\)、闭合关系、消光和吸收，并确认拐折是否无色。本文结果最适合作为统计层面的基准：在 Swift/XRT 可识别喷流拐折的样本中，简单均匀喷流诊断并未给出压倒性的单一介质类型。</p>
+<h4 id="_30">重点章节 / 结果段落怎么读</h4>
+<p>数据和样本部分应首先细读。重点看作者如何从超过 1400 个 Swift/XRT 余辉中筛选出 170 个清晰喷流拐折事件：筛选阈值是什么，是否剔除耀发、早期陡降和平台期，是否要求拐折前后都有足够数据点，是否区分长暴和短暴。这一部分决定了后文所有比例的代表性。</p>
+<p>方法部分的核心是断裂幂律拟合和 \(\Delta\alpha\) 到 \(k\) 的转换。读者应检查拟合函数、误差估计、拟合优度、平滑参数处理方式，以及 \(\Delta\alpha=(3-k)/(4-k)\) 的适用条件。尤其要看作者是把 \(k\) 当连续变量报告，还是按靠近 \(0\) 或 \(2\) 强行分类。</p>
+<p>主结果部分应关注 \(k\) 分布和分类统计。82 个 ISM 型与 88 个风型的近似对半结果是论文的中心结论。读者应检查这个比例是否在误差条内稳定，是否被少数边界事件改变，是否长暴和短暴分别呈现不同分布，以及 \(k\) 是否存在物理上不合理的外点。</p>
+<p>多波段对比部分是稳健性检验。35 个有光学资料的事件提供了独立检查：如果 X 射线拐折真是几何喷流拐折，光学应在相近时间出现类似变陡，并且环境分类应与多波段闭合关系或文献拟合基本一致。读者应看不一致个例是否集中在某类光变形态，例如平台期后断裂或 X 射线独有断裂。</p>
+<p>喷流张角和能量部分适合放在最后读。对有红移的事件，作者由 \(t_b\)、环境类型和 \(E_{\rm iso}\) 估计 \(\theta_j\) 与 \(E_\gamma\)。这里的数值依赖介质密度、辐射效率和模型系数，系统误差通常较大；但它们对理解 GRB 真实能量函数和事件率修正很有意义。</p>
+<h4 id="_31">建议重点查看的图表</h4>
+<ol>
+<li>
+<p>样本筛选流程图或样本表：看从超过 1400 个 Swift/XRT 余辉到 170 个喷流拐折事件的每一步剔除标准，尤其是是否排除耀发、平台期和数据覆盖不足事件。</p>
+</li>
+<li>
+<p>代表性 X 射线光变拟合图：检查坐标是否为 \(\log F_X\) 对 \(\log t\)，断裂前后数据点是否足够，残差是否随机，拐折是否可能由单个晚期点驱动。</p>
+</li>
+<li>
+<p>\(\Delta\alpha\) 分布图：看分布是否聚集在对应 \(k\approx0\) 和 \(k\approx2\) 的区域，还是连续宽分布；注意 \(\Delta\alpha\) 接近 \(1\) 附近的误差放大。</p>
+</li>
+<li>
+<p>\(k\) 分布或 ISM/风分类柱状图：重点看分类边界、误差条和异常 \(k\) 值处理方式。若许多事件误差跨越 \(k=0\) 与 \(k=2\)，比例结论应谨慎解读。</p>
+</li>
+<li>
+<p>X 射线分类与光学/多波段分类对比表：看 35 个有光学资料事件中一致和不一致的比例，尤其是不一致事件是否有已知 X 射线色变或复杂早期活动。</p>
+</li>
+<li>
+<p>喷流张角 \(\theta_j\) 与束流修正能量 \(E_\gamma\) 分布：检查 ISM 与风两类是否给出系统不同的 \(\theta_j\) 或 \(E_\gamma\)，以及这些差异是否由红移子样本选择造成。</p>
+</li>
+</ol>
+<h4 id="_32">关键图表逐图导读</h4>
+<p>图 1：若论文给出样本筛选或光变示例，横轴通常是观测时间 \(t\) 或爆发后时间，纵轴是 X 射线通量 \(F_X\) 或计数率。数据点应显示断裂前后两个近似幂律段，模型线为断裂幂律。读图时不要只看模型线是否漂亮，要看断裂前后各有多少点、误差条是否覆盖模型、以及断裂是否位于观测间隙附近。</p>
+<p>图 2：\(\Delta\alpha\) 分布图应是本文最关键诊断之一。横轴为 \(\Delta\alpha\)，纵轴为事件数或概率密度，可能标出对应 ISM 和风环境的理论区域。主要结论是样本可被分成近似一半 ISM 型、一半风型。读图陷阱是把直方图峰误认为物理双峰；如果 bin 宽或误差较大，所谓两类可能只是连续分布经阈值切分。</p>
+<p>图 3：\(k\) 分布或 \(k\) 与其他爆发性质的散点图通常用于展示环境分类。横轴可能是 \(k\)，纵轴是事件数；或者横轴为红移、\(E_{\rm iso}\)、\(t_b\)，纵轴为 \(k\)。读者应检查是否存在大量非物理或边界 \(k\) 值，以及误差条是否跨越 \(k=0\) 与 \(k=2\)。若误差跨越两类，单个事件分类不应过度解释。</p>
+<p>图 4：X 射线分类与光学多波段结果对比图或表的意义在于验证单波段方法。若横轴为文献环境类型、纵轴为本文 \(k\) 或分类，则一致事件应沿对角分布。不一致点最值得看：它们可能揭示 X 射线断裂不是喷流拐折，或者光学受消光、宿主污染、稀疏采样影响。</p>
+<p>图 5：喷流张角 \(\theta_j\) 分布图通常横轴为 \(\theta_j\)，纵轴为事件数，可能按 ISM 和风环境分色。模型线或阴影区若存在，应代表典型 GRB 张角范围。读图陷阱是忽视 \(\theta_j\) 对密度和效率假设的依赖；同一个 \(t_b\) 在不同 \(k\) 下可给出不同张角。</p>
+<p>图 6：束流修正能量 \(E_\gamma\) 与 \(E_{\rm iso}\)、\(t_b\) 或红移的关系图可用于判断是否存在能量聚集。若数据点沿某种相关关系排列，要检查这是否由公式中的共同变量造成，例如 \(E_\gamma\) 本身由 \(E_{\rm iso}\) 和 \(\theta_j\) 计算而来。误差条和上限处理在这里尤其重要。</p>
+</details>
+<h4 id="_33">论文原图 / 可嵌入图片</h4>
+<p><strong>Fig10</strong><br />
+<img alt="Fig10" src="../assets/figures/2026-08-10/2608.07060/Fig10.png" /><br />
+图注：Distributions of the temporal decay index change $\Delta\alpha$ (left) and the density profile index $k$ (right) for our sample, where $k$ is derived from $\Delta\alpha$ using the relation $\Delta\alpha = (3 - k)/(4 - k)$.<br />
+对应解读：对应“建议重点查看的图表”第3、4项，以及“关键图表逐图导读”中关于 Δα 分布和 k 分布的核心诊断。<br />
+入选理由：这是本文最核心的物理推断图，直接展示时间衰减指数变化 Δα 以及由 Δα=(3-k)/(4-k) 反推出的密度剖面指数 k。它最能支撑日报中关于 ISM 与风环境近似对半、分类边界和误差放大风险的解读。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[10]</p>
+<p><strong>Fig01</strong><br />
+<img alt="Fig01" src="../assets/figures/2026-08-10/2608.07060/Fig01.png" /><br />
+图注：X-ray afterglow light curves for the 82 GRBs in our sample classified as having an ISM circum-burst environment. Blue points show the Swift/XRT observational data, and the solid red curves represent the best-fit broken power-law models. Multi-band (X-ray and optical) light curves are appended at the end.<br />
+对应解读：对应“代表性 X 射线光变拟合图”和“模型拟合”段落中对断裂幂律拟合、α1、α2、tb 与 Δα 提取的讨论。<br />
+入选理由：该图给出被分类为 ISM 环境的 82 个 GRB 的 XRT 光变数据点和最佳拟合断裂幂律模型，是检查拐折前后采样、拟合质量以及 Δα 是否可靠的关键原始证据。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[1]</p>
+<p><strong>Fig05</strong><br />
+<img alt="Fig05" src="../assets/figures/2026-08-10/2608.07060/Fig05.png" /><br />
+图注：X-ray afterglow light curves for the 88 GRBs in our sample classified as having a wind circum-burst environment. Blue points show the Swift/XRT observational data, and the solid red curves represent the best-fit broken power-law models. Multi-band (X-ray and optical) light curves are appended at the end.<br />
+对应解读：对应“代表性 X 射线光变拟合图”和风型环境样本的断裂幂律拟合诊断。<br />
+入选理由：该图与 Fig01 互补，展示 88 个风型环境 GRB 的 X 射线余辉光变和红色最佳拟合模型，可直接比较两类环境样本的光变形态、断裂显著性和拟合可靠性。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[5]</p>
+<p><strong>Fig11</strong><br />
+<img alt="Fig11" src="../assets/figures/2026-08-10/2608.07060/Fig11.png" /><br />
+图注：Distributions of derived physical parameters for GRBs with redshifts: the isotropic gamma-ray energy ($E_{\gamma,\mathrm{iso}}$), the jet half-opening angle ($\theta_j$), and the true beaming-corrected gamma-ray energy ($E_{\gamma} = E_{\gamma,\mathrm{iso}}(1 - \cos \theta_j)$).<br />
+对应解读：对应“建议重点查看的图表”第6项，以及“关键图表逐图导读”中关于喷流张角 θj 和束流修正能量 Eγ 分布的讨论。<br />
+入选理由：该图展示有红移 GRB 的 Eγ,iso、喷流半张角 θj 和束流修正能量 Eγ 分布，是评估介质分类后进一步物理量推导是否合理、是否存在选择效应或能量聚集的主要图。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[11]</p>
+<p><strong>Fig09</strong><br />
+<img alt="Fig09" src="../assets/figures/2026-08-10/2608.07060/Fig09.png" /><br />
+图注：Distribution of jet break times for the 170 GRBs in our sample. The histogram shows the observed distribution, and the red curve represents a Gaussian fit to the data.<br />
+对应解读：对应模型拟合段落中对喷流拐折时间 tb 的讨论，以及样本中可识别喷流拐折事件的统计特征。<br />
+入选理由：虽然不直接给出 k 分类，但 jet break time 分布是所有 Δα 和 θj 推导的基础参数之一，有助于判断样本是否偏向某些观测时间窗口或高质量覆盖事件。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[9]</p>
+<p><strong>Fig12</strong><br />
+<img alt="Fig12" src="../assets/figures/2026-08-10/2608.07060/Fig12.png" /><br />
+图注：Distributions of the spectral index $\beta$ in the pre- and post-jet break phases for the full sample of 170 GRBs. The histograms show the $\beta$ values derived from X-ray spectra.<br />
+对应解读：对应“模型拟合”和“局限和下一步”中关于 X 射线谱指数 β、闭合关系和能谱演化可能影响环境判别的讨论。<br />
+入选理由：该图展示断裂前后 X 射线谱指数 β 的分布，可辅助判断光变断裂是否伴随谱变化，从而评估单纯把 Δα 解释为喷流拐折并反推 k 的系统风险。<br />
+来源与置信度：\(arxiv_source\)；high；\(arxiv_source\) / ms.tex:figure[12]</p>
+<h4 id="_34">强相关工作</h4>
+<p>这篇工作与 Swift 时代大量 GRB 余辉统计研究直接相关，尤其是喷流拐折是否普遍存在、Swift/XRT 复杂光变如何解释、以及长暴环境为何常被拟合为 ISM 的问题。相似工作可用关键词检索：“Swift XRT GRB afterglow jet break sample”、“GRB circumburst medium density profile”、“GRB afterglow closure relations ISM wind”、“jet break chromatic achromatic Swift”。同类论文通常包括 XRT 光变曲线形态分类、光学/X 射线无色拐折检验、多波段余辉建模目录和 GRB 喷流张角统计。</p>
+<p>基础理论背景来自 Blandford-McKee 相对论自相似解、Sari/Piran/Narayan 的同步余辉模型、Rhoads 和 Sari 等关于喷流拐折的早期理论，以及 Chevalier 和 Li 关于风型介质余辉的工作。与本文可能存在张力的方向包括：Swift 发现许多 X 射线断裂是色变的，并不总是喷流拐折；结构化喷流和离轴观测可改变拐折形态；多波段拟合常显示 \(k\) 不是简单的 \(0\) 或 \(2\)。建议进一步检索：“chromatic X-ray breaks GRB afterglows”、“structured jet break GRB”、“energy injection plateau jet break confusion”、“wind termination shock GRB afterglow”。</p>
+<p><strong>同一事件 / 同类源线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2608.07060">https://arxiv.org/abs/2608.07060</a></li>
+<li><a href="https://arxiv.org/pdf/2608.07060">https://arxiv.org/pdf/2608.07060</a></li>
+<li><a href="https://www.swift.ac.uk/xrt_curves/">https://www.swift.ac.uk/xrt_curves/</a></li>
+</ul>
+<p><strong>相似工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/astro-ph/0607295">https://arxiv.org/abs/astro-ph/0607295</a></li>
+<li><a href="https://arxiv.org/abs/0712.2186">https://arxiv.org/abs/0712.2186</a></li>
+<li><a href="https://arxiv.org/abs/0804.1726">https://arxiv.org/abs/0804.1726</a></li>
+<li><a href="https://arxiv.org/abs/1207.1436">https://arxiv.org/abs/1207.1436</a></li>
+</ul>
+<p><strong>基础理论 / 方法工作</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/astro-ph/9802289">https://arxiv.org/abs/astro-ph/9802289</a></li>
+<li><a href="https://arxiv.org/abs/astro-ph/9901235">https://arxiv.org/abs/astro-ph/9901235</a></li>
+<li><a href="https://arxiv.org/abs/astro-ph/9903399">https://arxiv.org/abs/astro-ph/9903399</a></li>
+<li><a href="https://arxiv.org/abs/astro-ph/9908272">https://arxiv.org/abs/astro-ph/9908272</a></li>
+<li><a href="https://arxiv.org/abs/astro-ph/9912006">https://arxiv.org/abs/astro-ph/9912006</a></li>
+</ul>
+<p><strong>相反观点 / 张力线索</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/0704.1609">https://arxiv.org/abs/0704.1609</a></li>
+<li><a href="https://arxiv.org/abs/0808.0184">https://arxiv.org/abs/0808.0184</a></li>
+<li><a href="https://arxiv.org/abs/0903.5408">https://arxiv.org/abs/0903.5408</a></li>
+</ul>
+</details>
+<h2 id="_35">说明</h2>
+<p>评分由 LLM 给出初评，再由本地阈值策略过滤；IACT、TeV 伽马射线和高能中微子天文学按重点方向处理。</p>
+    </main>
+  </div>
+</body>
+</html>
