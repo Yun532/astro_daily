@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-15</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-15</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-15">
+      <a class="previous" href="2026-08-14.html">← 上一期：2026-08-14</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-15T11:10:44+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-pwn-pulsar-halo-crab-nebulatermination-shock-pwn">1. PWN 与 pulsar halo 从零到前沿（二）：Crab Nebula、termination shock 和 PWN 标准模型</h3>
+<ul>
+<li>课程系列：PWN 与 pulsar halo 从零到前沿课程（第 2/5 讲）</li>
+<li>本讲边界：本讲讲 pulsar wind 被 SNR 约束后形成 termination shock、非热粒子、磁场和多波段 PWN。不讲粒子逃逸后的大尺度 pulsar halo。</li>
+<li>上下文承接：上一讲讲了中心脉冲星如何注入能量；本讲讲这些能量如何在星云中发光。</li>
+<li>主题：pulsar wind nebulae, termination shock, Crab Nebula and sigma problem</li>
+<li>经典工作：Rees &amp; Gunn 1974、Kennel &amp; Coroniti 1984 和 Crab Nebula 多波段观测建立的 PWN 标准图像。</li>
+<li>为什么经典：Crab Nebula 是 PWN 物理的校准源。termination shock、sigma problem、同步辐射和 IC 这些语言都从这里进入现代 PWN 论文。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一段，本讲承接上一讲的能源账本：上一讲已经说明中心脉冲星如何通过自转能损失率 \(\dot E(t)\)、特征年龄和制动指数向外供能；本讲要回答的是这些能量离开磁层以后如何在超新星遗迹内部被截停、热化、加速并发光。课程边界要先划清：我们讨论的是 PWN 内部，从自由脉冲星风、termination shock、下游 shocked wind、磁场与非热粒子，到同步辐射和逆康普顿辐射；我们暂不进入逃逸电子在更大尺度介质中的扩散，也不写 pulsar halo 的扩散系数 \(D(E)\) 或损失方程。最核心的科学问题可以写成一条能量通道：\(\dot E \rightarrow F_{\rm w} \rightarrow P_{\rm pwn},B,Q(E) \rightarrow L_\nu\)。这里的难点不是“有没有能量”，而是“能量在什么位置、以什么形式、通过什么机制变成可观测的非热辐射”。</p>
+<p>第二段，Crab Nebula 之所以成为本讲的经典锚点，是因为它把这个抽象问题变成了可测量的物理系统。Crab 有历史超新星遗迹的光学丝状结构，有明亮的 radio、optical、X-ray、GeV 和 TeV 连续谱，有中心 Crab pulsar 的精确计时参数，还有可分辨的 inner ring、torus、jet、wisps 和外部星云形态。脉冲星发现以前，Crab 的非热连续谱已经暗示存在高能电子和磁场；脉冲星发现以后，\(\dot E\) 解决了能源来源问题。Rees 与 Gunn 的关键贡献是提出 pulsar wind 在星云内部被终止并注入 relativistic plasma；Kennel 与 Coroniti 的关键贡献是把这个图像写成稳态球对称 MHD 标准模型，用 \(\dot E\)、\(R_{\rm ts}\)、\(R_{\rm pwn}\) 和 \(\sigma\) 连接动力学结构与同步辐射。</p>
+<p>第三段，第一条主线是 termination shock 的形成。若先取各向同性、稳态近似，脉冲星风在半径 \(r\) 处的能流量为 \(F_{\rm w}(r)=\dot E/(4\pi r^2)\)。对近光速 relativistic wind，动量通量约为能流量除以 \(c\)，因此当 \(F_{\rm w}/c\) 与星云内部压力 \(P_{\rm pwn}\) 平衡时，风不能继续自由膨胀，形成 termination shock。由此得到 \(P_{\rm pwn}\simeq \dot E/(4\pi cR_{\rm ts}^2)\)，以及 \(R_{\rm ts}\simeq [\dot E/(4\pi cP_{\rm pwn})]^{1/2}\)。这个式子告诉我们，\(R_{\rm ts}\) 不是任意画出的亮环半径，而是中心引擎当前功率和 PWN 内部压力共同决定的动力学诊断量。Crab 的 X-ray inner ring 可作为 \(R_{\rm ts}\) 的重要线索，但它不是完全球形 shock 的直接照片，而是受环面几何、Doppler boosting、风的纬向各向异性和投影共同影响的观测结构。</p>
+<p>第四段，第二条主线是 PWN bubble 的能量账本。PWN 内部不是普通热气体泡，而是由相对论 \(e^\pm\)、磁场和可能离子成分组成的非热高压区。若把星云近似为相对论气体，体积为 \(V_{\rm pwn}=4\pi R_{\rm pwn}^3/3\)，则压力尺度为 \(P_{\rm pwn}\simeq E_{\rm pwn}/(3V_{\rm pwn})\simeq E_{\rm pwn}/(4\pi R_{\rm pwn}^3)\)。内部能量由方程 \(dE_{\rm pwn}/dt=\dot E(t)-P_{\rm pwn}dV_{\rm pwn}/dt-L_{\rm rad}\) 控制，表示注入能量分配到内部储能、对外做功和辐射损失。年轻 PWN 在自由膨胀抛射物中的标度关系常写作 \(R_{\rm pwn}(t)\propto (\dot E/M_{\rm ej})^{1/5}v_{\rm ej}^{3/5}t^{6/5}\)，它适合作为持续注入 bubble 的尺度理解，而不应被当作 Crab 的精确拟合公式。</p>
+<p>第五段，第三条主线是 \(\sigma\) problem。磁化参数定义为 Poynting flux 与粒子动能 flux 之比，即 \(\sigma=F_B/F_{\rm kin}\)，总风能流可写为 \(F_{\rm w}=F_{\rm kin}(1+\sigma)\)。靠近磁层和光柱时，风很可能是 Poynting-dominated，即 \(\sigma\gg1\)；但 Kennel-Coroniti 型 Crab 模型为了得到合适的下游速度、压力、磁场和星云尺寸，通常需要 termination shock 上游的有效 \(\sigma\ll1\)。低磁化强相对论 shock 的典型极限给出 \(\beta_2\simeq1/3\)，有利于把 bulk kinetic energy 转成随机粒子能；而高 \(\sigma\) 会带来强磁张力和能量转化困难。这就提出了从光柱到 \(R_{\rm ts}\) 之间磁能如何耗散或重新分配的问题，现代解释包括 striped wind 耗散、三维湍流重联、纬向各向异性能流、局部非均匀磁化和可能的离子成分。</p>
+<p>第六段，第四条主线是非热辐射诊断。termination shock 或其附近的湍流与重联区可以用注入谱 \(Q(E)=Q_0(E/E_0)^{-p}\exp(-E/E_{\rm cut})\) 描述粒子加速，并用 \(\int EQ(E)dE=\eta_e\dot E\) 约束能量归一化。同步辐射把磁场和粒子能量映射到观测频率，典型关系为 \(\nu_{\rm syn}\simeq3eB\gamma^2/(4\pi m_ec)\)；同步冷却时间为 \(t_{\rm syn}=6\pi m_ec/(\sigma_TB^2\gamma)\)，结合前式得到 \(t_{\rm syn}\propto B^{-3/2}\nu^{-1/2}\)。因此 radio 电子寿命长、可填满大体积，X-ray 电子寿命短、通常集中在内区。逆康普顿散射在 Thomson 极限下满足 \(E_\gamma\simeq(4/3)\gamma^2\epsilon_{\rm seed}\)，而单区近似下 \(L_{\rm IC}/L_{\rm syn}\simeq U_{\rm rad}/U_B\) 且 \(U_B=B^2/(8\pi)\)，这使同步与 IC 的相对光度成为平均磁场的重要但有条件的诊断。</p>
+<p>第七段，实际读论文和做模型时，不能只看某条模型曲线是否穿过 SED 数据点。单区模型通常拟合 \(B\)、\(p_1\)、\(p_2\)、\(E_b\)、\(E_{\rm cut}\)、\(\eta_e\)、\(U_{\rm rad}\)、\(t_{\rm age}\)、距离和吸收柱等参数；通量点可用高斯似然 \(\ln\mathcal{L}=-\frac12\sum_i[(F_i-F_{{\rm mod},i})/\sigma_i]^2\)，而低计数 gamma-ray 数据原则上应在 counts space 中使用 Poisson likelihood \(\ln\mathcal{L}=\sum_j[n_j\ln\mu_j-\mu_j-\ln(n_j!)]\)。upper limits 不能当作普通探测点。检查拟合时要看残差是否集中在 TeV 端、X-ray 端或 radio 端；要看 \(B\)-\(N_e\)、年龄-冷却 break、注入 break-冷却 break、\(U_{\rm rad}\)-IC 归一化等二维后验简并；还要用 \(R_{\rm ts}\)、\(R_{\rm pwn}\)、\(P_{\rm pwn}\) 和 \(\dot E\) 检查谱模型是否违反动力学和能量预算。</p>
+<p>第八段，标准模型的局限同样是本讲的一部分。Crab 是校准源，不是所有 PWN 的普适模板；Kennel-Coroniti 模型提供了清晰的物理闭合链条，却依赖一维、球对称、准稳态和简单磁化分布。真实 Crab 有 torus、jet、wisps、inner knot、局部快速变化和 gamma-ray flare，说明单一 \(B\)、单一粒子谱和均匀流体图像不足以解释全部细节。读图时也要警惕陷阱：多波段形态图要比较尺度与冷却时间，termination shock 示意图要区分自由风区和 shocked wind，SED 图要确认纵轴是 \(\nu F_\nu\) 还是 \(E^2dN/dE\)，径向光谱软化图要检查背景、pile-up 和吸收柱系统误差，MHD 合成图不能只凭“像不像”判断成功。下一讲将在本讲基础上系统展开 PWN 的同步、IC 和宽带 SED 拟合；更后面的课程才进入 evolved PWN、SNR reverse shock 和大尺度 pulsar halo。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一段，本讲在《PWN 与 pulsar halo 从零到前沿课程》中处于第二讲的位置。上一讲已经解决中心脉冲星的能源来源问题：通过 \(\dot E(t)\)、制动指数、特征年龄和 spin-down 历史，建立“脉冲星能向外注入多少能量”的账本。本讲不再重复磁层和 spin-down 的推导，而是把视角从中心引擎向外移动，问这些能量如何穿过自由风区，在超新星遗迹内部被约束，并在 PWN 内部形成可观测的非热辐射。下一讲才会把 \(B\)、\(Q(E)\)、冷却和目标光子场系统用于宽带 SED 拟合；本讲暂不进入逃逸粒子的 halo 扩散。</p>
+<p>第二段，PWN 的基本定义是由旋转供能脉冲星驱动的非热星云。它不是超新星前向激波扫过星际介质形成的热壳层，也不是普通热等离子体泡，而是一个由相对论 \(e^\pm\)、磁场、湍流和可能的离子成分组成的 relativistic bubble。年轻 PWN 通常仍嵌在超新星抛射物之中，因此它的大小、压力和演化既由中心脉冲星的 \(\dot E(t)\) 控制，也受 SNR 抛射物边界条件限制。本讲使用 SNR 作为外部压力和动力学环境，但不展开完整 SNR 演化理论。</p>
+<p>第三段，Crab Nebula 的历史角色非常特殊。它的光学丝状结构记录了公元 \(1054\) 年附近的历史爆发，radio 和 optical 连续谱显示存在非热电子和磁场，X-ray 辐射揭示出寿命更短、能量更高的电子群。Crab pulsar 被发现以后，星云能源问题发生根本转变：Crab pulsar 当前的 \(\dot E\) 足以支持星云辐射和膨胀，使 Crab 从“神秘连续谱源”变成了“pulsar-powered nebula”的标准实验室。正是在这个背景下，Rees 与 Gunn 提出了中心 wind 被星云截停并注入 relativistic plasma 的图像，Kennel 与 Coroniti 则建立了把 termination shock、MHD 流、\(\sigma\) 和同步辐射联系起来的标准模型。</p>
+<p>第四段，本领域的核心问题不是简单地问“Crab 为什么亮”，而是问“脉冲星的电磁能和粒子能在哪里、如何、以什么效率转化为辐射粒子”。自由脉冲星风在上游可以是近似 cold 的，这里的 cold 指共动系随机能较小，而不是普通热温度低；它的能量主要在 bulk motion 和电磁场中，所以自由风区辐射效率低，不容易直接看见。真正明亮的部分出现在风被 PWN 压力截停之后，即 termination shock 和下游 shocked wind 区域。这个区别是初学 PWN 时最重要的概念分界之一。</p>
+<p>第五段，第一个常见误区是把 termination shock 当作普通非相对论 SNR shock。PWN termination shock 的上游是超相对论或超快磁声脉冲星风，成分以 \(e^\pm\) 为主，磁场结构可能以环向分量和 striped wind 为特征，shock 的斜率、磁化和纬向结构会显著影响热化与粒子加速。SNR 前向激波主要是外层爆炸物或激波扫过环境介质并加热普通等离子体；PWN termination shock 则是内源 relativistic wind 被星云压力截停的过程。两者都叫 shock，但物理条件和诊断量完全不同。</p>
+<p>第六段，第二个常见误区是把 Crab 的 inner ring 直接看作完全球形 shock 的照片。Crab 的内环确实常被用作 \(R_{\rm ts}\) 的观测线索，但真实结构包含倾斜 torus、Doppler boosting、风的赤道增强、喷流、投影效应和局部时间变化。因而读图时应把 inner ring 视为 termination shock 区域的投影诊断，而不是把它当作几何上均匀的球壳边界。这个提醒对理解后续 MHD 模拟尤其重要，因为许多模型能够形成环面和喷流，正是由于引入了各向异性能流和磁场结构。</p>
+<p>第七段，第三个常见误区是把 Crab 当作所有 PWN 的普适模板。Crab 年轻、明亮、\(\dot E\) 高，且处于相对特殊的演化阶段；许多中年 PWN 已经受到 SNR reverse shock 压缩，出现偏移、再膨胀和 TeV 尺度远大于 X-ray 尺度的现象。还有一些系统与 pulsar halo 的边界更加模糊，TeV 辐射可能来自已经逃逸到更大尺度环境的 \(e^\pm\)。本讲使用 Crab 建立标准语言，是因为它最清楚地展示了 termination shock、\(\sigma\) problem、同步辐射和 IC 诊断，但课程上必须记住：Crab 是基准源，不是全部源类。</p>
+<p>第八段，为什么本讲重要？因为 PWN 是银河系高能 \(e^\pm\) 的关键候选源类，也是 TeV 伽马射线天空中最丰富的源类之一。若不了解 PWN 内部的压力平衡、粒子加速、磁场诊断和冷却形态，就无法可靠讨论 evolved PWN、未识别 TeV 源、正电子超额和 pulsar halo。换句话说，本讲是从 compact object electrodynamics 走向多波段高能天文和宇宙线传播的桥梁：先搞清楚粒子如何在 PWN 内部被制造和冷却，后续才能讨论哪些粒子逃逸、在哪里逃逸、逃逸后如何扩散。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一段，先建立空间分层图像。中心脉冲星通过自转能损失率 \(\dot E(t)\) 向外注入能量，最内侧是磁层和光柱附近的电磁加速区，这部分属于上一讲和更专门的脉冲星磁层课程；在更大半径处，能量以 pulsar wind 的形式向外传播。本讲从自由风区开始：上游风常被称为 cold relativistic wind，因为粒子共动系随机能较小，能量主要储存在 bulk kinetic energy 与 Poynting flux 中。正因为如此，自由风区本身通常不是 PWN 最明亮的辐射区。</p>
+<p>第二段，自由风之所以会终止，是因为年轻 PWN 嵌在 SNR 抛射物内部，历史注入的相对论粒子和磁场撑起了星云压力 \(P_{\rm pwn}\)。若采用零阶各向同性近似，风能流量为 \(F_{\rm w}(r)=\dot E/(4\pi r^2)\)，对应的相对论动压约为 \(F_{\rm w}/c\)。当风动压下降到与 \(P_{\rm pwn}\) 相当时，形成 termination shock，其半径满足 \(R_{\rm ts}\simeq [\dot E/(4\pi cP_{\rm pwn})]^{1/2}\)。这一步把中心脉冲星的当前功率、星云内部压力和可观测内区尺度连在一起，是本讲的动力学起点。</p>
+<p>第三段，termination shock 下游是 shocked wind 区域，也是 PWN 非热辐射的主要舞台。上游的 bulk kinetic energy 和部分磁能在 shock、湍流、剪切流和磁重联中转化为粒子随机能与湍动磁场。低磁化强相对论 shock 的典型下游入口速度尺度为 \(\beta_2\simeq1/3\)，说明流体从极快上游状态突然变慢并热化；但真实 Crab 中的 shock 不是球对称面，而是受风的纬向能流、磁场斜率、赤道 striped wind 和投影影响。因而我们使用球对称公式估算尺度，同时保留对三维结构的警惕。</p>
+<p>第四段，PWN 内部压力来自累积能量而不是任意参数。若星云体积近似为 \(V_{\rm pwn}=4\pi R_{\rm pwn}^3/3\)，相对论气体近似给出 \(P_{\rm pwn}\simeq E_{\rm pwn}/(3V_{\rm pwn})\simeq E_{\rm pwn}/(4\pi R_{\rm pwn}^3)\)。能量演化由 \(dE_{\rm pwn}/dt=\dot E(t)-P_{\rm pwn}dV_{\rm pwn}/dt-L_{\rm rad}\) 表示：脉冲星注入增加内部能量，PWN 膨胀对外做功，同步与 IC 辐射带走能量。年轻系统在自由膨胀抛射物中的半径标度可写作 \(R_{\rm pwn}(t)\propto(\dot E/M_{\rm ej})^{1/5}v_{\rm ej}^{3/5}t^{6/5}\)，用于理解持续注入 bubble 的增长趋势。</p>
+<p>第五段，接着引入磁化参数 \(\sigma\)。它定义为 \(\sigma=F_B/F_{\rm kin}\)，即 Poynting flux 与粒子动能 flux 的比值，总能流满足 \(F_{\rm w}=F_{\rm kin}(1+\sigma)\)。若 \(\sigma\ll1\)，风是 particle-dominated，termination shock 容易把 bulk kinetic energy 转化为非热粒子；若 \(\sigma\gg1\)，风是 Poynting-dominated，强磁张力和较弱压缩会使热化与加速更困难。Crab 标准模型的教育意义正在这里：靠近光柱的风可能需要 \(\sigma\gg1\)，而解释 Crab 的一维稳态模型常要求 \(R_{\rm ts}\) 上游有效 \(\sigma\ll1\)，这就是 \(\sigma\) problem 的基本表述。</p>
+<p>第六段，粒子加速后的辐射首先通过同步过程被观测到。常用注入谱可以写为 \(Q(E)=Q_0(E/E_0)^{-p}\exp(-E/E_{\rm cut})\)，并用 \(\int EQ(E)dE=\eta_e\dot E\) 约束进入电子和正电子的功率比例。相对论电子在磁场 \(B\) 中的同步特征频率为 \(\nu_{\rm syn}\simeq3eB\gamma^2/(4\pi m_ec)\)，这说明 radio、optical 和 X-ray 对应不同 \(\gamma\) 的电子。同步冷却时间为 \(t_{\rm syn}=6\pi m_ec/(\sigma_TB^2\gamma)\)，结合频率关系得到 \(t_{\rm syn}\propto B^{-3/2}\nu^{-1/2}\)。因此 X-ray PWN 通常更靠近内区，radio PWN 更扩展；这不是简单的注入位置差异，而是能量、冷却和输运共同作用的结果。</p>
+<p>第七段，同一批电子还会通过逆康普顿散射产生 GeV 到 TeV 伽马射线。在 Thomson 极限下，散射后光子能量满足 \(E_\gamma\simeq(4/3)\gamma^2\epsilon_{\rm seed}\)，其中 \(\epsilon_{\rm seed}\) 可以来自 CMB、红外、星光或同步光子场。若采用单区、同一电子群和 Thomson 近似，同步与 IC 光度比满足 \(L_{\rm IC}/L_{\rm syn}\simeq U_{\rm rad}/U_B\)，其中 \(U_B=B^2/(8\pi)\)。这个关系常被用来估计平均磁场：较强 IC 相对同步通常暗示较低 \(B\) 或较高 \(U_{\rm rad}\)。但真实 PWN 有空间分层、Klein-Nishina 抑制和多种目标光子场，因此该公式是诊断起点，不是机械结论。</p>
+<p>第八段，最后把理论与观测分析闭合。读多波段图像时，要比较 radio、optical、X-ray 和 TeV 的尺度差异，并用 \(t_{\rm syn}\propto B^{-3/2}\nu^{-1/2}\) 判断冷却是否足以解释形态；读 termination shock 图时，要回到 \(R_{\rm ts}\simeq [\dot E/(4\pi cP_{\rm pwn})]^{1/2}\)，检查图中是否暗含各向同性风；读 SED 时，要区分同步峰、IC 峰、冷却 break、目标光子场成分和残差结构；读拟合论文时，要检查似然选择、upper limits 处理、\(B\)-\(N_e\) 简并、动力学能量预算和系统误差。本讲到此只完成 PWN 内部标准图像：自由风被 SNR 约束形成 termination shock，下游粒子和磁场产生多波段辐射。逃逸到更大尺度后形成 pulsar halo 的扩散问题，将留到后续课程处理。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：从上一讲的中心引擎账本出发。上一讲已经给出脉冲星自转能损失率 \(\dot E(t)\)；本讲先取当前时刻、稳态、各向同性风的零阶近似，把总功率摊到半径为 \(r\) 的球面上，得到风能流量</p>
+<div class="math-display">\[F_{\rm w}(r)=\frac{\dot E}{4\pi r^2}.\]</div>
+<p>这里的 \(F_{\rm w}\) 是单位面积单位时间通过的总能量，包括粒子动能和电磁能。这个式子不是说 Crab 的风真实各向同性，而是给出 termination shock 尺度估算的起点；下一步要把能流量转成可与星云压力比较的动量通量。</p>
+<p>第二步：由相对论风能流量得到动压。假设上游 wind 以接近光速 \(c\) 传播，能量通量与动量通量相差约一个因子 \(c\)，所以在半径 \(r\) 处有</p>
+<div class="math-display">\[P_{\rm ram}(r)\simeq \frac{F_{\rm w}(r)}{c}=\frac{\dot E}{4\pi c r^2}.\]</div>
+<p>这里的 \(P_{\rm ram}\) 是 wind 对下游 shocked nebula 的冲击压力。物理上，超相对论风虽然上游可近似为 cold wind，但其 bulk motion 和 Poynting flux 仍携带巨大动量；下一步令它与 \(P_{\rm pwn}\) 平衡来求 \(R_{\rm ts}\)。</p>
+<p>第三步：用压力平衡确定 termination shock 半径。termination shock 出现在上游风动压下降到 PWN 内部压力 \(P_{\rm pwn}\) 的位置，因此</p>
+<div class="math-display">\[P_{\rm pwn}\simeq \frac{\dot E}{4\pi c R_{\rm ts}^2},\qquad R_{\rm ts}\simeq \left(\frac{\dot E}{4\pi cP_{\rm pwn}}\right)^{1/2}.\]</div>
+<p>这一步解出的 \(R_{\rm ts}\) 是动力学量，不是随意画出的亮环半径。观测上 Crab inner ring 可作为 \(R_{\rm ts}\) 的线索，但还受到 torus 几何、Doppler boosting、纬向各向异性和投影影响；下一步要解释 \(P_{\rm pwn}\) 从哪里来。</p>
+<p>第四步：把 PWN 当作 relativistic bubble 来估计压力。若星云半径为 \(R_{\rm pwn}\)，体积为</p>
+<div class="math-display">\[V_{\rm pwn}=\frac{4\pi}{3}R_{\rm pwn}^3,\]</div>
+<p>并假设相对论粒子与磁场能量在体积中零阶均匀分布，则相对论气体近似给出</p>
+<div class="math-display">\[P_{\rm pwn}\simeq \frac{E_{\rm pwn}}{3V_{\rm pwn}}\simeq \frac{E_{\rm pwn}}{4\pi R_{\rm pwn}^3}.\]</div>
+<p>这里的 \(E_{\rm pwn}\) 是 PWN 内部储存的总非热能量。它把内区的 \(R_{\rm ts}\) 与外区的 \(R_{\rm pwn}\) 联系起来；下一步需要写出 \(E_{\rm pwn}\) 的时间演化。</p>
+<p>第五步：建立 PWN 能量演化账本。持续注入的 bubble 同时经历内部储能、对外做功和辐射损失，因此满足</p>
+<div class="math-display">\[\frac{dE_{\rm pwn}}{dt}=\dot E(t)-P_{\rm pwn}\frac{dV_{\rm pwn}}{dt}-L_{\rm rad}.\]</div>
+<p>右端第一项是中心 pulsar 注入，第二项是 PWN 膨胀对 SNR 抛射物做功，第三项是同步辐射与逆康普顿辐射带走的功率。这个方程说明 \(P_{\rm pwn}\)、\(R_{\rm pwn}\)、\(R_{\rm ts}\) 和星云光度并非彼此独立；下一步给出年轻 PWN 在自由膨胀抛射物中的半径标度。</p>
+<p>第六步：给出自由膨胀 SNR 抛射物中的 PWN 半径标度。若早期 \(\dot E(t)\) 变化较慢，外部抛射物质量尺度为 \(M_{\rm ej}\)，速度尺度为 \(v_{\rm ej}\)，自相似分析给出</p>
+<div class="math-display">\[R_{\rm pwn}(t)\propto \left(\frac{\dot E}{M_{\rm ej}}\right)^{1/5}v_{\rm ej}^{3/5}t^{6/5}.\]</div>
+<p>这个关系只作为尺度公式使用，不能当作 Crab 的精确拟合式。它告诉我们 PWN 半径由中心注入和 SNR 边界共同决定；下一步转向 wind 的能量组成，即粒子动能与电磁能的比例。</p>
+<p>第七步：定义磁化参数并连接到 \(\sigma\) problem。上游风总能流可分为粒子动能通量 \(F_{\rm kin}\) 与 Poynting 通量 \(F_B\)，定义</p>
+<div class="math-display">\[\sigma=\frac{F_B}{F_{\rm kin}},\qquad F_{\rm w}=F_{\rm kin}(1+\sigma).\]</div>
+<p>若 \(\sigma\ll1\)，风是 particle-dominated，termination shock 容易把 bulk kinetic energy 转化为随机粒子能；若 \(\sigma\gg1\)，风是 Poynting-dominated，磁张力和磁压会使热化与压缩更困难。Crab 的经典一维模型通常需要 shock 上游有效 \(\sigma\ll1\)，而光柱附近理论上可能有 \(\sigma\gg1\)，这就是 \(\sigma\) problem 的核心张力；下一步看低磁化 shock 的下游速度尺度。</p>
+<p>第八步：低磁化强相对论 shock 的极限。忽略复杂 obliquity、纬向结构和三维湍流，在 \(\sigma\ll1\) 的强相对论 shock 极限，下游入口速度尺度约为</p>
+<div class="math-display">\[\beta_2\simeq \frac{1}{3},\qquad \beta_2\equiv \frac{v_2}{c}.\]</div>
+<p>这个结果表示上游 bulk motion 在 shock 附近被显著减速并随机化，为非热粒子和湍动磁场提供能量来源。它不是整个 PWN 内所有位置的速度，而是下游边界条件的典型尺度；下一步需要用注入谱描述被加速的粒子分布。</p>
+<p>第九步：写出非热粒子注入谱和能量归一化。把 termination shock、湍流和重联的微观加速过程先参数化为 cutoff power law，取</p>
+<div class="math-display">\[Q(E)=Q_0\left(\frac{E}{E_0}\right)^{-p}\exp\left(-\frac{E}{E_{\rm cut}}\right),\qquad \int E Q(E)\,dE=\eta_e\dot E.\]</div>
+<p>这里 \(Q(E)\) 是单位时间注入的粒子能谱，\(p\) 是谱指数，\(E_{\rm cut}\) 是截止能量，\(\eta_e\) 是进入辐射粒子的功率比例。这个归一化把中心引擎功率与可观测 SED 振幅连接起来；下一步用同步辐射把粒子能量映射到观测频率。</p>
+<p>第十步：同步辐射特征频率。相对论电子在平均磁场 \(B\) 中辐射，其特征频率近似为</p>
+<div class="math-display">\[\nu_{\rm syn}\simeq \frac{3eB}{4\pi m_ec}\gamma^2.\]</div>
+<p>这里 \(\gamma\) 是电子 Lorentz 因子，\(e\) 和 \(m_e\) 分别是电子电荷与质量。给定 \(B\) 后，radio、optical 和 X-ray 对应不同 \(\gamma\) 的电子；X-ray 需要更高能电子，因此也更容易受冷却限制。下一步计算这些电子的同步冷却时间。</p>
+<p>第十一步：同步冷却时间与多波段尺寸差异。若电子主要通过同步辐射损失能量，则冷却时间为</p>
+<div class="math-display">\[t_{\rm syn}=\frac{6\pi m_ec}{\sigma_TB^2\gamma},\qquad t_{\rm syn}\propto B^{-3/2}\nu_{\rm syn}^{-1/2}.\]</div>
+<p>第二个比例关系来自把 \(\gamma\) 用 \(\nu_{\rm syn}\) 和 \(B\) 消去。它直接解释了常见观测事实：X-ray PWN 通常比 radio PWN 更紧凑，因为高能电子在向外输运前已经显著冷却；下一步引入同一批电子产生的逆康普顿辐射。</p>
+<p>第十二步：逆康普顿能量映射。在 Thomson 极限下，Lorentz 因子为 \(\gamma\) 的电子散射能量为 \(\epsilon_{\rm seed}\) 的目标光子，得到的伽马射线能量近似为</p>
+<div class="math-display">\[E_\gamma\simeq \frac{4}{3}\gamma^2\epsilon_{\rm seed}.\]</div>
+<p>目标光子可以是 CMB、红外、星光或同步光子场。这个式子把电子能量、seed photon 场和 GeV 到 TeV 观测联系起来；但在高能端若进入 Klein-Nishina 区域，简单 Thomson 标度会失效。下一步用同步与逆康普顿的相对光度诊断平均磁场。</p>
+<p>第十三步：用同步与 IC 光度比闭合到可观测诊断。在单区、同一电子群、Thomson 散射和空间平均磁场近似下，有</p>
+<div class="math-display">\[\frac{L_{\rm IC}}{L_{\rm syn}}\simeq \frac{U_{\rm rad}}{U_B},\qquad U_B=\frac{B^2}{8\pi}.\]</div>
+<p>这里 \(U_{\rm rad}\) 是目标光子场能量密度，\(U_B\) 是磁场能量密度。若观测到 \(L_{\rm IC}\) 相对 \(L_{\rm syn}\) 较强，通常暗示平均 \(B\) 较低或 \(U_{\rm rad}\) 较高；但空间分层、局部磁场、不同电子年龄和 Klein-Nishina 效应会破坏简单解释。至此，\(\dot E\)、\(R_{\rm ts}\)、\(P_{\rm pwn}\)、\(R_{\rm pwn}\)、\(\sigma\)、\(Q(E)\)、\(B\)、\(t_{\rm syn}\) 与 \(L_{\rm syn}\) 和 \(L_{\rm IC}\) 形成一条从中心引擎到多波段观测的闭合推导链。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一段，拟合路线要从“为什么要拟合”开始，而不是直接把一条曲线画到数据点上。本讲承接上一讲的中心能源账本：上一讲给出脉冲星的自转能损失率 \(\dot E(t)\)、年龄和能量注入历史；本讲新增的是这些能量在 PWN 内部如何被 termination shock 截停，并转化为磁场 \(B\)、粒子注入谱 \(Q(E)\) 和多波段辐射。最小可拟合模型通常是单区宽带 SED 模型：假设星云有一个体积平均磁场 \(B\)，一族随时间注入并冷却的 \(e^\pm\)，以及若干目标光子场。这个模型适合建立能量预算和谱形诊断，但它故意不解释 torus、jet、wisps 和 flare 的全部空间细节；这些要留给 MHD 形态模型和下一讲更系统的 SED 课程。</p>
+<p>第二段，单区 SED 的核心参数应逐一对应观测约束。常用注入谱可写为 </p>
+<div class="math-display">\[Q(E)=Q_0\left(\frac{E}{E_0}\right)^{-p}\exp\left(-\frac{E}{E_{\rm cut}}\right),\]</div>
+<p>或使用 broken power law，参数包括低能斜率 \(p_1\)、高能斜率 \(p_2\)、断裂能 \(E_{\rm b}\)、截止能量 \(E_{\rm cut}\)、归一化 \(Q_0\)、电子能量比例 \(\eta_e\)、年龄 \(t_{\rm age}\)、距离 \(d\)、吸收柱 \(N_{\rm H}\)、目标光子场能量密度 \(U_{\rm rad}\) 和平均磁场 \(B\)。能量归一化必须回扣中心引擎，典型约束是 </p>
+<div class="math-display">\[\int E Q(E)\,dE=\eta_e\dot E.\]</div>
+<p>读论文时要问：radio 斜率主要约束哪个 \(p\)，X-ray 截止或软化约束哪个高能部分，TeV 峰值约束 \(U_{\rm rad}\) 还是 \(B\)，总电子能量是否超过 \(\int \dot E(t)dt\)。</p>
+<p>第三段，似然函数的选择决定了误差条是否可信。对高信噪比通量点，教学上可先用高斯通量似然，</p>
+<div class="math-display">\[\ln\mathcal{L}=-\frac{1}{2}\sum_i\left[\frac{F_i-F_{{\rm mod},i}}{\sigma_i}\right]^2,\]</div>
+<p>其中 \(F_i\) 是观测通量，\(F_{{\rm mod},i}\) 是模型通量，\(\sigma_i\) 是统计误差和可合并系统误差。对低计数 \(\gamma\)-ray 数据，更合适的是在 counts space 中使用 Poisson likelihood，</p>
+<div class="math-display">\[\ln\mathcal{L}=\sum_j\left[n_j\ln\mu_j-\mu_j-\ln(n_j!)\right],\]</div>
+<p>其中 \(n_j\) 是第 \(j\) 个 bin 的观测计数，\(\mu_j\) 是卷积仪器响应、背景和源模型后的预测计数。upper limits 不能当作普通探测点放入 \(\chi^2\)，应使用 one-sided likelihood、截断似然或在后验预测中检查模型是否超过限值。</p>
+<p>第四段，后验解释要围绕简并结构展开，而不是只报告一个最佳拟合值。同步辐射的归一化常近似受 \(N_e B^{(p+1)/2}\) 控制，而 IC 归一化常受 \(N_e U_{\rm rad}\) 控制，因此 \(B\) 与电子总数 \(N_e\) 会明显简并。谱中的弯曲也不唯一：它可能来自注入断裂 \(E_{\rm b}\)，也可能来自同步冷却 break，或来自年龄 \(t_{\rm age}\) 与输运时间的组合。读论文时应优先查看二维 posterior contour，例如 \(B\)-\(N_e\)、\(E_{\rm b}\)-\(t_{\rm age}\)、\(U_{\rm rad}\)-IC 归一化、\(E_{\rm cut}\)-X-ray 截止能量，而不是只看一维误差条。</p>
+<p>第五段，残差诊断要分成四层：能量预算、谱形、形态和时间变化。若 radio 与 X-ray 拟合良好但 TeV 系统偏高，可能说明目标光子场低估、存在低磁场电子区、SSC 成分处理不足，或模型把空间分层过度平均化。若总 SED 拟合良好但 X-ray photon index 的径向软化失败，说明模型缺少空间输运和同步冷却的联合约束。若 torus 亮度比拟合不错但无法解释 \(\gamma\)-ray flare，则表明平均 MHD 或单区模型没有包含局部重联与极端粒子加速。所谓“模型通过”不能只意味着曲线穿过 SED，而应同时满足 \(R_{\rm ts}\)、\(R_{\rm pwn}\)、\(P_{\rm pwn}\)、\(\dot E\) 和总能量预算。</p>
+<p>第六段，动力学约束是防止 SED 拟合变成纯数学插值的关键。termination shock 半径应回扣 </p>
+<div class="math-display">\[R_{\rm ts}\simeq\left(\frac{\dot E}{4\pi cP_{\rm pwn}}\right)^{1/2},\]</div>
+<p>而 PWN 压力应与 </p>
+<div class="math-display">\[P_{\rm pwn}\simeq\frac{E_{\rm pwn}}{4\pi R_{\rm pwn}^3}\]</div>
+<p>同时自洽。若某个 SED 模型要求极低 \(B\) 和极高 \(N_e\)，就要检查总粒子能量是否超过 pulsar 可供应的 \(\int\dot E(t)dt\)；若某个模型要求过高 \(B\)，则要检查同步冷却时间 \(t_{\rm syn}\) 是否会让 X-ray 星云过于紧凑。这样，谱拟合、压力平衡和多波段尺寸才形成闭合检验。</p>
+<p>第七段，形态拟合通常进入 Kennel-Coroniti 型一维 MHD、二维轴对称 relativistic MHD 或三维 MHD 模拟。可调参数包括风的纬向能流分布、赤道 striped wind 宽度、注入磁化 \(\sigma(\theta)\)、观测倾角、粒子示踪方法、发射率处方和局部湍流扩散。拟合对象包括 torus 前后亮度比、jet 与 counter-jet、inner ring 半径、wisps 位置和速度、X-ray surface brightness profile。这里的 likelihood 往往不如 SED 拟合标准化，常用图像残差、径向剖面、特征量匹配和模拟库比较；读论文时要分清“视觉相似”与“统计上通过”。</p>
+<p>第八段，系统误差必须在结论中显式出现。常见来源包括距离 \(d\)、年龄 \(t_{\rm age}\)、吸收柱 \(N_{\rm H}\)、X-ray pile-up、背景扣除、仪器绝对标定、TeV 有效面积、\(\gamma\)-ray 扩展源模板、目标光子场模型、低频 radio 前景污染、局部时变结构和 Crab flare。Crab 很亮并不意味着没有系统误差；亮源反而更容易暴露仪器标定和时变结构问题。一个合格的拟合章节应告诉读者：哪些参数由数据强约束，哪些参数由先验或系统误差主导，哪些结论只在单区近似下成立。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>第一，读 Rees 与 Gunn 相关经典结果时，要先抓住物理语言的转变：Crab Nebula 的非热连续谱不是一次爆炸后被动冷却的残余，而是由中心 pulsar 持续供能的 relativistic bubble。阅读时建议用三列笔记整理：中心能量源 \(\dot E\)、星云能量储库 \(E_{\rm pwn}\)、外部 SNR 抛射物提供的压力边界。这样就能看出本讲的主线不是“Crab 有多亮”，而是 \(\dot E\rightarrow F_{\rm w}\rightarrow P_{\rm pwn},B,Q(E)\rightarrow L_\nu\) 这条能量转化链。</p>
+<p>第二，读 Kennel 与 Coroniti 时，不要一开始被完整 MHD 方程淹没。第一遍应先问：模型输入是什么，模型输出是什么。输入包括当前风功率 \(\dot E\)、termination shock 半径 \(R_{\rm ts}\)、外部星云尺度 \(R_{\rm pwn}\)、边界压力和上游磁化参数 \(\sigma\)；输出包括下游速度、压力、磁场、粒子分布和同步辐射亮度。把这些量连起来后，再读具体方程会清楚得多。</p>
+<p>第三，Kennel-Coroniti 的低 \(\sigma\) 结论要作为“经典模型中的有效诊断”来读，而不是作为所有位置的绝对事实。课堂上应要求学生标出结论依赖的假设：一维、稳态、近似球对称、理想 MHD、简化粒子分布和 Crab-like 边界条件。经典张力在于：靠近光柱的风可能有 \(\sigma\gg1\)，而解释 Crab 的一维模型常要求 termination shock 上游有效 \(\sigma\ll1\)。这就是 \(\sigma\) problem 的教学核心。</p>
+<p>第四，读 Crab 多波段观测时，要按能段和寿命分层。radio 图像主要告诉我们低能长寿命电子如何填满星云体积；optical 和偏振图像显示磁场结构、丝状结构和中等能电子；X-ray 图像追踪最新注入和快速冷却的高能电子；GeV 到 TeV 图像通过 IC 辐射连接目标光子场与电子最高能端。不要把多波段图简单看成同一个结构的不同颜色版本。</p>
+<p>第五，读 termination shock 相关图像时，要保持几何警惕。Crab inner ring 是 \(R_{\rm ts}\) 的重要观测线索，但不是完全球形 shock 的直接照片。它同时包含倾斜 torus、Doppler boosting、赤道增强、纬向能流分布和投影效应。阅读时应把公式 \(R_{\rm ts}\simeq[\dot E/(4\pi cP_{\rm pwn})]^{1/2}\) 放在旁边，用它提醒自己：图上的亮环只是物理 shock 区域的投影诊断。</p>
+<p>第六，读现代 \(\sigma\) problem 论文时，要区分定义位置和平均方式。某篇文章中的 \(\sigma\) 可能指光柱附近、termination shock 上游、模拟注入边界、纬向平均值、局部值或时间平均值。许多看似矛盾的结论，实际来自不同半径、不同维度和不同平均方式。建议学生每读一篇就写下：\(\sigma\) 在哪里定义，是否包含 striped wind 耗散，是否有三维湍流重联，是否允许局部强磁化与整体低磁化同时存在。</p>
+<p>第七，读综述性文献时，可把本讲内容放入更大地图中。年轻 Crab-like PWN 对应本讲的 termination shock、PWN bubble、\(\sigma\) problem、同步和 IC 诊断；中年 evolved PWN 会引入 SNR reverse shock、偏移 morphology 和更大的 TeV 尺度；pulsar halo 则进一步进入逃逸 \(e^\pm\) 和扩散传播。本讲的边界是 PWN 内部，不提前展开大尺度 halo 的扩散系数 \(D(E)\)。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，多波段 Crab 形态图。检查 radio、optical、X-ray、GeV 和 TeV 的空间尺度、中心位置、表面亮度分布和能段差异。重点看低能长寿命电子是否更扩展，高能 X-ray 电子是否更集中，并用 \(t_{\rm syn}\propto B^{-3/2}\nu^{-1/2}\) 判断冷却解释是否合理。</p>
+<p>二，termination shock 与 PWN 结构示意图。检查自由风区、\(R_{\rm ts}\)、shocked wind、torus、jet、outer PWN 和 SNR ejecta 是否被清楚区分。特别警惕把 Crab inner ring 直接等同于完全球形 shock。</p>
+<p>三，宽带 SED 图。先确认横轴是频率 \(\nu\) 还是 photon energy，纵轴是 \(\nu F_\nu\) 还是 \(E^2dN/dE\)。再区分 synchrotron、SSC、CMB IC、IR IC 和星光 IC 成分，检查同步峰、IC 峰、冷却 break、截止和 TeV 残差。</p>
+<p>四，X-ray photon index 径向变化图。横轴通常是离 pulsar 的角距离或物理半径，纵轴是 photon index \(\Gamma_{\rm ph}\) 或谱指数。重点看 \(\Gamma_{\rm ph}\) 是否随半径增大而变大，即谱是否变软，并检查背景、pile-up、能段选择和 \(N_{\rm H}\) 处理。</p>
+<p>五，MHD 模拟合成图与 Chandra 图像对比。检查 torus 前后明暗比、jet 与 counter-jet、inner ring 半径、wisps 位置和时间变化。不要只凭整体图像“像不像”判断模型成功。</p>
+<p>六，\(\sigma\) problem 诊断图。检查横轴是半径 \(r\)、归一化半径 \(r/R_{\rm ts}\) 还是磁化参数 \(\sigma\)，纵轴是速度、压力、磁场、亮度还是能量通量。特别要问图中的 \(\sigma\) 是 shock 上游局部值、纬向平均值，还是模拟边界注入值。</p>
+<p>七，IC 目标光子场分解图。比较 CMB、红外、星光和 SSC 在不同 \(\gamma\)-ray 能段的贡献。检查 \(E_\gamma\simeq(4/3)\gamma^2\epsilon_{\rm seed}\) 是否处于 Thomson 极限，并寻找 Klein-Nishina 抑制导致的高能端变陡。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图一，多波段 Crab 形态图。横轴和纵轴通常是天球坐标或相对脉冲星的角距离，颜色或等值线表示表面亮度。读图顺序是先定位中心 pulsar，再比较 radio、optical、X-ray 和 TeV 的尺度。模型预期是低能电子寿命长，因此 radio 可以更扩展；高能 X-ray 电子冷却快，因此 X-ray 结构更靠近内区。误读风险是把 X-ray 小尺寸简单解释为高能电子注入不足，而忽略同步冷却、输运速度和磁场分布。</p>
+<p>图二，termination shock 与 PWN 分层示意图。图上应清楚标出自由 wind zone、termination shock、下游 shocked wind、torus、jet、outer PWN 和 SNR ejecta。半径标注要回扣 \(R_{\rm ts}\simeq[\dot E/(4\pi cP_{\rm pwn})]^{1/2}\)，说明 \(R_{\rm ts}\) 来自风动压与 PWN 压力平衡。常见误读是把示意图中的球形 shock 当作 Crab inner ring 的真实几何；实际观测环受倾角、赤道能流增强、Doppler boosting 和投影影响。</p>
+<p>图三，宽带 SED 图。横轴可能是 \(ν\) 或 photon energy，纵轴常用 \(\nu F_\nu\) 或 \(E^2dN/dE\)，因此读图前必须确认单位。同步成分一般从 radio 延伸到 X-ray 或更高能，IC 成分出现在 GeV 到 TeV；模型线若分解为 SSC、CMB IC、IR IC 和星光 IC，要逐一看哪一段由哪一成分主导。残差若集中在 TeV 端，可能提示目标光子场、低磁场区或空间分层处理不足；误读风险是用单个平均 \(B\) 过度解释所有波段。</p>
+<p>图四，X-ray photon index 随半径变化图。横轴是离 pulsar 的角距离或物理半径，纵轴是 photon index \(\Gamma_{\rm ph}\)。若 \(\Gamma_{\rm ph}\) 随半径增大而增大，表示谱变软，通常支持高能电子在向外输运过程中同步冷却。模型比较时要看是否同时拟合亮度剖面和谱指数剖面；只拟合总 SED 而不能拟合径向软化，说明空间输运模型不充分。误读风险是把所有软化都归因于吸收柱 \(N_{\rm H}\) 或背景，而不检查能段选择、pile-up 和局部结构。</p>
+<p>图五，MHD 合成 X-ray 图与 Chandra 图像对比。坐标轴是投影天球方向，颜色代表合成表面亮度或观测计数率。模型线或模拟图通常通过风各向异性、\(\sigma(\theta)\)、观测倾角和 Doppler boosting 形成 torus 与 jet。读图时要分项检查 torus 前后亮度比、jet 与 counter-jet、inner ring 半径、wisps 位置和时间演化。误读风险是只看整体 morphology 相似，却不检查局部残差和时变结构。</p>
+<p>图六，\(\sigma\) problem 诊断图。横轴可能是 \(r/R_{\rm ts}\)、\(\sigma\) 或模型编号，纵轴可能是流速、压力、磁场、磁能比例或同步亮度。低 \(\sigma\) 模型通常更容易形成 particle-dominated nebula，并与 Crab 的大小和亮度分布相容；高 \(\sigma\) 模型可能因磁张力过强而产生尺度和能量转化张力。读图时必须确认 \(\sigma\) 的定义位置：光柱附近的 \(\sigma\)、termination shock 上游的有效 \(\sigma\) 和模拟注入边界的 \(\sigma\) 不能直接混用。</p>
+<p>图七，IC 目标光子场分解图。横轴为 \(\gamma\)-ray energy，纵轴常为 \(E^2dN/dE\) 或 \(\nu F_\nu\)，曲线分别表示 CMB、红外、星光和 SSC。读图时要用 \(E_\gamma\simeq(4/3)\gamma^2\epsilon_{\rm seed}\) 粗略判断峰位是否合理，同时检查高能端是否进入 Klein-Nishina 区域。误读风险是把 IC 峰值直接解释为电子 cutoff，而忽略目标光子场谱形和 Klein-Nishina 抑制。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从经典工作读到标准语言。先读 Rees 与 Gunn 关于 pulsar-powered nebula 的思想，把重点放在持续注入、风被截停和 relativistic plasma bubble；再读 Kennel 与 Coroniti 的 Crab MHD 标准模型，把 \(\dot E\)、\(R_{\rm ts}\)、\(R_{\rm pwn}\)、\(P_{\rm pwn}\) 和 \(\sigma\) 连成一条动力学链。阅读时建议做一张对照表，记录每篇文献如何定义 \(\sigma\)、如何估计 \(B\)、如何处理粒子谱和边界压力。</p>
+<p>第二条路径是从一维模型走向多维 MHD 与 kinetic physics。Kennel-Coroniti 模型的优点是清晰、可解析、能说明低 \(\sigma\) 需求；局限是难以自然产生 torus、jet、wisps、三维湍流和局部 flare。后续应阅读轴对称 relativistic MHD、三维 MHD、striped wind 耗散、shock obliquity、磁重联和 PIC 相关工作，重点看现代模型如何在局部高磁化与整体有效低磁化之间建立桥梁。</p>
+<p>第三条路径是从 Crab-like young PWN 走向 population。Gaensler 与 Slane 等综述可作为地图：先理解年轻 PWN 的 termination shock、同步辐射和 IC 语言，再比较 Vela-like、中年和 evolved PWN 的差异。中年系统会受到 SNR reverse shock、脉冲星本动和环境密度梯度影响，出现 offset morphology、X-ray 与 TeV 尺度分离以及粒子年龄分层。这些问题仍主要属于 PWN 演化，不等同于 halo 扩散。</p>
+<p>第四条路径才是从 PWN 内部走向 pulsar halo。只有当读者已经掌握 \(B\)、\(Q(E)\)、\(t_{\rm syn}\)、\(L_{\rm IC}/L_{\rm syn}\)、\(R_{\rm ts}\) 和 \(P_{\rm pwn}\) 的内部诊断后，才适合进入逃逸边界、扩散系数 \(D(E)\)、能量损失 \(b(E)\)、HAWC 与 LHAASO 角向亮度剖面等主题。本讲不提前写 halo 扩散方程，是为了避免把 PWN 内部冷却与 ISM 中逃逸传播混为一谈。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>下一讲最自然的方向是一讲完整的“PWN 同步辐射、逆康普顿谱和多波段 SED 拟合”。本讲已经建立 termination shock、\(P_{\rm pwn}\)、\(R_{\rm ts}\)、\(\sigma\)、\(B\)、\(Q(E)\) 和冷却诊断；下一讲应把这些量系统用于 radio 到 TeV 的谱建模，详细讨论 broken power-law 注入、冷却 break、目标光子场、\(L_{\rm IC}/L_{\rm syn}\)、posterior degeneracy 和 upper limits 处理，而不重复本讲的压力平衡推导。</p>
+<p>第二个后续方向是“演化型 PWN、SNR reverse shock 和 TeV unidentified sources”。它应从 Crab-like 年轻系统走向中年系统，讨论 reverse shock 压缩、PWN 偏移、再膨胀、脉冲星本动和环境密度梯度如何改变 X-ray 与 TeV morphology。这个方向仍在 PWN 演化边界内，但比本讲更强调时间演化和外部 SNR 作用。</p>
+<p>第三个后续方向是“pulsar halo 与 TeV 扩散前沿”。这应放在更后面，因为它需要先掌握 PWN 内部如何产生和冷却 \(e^\pm\)。到那一讲再引入逃逸粒子、扩散系数 \(D(E)\)、能量损失 \(b(E)\)、角向亮度剖面和局部宇宙线正电子问题。本讲的边界明确止步于 PWN 内部发光，不进入大尺度 halo 传播。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>Crab Nebula pulsar wind nebula Kennel Coroniti sigma problem</li>
+<li>pulsar wind nebula termination shock synchrotron inverse Compton</li>
+<li>evolved PWN TeV gamma ray sources</li>
+<li>Rees Gunn 1974 Crab pulsar wind nebula</li>
+<li>Gaensler Slane 2006 pulsar wind nebula review</li>
+<li>Crab Nebula Chandra torus jet wisps termination shock</li>
+<li>PWN MHD simulations striped wind sigma problem</li>
+<li>Crab Nebula gamma ray flares magnetic reconnection</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1974MNRAS.167....1R/abstract">https://ui.adsabs.harvard.edu/abs/1974MNRAS.167....1R/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1984ApJ...283..694K/abstract">https://ui.adsabs.harvard.edu/abs/1984ApJ...283..694K/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
