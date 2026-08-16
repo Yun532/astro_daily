@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-16</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-16</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-16">
+      <a class="previous" href="2026-08-15.html">← 上一期：2026-08-15</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-16T11:10:31+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-pwn-pulsar-halo-pwn-tev-halo">1. PWN 与 pulsar halo 从零到前沿（三）：粒子何时逃逸，PWN 如何过渡到 TeV halo</h3>
+<ul>
+<li>课程系列：PWN 与 pulsar halo 从零到前沿课程（第 3/5 讲）</li>
+<li>本讲边界：本讲讲粒子逃逸、扩散系数、冷却半径和 PWN/halo 边界。不重点讲 Geminga/Monogem 观测细节。</li>
+<li>上下文承接：上一讲讲了粒子被困在 PWN 中如何发光；本讲问它们逃出星云后如何传播。</li>
+<li>主题：particle escape from PWNe, diffusion, cooling and transition to pulsar halos</li>
+<li>经典工作：从 evolved PWN 到逃逸电子正电子在周围介质中扩散冷却的模型，把传统 PWN 和 TeV halo 连接起来。</li>
+<li>为什么经典：现代 TeV 源分类经常在 SNR、PWN 和 pulsar halo 之间摇摆。理解粒子逃逸是读 LHAASO/HAWC/CTA 源解释的关键。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一段：本讲是系列第 \(3/5\) 讲，承接上一讲“PWN 内部粒子束缚与辐射”。上一讲的工作边界是：把 pulsar wind termination shock 之后的星云看成主要发光区，讨论 \(e^\pm\) 如何在磁化 PWN 中被注入、输运，并通过 synchrotron 与 IC 产生从 X-ray 到 TeV 的辐射。本讲的问题向外推进一步：如果 PWN 不是永久封闭盒子，那么同一批 \(e^\pm\) 何时越过 PWN 边界？它们逃出后在周围介质中怎样扩散、冷却并形成 TeV halo？因此，本讲的核心科学问题不是简单地区分“这是 PWN 还是 halo”，而是判断 pulsar-powered system 中不同能量粒子分别在哪个输运区发光。</p>
+<p>第二段：历史动机来自 TeV 天文学对传统 Crab-like PWN 图像的挑战。年轻 Crab Nebula 让人形成一种直觉：pulsar 位于中心，PWN 明亮、紧凑、多波段大致相关。但越来越多 evolved PWN 候选源显示出更复杂的外观：TeV 辐射比 X-ray 辐射更延展，峰值可能偏离 pulsar，甚至出现 X-ray 暗而 TeV 亮的现象。这并不必然说明存在完全不同的源类，而是提示高能电子的冷却寿命、PWN 动力学演化、SNR reverse shock 扰动和周围扩散环境共同决定了不同波段的可见形态。</p>
+<p>第三段：本讲采用“注入—逃逸—传播冷却”的三层模型作为教学主线。第一层是 pulsar 连续注入，源项写作 \(Q(E,t)=Q_0(t)(E/E_0)^{-p}\exp(-E/E_{\rm cut})\)，并由 \(\int E Q(E,t)\,dE=\eta_e\dot E(t)\) 归一化，保证能量预算不超过 pulsar 自旋下降功率能够提供的范围。第二层是 PWN 边界处的逃逸，用能量和时间相关的 \(t_{\rm esc}(E,t)\) 或等效逃逸概率描述。第三层是逃逸粒子在外部介质中的扩散—损失传播，由 \(D(E)\)、\(b(E)\)、\(t_{\rm cool}(E)\) 和系统年龄共同塑造 TeV halo 的大小与谱形。</p>
+<p>第四段：推导链的关键结论是一组时间尺度竞争，而不是某个固定的“halo 半径”。如果 \(t_{\rm esc}(E)\gg t_{\rm age}\)，粒子仍主要留在 PWN 内，本系统在该能量上更像 confined PWN；如果 \(t_{\rm esc}(E)<t_{\rm age}\) 且 \(t_{\rm cool}(E)\) 足够长，逃逸粒子可以扩散到大尺度并形成可见 halo；如果 \(t_{\rm cool}(E)\) 很短，高能粒子只能在 pulsar 附近发光。数量级上，可用 \(r_{\rm halo}(E)\sim2\sqrt{D(E)\min(t_{\rm age}-t_{\rm esc},t_{\rm cool})}\) 理解这种能量依赖形态，再通过 \(\theta\simeq r/d\) 转为观测角尺度。</p>
+<p>第五段：本讲还强调诊断量如何从理论走向数据。TeV halo 的重要观测检查包括：\(\theta_{\rm halo}(E_\gamma)\) 是否随能量升高而变小，外区光子谱是否比内区更软，TeV 光度是否满足 \(L_\gamma\lesssim\eta_e\int\dot E(t)dt\)，发射中心是否与 pulsar 相关，还是更贴近 gas column、SNR shell、X-ray relic PWN 或 proper-motion tail。尤其要避免只用一条 SED 曲线做源类判定，因为总谱可以被 \(D_0\)、\(\eta_e\)、\(B\)、\(U_{\rm rad}\)、年龄和距离的组合共同调节；空间信息和能量分箱 morphology 才是逃逸粒子图像的核心证据。</p>
+<p>第六段：模型拟合的课程重点不是报告一个最佳拟合 \(D_0\)，而是建立前向建模意识。物理参数先生成 \(Q_{\rm esc}(E,t)\)、粒子密度 \(n(E,r,t)\)、IC 发射率 \(j_\gamma(E_\gamma,r)\) 和角向亮度 \(I_\gamma(E_\gamma,\theta)\)，再经过曝光、PSF、能量重建、ROI mask、背景和邻近源模板卷积成预测计数 \(\mu_i(\boldsymbol\Theta)\)。计数图应使用 Poisson 似然 \(\ln\mathcal L=\sum_i[k_i\ln\mu_i(\boldsymbol\Theta)-\mu_i(\boldsymbol\Theta)-\ln(k_i!)]\)，而使用已发表 SED 或径向剖面时，则必须检查协方差、孔径定义和去卷积假设。</p>
+<p>第七段：局限性必须和模型一起学习。球对称、均匀扩散、连续注入、无平流和单一辐射场只是第一阶教学近似。真实系统可能包含 SNR reverse shock 压缩、PWN 破裂、bow shock tail、各向异性磁场、分子云、辐射场梯度、源混叠和仪器 acceptance 系统误差。低扩散系数 \(D(E)\) 也不等于源必然更暗；它可能让粒子更集中、表面亮度更高，但也改变粒子到达远处和贡献局地 \(e^\pm\) 的能力。因此本讲有意只处理单源传播物理与通用诊断，不展开 Geminga、Monogem 等具体观测案例细节，也不进入 Galactic \(e^\pm\) population inference。</p>
+<p>第八段：本讲的后续影响有两层。对 TeV 源分类来说，它提供了从 compact PWN、evolved PWN 到 pulsar halo 的连续语言，使学生读 LHAASO、HAWC、CTA 或 IACT 论文时能追问“粒子在哪个区发光”和“模型是否经过仪器响应卷积”。对宇宙线正电子问题来说，它说明 pulsar 是否能贡献地球附近 \(e^\pm\)，不仅取决于注入功率 \(\dot E(t)\)，也取决于低扩散区大小、粒子逃逸时间和最终进入普通 ISM 的效率。下一讲将进入 TeV halo 观测与仪器诊断，重点处理 PSF、背景、extension significance、能量分箱 morphology 和具体案例，而不重复本讲的扩散—损失方程推导。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一段：PWN 研究的历史起点通常是 Crab-like system。中心 pulsar 通过自旋下降功率 \(\dot E(t)\) 持续驱动 relativistic wind，风在 termination shock 附近被减速、热化或加速，形成含有高能 \(e^\pm\) 和磁场的非热星云。早期图像强调 confinement：粒子在 PWN 内部被束缚，产生 radio、optical、X-ray 和 TeV 辐射。这个框架对于年轻、明亮、结构相对紧凑的 PWN 非常成功，也构成了上一讲的基础。</p>
+<p>第二段：随着 TeV 巡天发展，Crab-like 直觉开始不够用了。许多 Galactic plane TeV 源没有明亮紧凑的 X-ray counterpart，或者 TeV 尺度远大于 X-ray 尺度，或者 TeV 峰值相对 pulsar 和 radio/X-ray nebula 明显偏移。若只用“年轻 PWN 内部发光”解释这些源，会遇到形态和寿命问题：产生 X-ray synchrotron 的高能电子在较强磁场中冷却很快，而产生 TeV IC 的较低能或较老电子可以在较弱磁场环境中存活更久、扩散更远。</p>
+<p>第三段：evolved PWN 的发现推动了一个关键转变：PWN 不是静态容器，而是随时间演化并与 SNR 环境相互作用的系统。SNR reverse shock 可能压缩、偏移或撕裂 PWN；pulsar proper motion 可能形成 bow shock tail；PWN 壳层和外部磁场连通可能打开逃逸通道。于是，粒子是否在 PWN 内发光，不再只是由注入谱 \(Q(E,t)\) 决定，还取决于逃逸边界条件和外部输运环境。</p>
+<p>第四段：TeV halo 概念进一步把问题从“星云内部辐射”扩展到“逃逸粒子在 pulsar 周围介质中发光”。如果逃逸 \(e^\pm\) 在局部区域内经历较慢扩散，常用 \(D(E)=D_0(E/E_0)^\delta\) 表示，它们可以在 pulsar 周围形成大尺度、相对平滑、以 IC 为主的 TeV 辐射。此时角向剖面不只是源大小测量，而可以反推局部扩散系数、冷却时间和逃逸历史。换言之，TeV 图像把宇宙线传播参数从银河平均量变成了可在单个源周围诊断的局部物理量。</p>
+<p>第五段：一个常见误区是把 PWN 和 pulsar halo 当成互斥源类。更合理的课程语言是：它们可能是同一 pulsar-powered system 的不同输运区。内区粒子仍受 PWN 磁场和流体结构控制，可称为 PWN-confined component；外区粒子已经逃逸，受扩散、冷却和外部辐射场控制，可称为 escaped-particle halo。两者之间没有必然锐利的物理边界，观测上看到的边界还会受到能段、PSF、背景模型和曝光分布影响。</p>
+<p>第六段：另一个误区是认为 X-ray 暗而 TeV 亮就自动等于 pulsar halo。低磁场 \(B\) 或老年逃逸电子确实可以压低 synchrotron 而保留 IC 辐射，但 hadronic SNR-cloud interaction、unresolved source population、relic PWN、错误的 diffuse background 或邻近源泄漏也可能产生类似现象。因此源类判定必须同时检查空间相关性、能量依赖形态、径向谱软化、能量预算和残差分布，不能只依靠“有没有 X-ray counterpart”。</p>
+<p>第七段：还需要纠正对扩散系数的直觉误读。较小的 \(D(E)\) 不等于较低的 TeV 光度；在相同注入功率下，较小的 \(D(E)\) 会让粒子更长时间停留在源附近，可能提高单位角面积表面亮度，但也会限制粒子向大尺度传播。总辐射强弱取决于 \(t_{\rm cool}(E)\)、目标光子场 \(U_{\rm rad}\)、磁场能量密度 \(U_B\)、观测孔径和注入历史。对局地宇宙线 \(e^\pm\) 而言，小 \(D(E)\) 还可能意味着粒子难以有效离开源周围低扩散区。</p>
+<p>第八段：本讲放在系列第 \(3/5\) 讲的位置，是因为学生已经具备上一讲的 PWN 内部粒子注入、同步/IC 辐射和能量预算基础，现在可以自然地把同一粒子群放到更大的传播空间中。第 \(4/5\) 讲将进一步讨论 HAWC、LHAASO、IACT 和未来 CTA 观测中的 PSF、背景、能量分箱 morphology 与 extension significance；第 \(5/5\) 讲才进入 pulsar halo population、Galactic \(e^\pm\) 和未识别 TeV 源群体。本讲的边界因此很明确：建立单源逃逸、扩散、冷却和通用诊断语言。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一段：本讲从最小物理图像开始：PWN 是一个由 pulsar 供能的粒子库，但不是永久封闭的盒子。上一讲中，我们关心 \(e^\pm\) 在 PWN 内部如何由 \(Q(E,t)\) 注入、如何在磁场中 synchrotron 冷却、如何通过 IC 产生高能光子。本讲增加一个边界条件：粒子可以以某种逃逸时间 \(t_{\rm esc}(E,t)\) 越过 PWN 可见边缘或磁拓扑边界，进入 SNR interior、破裂尾迹、低扩散泡或普通 ISM。这个逃逸过程可能由年龄增长、reverse shock、PWN 壳层破裂、bow shock tail 或磁场连通触发。</p>
+<p>第二段：第一层是注入。中心 pulsar 按自旋下降功率 \(\dot E(t)\) 连续提供 relativistic \(e^\pm\)，常用谱形为 \(Q(E,t)=Q_0(t)(E/E_0)^{-p}\exp(-E/E_{\rm cut})\)。这里 \(p\) 控制 TeV 频段的谱硬度，\(E_{\rm cut}\) 控制最高能端，\(Q_0(t)\) 由 \(\int E Q(E,t)\,dE=\eta_e\dot E(t)\) 决定。这个归一化非常重要：如果模型需要的 \(\eta_e\) 过高，或 TeV 光度超过 \(\eta_e\int\dot E(t)dt\) 的合理范围，就算曲线能穿过数据点，也缺乏物理可信度。</p>
+<p>第三段：第二层是 PWN 内部粒子库和泄漏。用 \(N_{\rm pwn}(E,t)\) 表示 PWN 内的粒子数时，一个教学级方程可以写成 \(\partial N_{\rm pwn}/\partial t=Q-\partial[\dot E_{\rm loss}N_{\rm pwn}]/\partial E-N_{\rm pwn}/t_{\rm esc}\)。前两项来自上一讲：注入与能量损失；最后一项是本讲新增的边界物理。由此定义逃逸源项 \(Q_{\rm esc}=N_{\rm pwn}/t_{\rm esc}\)。若 \(t_{\rm esc}\) 很短，PWN 像一个快速泄漏的中转站；若 \(t_{\rm esc}\) 很长，粒子仍被困住，外部 halo 难以形成。</p>
+<p>第四段：第三层是逃逸后的传播与冷却。最小模型假设球对称、各向同性扩散、无平流、中心点源注入，则逃逸粒子密度 \(n(E,r,t)\) 满足 \(\partial n/\partial t=D(E)\nabla^2 n+\partial[b(E)n]/\partial E+Q_{\rm esc}\delta(\boldsymbol r)\)。这里 \(D(E)=D_0(E/E_0)^\delta\) 描述空间扩散，\(b(E)=-dE/dt\) 描述能量损失。\(D_0\) 越小，粒子越集中在源附近；\(\delta\) 越大，不同能量粒子的空间分离越明显。</p>
+<p>第五段：冷却给 TeV halo 的能量依赖形态提供了最直观解释。对 TeV \(e^\pm\)，主要损失通常是 synchrotron 与 IC；在 Thomson 极限，\(b(E)=\frac{4}{3}\sigma_T c(U_B+U_{\rm rad})(E/m_ec^2)^2\)，所以 \(t_{\rm cool}=E/b(E)\simeq1/(b_0E)\)。能量越高，冷却越快，能走的距离越短，因此高能 TeV 图像通常预期更紧凑，外区谱更软。进入 Klein-Nishina 区时，IC 冷却和光子能量映射都会偏离简单标度，这是高能端解释中必须保留的系统误差来源。</p>
+<p>第六段：PWN 到 halo 的过渡可以用三个半径或尺度来理解。第一个是几何或动力学尺度 \(R_{\rm pwn}(t)\)，它常对应 radio/X-ray PWN 或磁化气泡的可见范围。第二个是扩散—冷却尺度 \(r_{\rm halo}(E)\sim2\sqrt{D(E)\Delta t_{\rm eff}}\)，其中 \(\Delta t_{\rm eff}=\min(t_{\rm age}-t_{\rm esc},t_{\rm cool})\)。第三个是观测角尺度 \(\theta\simeq r/d\)，它还必须与 PSF 卷积后的模型比较。很多源类争议其实来自这三个尺度没有被区分：X-ray 边缘不是 TeV 粒子边界，intrinsic radius 也不是仪器直接测到的 \(\theta_{\rm obs}\)。</p>
+<p>第七段：电子能量和 TeV 光子能量之间还需要 IC 映射。在 Thomson 极限，目标光子能量为 \(\epsilon\) 时，有 \(E_\gamma\simeq\frac{4}{3}(E_e/m_ec^2)^2\epsilon\)。因此，观测到的 \(E_\gamma\) 不是直接的电子能量，而是由目标光子场、散射截面和电子谱共同决定。读论文时，如果作者用 \(E_\gamma\) 分箱来推断 \(D(E_e)\)，要检查其是否处理了 CMB、红外、星光场以及 Klein-Nishina 修正；否则高能端的 \(D(E)\) 和 \(E_{\rm cut}\) 可能被系统偏差污染。</p>
+<p>第八段：观测分析的基本逻辑是同时使用能谱和空间信息。只拟合总 SED 时，\(D_0\)、\(\eta_e\)、\(B\)、\(U_{\rm rad}\)、\(E_{\rm cut}\)、\(d\) 和 \(t_{\rm age}\) 容易互相简并；加入径向亮度剖面后，可以约束 \(D(E)\Delta t_{\rm eff}\)；加入能量分箱 morphology 后，可以检查 \(r_{\rm halo}\) 是否随能量升高而收缩；加入残差图和替代模板后，才能判断 halo、confined evolved PWN、hadronic gas template、anisotropic diffusion 或邻近未分辨源哪一种解释更可靠。本讲到此建立理论和诊断框架，下一讲才进入具体 TeV 观测流程与案例拆解。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：从连续注入源项开始。承接上一讲，先把 pulsar wind termination shock 之后产生的高能 \(e^\pm\) 看成由中心 pulsar 持续供给，而不是一次性爆发。采用幂律加指数截止作为最小注入谱：</p>
+<div class="math-display">\[Q(E,t)=Q_0(t)\left(\frac{E}{E_0}\right)^{-p}\exp\left(-\frac{E}{E_{\rm cut}}\right).\]</div>
+<p>这里 \(Q(E,t)\) 是单位能量、单位时间的粒子注入率，\(p\) 决定注入谱硬度，\(E_{\rm cut}\) 决定最高能端，\(Q_0(t)\) 描述随自旋下降演化的归一化。这个式子给出后续所有 PWN-confined component 与 escaped-particle halo 的共同粒子来源；下一步必须用能量预算确定 \(Q_0(t)\)，否则模型可能在数学上拟合数据、却在物理上超过 pulsar 可供给功率。</p>
+<p>第二步：用自旋下降功率归一化粒子注入。假设自旋下降功率中只有比例 \(\eta_e\) 进入 relativistic \(e^\pm\)，则有</p>
+<div class="math-display">\[\int_{E_{\min}}^{E_{\max}} E Q(E,t)\,dE=\eta_e\dot E(t).\]</div>
+<p>这一步把可由 pulsar timing 估计的 \(\dot E(t)\) 与不可直接观测的粒子注入率联系起来。它解出的物理量是 \(Q_0(t)\)，并给出一个能量预算检查：后面得到的 TeV halo 光度不能任意超过 \(\eta_e\int \dot E(t)\,dt\)。完成归一化后，粒子首先进入 PWN 内部粒子库，因此下一步要描述 PWN 如何从封闭盒子变成泄漏系统。</p>
+<p>第三步：建立 PWN 内部粒子库方程。令 \(N_{\rm pwn}(E,t)\) 表示仍被束缚在 PWN 内部的粒子数，采用一阶盒子模型，包含注入、能量损失和逃逸三项：</p>
+<div class="math-display">\[\frac{\partial N_{\rm pwn}}{\partial t}=Q(E,t)-\frac{\partial}{\partial E}\left[\dot E_{\rm loss}(E,t)N_{\rm pwn}(E,t)\right]-\frac{N_{\rm pwn}(E,t)}{t_{\rm esc}(E,t)}.\]</div>
+<p>这里 \(\dot E_{\rm loss}(E,t)\) 包括同步、反康普顿和可能的绝热损失，\(t_{\rm esc}(E,t)\) 是能量与时间相关的逃逸时间。最后一项是本讲相对上一讲新增的边界物理：若没有它，系统就是 confined PWN；有了它，粒子可以越过 PWN 边界并成为 halo 的母体。下一步用这一项定义外部传播方程的源项。</p>
+<p>第四步：定义逃逸到 halo 区域的源项。把 PWN 中的泄漏项直接作为外部介质中的中心源项，可写为</p>
+<div class="math-display">\[Q_{\rm esc}(E,t)=\frac{N_{\rm pwn}(E,t)}{t_{\rm esc}(E,t)}.\]</div>
+<p>这个式子解出的不是新的加速过程，而是从 PWN 内部粒子库释放到外部输运区的注入率。若 \(t_{\rm esc}(E,t)\ll t_{\rm age}\)，该能量粒子近似及时释放，halo 更容易形成；若 \(t_{\rm esc}(E,t)\gg t_{\rm age}\)，粒子仍主要留在 PWN 内，外部 TeV halo 会弱或尚未出现。有了 \(Q_{\rm esc}(E,t)\)，下一步进入逃逸粒子的空间传播。</p>
+<p>第五步：写出扩散—损失方程。作为教学起点，采用球对称、各向同性扩散、无平流、中心点源注入和均匀环境的近似，逃逸粒子密度 \(n(E,r,t)\) 满足</p>
+<div class="math-display">\[\frac{\partial n}{\partial t}=D(E)\nabla^2 n+\frac{\partial}{\partial E}\left[b(E)n(E,r,t)\right]+Q_{\rm esc}(E,t)\delta(\boldsymbol r).\]</div>
+<p>其中 \(D(E)\) 控制空间扩散，\(b(E)=-dE/dt\) 控制能量损失，\(\delta(\boldsymbol r)\) 表示源在最小模型中位于 pulsar 附近。这个方程是本讲推导的核心：空间项决定 halo 尺度，能量项决定谱软化和高能端寿命。下一步需要给 \(D(E)\) 一个可拟合的参数化形式。</p>
+<p>第六步：参数化扩散系数。湍流介质中的扩散常用幂律经验式表示：</p>
+<div class="math-display">\[D(E)=D_0\left(\frac{E}{E_0}\right)^\delta.\]</div>
+<p>这里 \(D_0\) 是在参考能量 \(E_0\) 处的扩散归一化，\(\delta\) 描述能量依赖。较小的 \(D_0\) 会让粒子更集中在 pulsar 附近，提高局部表面亮度并产生更紧凑的 TeV halo；较大的 \(\delta\) 会使不同能量粒子的空间分布差异更明显。仅有扩散还不够，因为高能 \(e^\pm\) 会冷却，下一步必须给出 \(b(E)\)。</p>
+<p>第七步：写出同步与反康普顿冷却项。先在 Thomson 极限下处理，假设主要能量损失来自磁场能量密度 \(U_B\) 与目标光子场能量密度 \(U_{\rm rad}\)，则</p>
+<div class="math-display">\[b(E)=\frac{4}{3}\sigma_T c\left(U_B+U_{\rm rad}\right)\left(\frac{E}{m_ec^2}\right)^2\equiv b_0E^2.\]</div>
+<p>由此得到冷却时间</p>
+<div class="math-display">\[t_{\rm cool}(E)=\frac{E}{b(E)}=\frac{1}{b_0E}.\]</div>
+<p>这一步说明高能粒子寿命更短，因此同一个源在高能 TeV 图像中通常更紧凑，外区谱也更容易变软。需要注意，进入 Klein-Nishina 区后，反康普顿冷却不再严格服从 \(b(E)\propto E^2\)，这是高能端建模的系统误差来源。下一步把扩散与冷却合并成可观测尺度。</p>
+<p>第八步：构造有效传播时间与 halo 半径。粒子真正用于扩散的时间由三个因素限制：系统年龄、逃逸延迟和冷却寿命。教学上可写为</p>
+<div class="math-display">\[\Delta t_{\rm eff}(E)=\min\left[t_{\rm age}-t_{\rm esc}(E),\,t_{\rm cool}(E)\right].\]</div>
+<p>在三维扩散的数量级估计中，扩散长度为</p>
+<div class="math-display">\[r_{\rm halo}(E)\sim 2\sqrt{D(E)\Delta t_{\rm eff}(E)}.\]</div>
+<p>这一步给出 PWN 到 TeV halo 过渡的核心直觉：halo 半径不是固定的几何边界，而是由 \(D(E)\)、\(t_{\rm esc}(E)\)、\(t_{\rm cool}(E)\) 和 \(t_{\rm age}\) 共同决定。下一步要把电子能量 \(E\) 转换成观测到的 \(\gamma\)-ray 能量。</p>
+<p>第九步：连接电子能量与反康普顿光子能量。在 Thomson 极限下，能量为 \(E_e\) 的电子散射目标光子能量 \(\epsilon\)，典型产生的 \(\gamma\)-ray 能量为</p>
+<div class="math-display">\[E_\gamma\simeq \frac{4}{3}\left(\frac{E_e}{m_ec^2}\right)^2\epsilon.\]</div>
+<p>这一步把理论中的 \(r_{\rm halo}(E_e)\) 转换成观测中的 \(R_\gamma(E_\gamma)\) 或 \(\theta_{\rm halo}(E_\gamma)\)。读论文时要检查作者是否区分 CMB、红外和星光场，以及是否处理 Klein-Nishina 修正；否则用 \(E_\gamma\) 反推 \(E_e\) 和 \(D(E_e)\) 会有系统偏差。下一步给出更严格的粒子密度解的结构。</p>
+<p>第十步：写出瞬时点源的 Green 函数结构。对于瞬时点源注入并连续冷却的粒子，扩散—损失方程的三维解可写成</p>
+<div class="math-display">\[n(E,r,t)=\frac{Q(E_i,t_i)}{\pi^{3/2}r_d^3}\left|\frac{dE_i}{dE}\right|\exp\left(-\frac{r^2}{r_d^2}\right),\]</div>
+<p>其中扩散尺度满足</p>
+<div class="math-display">\[r_d^2=4\int_E^{E_i}\frac{D(E')}{b(E')}\,dE'.\]</div>
+<p>这里 \(E_i\) 是注入时能量，\(t_i\) 是注入时刻，\(\left|dE_i/dE\right|\) 是冷却导致的能量映射 Jacobian。这个结果比简单的 \(r_{\rm halo}\sim2\sqrt{D\Delta t}\) 更完整，因为它说明空间宽度由 \(D(E')/b(E')\) 的历史积分控制，而不是由某一个能量处的 \(D(E)\) 单独决定。下一步要把 \(n(E,r,t)\) 转换成可观测的 \(\gamma\)-ray 表面亮度。</p>
+<p>第十一步：从三维发射率投影到角向亮度。若局部反康普顿发射率为 \(j_\gamma(E_\gamma,r)\)，观测角距 \(\theta\) 处的表面亮度为</p>
+<div class="math-display">\[I_\gamma(E_\gamma,\theta)=\frac{1}{4\pi}\int j_\gamma(E_\gamma,r)\,dl,\qquad r^2=l^2+d^2\theta^2.\]</div>
+<p>这里 \(d\) 是源距离，\(l\) 是视线坐标。这个式子完成了从粒子密度到图像亮度的连接：实际拟合时还必须把 \(I_\gamma(E_\gamma,\theta)\) 经过曝光、PSF、能量重建、背景和邻近源模板卷积，才能与计数图比较。下一步给出一个读论文时常用的数量级闭合诊断。</p>
+<p>第十二步：建立观测闭合关系。若观测给出能量分箱后的 halo 角尺度 \(\theta_{\rm halo}(E_\gamma)\)，并且距离 \(d\)、年龄 \(t_{\rm age}\) 与电子能量映射 \(E_e(E_\gamma)\) 已有估计，则可用</p>
+<div class="math-display">\[D(E_e)\sim \frac{\left[d\theta_{\rm halo}(E_\gamma)\right]^2}{4\min\left[t_{\rm age},\,t_{\rm cool}(E_e)\right]}.\]</div>
+<p>这个关系不是完整反演，而是 sanity check：它帮助判断局部扩散是否显著低于 Galactic average，并检查最佳拟合 \(D_0\) 是否与图像尺度相容。使用时必须记住它忽略了 \(t_{\rm esc}(E)\)、连续注入历史、PSF 展宽、背景退化、Klein-Nishina 修正和 two-zone diffusion；因此它适合作为模型拟合与图像阅读的闭合诊断，而不能替代完整的前向建模。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合部分承接上一讲，但数据空间向外扩展。上一讲主要拟合 PWN 内部的非热辐射：给定注入谱、磁场和辐射场，解释 synchrotron 与 IC 的 SED。本讲要拟合的是逃逸粒子在源周围介质中的空间—能量分布，因此不能只问一条谱线是否穿过数据点，而要从物理参数前向生成角向亮度、能量分箱形态和计数图。最小 one-zone diffusion halo 的参数集包括 pulsar 年龄 \(t_{\rm age}\)、距离 \(d\)、注入谱指数 \(p\)、截止能量 \(E_{\rm cut}\)、电子效率 \(\eta_e\)、扩散归一化 \(D_0\)、扩散指数 \(\delta\)、磁场 \(B\) 和辐射场能量密度 \(U_{\rm rad}\)。其中 \(t_{\rm age}\) 与 \(d\) 往往来自外部观测，但在严肃拟合中应作为带不确定度的先验量，而不是当成无误差常数。</p>
+<p>第二段：从参数到数据的链条必须完整。第一步由 \(Q(E,t)=Q_0(t)(E/E_0)^{-p}\exp(-E/E_{\rm cut})\) 与 \(\int E Q(E,t)\,dE=\eta_e\dot E(t)\) 生成 pulsar 注入历史；第二步用 \(t_{\rm esc}(E,t)\) 或等效释放函数得到逃逸源项 \(Q_{\rm esc}(E,t)\)；第三步求解扩散—损失方程得到 \(n(E,r,t)\)；第四步计算 IC 发射率 \(j_\gamma(E_\gamma,r)\)；第五步做视线积分得到 \(I_\gamma(E_\gamma,\theta)\)。真正与观测比较时，还要把 \(I_\gamma(E_\gamma,\theta)\) 经过曝光、PSF、能量重建矩阵、ROI mask、背景模型和邻近源模板卷积，得到每个空间—能量 bin 的预测计数 \(\mu_i(\boldsymbol\Theta)\)。这一步是读论文时最容易被忽略、也最影响扩散系数结论的环节。</p>
+<p>第三段：若使用原始或近似原始的计数图，首选 Poisson 似然：</p>
+<div class="math-display">\[\ln\mathcal L(\boldsymbol\Theta)=\sum_i\left[k_i\ln\mu_i(\boldsymbol\Theta)-\mu_i(\boldsymbol\Theta)-\ln(k_i!)\right].\]</div>
+<p>这里 \(k_i\) 是第 \(i\) 个空间—能量 bin 的观测计数，\(\mu_i(\boldsymbol\Theta)\) 是模型预测计数，\(\boldsymbol\Theta\) 表示全部物理与背景参数。若只能使用已发表的 SED、径向剖面或 extension measurement，可以采用带协方差的高斯近似：</p>
+<div class="math-display">\[\ln\mathcal L\simeq-\frac{1}{2}\left(\boldsymbol y-\boldsymbol m(\boldsymbol\Theta)\right)^T\boldsymbol C^{-1}\left(\boldsymbol y-\boldsymbol m(\boldsymbol\Theta)\right),\]</div>
+<p>但必须说明 \(\boldsymbol C\) 是否包含能量 bin 之间、角向 bin 之间以及共同背景系统误差导致的相关性。只把通量点当作互相独立的高斯点，通常会低估不确定度。</p>
+<p>第四段：two-zone diffusion 是从教学模型走向现代研究的自然扩展。它假设 pulsar 周围存在一个低扩散区，半径为 \(r_b\)，内部扩散系数为 </p>
+<div class="math-display">\[D_{\rm in}(E)=D_{{\rm in},0}\left(\frac{E}{E_0}\right)^{\delta_{\rm in}},\]</div>
+<p>外部扩散系数为 </p>
+<div class="math-display">\[D_{\rm out}(E)=D_{{\rm out},0}\left(\frac{E}{E_0}\right)^{\delta_{\rm out}}.\]</div>
+<p>这个模型的物理意义是把紧凑 TeV halo 与粒子最终进入普通 ISM 的过程连接起来。读拟合结果时要特别警惕 \(r_b\)、\(D_{{\rm in},0}\)、\(D_{{\rm out},0}\) 和 \(\eta_e\) 的强简并：较大的 \(r_b\) 可以容纳较大的 \(D_{{\rm in},0}\)，较高的 \(\eta_e\) 可以补偿较快扩散导致的表面亮度降低。因而一维最佳拟合值往往不如二维联合后验有意义。</p>
+<p>第五段：先验和物理约束不是装饰，而是模型可信度的一部分。\(\eta_e\) 不能任意增大，因为总能量应满足类似 \(L_\gamma\lesssim\eta_e\int\dot E(t)\,dt\) 的预算检查；\(B\) 与 \(U_{\rm rad}\) 同时决定 cooling 和 synchrotron/IC 比值；\(d\) 的误差会以 \(r=d\theta\) 的形式直接传递到 \(D(E)\)；\(t_{\rm age}\) 与真实释放时间之间的差异会影响 \(\Delta t_{\rm eff}=\min(t_{\rm age}-t_{\rm esc},t_{\rm cool})\)。因此，课程中应训练学生把 \(D_0\) 的误差理解为统计误差、距离误差、年龄误差、辐射场误差、背景误差和模型结构误差的合成，而不是简单读表中的一个误差条。</p>
+<p>第六段：残差诊断至少分为空间、能谱、能量依赖形态和模板竞争四层。空间上，要看径向残差是否在内区、外翼或某一方向系统同号；若外翼长期偏正，可能说明 one-zone 模型过窄、背景过减、存在邻近源或扩散各向异性。能谱上，要看高能端残差是否系统偏离；这可能指向 \(E_{\rm cut}\)、Klein-Nishina 修正、目标光子场或能量刻度系统误差。能量依赖形态上，要检查高能 halo 是否真的更紧凑，而不是 PSF 随能量变窄造成的假象。模板竞争上，要把 pulsar-centered halo 与 gas template、SNR shell、relic PWN、proper-motion tail 和 unresolved source population 放在同一似然框架下比较。</p>
+<p>第七段：后验报告应从“最佳拟合曲线”升级为“预测检验”。可信论文应展示 \(P(D_0,\delta,r_b,\eta_e,B,E_{\rm cut}\mid{\rm data})\) 的边际分布和联合分布，给出 credible interval，并展示 posterior predictive map 或 posterior predictive radial profiles。模型比较可以使用 \(\Delta\ln\mathcal L\)、信息准则、Bayes factor 或 posterior predictive checks，但本讲要强调：统计显著性必须与物理可证伪性一起读。若 hadronic 模型胜出，应看到与 gas column 的空间相关；若 escaped-particle halo 模型胜出，应看到以 pulsar 为中心的扩散形态、能量相关收缩或径向谱软化；若 relic PWN 模型更合理，应与 X-ray/radio 结构和 SNR reverse shock 历史相联系。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>第一类经典内容是 PWN 综述中的能量预算和演化段落。读这类文章时，不要只把 Crab Nebula 当作模板，而要找出作者如何连接 \(\dot E(t)\)、PWN age、磁场演化、SNR reverse shock 和多波段寿命差异。上一讲已经说明粒子在 PWN 内部如何通过 synchrotron 与 IC 发光；本讲要继续追问：当 PWN 膨胀、被 reverse shock 压缩或出现破裂通道时，原本被束缚的 \(e^\pm\) 是否仍留在星云内，还是会变成 escaped-particle component。读这一部分的重点不是记住某个源的形态，而是理解 confinement 是有条件、有时代演化的。</p>
+<p>第二类经典内容是关于宇宙线加速与束缚条件的工作。读 Hillas 传统时，不能只把它理解为最大能量图；对本讲而言，更重要的是把加速、束缚和逃逸看成连续问题。PWN 能否提供高能 \(e^\pm\)，首先取决于加速和能量预算；这些粒子能否成为 TeV halo 的母体，则取决于 \(t_{\rm esc}(E,t)\)、边界磁拓扑和外部扩散环境。换言之，\(Q(E,t)\) 只回答“粒子从哪里来”，\(Q_{\rm esc}(E,t)\) 才开始回答“粒子何时进入 halo 区域”。</p>
+<p>第三类内容是 TeV halo 模型论文中的方程段。读这部分时应按课程推导链逐项核对：源项是否由 \(\int E Q(E,t)\,dE=\eta_e\dot E(t)\) 归一化；逃逸是否被显式建模，还是默认粒子即时释放；传播方程是否采用 \(\partial n/\partial t=D(E)\nabla^2 n+\partial[b(E)n]/\partial E+Q_{\rm esc}\delta(\boldsymbol r)\)；冷却项是否只用 Thomson 极限，还是包含 Klein-Nishina 修正；最后是否从 \(n(E,r,t)\) 投影到 \(I_\gamma(E_\gamma,\theta)\)。若论文直接给出扩散系数 \(D_0\)，却没有清楚说明这些步骤，读者应降低对该数值精确性的信任。</p>
+<p>第四类内容是观测分析论文中的前向建模段。重点不是作者画出了多漂亮的 halo 图，而是模型是否经过了曝光、PSF、能量重建、背景和邻近源模板卷积。尤其在 TeV halo 问题中，\(\theta_{\rm halo}\) 与 PSF 的关系非常关键；若 intrinsic profile 被直接拿来与 counts profile 比较，扩散长度会被系统性误判。读这类段落时，应主动寻找 \(\mu_i(\boldsymbol\Theta)\)、Poisson 似然、背景 nuisance parameters、ROI selection 和 residual maps 的说明。</p>
+<p>第五类内容是 two-zone diffusion 和低扩散区的解释段。读者要问：\(r_b\) 是由数据约束出来的，还是作为物理假设加入的？\(D_{\rm in}\) 和 \(D_{\rm out}\) 是否都有独立证据，还是主要靠先验支撑？\(D_{\rm in}\) 与 \(r_b\) 是否存在明显 banana-shaped degeneracy？这类论文常常连接单源 TeV halo 与局地 \(e^\pm\) 传播，但本讲只要求学生掌握单源物理和通用诊断；把这些结论推广到 Galactic lepton population，是第 \(5/5\) 讲的边界。</p>
+<p>第六类内容是 unidentified TeV source 的源类判定段。读这部分时要把作者的文字结论翻译成可检查的判据：是否存在足够强的 pulsar；\(\eta_e\dot E\) 是否能支持 TeV 光度；角尺度是否与 \(r_{\rm halo}(E)\sim2\sqrt{D(E)\Delta t_{\rm eff}}\) 同量级；是否存在径向谱软化；TeV 发射是否以 pulsar 为中心，还是更接近 gas column、SNR shell 或 X-ray relic PWN。这样读，学生就不会把“靠近 pulsar”自动等同于 PWN，也不会把“X-ray 暗而 TeV 亮”自动等同于 pulsar halo。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一、分层结构示意图：检查图中是否区分 pulsar、termination shock、PWN bubble、SNR interior、SNR shell、逃逸边界、低扩散区和普通 ISM。重点看作者把边界放在 \(R_{\rm pwn}\)、\(R_{\rm snr}\) 还是 \(r_b\)。误读风险是把 X-ray PWN 的可见边缘当成所有 TeV 粒子的真实物理边界。</p>
+<p>二、时间尺度图：横轴通常为 \(E_e\) 或 \(E_\gamma\)，纵轴为 \(t_{\rm cool}\)、\(t_{\rm esc}\)、\(t_{\rm diff}\) 和 \(t_{\rm age}\)。读图核心是找交点：哪些能量粒子仍被困住，哪些已逃逸，哪些已经冷却。还要检查 \(t_{\rm diff}(r,E)\sim r^2/[4D(E)]\) 中采用的半径 \(r\) 是什么。</p>
+<p>三、扩散长度或 halo 半径随能量变化图：看 \(r_{\rm halo}(E)\) 或 \(\theta_{\rm halo}(E_\gamma)\) 是否随能量升高而收缩。比较不同 \(D_0\)、\(\delta\)、\(B\) 和 \(U_{\rm rad}\) 模型线的分离程度。误读风险是把 PSF 的能量依赖、统计阈值变化或背景选择造成的 extension 变化当成真实物理收缩。</p>
+<p>四、径向 TeV 亮度剖面图：横轴为角距 \(\theta\) 或物理半径 \(r=d\theta\)，纵轴可能是 excess counts、surface brightness 或 flux per solid angle。必须确认模型线已经过 PSF 和曝光卷积，并检查内区、外翼和背景区残差。若只展示 intrinsic profile，不能直接用于判断 \(D(E)\)。</p>
+<p>五、能量分箱 morphology 图：每个能段给出径向剖面、extension 或 significance map。检查高能图像是否比低能图像更紧凑，以及该趋势是否超过 PSF 和统计误差。若没有能量依赖，不能立即否定 halo 模型，而要检查能量分辨率、目标光子场、Klein-Nishina 效应和背景退化。</p>
+<p>六、多波段 SED 图：横轴为频率或能量，纵轴常为 \(\nu F_\nu\) 或 \(E^2dN/dE\)。应区分 PWN-confined synchrotron、PWN-confined IC、escaped-particle IC 和可能的 hadronic component。重点不是曲线是否穿过数据点，而是每个 component 的空间区域、能量预算和上限是否一致。</p>
+<p>七、后验 corner plot 或二维置信区图：检查 \(D_0\)、\(\delta\)、\(\eta_e\)、\(B\)、\(E_{\rm cut}\)、\(r_b\)、\(D_{{\rm in},0}\) 和 \(D_{{\rm out},0}\) 的联合约束。要寻找参数相关性，而不是只读一维边际峰值。</p>
+<p>八、残差图与替代模板比较图：阅读 significance map、template residual、\(\Delta TS\) 或 posterior predictive residual。检查残差是否沿 gas column、proper-motion tail、X-ray relic structure、邻近源或仪器 acceptance 边界分布。误读风险是把系统残差解释成低扩散区、各向异性扩散或新源。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图一：PWN 到 pulsar halo 的结构示意图。坐标通常是从 pulsar 向外的径向结构，图中会标出 termination shock、PWN bubble、SNR shell、逃逸通道、低扩散区和普通 ISM。读图时首先要问：作者定义的 halo 是从 \(R_{\rm pwn}\) 外开始，还是从 \(R_{\rm snr}\) 外开始，抑或只是用 \(r_b\) 表示一个低扩散区？模型线或色块常常只是概念示意，不代表密度、磁场或扩散系数有锐利跳变。误读风险是把 X-ray PWN 边缘当成 TeV 粒子的终止边界；实际上 X-ray synchrotron 对高能电子和磁场更敏感，而 TeV IC 可能来自更老、更远的逃逸粒子。</p>
+<p>图二：时间尺度对比图。横轴一般为 \(E_e\) 或通过 IC 映射得到的 \(E_\gamma\)，纵轴为时间，常见曲线包括 \(t_{\rm cool}(E)\)、\(t_{\rm esc}(E)\)、\(t_{\rm diff}(r,E)\) 和水平线 \(t_{\rm age}\)。读图关键是找交点：若 \(t_{\rm esc}>t_{\rm age}\)，该能量粒子尚未有效逃逸；若 \(t_{\rm cool}<t_{\rm age}\)，当前高能粒子只记录最近一段注入历史；若 \(t_{\rm diff}>t_{\rm cool}\)，粒子还没扩散到给定半径就已冷却。常见误读是忽略 \(t_{\rm diff}\) 所采用的半径 \(r\)，因为不同 \(r\) 会改变整条扩散时间曲线。</p>
+<p>图三：径向 TeV 亮度剖面。横轴是角距 \(\theta\) 或物理半径 \(r=d\theta\)，纵轴可能是 excess counts、归一化 surface brightness 或能量通量面密度。数据点应与经过 PSF、曝光和背景处理后的模型线比较；若图中同时给出 PSF 曲线，要检查源延展是否显著宽于 PSF。内区残差为正可能意味着还需要 compact PWN 或 point-like pulsar component；外翼残差为正可能意味着 \(D_0\) 太小、背景过减、two-zone diffusion、邻近源或各向异性扩散。误读风险是用 intrinsic profile 直接推 \(D(E)\)，这会把仪器响应混进物理尺度。</p>
+<p>图四：能量分箱 morphology 或 extension 图。每个能量段给出一张 significance map、一条径向剖面，或一个 \(\theta_{\rm ext}(E_\gamma)\) 测量值。冷却—扩散图像通常预期高能 \(E_\gamma\) 对应更高 \(E_e\)，而 \(t_{\rm cool}(E_e)\) 更短，所以高能 halo 更紧凑。读图时要同时看 PSF 随能量变窄的趋势、各能段统计量、背景模板变化和能量迁移。若高能收缩只出现在 PSF 较好的能段，而 residual map 没有相应改善，就不能把它直接解释成冷却半径变化。</p>
+<p>图五：多波段 SED。横轴为频率、光子能量或 \(E_\gamma\)，纵轴常为 \(\nu F_\nu\) 或 \(E^2dN/dE\)。模型线通常包括 PWN-confined synchrotron、PWN-confined IC、escaped-particle IC，有时还包括 \(\pi^0\) decay hadronic component。读图时要先确认每组数据点来自哪个空间孔径：X-ray 上限可能只覆盖紧凑 PWN，而 TeV 点可能来自大孔径 halo。若只看曲线穿点，可能会误判源类；正确问题是 \(B\)、\(U_{\rm rad}\)、\(\eta_e\) 和 \(E_{\rm cut}\) 是否同时满足能量预算、空间区域和上限约束。</p>
+<p>图六：后验 corner plot 或二维置信区。坐标轴可能是 \(D_0\)、\(\delta\)、\(\eta_e\)、\(B\)、\(E_{\rm cut}\)、\(r_b\)、\(D_{{\rm in},0}\) 和 \(D_{{\rm out},0}\)。读图时要找相关性：更大的 \(D_0\) 会让粒子分布更稀释，可能需要更大的 \(\eta_e\) 补偿亮度；更大的 \(B\) 会增强 synchrotron 冷却，可能压低 TeV 高能端；更大的 \(r_b\) 可以和更大的 \(D_{{\rm in},0}\) 同时给出相似角尺度。误读风险是把某个参数的一维峰值当成独立精确测量，而忽略联合后验的长尾或弯曲简并。</p>
+<p>图七：残差图与替代模型比较图。横纵坐标通常是天球坐标，颜色表示数据减模型的显著性、\(\Delta TS\) 或 posterior predictive residual。有些论文会并排展示 pulsar-centered halo、gas template、shell template、point-source model 和 diffuse background 变化后的残差。读图时要问：残差是否围绕 pulsar 对称，是否沿分子云或 HI column 分布，是否沿 proper-motion tail 或 X-ray relic PWN 分布，是否靠近 ROI 边缘或仪器 acceptance 梯度。若残差结构与 gas column 更一致，hadronic 解释不能被轻易排除；若残差随背景模型改变而消失，就不应把它解释成新的低扩散物理。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从经典 PWN 读到 evolved PWN。建议先读 PWN 综述中的动力学演化、多波段辐射和 SNR interaction 部分，尤其关注 \(\dot E(t)\)、PWN 磁场、reverse shock、offset nebula 和 relic electron population。这样可以把上一讲的 confined particle picture 放进时间演化中理解：年轻系统接近 Crab-like PWN，年老系统可能出现 X-ray 紧凑而 TeV 延展、峰值偏移或粒子泄漏。读这一路径时，本讲提供的问题清单是：粒子是否仍在 PWN 内，逃逸边界在哪里，TeV 辐射是否可能来自 PWN 外部的 older electrons。</p>
+<p>第二条路径是从宇宙线传播读到 pulsar halo。先复习扩散—损失方程、Green 函数、\(D(E)=D_0(E/E_0)^\delta\)、\(b(E)\) 和 \(t_{\rm cool}=E/b(E)\) 的基本推导，再读 TeV halo morphology 分析。读到任何 \(D_0\) 结论时，都应做数量级闭合检查：用观测角尺度 \(\theta_{\rm halo}\)、距离 \(d\) 和冷却时间估计 \(D(E_e)\sim(d\theta_{\rm halo})^2/[4\min(t_{\rm age},t_{\rm cool}(E_e))]\)，再与论文的完整前向拟合比较。这样可以防止把模型细节包装出来的数值误认为无条件观测量。</p>
+<p>第三条路径是从 one-zone halo 走向 two-zone diffusion 和低扩散区起源。现代论文关心的不只是 \(D_0\) 是否低于 Galactic average，而是低扩散区为什么存在、半径 \(r_b\) 多大、持续多久、是否由 self-generated turbulence、SNR 环境、PWN outflow、磁场拓扑或外部湍流决定。读这类文章时，要特别关注 \(D_{\rm in}\)、\(D_{\rm out}\) 与 \(r_b\) 的联合约束，以及它们如何同时影响 TeV 表面亮度和粒子最终逃入 ISM 的效率。</p>
+<p>第四条路径是走向观测前沿，但边界要清楚。HAWC、LHAASO、IACT 和未来 CTA 的论文会详细讨论 PSF、背景、能量分箱 morphology、extension significance 和 source confusion。读这些论文前，本讲已经提供了物理语言；读这些论文时，应把注意力放到仪器响应与模板比较上，而不是重新推导扩散—损失方程。Geminga、Monogem 等具体案例的细节适合放到第 \(4/5\) 讲中处理。</p>
+<p>第五条路径是最终通向 Galactic \(e^\pm\) 和源群体问题。单个 pulsar halo 的低扩散区会影响粒子是否能到达地球，因此它与 positron excess、local lepton spectrum、unidentified TeV sources 和 halo luminosity function 有联系。但这一步需要人口合成、选择效应和 Galactic propagation 的额外框架，不属于本讲主体。学生应先掌握单源的 \(Q_{\rm esc}\)、\(D(E)\)、\(b(E)\)、\(r_{\rm halo}\) 和观测诊断，再进入第 \(5/5\) 讲的 population inference。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第一，最自然的第 \(4/5\) 讲方向是“TeV halo 观测与仪器诊断：从 HAWC、LHAASO、IACT 到 CTA 的角向剖面和 extension significance”。本讲已经建立 \(Q_{\rm esc}\)、\(D(E)\)、\(b(E)\)、\(r_{\rm halo}\)、\(I_\gamma(E_\gamma,\theta)\) 和 Poisson 似然的物理框架；下一讲应把这些工具放入真实数据流程，重点讲 PSF、曝光、背景、能量重建、ROI 选择、能量分箱 morphology、source confusion、upper limits 和 residual maps。本讲不展开 Geminga、Monogem 等具体案例，下一讲可以在仪器诊断框架下处理这些代表性源。</p>
+<p>第二，第 \(5/5\) 讲的自然方向是“从 pulsar halo 到 Galactic \(e^\pm\) 与未识别 TeV 源群体”。它应讨论单源逃逸粒子如何进入普通 ISM、低扩散区对地球附近 \(e^\pm\) 的抑制或延迟、源人口分布、halo luminosity function、选择效应和 unidentified TeV source population。本讲只建立单源传播物理与通用诊断，不把 \(D_0\) 结论直接推广到整个银河。</p>
+<p>第三，可作为系列后的前沿加餐方向是“self-generated turbulence 与各向异性扩散”。这个方向会进一步解释低扩散区的物理起源，涉及 \(e^\pm\) streaming、Alfvén waves、wave damping、磁力线 wandering、MHD turbulence 和 bow shock escape。它与本讲的关系是：本讲把 \(D(E)\) 当作可拟合的有效参数；加餐课则追问这个有效参数从何而来、何时可以用标量扩散近似、何时必须改用各向异性输运。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>PWN particle escape TeV halo diffusion cooling</li>
+<li>evolved pulsar wind nebula TeV halo transition</li>
+<li>two zone diffusion pulsar halo</li>
+<li>Gaensler Slane 2006 pulsar wind nebula review</li>
+<li>Hillas 1984 origin of cosmic rays</li>
+<li>pulsar halo diffusion coefficient HAWC LHAASO</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/2006ARA%26A..44...17G/abstract">https://ui.adsabs.harvard.edu/abs/2006ARA%26A..44...17G/abstract</a></li>
+<li><a href="https://ui.adsabs.harvard.edu/abs/1984ARA%26A..22..425H/abstract">https://ui.adsabs.harvard.edu/abs/1984ARA%26A..22..425H/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
