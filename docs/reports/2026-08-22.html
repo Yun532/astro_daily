@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-22</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-22</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-22">
+      <a class="previous" href="2026-08-21.html">← 上一期：2026-08-21</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-22T11:12:38+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-pwn-pulsar-halo-gemingamonogem">1. PWN 与 pulsar halo 从零到前沿（四）：Geminga、Monogem 和正电子超额</h3>
+<ul>
+<li>课程系列：PWN 与 pulsar halo 从零到前沿课程（第 4/5 讲）</li>
+<li>本讲边界：本讲讲 Geminga/Monogem 观测、TeV halo 尺度、扩散系数、冷却和它们能否解释地球正电子超额。不讲所有 Galactic TeV 源分类。</li>
+<li>上下文承接：上一讲建立了粒子逃逸和扩散冷却；本讲进入最经典的 pulsar halo 观测案例。</li>
+<li>主题：Geminga and Monogem TeV halos, diffusion coefficient and positron excess</li>
+<li>经典工作：HAWC 对 Geminga 与 Monogem 周围扩展 TeV 伽马射线晕的探测，以及 AMS-02 正电子分数上升问题。</li>
+<li>为什么经典：HAWC 2017 让 pulsar halo 成为高能天体物理独立问题，并把局域宇宙线正电子来源与 TeV 伽马射线形态直接相连。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>一、本讲是系列第 \(4/5\) 讲，位置非常明确：上一讲已经建立了逃逸粒子在源外经历扩散与冷却的基本框架，本讲把那套框架放到最经典的两个对象——Geminga 与 Monogem——上检验。科学问题可以先用一句话概括：围绕这两颗近邻中年脉冲星的扩展 \({\rm TeV}\) 伽马射线晕，究竟说明源附近 \(e^\pm\) 的扩散被强烈抑制，还是说明我们对源环境、背景、辐射场或传播几何的理解还不完整？这个问题之所以重要，是因为同一批 \(e^\pm\) 既能在源附近通过逆康普顿散射产生 \({\rm TeV}\) halo，也可能在冷却前传播到太阳邻域，贡献 AMS-02 观测到的正电子分数上升。</p>
+<p>二、历史动机来自两个方向的汇合。第一条线索是宇宙线正电子问题：PAMELA、Fermi-LAT 与 AMS-02 相继发现正电子分数 \(f_{e^+}(E)=\Phi_{e^+}(E)/[\Phi_{e^-}(E)+\Phi_{e^+}(E)]\) 在 \(\gtrsim 10\,{\rm GeV}\) 后上升，简单次级产生模型难以自然解释。第二条线索是脉冲星物理：中年脉冲星的磁层和 pulsar wind 可产生大量 \(e^\pm\)，其自转能损失率 \(\dot E(t)\) 为注入能量预算提供源项背景。Geminga 与 Monogem 因为距离近、年龄约几十万年、总 spin-down 能量足够，长期被视为正电子超额的自然候选源。</p>
+<p>三、HAWC 的经典贡献在于把这个候选源问题从“能量预算是否足够”推进到“传播形态是否允许”。HAWC 在 Geminga 与 Monogem 周围探测到数度尺度的扩展 \({\rm TeV}\) 发射，这类发射不是传统紧凑 \({\rm PWN}\) 的简单延伸，而更适合解释为逃逸 \(e^\pm\) 在源附近辐射场中发生逆康普顿散射形成的 pulsar halo。关键不只是探测到亮度，而是角向剖面比点源点扩散函数更宽；这种形态信息允许人们反推出源附近有效扩散系数 \(D_{\rm eff}(E)\)。在各向同性标量扩散模型下，得到的 \(D_{\rm eff}(E)\) 通常远低于由银河宇宙线成分比推断的平均扩散系数 \(D_{\rm gal}(E)\)。</p>
+<p>四、方法上，本讲要把观测结论拆成一条连续物理链。脉冲星通过 \(\dot E(t)\) 向外注入 \(e^\pm\)；这些粒子逃出传统 \({\rm PWN}\) 或 \({\rm SNR}\) 约束区后，在源附近以 \(D(E)=D_0(E/E_0)^\delta\) 扩散；同时经历同步辐射和逆康普顿冷却，冷却率为 \(b(E)=-dE/dt\)，在 Thomson 近似下可写为 \(b(E)\simeq (4/3)\sigma_Tc(U_B+U_{\rm rad})(E/m_ec^2)^2\)；当前电子分布再通过逆康普顿辐射映射到 \({\rm TeV}\) 伽马射线；最后三维体发射率沿视线投影，并与曝光、背景和点扩散函数卷积，才成为 HAWC 看到的显著性图、径向剖面和能谱。</p>
+<p>五、关键结果的物理含义需要谨慎表述。低扩散结论的强处是它主要来自形态尺度，而不是只来自总光度：若 \(D(E)\) 很大，粒子会扩散到更大的体积，表面亮度更低、角剖面更宽；若 \(D(E)\) 很小，粒子被困在源附近，halo 更紧凑、更亮。由扩散长度 \(r_{\rm diff}(E)\simeq 2\sqrt{D(E)t_{\rm eff}(E)}\) 与角尺度 \(\theta_{\rm diff}\simeq r_{\rm diff}/d\) 的关系可以看出，给定距离 \(d\)、年龄 \(t_{\rm age}\) 和冷却时间 \(t_{\rm cool}(E)=E/b(E)\)，角向剖面宽度会直接约束有效传播速度。因此，HAWC 型结果使 Geminga 与 Monogem 成为 pulsar halo 领域的教科书案例。</p>
+<p>六、但同一个低扩散结论马上带来正电子超额张力。若把 HAWC 反推出的低 \(D(E)\) 作为单区传播系数，一直从源附近延伸到地球，那么地球处通量 \(\Phi_{e^\pm}(E)=c n_e(E,r=d,t=t_{\rm age})/(4\pi)\) 往往会很小，因为粒子在冷却前难以走完几百 \({\rm pc}\) 的距离。也就是说，低扩散会增强源附近的 \({\rm TeV}\) halo，却抑制到达太阳邻域的 \(e^\pm\)。因此，Geminga 与 Monogem 能否解释 AMS-02 不是一个单纯的“脉冲星是否产生足够多 \(e^\pm\)”的问题，而是一个关于 \(D(r,E)\)、低扩散区半径 \(r_*\)、边界条件、注入历史和冷却窗口的联合问题。</p>
+<p>七、后续研究的主要分叉正是围绕这些局限展开。单区低扩散模型给出强张力；两区扩散模型把传播写成 \(D(r,E)=D_{\rm in}(E)\) 对 \(r<r_*\)，以及 \(D(r,E)=D_{\rm out}(E)\) 对 \(r>r_*\)，从而允许粒子先在源附近慢扩散、离开 halo 后在普通 \({\rm ISM}\) 中快扩散。各向异性扩散模型则指出，一个看似圆形或近似圆形的投影结构未必等价于真正的低标量扩散。辐射场、磁场、距离、年龄、背景估计和邻近源混淆都会影响 \(D_{\rm eff}(E)\) 的解释。下一讲将不再重复 Geminga 与 Monogem 的单源推导，而会进入 pulsar halo population、未识别 \({\rm TeV}\) 源、选择效应和低扩散区微观起源。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>一、理解 Geminga 与 Monogem 的历史背景，要先从正电子分数问题讲起。传统宇宙线图像中，高能正电子主要是次级产物：宇宙线质子和核与星际介质相互作用，产生介子，随后衰变出 \(e^+\)。在许多简单传播模型中，正电子分数 \(f_{e^+}(E)=\Phi_{e^+}(E)/[\Phi_{e^-}(E)+\Phi_{e^+}(E)]\) 应随能量升高而下降或至少不显著上升。然而 PAMELA、Fermi-LAT 和 AMS-02 显示 \(f_{e^+}(E)\) 在 \(\gtrsim 10\,{\rm GeV}\) 后上升，这提示可能存在额外 \(e^\pm\) 源，也可能意味着银河传播、次级产生截面或局域源分布需要修正。</p>
+<p>二、脉冲星很自然地进入候选名单，因为它们不是只产生电子，而是通过磁层级联和 pulsar wind 产生近似成对的 \(e^\pm\)。年轻脉冲星周围常有明亮 \({\rm PWN}\)，粒子仍在风终止激波、星云磁场和超新星遗迹环境中演化；中年脉冲星则可能已经让相当一部分 \(e^\pm\) 逃出紧凑星云区域。Geminga 与 Monogem 兼具几个有利条件：距离地球只有几百 \({\rm pc}\) 量级，年龄约几十万年，spin-down 能量预算充足，并且位于正电子冷却时间和传播时间都可能相关的窗口内。因此，在 HAWC 之前，它们已经是解释局域正电子超额的经典候选源。</p>
+<p>三、在 HAWC 结果出现之前，许多估算会把源附近扩散近似为普通银河平均扩散，即使用类似 \(D(E)=D_0(E/E_0)^\delta\) 的幂律形式，并让 \(D_0\) 接近由硼碳比等宇宙线成分比推断出的银河平均值。若 \(D(E)\) 足够大，Geminga 与 Monogem 注入的 \(e^\pm\) 可以在冷却前传播到地球，因而对 AMS-02 贡献显著。这个图像的核心假设是：源附近传播环境与银河平均传播环境相差不大。HAWC 对 \({\rm TeV}\) halo 的探测正是挑战了这个假设。</p>
+<p>四、HAWC 看到的是围绕 Geminga 和 Monogem 的扩展 \({\rm TeV}\) 伽马射线发射。物理解释是：逃逸的高能 \(e^\pm\) 与宇宙微波背景、红外光和星光发生逆康普顿散射，产生 \(E_\gamma\) 位于 \({\rm TeV}\) 能段的光子。在 Thomson 近似下，能量映射可写为 \(E_\gamma\simeq (4/3)\gamma_e^2\epsilon\)，其中 \(\gamma_e=E_e/(m_ec^2)\)，\(\epsilon\) 是目标光子能量。因此，\({\rm TeV}\) 伽马射线常追踪几十到上百 \({\rm TeV}\) 的电子，而不是 AMS-02 所有能段正电子的直接一一对应物。</p>
+<p>五、这里最容易出现的第一个误区，是把 \({\rm TeV}\) halo 的亮度直接等同于地球正电子通量。强 halo 可能说明脉冲星注入了大量 \(e^\pm\)，也可能说明 \(e^\pm\) 被困在源附近，使局部电子密度升高。前一种解释有利于正电子到达地球，后一种解释反而不利。真正的地球通量取决于电子密度解在 \(r=d\) 与 \(t=t_{\rm age}\) 处的值，即 \(\Phi_{e^\pm}(E)=c n_e(E,r=d,t=t_{\rm age})/(4\pi)\)，而不是源附近伽马射线光度本身。</p>
+<p>六、第二个常见误区，是把 HAWC 推断出的低扩散理解为整个银河盘的普遍扩散系数。事实上，\({\rm TeV}\) halo 观测约束的是 Geminga 与 Monogem 周围几十到百 \({\rm pc}\) 尺度上的有效传播，传统宇宙线成分比约束的是 \({\rm kpc}\) 尺度、长时间平均后的银河传播。二者不必矛盾：可以存在局域低扩散区，也可以存在从 \(D_{\rm in}(E)\) 过渡到 \(D_{\rm out}(E)\) 的两区结构，还可以存在各向异性扩散、磁力线导向传播或自生湍流等更复杂情形。</p>
+<p>七、第三个误区，是把显著性天图上的颜色斑块直接当作真实物理半径。实际观测图像是源体发射率沿视线积分后，再与仪器点扩散函数、曝光、能量响应和背景模型卷积得到的。径向剖面是否比点源点扩散函数更宽，才是判断 extension 的关键；而要从 extension 反推 \(D_{\rm eff}(E)\)，还必须指定源距离 \(d\)、年龄 \(t_{\rm age}\)、冷却模型 \(b(E)\)、注入谱、辐射场和磁场。本讲的任务正是把这些中间环节连起来，使学生不把观测结论误读成单句口号。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>一、本讲的基础从能量源开始。脉冲星旋转能随时间损失，其自转能损失率为 \(\dot E(t)\)，其中一部分可转化为相对论 \(e^\pm\) 的注入功率。对 Geminga 与 Monogem 这样的中年脉冲星，当前 \(\dot E(t)\) 不是唯一重要量，因为今天看到的 \({\rm TeV}\) halo 可能来自过去一段时间内注入并尚未冷却掉的粒子。实际读论文时，应同时记录距离 \(d\)、年龄 \(t_{\rm age}\)、当前 spin-down luminosity、总释放能量 \(E_{\rm sd}\)、以及注入效率 \(\eta_{e^\pm}\)，并用 \(\eta_{e^\pm}E_{\rm sd}\) 做能量预算上限检查。</p>
+<p>二、第二步是理解逃逸。上一讲已经讨论过粒子如何离开 \({\rm PWN}\) 或 \({\rm SNR}\) 限制区，并进入源外传播；本讲不再展开逃逸微观细节，而把逃逸后的 \(e^\pm\) 作为传播方程中的源项 \(Q(E,t)\)。在最简单单源模型中，Geminga 或 Monogem 可近似为位于原点的点源注入，传播方程写为 \(\partial n_e/\partial t=\nabla\cdot[D(E)\nabla n_e]+\partial[b(E)n_e]/\partial E+Q(E,t)\delta^3(\boldsymbol r)\)。这里 \(n_e(E,\boldsymbol r,t)\) 是电子正电子数密度，\(D(E)\) 控制空间扩散，\(b(E)=-dE/dt\) 控制连续冷却。</p>
+<p>三、第三步是扩散的第一层近似。为了从观测角尺度得到直觉，通常先采用各向同性、均匀、标量扩散，并写成 \(D(E)=D_0(E/E_0)^\delta\)。这个假设不是最终真理，而是课程中的第一层模型：它把复杂磁场、湍流、源环境和各向异性传播压缩成一个有效系数 \(D_{\rm eff}(E)\)。在这个模型中，\(D_0\) 主要控制参考能量处粒子扩散得快还是慢，\(\delta\) 控制高能粒子是否比低能粒子扩散得更远。</p>
+<p>四、第四步是冷却。\({\rm TeV}\) 到 \({\rm PeV}\) 电子主要通过同步辐射和逆康普顿散射损失能量。冷却率定义为 \(b(E)=-dE/dt\)，在 Thomson 近似下可写为 \(b(E)\simeq (4/3)\sigma_Tc(U_B+U_{\rm rad})(E/m_ec^2)^2\)。因此 \(b(E)\) 近似随 \(E^2\) 增长，冷却时间 \(t_{\rm cool}(E)=E/b(E)\) 近似随 \(E^{-1}\) 下降。这一点决定了高能 halo 往往更紧凑，也决定了并非所有早期注入的高能 \(e^\pm\) 都能存活到今天。</p>
+<p>五、第五步是把扩散与冷却合成尺度估计。粒子在有效传播时间 \(t_{\rm eff}(E)=\min[t_{\rm age},t_{\rm cool}(E)]\) 内的典型扩散半径可估为 \(r_{\rm diff}(E)\simeq 2\sqrt{D(E)t_{\rm eff}(E)}\)。观测角尺度则近似为 \(\theta_{\rm diff}\simeq r_{\rm diff}/d\)。这个式子给出本讲最重要的直觉：HAWC 看到的数度尺度不是源的硬边界，而是由扩散长度、冷却时间、距离投影和仪器响应共同塑造的表面亮度结构。</p>
+<p>六、第六步是逆康普顿能量映射。电子能量 \(E_e\) 与伽马射线能量 \(E_\gamma\) 之间不是简单相等关系；在 Thomson 极限中，\(E_\gamma\simeq (4/3)\gamma_e^2\epsilon\)，其中 \(\gamma_e=E_e/(m_ec^2)\)，\(\epsilon\) 是目标光子能量。对宇宙微波背景、红外背景和星光，不同 \(\epsilon\) 会把不同电子能量映射到 \({\rm TeV}\) 波段；在更高能时 Klein-Nishina 效应还会改变辐射效率和谱形。因此，由 \({\rm TeV}\) halo 反推 \(D(E)\) 时，必须说明被约束的是哪一段电子能量的有效传播。</p>
+<p>七、第七步是从三维电子分布到二维观测图像。电子分布通过逆康普顿产生体发射率 \(j_\gamma(E_\gamma,r)\)，球对称近似下表面亮度为 \(I_\gamma(E_\gamma,\theta)=(1/4\pi)\int j_\gamma(E_\gamma,\sqrt{\ell^2+d^2\theta^2})d\ell\)。但仪器真正拟合的是 \(I_{\rm obs}={\rm PSF}\otimes {\rm Exposure}\otimes I_\gamma+{\rm Background}\)。所以读 HAWC 图时，不能从显著性图的颜色范围直接读物理半径，而要看径向剖面、点源点扩散函数、背景模型和残差结构。</p>
+<p>八、第八步是把 \({\rm TeV}\) halo 与 AMS-02 闭合。地球处单源通量为 \(\Phi_{e^\pm}(E)=c n_e(E,r=d,t=t_{\rm age})/(4\pi)\)，正电子分数应写成 \(f_{e^+}(E)=[\Phi_{e^+}^{\rm sec}(E)+\Phi_{e^+}^{\rm psr}(E)]/[\Phi_{e^-}^{\rm prim}(E)+\Phi_{e^-}^{\rm sec}(E)+\Phi_{e^-}^{\rm psr}(E)+\Phi_{e^+}^{\rm sec}(E)+\Phi_{e^+}^{\rm psr}(E)]\)。若使用单区低扩散，源附近高 \(e^\pm\) 密度会增强 \({\rm TeV}\) halo，却往往降低到达地球的 \(e^\pm\) 通量；若使用两区扩散，则 \(D(r,E)=D_{\rm in}(E)\) 对 \(r<r_*\)，\(D(r,E)=D_{\rm out}(E)\) 对 \(r>r_*\)，结果可能缓和张力。本讲到此为止：我们把 Geminga 与 Monogem 作为单源经典案例讲清；下一讲才推广到 pulsar halo population、选择效应、各向异性扩散和低扩散区的微观起源。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：从单源传播方程出发。承接上一讲的“逃逸粒子在源外扩散并冷却”的框架，本讲把 Geminga 或 Monogem 近似为位于原点的点源，暂时忽略对流、再加速、非连续损失和核反应，只保留空间扩散、连续能量损失与逃逸注入：</p>
+<div class="math-display">\[\frac{\partial n_e}{\partial t}=\nabla\cdot\left[D(E)\nabla n_e\right]+\frac{\partial}{\partial E}\left[b(E)n_e\right]+Q(E,t)\delta^3(\boldsymbol r) .\]</div>
+<p>这里 \(n_e(E,\boldsymbol r,t)\) 是单位能量的 \(e^\pm\) 数密度，\(D(E)\) 是源附近有效扩散系数，\(b(E)=-dE/dt\) 是连续冷却率，\(Q(E,t)\) 是逃逸注入项。这个方程的目标不是立刻给出观测图，而是先把“注入—扩散—冷却”写成可求解的物理问题；下一步要指定 \(D(E)\)，才能把空间尺度与能量联系起来。</p>
+<p>第二步：采用第一层各向同性标量扩散模型。为了建立从角大小反推传播速度的基础直觉，先假设源附近扩散均匀、各向同性，并用幂律参数化能量依赖：</p>
+<div class="math-display">\[D(E)=D_0\left(\frac{E}{E_0}\right)^\delta .\]</div>
+<p>其中 \(D_0\) 是参考能量 \(E_0\) 处的扩散归一化，\(\delta\) 描述高能粒子是否比低能粒子扩散得更快。HAWC 型分析所谓“低扩散”主要指由 TeV halo 形态反演得到的源附近 \(D_0\) 明显低于银河平均扩散系数，而不是指整个银河盘都具有同一个低值。指定 \(D(E)\) 后，还必须写出冷却项，因为高能 \(e^\pm\) 的可传播时间受能量损失限制。</p>
+<p>第三步：写出同步辐射与逆康普顿冷却。对 \({\rm TeV}\) 到更高能的 \(e^\pm\)，主要连续损失来自磁场中的同步辐射和辐射场中的逆康普顿散射；在 Thomson 近似下可写为：</p>
+<div class="math-display">\[b(E)=\frac{4}{3}\sigma_{\rm T}c\left(U_B+U_{\rm rad}\right)\left(\frac{E}{m_ec^2}\right)^2\equiv b_0E^2 .\]</div>
+<p>这里 \(U_B\) 是磁场能量密度，\(U_{\rm rad}\) 是目标辐射场能量密度，\(b_0\) 汇总了环境冷却强度。这个式子说明冷却率随能量近似按 \(E^2\) 增长，因此越高能的电子寿命越短；下一步用它定义冷却时间，并判断粒子到底能传播多久。</p>
+<p>第四步：由冷却率得到冷却时间与有效传播时间。若 \(b(E)=b_0E^2\)，则当前能量为 \(E\) 的粒子典型冷却时间为：</p>
+<div class="math-display">\[t_{\rm cool}(E)=\frac{E}{b(E)}=\frac{1}{b_0E},\qquad t_{\rm eff}(E)=\min\left[t_{\rm age},t_{\rm cool}(E)\right] .\]</div>
+<p>其中 \(t_{\rm age}\) 是脉冲星年龄，\(t_{\rm eff}(E)\) 是真正参与形成当前 halo 的有效时间。低能极限下若 \(t_{\rm cool}(E)>t_{\rm age}\)，粒子记得源的年龄；高能极限下若 \(t_{\rm cool}(E)<t_{\rm age}\)，粒子只记得最近一个冷却时间内的注入。下一步把 \(t_{\rm eff}(E)\) 与 \(D(E)\) 合并成扩散长度。</p>
+<p>第五步：得到扩散半径的尺度估计。在三维各向同性扩散中，点源注入后的典型空间扩展由均方位移控制，因此可用：</p>
+<div class="math-display">\[r_{\rm diff}(E)\simeq 2\sqrt{D(E)t_{\rm eff}(E)} .\]</div>
+<p>这个式子是理解 TeV halo 形态的第一把尺子：在相同 \(t_{\rm eff}(E)\) 下，较小的 \(D(E)\) 使粒子集中在源附近，形成更紧凑且表面亮度更高的 halo；较大的 \(D(E)\) 使粒子分布更宽、更稀薄。观测并不直接给出 \(r_{\rm diff}(E)\)，而给出天球角尺度，所以接下来要投影到角坐标。</p>
+<p>第六步：把物理扩散半径投影为观测角尺度。Geminga 与 Monogem 距离为几百 \({\rm pc}\) 量级，在小角近似下有：</p>
+<div class="math-display">\[\theta_{\rm diff}(E)\simeq \frac{r_{\rm diff}(E)}{d}=\frac{2}{d}\sqrt{D(E)t_{\rm eff}(E)} .\]</div>
+<p>其中 \(d\) 是源到地球的距离。这个关系说明 HAWC 约束 \(D(E)\) 的关键来自角向剖面宽度，而不只是总 TeV 光度。若 \(d\)、\(t_{\rm age}\) 和冷却环境给定，观测到的 \(\theta_{\rm diff}(E)\) 就能反推源附近有效扩散强度；但尺度估计还不等于完整模型，下一步需要写出电子分布的 Green 函数解。</p>
+<p>第七步：写出瞬时点源注入的传播解。若在某一时刻注入 \(Q(E_i)\)，粒子从注入能量 \(E_i\) 冷却到当前能量 \(E\)，球对称 Green 函数形式可写为：</p>
+<div class="math-display">\[n_e(E,r,t)=\frac{Q(E_i)}{\pi^{3/2}r_d^3}\frac{b(E_i)}{b(E)}\exp\left(-\frac{r^2}{r_d^2}\right) .\]</div>
+<p>这里 \(r_d\) 是包含能量依赖扩散与冷却历史的扩散长度，\(b(E_i)/b(E)\) 是能量变量变换带来的 Jacobian 因子。这个表达式说明 halo 形态不是任意二维高斯模板，而是由注入谱、冷却映射和扩散过程共同决定。下一步要明确 \(E_i\) 与 \(E\) 的关系。</p>
+<p>第八步：由连续冷却关系连接注入能量与当前能量。对 \(b(E)=b_0E^2\)，能量演化满足 \(dE/dt=-b_0E^2\)，积分后得到：</p>
+<div class="math-display">\[E_i=\frac{E}{1-b_0Et} .\]</div>
+<p>这个结果给出一个重要限制：当 \(b_0Et\rightarrow 1\) 时，所需注入能量 \(E_i\) 发散，表示这些高能粒子不可能从太早的注入中存活到今天。因此，高能 TeV halo 主要追踪较近时期的高能注入，而 AMS-02 能段的 \(e^\pm\) 可能对应不同的存活窗口。下一步要把电子能量映射到伽马射线能量。</p>
+<p>第九步：建立逆康普顿辐射的能量对应。在 Thomson 极限中，电子 Lorentz 因子 \(\gamma_e\) 与目标光子能量 \(\epsilon\) 决定散射后伽马射线能量：</p>
+<div class="math-display">\[E_\gamma\simeq \frac{4}{3}\gamma_e^2\epsilon,\qquad \gamma_e=\frac{E_e}{m_ec^2} .\]</div>
+<p>这个关系说明 \({\rm TeV}\) 伽马射线通常对应几十到上百 \({\rm TeV}\) 的电子，具体取决于目标光子来自宇宙微波背景、红外光还是星光。高能端还可能进入 Klein-Nishina 区，使散射效率下降并改变谱形。下一步要把电子分布产生的体发射率投影成天球表面亮度。</p>
+<p>第十步：从三维体发射率得到二维表面亮度。设逆康普顿体发射率为 \(j_\gamma(E_\gamma,r)\)，球对称近似下，角距离 \(	heta\) 处的本征表面亮度为：</p>
+<div class="math-display">\[I_\gamma(E_\gamma,\theta)=\frac{1}{4\pi}\int_{-\infty}^{+\infty}j_\gamma\left(E_\gamma,\sqrt{\ell^2+d^2\theta^2}\right)d\ell .\]</div>
+<p>这里 \(\ell\) 是视线方向坐标，\(\sqrt{\ell^2+d^2\theta^2}\) 是到脉冲星的三维距离。这个投影关系提醒我们，径向亮度剖面不是电子真实半径的直接照片，而是三维分布沿视线积分后的结果。下一步还要加入仪器响应，才能与 HAWC 计数图比较。</p>
+<p>第十一步：把物理亮度变成可拟合的观测计数。实际观测图像需要卷积点扩散函数、曝光、能量响应并叠加背景，可概括为：</p>
+<div class="math-display">\[\mu_i=\mu_{{\rm src},i}\left(D_0,\delta,p,E_{\rm cut},\eta_{e^\pm},B,U_{\rm rad}\right)+\mu_{{\rm bkg},i},\qquad \ln\mathcal L=\sum_i\left[k_i\ln\mu_i-\mu_i-\ln(k_i!)\right] .\]</div>
+<p>其中 \(k_i\) 是第 \(i\) 个空间像素或能量 proxy bin 的观测计数，\(\mu_i\) 是模型期望计数，\(p\) 是注入谱指数，\(E_{\rm cut}\) 是高能截断，\(\eta_{e^\pm}\) 是 \(e^\pm\) 注入效率。这里的重点是：\(D_0\) 的约束来自多角度、多能量 bin 中的形态和谱形共同拟合，而不是从显著性图上直接量一个颜色斑块半径。拟合得到的 halo 模型接下来可用于计算地球处 \(e^\pm\) 通量。</p>
+<p>第十二步：把同一传播解取到太阳邻域，得到单源 \(e^\pm\) 通量。对各向同性相对论粒子，地球处微分通量与当地数密度的关系为：</p>
+<div class="math-display">\[\Phi_{e^\pm}(E)=\frac{c}{4\pi}n_e(E,r=d,t=t_{\rm age}) .\]</div>
+<p>这一步是 TeV halo 与 AMS-02 之间的物理桥梁。若把 HAWC 反演得到的低 \(D(E)\) 作为单区扩散系数，一直从源附近延伸到地球，则 \(n_e(E,r=d,t=t_{\rm age})\) 往往很小，因为粒子在冷却前难以跨越几百 \({\rm pc}\)。因此，低扩散会增强源附近逆康普顿亮度，却可能抑制地球正电子通量。下一步用正电子分数写出最终观测闭合关系。</p>
+<p>第十三步：用 AMS-02 正电子分数完成闭合检验。地球观测到的正负电子包含一次电子、次级成分和脉冲星成分，因此应写为：</p>
+<div class="math-display">\[f_{e^+}(E)=\frac{\Phi_{e^+}^{\rm sec}(E)+\Phi_{e^+}^{\rm psr}(E)}{\Phi_{e^-}^{\rm prim}(E)+\Phi_{e^-}^{\rm sec}(E)+\Phi_{e^-}^{\rm psr}(E)+\Phi_{e^+}^{\rm sec}(E)+\Phi_{e^+}^{\rm psr}(E)} .\]</div>
+<p>这个公式给出本讲主结论的诊断标准：Geminga 或 Monogem 若要显著解释 AMS-02，不仅要有足够的 \(\eta_{e^\pm}E_{\rm sd}\) 能量预算，还必须在不破坏 TeV halo 角剖面、SED、冷却限制和背景残差的前提下，提高 \(\Phi_{e^+}^{\rm psr}(E)\)。若采用两区扩散，常写成 \(D(r,E)=D_{\rm in}(E)\) 对 \(r<r_*\)，\(D(r,E)=D_{\rm out}(E)\) 对 \(r>r_*\)，其目的正是让源附近慢扩散解释 TeV halo，同时允许粒子离开低扩散区后在普通星际介质中更快传播。由此形成 Geminga/Monogem 案例的核心张力：源附近有效低扩散是 TeV halo 形态的自然解释，但它是否允许足够正电子到达地球，取决于低扩散区半径 \(r_*\)、边界条件、注入历史和冷却模型。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>一、本讲的拟合部分要先从“经验扩展”开始，而不是一上来就把角尺度解释为扩散系数。第一层模型包括点源模板、二维高斯模板和可能的背景模板。点源模板的作用是建立零假设：若 Geminga 或 Monogem 只是仪器点扩散函数下的点源，观测到的径向剖面应与 \({\rm PSF}\) 一致。二维高斯模板的作用是给出较少物理假设的扩展描述，例如用角宽参数 \(\sigma_{\rm ext}\) 或等效半径描述源比 \({\rm PSF}\) 宽多少。这里必须提醒学生：\(\sigma_{\rm ext}\) 不是 \(D(E)\)，它只是投影、冷却、能量响应和仪器卷积之后的经验宽度。</p>
+<p>二、第二层才进入物理扩散模型。基本参数包括源距离 \(d\)、年龄 \(t_{\rm age}\)、扩散归一化 \(D_0\)、扩散指数 \(\delta\)、注入谱指数 \(p\)、高能截断 \(E_{\rm cut}\)、\(e^\pm\) 注入效率 \(\eta_{e^\pm}\)、磁场 \(B\) 和辐射场能量密度 \(U_{\rm rad}\)。教学时可先固定 \(d\) 与 \(t_{\rm age}\)，并采用 \(D(E)=D_0(E/E_0)^\delta\)，让学生观察两个最关键的响应：\(D_0\) 主要改变径向剖面的宽度，\(\eta_{e^\pm}\) 主要改变逆康普顿亮度归一化。随后再放开 \(p\)、\(E_{\rm cut}\)、\(B\) 与 \(U_{\rm rad}\)，展示形态和能谱如何共同约束模型。</p>
+<p>三、HAWC 型数据应尽量在计数空间中拟合，而不是只拟合论文中已经提取出的通量点。对空间像素和能量 proxy bin，可写 Poisson 似然为 \(\ln\mathcal L=\sum_i[k_i\ln\mu_i-\mu_i-\ln(k_i!)]\)，其中 \(k_i\) 是第 \(i\) 个 bin 的观测计数，\(\mu_i\) 是模型期望计数。期望计数应写成 \(\mu_i=\mu_{{\rm src},i}(D_0,\delta,p,E_{\rm cut},\eta_{e^\pm},B,U_{\rm rad})+\mu_{{\rm bkg},i}\)，并且 \(\mu_{{\rm src},i}\) 已经包含逆康普顿发射、视线投影、曝光、能量响应和 \({\rm PSF}\) 卷积。若只对发表后的 \(E_\gamma^2dN_\gamma/dE_\gamma\) 点做最小二乘，往往会丢失形态信息，而形态正是 \(D(E)\) 约束的核心来源。</p>
+<p>四、模型比较可用似然比统计量 \({\rm TS}=2\ln(\mathcal L_1/\mathcal L_0)\)，但要说明 \({\rm TS}\) 的解释依赖零假设、参数边界和试验因子。点源相对于扩展源的 \({\rm TS}\) 用于说明 extension 是否显著；高斯扩展相对于物理扩散模板的 \(\Delta\ln\mathcal L\) 用于判断是否有必要引入冷却和能量依赖传播；单区扩散相对于两区扩散的比较则不只是统计问题，还涉及低扩散区半径 \(r_*\) 是否物理合理。课程中应要求学生区分“探测到扩展”“扩展支持低 \(D_{\rm eff}(E)\)”和“低扩散区延伸到地球”这三个不同命题。</p>
+<p>五、参数后验的读法要强调简并而不是只读最佳拟合数值。较大的 \(U_{\rm rad}\) 和较大的 \(\eta_{e^\pm}\) 都会增强逆康普顿亮度；较强的 \(B\) 会增加同步冷却，从而改变电子谱和 \({\rm TeV}\) 输出；较硬的 \(p\) 或较高的 \(E_{\rm cut}\) 可提高高能端通量；距离 \(d\) 同时影响物理半径、光度换算和投影角尺度。因此读后验图时，要看 \(D_0\) 与 \(\eta_{e^\pm}\)、\(D_0\) 与 \(d\)、\(p\) 与 \(E_{\rm cut}\)、\(B\) 与 \(U_{\rm rad}\) 的相关性。一个只给出 \(D_0\) 最佳值而不展示 credible region 的结论，不足以支撑强物理解释。</p>
+<p>六、残差诊断应按空间、径向、能量和背景四条线检查。空间残差图要看是否有双峰、环状结构、沿银河面拉长或邻近源方向的正残差；径向残差要看中心 bin 是否受 \({\rm PSF}\) 主瓣误差控制，外翼 bin 是否系统性偏高或偏低；能量分箱残差要看高能端是否提示 \(\delta\)、冷却率 \(b(E)\) 或 Klein-Nishina 处理错误；背景控制区残差要看大尺度 exposure、hadron rejection 和 diffuse background 是否留下结构。对数度尺度 halo 而言，背景模型不是仪器细节，而是低扩散结论的系统误差核心。</p>
+<p>七、连接 AMS-02 时，需要另建宇宙线似然，而不能把 \({\rm TeV}\) 最佳拟合模型直接画到正电子图上就结束。可对 \(e^+\)、\(e^-\) 和 \(f_{e^+}\) 数据采用高斯近似似然，若有系统协方差则使用 \(\chi^2=(\boldsymbol y-\boldsymbol m)^T\mathbf C^{-1}(\boldsymbol y-\boldsymbol m)\)。模型中应包含一次电子 \(\Phi_{e^-}^{\rm prim}\)、次级正电子 \(\Phi_{e^+}^{\rm sec}\)、次级电子 \(\Phi_{e^-}^{\rm sec}\)、脉冲星成分 \(\Phi_{e^\pm}^{\rm psr}\)、太阳调制、银河传播参数和归一化系统误差。只拟合 \(f_{e^+}(E)\) 会掩盖分母中 \(e^-\) 模型的不确定性，因此必须同时看绝对 \(e^+\) 与 \(e^-\) 谱。</p>
+<p>八、最终应用应让学生回答三个闭合问题。第一，\({\rm TeV}\) 形态是否确实要求源附近 \(D_{\rm eff}(E)\) 低于 \(D_{\rm gal}(E)\)，还是可由背景、\({\rm PSF}\) 或各向异性结构模拟？第二，若采用单区低扩散，\(\Phi_{e^\pm}(E)=cn_e(E,r=d,t=t_{\rm age})/(4\pi)\) 是否足以贡献 AMS-02？第三，若采用两区扩散 \(D(r,E)=D_{\rm in}(E)\) 对 \(r<r_*\)，\(D(r,E)=D_{\rm out}(E)\) 对 \(r>r_*\)，\({\rm TeV}\) 允许区和 AMS-02 需要区是否在合理的 \(r_*\)、\(\eta_{e^\pm}\) 和 \(E_{\rm sd}\) 下重叠。只有这三个问题同时检查，Geminga/Monogem 才能从“漂亮的 halo 拟合”变成“正电子超额来源”的定量判断。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 HAWC 关于 Geminga 与 Monogem 的经典工作时，第一遍应先读数据与源选择段落。课程上要让学生标出观测时间、能量范围、角分辨率、事件分箱、背景估计方式，以及源位置是否固定在已知脉冲星位置。这里决定了扩展显著性的统计含义。若源位置、搜索半径或能量 bin 是事后选择的，就必须考虑 trial factor；若位置是先验固定的，则显著性解释更直接。</p>
+<p>第二个重点段落是 morphology analysis。读者要问：作者先比较的是点源、二维高斯还是扩散模板？\({\rm PSF}\) 如何进入模型？显著性天图是否经过平滑？径向剖面是否直接与未平滑模型比较？如果文章给出扩展宽度，学生必须先把它理解为观测层面的角尺度 \(\theta\)，而不是立刻换算为 \(r_{\rm diff}\) 或 \(D(E)\)。只有在指定 \(r_{\rm diff}(E)\simeq2\sqrt{D(E)t_{\rm eff}(E)}\)、\(\theta_{\rm diff}\simeq r_{\rm diff}/d\)、冷却模型和距离后，角宽才可转化为扩散约束。</p>
+<p>第三个重点段落是 physical interpretation。若作者把 halo 解释为逃逸 \(e^\pm\) 的逆康普顿发射，就要检查电子注入谱、辐射场、磁场和冷却是否写清楚。特别要注意 \({\rm TeV}\) 伽马射线并不等价于 \({\rm TeV}\) 正电子本身；在 Thomson 近似下 \(E_\gamma\simeq(4/3)\gamma_e^2\epsilon\)，所以 HAWC 的 \({\rm TeV}\) 光子常追踪几十到上百 \({\rm TeV}\) 的电子。若论文把该结果外推到 AMS-02 的 \(10\) 到 \(500\,{\rm GeV}\) 正电子区间，就必须说明低能电子传播和冷却是否同样适用。</p>
+<p>第四个重点是 diffusion coefficient 段落。读到 \(D(E)\) 的数值时，要立刻检查参考能量 \(E_0\)、扩散指数 \(\delta\)、单位、对应电子能量，以及是否与银河平均扩散 \(D_{\rm gal}(E)\) 在同一能量处比较。课程中可以要求学生把所有论文中的 \(D_0\) 换算到同一 \(E_0\)，否则“低多少倍”的说法可能只是能量标尺不同造成的表观差异。还要提醒：HAWC 反演的是源附近有效传播量 \(D_{\rm eff}(E)\)，不必等同于整个银河盘的微观扩散系数。</p>
+<p>第五个重点是 likelihood、background 与 systematics。空气簇射阵列适合宽视场巡天，但对数度尺度结构的背景处理非常关键。学生应寻找文章中关于直接积分背景、曝光校正、hadron contamination、\({\rm PSF}\) 不确定性、能量标定和 diffuse Galactic emission 的讨论。若残差图显示沿银河面拉长或邻近源方向过量，即使最佳拟合 \(D_0\) 看起来精确，也要降低对球对称标量扩散解释的信心。</p>
+<p>第六个重点是 positron excess 段落。读者必须区分三种说法：Geminga/Monogem 有足够的 \(\eta_{e^\pm}E_{\rm sd}\) 能量预算；Geminga/Monogem 的 \({\rm TeV}\) halo 支持源附近低 \(D_{\rm eff}(E)\)；Geminga/Monogem 能显著贡献地球处 \(f_{e^+}(E)\)。这三者不是同一句话。若作者采用单区低扩散，则通常会抑制 \(\Phi_{e^\pm}(E)\) 到达地球；若作者采用两区扩散，就要看 \(r_*\)、\(D_{\rm in}(E)\) 和 \(D_{\rm out}(E)\) 是否同时满足 \({\rm TeV}\) 形态与 AMS-02 数据。</p>
+<p>第七个重点是 discussion 和 caveats。经典论文的价值不在于给出永远不变的 \(D(E)\) 数字，而在于把 pulsar halo 从概念变成可由伽马射线形态约束的物理对象。后续文献会从两区扩散、各向异性扩散、自生湍流、Fermi-LAT 低能约束和 LHAASO/HAWC population 角度修正解释。课程读法应把这些限定语看作下一讲的入口，而不是把它们视为削弱经典工作的附属注释。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一、显著性天图或 excess map：先看坐标是赤经/赤纬还是银经/银纬，再定位 Geminga 与 Monogem 的脉冲星位置。重点检查色标表示 significance、excess 还是 flux，图像是否经过平滑，平滑核是否大于 \({\rm PSF}\)。这类图用于确认源附近有过量，不用于直接读取物理半径。</p>
+<p>二、径向亮度或 excess profile：横轴通常为角距离 \(\theta\)，纵轴可为 excess counts、relative intensity、surface brightness 或 flux。要同时比较点源 \({\rm PSF}\)、经验高斯模板和物理扩散模型。关键看外翼是否显著宽于 \({\rm PSF}\)，以及外侧 bin 是否被背景系统误差支配。</p>
+<p>三、能谱或 \({\rm SED}\) 图：横轴为 \(E_\gamma\)，纵轴常用 \(E_\gamma^2dN_\gamma/dE_\gamma\)。应检查 HAWC 数据点、可能的 Fermi-LAT 上限、逆康普顿模型线、注入截断 \(E_{\rm cut}\) 和 Klein-Nishina 效应。不要只看 \({\rm TeV}\) 段拟合好，还要看 \({\rm GeV}\) 约束是否被违反。</p>
+<p>四、扩散系数比较图：横轴为粒子能量 \(E\) 或电子能量 \(E_e\)，纵轴为 \(D(E)\)。要比较 halo 反演得到的 \(D_{\rm halo}(E)\) 与银河平均 \(D_{\rm gal}(E)\)，并检查参考能量 \(E_0\)、扩散指数 \(\delta\) 和单位。不能把不同能量处的 \(D(E)\) 数字直接相除。</p>
+<p>五、正电子通量与正电子分数图：横轴为能量 \(E\)，纵轴可为 \(\Phi_{e^+}(E)\)、\(\Phi_{e^-}(E)\) 或 \(f_{e^+}(E)\)。要区分次级背景、一次电子、Geminga、Monogem、其他脉冲星和总模型。判断模型时必须同时看绝对 \(e^+\)、绝对 \(e^-\) 和正电子分数，而不是只看 \(f_{e^+}(E)\)。</p>
+<p>六、两区扩散参数扫描图：坐标轴可能是 \(r_*\)、\(D_{\rm in}\)、\(D_{\rm out}\)、\(\eta_{e^\pm}\) 或地球通量。要看 \({\rm TeV}\) halo 允许区和 AMS-02 需要区是否重叠，等高线表示 \(\Delta\ln\mathcal L\)、credible region 还是人为阈值。若重叠只出现在极端 \(\eta_{e^\pm}\) 或不合理 \(r_*\)，应判定为物理张力而非成功解释。</p>
+<p>七、残差图或 \({\rm TS}\) map：坐标仍是天球坐标，颜色表示 data-model、significance residual 或 test statistic。要检查是否存在环状残差、双峰结构、沿银河面延伸、邻近源污染或 halo 外缘系统偏差。残差图常常比最佳拟合曲线更能揭示各向异性扩散、背景失败或源混淆。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 1：显著性天图。横轴和纵轴通常是赤经/赤纬或 Galactic longitude/latitude，颜色表示 significance 或 excess。读图第一步是找到脉冲星位置，并比较过量中心与 Geminga/Monogem 的位置是否一致；第二步是查看图注中的平滑尺度和 \({\rm PSF}\) 尺度。此图的结论是“源附近存在扩展过量的候选形态”，不是“halo 物理半径就是颜色斑块大小”。误读风险在于忽略平滑处理、背景扣除和色标饱和，把视觉面积当成 \(r_{\rm diff}\)。</p>
+<p>图 2：径向剖面。横轴是角距离 \(\theta\)，纵轴可能是 excess counts、relative intensity 或 surface brightness。数据点应与点源 \({\rm PSF}\)、经验高斯曲线和物理扩散曲线一起读。若数据外翼明显高于点源 \({\rm PSF}\)，说明扩展发射显著；若扩散模型在中心和外翼同时拟合好，才可进一步讨论 \(D(E)\)。常见误读是只看最佳拟合曲线经过大多数数据点，却不检查外侧 bin 是否由背景系统误差控制。</p>
+<p>图 3：能谱或 \({\rm SED}\)。横轴是 \(E_\gamma\)，纵轴常为 \(E_\gamma^2dN_\gamma/dE_\gamma\)。数据点来自 HAWC 或其他 \({\rm TeV}\) 仪器，模型线通常是逆康普顿辐射，可能还叠加 Fermi-LAT 上限。读图时要问模型中的电子能量 \(E_e\) 如何通过 \(E_\gamma\simeq(4/3)\gamma_e^2\epsilon\) 映射到伽马射线，谱形由 \(p\)、\(E_{\rm cut}\)、冷却和 Klein-Nishina 效应共同决定。误读风险是只看 \({\rm TeV}\) 点拟合好，而忽略 \({\rm GeV}\) 上限或高能截断的物理含义。</p>
+<p>图 4：扩散系数对比图。横轴是能量 \(E\)，纵轴是 \(D(E)\)，图中常有 \(D_{\rm halo}(E)\) 与 \(D_{\rm gal}(E)\) 两类曲线。读图时必须检查所有曲线是否换算到相同参考能量 \(E_0\)，是否采用相同或不同的 \(\delta\)，以及纵轴单位是否一致。正确结论是源附近有效扩散可能被抑制；误读风险是把 \(D_{\rm halo}(E)\) 直接推广为整个银河盘的扩散系数，或把不同能量处的数值直接比较。</p>
+<p>图 5：AMS-02 正电子分数图。横轴是能量 \(E\)，纵轴是 \(f_{e^+}(E)\)。数据点来自 AMS-02，曲线通常分为次级背景、Geminga、Monogem、其他脉冲星和总和。读图时要看模型是否解释 \(f_{e^+}(E)\) 的上升、平台和高能趋势，同时不破坏 \(\Phi_{e^+}(E)\) 与 \(\Phi_{e^-}(E)\)。误读风险是只看分数曲线贴合数据，因为分母中的 \(e^-\) 模型变化也能改变 \(f_{e^+}(E)\)。</p>
+<p>图 6：单区与两区扩散的参数扫描图。坐标轴可能是 \(D_0\) 与 \(\eta_{e^\pm}\)，也可能是 \(r_*\) 与 \(D_{\rm in}/D_{\rm out}\)。等高线表示 \(\Delta\ln\mathcal L\)、posterior credible region 或满足 AMS-02 的区域。读图时要检查 \({\rm TeV}\) 形态允许的区域与 AMS-02 需要的区域是否真正重叠，并评估重叠点的 \(\eta_{e^\pm}E_{\rm sd}\) 是否超过能量预算。误读风险是把统计上可画出的边缘区域当作物理上自然的解。</p>
+<p>图 7：拟合后残差图或 \({\rm TS}\) map。横轴和纵轴仍是天球坐标，颜色显示 data-model、residual significance 或 test statistic。理想的球对称扩散模型应在源中心、外翼和背景区都不留下系统结构。若出现环状残差，可能提示扩散长度或 \({\rm PSF}\) 错误；若出现双峰或沿银河面拉长，可能提示邻近源、各向异性扩散或 diffuse background 问题。误读风险是只引用最佳拟合 \(D_0\)，却忽略残差已经否定了过于简单的球对称模型。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径是从 HAWC 经典探测读到单区低扩散的张力。先读 HAWC 对 Geminga 与 Monogem 周围扩展 \({\rm TeV}\) 伽马射线晕的分析，重点理解低 \(D_{\rm eff}(E)\) 如何来自角向剖面和 \({\rm PSF}\) 比较。随后读关于 Geminga 是否能解释 AMS-02 正电子超额的工作，把每篇文章的传播假设画成图：是单区 \(D(E)\)，还是两区 \(D(r,E)\)，低扩散是否延伸到地球方向。这样读能避免把“能量预算足够”误读为“地球通量足够”。</p>
+<p>第二条路径是把 \({\rm TeV}\) 与 \({\rm GeV}\) 观测接起来。HAWC 和 LHAASO 主要约束更高能电子的逆康普顿辐射，Fermi-LAT 则可限制较低能电子产生的 extended emission 或给出上限。一个完整模型需要同时通过 \({\rm GeV}\) 上限、\({\rm TeV}\) 形态和 \({\rm TeV}\) 能谱，而不能只在 HAWC 能段拟合成功。读这类文献时，要特别检查 Klein-Nishina 效应、局域辐射场、磁场 \(B\) 和电子截断 \(E_{\rm cut}\) 如何影响跨能段预测。</p>
+<p>第三条路径是从单源案例进入 pulsar halo population。LHAASO 与 HAWC 的巡天结果使问题从“Geminga/Monogem 是否特殊”变成“中年脉冲星是否普遍产生 halo”。读 population 论文时，要把本讲的单源工具推广到选择函数、灵敏度、视场、背景模型、距离偏差、年龄偏差和 halo luminosity function。尤其要问：未识别 \({\rm TeV}\) 源中有多少可能是 pulsar halo？样本中的非探测是否同样约束 \(D_{\rm eff}(E)\) 和 \(\eta_{e^\pm}\)？</p>
+<p>第四条路径是理论前沿：低扩散区的物理起源。本讲把 \(D_{\rm eff}(E)\) 当作观测反演量，下一步要读 self-generated turbulence、Alfvén wave damping、MHD turbulence、磁力线 wandering 和各向异性扩散。核心问题是：脉冲星注入的 \(e^\pm\) 是否能自洽地产生足够湍流，使 \(D_{\rm in}(E)\) 长时间低于 \(D_{\rm gal}(E)\)；如果不能，低扩散是否只是复杂磁场几何在投影后的有效描述。</p>
+<p>第五条路径是多信使闭合。正电子数据给出 \(\Phi_{e^+}(E)\)、\(\Phi_{e^-}(E)\) 和 \(f_{e^+}(E)\)，伽马射线给出逆康普顿 halo，X 射线或射电可约束同步辐射和磁场，宇宙线各向异性可限制单个近邻源贡献过大。现代研究越来越强调联合拟合和 posterior predictive check，而不是单独展示一条能穿过 AMS-02 数据点的曲线。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>同一系列第 \(5/5\) 讲最自然的方向是“从 Geminga/Monogem 到 pulsar halo population 与低扩散区物理起源”。本讲已经完成单源经典案例：HAWC 形态、\(D(E)\) 反演、冷却尺度、逆康普顿投影、两区扩散和 AMS-02 正电子张力。下一讲应避免重复 Geminga/Monogem 的逐步推导，而把工具推广到 population inference、未识别 \({\rm TeV}\) 源、LHAASO/HAWC 统计样本、选择函数和 halo luminosity function。</p>
+<p>第二个自然方向是“仪器选择效应如何塑造 pulsar halo 样本”。本讲只把 \({\rm PSF}\)、曝光和背景作为单源拟合的一部分；下一讲可以系统比较 HAWC、LHAASO、IACT 和未来 CTA 对大角尺度、低表面亮度 halo 的灵敏度差异。重点应放在 source confusion、diffuse background、视场大小、角分辨率和能量阈值如何影响 population 结论，而不是重新讲 \(r_{\rm diff}(E)\) 的基础推导。</p>
+<p>第三个方向是“各向异性扩散与自生湍流”。本讲采用有效标量 \(D_{\rm eff}(E)\) 作为第一层模型，并在 caveats 中指出它可能不是唯一微观扩散系数。下一讲或系列后的前沿加餐可以把 \(D(E)\) 推广为扩散张量，讨论磁力线随机游走、波粒相互作用、Alfvén wave damping 和源注入驱动湍流，解释为什么某些 halo 可能近似圆形，某些可能被拉长，以及低扩散区是否能在中年脉冲星周围长期维持。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>Geminga Monogem TeV halo HAWC positron excess</li>
+<li>pulsar halo diffusion coefficient AMS-02 positron</li>
+<li>suppressed diffusion around Geminga</li>
+<li>HAWC 2017 Geminga Monogem extended TeV gamma-ray emission</li>
+<li>two-zone diffusion Geminga positron excess</li>
+<li>LHAASO pulsar halo population study</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://ui.adsabs.harvard.edu/abs/2017Sci...358..911A/abstract">https://ui.adsabs.harvard.edu/abs/2017Sci...358..911A/abstract</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
