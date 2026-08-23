@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-08-23</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-08-23</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-08-23">
+      <a class="previous" href="2026-08-22.html">← 上一期：2026-08-22</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-08-23T11:11:28+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-pwn-pulsar-halo-lhaasohawccta-tev-halo">1. PWN 与 pulsar halo 从零到前沿（五）：LHAASO/HAWC/CTA 时代的 TeV halo 前沿问题</h3>
+<ul>
+<li>课程系列：PWN 与 pulsar halo 从零到前沿课程（第 5/6 讲）</li>
+<li>本讲边界：本讲整合 PWN/pulsar halo 模型前沿：TeV halo population、多区扩散、源分类退化、PeVatron 混淆和未来观测判据；下一讲做论文研读训练。</li>
+<li>上下文承接：前四讲从脉冲星能量源讲到 Geminga/Monogem；本讲进入当前 TeV 巡天前沿。</li>
+<li>主题：TeV halo population, PeVatron confusion, multi-zone diffusion and future CTA/LHAASO diagnostics</li>
+<li>经典工作：HAWC、LHAASO 和未来 CTAO 对扩展 TeV 源的 population 研究，把 PWN、pulsar halo、SNR 和 PeVatron 解释放在同一诊断框架。</li>
+<li>为什么经典：当前高能银河源研究的难点是扩展 TeV 源的物理归类。PWN、pulsar halo、SNR shell 和 hadronic PeVatron 常会给出相似的 TeV 表象，需要系统诊断。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一段：本讲是《PWN 与 pulsar halo 从零到前沿课程》的第 \(5/6\) 讲，位置非常关键。前四讲已经建立了脉冲星自转能损失、PWN 多波段辐射、逃逸 \(e^\pm\) 的扩散—冷却图像，以及 Geminga/Monogem 这类单源 halo 的慢扩散反演。本讲不再只问“某一个 halo 的 \(D(E)\) 是多少”，而是进入 HAWC、LHAASO 与未来 CTAO 时代的巡天前沿：当银河面上出现一个扩展的 \({\rm TeV}\) 或超高能伽马射线源时，怎样判断它是传统 PWN、pulsar halo、SNR shell、分子云被照亮，还是 hadronic PeVatron 候选。下一讲第 \(6/6\) 讲将做具体论文研读训练，因此本讲的目标是搭建通用诊断框架，而不是逐篇论文精读。</p>
+<p>第二段：本讲的核心科学问题可以概括为四个层次。第一，能量载体是什么：是电子正电子还是强子。第二，能量来源是什么：是脉冲星自转能 \(\dot E(t)\)，还是超新星遗迹冲击波释放的机械能，或更一般的银河 PeVatron。第三，传播环境是什么：粒子仍在 PWN 内部，已经进入 pulsar 周围的低扩散区，还是传播到普通 ISM、分子云或各向异性磁场结构中。第四，观测到的“源”是否就是一个物理实体：catalog 中的扩展椭圆、Gaussian 半径或模板边界，可能同时混合了 PSF、曝光、背景估计、邻近源和真实辐射结构。因此本讲会反复强调，源名不等于物理实体，extension 不等于真实 halo 半径。</p>
+<p>第三段：历史动机来自三个阶段的推进。最初，Crab-like 年轻 PWN 提供了清晰图像：中心脉冲星把自转能注入相对论风，风在终止激波处加速粒子，电子在磁场中产生同步辐射，并通过逆康普顿辐射产生高能伽马射线。后来，许多 Galactic \({\rm TeV}\) 扩展源被优先解释为 PWN，因为候选脉冲星的 \(\dot E\) 往往足够大，且 TeV 电子的辐射寿命通常长于 X 射线同步辐射寿命。再后来，Geminga/Monogem 类 TeV halo 表明，逃逸 \(e^\pm\) 可以在几十 \({\rm pc}\) 尺度上产生低表面亮度 IC 发射，并暗示局域扩散可能显著慢于标准银河宇宙线扩散。</p>
+<p>第四段：LHAASO 的超高能发现进一步改变了问题的重心。强子 \(pp\) 相互作用中，伽马射线能量与质子能量的数量级关系常写为 \(E_\gamma\sim0.1E_p\)，因此 \(100\\,{\rm TeV}\) 光子会自然引出 PeVatron 候选讨论。但这并不意味着“有 \(100\\,{\rm TeV}\) 光子”就等于“有 \({\rm PeV}\) 质子”。在 Thomson 近似下，电子 IC 光子能量满足 \(E_\gamma\simeq(4/3)\gamma_e^2\epsilon\)，某些低磁场、强注入或年轻系统也可能给出很高能量的 leptonic 光子，只是会受到冷却和 Klein-Nishina 效应限制。因此 PeVatron 判据必须同时检查能谱、气体、磁场、X 射线上限、电子冷却和强子能量账本。</p>
+<p>第五段：本讲的方法是把每个扩展源拆成四层模型。注入层描述 \(\dot E(t)\)、PWN 粒子注入、SNR 冲击加速或强子能量库；传播层描述单区扩散、两区扩散、各向异性扩散、平流或反向激波挤压；辐射层描述电子同步辐射与逆康普顿，或质子 \(pp\) 相互作用与 \(\pi^0\) 衰变；观测层描述 PSF、曝光、能量迁移、弥散背景、邻近源模板和 catalog 参数化。只有把这四层分开，学生才能理解为什么同一张 TeV 图像可能对应多种物理解释，也才能在读论文时知道哪些结论来自数据，哪些来自模型假设。</p>
+<p>第六段：本讲会建立一组从基础到前沿的诊断量。首先是能量账本，例如观测通量可换算为 \(L_\gamma=4\pi d^2F_\gamma\)，再与脉冲星当前自转能损失率比较得到 \(\eta_\gamma=L_\gamma/\dot E\)。如果所需效率过高，pulsar 关联就要降级。其次是尺寸账本，角尺度与线性尺度通过 \(R=d\theta\) 相连，因此距离不确定性会直接影响 halo 半径、PWN 大小和本动速度估计。第三是形态诊断，例如高能图是否比低能图更紧凑、残差是否围绕 pulsar 呈圆形、TeV 轮廓是否跟随 CO 或 HI 气体模板。第四是谱诊断，例如是否存在硬谱延伸、指数截断、Klein-Nishina 变软、GeV 连接和 X 射线上限冲突。</p>
+<p>第七段：关键结果不是给学生一张“源类判别表”后机械套用，而是建立证据强弱语言。能量足够的 pulsar 在附近，只能支持 PWN 或 halo 的可能性；TeV 形态与气体相关，只能增强 hadronic 解释；高能更紧凑常支持冷却受限电子扩散，但也要检查 PSF 随能量变化、背景处理和邻近源混叠；硬谱到 \(\gtrsim100\\,{\rm TeV}\) 会提高 PeVatron 兴趣，但不能绕过 leptonic 替代模型。真正可靠的结论应来自能量账本、形态、能谱、多波段对应体、环境模板和统计模型比较的一致收敛。</p>
+<p>第八段：局限性贯穿全讲。距离不确定性会支配 \(L_\gamma\)、\(R\)、\(v_\perp\) 和效率解释；气体模板有速度距离二义性，沿视线积分可能制造偶然相关；X 射线上限依赖吸收柱密度、曝光和背景；大尺度 TeV 发射对 diffuse background 模型十分敏感；水切伦科阵列与 IACT 对同一扩展源的响应不同，一个源可能被分解、被滤掉或与邻近源混合。现代前沿因此从单源 SED 拟合走向联合 likelihood、残差诊断、模型比较、选择函数和 population synthesis。本讲结束时学生应具备一个工具箱：看到扩展 \({\rm TeV}\) 源，先做能量账本，再读形态和谱，再查多波段与气体，最后用统计模型比较表达结论强弱。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一段：理解本讲背景，要从 PWN 的经典图像开始。Crab-like PWN 是高能天体物理中最清楚的非热辐射实验室之一：中心脉冲星以自转能损失率 \(\dot E\) 驱动相对论风，风在终止激波附近把能量注入非热电子正电子，粒子在磁场中产生 radio 到 X-ray 的同步辐射，并通过逆康普顿散射产生 \({\rm GeV}\) 到 \({\rm TeV}\) 伽马射线。这个图像特别适合解释年轻、紧凑、X 射线明亮、与脉冲星位置高度重合的源。</p>
+<p>第二段：但银河面 TeV 巡天很快暴露出经典 PWN 图像的不足。许多扩展 \({\rm TeV}\) 源面积大、表面亮度低、X 射线对应体弱，甚至中心没有明显的紧凑 PWN。若仍把所有这类源都称为 PWN，就会混淆粒子仍被星云束缚的阶段与粒子已经逃逸到 ISM 后继续辐射的阶段。pulsar halo 概念正是在这里变得重要：它强调离开 PWN 的 \(e^\pm\) 仍可在脉冲星周围几十 \({\rm pc}\) 内通过 IC 产生大尺度 TeV 发射，而磁场较低时 X 射线同步辐射可以很弱。</p>
+<p>第三段：HAWC 对 Geminga/Monogem 周围扩展 TeV 发射的研究，使 halo 从一种可能解释变成必须认真处理的源类。前四讲已经讲过，单源 halo 反演的核心是扩散—冷却方程，关键参数包括扩散系数 \(D(E)\)、冷却项 \(b(E)=-dE/dt\)、注入谱和源年龄。Geminga/Monogem 的重要性不只在于“发现了 halo”，更在于它们提示 pulsar 周围的有效扩散可能低于标准 ISM 值，从而影响局域宇宙线 \(e^\pm\)、TeV 源表解释和银河扩散模型。</p>
+<p>第四段：与此同时，LHAASO 把观测推向 \(100\\,{\rm TeV}\) 以上，使 PeVatron 候选成为银河高能天体物理的中心议题。若质子被加速到 \({\rm PeV}\)，它们与气体发生 \(pp\) 相互作用后可通过 \(\pi^0\) 衰变产生超高能伽马射线，数量级关系为 \(E_\gamma\sim0.1E_p\)。这与宇宙线膝区起源直接相关，因此每一个超高能源都很诱人。但本讲必须纠正常见误区：超高能光子是 PeVatron 线索，不是 PeVatron 证明；还必须检查是否存在可行的电子 IC 解释，以及强子模型所需的气体密度 \(n_{\rm gas}\) 和质子能量库 \(W_p\) 是否合理。</p>
+<p>第五段：观测仪器的差异也是源类混淆的历史原因。HAWC 和 LHAASO 这类水切伦科阵列具有大视场、高 duty cycle 和超高能覆盖优势，适合发现大尺度、硬谱和高能延伸源；H.E.S.S.、MAGIC、VERITAS 以及未来 CTAO 这类 IACT 具有更好角分辨率和能量分辨率，适合做细致 morphology 与 SED 分析，但对大尺度背景估计更敏感。同一片天空中，水切伦科阵列看到的一个扩展源，在 IACT 图像中可能被分解为多个紧凑源，也可能因为背景滤波而丢失大尺度外翼。</p>
+<p>第六段：另一个背景问题是 catalog 语言与物理语言之间的差别。catalog 里给出的源名、中心、扩展半径和谱指数，是在特定能段、特定背景模型和特定源模板下得到的统计描述。物理模型中的 halo 半径、PWN 边界、SNR shell 半径或低扩散区边界，则是粒子输运和环境共同决定的物理量。把 catalog extension 直接当作 \(R=d\theta\) 意义下的真实物理半径，是读 TeV 源表时最常见的错误之一。</p>
+<p>第七段：本讲还要处理多波段误读。没有 X 射线对应体不能直接否定 leptonic 模型，因为同步辐射强度取决于磁场能量密度 \(U_B=B^2/(8\pi)\)、吸收柱密度、曝光和电子能谱；有分子云投影也不能直接证明 hadronic 模型，因为沿视线不同距离的 CO 或 HI 结构可能偶然与 TeV 轮廓重合；有 pulsar 在附近也不能直接证明 PWN 或 halo，因为银河面 pulsar、SNR、分子云和 TeV 源的角向重合概率并不低。真正的关联至少要同时检查能量、年龄、距离、偏移和形态。</p>
+<p>第八段：因此，本讲的重要性在于把学生从“看到源名就贴标签”的阶段带到“阅读模型假设和证据链”的阶段。未来 CTAO 和 LHAASO 将提供更大的扩展源样本，更细的能量分箱 morphology，以及更多超高能源。面对这些数据，研究者需要判断哪些参数被真实约束，哪些由先验支配；哪些源可以用单区扩散解释，哪些需要两区扩散、多成分 PWN+halo 或强子气体模板；哪些 PeVatron 候选经得起电子替代模型检验。第 \(6/6\) 讲会在具体论文中训练这些阅读技能，本讲先给出完整框架。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一段：本讲的基础物理图像从“能量账本”开始。对于 PWN 和 pulsar halo，最直接的能量源是脉冲星自转能损失率 \(\dot E(t)\)。观测到的能量通量 \(F_\gamma\) 可在给定距离 \(d\) 后换算为 \(L_\gamma=4\pi d^2F_\gamma\)，再与当前 \(\dot E\) 比较得到表观效率 \(\eta_\gamma=L_\gamma/\dot E\)。若某个模型要求 \(\eta_\gamma\) 过高，或要求远超可用初始自转能的总注入，它就不是一个好的物理解释。这里要注意，当前 \(\dot E\) 不是全部历史能量释放；中年 pulsar 可能早期注入很强，而现在已经变暗。</p>
+<p>第二段：电子模型的最小结构是注入、传播、冷却和辐射。注入层通常写成幂律加指数截断形式，例如 \(Q_e(E,t)=Q_0(t)(E/E_0)^{-p}\exp(-E/E_{\rm cut})\)，并用 \(\int E Q_e(E,t)dE=\eta_e\dot E(t)\) 归一化。传播层用扩散系数描述，最简单写为 \(D(E)=D_0(E/E_0)^\delta\)。冷却层由同步辐射和逆康普顿主导时常取 \(b(E)=b_0E^2\)。辐射层再把电子分布 \(n_e(E,\boldsymbol{x},t)\) 映射到 X 射线和伽马射线亮度。</p>
+<p>第三段：PWN 与 pulsar halo 的区别不在于能量源，而在于粒子所处的区域和输运边界。PWN 中的粒子仍在由脉冲星风、终止激波、磁场和 SNR 内部环境控制的星云中，辐射可很紧凑，X 射线同步通常更明显。halo 中的粒子已经逃逸到更接近 ISM 的区域，空间尺度可达几十 \({\rm pc}\)，磁场可能较低，TeV IC 发射可以比 X 射线更容易被看到。前四讲已经用 Geminga/Monogem 说明单源 halo 的扩散反演；本讲进一步把这种反演放到巡天源族群和源类混淆中。</p>
+<p>第四段：强子模型的最小结构不同。若源是 SNR shell 或 hadronic PeVatron，非热质子被加速后逃逸或留在源区，并与气体密度 \(n_{\rm gas}(\boldsymbol{x})\) 发生 \(pp\) 相互作用，产生 \(\pi^0\) 衰变伽马射线。其能量账本由质子总能量 \(W_p\)、气体密度、相互作用时间和距离共同决定。强子模型的一个重要可观测特征是形态可能与 CO、HI 或尘埃柱密度相关，而不是简单围绕 pulsar 对称分布。但气体相关性需要速度距离信息支持，不能只看二维投影。</p>
+<p>第五段：多区扩散是本讲从“单源基础”进入“前沿诊断”的关键。单区模型假设 \(D(E)\) 在空间中近似一致，适合建立第一层直觉；两区模型假设 pulsar 周围存在低扩散泡，半径为 \(R_b\)，内部扩散为 \(D_{\rm in}(E)\)，外部恢复到 \(D_{\rm out}(E)\)。这种模型可改变角向剖面的中心与外翼，并影响到达地球的 \(e^\pm\) 通量。但 \(D_{\rm in}\) 与 \(R_b\) 往往强烈简并，因此不能只凭一个 best-fit 值就宣称测得微观扩散系数。</p>
+<p>第六段：形态诊断来自扩散与冷却的组合。若电子冷却满足 \(t_{\rm cool}=1/(b_0E)\)，高能电子寿命更短；若 \(D(E)=D_0(E/E_0)^\delta\) 且 \(\delta<1\)，高能电子的有效扩散长度通常更小。因此，在能量分箱 morphology 中，高能 TeV halo 比低能 halo 更紧凑，是支持冷却受限电子扩散的一个重要信号。观测角尺寸与物理尺度通过 \(\theta_{\rm diff}\simeq r_{\rm diff}/d\) 连接，但必须同时检查 PSF 随能量变化、背景处理和邻近源混合。</p>
+<p>第七段：谱诊断要同时比较 leptonic 与 hadronic 解释。电子 IC 在 Thomson 极限下满足 \(E_\gamma\simeq(4/3)\gamma_e^2\epsilon\)，但在超高能端会受到 Klein-Nishina 抑制；同步辐射强度由磁场能量密度 \(U_B=B^2/(8\pi)\) 控制，因此 X 射线上限可限制 \(B\) 与高能电子数。强子模型可自然把 \(100\,{\rm TeV}\) 光子与 \({\rm PeV}\) 质子联系起来，但需要足够气体和合理 \(W_p\)。所以读 SED 时不能只看 TeV 数据点，还要同时看 radio、X-ray、GeV、TeV 和超高能上限或探测点。</p>
+<p>第八段：最后，理论必须落到观测与统计空间。实际拟合不应只在去卷积后的 SED 点上画曲线，而应尽量使用空间—能量 bin 的 Poisson 计数似然，例如 \(\mathcal{L}=\prod_k\mu_k^{N_k}e^{-\mu_k}/N_k!\)，其中 \(\mu_k=\mu_{k,{\rm src}}+\mu_{k,{\rm bkg}}\)。读论文时要检查残差图是否从结构化变为随机，置信区间是否受先验驱动，系统误差是否包含距离、气体、背景、PSF 和能量标定。对于 population 研究，还必须引入选择函数 \(S(\theta)\)，因为被发现概率依赖通量、角尺度、谱硬度、银河纬度、曝光和邻近源密度。这个观测—统计闭环，就是本讲与前四讲单源物理最大的区别。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：先建立脉冲星随时间供能的基线。假设自转制动满足 \(\dot\Omega\propto-\Omega^n\)，且制动指数 \(n\) 在本讲讨论的时间尺度内可近似为常数，则自转能损失率可写为</p>
+<div class="math-display">\[\dot E(t)=\dot E_0\left(1+\frac{t}{\tau_0}\right)^{-\frac{n+1}{n-1}} .\]</div>
+<p>这里 \(\tau_0\) 是初始减速时间尺度，\(\dot E_0\) 是早期归一化供能。这个式子要解决的是“源在历史上注入了多少能量”，而不是只看当前 \(\dot E\)。它直接提醒我们：中年 pulsar 现在可能较暗，但早期已经向 PWN 或 halo 注入了大量 \(e^\pm\)。下一步要把这部分自转能分配给非热粒子注入谱。</p>
+<p>第二步：把脉冲星供能转化为电子正电子源项。假设注入粒子服从幂律加指数截断，并且注入到逃逸或星云内 \(e^\pm\) 的功率是总自转能损失率的一部分，则</p>
+<div class="math-display">\[Q_e(E,t)=Q_0(t)\left(\frac{E}{E_0}\right)^{-p}\exp\left(-\frac{E}{E_{\rm cut}}\right),\qquad \int_{E_{\min}}^{E_{\max}}E Q_e(E,t)\,dE=\eta_e\dot E(t) .\]</div>
+<p>这里 \(Q_e(E,t)\) 是单位能量单位时间的注入率，\(p\) 是注入谱指数，\(E_{\rm cut}\) 是截断能量，\(\eta_e\) 是电子正电子注入效率。这个归一化解出的是 \(Q_0(t)\)，也就是给定 \(\eta_e\)、\(p\) 和 \(E_{\rm cut}\) 后每一时刻的粒子注入强度。若拟合要求 \(\eta_e>1\) 或极端 \(E_{\rm cut}\)，leptonic 解释在能量学上就要降级。下一步要让这些粒子在空间中传播并冷却。</p>
+<p>第三步：写出单区、球对称、各向同性扩散—冷却方程。假设源项近似为中心注入，扩散系数只依赖能量 \(D(E)\)，电子数密度为 \(n_e(E,r,t)\)，则</p>
+<div class="math-display">\[\frac{\partial n_e}{\partial t}=\frac{1}{r^2}\frac{\partial}{\partial r}\left[r^2D(E)\frac{\partial n_e}{\partial r}\right]+\frac{\partial}{\partial E}\left[b(E)n_e\right]+Q_e(E,t)\delta(\boldsymbol r) .\]</div>
+<p>这个方程解的是给定注入历史后的 \(e^\pm\) 空间—能量分布。PWN、escaped-PWN 和 pulsar halo 的差别，首先体现在 \(Q_e(E,t)\)、\(D(E)\)、边界条件和是否仍受星云内部环境控制。下一步要明确 \(b(E)\)，因为冷却决定高能粒子的寿命和 halo 的能量依赖尺寸。</p>
+<p>第四步：计算同步辐射与逆康普顿冷却。若同步辐射和 Thomson 区逆康普顿散射主导能量损失，则损失率可近似为二次型：</p>
+<div class="math-display">\[b(E)=-\frac{dE}{dt}=b_0E^2,\qquad b_0=\frac{4\sigma_Tc}{3(m_ec^2)^2}\left(U_B+U_{\rm rad}\right),\qquad U_B=\frac{B^2}{8\pi} .\]</div>
+<p>这里 \(U_B\) 是磁场能量密度，\(U_{\rm rad}\) 是目标辐射场能量密度。这个式子解出的是电子随能量的损失速度；它把多波段观测中的 X 射线同步约束与 TeV 逆康普顿亮度联系起来。下一步由 \(b(E)\) 得到冷却时间。</p>
+<p>第五步：由冷却率得到高能粒子的生存时间。在上一步的二次冷却近似下，电子冷却时间为</p>
+<div class="math-display">\[t_{\rm cool}(E)=\frac{E}{b(E)}=\frac{1}{b_0E} .\]</div>
+<p>这个结果说明能量越高的电子寿命越短，因此在冷却受限的 leptonic halo 中，高能伽马射线通常应来自更靠近注入源的区域。这个趋势是读能量分箱 morphology 时最重要的物理直觉。下一步要把有限寿命与扩散系数结合，得到粒子能走多远。</p>
+<p>第六步：估计扩散长度。假设扩散系数为幂律 \(D(E)=D_0(E/E_0)^\delta\)，并用冷却轨迹 \(dE/dt=-b(E)\) 把初始能量 \(E_i\) 与当前能量 \(E\) 联系起来，则有效扩散尺度可写为</p>
+<div class="math-display">\[r_{\rm diff}(E,t)\simeq2\left[\int_E^{E_i}\frac{D(E')}{b(E')}\,dE'\right]^{1/2} .\]</div>
+<p>这个式子解的是电子在冷却到 \(E\) 之前能扩散到的典型半径。它是从输运方程走向可观测形态的关键桥梁。下一步取标准极限，得到能量依赖尺寸的可检验斜率。</p>
+<p>第七步：取标准冷却极限得到形态随能量收缩的判据。若 \(b(E)=b_0E^2\)、\(D(E)=D_0(E/E_0)^\delta\)，且 \(E_i\gg E\)，则上一式给出近似标度</p>
+<div class="math-display">\[r_{\rm diff}(E)\propto E^{(\delta-1)/2},\qquad \theta_{\rm diff}(E)\simeq\frac{r_{\rm diff}(E)}{d} .\]</div>
+<p>这里 \(\theta_{\rm diff}\) 是观测角尺度，\(d\) 是距离。若 \(\delta<1\)，高能粒子的扩散尺度随能量升高而变小，因此高能 halo 更紧凑是冷却受限电子扩散的重要支持证据。不过实际读图时还必须检查 \({\rm PSF}\)、背景处理和邻近源混叠。下一步要把电子能量转换成观测到的伽马射线能量。</p>
+<p>第八步：把电子能量映射到逆康普顿光子能量。在 Thomson 极限下，目标光子能量为 \(\epsilon\)，电子洛伦兹因子为 \(\gamma_e\)，则</p>
+<div class="math-display">\[E_\gamma\simeq\frac{4}{3}\gamma_e^2\epsilon,\qquad \gamma_e=\frac{E_e}{m_ec^2} .\]</div>
+<p>这个关系解的是产生某个 \(E_\gamma\) 所需的电子能量 \(E_e\)。不同目标光子场，例如 CMB、红外和星光，会对应不同的 \(E_e\) 和不同的冷却长度。在超高能端，Klein-Nishina 抑制会降低逆康普顿效率，因此 \(\gtrsim100\,{\rm TeV}\) 光子不能简单等同于 leptonic 模型可任意延伸。下一步把体发射率投影到天图亮度。</p>
+<p>第九步：从体发射率得到角向亮度。设源距为 \(d\)，视线坐标为 \(l\)，投影半径为 \(R=d\theta\)，体发射率为 \(j_\gamma(E_\gamma,r)\)，则观测前的面亮度为</p>
+<div class="math-display">\[I_\gamma(E_\gamma,\theta)=\frac{1}{4\pi}\int j_\gamma\left(E_\gamma,\sqrt{l^2+d^2\theta^2}\right)\,dl .\]</div>
+<p>这个式子解的是模型在天空上的亮度剖面，而不是仪器最终计数。真实比较还要经过 \({\rm PSF}\)、曝光、能量迁移、弥散背景和邻近源模板。因此 catalog extension 只是观测层参数，不应直接等同于低扩散区或 halo 的物理边界。下一步引入多区扩散，解释为什么单区剖面常常不足。</p>
+<p>第十步：用两区扩散描述 pulsar 周围低扩散泡。假设半径 \(R_b\) 内部扩散较慢，外部恢复到普通 ISM 扩散，则</p>
+<div class="math-display">\[D(E,r)=\begin{cases}D_{\rm in}(E),& r<R_b,\\ D_{\rm out}(E),& r\ge R_b .\end{cases}\]</div>
+<p>这个分段形式要解决的是中心亮度、外翼亮度和能量依赖角尺寸能否同时拟合的问题。它的物理含义是 pulsar 周围可能存在局域低扩散区，但 \(D_{\rm in}\) 与 \(R_b\) 往往强烈简并：较小的 \(D_{\rm in}\) 和较大的 \(R_b\) 可产生相似角向剖面。因此必须用低能外翼、高能收缩、地球附近 \(e^\pm\) 和多仪器数据共同约束。下一步构造与 leptonic 模型竞争的强子能量账本。</p>
+<p>第十一步：写出 hadronic PeVatron 的一阶能量约束。假设质子能量库 \(W_p\) 与气体密度 \(n_{\rm gas}\) 发生 \(pp\) 相互作用，并通过 \(\pi^0\) 衰变产生伽马射线，则</p>
+<div class="math-display">\[L_\gamma(>E_\gamma)\sim\frac{W_p(>10E_\gamma)}{t_{pp}}f_\gamma,\qquad t_{pp}=\left(n_{\rm gas}\kappa_{pp}\sigma_{pp}c\right)^{-1} .\]</div>
+<p>这里 \(f_\gamma\) 是进入伽马射线的能量比例，\(\kappa_{pp}\) 是非弹性系数，\(\sigma_{pp}\) 是相互作用截面。这个式子解的是在给定气体条件下需要多少高能质子。若所需 \(W_p\) 超出合理超新星能量预算，或气体距离与源距离不一致，强子解释即使能贴合 SED 也不稳固。下一步用空间相关性检验气体照亮图像。</p>
+<p>第十二步：把形态和统计证据统一为模型比较。对气体模板可先定义归一化相关系数</p>
+<div class="math-display">\[\rho_{\gamma,{\rm gas}}=\frac{\sum_i(G_i-\bar G)(M_i-\bar M)}{\left[\sum_i(G_i-\bar G)^2\sum_i(M_i-\bar M)^2\right]^{1/2}},\qquad K=\frac{\int\mathcal L({\rm data}\mid\boldsymbol\theta_{\rm lep})\pi(\boldsymbol\theta_{\rm lep})\,d\boldsymbol\theta_{\rm lep}}{\int\mathcal L({\rm data}\mid\boldsymbol\theta_{\rm had})\pi(\boldsymbol\theta_{\rm had})\,d\boldsymbol\theta_{\rm had}} .\]</div>
+<p>其中 \(G_i\) 是伽马射线像素，\(M_i\) 是气体模板像素，\(K\) 是 leptonic 与 hadronic 模型证据之比。高 \(\rho_{\gamma,{\rm gas}}\) 支持但不证明强子起源，因为速度距离二义性和视线投影会制造偶然相关；高 \(K\) 或低 \(K\) 也必须连同先验、背景系统误差和替代源模板一起报告。若进入巡天 population 层面，还需把单源参数 \(\boldsymbol\theta_i\) 与总体超参数 \(\boldsymbol\Lambda\) 及选择函数 \(S(\boldsymbol\theta_i)\) 连接为</p>
+<div class="math-display">\[P(\{\boldsymbol d_i\}\mid\boldsymbol\Lambda)=\prod_i\int P(\boldsymbol d_i\mid\boldsymbol\theta_i)P(\boldsymbol\theta_i\mid\boldsymbol\Lambda)S(\boldsymbol\theta_i)\,d\boldsymbol\theta_i .\]</div>
+<p>这最后一步把本讲从单个扩展源推进到 TeV halo population、PeVatron 污染比例和源类混叠问题：没有 \(S(\boldsymbol\theta_i)\)，光度函数、扩散区半径分布和未识别源组成都会被通量阈值、角尺度偏置、银河面背景和仪器响应严重扭曲。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合路线要从“在计数空间中比较物理模型”开始，而不是从画一条穿过 SED 点的曲线开始。前四讲已经把单个 Geminga/Monogem 类 halo 的扩散—冷却反演讲清楚；本讲新增的是巡天扩展源中的源类退化，因此拟合对象应尽量是空间—能量 bin 中的计数 \(N_k\)。最小的 Poisson 似然写成</p>
+<div class="math-display">\[\mathcal{L}=\prod_k \frac{\mu_k^{N_k}e^{-\mu_k}}{N_k!},\qquad \mu_k=\mu_{k,{\rm src}}+\mu_{k,{\rm bkg}} .\]</div>
+<p>这里 \(k\) 同时标记天区像素和能量 bin，\(\mu_{k,{\rm src}}\) 来自源模型经过 \({\rm PSF}\)、曝光、能量迁移和分析选择后的预测计数，\(\mu_{k,{\rm bkg}}\) 来自宇宙线背景、弥散伽马射线背景和邻近源模板。只有在计数足够高、误差近似高斯且协方差清楚时，才适合把问题简化为 \(\chi^2\) 拟合。</p>
+<p>第二段：第一层模型是单源 leptonic halo。它把脉冲星历史供能、逃逸 \(e^\pm\) 注入、扩散冷却和逆康普顿辐射连起来。常见参数包括距离 \(d\)、年龄 \(t\)、注入效率 \(\eta_e\)、注入谱指数 \(p\)、截断能量 \(E_{\rm cut}\)、扩散归一化 \(D_0\)、扩散指数 \(\delta\)、磁场 \(B\) 和目标辐射场能量密度 \(U_{\rm rad}\)。如果只拟合 SED，\(\eta_e\)、\(d\)、\(U_{\rm rad}\) 和 \(B\) 会强烈简并，因为 \(L_\gamma=4\pi d^2F_\gamma\) 的距离依赖可被注入效率或辐射场强度部分吸收。加入角向剖面后，\(D_0\)、\(\delta\) 和 \(t\) 的组合才开始受到约束；加入 X 射线上限后，\(B\) 和高能电子数会受到同步辐射限制。</p>
+<p>第三段：第二层模型是两区扩散或多区扩散。单区模型假设 \(D(E)=D_0(E/E_0)^\delta\) 在空间中不变，而两区模型引入低扩散泡，常写为 \(D_{\rm in}(E)\)、\(D_{\rm out}(E)\) 和边界半径 \(R_b\)。拟合时最常见的诊断不是 best-fit 是否漂亮，而是残差形态：单区模型若中心过宽，说明粒子被扩得太快；若外翼不足，说明大尺度低表面亮度 halo 没被解释；若外翼过强，可能是背景或邻近源混入。两区模型可以改善这些残差，但 \(D_{\rm in}\) 与 \(R_b\) 往往强相关，因此不能把某个 best-fit 的 \(D_{\rm in}\) 直接称为微观扩散系数。需要用 profile likelihood、corner plot 或 posterior predictive residual 来判断参数是否真正被数据约束。</p>
+<p>第四段：第三层模型是 PWN 与 halo 的共存模型。对于 evolved PWN，一个实际源可能同时包含紧凑 X 射线 PWN、被反向激波挤压而偏移的 TeV PWN，以及更大尺度的逃逸 \(e^\pm\) halo。拟合时可把 \(\mu_{k,{\rm src}}\) 拆成 \(\mu_{k,{\rm PWN}}+\mu_{k,{\rm halo}}\)，前者可用高斯、非对称模板或 X 射线先验模板描述，后者用扩散模板描述。读论文时要检查加入第二个成分后残差是否真的从结构化变为随机，而不是只看总测试统计量 \({\rm TS}\) 增加。若中心残差仍显著，说明紧凑成分不足；若外层圆形残差仍存在，说明 halo 成分不足；若残差沿银河面呈带状，则更可能是 diffuse background 模型不足。</p>
+<p>第五段：第四层模型是 hadronic 模板拟合。强子模型的参数通常包括质子谱指数、总质子能量 \(W_p\)、最高质子能量 \(E_{p,\max}\)、气体密度 \(n_{\rm gas}\)、气体距离、空间模板和可能的宇宙线逃逸半径。最小能量账本可写为 \(W_p\propto L_\gamma/n_{\rm gas}\)，因此如果 \(n_{\rm gas}\) 的距离归属不清楚，\(W_p\) 就不能被单独精确测定。读论文时要同时检查 SED、气体图和能量预算：一条 \(\pi^0\) 衰变曲线穿过 TeV 点并不足以证明 PeVatron；还要看所需 \(W_p\) 是否低于合理的超新星机械能份额，气体模板是否与伽马射线形态一致，以及 \(E_{p,\max}\) 是否只是下限。</p>
+<p>第六段：模型比较要使用证据强弱语言。可以比较 leptonic、hadronic、PWN+halo、多源叠加和 diffuse-background 变体。频率学路线可使用似然比、\(\Delta {\rm TS}\)、Akaike 或 Bayesian 信息准则；贝叶斯路线可写成</p>
+<div class="math-display">\[K=\frac{P({\rm data}\mid H_{\rm lep})}{P({\rm data}\mid H_{\rm had})}
+=\frac{\int \mathcal{L}({\rm data}\mid \boldsymbol\theta_{\rm lep})\pi(\boldsymbol\theta_{\rm lep})\\,d\boldsymbol\theta_{\rm lep}}{\int \mathcal{L}({\rm data}\mid \boldsymbol\theta_{\rm had})\pi(\boldsymbol\theta_{\rm had})\\,d\boldsymbol\theta_{\rm had}} .\]</div>
+<p>这里 \(K\) 不是一个“自动判定源类”的按钮，因为它依赖先验、参数空间体积、背景模型和替代源模板。课程中要训练学生把结论写成“数据在给定先验和系统误差下更支持某模型”，而不是“该源就是某类源”。</p>
+<p>第七段：后验与误差解释是读论文时最容易出错的部分。若 \(E_{\rm cut}\) 只有下限，不能宣称测得了最高电子能量；若 \(E_{p,\max}\) 只有下限，不能宣称已经证明 PeVatron；若 \(D_{\rm in}\) 与 \(R_b\) 在 corner plot 中呈长条相关，说明低扩散泡大小和扩散强度没有被独立分辨；若 \(W_p/n_{\rm gas}\) 被约束而 \(n_{\rm gas}\) 来自有距离二义性的气体图，则 \(W_p\) 的系统误差远大于统计误差。还要检查 upper limits 是作为似然中的删失数据处理，还是仅作为图上箭头；两者对 \(B\)、\(E_{\rm cut}\) 和 \(W_p\) 的限制不同。</p>
+<p>第八段：最后一层是 population 拟合。巡天样本不能直接等同于真实银河源族群，因为选择函数 \(S(\boldsymbol\theta)\) 依赖通量、谱硬度、角尺度、银河纬度、曝光、邻近源密度和背景算法。层级模型可写成</p>
+<div class="math-display">\[P(\\{\boldsymbol d_i\\}\mid\boldsymbol\Lambda)=\prod_i\int P(\boldsymbol d_i\mid\boldsymbol\theta_i)P(\boldsymbol\theta_i\mid\boldsymbol\Lambda)S(\boldsymbol\theta_i)\\,d\boldsymbol\theta_i .\]</div>
+<p>这里 \(\boldsymbol\theta_i\) 是单源参数，\(\boldsymbol\Lambda\) 是 halo 光度函数、年龄依赖、低扩散区半径分布或 PeVatron 污染比例等总体超参数。好的 population 论文应给出 posterior predictive catalog，检查模拟源表是否能再现实测的 \(F_\gamma\)、\(\theta\)、谱指数、纬度分布和未识别源比例。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>第一部分先读课程位置与问题边界。对于 HAWC、LHAASO 和未来 CTAO 扩展源论文，不要一开始就问“这个源是什么”。应先问作者研究的是单源解释、源表关联、population synthesis，还是某类源的模型比较。前四讲已经覆盖脉冲星供能、PWN 辐射和 Geminga/Monogem 单源 halo；本讲关注的是巡天时代同一 TeV 表象下的 PWN、pulsar halo、SNR shell 和 hadronic PeVatron 混淆。因此读引言时要标出作者是否区分了 catalog source 与 physical source，是否说明了 extension 只是观测模板参数，而不一定是 \(R=d\theta\) 意义下的真实边界。</p>
+<p>第二部分读数据与样本选择。要看使用的是 HAWC、LHAASO、H.E.S.S.、MAGIC、VERITAS、Fermi-LAT，还是多仪器联合；要记录能量范围、角分辨率、\({\rm PSF}\)、曝光、背景估计方式和 ROI 边界。源表论文中的阈值、trial correction、邻近源剔除和 diffuse background 模型会决定哪些源能被发现。若论文声称某类源在 population 中占比很高，必须检查是否写出了选择函数 \(S(\boldsymbol\theta)\)，否则通量阈值和角尺度偏置会把样本解释扭曲。</p>
+<p>第三部分读物理模型小节。对 leptonic 模型，要找出 \(Q_e(E,t)\)、\(D(E,r)\)、\(b(E)\)、\(B\)、\(U_{\rm rad}\)、\(d\)、\(t\) 和 \(\eta_e\) 的假设；对 PWN 模型，要看是否包含磁场演化、绝热损失、反向激波和偏移；对 hadronic 模型，要找出 \(dN_p/dE_p\)、\(W_p\)、\(E_{p,\max}\)、\(n_{\rm gas}\) 和气体模板。特别要警惕“PeVatron candidate”这一表述：它可能只是因为探测到 \(\gtrsim100\\,{\rm TeV}\) 光子，也可能是经过电子 IC、气体能量账本和多波段约束后得到的较强结论，两者证据等级完全不同。</p>
+<p>第四部分读统计方法而不是跳过。要看作者是在 SED 点上做 \(\chi^2\)，还是在空间—能量计数中做 Poisson likelihood；背景是否有 nuisance parameter；\({\rm PSF}\)、能量标定、能量迁移和 diffuse background 是否进入系统误差；是否把 X 射线上限、GeV 上限和气体距离不确定性纳入似然。若论文只给出一条 SED 曲线而没有形态似然和残差图，那么源类判别最多是 suggestive，而不是 decisive。</p>
+<p>第五部分读结果表时要分清“测得”“限制”和“固定”。参数 \(D_0\)、\(D_{\rm in}\)、\(R_b\)、\(\eta_e\)、\(E_{\rm cut}\)、\(W_p\) 和 \(E_{p,\max}\) 对源类判断很敏感。若某些参数被固定为典型值，结论可能来自先验假设；若不确定性是单边的，例如 \(E_{\rm cut}>E_0\) 或 \(E_{p,\max}>E_1\)，就不能在讨论中把它们当成精确测量；若 \(W_p\) 的误差没有包含 \(n_{\rm gas}\) 的距离二义性，则强子能量预算被低估了不确定性。</p>
+<p>第六部分读图像、残差和讨论。优秀论文会展示显著性图、能量分箱 morphology、径向剖面、SED、气体模板、残差图和替代模型比较；讨论部分会主动列出 source confusion、diffuse background、气体投影、距离不确定性和多源叠加。若讨论把“附近有 pulsar”“有扩展”“有 \(100\\,{\rm TeV}\) 光子”直接等同于 halo、PWN 或 PeVatron，而没有走完能量账本、形态、谱、多波段和统计比较链条，就应在课程笔记中标为弱结论。下一讲第 \(6/6\) 讲会把这一读法应用到具体论文逐段拆解。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一、积分显著性图或 excess map：横轴与纵轴通常是银河经度和纬度，或赤经与赤纬；颜色表示显著性、excess counts 或 flux proxy。要看 excess 是否单峰、是否沿银河面拉伸、是否靠近其他 TeV 源，pulsar、SNR 和分子云标记是否只是投影重合。不能把 catalog 椭圆直接当作物理 halo 半径。</p>
+<p>二、能量分箱 morphology 图：比较低能、中能和高能图中源的角尺寸、峰值位置和外翼。若高能更紧凑，可能支持冷却受限电子扩散，因为 \(t_{\rm cool}=1/(b_0E)\) 随能量升高而缩短；但必须同时检查 \({\rm PSF}\) 随能量变化和背景算法对大尺度结构的滤除。</p>
+<p>三、径向亮度剖面或二维 morphology 拟合图：横轴是角距离 \(\theta\) 或物理半径 \(r=d\theta\)，纵轴是表面亮度、归一化 excess 或 differential flux。要比较点源 \({\rm PSF}\)、高斯模型、扩散模板、两区扩散模板和残差。extension significance 必须和 \({\rm PSF}\) 系统误差一起读。</p>
+<p>四、多波段 SED 图：横轴是光子能量 \(E_\gamma\)，纵轴常为 \(E_\gamma^2dN/dE_\gamma\)。要同时读 radio、X-ray、GeV、TeV 和超高能点或上限，检查 IC 分量、同步预言、Klein-Nishina 变软、\(\pi^0\) 衰变曲线和最高能端是否互相兼容。</p>
+<p>五、气体模板叠加图：颜色或轮廓为 \({\rm CO}\)、\({\rm HI}\)、尘埃或总柱密度，伽马射线轮廓叠加其上。要看峰值、边界和延展方向是否一致，并阅读速度积分范围和距离假设。二维相关性高只能支持强子解释，不能单独证明因果关联。</p>
+<p>六、候选脉冲星能量预算图：横轴可为特征年龄、\(\dot E/d^2\)、偏移距离或本动速度，纵轴可为 \(L_\gamma\)、\(L_\gamma/\dot E\) 或角尺寸。要同时检查能量、年龄、距离和偏移四项一致性；若 \(L_\gamma/\dot E\) 过高或所需横向速度 \(v_\perp\simeq d\Delta\theta/t\) 不合理，pulsar 关联应降级。</p>
+<p>七、残差图与 \({\rm TS}\) map：比较 baseline、加入 halo、加入 gas template、加入额外点源后的 residual significance。应看残差是否从结构化变为随机，而不是只看总 \({\rm TS}\) 增加。沿银河面带状残差通常提示 diffuse background 或邻近源问题。</p>
+<p>八、population synthesis 对比图：横轴可为 \(F_\gamma\)、extension、spectral index、latitude、\(\dot E\) 或年龄，纵轴为源数或累计分布。要看灵敏度边界、角尺度偏置和未探测区域；没有选择函数校正的累计分布不能直接解释为真实银河源分布。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 \(1\)：积分显著性图或 excess map。横轴和纵轴通常是银河经度 \(l\) 与银河纬度 \(b\)，颜色表示显著性或 excess counts，轮廓表示某个 TeV 模板或 catalog extension，符号标出候选 pulsar、SNR、分子云和 GeV 源。读图第一步是判断 excess 是否单峰，还是由多个相邻峰叠加；第二步看主轴是否沿银河面，若沿银河面拉伸，diffuse background 和多源混叠风险上升；第三步看候选 pulsar 是否在中心附近，还是只是落在大椭圆内。常见误读是把轮廓当成物理边界，但它往往只是特定能段、特定模板和特定背景模型下的统计描述。</p>
+<p>图 \(2\)：能量分箱 morphology 图。每个小图的坐标轴仍是天区坐标，但列或行对应不同的 \(E_\gamma\) 区间。leptonic halo 在冷却受限情况下常预期高能图更紧凑，因为高能电子的 \(t_{\rm cool}(E)\) 更短，扩散长度 \(r_{\rm diff}(E)\) 变小。读图时要同时看三件事：源尺寸是否随能量单调收缩，峰值位置是否随能量移动，外翼是否只在低能出现。误读风险在于 \({\rm PSF}\) 通常随能量改善，高能图天然更锐；若不把模型先卷积 \({\rm PSF}\)，会把仪器效应误认为物理收缩。</p>
+<p>图 \(3\)：径向亮度剖面。横轴是角距离 \(\theta\) 或物理半径 \(r=d\theta\)，纵轴是表面亮度、归一化 excess 或 differential flux。数据点应与点源 \({\rm PSF}\)、高斯模型、单区扩散模板和两区扩散模板比较。中心几个 bin 检查是否需要紧凑 PWN，外翼检查是否存在低表面亮度 halo，残差检查是否在某个半径区间系统偏正或偏负。如果两区扩散线明显改善外翼，结论也不能立刻写成“测得低扩散泡”，因为 \(D_{\rm in}\) 与 \(R_b\) 可能高度简并。</p>
+<p>图 \(4\)：多波段 SED 图。横轴是 \(E_\gamma\) 或更宽的光子能量，纵轴常为 \(E_\gamma^2dN/dE_\gamma\)；radio 和 X-ray 上限常放在低能侧，Fermi-LAT、HAWC、LHAASO 或 IACT 点覆盖 GeV 到 PeV 附近。leptonic 模型线应同时给出同步辐射和 IC 分量，hadronic 模型线应给出 \(pp\) 产生的 \(\pi^0\) 衰变伽马射线。读图时看模型是否同时满足 X 射线上限、GeV 连接、TeV 斜率和超高能点。常见误读是只看 TeV 段贴合，却忽略同一电子族在 X-ray 端过亮，或忽略 IC 在 Klein-Nishina 区应变软。</p>
+<p>图 \(5\)：气体模板叠加图。横轴与纵轴是天区坐标，颜色或灰度显示 \({\rm CO}\)、\({\rm HI}\)、尘埃或总柱密度，伽马射线轮廓叠加在其上。若伽马射线峰值、边界和延展方向与气体云一致，hadronic illumination 解释增强；若伽马射线更圆且围绕 pulsar，而气体呈不相关丝状结构，则 pulsar halo 解释增强。读图时必须查气体速度积分范围，因为不同径向速度代表不同距离。把所有速度成分沿视线积分后得到的相关性可能只是投影巧合。</p>
+<p>图 \(6\)：候选 pulsar 能量预算与关联图。横轴可为特征年龄、\(\dot E/d^2\)、偏移距离 \(\Delta\theta\) 或 \(v_\perp\simeq d\Delta\theta/t\)，纵轴可为 \(L_\gamma\)、\(L_\gamma/\dot E\)、extension 或 \(\theta_{\rm diff}\)。读图时要找同时满足能量、年龄、距离和位置的候选体。若 \(L_\gamma/\dot E\) 接近或超过合理效率，或者需要 pulsar 以极端 \(v_\perp\) 从 SNR 中心移动到当前位置，就不能因为角向接近而强行关联。</p>
+<p>图 \(7\)：残差图与模型比较 \({\rm TS}\) 图。通常会依次显示 baseline 背景模型、加入高斯源、加入扩散 halo、加入气体模板或加入额外点源后的 residual significance。应检查残差是否由斑块状和条带状变成近似随机噪声。如果总 \({\rm TS}\) 上升但残差仍沿银河面成带，说明 diffuse background 仍不足；如果残差集中在气体 clump 上，强子模板可能缺失；如果 residual 在 pulsar 周围近似圆形，可能需要 halo 成分。误读风险是只报告 \(\Delta {\rm TS}\)，不展示残差空间结构。</p>
+<p>图 \(8\)：population synthesis 对比图。横轴可为 \(F_\gamma\)、extension、spectral index、latitude、\(\dot E\) 或年龄，纵轴是源数、累计分布或探测概率。模型曲线代表不同 halo luminosity function、低扩散区半径分布、PeVatron fraction 或未识别源污染比例。读图时要先找选择函数边界：低通量、大角尺度、软谱和低纬度源更容易漏检或混叠。若没有 \(S(F_\gamma,\theta,\Gamma)\) 的校正，就不能把观测到的 \(N_{\rm obs}\) 直接解释为真实 \(N_{\rm true}\)。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径从经典 PWN 到单源 halo。先读 PWN 综述和 Crab-like PWN 的多波段建模，重点理解脉冲星 \(\dot E(t)\)、终止激波、磁场演化、同步辐射和 IC 辐射如何组成能量账本。随后读 HAWC 关于 Geminga/Monogem 周围扩展 TeV 发射的经典工作，把角向剖面、\({\rm PSF}\)、背景和 IC 模型如何转化为 \(D(E)\) 的过程作为基准。读这些文章时不要只记“扩散慢”，而要追踪 \(r_{\rm diff}\)、\(\theta_{\rm diff}\)、\(t_{\rm cool}\) 和 \(D_0\) 的推理链。</p>
+<p>第二条阅读路径进入 Galactic TeV source catalog。比较 H.E.S.S. Galactic Plane Survey、HAWC 源表和 LHAASO 超高能源表中对源中心、extension、谱指数、显著性和关联的定义。重点训练一个判断：同一天区在不同仪器中可能有不同源名、不同 \(\theta\) 和不同谱指数，这通常不只是“谁对谁错”，而是能量覆盖、角分辨率、背景处理和大尺度响应不同。读源表时要把 catalog 参数看成观测层描述，而不是直接看成 halo 半径、PWN 边界或 SNR shell 半径。</p>
+<p>第三条阅读路径进入 PeVatron confusion。选择几篇声称 hadronic PeVatron、pulsar halo 或 PWN+halo 的现代论文，把每篇拆成四张笔记表：能量预算表、形态证据表、SED 证据表和系统误差表。若文章支持 hadronic 解释，检查 \(W_p\)、\(n_{\rm gas}\)、气体距离和 \(E_{p,\max}\)；若文章支持 leptonic halo，检查 \(B\)、\(U_{\rm rad}\)、\(E_{\rm cut}\)、Klein-Nishina 抑制和 X 射线上限；若文章讨论 PeVatron，检查是否真正排除了电子 IC 替代模型。</p>
+<p>第四条阅读路径面向 population 与未来观测。读 TeV halo population、未识别 TeV 源组成、LHAASO 超高能源统计和 CTAO Galactic Plane Survey 预期论文时，要把注意力放在选择函数 \(S(\boldsymbol\theta)\)、posterior predictive catalog 和源混叠模型上。现代问题不只是“某一个源是什么”，而是“在巡天选择偏差下，多少扩展源属于 PWN、halo、SNR shell、hadronic PeVatron 或 diffuse background fluctuation”。这一路径自然连接到第 \(6/6\) 讲的论文研读训练。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第 \(6/6\) 讲最自然的方向是“PWN 与 pulsar halo 前沿论文研读训练：从源表到后验图”。本讲已经给出源类诊断框架、公式工具箱、拟合流程和图像阅读方法；下一讲不再系统引入新理论，而是选择一篇或一组 HAWC、LHAASO 或 CTAO 相关论文，逐段阅读摘要、样本、仪器响应、模板、likelihood、SED、morphology、residual、corner plot 和 discussion，训练学生判断结论是数据直接支持、模型假设支持，还是先验驱动。</p>
+<p>第二个后续方向可作为新短系列：“Galactic PeVatron 诊断专题”。它会把 SNR shock acceleration、escaped cosmic-ray illumination、分子云模板、\(pp\) 相互作用、中微子对应体和 \({\rm PeV}\) 质子证据标准作为主线。本讲只在 PWN 和 halo 混淆框架中讨论 PeVatron，因此强子加速物理本身仍可进一步展开。</p>
+<p>第三个后续方向是“CTA/IACT 与水切伦科阵列数据分析专题”。它可专门讲 \({\rm IRF}\)、\({\rm PSF}\)、energy dispersion、background estimation、template likelihood、extended source trials 和大尺度源系统误差。本讲把这些作为源类诊断所需的观测层工具；若要真正复现实验分析，还需要单独课程。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>TeV halo population HAWC LHAASO CTA pulsar halos</li>
+<li>unidentified Galactic TeV sources pulsar wind nebula halo PeVatron</li>
+<li>anisotropic diffusion pulsar halo</li>
+<li>two-zone diffusion TeV halos Geminga</li>
+<li>LHAASO Galactic PeVatron pulsar wind nebula confusion</li>
+<li>HAWC Geminga Monogem TeV halo diffusion</li>
+<li>CTAO extended Galactic sources morphology diagnostics</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<p>（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
