@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-09-05</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-09-05</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-09-05">
+      <a class="previous" href="2026-09-04.html">← 上一期：2026-09-04</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <span class="next">没有更新的报告 →</span>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-09-05T11:10:55+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-grb-blandfordmckee">1. GRB 余辉经典课程（一）：从 Blandford–McKee 激波到同步辐射闭合关系</h3>
+<ul>
+<li>课程系列：GRB 余辉经典课程（第 1/3 讲）</li>
+<li>本讲边界：本讲只讲长伽马暴外激波余辉的最小标准模型：绝热相对论前向激波、均匀星际介质、电子幂律加速、同步辐射谱、特征频率与闭合关系。故意不讲 prompt emission 的内部耗散、早期反向激波、喷流破裂、风介质、能量注入、逆康普顿和多区数值拟合；这些留给本系列后两讲。</li>
+<li>上下文承接：这是新系列第一讲。此前课程历史主要集中在 PWN、pulsar halo 与 TDE，已经收束；本讲开启新的 GRB 余辉短系列，从最小外激波模型建立共同语言，为后续“环境与喷流几何”和“观测拟合与系统误差”打基础。</li>
+<li>主题：GRB afterglow classic theory and diagnostics</li>
+<li>经典工作：Blandford–McKee 相对论自相似爆波解，以及 Sari、Piran 与 Narayan 1998 年建立的伽马暴余辉同步辐射标准谱和光变闭合关系。</li>
+<li>为什么经典：这项工作经典之处在于，它把 GRB 余辉从“发现后的经验光变”转化为可检验的物理模型：一个相对论爆波在外部介质中减速，激波后电子在磁场中同步辐射，观测者看到由 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 与 \(F_{\nu,\max}\) 控制的分段谱。更重要的是，它给出了时间衰减指数与谱指数之间的闭合关系，使观测者能用多波段光变直接检验外激波假设、介质密度剖面和电子谱指数 \(p\)。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>第一段：本讲开启“GRB 余辉经典课程”三讲短系列。此前课程已经收束在 \(\mathrm{PWN}\)、pulsar halo 与 \(\mathrm{TDE}\) 等主题，本讲换到长伽马暴余辉，但方法论保持一致：先建立一个能被观测检验的最小模型，再讨论它何时失败。这里的科学问题非常具体：为什么持续仅数秒到数百秒的 prompt emission 之后，还会出现持续数小时、数天甚至数月的 X 射线、光学与射电辐射，并且这些辐射常可近似写成 \(F_\nu(t)\propto t_{\rm obs}^{-\alpha}\nu^{-\beta}\)。最小外激波图像的回答是，中心引擎不需要一直以同样方式发光；超相对论 ejecta 把动能交给外部介质，形成前向激波，激波后电子在磁场中同步辐射，观测者看到的是一个减速爆波的时变谱。</p>
+<p>第二段：历史动机来自两个阶段的观测突破。\(\mathrm{BATSE}\) 发现伽马暴在天球上近似各向同性，削弱了简单银河盘来源的解释，却因为定位不够精确而难以确认距离尺度。\(\mathrm{BeppoSAX}\) 时代 X 射线余辉的精确定位使光学对应体、宿主星系和红移测量成为可能，宇宙学距离由此变成可测事实。各向同性等效伽马射线能量常写为 \(E_{\gamma,{\rm iso}}=4\pi d_L^2S_\gamma/(1+z)\)，其中 \(d_L\) 是光度距离，\(S_\gamma\) 是观测 fluence，\(z\) 是红移；余辉拟合进一步给出各向同性等效动能 \(E_{k,{\rm iso}}\)，于是辐射效率可写成 \(\eta_\gamma=E_{\gamma,{\rm iso}}/(E_{\gamma,{\rm iso}}+E_{k,{\rm iso}})\)。这些量把“发现一个 fading source”转化为“测量爆炸能量预算和外部环境”的物理问题。</p>
+<p>第三段：本讲采用的经典工作边界是 Blandford–McKee 相对论自相似爆波解，以及 Sari、Piran 与 Narayan 在 \(1998\) 年建立的同步余辉标准谱和光变闭合关系。动力学部分把 ejecta 简化为各向同性等效能量 \(E_{\rm iso}\) 的绝热相对论爆波；当 \(\Gamma\gg\theta_j^{-1}\) 时，喷流边缘对观测者不可见，局部可近似球对称。辐射部分假设均匀介质 \(n={\rm const}\)，激波后共动内能密度 \(e'\simeq4\Gamma^2nm_pc^2\)，磁场满足 \(B'=(8\pi\epsilon_Be')^{1/2}\)，电子获得比例 \(\epsilon_e\) 的能量并形成 \(N(\gamma_e)d\gamma_e\propto\gamma_e^{-p}d\gamma_e\) 且 \(\gamma_e\ge\gamma_m\) 的非热分布。这个假设清单很重要，因为后面每一个观测诊断都在检验这些假设是否能同时成立。</p>
+<p>第四段：推导主线是一条从动力学到可观测量的连续链。均匀介质中的扫掠质量为 \(M_{\rm sw}\simeq4\pi R^3nm_p/3\)，绝热相对论爆波的能量标度为 \(E_{\rm iso}\simeq\Gamma^2M_{\rm sw}c^2\simeq(4\pi/3)R^3nm_pc^2\Gamma^2\)。由于相对论等到达时间面，观测时间不是 \(R/c\)，而近似为 \(t_{\rm obs}\simeq(1+z)R/(4\Gamma^2c)\)。联立后得到均匀介质的 Blandford–McKee 标度：\(\Gamma\propto E_{\rm iso}^{1/8}n^{-1/8}t_{\rm obs}^{-3/8}(1+z)^{3/8}\)，以及 \(R\propto E_{\rm iso}^{1/4}n^{-1/4}t_{\rm obs}^{1/4}(1+z)^{-1/4}\)。这些标度是后续所有频率、流量和闭合关系的根。</p>
+<p>第五段：同步辐射部分把动力学映射到宽带谱。最小电子洛伦兹因子为 \(\gamma_m\simeq\epsilon_e[(p-2)/(p-1)](m_p/m_e)\Gamma\)，注入频率满足 \(\nu_m\simeq(1+z)^{-1}\Gamma(3q_eB'/(4\pi m_ec))\gamma_m^2\)，因此在均匀绝热模型中 \(\nu_m\propto t_{\rm obs}^{-3/2}\)。冷却洛伦兹因子由同步冷却时间等于动力学时间定义，\(\gamma_c\simeq6\pi m_ec(1+z)/(\sigma_TB'^2\Gamma t_{\rm obs})\)，对应 \(\nu_c\simeq(1+z)^{-1}\Gamma(3q_eB'/(4\pi m_ec))\gamma_c^2\)，并给出 \(\nu_c\propto t_{\rm obs}^{-1/2}\)。峰值流量满足 \(F_{\nu,\max}\propto N_e\Gamma B'/d_L^2\)，在均匀绝热阶段近似为 \(F_{\nu,\max}\propto t_{\rm obs}^{0}\)。因此，一条光变不是孤立经验幂律，而是 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 与 \(F_{\nu,\max}\) 共同演化的投影。</p>
+<p>第六段：闭合关系是这个经典模型最有教学价值的结果。慢冷却且 \(\nu_m<\nu<\nu_c\) 时，分段谱给出 \(F_\nu=F_{\nu,\max}(\nu/\nu_m)^{-(p-1)/2}\)，固定观测频率下有 \(F_\nu\propto t_{\rm obs}^{-3(p-1)/4}\nu^{-(p-1)/2}\)，因此 \(\alpha=3(p-1)/4\)、\(\beta=(p-1)/2\)，闭合为 \(\alpha=3\beta/2\)。若 \(\nu>\nu_c\)，则 \(F_\nu\propto t_{\rm obs}^{-(3p-2)/4}\nu^{-p/2}\)，因此 \(\alpha=(3p-2)/4\)、\(\beta=p/2\)，闭合为 \(\alpha=(3\beta-1)/2\)。实际使用时必须先判定谱段；若光学与 X 射线分处 \(\nu_c\) 两侧，二者谱指数差应接近 \(\Delta\beta\simeq1/2\)，而不是强行要求同一个 \(\alpha\) 与 \(\beta\)。</p>
+<p>第七段：读论文和做拟合时，本讲要求学生从经验层进入物理层。第一步可在干净时间窗内拟合 \(F_\nu(t)=F_0(t/t_0)^{-\alpha}\nu^{-\beta}\)，得到 \(\alpha\) 与 \(\beta\) 及其协方差；第二步把它们放到闭合关系平面上，看误差椭圆是否真正区分模型；第三步才用参数集 \(\Theta=\{E_{\rm iso},n,\epsilon_e,\epsilon_B,p,z,A_V,N_H,t_0\}\) 生成 \(\nu_m(t)\)、\(\nu_c(t)\)、\(\nu_a(t)\) 与 \(F_{\nu,\max}(t)\)。光学与射电流量点常用含系统误差 \(\sigma_{\rm sys}\) 的高斯似然，\(\ln L=-\frac{1}{2}\sum_i\{[F_{\nu,i}-F_{\nu,{\rm mod}}(t_i,\nu_i;\Theta)]^2/(\sigma_i^2+\sigma_{\rm sys}^2)+\ln[2\pi(\sigma_i^2+\sigma_{\rm sys}^2)]\}\)；X 射线若有计数谱，最好在 counts space 中折叠响应矩阵，而不是只拟合已经转换的 flux point。</p>
+<p>第八段：图像阅读也是本讲的一部分，而不是附录。多波段光变要先排除 prompt tail、early steep decay、plateau、flare、反向激波光学闪和晚期 bump；宽带 \(\mathrm{SED}\) 要检查消光和吸收是否已处理，不能把尘埃造成的弯曲误认为 \(\nu_c\)；闭合关系图要看误差椭圆和系统误差，而不是只看最佳点落在哪条线附近；特征频率演化图要检查 \(\nu_m\propto t_{\rm obs}^{-3/2}\)、\(\nu_c\propto t_{\rm obs}^{-1/2}\)、\(F_{\nu,\max}\propto t_{\rm obs}^{0}\) 是否与光变峰和谱变化同步；残差图中连续同号偏差往往比总 \(\chi^2\) 更能暴露缺失物理；corner plot 中 \(E_{\rm iso}\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\) 的强相关和先验边界效应不能被误读为精确测量。</p>
+<p>第九段：局限必须与模型价值一起讲清楚。最小模型故意不展开 prompt emission 的内部耗散、反向激波、喷流破裂、风介质、能量注入、逆康普顿和多区数值拟合。真实余辉中，风介质 \(n(R)\propto R^{-2}\)、喷流边缘条件 \(\Gamma\lesssim\theta_j^{-1}\)、微物理参数演化、宿主污染、射电闪烁、同步自康普顿以及 Klein–Nishina 效应都可能改变闭合关系；若考虑逆康普顿冷却，冷却洛伦兹因子还会出现类似 \(\gamma_c\propto(1+Y)^{-1}\) 的修正。本讲的目标不是解释所有点，而是给出一把零阶标尺：当数据偏离这把标尺时，我们才能有条理地判断下一讲需要引入环境、喷流几何还是反向激波。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>第一段：伽马暴研究在余辉发现之前长期受限于定位和距离尺度。\(\mathrm{BATSE}\) 看到 GRB 在天球上近似各向同性，这一事实支持宇宙学距离的可能性，但没有足够精确的位置来寻找宿主星系和红移。直到 \(\mathrm{BeppoSAX}\) 捕捉到 X 射线余辉并给出较小误差框，光学对应体、宿主星系和吸收线红移才成为系统观测对象。历史上真正改变理论地位的不是“余辉存在”这一个事实，而是余辉能被定位、能被追踪、能被放入多波段光变和宽带谱中检验。</p>
+<p>第二段：本系列第一讲的边界要从一开始说清。我们只讨论长伽马暴的最小外激波余辉：绝热相对论前向激波、均匀星际介质 \(n={\rm const}\)、电子幂律加速、同步辐射、特征频率和闭合关系。此前课程集中在 \(\mathrm{PWN}\)、pulsar halo 与 \(\mathrm{TDE}\)，本讲是新系列的入口，目的是建立共同语言。下一讲才会系统讨论风介质 \(n(R)\propto R^{-2}\)、喷流破裂、achromatic break、反向激波光学闪和射电诊断；第三讲再进入 Swift 到 TeV 时代的多波段拟合、同步自康普顿、仪器响应、upper limits、\(\mathrm{EBL}\) 吸收和系统误差。</p>
+<p>第三段：火球模型的重要概念是把 prompt emission 与 afterglow 的物理区域分开。prompt emission 的快变时间尺度要求较小半径或内部耗散过程，例如 internal shocks、photosphere 或磁重联；这些过程主要诊断中心引擎、重子载荷和耗散机制。余辉则更自然地来自 ejecta 与外部介质相互作用后的减速阶段，主要诊断外部密度、爆炸动能和冲击加速。把两者混为一个连续中心引擎光度曲线，会掩盖相对论等到达时间面和外激波动力学对光变形状的决定作用。</p>
+<p>第四段：为什么经典外激波模型能迅速成为基准？原因在于它给出了可证伪的定量预测，而不只是解释性的故事。若余辉由一个均匀介质中的绝热前向激波产生，那么动力学会给出 \(\Gamma\propto t_{\rm obs}^{-3/8}\) 与 \(R\propto t_{\rm obs}^{1/4}\)，同步辐射会给出 \(\nu_m\propto t_{\rm obs}^{-3/2}\)、\(\nu_c\propto t_{\rm obs}^{-1/2}\) 与 \(F_{\nu,\max}\propto t_{\rm obs}^{0}\)。这些量不是直接从单个波段读出的，但会共同约束宽带 \(\mathrm{SED}\)、光变峰值、谱段穿越和不同波段之间的相对衰减。</p>
+<p>第五段：第一个常见误区是把余辉的幂律衰减直接理解成中心引擎 luminosity 的幂律下降。最小外激波模型中，即使中心引擎早已停止，观测者仍会看到 \(F_\nu(t)\propto t_{\rm obs}^{-\alpha}\nu^{-\beta}\) 形式的辐射，因为爆波不断扫掠外部介质、\(\Gamma\) 随时间下降、谱断频随时间穿越观测频段。也就是说，余辉时间结构是动力学、辐射机制、相对论 beaming 和等到达时间面的合成结果，而不等于发动机功率表。</p>
+<p>第六段：第二个常见误区是用单个 \(\alpha\) 或单个 \(\beta\) 唯一确定电子谱指数 \(p\)、介质类型或喷流几何。闭合关系只有在谱段判定正确时才有意义。例如慢冷却条件下，若 \(\nu_m<\nu<\nu_c\)，则 \(\alpha=3\beta/2\)；若 \(\nu>\nu_c\)，则 \(\alpha=(3\beta-1)/2\)。同一个观测 \(\alpha\) 可能被不同谱段、不同介质或额外成分解释，因此必须结合宽带 \(\mathrm{SED}\)、光学与 X 射线之间的 \(\Delta\beta\simeq1/2\) 检验、以及多波段残差结构来判断。</p>
+<p>第七段：第三个常见误区是忽略观测系统误差。光学谱可能被银河系消光和宿主尘埃弯曲，X 射线谱可能被宿主吸收 \(N_H\) 改变，射电可能受闪烁影响，非同时 \(\mathrm{SED}\) 拼接可能把时间演化误认为谱弯曲，不同望远镜零点和滤光片转换也会引入交叉校准误差。因此，读余辉论文不能只看模型线是否“穿过数据点”，而要看作者是否说明拟合时间窗、是否排除 prompt tail 与 flare、是否报告系统误差项、是否展示残差和后验相关性。</p>
+<p>第八段：这门课把经典模型当作训练工具，而不是教条。最小模型的强大之处在于它简单、连续、可推导、可拟合，并且能够清楚地失败。只要我们知道均匀介质前向激波应当如何演化，就能识别什么时候需要引入风介质、喷流边缘、能量注入、微物理演化、反向激波、非相对论转变或同步自康普顿。换句话说，本讲不是余辉复杂性的终点，而是后续所有扩展模型的坐标原点。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>第一段：最小余辉模型从一个简单图像开始：中心引擎发射的超相对论 ejecta 冲入外部介质，在前方形成前向激波，在 ejecta 与扫掠物质之间形成接触间断面。前向激波把外部介质的质子和电子加热并加速，将 bulk kinetic energy 转化为激波后内能。观测者接收到的辐射主要来自视线附近角度 \(\theta\sim1/\Gamma\) 的区域，因为相对论 beaming 会把辐射集中在一个窄锥内。只要 \(\Gamma\gg\theta_j^{-1}\)，喷流边缘尚不可见，局部动力学可用球对称的各向同性等效模型描述。</p>
+<p>第二段：动力学的第一块积木是扫掠质量。均匀星际介质假设为 \(n={\rm const}\)，半径 \(R\) 内被前向激波扫入的质量近似为 \(M_{\rm sw}\simeq4\pi R^3nm_p/3\)。绝热相对论爆波把总能量近似保持为常数，能量标度可写为 \(E_{\rm iso}\simeq\Gamma^2M_{\rm sw}c^2\simeq(4\pi/3)R^3nm_pc^2\Gamma^2\)。这个式子使用的假设是辐射损失相对较小、外部介质均匀、爆波仍相对论化；它求出的不是精确数值系数，而是 \(\Gamma\) 与 \(R\) 的标度关系。</p>
+<p>第三段：动力学的第二块积木是观测时间。对相对论运动源而言，观测时间不是简单的 \(R/c\)，而被光行时和相对论运动压缩。来自视线方向附近的辐射满足近似关系 \(t_{\rm obs}\simeq(1+z)R/(4\Gamma^2c)\)。将这个关系与能量守恒联立，就得到 \(\Gamma\propto E_{\rm iso}^{1/8}n^{-1/8}t_{\rm obs}^{-3/8}(1+z)^{3/8}\) 和 \(R\propto E_{\rm iso}^{1/4}n^{-1/4}t_{\rm obs}^{1/4}(1+z)^{-1/4}\)。这一步把源的空间演化转换成可观测时间演化，是余辉理论最容易被忽略但最关键的桥梁。</p>
+<p>第四段：有了 \(\Gamma(t_{\rm obs})\) 和 \(R(t_{\rm obs})\)，下一步要把激波内能转化为辐射粒子和磁场。强相对论前向激波后的共动内能密度近似为 \(e'\simeq4\Gamma^2nm_pc^2\)。我们假设其中比例 \(\epsilon_B\) 进入磁场，因此 \(B'=(8\pi\epsilon_Be')^{1/2}\propto\epsilon_B^{1/2}n^{1/2}\Gamma\)。另一个比例 \(\epsilon_e\) 进入非热电子，电子分布写成 \(N(\gamma_e)d\gamma_e\propto\gamma_e^{-p}d\gamma_e\) 且 \(\gamma_e\ge\gamma_m\)。当 \(p>2\) 时，最小电子洛伦兹因子近似为 \(\gamma_m\simeq\epsilon_e[(p-2)/(p-1)](m_p/m_e)\Gamma\)。</p>
+<p>第五段：同步谱的第一个特征频率是注入频率 \(\nu_m\)。单个电子的同步特征频率在共动系与 \(B'\gamma_e^2\) 成正比，转换到观测系还要乘以 bulk Doppler 因子并除以 \(1+z\)，因此 \(\nu_m\simeq(1+z)^{-1}\Gamma(3q_eB'/(4\pi m_ec))\gamma_m^2\)。代入 \(B'\propto\Gamma\) 和 \(\gamma_m\propto\Gamma\)，得到 \(\nu_m\propto\Gamma^4\propto t_{\rm obs}^{-3/2}\)。物理上，这表示同步谱的注入峰会快速向低频移动，早期可能高于光学，晚期会进入红外和射电。</p>
+<p>第六段：第二个特征频率是冷却频率 \(\nu_c\)。我们把同步冷却时间等于动力学时间的电子定义为冷却电子，其洛伦兹因子为 \(\gamma_c\simeq6\pi m_ec(1+z)/(\sigma_TB'^2\Gamma t_{\rm obs})\)。对应观测频率为 \(\nu_c\simeq(1+z)^{-1}\Gamma(3q_eB'/(4\pi m_ec))\gamma_c^2\)，在本讲忽略逆康普顿冷却时得到 \(\nu_c\propto t_{\rm obs}^{-1/2}\)。若将来考虑 Compton 参数 \(Y\)，则冷却会增强，并出现类似 \(\gamma_c\propto(1+Y)^{-1}\) 的修正；但这属于后续 caveat，不在本讲展开。</p>
+<p>第七段：第三个归一化量是峰值流量 \(F_{\nu,\max}\)。参与辐射的电子数约为 \(N_e\simeq4\pi R^3n/3\)，单电子峰值谱功率经相对论提升后给出 \(F_{\nu,\max}\propto N_e\Gamma B'/d_L^2\)。代入均匀介质绝热动力学标度后，得到 \(F_{\nu,\max}\propto t_{\rm obs}^{0}\)，即峰值流量近似常数。低频还有自吸收频率 \(\nu_a\)，它对射电余辉很重要，但本讲主要把 \(\nu_a\) 作为低频边界；完整射电自吸收诊断会在后续观测拟合中再强化。</p>
+<p>第八段：当 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 与 \(F_{\nu,\max}\) 都确定后，宽带谱就不是任意曲线。慢冷却情形 \(\nu_m<\nu_c\) 下，常用谱段为 \(F_\nu=F_{\nu,\max}(\nu/\nu_m)^{1/3}\) 对应 \(\nu<\nu_m\)，\(F_\nu=F_{\nu,\max}(\nu/\nu_m)^{-(p-1)/2}\) 对应 \(\nu_m<\nu<\nu_c\)，以及 \(F_\nu=F_{\nu,\max}(\nu_c/\nu_m)^{-(p-1)/2}(\nu/\nu_c)^{-p/2}\) 对应 \(\nu>\nu_c\)。把时间标度代入固定观测频率，就得到闭合关系：\(\nu_m<\nu<\nu_c\) 时 \(\alpha=3(p-1)/4\)、\(\beta=(p-1)/2\)、\(\alpha=3\beta/2\)；\(\nu>\nu_c\) 时 \(\alpha=(3p-2)/4\)、\(\beta=p/2\)、\(\alpha=(3\beta-1)/2\)。</p>
+<p>第九段：观测分析的基本顺序因此是先判定谱段，再检验闭合关系，最后才做物理参数拟合。经验拟合可先用 \(F_\nu(t)=F_0(t/t_0)^{-\alpha}\nu^{-\beta}\) 测得 \(\alpha\) 与 \(\beta\)，然后在闭合关系图中比较均匀介质慢冷却的模型线。物理拟合则使用 \(\Theta=\{E_{\rm iso},n,\epsilon_e,\epsilon_B,p,z,A_V,N_H,t_0\}\) 生成全时变宽带谱，并通过残差、置信区间和后验相关性判断模型是否可信。读图时，多波段光变要检查早期陡降、plateau、flare 和 late bump；\(\mathrm{SED}\) 要检查消光与吸收；残差 \(\chi_i=(F_{{\rm data},i}-F_{{\rm model},i})/\sigma_i\) 不应出现连续同号结构；corner plot 要警惕 \(\epsilon_B\) 贴先验下限、\(n\) 跨越多数量级和 \(p\) 未被数据真正约束。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：先把本讲边界固定在长暴、均匀外部介质、绝热前向激波和喷流边缘尚不可见的阶段。假设外部数密度为 \(n={\rm const}\)，且 \(\Gamma\gg\theta_j^{-1}\)，观测者只能看到相对论 beaming 锥内的局部区域，因此可采用球对称各向同性等效描述。半径为 \(R\) 时，前向激波扫入的外部质量为</p>
+<div class="math-display">\[M_{\rm sw}\simeq {4\pi\over 3}R^3 n m_p .\]</div>
+<p>这里求出的 \(M_{\rm sw}\) 是爆波减速的源项；下一步它进入能量守恒，决定 \(\Gamma\) 如何随 \(R\) 下降。</p>
+<p>第二步：采用绝热相对论爆波近似，忽略显著辐射能量损失和能量注入。激波后内能量级由 \(\Gamma^2 M_{\rm sw}c^2\) 给出，因此</p>
+<div class="math-display">\[E_{\rm iso}\simeq \Gamma^2 M_{\rm sw}c^2\simeq {4\pi\over 3}R^3 n m_p c^2\Gamma^2 .\]</div>
+<p>这个式子求出的是 \(E_{\rm iso}\)、\(R\)、\(n\) 与 \(\Gamma\) 的标度关系，而不是精确数值系数；物理含义是随着 \(M_{\rm sw}\) 增长，若 \(E_{\rm iso}\) 近似守恒，\(\Gamma\) 必须下降。下一步要把源系半径 \(R\) 转换成观测时间 \(t_{\rm obs}\)。</p>
+<p>第三步：相对论等到达时间面给出观测时间与半径的关系。辐射主要来自 \(\theta\sim 1/\Gamma\) 的区域，光行时延迟被相对论运动压缩，因此</p>
+<div class="math-display">\[t_{\rm obs}\simeq {1+z\over 4c}{R\over \Gamma^2} .\]</div>
+<p>这里 \(z\) 是红移。这个关系强调余辉时钟不是简单的 \(R/c\)，而是包含 \(\Gamma^{-2}\) 压缩；联立能量守恒后即可得到 Blandford–McKee 动力学标度。</p>
+<p>第四步：联立前两步，并保持 \(E_{\rm iso}\) 与 \(n\) 为常数，可得均匀介质绝热阶段的核心动力学</p>
+<div class="math-display">\[\Gamma(t_{\rm obs})\propto E_{\rm iso}^{1/8}n^{-1/8}t_{\rm obs}^{-3/8}(1+z)^{3/8},\qquad R(t_{\rm obs})\propto E_{\rm iso}^{1/4}n^{-1/4}t_{\rm obs}^{1/4}(1+z)^{-1/4} .\]</div>
+<p>这一步求出了后续所有辐射量的时间底座：\(\Gamma\) 缓慢下降，\(R\) 缓慢增长。下一步利用相对论强激波跳跃条件，把动力学量转化为共动内能密度。</p>
+<p>第五步：强相对论前向激波后，共动内能密度近似为</p>
+<div class="math-display">\[e'\simeq 4\Gamma^2 n m_p c^2 .\]</div>
+<p>撇号表示共动系量。这里假设外部介质冷、激波强且仍高度相对论；求出的 \(e'\) 是磁场和电子能量分配的母量。若比例 \(\epsilon_B\) 的内能进入磁场，则下一步得到 \(B'\)。</p>
+<p>第六步：磁场由微物理参数 \(\epsilon_B\) 定义为</p>
+<div class="math-display">\[B'=(8\pi\epsilon_B e')^{1/2}\propto \epsilon_B^{1/2}n^{1/2}\Gamma .\]</div>
+<p>这个结果说明 \(B'\) 随 \(\Gamma\) 下降而衰减，因而会同时影响同步特征频率和冷却效率。下一步还需要电子最低非热能量 \(\gamma_m\)，才能确定注入频率 \(\nu_m\)。</p>
+<p>第七步：假设比例 \(\epsilon_e\) 的激波后能量进入非热电子，且电子分布为 \(N(\gamma_e)d\gamma_e\propto \gamma_e^{-p}d\gamma_e\)、\(\gamma_e\ge\gamma_m\)、\(p>2\)。由电子平均能量与激波后质子能量相匹配，可得</p>
+<div class="math-display">\[\gamma_m\simeq \epsilon_e {p-2\over p-1}{m_p\over m_e}\Gamma .\]</div>
+<p>这里求出的 \(\gamma_m\) 把 bulk Lorentz factor 转换为辐射电子的最低非热能量，是从动力学进入同步谱的关键桥梁。</p>
+<p>第八步：单电子同步特征频率在共动系与 \(B'\gamma_e^2\) 成正比，变到观测系需乘以 bulk Doppler 因子并除以 \(1+z\)。对 \(\gamma_m\) 电子，注入频率为</p>
+<div class="math-display">\[\nu_m\simeq {1\over 1+z}\Gamma {3q_eB'\over 4\pi m_ec}\gamma_m^2\propto \Gamma^4\propto t_{\rm obs}^{-3/2} .\]</div>
+<p>这一步解释了为什么余辉谱峰会快速从高频向低频移动；观测上，\(\nu_m\) 穿越某一波段时常对应光变峰或谱斜率变化。</p>
+<p>第九步：冷却洛伦兹因子由同步冷却时间等于动力学时间定义。本讲暂时忽略逆康普顿冷却，得到</p>
+<div class="math-display">\[\gamma_c\simeq {6\pi m_ec(1+z)\over \sigma_T B'^2\Gamma t_{\rm obs}} .\]</div>
+<p>这里求出的 \(\gamma_c\) 区分显著冷却与未显著冷却的电子；若后续考虑 Compton 参数 \(Y\)，则有 caveat 型修正 \(\gamma_c\propto (1+Y)^{-1}\)，但本讲不展开。下一步把 \(\gamma_c\) 映射为可观测冷却频率 \(\nu_c\)。</p>
+<p>第十步：将 \(\gamma_c\) 代入同步频率公式，得到</p>
+<div class="math-display">\[\nu_c\simeq {1\over 1+z}\Gamma {3q_eB'\over 4\pi m_ec}\gamma_c^2\propto t_{\rm obs}^{-1/2} .\]</div>
+<p>在均匀绝热模型中，\(\nu_c\) 随时间缓慢下降。观测诊断上，若 \(\nu_c\) 位于光学与 X 射线之间，两者谱指数应相差约 \(\Delta\beta\simeq 1/2\)，这为谱段判定提供闭合关系之外的独立检查。</p>
+<p>第十一步：谱的归一化来自参与辐射的电子数和单电子峰值谱功率。扫掠电子数为 \(N_e\simeq 4\pi R^3n/3\)，峰值流量标度为</p>
+<div class="math-display">\[F_{\nu,\max}\propto {N_e\Gamma B'\over d_L^2}\propto E_{\rm iso}n^{1/2}\epsilon_B^{1/2}d_L^{-2}t_{\rm obs}^{0} .\]</div>
+<p>因此在均匀绝热前向激波中，\(F_{\nu,\max}\) 近似不随时间变化。若论文中的拟合要求 \(F_{\nu,\max}\) 快速演化，通常提示环境、能量注入或微物理参数演化可能超出本讲最小模型。</p>
+<p>第十二步：有了 \(\nu_m\)、\(\nu_c\) 与 \(F_{\nu,\max}\)，在慢冷却 \(\nu_m<\nu_c\) 且忽略光学和 X 射线自吸收时，分段谱为</p>
+<div class="math-display">\[F_\nu=F_{\nu,\max}\begin{cases}(\nu/\nu_m)^{1/3},& \nu<\nu_m,\(\nu/\nu_m)^{-(p-1)/2},& \nu_m<\nu<\nu_c,\(\nu_c/\nu_m)^{-(p-1)/2}(\nu/\nu_c)^{-p/2},& \nu>\nu_c .\end{cases}\]</div>
+<p>这个公式把电子谱指数 \(p\) 与宽带 \(\mathrm{SED}\) 斜率直接相连。读图时必须先判断观测频率 \(\nu\) 位于哪一段，否则后续闭合关系会被误用。</p>
+<p>第十三步：对固定观测频率，若谱段为 \(\nu_m<\nu<\nu_c\)，代入 \(F_{\nu,\max}\propto t_{\rm obs}^{0}\) 与 \(\nu_m\propto t_{\rm obs}^{-3/2}\)，得到</p>
+<div class="math-display">\[F_\nu\propto t_{\rm obs}^{-3(p-1)/4}\nu^{-(p-1)/2},\qquad \alpha={3(p-1)\over 4},\qquad \beta={p-1\over 2},\qquad \alpha={3\over 2}\beta .\]</div>
+<p>这是均匀介质慢冷却中常用于光学余辉的闭合关系。实际诊断时，应检查由 \(\alpha\) 推得的 \(p\) 与由 \(\beta\) 推得的 \(p\) 是否在误差内一致。</p>
+<p>第十四步：若固定观测频率位于 \(\nu>\nu_c\)，则高频段谱斜率由冷却后的电子分布决定，得到</p>
+<div class="math-display">\[F_\nu\propto t_{\rm obs}^{-(3p-2)/4}\nu^{-p/2},\qquad \alpha={3p-2\over 4},\qquad \beta={p\over 2},\qquad \alpha={3\beta-1\over 2} .\]</div>
+<p>这就是 X 射线或高频光学常用的观测闭合式。推导链最终连接到论文中的 \(F_\nu(t)\propto t_{\rm obs}^{-\alpha}\nu^{-\beta}\)、宽带 \(\mathrm{SED}\)、闭合关系图和残差诊断：若观测 \(\alpha\)、\(\beta\)、\(\Delta\beta\) 与断频穿越行为同时符合这些关系，最小均匀外激波模型才算通过第一轮检验。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>第一段：本讲的拟合从“经验量”开始，而不是一上来就宣称测得了爆炸能量和外部密度。对一段已经排除早期陡降、prompt tail、flare、光学闪和晚期 bump 的干净余辉，先用</p>
+<div class="math-display">\[F_\nu(t)=F_0\left({t\over t_0}\right)^{-\alpha}\nu^{-\beta}\]</div>
+<p>测量时间衰减指数 \(\alpha\) 和谱指数 \(\beta\)。这一步的物理目标很有限：它只回答“数据在某一时间窗内是否近似幂律衰减、谱是否近似幂律”，并为闭合关系检验提供输入。读论文时要特别看作者如何定义 \(t_0\)、如何选择拟合起止时间、是否把不同望远镜和滤光片转换到同一流量标度，以及 \(\alpha\) 与 \(\beta\) 的误差是否包含协方差和系统误差。</p>
+<p>第二段：经验拟合之后才进入闭合关系诊断。对均匀介质、绝热前向激波、慢冷却情形，若观测频率位于 \(\nu_m<\nu<\nu_c\)，则模型要求 \(\alpha=3\beta/2\)；若观测频率位于 \(\nu>\nu_c\)，则模型要求 \(\alpha=(3\beta-1)/2\)。实际操作不是把观测点硬贴到某条直线上，而是先用宽带 \(\mathrm{SED}\) 判断谱段，再用 \(\beta\) 推断电子谱指数 \(p\)，最后检查由 \(p\) 预测的 \(\alpha\) 是否与光变拟合一致。若光学与 X 射线给出不同的 \(p\)，第一反应不应是直接否定模型，而应检查冷却断频 \(\nu_c\) 是否位于两者之间，并寻找 \(\Delta\beta\simeq1/2\) 的证据。</p>
+<p>第三段：物理参数拟合使用的最小参数集可写为</p>
+<div class="math-display">\[\Theta=\{E_{\rm iso},n,\epsilon_e,\epsilon_B,p,z,A_V,N_H,t_0\} .\]</div>
+<p>其中 \(E_{\rm iso}\) 控制爆波能量标度，\(n\) 是均匀外部介质数密度，\(\epsilon_e\) 与 \(\epsilon_B\) 是电子和磁场能量分配比例，\(p\) 控制电子幂律分布，\(z\) 决定时间和频率的宇宙学变换，\(A_V\) 与 \(N_H\) 分别描述宿主尘埃消光和 X 射线吸收，\(t_0\) 则影响早期时间轴定义。给定 \(\Theta\) 后，模型应自洽地产生 \(\nu_m(t)\)、\(\nu_c(t)\)、\(\nu_a(t)\)、\(F_{\nu,\max}(t)\) 和每个观测点对应的 \(F_{\nu,{\rm mod}}(t_i,\nu_i;\Theta)\)。本讲边界内不要把风介质、喷流破裂、反向激波、能量注入或同步自康普顿直接并入基准模型；这些只能在最小模型失败后作为下一讲的扩展方向。</p>
+<p>第四段：对光学和射电流量点，若误差近似高斯，可使用含系统误差项的似然</p>
+<div class="math-display">\[\ln L=-{1\over2}\sum_i\left\{ {\left[F_{\nu,i}-F_{\nu,{\rm mod}}(t_i,\nu_i;\Theta)\right]^2\over \sigma_i^2+\sigma_{\rm sys}^2}+\ln\left[2\pi(\sigma_i^2+\sigma_{\rm sys}^2\right]\right\} .\]</div>
+<p>这里 \(\sigma_{\rm sys}\) 不是装饰项，而是吸收滤光片零点、交叉校准、宿主扣除、射电闪烁和非同时拼接误差的必要参数。X 射线谱如果仍有计数数据，严格做法应在 counts space 中折叠仪器响应矩阵和有效面积，而不是只拟合已经转换成 flux 的点。对于 upper limits，不能把上限当作普通检测点；应使用积分似然或删失数据似然，即计算模型预测在探测阈值以下的概率。</p>
+<p>第五段：后验解释要从“最佳值”转向“约束结构”。余辉拟合中常见强简并：\(E_{\rm iso}\) 与 \(n\) 都会影响动力学和归一化，\(\epsilon_B\) 与 \(n\) 共同移动 \(\nu_c\)，\(\epsilon_e\) 与 \(E_{\rm iso}\) 共同影响 \(\nu_m\) 和整体流量。若数据缺少射电峰、缺少冷却断频位置，或者只有窄波段光变，\(\epsilon_B\) 与 \(n\) 可能跨越数个数量级。读 corner plot 时要检查 \(\epsilon_B\) 是否贴近先验下限、\(p\) 是否由谱斜率真正决定、\(E_{\rm iso}\) 是否只是被归一化粗略限制。后验贴边时，正确表述是“得到先验依赖的界限”，而不是“精确测得该参数”。</p>
+<p>第六段：残差诊断是判断最小模型是否成立的核心。标准化残差可写为</p>
+<div class="math-display">\[\chi_i={F_{{\rm data},i}-F_{{\rm model},i}\over \sigma_i} .\]</div>
+<p>若残差在选定拟合区间内随机分布，说明最小前向激波模型至少通过了形状检验；若光学多滤光片残差同步同号，可能提示密度起伏、能量注入或宿主扣除问题；若 X 射线出现 plateau 而光学没有对应变化，说明单区外激波解释有张力；若射电残差大而且随频率相关，需考虑自吸收、闪烁、反向激波或主星系背景。读论文时不要只看总 \(\chi^2\) 或 reduced \(\chi^2\)，因为一个看似可接受的总统计量可能掩盖长时间连续同号残差。</p>
+<p>第七段：系统误差应作为拟合流程的一部分，而不是讨论末尾的一句免责声明。光学端要检查银河系消光图、宿主消光曲线、\(k\)-correction、滤光片有效波长和宿主星系通量；X 射线端要检查 \(N_H\) 与谱指数的相关性、pile-up、背景区选择和响应矩阵；射电端要检查闪烁、自吸收、非同时性和通量标定。稳健的论文通常会改变拟合时间窗、消光模型、\(\sigma_{\rm sys}\)、宿主通量和交叉校准因子，观察 \(p\)、\(E_{\rm iso}\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\) 是否稳定。若结论只在某个精心挑选的时间窗或某条消光曲线下成立，就不能把它视为最小模型的强成功。</p>
+<p>第八段：本讲拟合训练的最终目标不是用最小模型解释所有观测点，而是识别标准均匀介质前向激波在哪一段时间、哪一组波段中成立。一个好的分析应先给出经验 \(\alpha\) 与 \(\beta\)，再做闭合关系检验，然后给出物理参数后验，最后展示残差和系统误差试验。若最小模型失败，也要说明失败的方向：是需要风介质 \(n(R)\propto R^{-2}\)，还是喷流边缘条件 \(\Gamma\lesssim\theta_j^{-1}\)，还是反向激波、能量注入、微物理演化或同步自康普顿。这一结论正好构成下一讲的入口。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 Blandford–McKee 与 Sari、Piran、Narayan 这一类经典余辉论文时，第一步不是立刻寻找最终公式表，而是先读“问题设置”和“假设”段落。你要明确论文讨论的是 prompt emission 还是 afterglow，是内部耗散还是外部激波；本讲只保留长暴、均匀介质 \(n={\rm const}\)、绝热前向激波、球对称各向同性等效能量 \(E_{\rm iso}\)、常数微物理参数 \(\epsilon_e\) 与 \(\epsilon_B\)、电子幂律指数 \(p\) 和同步辐射。只要论文开始讨论风介质 \(n(R)\propto R^{-2}\)、喷流破裂、反向激波、能量注入或同步自康普顿，就要意识到那已经越过本讲的基准模型边界。</p>
+<p>第二步读动力学段落。Blandford–McKee 解的完整自相似变量和数值系数可以放在第二轮学习，但第一轮必须抓住三件事：扫掠质量如何随半径增长，绝热能量守恒如何给出 \(E_{\rm iso}\simeq\Gamma^2M_{\rm sw}c^2\)，以及等到达时间面为什么给出 \(t_{\rm obs}\simeq(1+z)R/(4\Gamma^2c)\)。这三步合起来才导出 \(\Gamma\propto t_{\rm obs}^{-3/8}\) 和 \(R\propto t_{\rm obs}^{1/4}\)。读这一段时不要只背最终指数；要能说清楚每个指数来自 \(M_{\rm sw}\propto R^3\)、\(E_{\rm iso}\approx{\rm const}\) 和 \(t_{\rm obs}\propto R/\Gamma^2\) 的联立。</p>
+<p>第三步读微物理映射段落。论文通常会从激波后内能密度 \(e'\simeq4\Gamma^2nm_pc^2\) 定义磁场 \(B'=(8\pi\epsilon_Be')^{1/2}\)，再由电子能量分配写出 \(\gamma_m\simeq\epsilon_e[(p-2)/(p-1)](m_p/m_e)\Gamma\)。这里的重点是理解 \(\epsilon_e\)、\(\epsilon_B\) 与 \(p\) 不是直接观测量，而是把流体动力学转成辐射谱的桥梁。若后续拟合得到非常小的 \(\epsilon_B\) 或很宽的 \(n\) 后验，通常不是仪器已经精确测量了这些量，而是宽带数据对断频和归一化的约束不足。</p>
+<p>第四步读同步谱段落。你要检查论文采用的是慢冷却还是快冷却，断频顺序是否为 \(\nu_m<\nu_c\)，自吸收频率 \(\nu_a\) 是否影响所用波段，以及观测频率到底位于 \(\nu_m<\nu<\nu_c\) 还是 \(\nu>\nu_c\)。慢冷却下的三个常用谱段分别对应 \(F_\nu\propto\nu^{1/3}\)、\(F_\nu\propto\nu^{-(p-1)/2}\) 和 \(F_\nu\propto\nu^{-p/2}\)。如果读者没有先判定谱段，就直接把某个 \(\alpha\) 或 \(\beta\) 代入闭合关系，结论很容易错误。</p>
+<p>第五步读闭合关系段落。均匀介质慢冷却模型的关键诊断是：在 \(\nu_m<\nu<\nu_c\) 中，\(\alpha=3(p-1)/4\)、\(\beta=(p-1)/2\)、\(\alpha=3\beta/2\)；在 \(\nu>\nu_c\) 中，\(\alpha=(3p-2)/4\)、\(\beta=p/2\)、\(\alpha=(3\beta-1)/2\)。读经典论文时应主动做一个小练习：用观测 \(\beta\) 推出 \(p\)，再预测 \(\alpha\)，然后与光变拟合值比较。若光学与 X 射线位于冷却断频两侧，还要检查谱指数差是否接近 \(\Delta\beta\simeq1/2\)。</p>
+<p>第六步读观测应用段落。好的余辉论文不会只说“光变是幂律”，而会说明多波段数据如何限制 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 与 \(F_{\nu,\max}\)，如何处理消光、吸收、宿主光、射电闪烁和非同时拼接，如何选择拟合区间，以及残差是否随机。尤其要看作者是否把 prompt tail、flare、plateau、反向激波光学闪和晚期超新星成分排除在最小前向激波拟合之外。若没有这些步骤，所谓“符合标准模型”通常只是定性陈述。</p>
+<p>第七步读讨论和局限段落。经典模型的价值不是解释所有数据点，而是提供一个能清楚失败的零阶标尺。讨论段应回答：偏离闭合关系是统计涨落还是系统误差？是否需要风介质、喷流边缘、能量注入、微物理演化或额外辐射成分？是否存在辐射效率 \(\eta_\gamma=E_{\gamma,{\rm iso}}/(E_{\gamma,{\rm iso}}+E_{k,{\rm iso}})\) 异常高的问题？这些问题把本讲内容自然连接到下一讲的环境、喷流几何和反向激波，而不是把所有复杂性都提前塞进最小模型。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一、多波段光变图。横轴通常为 \(t_{\rm obs}\)，纵轴为 \(F_\nu\)、magnitude 或经平移后的 flux。先看哪些点属于可用的前向激波拟合区间，哪些可能是 early steep decay、plateau、flare、prompt optical、反向激波、晚期 bump 或超新星污染。再看不同波段是否同色衰减：若光学各滤光片有相同 \(\alpha\)，通常支持同一谱段；若 X 射线与光学出现 chromatic break，则最小单区模型有张力。</p>
+<p>二、单时刻或多时刻宽带 \(\mathrm{SED}\) 图。横轴为 \(\nu\)，纵轴为 \(F_\nu\) 或 \(\nu F_\nu\)。要检查 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 和 \(F_{\nu,\max}\) 是否真的被数据覆盖，而不是由先验外推。慢冷却标准谱要求相关斜率接近 \(1/3\)、\(-(p-1)/2\) 和 \(-p/2\)。图上常见陷阱是未充分校正的宿主尘埃消光或 X 射线吸收会伪装成冷却断频。</p>
+<p>三、闭合关系平面。横轴一般为 \(\beta\)，纵轴为 \(\alpha\)，模型线包括均匀介质中 \(\alpha=3\beta/2\) 和 \(\alpha=(3\beta-1)/2\)。读图时看的是误差椭圆、系统误差带和谱段判定，而不是最佳点是否“看起来靠近”某条线。若误差椭圆同时覆盖多条模型线，图并不能唯一确定介质或谱段。</p>
+<p>四、特征频率演化图。横轴为 \(t_{\rm obs}\)，纵轴为 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 以及光学、X 射线、射电等观测频带。均匀介质绝热模型要求 \(\nu_m\propto t_{\rm obs}^{-3/2}\)、\(\nu_c\propto t_{\rm obs}^{-1/2}\)、\(F_{\nu,\max}\propto t_{\rm obs}^{0}\)。如果模型声称 \(\nu_m\) 穿越光学，却没有对应峰值或谱变化；或声称 \(\nu_c\) 位于光学与 X 射线之间，却没有 \(\Delta\beta\simeq1/2\)，就要怀疑该解释。</p>
+<p>五、模型残差图。横轴可以是时间，也可以是频率；纵轴常为 \(\chi_i=(F_{{\rm data},i}-F_{{\rm model},i})/\sigma_i\)。成功的最小模型应在选定拟合区间内没有连续结构。单一波段连续正残差可能来自校准、消光或宿主扣除问题；多波段同步残差则更像动力学变化或额外辐射成分。</p>
+<p>六、参数后验或 corner plot。重点看 \(E_{\rm iso}\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\)、\(p\)、\(A_V\) 和 \(N_H\) 的一维边缘分布与二维相关。若 \(\epsilon_B\) 贴近先验下限、\(n\) 跨越多个数量级、\(p\) 由先验而非谱斜率决定，则不能把参数表中的中位数当作强测量。</p>
+<p>七、能量预算与效率图。比较 prompt 阶段的 \(E_{\gamma,{\rm iso}}\)、余辉动能 \(E_{k,{\rm iso}}\) 和辐射效率 \(\eta_\gamma=E_{\gamma,{\rm iso}}/(E_{\gamma,{\rm iso}}+E_{k,{\rm iso}})\)。若 \(\eta_\gamma\) 极高，可能说明 prompt 辐射效率确实高，也可能说明余辉动能被低估、介质模型错误、存在早期能量注入或数据覆盖不足。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图一：多波段光变图。横轴是 \(t_{\rm obs}\)，通常采用对数坐标；纵轴是 \(F_\nu\)、magnitude 或为了展示而人为平移的多波段流量。模型线若代表均匀介质前向激波，在同一谱段中的不同波段应具有相同的 \(\alpha\)，只是在归一化上按 \(\nu^{-\beta}\) 平移。读图时先标出不能直接用于最小模型的区域：早期 X 射线陡降、flare、plateau、光学闪和晚期 bump。误读风险是把所有点都纳入单一幂律，从而得到一个看似精确但物理上混合了多个成分的 \(\alpha\)。</p>
+<p>图二：单时刻宽带 \(\mathrm{SED}\) 图。横轴为 \(\nu\)，纵轴为 \(F_\nu\) 或 \(\nu F_\nu\)，数据点通常来自射电、毫米波、红外、光学、紫外和 X 射线。模型线常是 broken power law，断点对应 \(\nu_a\)、\(\nu_m\) 和 \(\nu_c\)。读图时要检查光学点是否已校正银河系和宿主消光，X 射线点是否已处理 \(N_H\)，以及这些点是否近同时。结论应来自谱斜率和断频位置的共同约束；常见误读是把消光造成的光学弯曲误认为 \(\nu_c\)，或把非同时数据拼接造成的弯曲误认为真实谱断裂。</p>
+<p>图三：闭合关系图。横轴为观测谱指数 \(\beta\)，纵轴为时间衰减指数 \(\alpha\)，模型线可包括均匀介质慢冷却的 \(\alpha=3\beta/2\) 和高频段的 \(\alpha=(3\beta-1)/2\)。数据点一般带有一维误差棒或二维误差椭圆。读图时要看误差区域是否真的排除其他谱段或介质模型，而不是只看最佳点落在哪条线附近。若 \(\beta\) 来自未校正消光的光学谱，或 \(\alpha\) 来自含 plateau 的时间窗，闭合关系图会给出虚假的模型偏好。</p>
+<p>图四：特征频率演化图。横轴是 \(t_{\rm obs}\)，纵轴是频率，图中通常画出 \(\nu_m(t)\)、\(\nu_c(t)\)、\(\nu_a(t)\) 以及固定观测波段的位置。均匀介质最小模型要求 \(\nu_m\propto t_{\rm obs}^{-3/2}\)，\(\nu_c\propto t_{\rm obs}^{-1/2}\)，并且 \(F_{\nu,\max}\propto t_{\rm obs}^{0}\)。如果 \(\nu_m\) 穿越射电，射电光变应出现相应峰值；如果 \(\nu_c\) 穿越光学或 X 射线，应有谱指数变化。误读风险是只接受一条平滑断频演化曲线，而不检查观测光变和 \(\mathrm{SED}\) 是否同步响应。</p>
+<p>图五：残差图。横轴可以是 \(t_{\rm obs}\) 或 \(\nu\)，纵轴是标准化残差 \(\chi_i=(F_{{\rm data},i}-F_{{\rm model},i})/\sigma_i\)。理想情况下，残差围绕零随机散布，没有连续同号区段，也没有只在某个波段系统偏离。若光学残差随颜色变化，可能是消光曲线或滤光片转换问题；若 X 射线早期系统高于模型，可能是 prompt tail 或能量注入；若射电残差呈频率相关，可能是自吸收、闪烁或额外反向激波。常见误读是只报告总 \(\chi^2\)，不展示残差结构。</p>
+<p>图六：后验 corner plot。对角线显示单参数边缘后验，非对角线显示二维相关。读图时优先看 \(E_{\rm iso}\) 与 \(n\)、\(\epsilon_B\) 与 \(n\)、\(\epsilon_e\) 与 \(E_{\rm iso}\) 的相关方向，因为这些简并直接来自 \(\nu_m\)、\(\nu_c\) 和 \(F_{\nu,\max}\) 的组合依赖。若 \(\epsilon_B\) 在先验下限堆积，或 \(n\) 的后验横跨多个数量级，参数表中的中位数并不代表精确测量。若 \(p\) 很窄但 \(\beta\) 测量很差，就要怀疑先验或模型设置在主导结论。</p>
+<p>图七：能量和效率比较图。横轴可能是 burst 编号、红移 \(z\) 或 \(E_{\gamma,{\rm iso}}\)，纵轴可能是 \(E_{k,{\rm iso}}\)、\(E_{\gamma,{\rm iso}}\) 或 \(\eta_\gamma\)。这类图用于检查 prompt 辐射能量与余辉动能是否在合理范围内。若 \(\eta_\gamma=E_{\gamma,{\rm iso}}/(E_{\gamma,{\rm iso}}+E_{k,{\rm iso}})\) 接近极端值，不能立刻解释为中心引擎效率异常；还要检查余辉拟合是否缺少早期能量注入、是否使用了错误介质模型、是否缺少射电约束，以及是否忽略喷流校正。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条阅读路径是从动力学原点读起。先读 Blandford–McKee 相对论自相似爆波解，目标不是记住所有自相似变量，而是理解为什么绝热相对论爆波满足 \(E_{\rm iso}\simeq\Gamma^2M_{\rm sw}c^2\)，以及为什么均匀介质给出 \(\Gamma\propto t_{\rm obs}^{-3/8}\)。随后读 Sari、Piran 与 Narayan 关于余辉同步谱和光变的经典工作，重点掌握 \(\nu_m\)、\(\nu_c\)、\(\nu_a\) 与 \(F_{\nu,\max}\) 如何组成分段谱，而不是只背闭合关系表。</p>
+<p>第二条阅读路径是从早期观测案例进入模型检验。BeppoSAX 之后的 X 射线定位、光学余辉、宿主星系红移和射电峰值观测，使 \(E_{\gamma,{\rm iso}}\)、\(E_{k,{\rm iso}}\)、\(n\)、\(p\) 等量开始被放入统一框架。读这些论文时，不要只看发现叙事，要训练自己按本讲顺序检查：光变是否幂律、\(\mathrm{SED}\) 是否支持某个断频位置、光学与 X 射线是否满足 \(\Delta\beta\simeq1/2\)、射电峰是否帮助约束 \(F_{\nu,\max}\) 和 \(\nu_a\)。</p>
+<p>第三条阅读路径是进入 Swift 时代的复杂余辉。Swift 大量发现早期 X 射线陡降、plateau、flare、chromatic break 和复杂光学行为，这些现象经常偏离本讲的最小均匀介质前向激波闭合关系。阅读这类论文时，本讲模型应作为零阶基准：先问最小模型在哪些时段通过检验，再问偏离是否需要能量注入、微物理演化、风介质、喷流边缘、反向激波或额外辐射区。不要把复杂模型当作默认答案，否则会失去经典闭合关系的诊断价值。</p>
+<p>第四条阅读路径是走向现代多波段贝叶斯建模。现代余辉论文常使用 \(\mathrm{MCMC}\)、nested sampling、响应矩阵折叠、upper limits 似然、宿主星系成分、交叉校准因子和多成分模型。读这些工作时应重点检查后验是否由数据而非先验主导，残差是否展示，系统误差是否传播到 \(E_{\rm iso}\)、\(n\)、\(\epsilon_e\)、\(\epsilon_B\) 和 \(p\)。本讲的作用是让你看懂这些复杂工具到底在检验哪一条物理链。</p>
+<p>第五条阅读路径是连接 GeV 到 TeV 余辉前沿。甚高能探测迫使研究者讨论同步辐射极限、同步自康普顿、Klein–Nishina 效应、外部介质密度和 \(\mathrm{EBL}\) 吸收。进入这些主题前，必须先牢固掌握本讲的同步前向激波标尺：如果连 \(\nu_m\)、\(\nu_c\)、\(F_{\nu,\max}\) 和闭合关系都没有建立清楚，就很难判断高能额外成分究竟是必需物理还是拟合自由度。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>第一，最自然的第 \(2/3\) 讲是“GRB 余辉经典课程（二）：环境、喷流破裂和反向激波”。本讲已经完成均匀介质 \(n={\rm const}\)、绝热前向激波和同步闭合关系的基准推导；下一讲应专门讨论破坏这些基准假设的情形，包括风介质 \(n(R)\propto R^{-2}\)、喷流边缘条件 \(\Gamma\lesssim\theta_j^{-1}\)、achromatic jet break、反向激波光学闪和射电诊断。下一讲不应重复 \(\nu_m\)、\(\nu_c\) 与 \(F_{\nu,\max}\) 的基础推导，而应比较这些量在不同环境和几何中的变化。</p>
+<p>第二，第 \(3/3\) 讲可进入“从 Swift 到 TeV：余辉多波段拟合、逆康普顿和系统误差”。它应承接本讲的 likelihood、后验和残差训练，进一步处理 X 射线 counts space 拟合、upper limits、仪器响应、同步自康普顿、Klein–Nishina 修正、\(\mathrm{EBL}\) 吸收和甚高能余辉案例。这个方向属于现代观测拟合与高能扩展，不应在本讲的最小同步模型中提前展开。</p>
+<p>第三，如果暂时跳出余辉系列，可以开启独立的“GRB prompt emission 经典专题”。那一专题应讨论 compactness problem、最小洛伦兹因子 \(\Gamma_{\min}\)、Band spectrum、photosphere、internal shocks 和磁重联。它研究的是中心引擎与 prompt 区域耗散，而本讲研究的是外部介质中的 afterglow；两者观测上相连，但物理边界必须分清。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>Blandford McKee 1976 relativistic blast wave</li>
+<li>Sari Piran Narayan 1998 spectra and light curves of gamma-ray burst afterglows</li>
+<li>GRB afterglow closure relations uniform medium</li>
+<li>gamma-ray burst afterglow synchrotron spectrum \(nu_m\) \(nu_c\) \(F_nu_max\)</li>
+<li>BeppoSAX first GRB afterglow discovery</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/astro-ph/9712005">https://arxiv.org/abs/astro-ph/9712005</a></li>
+</ul>
+</details>
+    </main>
+  </div>
+</body>
+</html>
