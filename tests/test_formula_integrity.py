@@ -105,6 +105,17 @@ def test_repairs_json_escape_damaged_latex_control_characters(tmp_path: Path):
     assert result.unresolved_count == 0
 
 
+def test_repairs_json_escape_controls_without_the_lost_backslash(tmp_path: Path):
+    path = tmp_path / "2026-09-06.md"
+    path.write_text(formula_section(f"F_\\nu \\propto t^-{chr(8)}eta and E=\\{chr(12)}rac{{1}}{{2}}mc^2."), encoding="utf-8")
+
+    repair_report_latex_formulas(path)
+
+    repaired = path.read_text(encoding="utf-8")
+    assert "\\beta" in repaired
+    assert "\\frac{1}{2}" in repaired
+
+
 def test_repairs_line_broken_rm_fragments(tmp_path: Path):
     path = tmp_path / "2026-07-09.md"
     damaged = (
@@ -136,6 +147,16 @@ def test_repairs_line_broken_rm_fragments(tmp_path: Path):
     assert result.unresolved_count == 0
 
 
+def test_repairs_line_broken_rm_when_json_loses_the_backslash(tmp_path: Path):
+    path = tmp_path / "2026-09-06.md"
+    path.write_text(formula_section("峰值满足 \\(t_{\n m peak}\\sim t_{\n m dec}\\)"), encoding="utf-8")
+
+    repair_report_latex_formulas(path)
+
+    repaired = path.read_text(encoding="utf-8")
+    assert "\\(t_{\\rm peak}\\sim t_{\\rm dec}\\)" in repaired
+
+
 def test_repairs_other_line_broken_latex_commands():
     slash = chr(92)
     damaged = "\\left(x" + slash + "\night) + S_" + slash + "\nu + \\" + "(" + slash + "\n\\(ho_0\\)\\)"
@@ -145,6 +166,21 @@ def test_repairs_other_line_broken_latex_commands():
     assert "\\left(x\\right)" in repaired
     assert "S_\\nu" in repaired
     assert "\\(\\rho_0\\)" in repaired
+
+
+def test_repairs_line_broken_nu_before_punctuation():
+    damaged = "j_\\\nu,\\qquad \\nu=\\delta\\\nu'."
+
+    repaired = _normalize_line_broken_latex_rm(damaged)
+
+    assert repaired == "j_\\nu,\\qquad \\nu=\\delta\\nu'."
+
+
+def test_does_not_treat_parentheses_in_display_math_as_inline_delimiters():
+    repaired, result = repair_formula_sections(formula_section(r"\[N(E)=A\left(\frac{E}{E_0}\right)^\alpha\]"))
+
+    assert repaired.endswith(r"\[N(E)=A\left(\frac{E}{E_0}\right)^\alpha\]" + "\n\n#### 模型拟合 / 应用方法\n\n后续内容。\n")
+    assert result.unresolved_count == 0
 
 
 def test_does_not_touch_non_formula_sections():

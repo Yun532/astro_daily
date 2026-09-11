@@ -10,7 +10,9 @@ logger = logging.getLogger(__name__)
 FORMULA_HEADING = "#### 公式与推导"
 FORMULA_BOUNDARY_RE = re.compile(r"^####\s+")
 LATEX_COMMAND_RE = re.compile(r"\\[A-Za-z]+")
-JSON_ESCAPED_LATEX_CONTROL_RE = re.compile(r"\\([\b\f\r\t])(?=[A-Za-z])")
+# A malformed JSON string can leave either ``\\<control>`` or just the
+# control character behind (for example ``\\beta`` becomes ``\x08eta``).
+JSON_ESCAPED_LATEX_CONTROL_RE = re.compile(r"(?:\\)?([\b\f\r\t])(?=[A-Za-z])")
 JSON_ESCAPED_LATEX_CONTROL_MAP = {
     "\b": "b",
     "\f": "f",
@@ -164,10 +166,11 @@ def _normalize_line_broken_latex_rm(text: str) -> str:
 
     text = text.replace("\\[\\n", "\\[\n").replace("\\]\\n", "\\]\n")
     text = re.sub(r"([_^])\{\\\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}", r"\1{\\rm \2}", text)
+    text = re.sub(r"([_^])\{\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}", r"\1{\\rm \2}", text)
     text = re.sub(r"\{\\\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)", r"{\\rm \1", text)
     text = re.sub(r"([_^])\{\\\}\}\\\)\s*\n\s*m\s+([A-Za-z][A-Za-z0-9]*)\}\\\)", r"\1{\\rm \2}\\)", text)
     text = re.sub(r"\\\s*\n\s*ight\b", r"\\right", text)
-    text = re.sub(r"\\\s*\n\s*u(?=[={}_/\\\s])", r"\\nu", text)
+    text = re.sub(r"\\\s*\n\s*u(?=[A-Za-z0-9={}_/\\\s',.)\]])", r"\\nu", text)
     text = re.sub(r"\\\(\\\s*\n\s*\\\(ho_0\\\)\\\)", r"\\(\\rho_0\\)", text)
     text = re.sub(r"\\\(\\\s*\n\s*ho\\\)", r"\\(\\rho\\)", text)
     text = re.sub(r"\\\(\\\s*\n\s*\\\(u_", r"\\(\\nu_", text)
@@ -309,9 +312,10 @@ def _repair_line(line: str, line_number: int, *, repair: bool, skip_bare_latex: 
     issues: list[FormulaIntegrityIssue] = []
     current = line
 
-    paren_opens = current.count("\\(")
-    paren_closes = current.count("\\)")
-    if paren_opens == paren_closes + 1 and _looks_formula_like(current.rsplit("\\(", 1)[-1]):
+    inline_only = _strip_display_math(current)
+    paren_opens = inline_only.count("\\(")
+    paren_closes = inline_only.count("\\)")
+    if paren_opens == paren_closes + 1 and _looks_formula_like(inline_only.rsplit("\\(", 1)[-1]):
         issues.append(_issue(line_number, "missing_inline_paren", "missing closing \\)", repair, current))
         if repair:
             current += "\\)"
@@ -333,6 +337,10 @@ def _repair_line(line: str, line_number: int, *, repair: bool, skip_bare_latex: 
         issues.append(_issue(line_number, "bare_latex", "possible bare LaTeX left unchanged", False, current))
 
     return current, issues
+
+
+def _strip_display_math(text: str) -> str:
+    return re.sub(r"\\\[[\s\S]*?\\\]|\$\$[\s\S]*?\$\$", "", text)
 
 
 def _repair_bare_latex_line(line: str, line_number: int, *, repair: bool) -> tuple[str, list[FormulaIntegrityIssue]]:
