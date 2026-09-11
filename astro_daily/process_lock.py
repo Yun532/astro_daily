@@ -42,9 +42,36 @@ def _acquire(lock_path: Path, *, stale_after_seconds: float) -> int:
 
 def _is_stale(path: Path, stale_after_seconds: float) -> bool:
     try:
-        return time.time() - path.stat().st_mtime > stale_after_seconds
+        if time.time() - path.stat().st_mtime > stale_after_seconds:
+            return True
+        pid = _lock_pid(path)
+        if pid is not None and not _pid_is_running(pid):
+            return True
+        return False
     except FileNotFoundError:
         return True
+
+
+def _lock_pid(path: Path) -> int | None:
+    try:
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if line.startswith("pid="):
+                return int(line.removeprefix("pid="))
+    except (OSError, ValueError):
+        return None
+    return None
+
+
+def _pid_is_running(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except OSError:
+        return False
+    return True
 
 
 def _lock_detail(path: Path) -> str:

@@ -134,7 +134,7 @@ SUMMARY_REPAIR_SYSTEM_PROMPT += RELATED_SOURCE_CONTEXT_CONTRACT
 class ClaudePaperAnalyst:
     def __init__(self, config: LlmConfig, *, api_key: str):
         self.config = config
-        client_kwargs: dict[str, Any] = {"api_key": api_key}
+        client_kwargs: dict[str, Any] = {"api_key": api_key, "timeout": config.request_timeout_seconds}
         if config.base_url:
             client_kwargs["base_url"] = config.base_url
         self.client = anthropic.Anthropic(**client_kwargs)

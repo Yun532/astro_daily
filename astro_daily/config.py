@@ -103,6 +103,7 @@ class LlmConfig(BaseModel):
     effort: str = "high"
     prompt_cache: bool = True
     summary_parallel_workers: int = Field(default=3, ge=1, le=8)
+    request_timeout_seconds: float = Field(default=60, ge=10, le=600)
     base_url: str | None = None
     api_mode: str = "auto"
 

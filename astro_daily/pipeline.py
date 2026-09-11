@@ -40,7 +40,7 @@ from src.wechat_summary import compress_for_wechat, compress_report_mix_for_wech
 
 logger = logging.getLogger(__name__)
 
-SCORE_BATCH_SIZE = 20
+SCORE_BATCH_SIZE = 5
 DEFERRED_RETRY_EXIT_CODE = 75
 TEMPORARY_SOURCE_ERROR_MARKERS = (
     "429",
@@ -53,6 +53,7 @@ TEMPORARY_SOURCE_ERROR_MARKERS = (
     "connection reset",
     "temporarily unavailable",
 )
+TRANSIENT_LLM_ERROR_MARKERS = (" 429", " 502", " 503", "rate limit", "connect to anthropic", "timed out", "timeout")
 
 
 class DeferredRetryNeeded(RuntimeError):
@@ -868,8 +869,8 @@ def _score_batch(
 ) -> list:
     try:
         return analyst.score_papers(batch, run_date=run_date, scoring_config=scoring_config, feedback_context=feedback_context)
-    except RuntimeError:
-        if len(batch) == 1:
+    except RuntimeError as exc:
+        if len(batch) == 1 or any(marker in str(exc).lower() for marker in TRANSIENT_LLM_ERROR_MARKERS):
             raise
         midpoint = len(batch) // 2
         logger.warning("LLM scoring failed for batch of %s papers; retrying as %s and %s", len(batch), midpoint, len(batch) - midpoint)

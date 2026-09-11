@@ -19,7 +19,7 @@ from astro_daily.config import (
 )
 from astro_daily.formula_integrity import FormulaIntegrityResult
 from astro_daily.models import ExtractedFigure, FigureSelection, Paper, PaperScore, PaperSummary, ScoredPaper, ScoreResult, WeekendLesson
-from astro_daily.pipeline import DeferredRetryNeeded, _select_figures_for_items_parallel, _summary_repair_fields, evaluate_source_freshness, fetch_all_sources, run_pipeline
+from astro_daily.pipeline import DeferredRetryNeeded, _score_batch, _select_figures_for_items_parallel, _summary_repair_fields, evaluate_source_freshness, fetch_all_sources, run_pipeline
 from astro_daily.seen import SeenStore
 from astro_daily.sources.arxiv import ArxivDailyListing
 
@@ -53,6 +53,20 @@ def make_paper(paper_id="old"):
         published=datetime(2026, 5, 1, tzinfo=timezone.utc),
         source_batch_date=date(2026, 5, 1),
     )
+
+
+def test_transient_scoring_error_is_not_recursively_split():
+    class FailingAnalyst:
+        def score_papers(self, *_args, **_kwargs):
+            raise RuntimeError("Anthropic API error 502; request_id=None")
+
+    with pytest.raises(RuntimeError, match="502"):
+        _score_batch(
+            [make_paper("one"), make_paper("two")],
+            FailingAnalyst(),
+            run_date=date(2026, 5, 1),
+            scoring_config=ScoringConfig(),
+        )
 
 
 def make_lesson(title="经典 GRB 余辉课程", anchor="Blandford-McKee self-similar blast wave"):
@@ -256,7 +270,7 @@ def test_weekday_run_scores_candidates_in_batches(monkeypatch, tmp_path):
 
     result = run_pipeline(config_path="unused.yaml", run_date=date(2026, 5, 1), dry_run=False, ignore_seen=True)
 
-    assert batch_sizes == [20, 20, 5]
+    assert batch_sizes == [5] * 9
     assert result.kept_count == settings.scoring.max_papers_per_report + settings.scoring.important_overflow_papers
 
 
