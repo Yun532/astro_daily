@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天文论文日报 2026-09-06</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fbff;
+      --text: #172033;
+      --muted: #65758b;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-dark: #1e40af;
+      --cyan: #0891b2;
+      --amber: #d97706;
+      --shadow: 0 18px 50px rgba(30, 64, 175, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 32rem),
+        radial-gradient(circle at top right, rgba(8, 145, 178, 0.12), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: var(--blue); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; word-break: break-word; }
+    a:hover { color: var(--blue-dark); }
+    .page { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #12213f 0%, #1d4ed8 52%, #0891b2 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -150px auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .report-nav { display: flex; justify-content: space-between; gap: 1rem; margin: 18px 0 0; }
+    .report-nav a,
+    .report-nav span { flex: 1; padding: 0.85rem 1rem; border: 1px solid var(--line); border-radius: 16px; background: rgba(255, 255, 255, 0.86); box-shadow: 0 10px 24px rgba(30, 64, 175, 0.08); text-decoration: none; font-weight: 700; }
+    .report-nav .home { text-align: center; }
+    .report-nav .next { text-align: right; }
+    .report-nav span { color: var(--muted); background: rgba(248, 251, 255, 0.78); }
+    .eyebrow { margin: 0 0 10px; color: rgba(255, 255, 255, 0.78); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { position: relative; margin: 0; max-width: 760px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+    .subtitle { position: relative; max-width: 760px; margin: 16px 0 0; color: rgba(255, 255, 255, 0.86); font-size: 1.05rem; }
+    main {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid rgba(220, 230, 242, 0.9);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    main > p:first-child,
+    main > p:nth-child(2) { color: var(--muted); }
+    h2 {
+      margin: 2.4rem 0 1rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      background: linear-gradient(90deg, #eff6ff, #ffffff);
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      margin: 2rem 0 1rem;
+      padding: 1.15rem 1.25rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f8fbff, #eef6ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    h4 { margin: 1.25rem 0 0.5rem; color: #0f3b7a; font-size: 1.02rem; }
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 0.3rem 0; }
+    main > ul {
+      padding: 1rem 1.2rem 1rem 2.2rem;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel-soft);
+    }
+    strong { color: #0f2f5f; }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid #fed7aa;
+      border-left: 5px solid #f97316;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #7c2d12;
+    }
+    code { background: #eaf1fb; padding: 0.12rem 0.3rem; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; }
+    th, td { padding: 0.75rem; border: 1px solid var(--line); vertical-align: top; }
+    th { background: #eff6ff; }
+    mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.25rem 0; }
+    .math-display { margin: 1rem 0; overflow-x: auto; padding: 0.75rem 1rem; border: 1px solid #dbeafe; border-radius: 14px; background: #f8fbff; }
+    main img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 10px 24px rgba(15, 47, 95, 0.12); }
+    details.paper-detail {
+      margin: 1.25rem 0 1.9rem;
+      border: 1px solid #b9d7ff;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fbfdff, #f3f8ff);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+      overflow: hidden;
+    }
+    details.paper-detail[open] { border-color: #60a5fa; }
+    details.paper-detail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 1rem 1.15rem;
+      background: linear-gradient(90deg, #dbeafe, #ecfeff);
+      color: #173b73;
+      font-weight: 800;
+    }
+    details.paper-detail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail summary::before { content: "展开"; display: inline-block; margin-right: 0.65rem; padding: 0.12rem 0.5rem; border-radius: 999px; background: #2563eb; color: #fff; font-size: 0.78rem; }
+    details.paper-detail[open] summary::before { content: "收起"; background: #0891b2; }
+    details.paper-detail > *:not(summary) { margin-left: 1.15rem; margin-right: 1.15rem; }
+    details.paper-detail > :last-child { margin-bottom: 1.2rem; }
+    details.paper-detail h4 {
+      margin-top: 1.15rem;
+      padding-top: 1rem;
+      border-top: 1px dashed #bfdbfe;
+    }
+    details.paper-subdetail {
+      margin: 1rem 1.15rem 1.35rem;
+      border: 1px solid #d8e8ff;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+    details.paper-subdetail[open] { border-color: #93c5fd; }
+    details.paper-subdetail > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.75rem 0.9rem;
+      background: #f1f7ff;
+      color: #234d83;
+      font-weight: 750;
+    }
+    details.paper-subdetail > summary::-webkit-details-marker { display: none; }
+    details.paper-detail details.paper-subdetail > summary::before { content: "展开"; display: inline-block; margin-right: 0.55rem; padding: 0.08rem 0.42rem; border-radius: 999px; background: #64748b; color: #fff; font-size: 0.74rem; }
+    details.paper-detail details.paper-subdetail[open] > summary::before { content: "收起"; background: #2563eb; }
+    details.paper-subdetail > *:not(summary) { margin-left: 0.95rem; margin-right: 0.95rem; }
+    details.paper-subdetail > :last-child { margin-bottom: 1rem; }
+    @media (max-width: 720px) {
+      .page { padding: 18px 10px 36px; }
+      .hero { padding: 24px 20px; border-radius: 22px; }
+      .report-nav { flex-direction: column; }
+      .report-nav .home { text-align: left; }
+      .report-nav .next { text-align: left; }
+      main { padding: 18px 14px; border-radius: 20px; }
+      h2 { font-size: 1.25rem; }
+      h3 { font-size: 1.05rem; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Astro Daily</p>
+      <h1>天文论文日报 2026-09-06</h1>
+      <p class="subtitle">面向天文与物理专业读者的每日论文筛选、中文解读与延伸阅读。</p>
+    </header>
+    <!-- REPORT_NAV_START -->
+    <nav class="report-nav" aria-label="日报前后导航" data-report-date="2026-09-06">
+      <a class="previous" href="2026-09-05.html">← 上一期：2026-09-05</a>
+      <a class="home" href="../index.html">⌂ 返回主页</a>
+      <a class="next" href="2026-09-10.html">下一期：2026-09-10 →</a>
+    </nav>
+    <!-- REPORT_NAV_END -->
+    <main>
+      <p>生成时间：2026-09-06T11:14:16+08:00<br />
+今日保留论文数：0</p>
+<h2 id="_1">周末经典专题课</h2>
+<p>周末 arXiv 通常不更新；本期改为一讲讲透的高能天体物理经典专题课，重点补公式推导、经典拟合和关键图表读法。</p>
+<h3 id="1-grb">1. GRB 余辉经典课程（二）：环境、喷流破裂和反向激波</h3>
+<ul>
+<li>课程系列：GRB 余辉经典课程（第 2/3 讲）</li>
+<li>本讲边界：本讲承接第 \(1/3\) 讲的最小前向激波模型，但不重复均匀介质中 \(\nu_m\)、\(\nu_c\) 与 \(F_{\nu,\max}\) 的完整同步谱推导。本讲专门讨论三类打破基准假设的经典诊断：第一，外部介质从均匀星际介质变为恒星风密度 \(n(R)\propto R^{-2}\) 时，动力学与闭合关系如何改变；第二，喷流有限张角导致 \(\Gamma\theta_j\sim 1\) 后的 achromatic jet break 与真实能量校正；第三，早期反向激波如何产生光学闪、射电 flare，并怎样诊断初始洛伦兹因子、磁化程度和 ejecta 厚薄壳。故意不讲 prompt emission 内部耗散、同步自康普顿和 \(\mathrm{TeV}\) 余辉；这些留给第 \(3/3\) 讲的多波段拟合与高能扩展。</li>
+<li>上下文承接：上一讲已经建立了长伽马暴余辉的基准语法：绝热 Blandford--McKee 前向激波、均匀介质 \(n={\rm const}\)、电子幂律分布、同步辐射特征频率、峰值流量以及 (F_<br />
+u\propto \(t^{-\alpha}\)<br />
+\(u^{-\beta}\)) 的闭合关系。本讲把这些量作为已知工具，追问当环境不是均匀的、爆流不是球对称的、以及 ejecta 本身也被反向激波照亮时，观测光变会怎样偏离上一讲的闭合关系。边界是：本讲只改动力学几何和早期双激波结构，不重新讲单区同步辐射基础，也不进入 Swift 后期平台期、能量注入和 \(\mathrm{SSC}\) 的复杂拟合。</li>
+<li>主题：GRB afterglow environment, jet break and reverse shock diagnostics</li>
+<li>经典工作：Rhoads 1999 关于相对论喷流余辉 achromatic break 的经典理论，Sari、Piran 与 Halpern 1999 的喷流破裂解释，以及 Sari 与 Piran 1999 等关于早期反向激波光学闪的标准图像。</li>
+<li>为什么经典：这一讲的主题之所以经典，是因为它把 GRB 余辉从“能解释一次多波段衰减”的标准模型，提升为“能测环境、几何和初始 ejecta”的物理诊断工具。风介质连接长暴与大质量恒星前身星；喷流破裂把各向同性等效能量 \(E_{\rm iso}​\) 转换为真实能量 \(E_{\rm true}​\)，直接影响 GRB 能量学、发生率和宇宙学应用；反向激波则是少数能直接触碰 prompt ejecta 初始条件的余辉成分。Rhoads、Sari--Piran--Halpern 和早期光学闪研究共同定义了后来二十多年 GRB 余辉论文中最常见的三组问题：环境是什么、喷流有多窄、初始出流有多快。</li>
+</ul>
+<details class="paper-detail">
+<summary>展开经典专题课：论文脉络、背景、理论、重点段落与图表</summary>
+<h4 id="_2">经典工作详细讲解</h4>
+<p>本讲承接第 \(1/3\) 讲的基准模型：上一讲已经把绝热 Blandford--McKee 前向激波、均匀介质 \(n={\rm const}\)、电子幂律分布 \(N(\gamma_e)\propto \gamma_e^{-p}\)、同步谱特征频率以及 \(F_\nu\propto t^{-\alpha}\nu^{-\beta}\) 的闭合关系建立起来。本讲不再重复 \(\nu_m\)、\(\nu_c\) 和 \(F_{\nu,\max}\) 的单区同步谱推导，而是问一个更接近真实论文阅读的问题：当余辉偏离这个基准模型时，哪些偏离能够被解释为外部环境、喷流几何或早期 ejecta 的物理信息？因此本讲的三条主线分别是风介质闭合关系、achromatic jet break，以及反向激波的光学和射电诊断；同步自康普顿、\(\mathrm{TeV}\) 余辉、Klein--Nishina 修正和复杂高能吸收留到第 \(3/3\) 讲。</p>
+<p>历史动机来自三个压力点。第一，长 GRB 与大质量恒星坍缩有关，前身星若经历 Wolf--Rayet 风，外部密度自然不是常数，而更接近 \(\rho\propto R^{-2}\)。第二，若把早期 GRB 的辐射都按各向同性解释，某些事件的 \(E_{\rm iso}\) 会造成严重能量预算压力；Rhoads 1999 与 Sari--Piran--Halpern 1999 的关键贡献，是指出有限张角喷流在 \(\Gamma\theta_j\sim 1\) 后会产生近似无色的光变陡化，从而让我们由 \(t_j\) 反推 \(\theta_j\) 并得到 \(E_{\rm true}\simeq \theta_j^2E_{\rm iso}/2\)。第三，GRB 990123 等早期光学闪事件表明，prompt ejecta 在被外部介质减速时也会被反向激波照亮，峰值时间 \(t_{\rm peak}\sim t_{\rm dec}\) 可成为估计初始洛伦兹因子 \(\Gamma_0\) 的窗口。</p>
+<p>方法上，本讲采用“先动力学、再闭合关系、再观测诊断”的顺序。外部密度写成 \(n(R)=A_kR^{-k}/m_p\)，其中 \(k=0\) 对应均匀介质，\(k=2\) 对应恒星风。由扫掠质量 \(M(R)=4\pi A R^{3-k}/(3-k)\) 和绝热能量守恒 \(E\simeq \Gamma^2M(R)c^2\)，可得 \(\Gamma(R)\propto R^{-(3-k)/2}\)。再用观测者时间映射 \(t_{\rm obs}\simeq (1+z)R/[4(4-k)c\Gamma^2]\)，得到 \(R(t)\propto t^{1/(4-k)}\) 与 \(\Gamma(t)\propto t^{-(3-k)/[2(4-k)]}\)。这条推导链的意义是：环境不是只改变一个归一化常数，而是改变减速历史，最终改变 \(\alpha\)--\(\beta\) 闭合关系。</p>
+<p>最常用的环境判据出现在慢冷却谱段 \(\nu_m<\nu<\nu_c\)。在这一谱段，\(\beta=(p-1)/2\)。均匀介质给出 \(\alpha_{k=0}=(3p-3)/4=3\beta/2\)，风介质给出 \(\alpha_{k=2}=(3p-1)/4=(3\beta+1)/2\)。因此在相同 \(\beta\) 下，风介质的光变通常比均匀介质陡 \(1/2\)。但这个判据不能脱离谱段判断使用：若观测频段在 \(\nu_c\) 以上，或者宿主消光使光学谱指数偏红，或者存在能量注入和额外成分，单纯比较 \(\alpha\) 就会误导环境判断。</p>
+<p>喷流诊断的推导从可见角锥开始。早期若 \(1/\Gamma\ll\theta_j\)，on-axis top-hat jet 对观测者近似像球对称爆波；当 \(1/\Gamma\sim\theta_j\) 时，喷流边缘进入可见区域，流量损失导致光变陡化。经典判据为 \(\Gamma(t_j)\theta_j\simeq 1\)。在均匀介质和标准归一化下，常用量级公式为 \(\theta_j\simeq 0.1(t_j/1\ {\rm day})^{3/8}[(1+z)/2]^{-3/8}(E_{\rm iso,53}/n_0)^{-1/8}\)。若横向扩张有效且观测频段高于 \(\nu_m\)，破裂后可近似为 \(F_\nu(t>t_j)\propto t^{-p}\nu^{-\beta}\)，即 \(\alpha_{\rm post}\sim p\)。实际论文中要特别检查 break 是否 achromatic；单独的光学弯折、X 射线弯折或射电峰演化都不足以自动构成 jet break 证据。</p>
+<p>反向激波诊断把时间轴推到更早阶段。均匀介质中，当扫掠外部静质量达到约 \(E_{\rm iso}/(\Gamma_0^2c^2)\) 时，ejecta 开始显著减速，减速半径为 \(R_{\rm dec}\simeq [3E_{\rm iso}/(4\pi n m_pc^2\Gamma_0^2)]^{1/3}\)，对应观测时间 \(t_{\rm dec}\simeq (1+z)R_{\rm dec}/(2c\Gamma_0^2)\)。若早期峰确实代表减速峰，可反解得 \(\Gamma_0\simeq [3E_{\rm iso}(1+z)^3/(32\pi n m_pc^5t_{\rm dec}^3)]^{1/8}\)。反向激波与前向激波的量级比较常写为 \(\nu_{m,{\rm r}}\sim \Gamma_0^{-2}\nu_{m,{\rm f}}\)、\(F_{\nu,\max,{\rm r}}\sim \Gamma_0F_{\nu,\max,{\rm f}}\)，若引入磁场比 \(R_B=B_{\rm r}/B_{\rm f}\)，则 \(F_{\nu,\max,{\rm r}}/F_{\nu,\max,{\rm f}}\sim \Gamma_0R_B\)。这解释了为什么反向激波可能产生明亮光学闪和延迟射电 flare，也解释了为什么 ejecta 磁化、消光和观测时延会让它难以被发现。</p>
+<p>把这些解析式用于真实数据时，课程重点不是机械套公式，而是训练模型检查。经验上可先对各频段使用 smooth broken power law，拟合 \(F_0\)、\(\alpha_1\)、\(\alpha_2\)、\(t_b\) 和平滑度 \(s\)，再比较不同频段的 \(t_b\) 是否一致。物理拟合时参数集可写为 \(\Theta=\{E_{\rm K,iso},n\ {\rm 或}\ A_*,p,\epsilon_e,\epsilon_B,A_V,θ_j,t_{\rm dec},R_B\}\)，通量空间常用 \(\ln\mathcal{L}=-\frac{1}{2}\sum_i[(F_i-F_{\rm mod}(t_i,\nu_i;\Theta))/\sigma_i]^2+{\rm const}\)，上限应通过 \(P(F<F_{\rm lim}\mid\Theta)\) 的积分似然处理，而不能当作零通量点。读图时要看残差而不仅是最佳曲线：jet break 残差应跨波段一致，反向激波模型应同时解释早期光学峰和可能的射电 flare，风介质模型不应系统性低估某一波段。</p>
+<p>本讲的局限需要在结尾明确。真实 \(n(R)\) 未必只在 \(k=0\) 与 \(k=2\) 之间二选一，可能存在 wind termination shock、密度跳变和团块结构；喷流可能不是 top-hat，而有 \(E(\theta)\) 的角向结构；ejecta 也可能具有 \(E(>\Gamma)\) 的速度分层或较强磁化。Swift 时代常见的 chromatic breaks、X 射线平台期和 late flares 不能强行塞进经典 jet break 图像。经典模型的价值在于提供诊断坐标系：本讲结束时，学生应能带着 \(A_*\)、\(\theta_j\)、\(E_{\rm true}\)、\(t_{\rm dec}\)、\(\Gamma_0\) 和 \(R_B\) 进入第 \(3/3\) 讲的多波段全局拟合与高能扩展。</p>
+<details class="paper-subdetail">
+<summary>展开背景、理论、公式、模型、章节和图表导读</summary>
+<h4 id="_3">背景知识</h4>
+<p>这一讲的历史背景首先来自“标准余辉模型为什么会成功，又为什么必然不够”。第 \(1/3\) 讲中，均匀介质、球对称近似和单一前向激波已经足以解释许多长时标的光学与 X 射线衰减，并给出 \(F_\nu\propto t^{-\alpha}\nu^{-\beta}\) 的闭合关系。但真实 GRB 不是在真空中发生，也不是完全球对称爆炸。只要我们把长 GRB 与大质量恒星坍缩联系起来，就必须面对恒星风环境；只要我们面对极大的 \(E_{\rm iso}\)，就必须考虑喷流准直；只要 ejecta 撞上外部介质，就必然有前向激波和反向激波的双激波结构。</p>
+<p>第一个核心问题是外部介质。长 GRB 的前身星若是 Wolf--Rayet 星，其爆发前的质量损失会形成近似稳态风，质量密度满足 \(\rho\propto R^{-2}\)。这与均匀星际介质 \(n={\rm const}\) 的动力学后果不同，因为扫掠质量 \(M(R)\) 随半径 \(R\) 增长的方式改变了。余辉光变因此成为探测 circumburst medium 的工具：如果我们能可靠测得 \(\alpha\) 与 \(\beta\)，并确认观测频段相对于 \(\nu_m\)、\(\nu_c\) 和 \(\nu_a\) 的位置，就可能区分 \(k=0\) 与 \(k=2\) 的环境。</p>
+<p>第二个核心问题是能量预算。早期一些 GRB 若按各向同性辐射解释，\(E_{\rm iso}\) 会大到接近甚至挑战合理的恒星坍缩能量尺度。喷流准直提供了自然解决方案：真实能量不是 \(E_{\rm iso}\)，而是 \(E_{\rm true}=(1-\cos\theta_j)E_{\rm iso}\simeq \theta_j^2E_{\rm iso}/2\)。困难在于 \(\theta_j\) 不能直接成像测量，只能通过余辉光变的几何效应间接推断。Rhoads 1999 与 Sari--Piran--Halpern 1999 的经典意义，正是在于把 \(\Gamma\theta_j\sim 1\) 与 achromatic break 联系起来，使光变陡化成为喷流张角和真实能量的诊断量。</p>
+<p>第三个核心问题是早期 ejecta。快速光学观测打开了触发后几十秒到几千秒的窗口，这一阶段并不一定只由前向激波控制。当前向激波扫入外部介质时，反向激波会向 ejecta 内传播并使 ejecta 减速，常在 \(t_{\rm peak}\sim t_{\rm dec}\) 附近产生光学闪或随后在射电出现 flare。Sari 与 Piran 等关于反向激波的标准图像把早期余辉从“外部介质探针”扩展为“prompt ejecta 初始条件探针”，尤其是对 \(\Gamma_0\)、壳层厚薄和磁化程度的约束。</p>
+<p>为什么这些问题重要？因为它们把 GRB 余辉从拟合光变的经验曲线变成物理诊断系统。环境诊断连接 GRB 与前身星演化；喷流破裂连接观测到的 \(E_{\rm iso}\) 与真实能量、真实发生率和 GRB population；反向激波连接 prompt ejecta 的速度、磁场和组成。换句话说，本讲研究的不是三个互不相关的“修正项”，而是同一个问题的三个维度：爆炸发生在哪里、爆流有多窄、最初喷出的物质有多快和多磁化。</p>
+<p>常见误区也必须从背景部分就说清楚。第一，不是所有 break 都是 jet break；若 break 只出现在 X 射线而光学没有同步变化，可能是 late prompt、能量注入结束或中心引擎活动。第二，不是所有早期光学超额都是 reverse shock；它也可能是前向激波 onset、prompt optical tail、密度结构或稀疏采样造成的假峰。第三，不能只凭 \(\alpha\) 判断环境；宿主消光会改变 \(\beta\)，冷却频率 \(\nu_c\) 穿越会改变谱段，射电自吸收和星际闪烁会污染低频光变。</p>
+<p>从经典论文到现代论文的阅读方式也发生了变化。经典工作强调解析标度、闭合关系和光变形状，现代工作则更强调多波段联合拟合、上限处理、counts-space 似然、参数后验和系统误差。读现代 GRB 余辉论文时，应先问模型是否区分 \(F_{\rm obs}=F_{\rm FS}+F_{\rm RS}+F_{\rm extra}\)，再问 \(k=0\)、\(k=2\)、top-hat jet 和反向激波假设是否真的被数据支持。经典模型不是最终答案，而是帮助我们识别残差方向和参数简并的坐标系。</p>
+<p>本讲与第 \(3/3\) 讲的边界也很重要。这里我们只处理风介质、喷流破裂和早期反向激波这三类经典诊断，不展开同步自康普顿、\(\mathrm{TeV}\) 光子、\(\gamma\gamma\) 吸收、\(\mathrm{EBL}\) 衰减或 Klein--Nishina 效应。第 \(3/3\) 讲会把本讲得到的 \(A_*\)、\(\theta_j\)、\(t_{\rm dec}\)、\(\Gamma_0\) 和 \(R_B\) 放入更完整的多波段全局拟合和高能辐射框架中。</p>
+<h4 id="_4">基础理论 / 方法脉络</h4>
+<p>本讲的基础图像从外部密度开始。第 \(1/3\) 讲默认均匀介质 \(n={\rm const}\)，而本讲把密度统一写成 \(n(R)=A_kR^{-k}/m_p\)。当 \(k=0\) 时，外部介质近似为均匀星际介质；当 \(k=2\) 时，质量密度满足 \(\rho️\propto R^{-2}\)，对应稳态恒星风。这个写法的意义不是形式统一，而是让我们看到动力学差异的源头：激波扫掠到的外部质量 \(M(R)\) 决定惯性加载，惯性加载决定 \(\Gamma(t)\)，而 \(\Gamma(t)\) 最终决定光变指数 \(\alpha\)。</p>
+<p>在绝热相对论阶段，爆波总能量近似守恒。由 \(M(R)=4\pi A R^{3-k}/(3-k)\) 与 \(E\simeq \Gamma^2M(R)c^2\)，可得 \(\Gamma(R)\propto R^{-(3-k)/2}\)。观测者看到的不是 \(R\) 的直接演化，而是由相对论时延映射后的 \(t_{\rm obs}\)。使用 \(t_{\rm obs}\simeq (1+z)R/[4(4-k)c\Gamma^2]\)，得到 \(R(t)\propto t^{1/(4-k)}\) 和 \(\Gamma(t)\propto t^{-(3-k)/[2(4-k)]}\)。因此，\(k=0\) 时 \(\Gamma\propto t^{-3/8}\)，\(k=2\) 时 \(\Gamma\propto t^{-1/4}\)。这一差异是风介质闭合关系的动力学基础。</p>
+<p>接下来把动力学连接到同步谱，但不重推第 \(1/3\) 讲的全部谱形。我们只取已经掌握的结论：在慢冷却且 \(\nu_m<\nu<\nu_c\) 的谱段，谱指数为 \(\beta=(p-1)/2\)，光变满足 \(F_\nu\propto t^{-\alpha}\nu^{-\beta}\)。均匀介质给出 \(\alpha_{k=0}=(3p-3)/4=3\beta/2\)，风介质给出 \(\alpha_{k=2}=(3p-1)/4=(3\beta+1)/2\)。所以在同一 \(\beta\) 下，风介质的衰减通常比均匀介质陡 \(1/2\)。但这只是一个谱段内的判据；若观测频率高于 \(\nu_c\)，或者 \(\nu_c\) 正在穿越观测带，闭合关系必须换用相应分支。</p>
+<p>第二个基础图像是相对论 beaming 与喷流边缘。早期当 \(1/\Gamma\ll\theta_j\) 时，观测者只看到喷流轴附近很小的角域，top-hat jet 看起来近似球对称。随着爆波减速，\(1/\Gamma\) 逐渐变大；当 \(1/\Gamma\sim\theta_j\) 或等价地 \(\Gamma(t_j)θ_j\simeq 1\) 时，喷流边缘进入可见区域，光变会出现几何陡化。这种 break 的本质不是谱频率穿越，而是可见角域触及边界，所以理想情况下应近似 achromatic，即在光学、红外和 X 射线中接近同步出现。</p>
+<p>由 \(t_j\) 反推 \(\theta_j\) 是喷流诊断的核心。均匀介质、on-axis top-hat jet 和标准归一化下，常用量级表达式为 \(\theta_j\simeq 0.1(t_j/1\ {\rm day})^{3/8}[(1+z)/2]^{-3/8}(E_{\rm iso,53}/n_0)^{-1/8}\)。这个公式显示 \(t_j\) 是主要约束，而 \(E_{\rm iso}\) 与 \(n\) 只以弱幂次进入。得到 \(\theta_j\) 后，可用 \(E_{\rm true}=(1-\cos\theta_j)E_{\rm iso}\simeq \theta_j^2E_{\rm iso}/2\) 做准直修正。若破裂后横向扩张有效且观测频段高于 \(\nu_m\)，经典极限为 \(F_\nu(t>t_j)\propto t^{-p}\nu^{-\beta}\)，即 \(\alpha_{\rm post}\sim p\)。但实际喷流可能横向扩张弱或具有角结构，break 可能更平滑、更温和。</p>
+<p>第三个基础图像是双激波结构。当前向激波进入外部介质时，反向激波会向 ejecta 传播，两者之间由接触间断面分开。前向激波加热外部介质，通常主导长时标余辉；反向激波加热 ejecta，通常在早期短暂明亮。薄壳与厚壳的粗略判据由 prompt 持续时间 \(T\) 与减速时间 \(t_{\rm dec}\) 比较给出：\(T<t_{\rm dec}\) 为薄壳量级情形，\(T\gtrsim t_{\rm dec}\) 为厚壳量级情形。薄壳中反向激波常在 prompt 结束后穿越 ejecta；厚壳中反向激波可能在 prompt 阶段已很重要。</p>
+<p>减速时间把早期观测与初始洛伦兹因子连接起来。均匀介质中，减速半径满足 \(R_{\rm dec}\simeq [3E_{\rm iso}/(4\pi n m_pc^2\Gamma_0^2)]^{1/3}\)，观测减速时间为 \(t_{\rm dec}\simeq (1+z)R_{\rm dec}/(2c\Gamma_0^2)\)。若早期光学峰确实代表外部激波 onset 或反向激波 crossing，则可反推出 \(\Gamma_0\simeq [3E_{\rm iso}(1+z)^3/(32\pi n m_pc^5t_{\rm dec}^3)]^{1/8}\)。这里 \(1/8\) 的弱幂次使 \(\Gamma_0\) 对 \(E_{\rm iso}\) 和 \(n\) 不极端敏感，但对峰值物理识别非常敏感；错误地把 prompt tail 或稀疏采样峰当作 \(t_{\rm dec}\) 会造成系统偏差。</p>
+<p>反向激波为何容易在光学和射电被看见，可以从前向与反向激波的谱量级比较理解。在薄壳、低到中等磁化、两区电子指数相近的近似下，\(\nu_{m,{\rm r}}(t_{\rm dec})\sim \Gamma_0^{-2}\nu_{m,{\rm f}}(t_{\rm dec})\)，而 \(F_{\nu,\max,{\rm r}}(t_{\rm dec})\sim \Gamma_0F_{\nu,\max,{\rm f}}(t_{\rm dec})\)。若定义磁场比 \(R_B=B_{\rm r}/B_{\rm f}\)，则有 \(F_{\nu,\max,{\rm r}}/F_{\nu,\max,{\rm f}}\sim \Gamma_0R_B\)。这意味着反向激波特征频率较低但峰值流量较高，可产生早期光学闪和低频延迟 flare；但若 ejecta 强磁化，反向激波可能被削弱或抑制。因此没有强光学闪不等于没有反向激波。</p>
+<p>把理论用于观测时，要按诊断优先级阅读数据。环境判断必须同时使用 \(\alpha\)、\(\beta\)、谱段位置和宿主消光；jet break 候选必须检查多波段近似同步陡化、break 后 \(\alpha_{\rm post}\) 是否合理以及残差是否系统；反向激波候选必须检查早期峰是否被真实覆盖、峰后是否快速衰减、是否叠加在前向激波基线上，以及射电或毫米波是否出现相应 flare。射电数据还要考虑自吸收、星际闪烁和宿主污染。最终，本讲提供的是一套解析诊断语法，而第 \(3/3\) 讲会把这套语法放入 \(F_{\rm obs}=F_{\rm FS}+F_{\rm RS}+F_{\rm extra}\) 的多波段全局拟合和高能辐射框架中。</p>
+<h4 id="_5">公式与推导</h4>
+<p>第一步：统一外部密度律，先把第 \(1/3\) 讲的均匀介质推广为幂律环境。假设爆波外部质量密度满足</p>
+<div class="math-display">\[\rho(R)=A R^{-k},\quad 0\le k<3,\]</div>
+<p>其中 \(R\) 是激波半径，\(A\) 是密度归一化，\(k=0\) 对应均匀介质，\(k=2\) 对应稳态恒星风。要解出的第一个量是半径 \(R\) 内的扫掠质量：</p>
+<div class="math-display">\[M(R)=\int_0^R4\pi r^2\rho(r){\rm d}r=\frac{4\pi A}{3-k}R^{3-k}.\]</div>
+<p>这一步的物理含义是：环境诊断首先不是辐射问题，而是惯性加载问题；不同的 \(k\) 改变 \(M(R)\) 的增长速度，从而改变下一步的减速规律。</p>
+<p>第二步：使用绝热相对论能量守恒，求 \(\Gamma\) 随 \(R\) 的变化。本讲沿用经典余辉主线，假设外部激波总能量近似守恒，辐射损失不主导动力学，于是有</p>
+<div class="math-display">\[E\simeq \Gamma^2 M(R)c^2.\]</div>
+<p>把上一式的 \(M(R)\) 代入，得到</p>
+<div class="math-display">\[\Gamma(R)\propto R^{-(3-k)/2}.\]</div>
+<p>这里 \(E\) 是各向同性等效动能量级，\(\Gamma\) 是激波洛伦兹因子，\(c\) 是光速。这一步解出了减速历史的半径标度；它将直接进入观测者时间映射，并最终控制光变指数 \(\alpha\)。</p>
+<p>第三步：把动力学变量转成观测者时间。相对论壳层的到达时延由几何延迟和宇宙学红移共同决定，经典自相似标度可写成</p>
+<div class="math-display">\[t_{\rm obs}\simeq \frac{1+z}{4(4-k)c}\frac{R}{\Gamma^2}.\]</div>
+<p>联立 \(\Gamma(R)\propto R^{-(3-k)/2}\)，得到可观测时间下的动力学标度</p>
+<div class="math-display">\[R(t)\propto t^{1/(4-k)},\quad \Gamma(t)\propto t^{-(3-k)/[2(4-k)]}.\]</div>
+<p>标准极限是：\(k=0\) 时 \(\Gamma\propto t^{-3/8}\)，\(k=2\) 时 \(\Gamma\propto t^{-1/4}\)。这一步是从物理半径到观测光变的桥梁；没有它，就不能把环境密度律连接到 \(F_\nu(t)\)。</p>
+<p>第四步：在已知同步谱段中建立环境闭合关系。本讲不重推第 \(1/3\) 讲的同步谱，只取慢冷却且 \(\nu_m<\nu<\nu_c\) 的结论。若电子分布为 \(N(\gamma_e)\propto \gamma_e^{-p}\)，则谱指数为</p>
+<div class="math-display">\[\beta=\frac{p-1}{2}.\]</div>
+<p>对应的时间衰减指数在均匀介质中为</p>
+<div class="math-display">\[\alpha_{k=0}=\frac{3p-3}{4}=\frac{3\beta}{2},\]</div>
+<p>而在风介质中为</p>
+<div class="math-display">\[\alpha_{k=2}=\frac{3p-1}{4}=\frac{3\beta+1}{2}.\]</div>
+<p>这组关系解出的不是新的微观参数，而是给出环境诊断量：在同一 \(\beta\) 和同一谱段下，风介质通常比均匀介质陡 \(1/2\)。下一步若观测到比这更强、且多波段同步的陡化，就要考虑喷流几何而不只是环境差异。</p>
+<p>第五步：写出喷流边缘进入可见区的几何判据。假设喷流是沿视线观测的 \({\rm top\mbox{-}hat}\) 喷流，早期满足 \(1/\Gamma\ll\theta_j\)，观测者只看到喷流轴附近的小角域；当相对论 beaming 角增大到喷流半张角时，几何破裂发生：</p>
+<div class="math-display">\[\Gamma(t_j)\theta_j\simeq 1.\]</div>
+<p>这里 \(t_j\) 是喷流破裂时间，\(\theta_j\) 是喷流半张角。这个条件解出的核心物理量是 \(\theta_j\)，但它首先要求观测 break 近似 achromatic；若 break 只在单一频段出现，就不能直接代入下一步的张角公式。</p>
+<p>第六步：由 \(t_j\) 反推喷流张角。采用均匀介质、沿轴 \({\rm top\mbox{-}hat}\) 喷流和标准归一化，把 \(\Gamma(t)\propto t^{-3/8}\) 代入 \(\Gamma(t_j)\theta_j\simeq 1\)，可得常用量级关系</p>
+<div class="math-display">\[\theta_j\simeq 0.1\left(\frac{t_j}{1\ {\rm day}}\right)^{3/8}\left(\frac{1+z}{2}\right)^{-3/8}\left(\frac{E_{\rm iso,53}}{n_0}\right)^{-1/8}.\]</div>
+<p>这里 \(E_{\rm iso,53}\) 是以 \(10^{53}\ {\rm erg}\) 归一化的各向同性等效能量，\(n_0\) 是以 \(1\ {\rm cm}^{-3}\) 归一化的数密度。该式说明 \(t_j\) 对 \(\theta_j\) 最敏感，而 \(E_{\rm iso}\) 与 \(n\) 只以弱幂次进入；但环境模型、横向扩张和结构化喷流会给 \(\theta_j\) 带来系统误差。</p>
+<p>第七步：把喷流张角转化为真实能量。若 \(\theta_j\ll1\)，喷流立体角校正给出</p>
+<div class="math-display">\[E_{\rm true}=(1-\cos\theta_j)E_{\rm iso}\simeq \frac{\theta_j^2}{2}E_{\rm iso}.\]</div>
+<p>这一步把光变中的几何诊断转化为能量学诊断：\(E_{\rm true}\) 决定真实能量预算，\(\theta_j\) 也影响真实发生率估计。下一步要检查光变斜率是否真的符合喷流破裂后的经典极限。</p>
+<p>第八步：给出喷流破裂后的理想衰减极限。若观测频率高于 \(\nu_m\)，且喷流发生有效横向扩张，经典解析近似为</p>
+<div class="math-display">\[F_\nu(t>t_j)\propto t^{-p}\nu^{-\beta},\quad \alpha_{\rm post}\sim p.\]</div>
+<p>这一步提供喷流解释的观测闭合检查：破裂后衰减应明显变陡，并且不同频段的破裂时间应一致。但实际数据中弱横向扩张、角结构、能量注入或额外辐射成分都可能让 \(\alpha_{\rm post}\) 偏离 \(p\)，因此该式应作为诊断极限而不是机械判据。</p>
+<p>第九步：转向早期 \({\rm ejecta}\) 减速，求减速半径。假设均匀介质中初始壳层洛伦兹因子为 \(\Gamma_0\)，当扫掠外部静质量达到约 \(E_{\rm iso}/(\Gamma_0^2c^2)\) 时，壳层显著减速，于是</p>
+<div class="math-display">\[R_{\rm dec}\simeq \left(\frac{3E_{\rm iso}}{4\pi n m_p c^2\Gamma_0^2}\right)^{1/3}.\]</div>
+<p>这里 \(n\) 是外部数密度，\(m_p\) 是质子质量。\(R_{\rm dec}\) 标志前向激波进入自相似余辉阶段，也标志反向激波接近穿越 \({\rm ejecta}\)；下一步需要把它转成早期光学峰或射电峰可比较的观测时间。</p>
+<p>第十步：把减速半径映射到减速时间并反解 \(\Gamma_0\)。若早期光学峰代表外部激波 \({\rm onset}\) 或反向激波穿越，则 \(t_{\rm peak}\sim t_{\rm dec}\)，其中</p>
+<div class="math-display">\[t_{\rm dec}\simeq (1+z)\frac{R_{\rm dec}}{2c\Gamma_0^2}.\]</div>
+<p>把上一式与 \(R_{\rm dec}\) 联立，得到初始洛伦兹因子的估计式</p>
+<div class="math-display">\[\Gamma_0\simeq \left(\frac{3E_{\rm iso}(1+z)^3}{32\pi n m_p c^5t_{\rm dec}^3}\right)^{1/8}.\]</div>
+<p>这一步连接到直接可观测量 \(t_{\rm peak}\)：由于幂次只有 \(1/8\)，\(\Gamma_0\) 对 \(E_{\rm iso}\) 和 \(n\) 的误差不极端敏感，但对峰值物理识别极其敏感；若峰来自 prompt 光学尾迹、能量注入或采样不足，\(\Gamma_0\) 会系统偏差。</p>
+<p>第十一步：比较反向激波与前向激波的谱量级。假设薄壳、低到中等磁化，且反向激波区与前向激波区的电子指数相近，在 \(t_{\rm dec}\) 附近有</p>
+<div class="math-display">\[\nu_{m,{\rm r}}(t_{\rm dec})\sim \Gamma_0^{-2}\nu_{m,{\rm f}}(t_{\rm dec}),\quad F_{\nu,\max,{\rm r}}(t_{\rm dec})\sim \Gamma_0 F_{\nu,\max,{\rm f}}(t_{\rm dec}).\]</div>
+<p>这一步解出的是反向激波相对前向激波的辐射位置：\(\nu_{m,{\rm r}}\) 更低，而 \(F_{\nu,\max,{\rm r}}\) 更高。因此反向激波容易表现为早期光学闪和随后较低频率的射电 flare；但观测时必须扣除前向激波基线，不能只凭单个早期超额点下结论。</p>
+<p>第十二步：引入磁场比作为反向激波可见性的诊断量。定义</p>
+<div class="math-display">\[R_B=\frac{B_{\rm r}}{B_{\rm f}},\quad \frac{F_{\nu,\max,{\rm r}}}{F_{\nu,\max,{\rm f}}}\sim \Gamma_0 R_B.\]</div>
+<p>这里 \(B_{\rm r}\) 与 \(B_{\rm f}\) 分别是反向激波区和前向激波区磁场强度。若 \(R_B\) 较大，早期光学闪或偏振信号可能增强；若 \({\rm ejecta}\) 强磁化，反向激波本身也可能被削弱或抑制。因此完整诊断链的观测闭合应写成：环境由 \(\alpha\)--\(\beta\) 与谱段共同检查，喷流由 achromatic \(t_j\)、\(\theta_j\) 和 \(E_{\rm true}\) 检查，反向激波由 \(t_{\rm dec}\)、\(\Gamma_0\)、\(R_B\) 以及光学和射电联合残差检查。</p>
+<h4 id="_6">经典拟合 / 应用方法</h4>
+<p>拟合部分要承接本讲的课程边界：第 \(1/3\) 讲已经教会我们如何从最小前向激波同步谱得到 \(F_\nu\propto t^{-\alpha}\nu^{-\beta}\)，本讲不再重推同步谱，而是把拟合用作环境、喷流几何和反向激波的检验工具。实际读论文时，第一步通常应先做经验光变拟合，而不是立即相信某个物理解释。对单个频段可使用平滑折断幂律，例如用参数 \(\{F_0,\alpha_1,\alpha_2,t_b,s\}\) 描述归一化、破裂前斜率、破裂后斜率、破裂时间和平滑度。课程中要强调：经验拟合解出的是 \(t_b\)、\(\alpha_1\)、\(\alpha_2\) 和 \(s\)，它们只是诊断量；只有当多波段的 \(t_b\) 在误差内一致、破裂前后谱指数 \(\beta\) 没有显著演化、且 \(\alpha_2\) 接近喷流后预期时，\(t_b\) 才有资格被解释为 \(t_j\)。</p>
+<p>第二步是闭合关系检验。应从同时期光学到 X 射线的谱能分布估计 \(\beta\)，并显式修正银河系消光、宿主星系消光 \(A_V\) 和 X 射线吸收柱 \(N_H\)。在慢冷却 \(\nu_m<\nu<\nu_c\) 中，均匀介质预测 \(\alpha_{k=0}=3\beta/2\)，风介质预测 \(\alpha_{k=2}=(3\beta+1)/2\)。如果观测点落在两条线之间，不能简单宣布环境为 \(k=0\) 或 \(k=2\)，而要检查 \(\nu_c\) 是否位于光学与 X 射线之间、\(A_V\) 是否把光学谱人为变红、以及早期或晚期是否有额外成分。闭合关系的正确用法是排除不合适的谱段和环境，而不是用单个 \(\alpha\) 值给出唯一答案。</p>
+<p>第三步进入物理参数拟合。前向激波参数可写成 \(\Theta_{\rm FS}=\{E_{\rm K,iso},n\ {\rm or}\ A_*,p,\epsilon_e,\epsilon_B,A_V,z,\theta_j\}\)，其中 \(E_{\rm K,iso}\) 控制动力学能量尺度，\(n\) 或 \(A_*\) 控制外部密度，\(p\) 控制谱斜率，\(\epsilon_e\) 与 \(\epsilon_B\) 控制电子和磁场能量分配，\(A_V\) 控制光学谱形，\(z\) 进入距离和时间修正，\(\theta_j\) 进入喷流破裂。反向激波若加入，则参数集扩展为 \(\Theta=\{E_{\rm K,iso},n\ {\rm or}\ A_*,p,\epsilon_e,\epsilon_B,A_V,\theta_j,t_{\rm dec},R_B\}\)。这里 \(t_{\rm dec}\) 连接到 \(\Gamma_0\)，而 \(R_B=B_{\rm r}/B_{\rm f}\) 诊断反向激波区与前向激波区的磁场比。</p>
+<p>第四步是似然函数的选择。若数据已经转为通量密度 \(F_i\)，且误差近似高斯，可写</p>
+<div class="math-display">\[\ln\mathcal{L}=-\frac{1}{2}\sum_i\left[\frac{F_i-F_{\rm mod}(t_i,\nu_i;\Theta)}{\sigma_i}\right]^2+{\rm const}.\]</div>
+<p>若在 X 射线计数空间拟合，则模型必须卷积仪器响应，并使用 Poisson 似然或 Cash 统计，而不是把低计数数据强行当作高斯通量点。若某些射电、毫米波或高能观测只有上限，应使用积分似然 \(P(F<F_{\rm lim}\mid\Theta)\)，不能把上限当作 \(F=0\) 的探测点。多望远镜数据还应加入交叉定标参数，例如每台仪器的乘法因子 \(C_j\)，并在后验中边缘化。</p>
+<p>第五步是残差诊断。对于 jet break，残差图应检查 \((F_{\rm obs}-F_{\rm mod})/\sigma\) 是否在光学、近红外和 X 射线中同时从同号偏差过渡到无系统偏差；若 X 射线出现 break 而光学没有，几何喷流解释就不稳，可能需要 late prompt、能量注入结束或多区辐射。对于风介质，若模型能解释光学衰减却长期低估射电峰值，可能是自吸收频率 \(\nu_a\)、星际闪烁或密度结构处理不当。对于反向激波，残差应显示早期光学峰和低频射电 flare 能被同一个 \(F_{\rm RS}\) 成分解释，而不是各自用任意经验函数修补。</p>
+<p>第六步是后验与置信区间解释。\(\theta_j\) 的后验常看似很窄，但它依赖于环境假设、\(E_{\rm iso}\)、密度先验和 break 平滑度；若没有观测到 break，只能给出 \(\theta_j\) 的下限和 \(E_{\rm true}\) 的下限。\(\Gamma_0\) 的后验受 \(t_{\rm dec}\) 强烈控制，但 \(t_{\rm dec}\) 是否真是减速时间必须由早期采样、峰后斜率和前向激波基线共同验证。\(A_*\)、\(n\)、\(\epsilon_B\) 之间经常强简并；若 corner plot 中后验贴着先验边界，就不能宣称这些物理量被精确测量。</p>
+<p>第七步是系统误差清单。光学宿主消光会改变 \(\beta\)，进而改变 \(p\) 和闭合关系判断；射电星际闪烁会放大低频散点；晚期宿主星系和超新星成分会污染光学余辉；X 射线吸收柱 \(N_H\) 与谱指数相关；红移不确定会影响 luminosity distance 和 rest-frame time；早期机器人望远镜的触发延迟会让真实峰值被错过。课程中应要求学生在报告 \(A_*\)、\(\theta_j\)、\(E_{\rm true}\)、\(\Gamma_0\) 和 \(R_B\) 时同时报告统计不确定度、模型选择不确定度和这些系统误差。</p>
+<h4 id="_7">重点章节 / 结果段落怎么读</h4>
+<p>读 Rhoads 1999 与 Sari--Piran--Halpern 1999 的喷流破裂部分，第一段应抓几何逻辑，而不是先背结论。关键句通常围绕相对论 beaming 展开：早期观测者只能看到角尺度 \(1/\Gamma\) 的区域，若 \(1/\Gamma\ll\theta_j\)，top-hat jet 与球对称爆波在光变上近似不可区分；当 \(\Gamma(t_j)\theta_j\simeq 1\) 时，喷流边缘进入可见区，流量衰减加快。读到这里要立刻问：这是否是几何效应？若是，它就应近似 achromatic；若论文只给出单频 break，则证据是不完整的。</p>
+<p>第二类重点段落是动力学假设。经典解析论文常在均匀介质、on-axis top-hat jet 和较强横向扩张的近似下讨论破裂后衰减，因此会得到 \(F_\nu(t>t_j)\propto t^{-p}\nu^{-\beta}\) 或 \(\alpha_{\rm post}\sim p\) 的理想极限。现代读法要追问作者是否允许弱横向扩张、结构化喷流或视线偏离喷流轴。如果模型线很平滑、破裂幅度较小，并不一定推翻喷流解释；但若作者仍用强横向扩张公式直接反推 \(\theta_j\)，就要把模型系统误差计入 \(E_{\rm true}\)。</p>
+<p>第三类重点段落是能量校正。经典工作的重要性不只在于解释一个 break，而在于把 \(E_{\rm iso}\) 转为 \(E_{\rm true}=(1-\cos\theta_j)E_{\rm iso}\simeq \theta_j^2E_{\rm iso}/2\)。读这一段时应检查 \(t_j\)、\(z\)、\(E_{\rm iso}\) 和密度 \(n\) 是如何进入 \(\theta_j\) 的，尤其要注意 \(\theta_j\simeq 0.1(t_j/1\ {\rm day})^{3/8}[(1+z)/2]^{-3/8}(E_{\rm iso,53}/n_0)^{-1/8}\) 中 \(n\) 的弱幂次并不意味着密度模型不重要，因为 \(k=0\) 与 \(k=2\) 会改变整个动力学假设。</p>
+<p>第四类重点段落是环境闭合关系表。许多余辉论文会列出 \(k=0\)、\(k=2\)、\(\nu_m<\nu<\nu_c\) 和 \(\nu>\nu_c\) 的不同 \(\alpha\)--\(\beta\) 关系。课程读法是先判断谱段：\(\beta=(p-1)/2\) 适用于 \(\nu_m<\nu<\nu_c\)，而 \(\beta=p/2\) 适用于 \(\nu>\nu_c\)。只有谱段选对后，\(\alpha_{k=0}=3\beta/2\) 与 \(\alpha_{k=2}=(3\beta+1)/2\) 的比较才有意义。若没有可靠 SED、没有消光修正或光学与 X 射线谱不一致，环境判断应降级为候选解释。</p>
+<p>第五类重点段落是反向激波的时间尺度和峰值解释。读 Sari 与 Piran 1999 以及后续早期光学闪论文时，应把 \(T\) 与 \(t_{\rm dec}\) 的比较作为主线：\(T<t_{\rm dec}\) 是薄壳量级，\(T\gtrsim t_{\rm dec}\) 是厚壳量级。若论文把早期峰解释为反向激波，应检查是否给出 \(R_{\rm dec}\)、\(t_{\rm dec}\)、\(\Gamma_0\)、\(\nu_{m,{\rm r}}\)、\(F_{\nu,\max,{\rm r}}\) 和前向激波外推基线。只看到早期光学亮点，不能自动等同于 reverse shock。</p>
+<p>第六类重点段落是讨论与局限。经典模型建立的是诊断坐标系，而不是对 Swift 时代所有现象的最终解释。读到 chromatic break、X 射线平台期、late flare、密度跳变或能量注入时，要明确哪些现象超出本讲边界，将留给第 \(3/3\) 讲的多波段全局拟合、\(\mathrm{SSC}\)、高能余辉和系统误差框架。</p>
+<h4 id="_8">建议重点查看的图表</h4>
+<p>一，多波段余辉光变图。横轴通常为触发后时间 \(t\)，应尽量换算为 rest-frame 时间 \(t/(1+z)\)；纵轴为通量密度 \(F_\nu\)、能流或归一化 flux。重点检查光学、近红外、X 射线和射电是否在同一时间附近出现同步陡化，模型线是否区分 \(F_{\rm FS}\)、\(F_{\rm RS}\) 和总通量 \(F_{\rm obs}\)。</p>
+<p>二，\(\alpha\)--\(\beta\) 闭合关系图。横轴为谱指数 \(\beta\)，纵轴为时间衰减指数 \(\alpha\)，不同线或区域代表 \(k=0\)、\(k=2\)、不同谱段和喷流后极限。重点看误差椭圆是否真的排除其他模型，以及宿主消光修正前后数据点是否移动。</p>
+<p>三，早期光学闪或早期光学峰图。横轴通常覆盖触发后几十秒到几千秒，纵轴可能是 magnitude 或 flux，因此必须先确认亮度方向。重点看峰是否被真实观测覆盖、峰后是否快速衰减、是否显著高于前向激波外推，以及是否可能是 prompt optical tail。</p>
+<p>四，射电与毫米波光变或 SED 图。重点检查自吸收频率 \(\nu_a\)、峰值流量 \(F_{\nu,\max}\)、低频 flare 和星际闪烁。反向激波解释应能同时连接早期光学峰与延迟射电增强，而不是只解释一个波段。</p>
+<p>五，jet break 拟合残差图。横轴为 \(t\)，纵轴为 \((F_{\rm obs}-F_{\rm mod})/\sigma\) 或 \(F_{\rm obs}/F_{\rm mod}\)。重点看 break 前后是否存在长期同号残差，光学与 X 射线残差方向是否一致，平滑度 \(s\) 是否被数据约束。</p>
+<p>六，参数后验 corner plot。重点检查 \(E_{\rm K,iso}\)、\(n\)、\(A_*\)、\(p\)、\(\epsilon_B\)、\(A_V\)、\(\theta_j\)、\(t_{\rm dec}\) 和 \(R_B\) 的边缘分布与二维相关。若后验贴着先验边界，说明所谓测量更接近先验限制。</p>
+<p>七，准直修正能量图。横轴可为 \(E_{\rm iso}\)，纵轴可为 \(E_{\rm true}\)、\(\theta_j\) 或 beaming correction。重点区分有 jet break 探测的事件和只有 nondetection 的事件；后者通常给出 \(\theta_j\) 下限与 \(E_{\rm true}\) 下限，而不是精确能量。</p>
+<h4 id="_9">关键图表逐图导读</h4>
+<p>图 \(1\)：多波段余辉光变图。横轴是触发后时间 \(t\)，如果论文同时给出 observer-frame 与 rest-frame，要优先用 rest-frame 比较不同 GRB；纵轴可能是 \(F_\nu\)、\(\nu F_\nu\) 或经过任意平移的 flux。模型线若分成虚线、点线和实线，通常分别代表 \(F_{\rm FS}\)、\(F_{\rm RS}\) 与 \(F_{\rm FS}+F_{\rm RS}\)。读图时先看光学和 X 射线是否在同一 \(t_b\) 附近陡化，再看 break 后 \(\alpha_{\rm post}\) 是否接近由 \(p\) 预期的范围。误读风险是把不同频段为视觉清楚而人为平移后的曲线当作真实通量差异，或只凭光学单波段折断宣称 jet break。</p>
+<p>图 \(2\)：\(\alpha\)--\(\beta\) 闭合关系图。横轴为 \(\beta\)，纵轴为 \(\alpha\)，图中常有 \(k=0\) 慢冷却线 \(\alpha=3\beta/2\)、\(k=2\) 慢冷却线 \(\alpha=(3\beta+1)/2\)，以及 \(\nu>\nu_c\) 或 jet 后区域。数据点的误差条应理解为联合误差，若 \(A_V\) 不确定，\(\beta\) 的误差可能并非对称。读图时要问数据椭圆是否跨过多条理论线；若跨过，就只能说模型相容，不能说模型被唯一选择。误读风险是忽略 \(\nu_c\) 在光学与 X 射线之间导致两个波段不应使用同一 \(\beta\)。</p>
+<p>图 \(3\)：早期光学闪图。横轴多为对数时间 \(t\)，纵轴若是 magnitude，则数值越小越亮；若是 (F_<br />
+u)，则越高越亮。反向激波候选通常表现为在 \(t_{\rm dec}\) 附近出现峰值，然后以较快的 \(\alpha\) 衰减，并叠加在更平缓的前向激波上升或衰减之上。读图时要检查峰值是否真的由观测点夹住，而不是由第一点和第二点外推；还要检查峰后斜率是否过陡，以至于 high-latitude prompt tail 也能解释。误读风险是把稀疏 cadence 造成的假峰当作 \(t_{\rm dec}\)，进而得到偏差的 \(\Gamma_0\)。</p>
+<p>图 \(4\)：射电和毫米波演化图。横轴可以是时间 \(t\)，也可以是频率 \(\nu\)；纵轴为 (F_<br />
+u)。若是多时刻 SED，应看 \(\nu_a\)、\(\nu_m\) 和峰值是否随时间按模型移动；若是射电光变，应看 flare 是否晚于光学闪出现。反向激波模型往往要求 \(\nu_{m,{\rm r}}\sim \Gamma_0^{-2}\nu_{m,{\rm f}}\) 且 \(F_{\nu,\max,{\rm r}}\sim \Gamma_0F_{\nu,\max,{\rm f}}\)，因此低频增强应与早期光学峰有同一物理来源。误读风险是把星际闪烁造成的射电散点全部解释为密度团块或反向激波变化。</p>
+<p>图 \(5\)：jet break 残差图。横轴为 \(t\)，纵轴为标准化残差 \((F_{\rm obs}-F_{\rm mod})/\sigma\) 或比值 \(F_{\rm obs}/F_{\rm mod}\)。如果喷流模型合适，break 前后不应长期出现同号残差；若在 \(t_j\) 前模型普遍高估而在 \(t_j\) 后普遍低估，说明 \(t_j\)、\(s\) 或模型动力学可能不对。还要比较不同波段残差方向：光学残差与 X 射线残差同向更支持 achromatic break，反向则提示 chromatic break。误读风险是只看主图中最佳拟合线很漂亮，却忽略残差中明显的系统结构。</p>
+<p>图 \(6\)：参数后验 corner plot。对角线给出 \(E_{\rm K,iso}\)、\(n\)、\(A_*\)、\(p\)、\(\epsilon_e\)、\(\epsilon_B\)、\(A_V\)、\(\theta_j\)、\(R_B\) 等参数的边缘分布，非对角线给出二维相关。读图时要看 \(\epsilon_B\) 与 \(n\) 或 \(A_*\) 是否强相关，\(A_V\) 与 \(p\) 是否相关，\(\theta_j\) 是否主要由 \(t_j\) 驱动。若后验峰贴在先验上下限，说明数据只给出约束边界。误读风险是把窄先验导致的窄后验当成高精度物理测量。</p>
+<p>图 \(7\)：准直修正能量图。横轴常为 \(E_{\rm iso}\)，纵轴为 \(E_{\rm true}\) 或 \(\theta_j\)，有时会叠加恒定 \(E_{\rm true}\) 的参考线。读图时要区分真实探测到 \(t_j\) 的点、只有下限的箭头以及样本选择造成的截断。若未观测到 jet break，只能说明 \(t_j\) 晚于最后观测时间，从而给出 \(\theta_j\) 下限。误读风险是把这些下限当作精确值纳入能量标准化，低估真实能量分布的散布。</p>
+</details>
+<h4 id="_10">可嵌入的官方图片</h4>
+<p>（未提供 verified figure；为避免编造图片链接，本节只在能确认官方图片 URL 或成功提取论文原图时嵌入图片。）</p>
+<h4 id="_11">后续阅读路径</h4>
+<p>第一条路径是从标准余辉到环境诊断。建议先回到第 \(1/3\) 讲的核心工具：同步谱分段、\(\nu_m\)、\(\nu_c\)、\(F_{\nu,\max}\) 和 \(\(F_\nu\propto\) \(t^{-\alpha}\)<br />
+\(u^{-\beta}\))。然后读风介质余辉的经典解析工作，重点比较 \(k=0\) 与 \(k=2\) 如何改变 \(M(R)\)、\(\Gamma(t)\) 和 \(\alpha\)--\(\beta\) 关系。进入现代论文时，应特别关注作者如何处理 \(A_*\)、宿主消光 \(A_V\)、冷却频率 \(\nu_c\) 位置和射电自吸收，因为这些因素决定风介质结论是否稳健。</p>
+<p>第二条路径是喷流破裂与能量校正。先读 Rhoads 1999，抓住 \(1/\Gamma\) 可见角域和 \(\Gamma\theta_j\simeq1\) 的几何论证；再读 Sari、Piran 与 Halpern 1999，理解 achromatic steepening 如何成为 \(t_j\) 与 \(\theta_j\) 的观测桥梁；随后读关于 beaming correction 和 GRB 能量分布的观测工作。现代延伸应转向数值喷流、弱横向扩张、structured jet 和 off-axis viewing，因为这些研究解释了为什么许多 Swift 时代 break 比经典 top-hat 预期更平滑、更不完全 achromatic。</p>
+<p>第三条路径是早期反向激波。以 GRB 990123 这类早期光学闪为入口，读 Sari 与 Piran 关于 reverse shock 的标准图像，重点掌握 \(t_{\rm peak}\(\sim\) \(t_{\rm dec}\))、\(R_{\rm dec}\)、\(\Gamma_0\)、\(\nu_{m,{\rm r}}\) 和 (F_{<br />
+u,\max,{\rm r}}) 的物理含义。然后读 Swift 之后的早期光学样本，比较为什么许多事件没有强光学闪：可能是观测太晚、宿主消光强、前向激波掩盖、\(R_B\) 不大，或 ejecta 磁化抑制反向激波。进一步可读早期光学偏振、毫米波快速响应和反向激波磁化约束。</p>
+<p>第四条路径通向本系列第 \(3/3\) 讲。本讲得到的 \(A_*\)、\(\theta_j\)、\(E_{\rm true}\)、\(t_{\rm dec}\)、\(\Gamma_0\) 和 \(R_B\) 是现代全局拟合的输入坐标，而不是终点。下一步应阅读多波段 forward-shock 与 reverse-shock 联合拟合、上限似然、X 射线 counts-space 统计、射电闪烁建模和模型比较方法。再往高能方向，才进入 \(\mathrm{SSC}\)、Klein--Nishina 修正、\(\gamma\gamma\) 吸收、\(\mathrm{EBL}\) 衰减和 \(\mathrm{TeV}\) afterglow。</p>
+<h4 id="_12">下一讲建议</h4>
+<p>同一系列第 \(3/3\) 讲最自然的方向是“从 Swift 到 \(\mathrm{TeV}\)：GRB 余辉多波段拟合、逆康普顿和系统误差”。本讲已经完成三类经典诊断：用 \(k=0\) 与 \(k=2\) 的闭合关系判断环境，用 achromatic \(t_j\) 反推 \(\theta_j\) 与 \(E_{\rm true}\)，用 \(t_{\rm dec}\)、\(\Gamma_0\) 和 \(R_B\) 诊断早期 ejecta。下一讲不应重复这些解析推导，而应把它们放进 \(F_{\rm obs}=F_{\rm FS}+F_{\rm RS}+F_{\rm extra}\) 的多波段全局模型中，系统讲似然、上限、仪器响应、后验预测检验、\(\mathrm{SSC}\)、Klein--Nishina 效应、\(\gamma\gamma\) 吸收、\(\mathrm{EBL}\) 和 \(\mathrm{TeV}\) 余辉案例。</p>
+<p>第二个可选后续方向是在三讲结束后开设“GRB prompt emission 经典专题”。它可以讨论 compactness problem、最小洛伦兹因子 \(\Gamma_{\min}\)、Band spectrum、photosphere、internal shocks 与磁重联。它与本系列的边界很清楚：prompt 专题研究中心引擎附近或喷流内部的即时耗散，本系列研究外部激波产生的 afterglow 及其环境、几何和多波段诊断。</p>
+<p>第三个后续方向是“GRB 多信使与高能粒子”。在完成第 \(3/3\) 讲之后，可进一步讨论高能中微子、超高能宇宙线、\(\mathrm{GeV}\)--\(\mathrm{TeV}\) 光子和引力波对应体。它依赖本讲的喷流张角 \(\theta_j\)、真实能量 \(E_{\rm true}\) 和环境密度诊断，也依赖下一讲的高能辐射与吸收机制，因此不应放在本讲展开。</p>
+<p><strong>检索关键词</strong>：</p>
+<ul>
+<li>Rhoads 1999 gamma-ray burst jet break afterglow</li>
+<li>Sari Piran Halpern 1999 jets in gamma-ray bursts</li>
+<li>GRB 990123 reverse shock optical flash Sari Piran</li>
+<li>gamma-ray burst afterglow wind medium closure relations</li>
+<li>Frail 2001 beaming in gamma-ray bursts energy reservoir</li>
+<li>GRB afterglow reverse shock magnetization</li>
+<li>GRB afterglow jet break achromatic</li>
+</ul>
+<p><strong>确信的公开链接</strong>：</p>
+<p>（未提供）</p>
+</details>
+    </main>
+  </div>
+</body>
+</html>
