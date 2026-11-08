@@ -32,6 +32,11 @@ jobs:
 
           figures = Path("_site/assets/figures")
           keep_latest = 5
+          # These explicitly backfilled issues must keep their original figures.
+          keep_backfill = {
+              "2026-10-20", "2026-10-27", "2026-10-28", "2026-10-30",
+              "2026-11-02", "2026-11-03", "2026-11-04", "2026-11-05", "2026-11-06",
+          }
           if figures.exists():
               dated_dirs = sorted(
                   path
@@ -39,7 +44,8 @@ jobs:
                   if path.is_dir() and re.fullmatch(r"\d{4}-\d{2}-\d{2}", path.name)
               )
               for path in dated_dirs[:-keep_latest]:
-                  shutil.rmtree(path)
+                  if path.name not in keep_backfill:
+                      shutil.rmtree(path)
           PY
           du -sh _site
 
